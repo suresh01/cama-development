@@ -1,0 +1,395 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width"/>
+<title>Code Maintenance</title>
+@include('includes.header', ['page' => 'datamaintenance'])
+	
+	<div id="content">
+		<div class="grid_container">
+		
+			@if ($errors->any())
+			<script>
+				$(document).ready(function(){
+				    $("#usertable").hide();
+				 	$("#adduserform").show();
+		 			$("#resetpwd").hide();
+				});
+			</script>
+			<div id="err_lbl">       
+            @foreach ($errors->all() as $error)
+            	<div>
+            		<label for="confirm_password"  generated="true" class="error">{{ $error }}</label>
+            	</div>              
+            @endforeach      
+    		</div>
+			
+		@endif
+
+		<div id="usertable" class="grid_12">
+			
+			<br>
+			<div class="form_input">
+				
+
+				<div id="breadCrumb3" class="breadCrumb grid_4">
+					<ul >
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Data Maintenance</a></li>
+						<li><a href="codemaintenance">Code Maintenance</a></li>
+						@foreach ($isparent as $rec)
+							@if($rec->pd_parent != 'Root' )	
+								<li><a href="codemaintenancedetail?name={{$rec->pd_parent}}">{{$rec->pd_parent}} - {{$id}}</a></li>
+							@endif
+						@endforeach
+						<li>{{$name}}</li>
+					</ul>
+				</div>
+
+				<button id="adduser" style="float:right;" onclick="openAddUser()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Parameter Detail</span></button>
+
+				@include('search.sample')
+				<br>
+			</div>
+				<div class="widget_wrap">					
+					<div class="widget_content">						
+						<table class="display data_tbl">
+						<thead style="text-align: left;">
+						<tr>
+							<th class="table_sno">
+								S No
+							</th>
+							@foreach ($isparent as $rec)
+							@if($rec->pd_parent != 'Root' )	
+							<th>
+								Parent Parameter Key
+							</th>
+							<th>
+								Parent Parameter Velue
+							</th>
+							@endif
+							@endforeach
+							<th>
+								Parameter Key
+							</th>
+							<th>
+								Parameter Value	
+							</th>
+							<th>
+								Parameter Description	
+							</th>
+							<th>
+								Sort	
+							</th>
+							<th>
+								Update by
+							</th>
+							<!--<th>
+								Update at
+							</th>-->	
+							<th>
+								Action
+							</th>
+						</tr> 
+						</thead>
+						<tbody>
+							@foreach ($codedetail as $rec)
+							<tr>
+								<td>
+									{{$loop->iteration}}
+								</td>
+								@foreach ($isparent as $rec1)
+								@if($rec1->pd_parent != 'Root' )	
+								<td>
+									{{ $rec->tdi_parent_key }}
+								</td>
+								<td>
+									{{ $rec->tdi_parent_name }}
+								</td>
+								@endif
+								
+								@endforeach
+								<td>
+									<!--<a onclick="multilevel('{{$name}}','{{ $rec->tdi_key }}')" href='#'>{{ $rec->tdi_key }}</a>-->
+									@if($rec->tdi_td_name == 'BULDINGCATEGORY' )
+										<a onclick="multilevel('{{$name}}','{{ $rec->tdi_key }}')" href='#'>{{ $rec->tdi_key }}</a>
+									@else
+										<a href='codemaintenancedetail?name={{$name}}&id={{ $rec->tdi_key }}'>{{ $rec->tdi_key }}</a>
+									@endif
+								</td>
+								<td>
+									{{ $rec->tdi_value }}
+								</td>
+								<td>
+									{{ $rec->tdi_desc }}
+								</td>
+								<td>
+									{{ $rec->tdi_sort }}
+								</td>
+								<td>
+									{{ $rec->tdi_updateby }}
+								</td>
+								<!--<td>
+									{{ $rec->tdi_updateat }}
+								</td>	-->
+								<td>
+									<span><a class="action-icons c-edit" onclick="openEditDetail('{{ $rec->tdi_key }}')" href="#" title="Edit">Edit</a></span>
+									<span><a class="action-icons c-Delete " onclick="deleteSdt('{{ $rec->tdi_key }}')" href="#" title="Delete">Delete</a></span>
+								</td>
+							</tr>
+							<div style="display:none;">
+							<input type="hidden" id="evalue_{{ $rec->tdi_key }}" value="{{ $rec->tdi_value }}">
+							<input type="hidden" id="edesc_{{ $rec->tdi_key }}" value="{{ $rec->tdi_desc }}">
+							<input type="hidden" id="esort_{{ $rec->tdi_key }}" value="{{ $rec->tdi_sort }}">	
+							<input type="hidden" id="eparent_{{ $rec->tdi_key }}" value="{{ $rec->tdi_parent_key }}">								
+							</div>
+							@endforeach
+						</tbody>
+						</table>
+					</div>
+				</div>
+			</div>		
+		
+		<div id="adduserform" style="display:none;" class="grid_10">
+			<div class="widget_wrap">
+				<div class="widget_content">
+					<h3 id="title">Add Parameter</h3>
+					<form id="usertransform" autocomplete="off" method="post" action="codemaintenancedetail?name={{ $name }}" class="">
+						<div  class="grid_6 form_container left_label">
+						<ul>
+							<li>
+								@csrf
+								<input type="hidden" value="1" name="operation" id="operation">
+								<input type="hidden" name="name" id="name" value="{{ $name }}">
+								<input type="hidden" name="transaction" id="transaction" value="proc">
+
+
+								<div class="form_grid_12">
+									<label class="field_title" id="lkey_name" for="key_name">Parameter Key<!--<span class="req">*</span>--></label>
+									<div class="form_input">
+										<input id="parameterkey" placeholder="Last Used Code : {{$lastcode}}" name="parameterkey" type="text" value="" maxlength="100" >
+									</div>
+									<span class=" label_intro"></span>
+								</div>							
+								
+								<div class="form_grid_12">
+									<label class="field_title" id="lkey_type" for="key_type">Parameter Value</label>
+									<div class="form_input">
+										<input id="parametervalue" name="parametervalue" type="text" value="" maxlength="50" />
+									</div>
+									<span class=" label_intro"></span>
+								</div>	
+								@foreach ($isparent as $rec)
+								@if($rec->pd_parent != 'Root' )	
+									<div class="form_grid_12">
+										<label class="field_title" id="llevel" for="level">Parameter Parent<span class="req">*</span></label>
+										<div class="form_input ">
+											<select style="width: 100%;" data-placeholder="Choose a Parent..." disabled="" class="cus-select" id="parent" name="parent" tabindex="20">
+											@foreach ($childparent as $rec)
+												<option value="{{ $rec->tdi_key }}">{{ $rec->tdi_key }}-{{ $rec->tdi_value }}</option>	
+											@endforeach									
+											</select>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+								@endif
+								@endforeach								
+								<div class="form_grid_12">
+									<label class="field_title" id="ltable_name" for="table_name">Parameter Description</label>
+									<div class="form_input">
+										<input id="desc" name="desc" type="text" value="" maxlength="50" />
+									</div>
+									<span class=" label_intro"></span>
+								</div>
+								
+								<div class="form_grid_12">
+									<label class="field_title" id="lbltable_field_name" for="table_field_name">Sort Order</label>
+									<div class="form_input">
+										<input id="sort" name="sort" type="text" value="0" maxlength="50" />
+									</div>
+									<span class=" label_intro"></span>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
+					
+						<div class="form_input">
+							<input type="button" id="addsubmit" onclick="checkSubmission();" class="btn_small btn_blue" value="Submit">				
+																							
+							<button id="close" onclick="closeAddUser()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+						</div>
+					</div>
+							
+					</form>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+	<span class="clear"></span>	
+	
+</div>
+
+<script>
+	function checkKey(){
+		return true;
+	}
+
+	function openAddUser(){
+		if(isAccessAllowed(31121)){
+			$('#parent').val('{{$id}}');
+			$("#parametervalue").val("");
+			$("#title").html("Add Parameter");
+			$("#desc").val("");
+			$("#sort").val("");
+			$("#title").html("Add");
+			$("#addsubmit").html("Save");
+		 	$("label.error").remove();	
+			$("#operation").val(1);
+			$("#usertable").hide();
+			$("#adduserform").show();
+		}
+
+	}
+
+
+	function multilevel(name, id){
+		var lvl = prompt("Please enter type", "BULDINGTYPE");
+		if (lvl == 'BULDINGTYPE' || lvl == "AREALEVEL" || lvl == "BUILDINGSTOREY" || lvl == "AREAUSE") {
+			//txt = "User cancelled the prompt.";
+			window.location.assign("codemaintenancedetail?name="+name+"&id="+id+"&page="+lvl);	
+
+		} else {
+			alert("Please Enter Valid");
+		}
+	}
+
+	function closeAddUser(){
+		$("#parametervalue").val("");
+		$("#parent").val("");
+		$("#desc").val("");
+		$("#sort").val("");
+	 	$("#usertable").show();
+	 	$("#adduserform").hide();
+	}
+
+	function openEditDetail(id){
+		if(isAccessAllowed(31123)){
+			$('#parameterkey').attr('readonly', "readonly");
+			$("#title").html("Update Parameter");
+			$("#parameterkey").val(id);
+			$("#parametervalue").val($("#evalue_"+id).val());
+			$("#parent").val($("#eparent_"+id).val());
+			$("#desc").val($("#edesc_"+id).val());
+			$("#sort").val($("#esort_"+id).val());
+			$("#title").html("Update");
+			$("#addsubmit").html("Update");
+		 	$("label.error").remove();	
+			$("#operation").val(2);
+			$("#usertable").hide();
+			$("#adduserform").show();	
+		}	
+	}
+
+	function deleteSdt(id){
+		if(isAccessAllowed(31124)){
+			$("#operation").val(3);
+			$("#parameterkey").val(id);
+
+			var noty_id = noty({
+				layout : 'center',
+				text: 'Do you want Delete?',
+				modal : true,
+				buttons: [
+					{type: 'button pink', text: 'Delete', click: function($noty) {
+			  
+						// this = button element
+						// $noty = $noty element
+			  			
+			  			$("#usertransform").submit();
+						$noty.close();
+						//noty({force: true, text: 'You clicked "Ok" button', type: 'success',layout : 'center',modal : true,});
+					  }
+					},
+					{type: 'button green', text: 'Cancel', click: function($noty) {
+						$noty.close();
+						//noty({force: true, text: 'You clicked "Cancel" button', type: 'error',layout : 'center',modal : true,});
+					  }
+					}
+					],
+				type : 'success', 
+			});
+
+		}	
+	}
+
+	function lastusedkey(){
+
+    	//console.log(this.value);
+    	var param_value = this.value;
+    	var param = 'bldgtype';
+        $.ajax({
+		  url: "subCategory",
+		  cache: false,
+		  data:{param_value:param_value,param:param},
+		  success: function(data){
+    		createDropDownOptions(data.res_arr, 'bldgttype');
+    		createDropDownOptions(data.res_arr2, 'bldgstorey');
+		  }
+		});
+	   
+	}
+
+	function checkSubmission(){
+
+		var length = 0;
+		var d=new Date();
+		var paramkey = $("#parameterkey").val();
+		var paramkeylength = paramkey.length;
+		var param = "{{ $name }}";
+		var operation = $("#operation").val();
+		if(operation == 2) {
+			$("#usertransform").submit();
+		} else {
+			@foreach ($isparent as $rec)
+				length = "{{$rec -> length }}"; 
+			@endforeach
+			//alert(parent);
+			if(paramkeylength != length){
+				alert("Please enter "+length+" digit parameter key ");
+			    $("#parameterkey").focus();
+			} else {
+				$.ajax({
+			        type:'GET',
+			        url:'getChildParameter?date='+ d.getTime(),
+			        data:{paramkey:paramkey,param:param},
+			        success:function(data){	        	
+			        	if(data.msg === "false"){
+			        		alert("Parameter Key already exsist.");
+			        		$("#parameterkey").focus();
+			        		return false;
+			        	} else {			        		
+      						$("#parent").removeAttr( "disabled");   
+			        		$("#usertransform").submit();
+			        		return true;
+			        	}
+			        	
+		        	}
+		    	});
+			}
+		}
+	}
+
+	function disableF5(e) { if ((e.which || e.keyCode) == 116 ) e.preventDefault(); };
+
+	$(document).ready(function(){
+		$(document).on("keydown", disableF5);
+		$('#parent').val('{{$id}}');
+		//$('#parent').readonly();
+
+	});
+</script>
+</body>
+</html>
