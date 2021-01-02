@@ -1,0 +1,849 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="inspection" language="javascript" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="edd3254a-f292-4495-a99b-7bc4698ed78c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Mysql Server"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="538"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="448"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="landdetail" uuid="530e2eae-590f-4f91-8464-d395857acf66">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Mysql Server"/>
+		<parameter name="propid" class="java.lang.Integer"/>
+		<parameter name="size" class="java.lang.Float"/>
+		<parameter name="vl_grosslandvalue" class="java.lang.Float"/>
+		<queryString language="SQL">
+			<![CDATA[select vla_desc, landuse.tdi_value landuse, vla_area, vla_landrate, vla_discountrate, vla_grossareavalue
+         from cm_appln_val_lotarea inner join cm_appln_val_lot on vl_id = vla_vt_id  left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = vl_lotcode_id
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROADTYPE") roadtype on roadtype.tdi_key = vl_roadtype_id
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE") titletype on titletype.tdi_key = vl_titletype_id
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SIZEUNIT") unitsize on unitsize.tdi_key = vl_sizeunit_id
+        left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDUSE") landuse on  vl_landuse_id = landuse.tdi_key
+        left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENURETYPE") tentype on  vl_tenuretype_id = tentype.tdi_key 
+left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDPOSITION") landposition on  vl_landposision_id = landposition.tdi_key 
+         where vl_vd_id =  $P{propid} ]]>
+		</queryString>
+		<field name="vla_desc" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="vla_desc"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_lotarea"/>
+		</field>
+		<field name="landuse" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="landuse"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="tbdefitems"/>
+		</field>
+		<field name="vla_area" class="java.lang.Float">
+			<property name="com.jaspersoft.studio.field.label" value="vla_area"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_lotarea"/>
+		</field>
+		<field name="vla_landrate" class="java.lang.Float">
+			<property name="com.jaspersoft.studio.field.label" value="vla_landrate"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_lotarea"/>
+		</field>
+		<field name="vla_discountrate" class="java.lang.Float">
+			<property name="com.jaspersoft.studio.field.label" value="vla_discountrate"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_lotarea"/>
+		</field>
+		<field name="vla_grossareavalue" class="java.lang.Float">
+			<property name="com.jaspersoft.studio.field.label" value="vla_grossareavalue"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_lotarea"/>
+		</field>
+	</subDataset>
+	<subDataset name="bldgdetail" uuid="e015d728-0b89-4046-87a1-dbb174bc12a6">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Mysql Server"/>
+		<parameter name="propid" class="java.lang.Integer"/>
+		<parameter name="vb_grossallowancevalue" class="java.math.BigDecimal"/>
+		<parameter name="vb_grossnt" class="java.math.BigDecimal"/>
+		<parameter name="vb_depreciationrate" class="java.math.BigDecimal"/>
+		<parameter name="vb_depreciationvalue" class="java.math.BigDecimal"/>
+		<parameter name="vb_roundnetnt" class="java.math.BigDecimal"/>
+		<queryString language="SQL">
+			<![CDATA[select tdi_desc, aruse.tdi_value aruse, artype.tdi_value artype, vba_size,  size.tdi_value sizeunit, vba_bldgrate, vba_grossareavalue
+ from cm_appln_val_bldgarea inner join cm_appln_val_bldg on vb_id = vba_vb_id 
+ left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREATYPE") artype on artype.tdi_key = cm_appln_val_bldgarea.vba_AREATYPE_ID
+left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREACATEGORY") arcate on  arcate.tdi_key = vba_AREACATEGORY_ID
+left join (select tdi_key, tdi_value,tdi_desc from tbdefitems where tdi_td_name = "AREALEVEL") arlvel on  arlvel.tdi_key = vba_AREALEVEL_ID 
+left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREAUSE") aruse on aruse.tdi_key = vba_areause_id  
+left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SIZEUNIT") size on size.tdi_key = vba_sizeunit_id 
+where vb_vd_id =  $P{propid} ]]>
+		</queryString>
+		<field name="tdi_desc" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="tdi_desc"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="tbdefitems"/>
+		</field>
+		<field name="aruse" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="aruse"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="tbdefitems"/>
+		</field>
+		<field name="artype" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="artype"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="tbdefitems"/>
+		</field>
+		<field name="vba_size" class="java.lang.Float">
+			<property name="com.jaspersoft.studio.field.label" value="vba_size"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_bldgarea"/>
+		</field>
+		<field name="sizeunit" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="sizeunit"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="tbdefitems"/>
+		</field>
+		<field name="vba_bldgrate" class="java.lang.Float">
+			<property name="com.jaspersoft.studio.field.label" value="vba_bldgrate"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_bldgarea"/>
+		</field>
+		<field name="vba_grossareavalue" class="java.lang.Float">
+			<property name="com.jaspersoft.studio.field.label" value="vba_grossareavalue"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_bldgarea"/>
+		</field>
+	</subDataset>
+	<parameter name="propid" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select vd_id,ma_fileno, ma_accno, ma_address1,ma_address2,ma_address3,ma_address4, ma_city, ma_state_id, ma_postcode, vt_note,va_name,
+ma_fileno, ma_accno, vl_size, vl_grosslandvalue, vl_roundnetlandvalue, vb_grossallowancevalue, vb_grossnt
+vb_depreciationrate, vb_depreciationvalue, vb_grossnt, vb_roundnetnt, vt_valuedescretion, vt_grossvalue,
+vt_proposednt, vt_termDate, cm_appln_valterm.vt_updateby, vt_approvednt, vt_approvedrate, vt_calculatedrate, vt_approvednt
+from  cm_appln_valdetl inner join cm_masterlist on ma_id = vd_ma_id 
+inner join cm_appln_val on va_id = vd_va_id 
+inner join cm_appln_val_lot on vl_vd_id = vd_id
+inner join cm_appln_val_bldg on vb_vd_id = vd_id
+inner join cm_appln_valterm on vt_id = va_vt_id
+left join cm_appln_val_tax on vt_vd_id = vd_id
+where $P!{propid}]]>
+	</queryString>
+	<field name="vd_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="vd_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_valdetl"/>
+	</field>
+	<field name="ma_fileno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ma_fileno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_masterlist"/>
+	</field>
+	<field name="ma_accno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ma_accno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_masterlist"/>
+	</field>
+	<field name="ma_address1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ma_address1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_masterlist"/>
+	</field>
+	<field name="ma_address2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ma_address2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_masterlist"/>
+	</field>
+	<field name="ma_address3" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ma_address3"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_masterlist"/>
+	</field>
+	<field name="ma_address4" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ma_address4"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_masterlist"/>
+	</field>
+	<field name="ma_city" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ma_city"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_masterlist"/>
+	</field>
+	<field name="ma_state_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ma_state_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_masterlist"/>
+	</field>
+	<field name="ma_postcode" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ma_postcode"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_masterlist"/>
+	</field>
+	<field name="vt_note" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vt_note"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_tax"/>
+	</field>
+	<field name="va_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="va_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val"/>
+	</field>
+	<field name="COLUMN_13" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ma_fileno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_masterlist"/>
+	</field>
+	<field name="COLUMN_14" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ma_accno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_masterlist"/>
+	</field>
+	<field name="vl_size" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="vl_size"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_lot"/>
+	</field>
+	<field name="vl_grosslandvalue" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="vl_grosslandvalue"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_lot"/>
+	</field>
+	<field name="vl_roundnetlandvalue" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="vl_roundnetlandvalue"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_lot"/>
+	</field>
+	<field name="vb_grossallowancevalue" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="vb_grossallowancevalue"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_bldg"/>
+	</field>
+	<field name="vb_depreciationrate" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="vb_depreciationrate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_bldg"/>
+	</field>
+	<field name="vb_depreciationvalue" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="vb_depreciationvalue"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_bldg"/>
+	</field>
+	<field name="vb_grossnt" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="vb_grossnt"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_bldg"/>
+	</field>
+	<field name="vb_roundnetnt" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="vb_roundnetnt"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_bldg"/>
+	</field>
+	<field name="vt_valuedescretion" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="vt_valuedescretion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_tax"/>
+	</field>
+	<field name="vt_grossvalue" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="vt_grossvalue"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_tax"/>
+	</field>
+	<field name="vt_proposednt" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="vt_proposednt"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_tax"/>
+	</field>
+	<field name="vt_termDate" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="vt_termDate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_valterm"/>
+	</field>
+	<field name="vt_updateby" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vt_updateby"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_valterm"/>
+	</field>
+	<field name="vt_approvednt" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="vt_approvednt"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_tax"/>
+	</field>
+	<field name="vt_approvedrate" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="vt_approvedrate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_tax"/>
+	</field>
+	<field name="vt_calculatedrate" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="vt_calculatedrate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_tax"/>
+	</field>
+	<field name="COLUMN_31" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.label" value="vt_approvednt"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cm_appln_val_tax"/>
+	</field>
+	<detail>
+		<band height="801" splitType="Stretch">
+			<staticText>
+				<reportElement x="14" y="81" width="46" height="20" uuid="e450173e-1d82-4914-8b54-85767c405eae"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<text><![CDATA[No.Fail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="81" width="90" height="20" uuid="375f8508-e800-4f1d-a89e-f2635c44154a"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<text><![CDATA[ALAMAT HARTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="190" width="90" height="20" uuid="879941e4-9769-4e97-961f-e1ec43202998"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[i) Tanah]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="414" y="81" width="136" height="55" uuid="993f4332-bac4-423b-8be1-58472600f5d4"/>
+				<textElement verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[CONCATENATE($F{ma_address1},"\n",$F{ma_address2},"\n",$F{ma_address3},"\n",$F{ma_address4},$F{ma_postcode})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="153" y="50" width="200" height="20" uuid="be3fe9e4-fab6-433c-b6df-07a517361572"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALUATION FORM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="16" width="72" height="20" uuid="98cf0b84-ab16-4f8c-a61a-deb17cf15c48"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PK-JPH-01-R5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="300" height="50" uuid="9ed930d7-479a-47c6-aab7-42cde61298a4">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JABATAN PENILAIAN DAN PENGURUSAN HARTA
+MAJLIS PERBANDARAN HANG TUAH JAYA
+ARAS 3, KOMPLEKS MELAKA MALL
+JALAN TUN RAZAK-AYER KEROH, MELAKA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="63" y="81" width="100" height="20" uuid="b7e19979-b06c-4917-86c6-4c52aa70b30a"/>
+				<textFieldExpression><![CDATA[$F{ma_fileno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="166" y="81" width="100" height="20" uuid="944d661a-427f-4e97-ada4-0f60981a4737"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[CONCATENATE("(",$F{ma_accno},")")]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="141" width="551" height="1" uuid="28bc53ca-e6c3-4e30-bb81-a5c68ef5cebf"/>
+			</line>
+			<staticText>
+				<reportElement x="9" y="141" width="100" height="19" uuid="6b1e7980-2952-4c86-895e-4a152b41ed25"/>
+				<text><![CDATA[Catatan:-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="9" y="160" width="271" height="20" uuid="d94af13a-9f75-4ba2-8e11-b35e8934a7c1"/>
+				<textFieldExpression><![CDATA[$F{va_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="160" width="200" height="20" uuid="4423ff75-5bf9-4ffc-b46d-58c4fe5b1500"/>
+				<textFieldExpression><![CDATA[$F{vt_note}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="183" width="551" height="1" uuid="f019aff5-7d1c-40e2-a371-546cc2b2df6e"/>
+			</line>
+			<componentElement>
+				<reportElement x="10" y="218" width="470" height="102" uuid="112ffb2b-c202-4757-ad16-635167107ee0">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="landdetail" uuid="0057fe30-1086-4d16-a08c-98cc81800912">
+						<datasetParameter name="propid">
+							<datasetParameterExpression><![CDATA[$F{vd_id}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="vl_grosslandvalue">
+							<datasetParameterExpression><![CDATA[$F{vl_grosslandvalue}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="size">
+							<datasetParameterExpression><![CDATA[$F{vl_size}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="79" uuid="629f1121-1d20-46ef-9a17-d13dabc897a2">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableHeader style="Table_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="79" height="30" uuid="7c9f2daa-a0a3-472b-b127-409476191ef4"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Keterangan]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TD" height="30" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+						</jr:tableFooter>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="79" height="30" uuid="05a3a76f-0695-4faf-9b21-9d255f8011bd"/>
+								<textFieldExpression><![CDATA[$F{vla_desc}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="79" uuid="d286a78e-515a-4334-bf0b-6e3275c2e7e1">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableHeader style="Table_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="79" height="30" uuid="d25cad36-037e-46a2-b6cd-a575f7edc6bd"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Kegunaan Tanah]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TD" height="30" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="79" height="30" uuid="5507b7ce-10c3-4635-9270-df0144e6b1b0"/>
+								<text><![CDATA[Jumlah PT 6749]]></text>
+							</staticText>
+						</jr:tableFooter>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="79" height="30" uuid="cf76fb0c-7406-4c6c-8086-fb8acf047eb8"/>
+								<textFieldExpression><![CDATA[$F{landuse}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="78" uuid="4dc69739-600a-453a-8f92-59759f183669">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:tableHeader style="Table_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="78" height="30" uuid="ff365ebc-c7ca-45fe-b4e0-196e25eb9944"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Ukuran]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TD" height="30" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="78" height="30" uuid="b34f440d-f5b5-429c-94f9-6ba55c097c4e"/>
+								<textFieldExpression><![CDATA[$P{size}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="78" height="30" uuid="b6d4139f-5443-4059-8d6e-f6310bae3063"/>
+								<textFieldExpression><![CDATA[$F{vla_area}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="78" uuid="582fcf0e-c041-42e9-819d-0d81d881ad07">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:tableHeader style="Table_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="78" height="30" uuid="9b968237-c54f-4992-8204-2128523d2da9"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Kadar]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TD" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="78" height="30" uuid="a0a63e40-1489-4519-a19e-ea967ab44b30"/>
+								<textFieldExpression><![CDATA[$F{vla_landrate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="78" uuid="1a004dd2-2647-47dc-9812-a52497730aaa">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:tableHeader style="Table_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="78" height="30" uuid="40a9b3c8-6397-437d-8c0d-26f1082f140b"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Dis(%)]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TD" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="78" height="30" uuid="33b924cb-88be-42b6-880b-202fddb414eb"/>
+								<textFieldExpression><![CDATA[$F{vla_discountrate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="78" uuid="f03c20ab-6d7b-47d0-a414-9c273cb104fb">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:tableHeader style="Table_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="78" height="30" uuid="c4bc0e9b-302d-4a6c-9830-3736f6690f03"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Nilai]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="78" height="30" uuid="b26d69e6-1634-4ba5-ac17-b0e23505f7c6"/>
+								<textFieldExpression><![CDATA[$P{vl_grosslandvalue}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="78" height="30" uuid="930bcd30-0099-4231-aab8-c50de39a2ac7"/>
+								<textFieldExpression><![CDATA[$F{vla_grossareavalue}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="370" y="320" width="100" height="15" uuid="3959eb9d-3400-4504-a944-e5d0f9003ad3"/>
+				<text><![CDATA[Katakan Nilai Tanah :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="475" y="320" width="72" height="15" uuid="e479d613-0965-48e7-892a-74c60ab4c46b"/>
+				<textFieldExpression><![CDATA[$F{vl_roundnetlandvalue}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="340" width="100" height="19" uuid="20980908-3c97-4c5c-a793-6a680e1d0159"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ii) Bangunan]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="10" y="358" width="467" height="180" uuid="8dbbbb64-6a79-42d2-b108-719d4833b4c3">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="bldgdetail" uuid="b5cd5eb4-75d5-4773-b1ed-17978c2a452f">
+						<datasetParameter name="propid">
+							<datasetParameterExpression><![CDATA[$F{vd_id}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="vb_depreciationrate">
+							<datasetParameterExpression><![CDATA[$F{vb_depreciationrate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="vb_depreciationvalue">
+							<datasetParameterExpression><![CDATA[$F{vb_depreciationvalue}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="vb_grossnt">
+							<datasetParameterExpression><![CDATA[$F{vb_grossnt}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="vb_grossallowancevalue">
+							<datasetParameterExpression><![CDATA[$F{vb_grossallowancevalue}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="vb_roundnetnt">
+							<datasetParameterExpression><![CDATA[$F{vb_roundnetnt}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="67" uuid="84260bfc-22e6-45ae-90c5-342b0816940a">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableFooter style="Table 1_TD" height="40">
+							<box>
+								<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="67" height="40" uuid="1b8c9a1e-9b9c-4d4c-a827-5cb59932a387"/>
+								<text><![CDATA[*Nilai Elaun Kasar]]></text>
+							</staticText>
+						</jr:tableFooter>
+						<jr:columnHeader style="Table 1_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="67" height="30" uuid="b60738b2-682a-4c7f-b802-2431e0cdde74"/>
+								<text><![CDATA[tdi_desc]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="67" height="30" uuid="08c4dcb0-c2ef-4398-8016-1f04b85ae9f4"/>
+								<textFieldExpression><![CDATA[$F{tdi_desc}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="67" uuid="e1422545-1811-4d5c-95e7-69bd71bf399a">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableFooter style="Table 1_TD" height="40">
+							<box>
+								<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="67" height="40" uuid="5ade97a4-9113-4120-80fe-be44ac5d6d3a"/>
+								<textFieldExpression><![CDATA[$P{vb_grossallowancevalue}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:columnHeader style="Table 1_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="67" height="30" uuid="3fb93de7-305a-4481-9187-263a647bd04b"/>
+								<text><![CDATA[aruse]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="67" height="30" uuid="1b0b823a-5fc4-44b2-8675-16eab35d34c2"/>
+								<textFieldExpression><![CDATA[$F{aruse}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="67" uuid="e1628613-b28e-4e1f-b5d2-933b4ed770d8">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:tableFooter style="Table 1_TD" height="40">
+							<box>
+								<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="67" height="40" uuid="d47d7d31-3f5b-42e8-bd87-3cb1649495aa"/>
+								<textFieldExpression><![CDATA[$P{vb_grossnt}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:columnHeader style="Table 1_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="67" height="30" uuid="c9e4f943-5bfc-4b32-9bf4-c6e779d82392"/>
+								<text><![CDATA[artype]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="67" height="30" uuid="5e626707-97d7-4067-be33-7be50e9a61a1"/>
+								<textFieldExpression><![CDATA[$F{artype}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="67" uuid="a0949336-0618-4e82-b115-c813b63f1b72">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:tableFooter style="Table 1_TD" height="40"/>
+						<jr:columnHeader style="Table 1_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="67" height="30" uuid="1e3114b0-adf5-4354-aca4-e22c107dbe64"/>
+								<text><![CDATA[vba_size]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="67" height="30" uuid="0cdd0626-9b96-4b33-9f78-aba2d93770b0"/>
+								<textFieldExpression><![CDATA[$F{vba_size}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="67" uuid="20c2bd7d-28bf-43bb-86b7-602606788895">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:tableFooter style="Table 1_TD" height="40">
+							<textField>
+								<reportElement x="0" y="0" width="67" height="40" uuid="ce07da4e-d3b2-42af-8bfa-b4ed5058d261"/>
+								<textFieldExpression><![CDATA[
+CONCATENATE("Nilai Tambah Kasar","\n","Susutnilai(",$P{vb_depreciationrate},")","\n","Nilai Bangunan Genab")
+]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:columnHeader style="Table 1_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="67" height="30" uuid="117637b4-203a-4df8-aa84-d876b10876bf"/>
+								<text><![CDATA[sizeunit]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="67" height="30" uuid="aa762768-409b-49bd-811b-cafbb1158be9"/>
+								<textFieldExpression><![CDATA[$F{sizeunit}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="66" uuid="3d4512cd-9741-4c7a-9e7d-29b23f8a0692">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:tableFooter style="Table 1_TD" height="40"/>
+						<jr:columnHeader style="Table 1_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="66" height="30" uuid="d896a582-deb4-4d30-a71d-3b57de6f2440"/>
+								<text><![CDATA[vba_bldgrate]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="66" height="30" uuid="08559ff7-f9f4-4f6f-a971-d213ac8ba870"/>
+								<textFieldExpression><![CDATA[$F{vba_bldgrate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="66" uuid="d8609a7b-8d24-4160-90fc-e51cd54120ba">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<jr:tableFooter style="Table 1_TD" height="40">
+							<textField>
+								<reportElement x="0" y="0" width="66" height="40" uuid="6946fe64-0110-4c03-b467-3f44d9e1c914"/>
+								<textFieldExpression><![CDATA[
+CONCATENATE($P{vb_grossnt},"\n",$P{vb_depreciationvalue},"\n",$P{vb_roundnetnt})]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:columnHeader style="Table 1_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="66" height="30" uuid="b1871788-70eb-4a6e-b360-8ade8be5ce83"/>
+								<text><![CDATA[vba_grossareavalue]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="66" height="30" uuid="dab06214-5891-4904-b3e4-7b2132d6166b"/>
+								<textFieldExpression><![CDATA[$F{vba_grossareavalue}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="350" y="540" width="120" height="20" uuid="697e2ed9-62f7-4b40-b2f2-9bfd290f7675"/>
+				<text><![CDATA[Katakan Nilai Bangunan :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="470" y="540" width="85" height="20" uuid="f3b9aecb-ad3b-4f9a-aee8-29f01e7b4594"/>
+				<textFieldExpression><![CDATA[$F{vb_roundnetnt}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="581" width="100" height="20" uuid="48acacee-73b6-48bc-96e9-8c4928edc939"/>
+				<text><![CDATA[Nilai Budibicara :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="343" y="601" width="110" height="20" uuid="c83e3a48-fce4-4eaf-baf8-4daae0b75da0"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Nilai Tambah Kasar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="621" width="113" height="20" uuid="bbe119fd-1d1c-44ee-8d8b-92c0fbc91b32"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Nilai Tambah Cadanga]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="109" y="581" width="100" height="20" uuid="a1d418be-b0b7-4bea-b222-4640a691047b"/>
+				<textFieldExpression><![CDATA[$F{vt_valuedescretion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="601" width="85" height="20" uuid="9c4d95c7-56c0-4186-8e9d-345b9b75f066"/>
+				<textFieldExpression><![CDATA[$F{vt_grossvalue}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="621" width="85" height="20" uuid="0fa6dbf7-25a7-457d-b8d1-8df111ca593a"/>
+				<textFieldExpression><![CDATA[$F{vt_proposednt}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2" y="640" width="551" height="1" uuid="38c83479-078e-43f1-a352-106e971f4a47"/>
+			</line>
+			<staticText>
+				<reportElement x="12" y="645" width="100" height="20" uuid="f10a2334-ac1c-4ebd-b488-a042aba97df6"/>
+				<text><![CDATA[TARIKH KUATKUASA :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="112" y="645" width="100" height="20" uuid="117aeca6-a1b3-49ee-bbee-e8ae2473ed4e"/>
+				<textFieldExpression><![CDATA[$F{vt_termDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="665" width="100" height="20" uuid="d4aa0e1f-b0e8-4ef6-ad48-36f9e56352e9"/>
+				<textFieldExpression><![CDATA[$F{vt_updateby}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="326" y="665" width="86" height="20" uuid="96ffc196-9a9b-4464-8dbb-b684d4450f99"/>
+				<text><![CDATA[TARIKH :]]></text>
+			</staticText>
+			<textField pattern="dd/mm/YYYY">
+				<reportElement x="414" y="665" width="100" height="20" uuid="1e2ae749-16c7-41d0-b9cc-66202c3bec10"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="4" y="703" width="551" height="1" uuid="62569061-6a4b-4c37-b33e-285879e6f607"/>
+			</line>
+			<staticText>
+				<reportElement x="14" y="717" width="116" height="20" uuid="d8909a2b-e69e-4c44-b304-77d2b5f797c3"/>
+				<text><![CDATA[Nilai Tambah Baru]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="757" width="116" height="20" uuid="50fc0a45-c178-4f47-9f1e-470ab126e23a"/>
+				<text><![CDATA[Peratus Kira (%)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="777" width="116" height="20" uuid="cf0cf719-c3e6-4699-a170-15d85be683d2"/>
+				<text><![CDATA[Cukai Perlu Dibayar]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="717" width="100" height="20" uuid="c0a2a347-b1a1-4327-8f7c-1d5a4dddba18"/>
+				<textFieldExpression><![CDATA[$F{vt_approvednt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="737" width="100" height="20" uuid="ad1dfeb9-7738-4754-9e5e-34754de5803b"/>
+				<textFieldExpression><![CDATA[$F{vt_approvedrate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="757" width="100" height="20" uuid="bc65eee7-9406-46c0-98a8-672468d9645d"/>
+				<textFieldExpression><![CDATA[$F{vt_calculatedrate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="14" y="737" width="116" height="20" uuid="c1d0aba9-a2b3-4ed8-8dc5-f5a386a46f33"/>
+				<text><![CDATA[% Kadar]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="777" width="100" height="20" uuid="62e8b6e4-fc6e-4d4d-9726-df5c7788ac81"/>
+				<textFieldExpression><![CDATA[$F{vt_approvednt}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
