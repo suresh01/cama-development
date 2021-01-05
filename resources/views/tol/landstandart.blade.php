@@ -93,6 +93,9 @@
 							Update by / Update date
 						</th>
 						<th>
+							Status
+						</th>
+						<th>
 							Action
 						</th>
 						
@@ -453,6 +456,44 @@
 	    });
 	}
 
+	function approve(id,currstatus){
+		
+		var noty_id = noty({
+			layout : 'center',
+			text: 'Are you sure want to Submit?',
+			modal : true,
+			buttons: [
+				{type: 'button pink', text: 'Submit', click: function($noty) {
+					$noty.close();
+					$.ajax({
+		  				type: 'GET', 
+					    url:'approve',
+					    headers: {
+						    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						},
+				        data:{param_value:id,module:'tonelandstandart',param:currstatus},
+				        success:function(data){	        	
+				        	
+							window.location.assign("tonelandstandart");	
+							
+			        	},
+				        error:function(data){
+							//$('#loader').css('display','none');	
+				        	alert('error');
+			        	}
+			    	});
+				  }
+				},
+				{type: 'button blue', text: 'Cancel', click: function($noty) {
+					$noty.close();
+				  }
+				}
+				],
+			 type : 'success', 
+		});
+
+	}
+
 	$(document).ready(function() {
 
 
@@ -489,12 +530,31 @@
 			        		return data.tstand_updateby+" / "+data.tstand_updatedate+"</a>";
 			        	
 			        }, "name": "TO_OWNNAME"},
+			        {"data": "approvalstatus", "name": "TO_OWNNO"},
 			        {"data": function(data){
-			        		//var url = 'datasearchdetail?prop_id='+data.vd_id; formatMoneyHas
-
-			        		return "<span><a class='action-icons c-edit' onclick='editBasket("+data.tstand_id+")' href='#' title='Edit'>Edit</a></span> " +
-							"<span><a class='action-icons c-Delete delete_tenant' onclick='deleteBasket("+data.tstand_id+")' href='#' title='Delete'>Delete</a></span>";
 			        	
+			        	var action = "";
+			        		
+							var editaction ="<span><a class='action-icons c-edit' onclick='editBasket("+data.tstand_id+")' href='#' title='Edit'>Edit</a></span> " +
+							"<span><a class='action-icons c-Delete delete_tenant' onclick='deleteBasket("+data.tstand_id+")' href='#' title='Delete'>Delete</a></span>";
+
+							if(data.tstand_approvaltstandstatus_id == '1'){
+								action = editaction +  '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.tstand_id+',1)"  title="Submit To Approve" href="#"></a></span>';							
+							} else if(data.tstand_approvaltstandstatus_id == '2'){
+								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.tstand_id+',2)"  title="Approve" href="#"></a></span>';							
+							} else if(data.tstand_approvaltstandstatus_id == '3'){
+								action =  '<spane><a  class=" new-action-icons reverse" onclick="approve('+data.tstand_id+',3)" title="Revise" href="#"></a></span>';
+						
+							} else if(data.tstand_approvaltstandstatus_id == '4'){
+								action =  editaction +  '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.tstand_id+',4)"  title="Submit to Revise Approval" href="#"></a></span>';							
+							} else if(data.tstand_approvaltstandstatus_id == '5'){
+								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.tstand_id+',5)"  title="Approve Revise" href="#"></a></span>';						
+							} 
+							
+
+			        		return action;
+
+			        		
 			        }, "name": "TO_OWNNO"}
 		   		],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {

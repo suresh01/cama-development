@@ -40,7 +40,12 @@
 						<li><a href="codemaintenance">Code Maintenance</a></li>
 						@foreach ($isparent as $rec)
 							@if($rec->pd_parent != 'Root' )	
-								<li><a href="codemaintenancedetail?name={{$rec->pd_parent}}">{{$rec->pd_parent}} - {{$id}}</a></li>
+								<li><a href="codemaintenancedetail?name={{$rec->pd_parent}}">{{$rec->pd_parent}} - 
+								@if($id != '')
+									{{$id}} 
+								@else
+									All
+								@endif</a></li>
 							@endif
 						@endforeach
 						<li>{{$name}}</li>
@@ -111,15 +116,18 @@
 								
 								@endforeach
 								<td>
-									<!--<a onclick="multilevel('{{$name}}','{{ $rec->tdi_key }}')" href='#'>{{ $rec->tdi_key }}</a>-->
-									@if($rec->tdi_td_name == 'BULDINGCATEGORY' )
-										<a onclick="multilevel('{{$name}}','{{ $rec->tdi_key }}')" href='#'>{{ $rec->tdi_key }}</a>
-									@else
-										<a href='codemaintenancedetail?name={{$name}}&id={{ $rec->tdi_key }}'>{{ $rec->tdi_key }}</a>
-									@endif
+									{{ $rec->tdi_key }}
 								</td>
 								<td>
-									{{ $rec->tdi_value }}
+									@if($rec->childcount != 0 )
+										@if($rec->tdi_td_name == 'BULDINGCATEGORY' )
+											<a onclick="multilevel('{{$name}}','{{ $rec->tdi_key }}')" href='#'>{{ $rec->tdi_value }}</a>
+										@else
+											<a href='codemaintenancedetail?name={{$name}}&id={{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</a>
+										@endif
+									@else
+										{{ $rec->tdi_value }}
+									@endif
 								</td>
 								<td>
 									{{ $rec->tdi_desc }}
@@ -155,7 +163,7 @@
 			<div class="widget_wrap">
 				<div class="widget_content">
 					<h3 id="title">Add Parameter</h3>
-					<form id="usertransform" autocomplete="off" method="post" action="codemaintenancedetail?name={{ $name }}" class="">
+					<form id="usertransform" autocomplete="off" method="post" action="codemaintenancedetail?name={{ $name }}&id={{ $id }}" class="">
 						<div  class="grid_6 form_container left_label">
 						<ul>
 							<li>
@@ -185,7 +193,7 @@
 									<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">Parameter Parent<span class="req">*</span></label>
 										<div class="form_input ">
-											<select style="width: 100%;" data-placeholder="Choose a Parent..." disabled="" class="cus-select" id="parent" name="parent" tabindex="20">
+											<select style="width: 100%;" onchange="getLastCode(this.value)" data-placeholder="Choose a Parent..." disabled="" class="cus-select" id="parent" name="parent" tabindex="20">
 											@foreach ($childparent as $rec)
 												<option value="{{ $rec->tdi_key }}">{{ $rec->tdi_key }}-{{ $rec->tdi_value }}</option>	
 											@endforeach									
@@ -228,6 +236,38 @@
 		</div>
 	
 	</div>
+
+
+	<div style="display: none;height: 160px;"  id="open-modal-content-child">
+		<h3>Select Child</h3>
+		<form action="#" id="codemaintenancedetail" method="get" class="form_container">	
+			@csrf		
+			<ul id="filterrow">		
+				<li class="li">
+					<div class="form_grid_12 multiline">
+						<div class="form_input">
+							<div class="form_grid_6">
+								<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="child" name="child" tabindex="20">
+									<option value="#">Please select Child</option>
+									<option value="AREALEVEL">AREALEVEL</option>				
+									<option value="AREAUSE">AREAUSE</option>	
+									<option value="BUILDINGSTOREY">BUILDINGSTOREY</option>				
+									<option value="BULDINGTYPE">BULDINGTYPE</option>						
+								</select>
+							</div>
+							<span class="clear"></span>
+							<input type="hidden" name="child_id"  id="child_id">
+						</div>
+					</div>
+				</li>
+			</ul>
+			
+			<div class="btn_24_blue">
+				<a href="#" onclick="childSelect()" ><span>Submit</span></a>
+				<a href="#" class="simplemodal-close"><span>Close </span></a>
+			</div>
+			</form>
+	</div>
 	<span class="clear"></span>	
 	
 </div>
@@ -237,9 +277,26 @@
 		return true;
 	}
 
+	function getLastCode(val){
+		$.ajax({
+	        type:'GET',
+	        url:'getLastCode',
+	        data:{param:val,name:'{{$name}}'},
+	        success:function(data){	  
+	       // alert(data.lastcode); 
+	        	$('#parameterkey').attr('placeholder',"Last Used Code : "+data.lastcode);
+	        
+	        	
+	        	
+        	}
+    	});
+	}
+
 	function openAddUser(){
 		if(isAccessAllowed(31121)){
 			$('#parent').val('{{$id}}');
+			$('#parameterkey').removeAttr('readonly');
+			$("#parameterkey").val("");
 			$("#parametervalue").val("");
 			$("#title").html("Add Parameter");
 			$("#desc").val("");
@@ -250,20 +307,29 @@
 			$("#operation").val(1);
 			$("#usertable").hide();
 			$("#adduserform").show();
+			if('{{$id}}' == ''){
+				$('#parent').removeAttr('disabled');
+			}
 		}
 
 	}
 
 
-	function multilevel(name, id){
-		var lvl = prompt("Please enter type", "BULDINGTYPE");
-		if (lvl == 'BULDINGTYPE' || lvl == "AREALEVEL" || lvl == "BUILDINGSTOREY" || lvl == "AREAUSE") {
-			//txt = "User cancelled the prompt.";
-			window.location.assign("codemaintenancedetail?name="+name+"&id="+id+"&page="+lvl);	
 
-		} else {
-			alert("Please Enter Valid");
-		}
+	function childSelect(){
+		//var url = $('#stage').val();
+		var name = $('#child').val();
+		var id = $('#child_id').val();
+		
+		window.location.assign("codemaintenancedetail?name="+name+"&id="+id);
+		
+		
+	}
+
+	function multilevel(name, id){
+		$('#child').val(name);
+		$('#child_id').val(id);
+		$('#open-modal-content-child').modal();
 	}
 
 	function closeAddUser(){
@@ -351,6 +417,7 @@
 		var param = "{{ $name }}";
 		var operation = $("#operation").val();
 		if(operation == 2) {
+			$("#parent").removeAttr( "disabled");   
 			$("#usertransform").submit();
 		} else {
 			@foreach ($isparent as $rec)

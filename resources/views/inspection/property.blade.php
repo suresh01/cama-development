@@ -9,7 +9,7 @@
 #proptble td.numericCol {
 	text-align: right;
 }
-
+ 
 .multiselect {
   width: 200px;
 }

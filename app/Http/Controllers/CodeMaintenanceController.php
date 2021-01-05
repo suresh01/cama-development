@@ -35,7 +35,7 @@ class CodeMaintenanceController extends Controller
         (select tdi_key activeind_id, tdi_value activeind from tbdefitems where tdi_td_name = 'ACTIVEIND') activeind,
         (select tdi_key applntype_id, tdi_value applntype from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype,
         (select tdi_key tenanttype_id, tdi_value tenanttype from tbdefitems where tdi_td_name = 'RATEPAYERTYPE') tenanttype,
-        (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = 'APPROVAL') approval
+        (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = 'GENERALAPPROVAL') approval
         where te_state_id = state_id and te_citizen_id = citizen_id and te_race_id = race_id
         and te_activeind_id = activeind_id and te_applntype_id = applntype_id
         and te_type_id = tenanttype_id and approval_id = te_approvaltestatus_id
@@ -108,7 +108,7 @@ class CodeMaintenanceController extends Controller
         (select tdi_key activeind_id, tdi_value activeind from tbdefitems where tdi_td_name = 'ACTIVEIND') activeind,
         (select tdi_key applntype_id, tdi_value applntype from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype,
         (select tdi_key tenanttype_id, tdi_value tenanttype from tbdefitems where tdi_td_name = 'RATEPAYERTYPE') tenanttype,
-        (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = 'APPROVAL') approval
+        (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = 'GENERALAPPROVAL') approval
         where te_state_id = state_id and te_citizen_id = citizen_id and te_race_id = race_id
         and te_activeind_id = activeind_id and te_applntype_id = applntype_id
         and te_type_id = tenanttype_id and approval_id = te_approvaltestatus_id
@@ -143,7 +143,7 @@ FROM `cm_ratepayer`, (select tdi_key state_id, tdi_value state from tbdefitems w
 (select tdi_key activeind_id, tdi_value activeind from tbdefitems where tdi_td_name = 'ACTIVEIND') activeind,
 (select tdi_key applntype_id, tdi_value applntype from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype,
 (select tdi_key ratepayertype_id, tdi_value ratepayertype from tbdefitems where tdi_td_name = 'RATEPAYERTYPE') ratepayertype,
-        (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = 'APPROVAL') approval
+        (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = 'GENERALAPPROVAL') approval
 where rp_state_id = state_id and rp_citizen_id = citizen_id and rp_race_id = race_id
 and rp_activeind_id = activeind_id and rp_applntype_id = applntype_id
 and rp_type_id = ratepayertype_id and approval_id = rp_approvalrpstatus_id");
@@ -205,7 +205,7 @@ left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCOD
 left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE") titletype on titletype.tdi_key = trans_titletype_id
 left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TRANSACTIONTYPE") transtype on transtype.tdi_key = trans_transtype_id
 left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE") state on state.tdi_key = trans_state_id
-left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "APPROVAL") approval on approval_id = trans_approvaltransstatus_id');
+left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = trans_approvaltransstatus_id');
 
         $search=DB::select(' select sd_key, sd_label, 
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
@@ -295,7 +295,7 @@ left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREALE
 left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREAUSE") aruse on aruse.tdi_key = tbldg_areause_id
 left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone on subzone.tdi_key = tbldg_subzon_id
 left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "TRANSACTIONTYPE") trnstype on trnstype.tdi_key = tbldg_transtype_id
-left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "APPROVAL") approval on approval_id = tbldg_approvalbldgstatus_id
+left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = tbldg_approvalbldgstatus_id
 where tollist_id = tbldg_tone_id');
 
          $search=DB::select(' select sd_key, sd_label, 
@@ -385,7 +385,7 @@ left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREALE
 left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREAUSE") aruse on aruse.tdi_key = tbldg_areause_id
 left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone on subzone.tdi_key = tbldg_subzon_id
 left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "TRANSACTIONTYPE") trnstype on trnstype.tdi_key = tbldg_transtype_id
-left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "APPROVAL") approval on approval_id = tbldg_approvalbldgstatus_id
+left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = tbldg_approvalbldgstatus_id
 where tollist_id = tbldg_tone_id '  .$filterquery  );
 
     /*  $property = DB::select('select ma_id,ma_accno, `cm_masterlist`.`ma_fileno`,ma_city, ma_postcode,
@@ -425,7 +425,7 @@ left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ISHASB
 left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgstorey on bldgstorey.tdi_key = tland_propstorey_id
 left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BULDINGTYPE") bldgtype on bldgtype.tdi_key = tland_proptype_id 
 left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone on subzone.tdi_key = tland_subzon_id
-left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "APPROVAL") approval on approval_id = tland_approvaltlandstatus_id
+left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = tland_approvaltlandstatus_id
 where tollist_id = tland_tone_id');
 
         $search=DB::select(' select sd_key, sd_label, 
@@ -496,7 +496,7 @@ where tollist_id = tland_tone_id');
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
 
-         $bldg = DB::select('select `tland_id`,`tland_tone_id`, tollis_year,   subzone.tdi_parent_key zoneid, subzone.tdi_parent_name zone,  `tland_ishasbuilding_id`,  hasbldg.tdi_value hasbldg,bldgtype.tdi_parent_key propcategory,  `tland_subzon_id`,   subzone.tdi_value subzone,
+        $bldg = DB::select('select `tland_id`,`tland_tone_id`, tollis_year,   subzone.tdi_parent_key zoneid, subzone.tdi_parent_name zone,  `tland_ishasbuilding_id`,  hasbldg.tdi_value hasbldg,bldgtype.tdi_parent_key propcategory,  `tland_subzon_id`,   subzone.tdi_value subzone,
  `tland_proptype_id`,  bldgtype.tdi_value bldgtype, bldgtype.tdi_parent_name category,
 `tland_propstorey_id`,    bldgstorey.tdi_value bldgstorey, `tland_value`,    `tland_createby`,    `tland_createdate`,    `tland_updateby`,
  DATE_FORMAT(`tland_updatedate`, "%d/%m/%Y") tland_updatedate, tland_approvaltlandstatus_id, approvalstatus
@@ -505,7 +505,7 @@ left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ISHASB
 left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgstorey on bldgstorey.tdi_key = tland_propstorey_id
 left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BULDINGTYPE") bldgtype on bldgtype.tdi_key = tland_proptype_id 
 left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone on subzone.tdi_key = tland_subzon_id
-left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "APPROVAL") approval on approval_id = tland_approvaltlandstatus_id
+left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = tland_approvaltlandstatus_id
 where tollist_id = tland_tone_id'  .$filterquery  );
 
     /*  $property = DB::select('select ma_id,ma_accno, `cm_masterlist`.`ma_fileno`,ma_city, ma_postcode,
@@ -538,10 +538,12 @@ where tollist_id = tland_tone_id'  .$filterquery  );
        
         $allowance = DB::select('select `tallo_id`, tollis_year,   `tallo_tone_id`, alltype.tdi_parent_key allcategory, alltype.tdi_parent_name allcategoryname,  `tallo_allowancetype_id`,alltype.tdi_value alltype,  `tallo_buldingcategory_id`, bldgate.tdi_value bldgate,
     `tallo_value`,    `tallo_factor`,    `tallo_createby`,    `tallo_createdate`,   `tallo_updateby`,    DATE_FORMAT(`tallo_updatedate`, "%d/%m/%Y") `tallo_updatedate`
+    , approvalstatus, tallo_approvaltallostatus_id
     FROM cm_toneoflistbasket,`cm_tone_bldg_allowances`
     left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BULDINGCATEGORY") bldgate on bldgate.tdi_key = tallo_buldingcategory_id
     left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "ALLOWANCETYPE") alltype
     on alltype.tdi_key = tallo_allowancetype_id
+    left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = tallo_approvaltallostatus_id
     where tollist_id = tallo_tone_id');
 
         $bldgcate=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BULDINGCATEGORY"');
@@ -663,10 +665,12 @@ where tollist_id = tstand_tone_id');
 bldgtype.tdi_value  bldgtype,bldgtype.tdi_parent_key propcategory, bldgtype.tdi_parent_name category,
     `tstand_propstorey_id`,   bldgstorey.tdi_value  bldgstorey, `tstand_standartarea`,    `tstand_nextarea`,   `tstand_maxlevel`,
     `tstand_createby`,    `tstand_createdate`,    `tstand_updateby`,   DATE_FORMAT(`tstand_updatedate`, "%d/%m/%Y")  `tstand_updatedate`
+    , approvalstatus, tstand_approvaltstandstatus_id
 FROM cm_toneoflistbasket, `cm_tone_land_standart`
 left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgstorey on bldgstorey.tdi_key = tstand_propstorey_id
 left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BULDINGTYPE") bldgtype on bldgtype.tdi_key = tstand_proptype_id 
 left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone on subzone.tdi_key = tstand_subzon_id
+left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = tstand_approvaltstandstatus_id
 where tollist_id = tstand_tone_id '  .$filterquery  );
 
     /*  $property = DB::select('select ma_id,ma_accno, `cm_masterlist`.`ma_fileno`,ma_city, ma_postcode,
@@ -704,7 +708,7 @@ where tollist_id = tstand_tone_id '  .$filterquery  );
             left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BULDINGTYPE") bldgtype on bldgtype.tdi_key = trate_proptype_id 
             left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ZONE") zone on zone.tdi_key = trate_zon_id
             left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ISHASBUILDING") hasbldg on hasbldg.tdi_key = trate_ishasbuilding_id
-left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "APPROVAL") approval on approval_id = trate_approvaltratestatus_id
+left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = trate_approvaltratestatus_id
             where trlist_id = trate_trlist_id
             ');
 
@@ -775,7 +779,7 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
             left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BULDINGTYPE") bldgtype on bldgtype.tdi_key = trate_proptype_id 
             left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ZONE") zone on zone.tdi_key = trate_zon_id
             left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ISHASBUILDING") hasbldg on hasbldg.tdi_key = trate_ishasbuilding_id
-left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "APPROVAL") approval on approval_id = trate_approvaltratestatus_id
+left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = trate_approvaltratestatus_id
             where trlist_id = trate_trlist_id
             '  .$filterquery  );
 

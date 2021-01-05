@@ -636,7 +636,7 @@ $roles = '';
        // Log::info(1 );
         //Log::info(Auth::logoutOtherDevices(Auth::user()->password));
         $result=DB::select('select pd_name, pd_parent, pd_desc,pd_search_mod,pd_tdi_value_lenght, (select count(*) from tbpardef t where t.pd_parent = tbpardef.pd_name) childcount, 
-(select count(tdi_key) from tbdefitems where tdi_td_name = pd_name) itemcount from tbpardef order by pd_name');
+(select count(tdi_key) from tbdefitems where tdi_td_name = pd_name) itemcount from tbpardef  order by pd_name');
         $searchmodule = DB::select('select se_id, se_name from tbsearch');
 
        // Log::info(2);
@@ -751,29 +751,34 @@ $roles = '';
             if($filterquery != ''){
                  /*Log::info('select tdi_td_name,tdi_key,tdi_value,tdi_parent_name,tdi_parent_key,tdi_desc, tdi_updateat, tdi_updateby,tdi_sort from tbdefitems
                 where tdi_td_name = "'.$td_name.'"  and '.' '.$filterquery.' order by tdi_parent_key,tdi_sort');*/
-                $codedetail=DB::select('select tdi_td_name,tdi_key,tdi_value,tdi_parent_name,tdi_parent_key,tdi_desc, tdi_updateat, tdi_updateby,tdi_sort from tbdefitems
+                $codedetail=DB::select('select tdi_td_name,tdi_key,tdi_value,tdi_parent_name,tdi_parent_key,tdi_desc, tdi_updateat, tdi_updateby,tdi_sort,
+                (select count(*) from tbpardef t where t.pd_parent = tdi_td_name) childcount from tbdefitems
                 where tdi_td_name = :td_name '.$cond.'  and '.' '.$filterquery.' order by tdi_parent_key,tdi_sort', 
                 array(":td_name" => $td_name)); 
                 /*Log::info( 'select tdi_td_name,tdi_key,tdi_value,tdi_parent_name,tdi_parent_key,tdi_desc, tdi_updateat, tdi_updateby,tdi_sort from tbdefitems
                 where tdi_td_name = :td_name  and '.' '.$filterquery.' order by tdi_parent_key,tdi_sort'); */ 
             } else {
-                $codedetail=DB::select('select tdi_td_name,tdi_key,tdi_value,tdi_parent_name,tdi_parent_key,tdi_desc, tdi_updateat, tdi_updateby,tdi_sort from tbdefitems
+                $codedetail=DB::select('select tdi_td_name,tdi_key,tdi_value,tdi_parent_name,tdi_parent_key,tdi_desc, tdi_updateat, tdi_updateby,tdi_sort, (select count(*) from tbpardef t where t.pd_parent = tdi_td_name) childcount from tbdefitems
                 where tdi_td_name = :td_name  '.$cond.'   order by tdi_parent_key,tdi_sort ', 
                 array(":td_name" => $td_name));
             }
             
         } else {
-            $codedetail=DB::select('select tdi_td_name,tdi_key,tdi_value,tdi_parent_name,tdi_parent_key,tdi_desc, tdi_updateat, tdi_updateby,tdi_sort from tbdefitems
+            $codedetail=DB::select('select tdi_td_name,tdi_key,tdi_value,tdi_parent_name,tdi_parent_key,tdi_desc, tdi_updateat, tdi_updateby,tdi_sort, (select count(*) from tbpardef t where t.pd_parent = tdi_td_name) childcount from tbdefitems
                 where tdi_td_name = :td_name  '.$cond.'   order by tdi_parent_key,tdi_sort', 
                 array(":td_name" => $td_name));
 
         }
 
         //$lastusedcode = DB::select('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where tdi_td_name ="'.$td_name.'" group by tdi_td_name');
+        $par ='';
+        if($id != ''){
+            $par = 'tdi_parent_key ="'.$id.'" and ';
+        }
+        $lastusedcode = DB::select('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par.' tdi_td_name ="'.$td_name.'" group by tdi_td_name');
+Log::info('---'.$id.'---');
 
-        $lastusedcode = DB::select('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where tdi_parent_key ="'.$id.'" and tdi_td_name ="'.$td_name.'" group by tdi_td_name,tdi_key');
-
-
+Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par.' tdi_td_name ="'.$td_name.'" group by tdi_td_name');
         $childparent = DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = (select pd_parent from tbpardef where pd_name = :pd_name  ) order by tdi_sort', 
                 array(":pd_name" => $td_name));
 
@@ -1160,9 +1165,21 @@ $roles = '';
         
     }
 
-    public function propertyRegister(){
+        public function propertyRegister(){
         $maxRow = 30;
         return view("propertyregister.property")->with('maxRow', $maxRow);
+    }
+
+    public function getLastCode(Request $request){
+        $param = $request->input('param');
+        $name = $request->input('name');
+
+        $lastusedcode = DB::select('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where tdi_parent_key ="'.$param.'" and tdi_td_name ="'.$name.'" group by tdi_td_name');
+        Log::info($lastusedcode );
+        foreach ($lastusedcode as $rec) {            
+            $lastcode = $rec->tdi_key;
+        } 
+        return response()->json(array('lastcode'=> $lastcode,'msg'=> 'true'),200);
     }
     
 } 

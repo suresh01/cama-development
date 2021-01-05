@@ -57,9 +57,11 @@
 							Update by / Update date
 						</th>
 						<th>
+							Status
+						</th>	
+						<th>
 							Action
-						</th>
-						
+						</th>						
 					</tr>
 					</thead>
 					<tbody>
@@ -92,7 +94,25 @@
 						<td>
 							{{ $rec->tallo_updateby }} / {{$rec->tallo_updatedate}}
 						</td>	
+						<td>
+							{{ $rec->approvalstatus }}
+						</td>	
 						<td class="">
+							@if( $rec->tallo_approvaltallostatus_id == '1')
+								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{ $rec->tallo_id }}',1)"  title="Submit To Approve" href="#"></a></span>
+							@endif
+							@if( $rec->tallo_approvaltallostatus_id == '2')
+								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{ $rec->tallo_id }}',2)"  title="Approve" href="#"></a></span>
+							@endif						
+							@if($rec->tallo_approvaltallostatus_id == '3')
+								<spane><a  class=" new-action-icons reverse" onclick="approve('{{ $rec->tallo_id }}',3)" title="Revise" href="#"></a></span>
+							@endif
+							@if( $rec->tallo_approvaltallostatus_id  == '4')
+								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{ $rec->tallo_id }}',4)"  title="Submit to Revise Approval" href="#"></a></span>				
+							@endif
+							@if( $rec->tallo_approvaltallostatus_id  == '5')
+								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{ $rec->tallo_id }}',5)"  title="Approve Revise" href="#"></a></span>					
+							@endif
 							<span><a class="action-icons c-edit" onclick="editBasket('{{ $rec->tallo_id }}')" href="#" title="Edit">Edit</a></span>
 							<span><a class="action-icons c-Delete delete_tenant" onclick="deleteBasket('{{ $rec->tallo_id }}')" href="#" title="Delete">Delete</a></span>
 						</td>
@@ -227,6 +247,43 @@
 
 <script src="js/propertyregister/tab-script.js"></script>
 <script>
+	function approve(id,currstatus){
+		
+		var noty_id = noty({
+			layout : 'center',
+			text: 'Are you sure want to Submit?',
+			modal : true,
+			buttons: [
+				{type: 'button pink', text: 'Submit', click: function($noty) {
+					$noty.close();
+					$.ajax({
+		  				type: 'GET', 
+					    url:'approve',
+					    headers: {
+						    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						},
+				        data:{param_value:id,module:'toneallowance',param:currstatus},
+				        success:function(data){	        	
+				        	
+							window.location.assign("toneallowance");	
+							
+			        	},
+				        error:function(data){
+							//$('#loader').css('display','none');	
+				        	alert('error');
+			        	}
+			    	});
+				  }
+				},
+				{type: 'button blue', text: 'Cancel', click: function($noty) {
+					$noty.close();
+				  }
+				}
+				],
+			 type : 'success', 
+		});
+
+	}
 	function editBasket(id){
 		$("#title").html("Update Building");
 		$('#basketid').val($('#basketid_'+id).val());

@@ -24,11 +24,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 /*Route::get('dashboard', function () {
-    return view('dashboard');
+    return view('dashboard'); 
 });*/
 Route::get('dashboard','UserController@dashboard');
 
 Route::get('user','UserController@user');
+
+
+Route::get('getLastCode','UserController@getLastCode');
 
 Route::get('getuserdetail','ReportController@getUserdetail');
 
