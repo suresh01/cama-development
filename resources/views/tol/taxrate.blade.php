@@ -427,9 +427,9 @@
 			        		var action = "";
 
 			        		var editaction ="<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick='editBasket("+data.trate_id+")' href='#' title='Edit'></a></span> " +
-							"<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; float: right;'  onclick='deleteBasket("+data.trate_id+")' href='#' title='Delete'></a></span>";
+							"&nbsp;&nbsp;<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick='deleteBasket("+data.trate_id+")' href='#' title='Delete'></a></span>";
 
-							if(data.trate_approvaltratestatus_id == '1'){
+							if(data.trate_approvaltratestatus_id == '1' || data.trate_approvaltratestatus_id == '6'){
 								action = editaction +  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.trate_id+',1)"  title="Submit To Approve" href="#"></a></span>';							
 							} else if(data.trate_approvaltratestatus_id == '2'){
 								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.trate_id+',2,1)"  title="Approve" href="#"></a></span>' + 

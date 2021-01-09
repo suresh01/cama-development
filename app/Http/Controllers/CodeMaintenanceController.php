@@ -566,10 +566,11 @@ where tollist_id = tland_tone_id'  .$filterquery  );
     public function toneDepreciation(Request $request){
        
         $result = DB::select('select `tdepre_id`,  tollis_year,  `tdepre_tone_id`,    `tdepre_bldgcondn_id`,  bldgcond.tdi_value bldgcond, `tdepre_value`,    `tdepre_createby`,
-    `tdepre_createdate`,    `tdepre_updateby`,   DATE_FORMAT(`tdepre_updatedate`, "%d/%m/%Y") `tdepre_updatedate`
-FROM cm_toneoflistbasket, `cm_tone_bldg_depreciation`
+    `tdepre_createdate`,    `tdepre_updateby`,   DATE_FORMAT(`tdepre_updatedate`, "%d/%m/%Y") `tdepre_updatedate`, tdepre_approvaltdeprestatus_id, approvalstatus
+FROM cm_toneoflistbasket
+inner join `cm_tone_bldg_depreciation` on  tollist_id = tdepre_tone_id
 left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BLDGCONDN") bldgcond on bldgcond.tdi_key = tdepre_bldgcondn_id
-where tollist_id = tdepre_tone_id');
+left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = tdepre_approvaltdeprestatus_id');
 
         $bldgcond=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BLDGCONDN"'); 
         $basket=DB::select('select tollist_id, tollis_year, tollis_desc from cm_toneoflistbasket '); 

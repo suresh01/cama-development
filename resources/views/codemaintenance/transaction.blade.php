@@ -120,18 +120,24 @@
 							{{ $rec->approvalstatus}}
 						</td>
 						<td class="">
-							
-							@if($rec->trans_approvaltransstatus_id == '1')
-								<span><a class="action-icons c-edit" onclick="editTrans('{{ $rec->trans_id }}')" href="#" title="Edit">Edit</a></span>
-							<span><a class="action-icons c-Delete delete_tenant" onclick="deleteTrans('{{ $rec->trans_id }}')" href="#" title="Delete">Delete</a></span>
-								 <span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',1)"  title="Ready To Approve" href="#"></a></span>'						
+							@if($rec->trans_approvaltransstatus_id == '1' || $rec->trans_approvaltransstatus_id == '6')
+							<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editTrans('{{ $rec->trans_id }}')" href='#' title='Edit'></a></span>&nbsp;&nbsp;
+								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick="deleteTrans('{{ $rec->trans_id }}')" href='#' title='Delete'></a></span>
+								
+								 <span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',1)"  title="Submit To Approve" href="#"></a></span>'						
 							@elseif($rec->trans_approvaltransstatus_id == '2')
-								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',2)"  title="Approve" href="#"></a></span>;							
+								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',2,1)"  title="Approve" href="#"></a></span>
+								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',2,2)"  title="Reject" href="#"></a></span>
 							@elseif($rec->trans_approvaltransstatus_id == '3')
-								<spane><a  class=" new-action-icons reverse" onclick="approve('{{$rec->trans_id}}',3)" title="Revise" href="#"></a></span>;
-						
+								<spane><a class=" new-action-icons reverse" onclick="approve('{{$rec->trans_id}}',3)" title="Revise" href="#"></a></span>	
+
 							@elseif($rec->trans_approvaltransstatus_id == '4')
-								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',4)"  title="Revise Ready To Approve" href="#"></a></span>;							
+								<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editTrans('{{ $rec->trans_id }}')" href='#' title='Edit'></a></span>&nbsp;&nbsp;
+								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block;'  onclick="deleteTrans('{{ $rec->trans_id }}')" href='#' title='Delete'></a></span>
+								
+								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',1)"  title="Submit To Approve" href="#"></a></span>				
+							@elseif($rec->trans_approvaltransstatus_id == '5')
+								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',5)"  title="Approve Revision" href="#"></a></span>						
 							@endif
 						</td>
 					</tr>
@@ -394,6 +400,50 @@
 				
 
 	}	
+
+	function approve(id,currstatus,type){
+		var param_str ="";
+		if(type == 1){
+			param_str = 'AP';
+		} else {
+			param_str = 'RJ';
+		}
+	
+		var noty_id = noty({
+			layout : 'center',
+			text: 'Are you sure want to Submit?',
+			modal : true,
+			buttons: [
+				{type: 'button pink', text: 'Submit', click: function($noty) {
+					$noty.close();
+					$.ajax({
+		  				type: 'GET', 
+					    url:'approve',
+					    headers: {
+						    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						},
+				        data:{param_value:id,module:'evidentmgmt',param:currstatus,param_str:param_str },
+				        success:function(data){	        	
+				        	
+							window.location.assign("evidentmgmt");	
+							
+			        	},
+				        error:function(data){
+							//$('#loader').css('display','none');	
+				        	alert('error');
+			        	}
+			    	});
+				  }
+				},
+				{type: 'button blue', text: 'Cancel', click: function($noty) {
+					$noty.close();
+				  }
+				}
+				],
+			 type : 'success', 
+		});
+
+	}
 	function editTrans(id){
 		$("#title").html("Update Transaction");
 		$('#transtype').val($('#transtype_'+id).val());

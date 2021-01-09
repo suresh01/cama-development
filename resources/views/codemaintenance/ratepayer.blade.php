@@ -87,22 +87,21 @@
 							{{ $rec->approvalstatus}}
 						</td>
 						<td class="">
-
 							
-							@if($rec->rp_approvalrpstatus_id == '1')
-							<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editTenantUser('{{ $rec->rp_id }}')" href='#' title='Edit'></a></span>
-								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; float: right;'  onclick="deleteTenant('{{ $rec->rp_id }}')" href='#' title='Delete'></a></span>
+							@if($rec->rp_approvalrpstatus_id == '1' || $rec->rp_approvalrpstatus_id == '6' )
+							<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editTenantUser('{{ $rec->rp_id }}')" href='#' title='Edit'></a></span>&nbsp;&nbsp;
+								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick="deleteTenant('{{ $rec->rp_id }}')" href='#' title='Delete'></a></span>
 								
 								 <span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->rp_id}}',1)"  title="Submit To Approve" href="#"></a></span>'						
 							@elseif($rec->rp_approvalrpstatus_id == '2')
 								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->rp_id}}',2,1)"  title="Approve" href="#"></a></span>
 								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->rp_id}}',2,2)"  title="Reject" href="#"></a></span>
-								
-								
+							@elseif($rec->rp_approvalrpstatus_id == '3')
+								<spane><a class=" new-action-icons reverse" onclick="approve('{{$rec->rp_id}}',3)" title="Revise" href="#"></a></span>
 						
 							@elseif($rec->rp_approvalrpstatus_id == '4')
-								<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editTenantUser('{{ $rec->rp_id }}')" href='#' title='Edit'></a></span>
-								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; float: right;'  onclick="deleteTenant('{{ $rec->rp_id }}')" href='#' title='Delete'></a></span>
+								<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editTenantUser('{{ $rec->rp_id }}')" href='#' title='Edit'></a></span>&nbsp;&nbsp;
+								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick="deleteTenant('{{ $rec->rp_id }}')" href='#' title='Delete'></a></span>
 								
 								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->rp_id}}',1)"  title="Submit To Approve" href="#"></a></span>				
 							@elseif($rec->rp_approvalrpstatus_id == '5')
@@ -411,6 +410,7 @@
 		});
 
 	}
+
 	function editTenantUser(id){
 		$("#title").html("Update Ratepayer");
 		$('#number').attr('readonly', "readonly");
