@@ -9,7 +9,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="llevel" for="level">BUILDING STATUS<span class="req">*</span></label>
 					<div  class="form_input">
-						<select data-placeholder="Choose a Status..."  style="width:100%" class="cus-select"  id="parambldgstatus" name="parambldgstatus" tabindex="6">
+						<select data-placeholder="Choose a Status..." disabled="" style="width:100%" class="cus-select"  id="parambldgstatus" name="parambldgstatus" tabindex="6">
 							<option></option>
 					@foreach ($ishasbuilding as $rec)
 							<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -21,7 +21,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="llevel" for="level">PROPERTY CATEGORY<span class="req">*</span></label>
 					<div  class="form_input">
-						<select data-placeholder="Choose a Status..."  style="width:100%" class="cus-select"  id="parambldgcategory" name="parambldgcategory" tabindex="6">
+						<select data-placeholder="Choose a Status..." disabled="" style="width:100%" class="cus-select"  id="parambldgcategory" name="parambldgcategory" tabindex="6">
 							<option></option>
 					@foreach ($bldgcate as $rec)
 							<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -33,7 +33,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="llevel" for="level">TYPE OF PROPERTY USE<span class="req">*</span></label>
 					<div  class="form_input">
-						<select data-placeholder="Choose a Status..."  style="width:100%" class="cus-select"  id="parambldgtype" name="parambldgtype" tabindex="6">
+						<select data-placeholder="Choose a Status..." disabled="" style="width:100%" class="cus-select"  id="parambldgtype" name="parambldgtype" tabindex="6">
 							<option></option>
 					@foreach ($bldgtype as $rec)
 							<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -45,7 +45,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="llevel" for="level">LEVEL OF PROPERTY USE<span class="req">*</span></label>
 					<div  class="form_input">
-						<select data-placeholder="Choose a Status..."  style="width:100%" class="cus-select"  id="paramarlevel" name="paramarlevel" tabindex="6">
+						<select data-placeholder="Choose a Status..." disabled="" style="width:100%" class="cus-select"  id="paramarlevel" name="paramarlevel" tabindex="6">
 							<option></option>
 					@foreach ($bldgstore as $rec)
 							<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>

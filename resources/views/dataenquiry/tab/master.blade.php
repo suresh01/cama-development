@@ -25,7 +25,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">FILE NUMBER<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="filenumber" tabindex="2"name="filenumber"  type="text" value="{{$master->ma_fileno}}" maxlength="50" class=""/>
+						<input id="filenumber" tabindex="2" readonly="true" name="filenumber"  type="text" value="{{$master->ma_fileno}}" maxlength="50" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
@@ -33,7 +33,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="llevel" for="level">DISTRICT<span class="req">*</span></label>
 					<div  class="form_input">
-						<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="district" name="district" tabindex="3">
+						<select data-placeholder="Choose a Status..." disabled="" style="width:100%" class="cus-select" id="district" name="district" tabindex="3">
 							<option></option>
 						@foreach ($district as $rec)
 								<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -46,7 +46,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="llevel" for="level">ZONE<span class="req">*</span></label>
 					<div  class="form_input">
-						<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="zone" name="zone" tabindex="4">
+						<select data-placeholder="Choose a Status..." disabled="" style="width:100%" class="cus-select" id="zone" name="zone" tabindex="4">
 							<option></option>
 						@foreach ($zone as $rec)
 								<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -59,7 +59,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="llevel" for="level">SUBZONE<span class="req">*</span></label>
 					<div  class="form_input">
-						<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="subzone" name="subzone" tabindex="5">
+						<select data-placeholder="Choose a Status..." disabled="" style="width:100%" class="cus-select"  id="subzone" name="subzone" tabindex="5">
 							<option></option>
 						@foreach ($subzone as $rec)
 								<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -93,7 +93,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 1<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="address1" tabindex="8" name="address1"  type="text" value="{{$master->ma_address1}}" maxlength="100" class=""/>
+						<input id="address1" tabindex="8" name="address1"  readonly="true" type="text" value="{{$master->ma_addr_ln1}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
@@ -101,42 +101,42 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 2<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="address2"  tabindex="9" name="address2"  type="text" value="{{$master->ma_address2}}" maxlength="100" class=""/>
+						<input id="address2"  tabindex="9" name="address2"  readonly="true" type="text" value="{{$master->ma_addr_ln2}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 3<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="address3"  name="address3" tabindex="10"  type="text" value="{{$master->ma_address3}}" maxlength="100" class=""/>
+						<input id="address3"  name="address3" tabindex="10"  readonly="true" type="text" value="{{$master->ma_addr_ln3}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 4<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="address4"  name="address4" tabindex="11"  type="text" value="{{$master->ma_address4}}" maxlength="100" class=""/>
+						<input id="address4"  name="address4" tabindex="11"  readonly="true" type="text" value="{{$master->ma_addr_ln4}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">POST CODE<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="postcode" name="postcode" tabindex="12"  type="text" value="{{$master->ma_postcode}}" maxlength="50" class=""/>
+						<input id="postcode" name="postcode" tabindex="12"  readonly="true" type="text" value="{{$master->ma_postcode}}" maxlength="50" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="city"  name="city" tabindex="13"  type="text" value="{{$master->ma_city}}" maxlength="50" class=""/>
+						<input id="city"  name="city" tabindex="13"  readonly="true" type="text" value="{{$master->ma_city}}" maxlength="50" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
 					<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
 					<div  class="form_input">
-						<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="state" name="state" tabindex="14">
+						<select data-placeholder="Choose a Status..." disabled="" style="width:100%" class="cus-select"  id="state" name="state" tabindex="14">
 							<option></option>
 					@foreach ($state as $rec)
 							<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>

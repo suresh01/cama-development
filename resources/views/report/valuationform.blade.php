@@ -272,8 +272,8 @@ $(document).ready(function (){
 			        {"data": "ma_fileno", "name": "fileno"},
 			        {"data": "zone", "name": "zone"},
 			        {"data": "subzone", "name": "subzone"},
-			        {"data": "ma_address1", "name": "owner"}, 
-			        {"data": "ma_address2", "name": "ishasbldg"},
+			        {"data": "ma_addr_ln1", "name": "owner"}, 
+			        {"data": "ma_addr_ln2", "name": "ishasbldg"},
 			        {"data": "owntype", "name": "owntype"}, 
 			        {"data": "TO_OWNNAME", "name": "TO_OWNNAME"}, 
 			        {"data": "bldgcount", "name": "bldgcount"}

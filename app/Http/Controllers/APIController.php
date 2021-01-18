@@ -75,7 +75,7 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
        
       $data = DB::select('select  vt_name,vt_termDate, va_id, va_name, ma_accno, vd_id, vd_ma_id, subzone.tdi_parent_key,subzone.tdi_parent_name, subzone.tdi_value subzone, subzone.tdi_key, 
         bldgstatus.tdi_value bldgstatus, bldgstatus.tdi_key bldgstatusid, proptype.tdi_parent_name propertycategory, proptype.tdi_value propertytype,vt_grossvalue,vt_proposednt, vt_proposedrate,
-        vt_calculatedrate, vt_proposedtax, vt_approvednt, vt_approvedrate,ma_address1, ma_address2, ma_address3, ma_address4, ma_postcode, propstate.tdi_value, 
+        vt_calculatedrate, vt_proposedtax, vt_approvednt, vt_approvedrate,ma_addr_ln1, ma_addr_ln2, ma_addr_ln3, ma_addr_ln4, ma_postcode, propstate.tdi_value, 
         TO_OWNNO, TO_OWNNAME, to_addr_ln1,to_addr_ln2,
         to_addr_ln3, to_addr_ln4, to_postcode, ownstate.tdi_value ownstate, al_no, al_altno, al_size, al_startdate, al_expireddate,al_tenureperiod
          from cm_appln_valterm 

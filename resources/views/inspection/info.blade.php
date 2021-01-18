@@ -53,7 +53,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 1<span class="req">*</span></label>
 					<div  class="form_input">
-						{{$master->ma_address1}}
+						{{$master->ma_addr_ln1}}
 					</div>
 					<span class=" label_intro"></span>
 				</div>
@@ -61,21 +61,21 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 2</label>
 					<div  class="form_input">
-						{{$master->ma_address2}}
+						{{$master->ma_addr_ln2}}
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 3</label>
 					<div  class="form_input">
-						{{$master->ma_address3}}
+						{{$master->ma_addr_ln3}}
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 4</label>
 					<div  class="form_input">
-						{{$master->ma_address4}}
+						{{$master->ma_addr_ln4}}
 					</div>
 					<span class=" label_intro"></span>
 				</div>

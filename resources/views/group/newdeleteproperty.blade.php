@@ -172,7 +172,7 @@ $(document).ready(function (){
               {"data": "vd_accno", "name": "zone"},
               {"data": "zone", "name": "subzone"},
               {"data": "subzone", "name": "owner"}, 
-              {"data": "ma_address1", "name": "ishasbldg"}, 
+              {"data": "ma_addr_ln1", "name": "ishasbldg"}, 
               {"data": "isbldg", "name": "ishasbldg"}              
           ],
 		    'columnDefs': [{

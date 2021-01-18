@@ -412,7 +412,10 @@ $('.mainNav li:has(ul)').addClass('has-child');
 			            <a style="padding: 5px;width: 172px;"  onclick="check_access('31','codemaintenance')" class="test" href="#">Code Maintenance<span class="caret"></span></a>
 			        </li>
 			        <li class="dropdown-submenu">
-			            <a style="padding: 5px;width: 172px;" onclick="check_access('32','propertybasket')" class="test" href="#">New Property Registration<span class="caret"></span></a>
+			            <a style="padding: 5px;width: 172px;" onclick="check_access('32','propertybasket')" class="test" href="#">New Masterlist Registration<span class="caret"></span></a>
+			        </li>
+			        <li class="dropdown-submenu">
+			            <a style="padding: 5px;width: 172px;" onclick="check_access('32','existspropertybasket')" class="test" href="#">Existing Masterlist Maintenance<span class="caret"></span></a>
 			        </li>
 			        <li class="dropdown-submenu">
 			            <a style="padding: 5px;width: 172px;" onclick="check_access('33','tenant')" class="test" href="#">Tenant Registration<span class="caret"></span></a>

@@ -63,9 +63,9 @@ class ObjectionController extends Controller
     public function basket(Request $request){
         
         $term = DB::select("select vt_id termid, vt_name term from cm_appln_valterm");
-        $basket = DB::select("select approval.tdi_value status,va_approved, va_id id, va_name l_group, va_vt_id termid, vt_name termaname, va_createby createby, DATE_FORMAT(va_createdate, '%d/%m/%Y') createdate, 
+        $basket = DB::select("select approval.tdi_value status,va_approvalstatus_id, va_id id, va_name l_group, va_vt_id termid, vt_name termaname, va_createby createby, DATE_FORMAT(va_createdate, '%d/%m/%Y') createdate, 
           va_updateby updateby, DATE_FORMAT(va_updatedate, '%d/%m/%Y') updatedate
-          from cm_appln_val left join (SELECT * FROM tbdefitems where tdi_td_name = 'APROVALSTATUS') approval on approval.tdi_key = va_approved join cm_appln_valterm  on va_vt_id = vt_id  where va_approved in (12,13,14)     
+          from cm_appln_val left join (SELECT * FROM tbdefitems where tdi_td_name = 'APROVALSTATUS') approval on approval.tdi_key = va_approvalstatus_id join cm_appln_valterm  on va_vt_id = vt_id  where va_approvalstatus_id in (12,13,14)     
            order by va_id  ");
         
 
@@ -134,7 +134,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         left join (select ag_siries,agd_vd_id,ob_listyear from cm_objection_agendadetail 
         inner join cm_objection_agenda on ag_id = agd_ag_id
         inner join cm_objection on ob_id = ag_ob_id) cm_objection_agendadetail on agd_vd_id = vd_id
-        where va_approved in ('08','09') and va_vt_id =  ".$term);*/
+        where va_approvalstatus_id in ('08','09') and va_vt_id =  ".$term);*/
 
 
         $search=DB::select(' select sd_key, sd_label, 
@@ -202,7 +202,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         inner join cm_appln_valterm on vt_id = va_vt_id                           
         left join (select no_vd_id,ob_listyear, ob_desc from cm_objection_notis 
         inner join cm_objection on ob_id = no_ob_id) cm_objection_notice on no_vd_id = vd_id        
-        where va_approved in ('08','09')  and va_vt_id =  ".$term);
+        where va_approvalstatus_id in ('08','09')  and va_vt_id =  ".$term);
 
 
 
@@ -501,7 +501,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
             inner join cm_appln_valterm on vt_id = va_vt_id
             left join (select ob_id,ob_desc, ol_vd_id from cm_objection_objectionlist 
             inner join cm_objection on ob_id = ol_ob_id) cm_objection_objectionlist on ol_vd_id = vd_id
-            where va_approved in ('08','09') AND va_vt_id = ".$term);
+            where va_approvalstatus_id in ('08','09') AND va_vt_id = ".$term);
 
         return view('objection.grab.objectionlist')->with(array('term'=>$term,'id'=>$id,'property'=>$property,'search'=>$search));
     }
@@ -552,7 +552,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
             left join (select ob_id,ob_desc, ol_vd_id from cm_objection_objectionlist 
             inner join cm_objection on ob_id = ol_ob_id) cm_objection_objectionlist on ol_vd_id = vd_id
             inner join tbdefitems subzone  on subzone.tdi_key = ma_subzone_id and tdi_td_name = 'SUBZONE'
-            where va_approved in ('08','09') AND va_vt_id = ".$term."  ".$filterquery);
+            where va_approvalstatus_id in ('08','09') AND va_vt_id = ".$term."  ".$filterquery);
         
         /*Log::info("call proc_data_objection_agenda('".$term." ".$filterquery."')");
 
@@ -733,7 +733,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
             left join (select ol_id,ob_id,ob_desc, ol_vd_id from cm_objection_objectionlist 
             inner join cm_objection on ob_id = ol_ob_id) cm_objection_objectionlist on ol_vd_id = vd_id
             inner join tbdefitems subzone  on subzone.tdi_key = ma_subzone_id and tdi_td_name = 'SUBZONE'
-            where va_approved in ('08','09') ");
+            where va_approvalstatus_id in ('08','09') ");
 
         return view('objection.grab.decision')->with(array('term'=>$term,'id'=>$id,'property'=>$property,'search'=> $search));
     }
@@ -783,7 +783,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
             left join (select ol_id,ob_id,ob_desc, ol_vd_id from cm_objection_objectionlist 
             inner join cm_objection on ob_id = ol_ob_id) cm_objection_objectionlist on ol_vd_id = vd_id
             inner join tbdefitems subzone  on subzone.tdi_key = ma_subzone_id and tdi_td_name = 'SUBZONE'
-            where va_approved in ('08','09')  ". $filterquery);
+            where va_approvalstatus_id in ('08','09')  ". $filterquery);
         
         $propertyDetails = Datatables::collection($property)->make(true);
    
@@ -908,7 +908,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
 
         }
         /* $property = DB::table('cm_appln_valdetl')->join('cm_masterlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
-        'ma_address1', 'tbdefitems_ishasbuilding.tdi_value' ,
+        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
         

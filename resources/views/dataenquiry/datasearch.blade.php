@@ -305,14 +305,14 @@ var id  = $(this).attr('data-val');
 			        {"data": "TO_OWNNO", "name": "TO_OWNNO", "visible": false},
 			        {"data": "TO_OWNNAME", "name": "TO_OWNNAME", "visible": false},
 			        {"data": "TO_OWNNO", "name": "TO_OWNNO", "visible": false},
-			        {"data": "ma_address1", "name": "address", "visible": false},
-			        {"data": "ma_address2", "name": "address", "visible": false},
-			        {"data": "ma_address3", "name": "address", "visible": false},
-			        {"data": "ma_address4", "name": "address", "visible": false},
-			        {"data": "ma_address1", "name": "address", "visible": false},
-			        {"data": "ma_address1", "name": "address", "visible": false},
-			        {"data": "ma_address1", "name": "address", "visible": false},
-			        {"data": "ma_address1", "name": "address", "visible": false},
+			        {"data": "ma_addr_ln1", "name": "address", "visible": false},
+			        {"data": "ma_addr_ln2", "name": "address", "visible": false},
+			        {"data": "ma_addr_ln3", "name": "address", "visible": false},
+			        {"data": "ma_addr_ln4", "name": "address", "visible": false},
+			        {"data": "ma_addr_ln1", "name": "address", "visible": false},
+			        {"data": "ma_addr_ln1", "name": "address", "visible": false},
+			        {"data": "ma_addr_ln1", "name": "address", "visible": false},
+			        {"data": "ma_addr_ln1", "name": "address", "visible": false},
 			        {"data": function(data){
 			        		//var url = 'datasearchdetail?prop_id='+data.vd_id; formatMoneyHas
 			        		return formatMoneyHas(data.vt_approvednt);

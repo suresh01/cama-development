@@ -105,9 +105,18 @@ Route::get('getChildParameter','UserController@getChildParameter');
 
 Route::get('propertyregister','PropertyRegisterationController@propertyRegister');
 
+Route::get('existspropertyregister','PropertyRegisterationController@existspropertyRegister');
+
+
+Route::get('existspropertymaintanance', 'InspectionController@exsitsPropertyMaintanace');
+
+Route::get('existspropertymaintanancedata', 'InspectionController@existPropertyMaintenanceTables')->name('existspropertymaintanance');
+
 Route::get('propertytables', 'PropertyRegisterationController@propertyTables')->name('propertytables');
 
 Route::get('tableview','PropertyRegisterationController@table');
+
+Route::get('maintenancepropertydetail','PropertyRegisterationController@maintenancepropertydetail');
 
 Route::get('childparam','PropertyRegisterationController@childparam');
 
@@ -117,13 +126,15 @@ Route::post('registerproperty','PropertyRegisterationController@registerproperty
 
 Route::get('teste','PropertyRegisterationController@testExceptopm');
 
-
 Route::get('propertybasket','PropertyRegisterationController@propertybasket');
 
 Route::post('propertybaskettrn','PropertyRegisterationController@propertybaskettrn');
 
 Route::get('bldgareadetail','PropertyRegisterationController@bldgareadetail');
 
+Route::get('existspropertybasket','PropertyRegisterationController@existspropertybasket');
+
+Route::post('exsitspropertybaskettrn','PropertyRegisterationController@exsitspropertybaskettrn');
 
 Route::get('fmterm', function () {
     return view('filemanager.term');
@@ -176,6 +187,8 @@ Route::get('existspropertydata', 'InspectionController@existPropertyTables')->na
 Route::get('grappdata', 'InspectionController@grappdata');
 
 Route::get('grapnewdata', 'InspectionController@grapnewdata');
+
+Route::get('existspropertymaintenancetrn', 'InspectionController@existspropertymaintenancetrn');
 
 Route::get('inspection', 'InspectionController@inspectionTab');
 

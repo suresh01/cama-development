@@ -233,6 +233,7 @@
 						@csrf
 						<input type="hidden" name="basket_id" id="basket_id" value="0">
 						<input type="hidden" name="operation" id="operation" value="0">
+						<input type="hidden" name="basket_type" id="basket_type" value="1">
 						<div  class="grid_6 form_container left_label">
 							<ul>
 								<li>								

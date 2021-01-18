@@ -110,7 +110,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 1<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="address1" tabindex="8" readonly="true" name="oaddress1"  type="text" value="{{$master->ma_address1}}" maxlength="100" class=""/>
+						<input id="address1" tabindex="8" readonly="true" name="oaddress1"  type="text" value="{{$master->ma_addr_ln1}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
@@ -118,21 +118,21 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 2<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="address2"  tabindex="9" readonly="true" name="oaddress2"  type="text" value="{{$master->ma_address2}}" maxlength="100" class=""/>
+						<input id="address2"  tabindex="9" readonly="true" name="oaddress2"  type="text" value="{{$master->ma_addr_ln2}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 3<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="address3"  name="oaddress3" readonly="true" tabindex="10"  type="text" value="{{$master->ma_address3}}" maxlength="100" class=""/>
+						<input id="address3"  name="oaddress3" readonly="true" tabindex="10"  type="text" value="{{$master->ma_addr_ln3}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 4<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="address4"  name="oaddress4" readonly="true" tabindex="11"  type="text" value="{{$master->ma_address4}}" maxlength="100" class=""/>
+						<input id="address4"  name="oaddress4" readonly="true" tabindex="11"  type="text" value="{{$master->ma_addr_ln4}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>

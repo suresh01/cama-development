@@ -83,13 +83,13 @@ class ReportController extends Controller
        // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
         Log::info($filterquery);
         /* $property = DB::table('cm_appln_valdetl')->join('cm_masternZlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
-        'ma_address1', 'tbdefitems_ishasbuilding.tdi_value' ,
+        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
       $property = DB::select('select `cm_appln_valdetl`.`vd_accno`,`cm_masterlist`.`ma_fileno`,
    `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone,
-   `cm_masterlist`.`ma_address1`,`cm_masterlist`.`ma_address2`, owntype.tdi_value owntype, 
+   `cm_masterlist`.`ma_addr_ln1`,`cm_masterlist`.`ma_addr_ln2`, owntype.tdi_value owntype, 
    `cm_owner`.`TO_OWNNAME`, (select count(*) from cm_appln_bldg where ab_vd_id = vd_id) bldgcount,
   `cm_appln_valdetl`.`vd_approvalstatus_id`, `cm_appln_valdetl`.`vd_id`, `cm_appln_valdetl`.`vd_va_id`, `cm_masterlist`.`ma_id`,
         `cm_masterlist`.`ma_pb_id`        
@@ -178,7 +178,7 @@ class ReportController extends Controller
        // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
         Log::info($filterquery);
         /* $property = DB::table('cm_appln_valdetl')->join('cm_masterlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
-        'ma_address1', 'tbdefitems_ishasbuilding.tdi_value' ,
+        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
@@ -308,20 +308,20 @@ class ReportController extends Controller
 
         }
         
-      Log::info("select approval.tdi_value status,va_approved, va_id id, va_name l_group, va_vt_id termid, vt_name termaname, va_createby createby, DATE_FORMAT(va_createdate, '%d/%m/%Y') createdate, 
+      Log::info("select approval.tdi_value status,va_approvalstatus_id, va_id id, va_name l_group, va_vt_id termid, vt_name termaname, va_createby createby, DATE_FORMAT(va_createdate, '%d/%m/%Y') createdate, 
             va_updateby updateby, DATE_FORMAT(va_updatedate, '%d/%m/%Y') updatedate, propertycount,inspropertyccount
-            from cm_appln_val left join (SELECT * FROM tbdefitems where tdi_td_name = 'APROVALSTATUS') approval on approval.tdi_key = va_approved join cm_appln_valterm  on va_vt_id = vt_id
+            from cm_appln_val left join (SELECT * FROM tbdefitems where tdi_td_name = 'APROVALSTATUS') approval on approval.tdi_key = va_approvalstatus_id join cm_appln_valterm  on va_vt_id = vt_id
             left join (select count(*) propertycount,vd_va_id from cm_appln_valdetl group by vd_va_id ) propcount on propcount.vd_va_id = va_id
             left join (select count(*) inspropertyccount ,vd_va_id from cm_appln_valdetl where vd_approvalstatus_id in ('13') 
-            group by vd_va_id ) insprop on insprop.vd_va_id = va_id where va_approved = '11' ".$filterquery."
+            group by vd_va_id ) insprop on insprop.vd_va_id = va_id where va_approvalstatus_id = '11' ".$filterquery."
              order by va_id
         ");
-        $group = DB::select("select approval.tdi_desc status,va_approved, va_id id, va_name l_group, va_vt_id termid,DATE_FORMAT(vt_termDate, '%d/%m/%Y') termdate,  vt_name termaname, va_createby createby, DATE_FORMAT(va_createdate, '%d/%m/%Y') createdate, 
+        $group = DB::select("select approval.tdi_desc status,va_approvalstatus_id, va_id id, va_name l_group, va_vt_id termid,DATE_FORMAT(vt_termDate, '%d/%m/%Y') termdate,  vt_name termaname, va_createby createby, DATE_FORMAT(va_createdate, '%d/%m/%Y') createdate, 
             va_updateby updateby, DATE_FORMAT(va_updatedate, '%d/%m/%Y') updatedate, propertycount,inspropertyccount
-            from cm_appln_val left join (SELECT * FROM tbdefitems where tdi_td_name = 'BASKETSTAGE') approval on approval.tdi_key = va_approved join cm_appln_valterm  on va_vt_id = vt_id
+            from cm_appln_val left join (SELECT * FROM tbdefitems where tdi_td_name = 'BASKETSTAGE') approval on approval.tdi_key = va_approvalstatus_id join cm_appln_valterm  on va_vt_id = vt_id
             left join (select count(*) propertycount,vd_va_id from cm_appln_valdetl group by vd_va_id ) propcount on propcount.vd_va_id = va_id
             left join (select count(*) inspropertyccount ,vd_va_id from cm_appln_valdetl where vd_approvalstatus_id in ('10','11','12') 
-            group by vd_va_id ) insprop on insprop.vd_va_id = va_id where va_approved in ('06','07','08','09','10','11')  ".$filterquery."
+            group by vd_va_id ) insprop on insprop.vd_va_id = va_id where va_approvalstatus_id in ('06','07','08','09','10','11')  ".$filterquery."
              order by va_id
         ");
         $propertyDetails = Datatables::collection($group)->make(true);
@@ -674,14 +674,14 @@ class ReportController extends Controller
        // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
         Log::info($filterquery);
         /* $property = DB::table('cm_appln_valdetl')->join('cm_masternZlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
-        'ma_address1', 'tbdefitems_ishasbuilding.tdi_value' ,
+        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
         $property = DB::select("call proc_repo_summary_zonepropstatus(".$termid.",'')");
      /* $property = DB::select('select `cm_appln_valdetl`.`vd_accno`,`cm_masterlist`.`ma_fileno`,
    `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone,
-   `cm_masterlist`.`ma_address1`,`cm_masterlist`.`ma_address2`, owntype.tdi_value owntype, 
+   `cm_masterlist`.`ma_addr_ln1`,`cm_masterlist`.`ma_addr_ln2`, owntype.tdi_value owntype, 
    `cm_owner`.`TO_OWNNAME`, (select count(*) from cm_appln_bldg where ab_vd_id = vd_id) bldgcount,
   `cm_appln_valdetl`.`vd_approvalstatus_id`, `cm_appln_valdetl`.`vd_id`, `cm_appln_valdetl`.`vd_va_id`, `cm_masterlist`.`ma_id`,
         `cm_masterlist`.`ma_pb_id`        
@@ -758,14 +758,14 @@ class ReportController extends Controller
        // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
         Log::info($termid);
         /* $property = DB::table('cm_appln_valdetl')->join('cm_masternZlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
-        'ma_address1', 'tbdefitems_ishasbuilding.tdi_value' ,
+        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
         $property = DB::select("call proc_repo_summary_zone(".$termid.",'')");
      /* $property = DB::select('select `cm_appln_valdetl`.`vd_accno`,`cm_masterlist`.`ma_fileno`,
    `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone,
-   `cm_masterlist`.`ma_address1`,`cm_masterlist`.`ma_address2`, owntype.tdi_value owntype, 
+   `cm_masterlist`.`ma_addr_ln1`,`cm_masterlist`.`ma_addr_ln2`, owntype.tdi_value owntype, 
    `cm_owner`.`TO_OWNNAME`, (select count(*) from cm_appln_bldg where ab_vd_id = vd_id) bldgcount,
   `cm_appln_valdetl`.`vd_approvalstatus_id`, `cm_appln_valdetl`.`vd_id`, `cm_appln_valdetl`.`vd_va_id`, `cm_masterlist`.`ma_id`,
         `cm_masterlist`.`ma_pb_id`        
@@ -841,14 +841,14 @@ class ReportController extends Controller
        // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
         Log::info($filterquery);
         /* $property = DB::table('cm_appln_valdetl')->join('cm_masternZlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
-        'ma_address1', 'tbdefitems_ishasbuilding.tdi_value' ,
+        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
         $property = DB::select("call proc_repo_summary_racepropstatus(".$termid.")");
      /* $property = DB::select('select `cm_appln_valdetl`.`vd_accno`,`cm_masterlist`.`ma_fileno`,
    `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone,
-   `cm_masterlist`.`ma_address1`,`cm_masterlist`.`ma_address2`, owntype.tdi_value owntype, 
+   `cm_masterlist`.`ma_addr_ln1`,`cm_masterlist`.`ma_addr_ln2`, owntype.tdi_value owntype, 
    `cm_owner`.`TO_OWNNAME`, (select count(*) from cm_appln_bldg where ab_vd_id = vd_id) bldgcount,
   `cm_appln_valdetl`.`vd_approvalstatus_id`, `cm_appln_valdetl`.`vd_id`, `cm_appln_valdetl`.`vd_va_id`, `cm_masterlist`.`ma_id`,
         `cm_masterlist`.`ma_pb_id`        
@@ -1263,7 +1263,7 @@ Log::info($termid);
  select ma_accno, subzone.tdi_parent_key , bldgstorey.tdi_value bldgstorey, subzone.tdi_parent_name zone, subzone.tdi_value subzone, subzone.tdi_key, vt_termDate,
     bldgstatus.tdi_value bldgstatus, bldgstatus.tdi_key, proptype.tdi_parent_name bldgcategory, proptype.tdi_value bldgtype,
      vt_approvednt, vt_approvedrate, vt_proposednt, vt_approvedtax,
-    vt_proposedrate, ma_address1, ma_address2, ma_address3, ma_address4, ma_postcode, propstate.tdi_value, to_addr_ln1,to_addr_ln2,
+    vt_proposedrate, ma_addr_ln1, ma_addr_ln2, ma_addr_ln3, ma_addr_ln4, ma_postcode, propstate.tdi_value, to_addr_ln1,to_addr_ln2,
     to_addr_ln3, to_addr_ln4, to_postcode, ownstate.tdi_value
          from cm_appln_valterm 
         inner join cm_appln_val on va_vt_id = cm_appln_valterm.vt_id
@@ -1591,7 +1591,7 @@ Log::info($termid);
        // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
         Log::info($filterquery);
         /* $property = DB::table('cm_appln_valdetl')->join('cm_masternZlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno', 
-        'ma_address1', 'tbdefitems_ishasbuilding.tdi_value' ,
+        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);

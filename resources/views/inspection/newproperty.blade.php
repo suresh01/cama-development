@@ -131,7 +131,7 @@ $(document).ready(function (){
                 {"data": "zone", "name": "subzone"},
                 {"data": "subzone", "name": "address"},
                 {"data": "to_ownname", "name": "owner"}, 
-                {"data": "ma_address1", "name": "ishasbldg"}, 
+                {"data": "ma_addr_ln1", "name": "ishasbldg"}, 
                 {"data": "isbldg", "name": "ishasbldg"}
             ],
 

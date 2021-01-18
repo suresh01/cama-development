@@ -639,10 +639,10 @@
 				$('#lotno').val(data[1][0].lo_no);
 				$('#titletype').val(data[1][0].lo_titletype_id);
 				$('#titltno').val(data[1][0].lo_titleno);
-				$('#address1').val(data[1][0].ma_address1);
-				$('#address2').val(data[1][0].ma_address2);
-				$('#address3').val(data[1][0].ma_address3);
-				$('#address4').val(data[1][0].ma_address4);
+				$('#address1').val(data[1][0].ma_addr_ln1);
+				$('#address2').val(data[1][0].ma_addr_ln2);
+				$('#address3').val(data[1][0].ma_addr_ln3);
+				$('#address4').val(data[1][0].ma_addr_ln4);
 				$('#postcode').val(data[1][0].ma_postcode);
 				$('#state').val(data[1][0].ma_state_id);
 				$('#city').val(data[1][0].ma_city);

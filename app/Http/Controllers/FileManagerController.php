@@ -112,7 +112,7 @@ class FileManagerController extends Controller
        // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
         Log::info($filterquery);
         /* $property = DB::table('cm_appln_valdetl')->join('cm_masternZlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
-        'ma_address1', 'tbdefitems_ishasbuilding.tdi_value' ,
+        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
@@ -121,7 +121,7 @@ class FileManagerController extends Controller
                 DATE_FORMAT(vt_updatedate, '%d/%m/%Y')  updatedate, ifnull(basket_count,0) basket_count, ifnull(property_count,0) property_count,DATE_FORMAT(vt_termDate, '%d/%m/%Y') termDate, DATE_FORMAT(now(), '%d/%m/%Y') enforceDate,  vt_applicationtype_id,
                  termstage.tdi_desc termstage, vt_approvalstatus_id,ap_basket_count, valbase.tdi_value valbase 
                 from cm_appln_valterm
-                left join (select va_vt_id, count(*) ap_basket_count from cm_appln_val where va_approved = '11' group by va_vt_id) approve on approve.va_vt_id = vt_id
+                left join (select va_vt_id, count(*) ap_basket_count from cm_appln_val where va_approvalstatus_id = '11' group by va_vt_id) approve on approve.va_vt_id = vt_id
                 left join (select va_vt_id, count(*) basket_count from cm_appln_val group by va_vt_id) cm_appln_val on cm_appln_val.va_vt_id = vt_id
                 left join (select va_vt_id, count(vd_id) property_count from cm_appln_valdetl inner join cm_appln_val on va_id = vd_va_id
                 group by va_vt_id) cm_appln_valdetl on cm_appln_valdetl.va_vt_id = vt_id 

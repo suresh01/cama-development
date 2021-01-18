@@ -213,9 +213,9 @@ $(document).ready(function (){
 			        {"data": "TO_OWNNAME", "name": "fileno"},
 			        {"data": "owntype", "name": "zone"},
 			        {"data": "TO_OWNNO", "name": "subzone"},
-			        {"data": "ma_address1", "name": "owner"}, 
-			        {"data": "ma_address2", "name": "ishasbldg"},
-			        {"data": "ma_address3", "name": "owntype"}, 
+			        {"data": "ma_addr_ln1", "name": "owner"}, 
+			        {"data": "ma_addr_ln2", "name": "ishasbldg"},
+			        {"data": "ma_addr_ln3", "name": "owntype"}, 
 			        {"data": "ma_city", "name": "TO_OWNNAME"}, 
 			        {"data": function(data){
 			        	

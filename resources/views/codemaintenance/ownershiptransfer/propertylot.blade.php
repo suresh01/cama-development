@@ -432,9 +432,9 @@ $(document).ready(function (){
 			        {"data": "ma_fileno", "name": "fileno"},
 			        {"data": "zone", "name": "zone"},
 			        {"data": "subzone", "name": "subzone"},
-			        {"data": "ma_address1", "name": "owner"}, 
-			        {"data": "ma_address2", "name": "ishasbldg"},
-			        {"data": "ma_address3", "name": "owntype"}, 
+			        {"data": "ma_addr_ln1", "name": "owner"}, 
+			        {"data": "ma_addr_ln2", "name": "ishasbldg"},
+			        {"data": "ma_addr_ln3", "name": "owntype"}, 
 			        {"data": "ma_city", "name": "TO_OWNNAME"}, 
 			        {"data": "ma_postcode", "name": "bldgcount"}
 		   		],

@@ -93,7 +93,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 1<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="address1" tabindex="8" name="address1"  type="text" value="{{$master->ma_address1}}" maxlength="100" class=""/>
+						<input id="address1" tabindex="8" name="address1"  type="text" value="{{$master->ma_addr_ln1}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
@@ -101,21 +101,21 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 2</label>
 					<div  class="form_input">
-						<input id="address2"  tabindex="9" name="address2"  type="text" value="{{$master->ma_address2}}" maxlength="100" class=""/>
+						<input id="address2"  tabindex="9" name="address2"  type="text" value="{{$master->ma_addr_ln2}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 3</label>
 					<div  class="form_input">
-						<input id="address3"  name="address3" tabindex="10"  type="text" value="{{$master->ma_address3}}" maxlength="100" class=""/>
+						<input id="address3"  name="address3" tabindex="10"  type="text" value="{{$master->ma_addr_ln3}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 4</label>
 					<div  class="form_input">
-						<input id="address4"  name="address4" tabindex="11"  type="text" value="{{$master->ma_address4}}" maxlength="100" class=""/>
+						<input id="address4"  name="address4" tabindex="11"  type="text" value="{{$master->ma_addr_ln4}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>

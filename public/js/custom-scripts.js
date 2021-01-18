@@ -63,6 +63,18 @@
 		validate: true
 	});
 
+	$('#existspropertyregsitration_from').stepy({
+		backLabel: 'Back',
+		nextLabel: 'Next',
+		errorImage:true,
+		block: true,
+		description: true,
+		legend: false,
+		titleClick: true,
+		titleTarget: '#top_tabby',
+		validate: false
+	});
+
 /* $("#propertyregsitration_from-next-0").click(function(){
 
 var masterdata = {};

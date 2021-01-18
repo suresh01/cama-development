@@ -230,7 +230,7 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
 
     public function evidentDetail(Request $request){
         $accno = $request->input('accno');       
-        $data=DB::select('select lo_lotcode_id, lo_no, lo_titletype_id, lo_titleno, ma_postcode, ma_address1,ma_address2,ma_address3,ma_address4, ma_city, ma_state_id 
+        $data=DB::select('select lo_lotcode_id, lo_no, lo_titletype_id, lo_titleno, ma_postcode, ma_addr_ln1,ma_addr_ln2,ma_addr_ln3,ma_addr_ln4, ma_city, ma_state_id 
 from cm_masterlist inner join cm_lot
  on ma_id = LO_MA_ID  where ma_accno = '.$accno);
 
@@ -365,7 +365,7 @@ where tollist_id = tbldg_tone_id');
        // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
         Log::info($filterquery);
         /* $property = DB::table('cm_appln_valdetl')->join('cm_masternZlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
-        'ma_address1', 'tbdefitems_ishasbuilding.tdi_value' ,
+        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
@@ -389,8 +389,8 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
 where tollist_id = tbldg_tone_id '  .$filterquery  );
 
     /*  $property = DB::select('select ma_id,ma_accno, `cm_masterlist`.`ma_fileno`,ma_city, ma_postcode,
-   `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone, ma_address3,
-   `cm_masterlist`.`ma_address1`,`cm_masterlist`.`ma_address2`, owntype.tdi_value owntype, 
+   `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone, ma_addr_ln3,
+   `cm_masterlist`.`ma_addr_ln1`,`cm_masterlist`.`ma_addr_ln2`, owntype.tdi_value owntype, 
    `cm_owner`.`TO_OWNNAME`, `cm_owner`.`TO_OWNNO`,
    `cm_masterlist`.`ma_id`,
         `cm_masterlist`.`ma_pb_id`        
@@ -491,7 +491,7 @@ where tollist_id = tland_tone_id');
        // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
         Log::info($filterquery);
         /* $property = DB::table('cm_appln_valdetl')->join('cm_masternZlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
-        'ma_address1', 'tbdefitems_ishasbuilding.tdi_value' ,
+        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
@@ -509,8 +509,8 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
 where tollist_id = tland_tone_id'  .$filterquery  );
 
     /*  $property = DB::select('select ma_id,ma_accno, `cm_masterlist`.`ma_fileno`,ma_city, ma_postcode,
-   `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone, ma_address3,
-   `cm_masterlist`.`ma_address1`,`cm_masterlist`.`ma_address2`, owntype.tdi_value owntype, 
+   `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone, ma_addr_ln3,
+   `cm_masterlist`.`ma_addr_ln1`,`cm_masterlist`.`ma_addr_ln2`, owntype.tdi_value owntype, 
    `cm_owner`.`TO_OWNNAME`, `cm_owner`.`TO_OWNNO`,
    `cm_masterlist`.`ma_id`,
         `cm_masterlist`.`ma_pb_id`        
@@ -675,8 +675,8 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
 where tollist_id = tstand_tone_id '  .$filterquery  );
 
     /*  $property = DB::select('select ma_id,ma_accno, `cm_masterlist`.`ma_fileno`,ma_city, ma_postcode,
-   `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone, ma_address3,
-   `cm_masterlist`.`ma_address1`,`cm_masterlist`.`ma_address2`, owntype.tdi_value owntype, 
+   `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone, ma_addr_ln3,
+   `cm_masterlist`.`ma_addr_ln1`,`cm_masterlist`.`ma_addr_ln2`, owntype.tdi_value owntype, 
    `cm_owner`.`TO_OWNNAME`, `cm_owner`.`TO_OWNNO`,
    `cm_masterlist`.`ma_id`,
         `cm_masterlist`.`ma_pb_id`        
@@ -785,8 +785,8 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
             '  .$filterquery  );
 
     /*  $property = DB::select('select ma_id,ma_accno, `cm_masterlist`.`ma_fileno`,ma_city, ma_postcode,
-   `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone, ma_address3,
-   `cm_masterlist`.`ma_address1`,`cm_masterlist`.`ma_address2`, owntype.tdi_value owntype, 
+   `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone, ma_addr_ln3,
+   `cm_masterlist`.`ma_addr_ln1`,`cm_masterlist`.`ma_addr_ln2`, owntype.tdi_value owntype, 
    `cm_owner`.`TO_OWNNAME`, `cm_owner`.`TO_OWNNO`,
    `cm_masterlist`.`ma_id`,
         `cm_masterlist`.`ma_pb_id`        

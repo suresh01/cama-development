@@ -54,8 +54,7 @@
 								<div style="display:none;" id="lotdetail" >
 								
 								<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
-									<button id="submitaddtbllot" onclick="addlotRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Add New</span></button>	
-									<button id="submitedittbllot" onclick="editlotRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Update</span></button>	
+									
 								<button id="close" onclick="closelot()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
 								</div>
 									<div  class="grid_6">
@@ -332,8 +331,8 @@
 			let lotmap = new Map([["0","sno"],["1", "lotstate"], ["2", "lotdistrict"], ["3", "lotcity"],["4", "presint"], ["5", "lotype"],["6", "lotnum"], ["7", "altlotnum"],["8", "lttt"], ["9", "ltnum"],["10", "altnum"], ["11", "landar"],["12", "landaruni"],["13", "landcon"], ["14", "lanpos"],["15", "roadtype"], ["16", "roadcate"],["17", "landuse"], ["18", "expcon"],["19", "interest"], ["20", "tentype"],["21", "tenduration"], ["22", "tenstart"],["23", "tenend"], ["24", "status"],["25", "action"],["26", "actioncode"],["27", "lot_id"],["28", "lotaccnum1"],["29", "lotaccnum2"],["30", "lotaccnum3"],["31", "lotaccnum4"],["32", "lotaccnum5"],["33", "lotaccnum6"],["34", "lotaccnum7"],["35", "lotaccnum"]]);
  		var lotdata = [];
 		 		@foreach ($lotlist as $rec)
-		 			lotdata.push( [ '{{$loop->iteration}}', '{{$rec->al_state}}', '{{$rec->al_district}}', '{{$rec->al_mbp}}', '{{$rec->al_ptss}}', '{{$rec->al_lotcode_id}}', '{{$rec->al_no}}', '{{$rec->al_altno}}', '{{$rec->al_titletype_id}}', '{{$rec->al_titleno}}', '{{$rec->al_alttitleno}}', '{{$rec->al_size}}', '{{$rec->al_sizeunit_id}}', '{{$rec->al_landcondition_id}}', '{{$rec->al_landposision_id}}', '{{$rec->al_roadtype_id}}', '{{$rec->al_roadcategory_id}}', '{{$rec->al_landuse_id}}', '{{$rec->al_excd}}', '{{$rec->al_rtit}}', '{{$rec->al_tenuretype_id}}', '{{$rec->al_tenureperiod}}', '{{$rec->al_startdate1}}', '{{$rec->al_expireddate1}}' ,'{{$rec->al_activeind_id}}','','noation', '{{$rec->al_id}}' ,'{{$rec->lotnumber}}','{{$rec->al_altno}}','{{$rec->titlenumber}}','{{$rec->al_size}}','{{$rec->landuse}}','{{$rec->tentype}}',
-		 				'<span><a onclick="" class="action-icons c-edit edtlotrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete dellotrow deletelotrow" href="#" title="delete">Delete</a></span>',account ] );
+		 			lotdata.push( [ '{{$loop->iteration}}', '{{$rec->al_state}}', '{{$rec->al_district}}', '', '', '{{$rec->al_lotcode_id}}', '{{$rec->al_no}}', '{{$rec->al_altno}}', '{{$rec->al_titletype_id}}', '{{$rec->al_titleno}}', '{{$rec->al_alttitleno}}', '{{$rec->al_size}}', '{{$rec->al_sizeunit_id}}', '{{$rec->al_landcondition_id}}', '{{$rec->al_landposision_id}}', '{{$rec->al_roadtype_id}}', '{{$rec->al_roadcategory_id}}', '{{$rec->al_landuse_id}}', '{{$rec->al_excd}}', '{{$rec->al_rtit}}', '{{$rec->al_tenuretype_id}}', '{{$rec->al_tenureperiod}}', '{{$rec->al_startdate1}}', '{{$rec->al_expireddate1}}' ,'{{$rec->al_activeind_id}}','','noation', '{{$rec->al_id}}' ,'{{$rec->lotnumber}}','{{$rec->al_altno}}','{{$rec->titlenumber}}','{{$rec->al_size}}','{{$rec->landuse}}','{{$rec->tentype}}',
+		 				'<span><a onclick="" class="action-icons c-edit edtlotrow" href="#" title="Edit">Edit</a></span>',account ] );
 		 		@endforeach
 
         $('#lottble').DataTable({

@@ -104,8 +104,7 @@
 	<div style="display:none;" id="bldgdetail" >
 		<div id="bldgform"  autocomplete="off" onsubmit="return false;" class=" left_label" method="post" action="#" >
 			<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
-				<button id="submitaddtblbldg" onclick="addbldgRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Add New</span></button>	
-				<button id="submitedittblbldg" onclick="editbldgRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Update</span></button>	
+					
 				<button id="close" onclick="closebldg()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
 			</div>
 			<div class="grid_6 ">
@@ -275,8 +274,7 @@
 	<div style="display:none;" id="bldgardetail1" >
 								<div id="bldgarform" autocomplete="off" onsubmit="return false;" class="form_container left_label" method="post" action="#" >
 									<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
-									<button id="submitaddtblbldgar" onclick="addbldgarRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Add New</span></button>	
-									<button id="submitedittblbldgar" onclick="editbldgarRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Update</span></button>	
+										
 								<button id="close" onclick="closebldgar()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
 								</div>
 								<div class="grid_6 ">
@@ -481,7 +479,7 @@
 			
 	 	var blsgardata = [];
 		@foreach ($bldgardetail as $rec)				
-					blsgardata.push( [ '{{$loop->iteration}}', $('#accnumber').val(), '{{$rec->ab_bldg_no}}', '{{$rec->artype}}','{{$rec->arcate}}','{{$rec->aruse}}','{{$rec->arlvel}}','{{$rec->aba_unitcount}}','{{$rec->aba_totsize}}','{{$rec->ceilingtype}}','{{$rec->floortype}}','{{$rec->walltype}}','{{$rec->aba_areadesc}}', '{{$rec->aba_ref}}', '{{$rec->aba_areatype_id}}','{{$rec->aba_areacategory_id}}','{{$rec->aba_arealevel_id}}', '{{$rec->aba_areazone_id}}', '{{$rec->aba_areause_id}}', '{{$rec->aba_areadesc}}',  '{{$rec->aba_dimention}}', '{{$rec->aba_unitcount}}', '{{$rec->aba_size}}','{{$rec->aba_sizeunit_id}}', '{{$rec->aba_totsize}}', '{{$rec->aba_floortype_id}}','{{$rec->aba_walltype_id}}','{{$rec->aba_ceilingtype_id}}','<span><a onclick="" class="action-icons c-edit edtbldgarrow" href="#" title="Edit">Edit</a></span>@if($iseditable == 1)<span><a onclick="" class="action-icons c-delete  deletebldgarrow" href="#" title="delete">Delete</a></span>@endif', 'noaction','{{$rec->aba_id}}' ] );
+					blsgardata.push( [ '{{$loop->iteration}}', $('#accnumber').val(), '{{$rec->ab_bldg_no}}', '{{$rec->artype}}','{{$rec->arcate}}','{{$rec->aruse}}','{{$rec->arlvel}}','{{$rec->aba_unitcount}}','{{$rec->aba_totsize}}','{{$rec->ceilingtype}}','{{$rec->floortype}}','{{$rec->walltype}}','{{$rec->aba_areadesc}}', '{{$rec->aba_ref}}', '{{$rec->aba_areatype_id}}','{{$rec->aba_areacategory_id}}','{{$rec->aba_arealevel_id}}', '{{$rec->aba_areazone_id}}', '{{$rec->aba_areause_id}}', '{{$rec->aba_areadesc}}',  '{{$rec->aba_dimention}}', '{{$rec->aba_unitcount}}', '{{$rec->aba_size}}','{{$rec->aba_sizeunit_id}}', '{{$rec->aba_totsize}}', '{{$rec->aba_floortype_id}}','{{$rec->aba_walltype_id}}','{{$rec->aba_ceilingtype_id}}','<span><a onclick="" class="action-icons c-edit edtbldgarrow" href="#" title="Edit">Edit</a></span>', 'noaction','{{$rec->aba_id}}' ] );
 	    @endforeach
 			
 		 $('#bldgartable1').DataTable({
@@ -612,7 +610,7 @@
 
 	 	var blsgdata = [];
 		@foreach ($building as $rec)
-			blsgdata.push( [ '{{$loop->iteration}}', "<a class='shobldg' onclick='showBldgAr({{$rec->ab_id}})' href='#' >{{ $rec->ab_bldg_no}}<input type='hidden' value='{{ $rec->ab_bldgtype_id}}' id='bldgtype_{{$rec->ab_id}}'><input type='hidden' value='{{ $rec->bldgcategory_id}}' id='bldgcate_{{$rec->ab_id}}'><input type='hidden' value='{{ $rec->ab_bldg_no}}' id='{{$rec->ab_id}}'></a>", '{{$rec->ab_bldg_no}}','{{$rec->bldgcategory}} / {{$rec->bldgtype}}','{{$rec->bldgstorey}}','{{$rec->bldgstr}}','{{$rec->rootype}}','{{$rec->ab_bldgtype_id}}', '{{$rec->ab_bldgstorey_id}}', '{{$rec->ab_bldgcondn_id}}', '{{$rec->ab_bldgposition_id}}', '{{$rec->ab_bldgstructure_id}}', '{{$rec->ab_rooftype_id}}', '{{$rec->ab_walltype_id}}','{{$rec->ab_floortype_id}}',  '{{$rec->ab_cccdate1}}', '{{$rec->ab_occupieddate1}}','{{$rec->ab_ismainbldg_id}}','<span><a onclick="edit({{$rec->ab_id}})" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span>@if($iseditable == 1)<span><a onclick="openbldgarea({{$rec->ab_id}})" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span><span><a class="action-icons1 c-copy  copybldgar" href="#" title="Copy Building Detail">Copy</a></span><span><a  class="action-icons1 c-paste  pastebldgar" href="#" title="Paste Building Detail">Paste</a></span><span><a onclick="" class="action-icons c-delete  deletebldgrow" href="#" title="delete">Delete</a></span>@endif','noation', '{{$rec->ab_id}}',account]);
+			blsgdata.push( [ '{{$loop->iteration}}', "<a class='shobldg' onclick='showBldgAr({{$rec->ab_id}})' href='#' >{{ $rec->ab_bldg_no}}<input type='hidden' value='{{ $rec->ab_bldgtype_id}}' id='bldgtype_{{$rec->ab_id}}'><input type='hidden' value='{{ $rec->bldgcategory_id}}' id='bldgcate_{{$rec->ab_id}}'><input type='hidden' value='{{ $rec->ab_bldg_no}}' id='{{$rec->ab_id}}'></a>", '{{$rec->ab_bldg_no}}','{{$rec->bldgcategory}} / {{$rec->bldgtype}}','{{$rec->bldgstorey}}','{{$rec->bldgstr}}','{{$rec->rootype}}','{{$rec->ab_bldgtype_id}}', '{{$rec->ab_bldgstorey_id}}', '{{$rec->ab_bldgcondn_id}}', '{{$rec->ab_bldgposition_id}}', '{{$rec->ab_bldgstructure_id}}', '{{$rec->ab_rooftype_id}}', '{{$rec->ab_walltype_id}}','{{$rec->ab_floortype_id}}',  '{{$rec->ab_cccdate1}}', '{{$rec->ab_occupieddate1}}','{{$rec->ab_ismainbldg_id}}','<span><a onclick="edit({{$rec->ab_id}})" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span>','noation', '{{$rec->ab_id}}',account]);
 		@endforeach
 
 	    $('#bldgtble').DataTable({

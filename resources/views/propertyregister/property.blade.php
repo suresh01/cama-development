@@ -360,8 +360,8 @@ var table = $('#proptble').DataTable();
 			        {"data": "zone", "name": "zone"},
 			        {"data": "subzone", "name": "subzone"},
 			        {"data": "isbldg", "name": "ishasbldg"},
-			        {"data": "ma_address1", "name": "address"},
-			        {"data": "ma_address2", "name": "address"},
+			        {"data": "ma_addr_ln1", "name": "address"},
+			        {"data": "ma_addr_ln2", "name": "address"},
 			        {"data": "owncount", "name": "ownername"},
 			        {"data":  "propstatus", "name": "status"},
 			        {"data": function(data){

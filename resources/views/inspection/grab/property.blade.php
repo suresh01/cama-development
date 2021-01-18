@@ -96,7 +96,7 @@ $(document).ready(function (){
    // Array holding selected row IDs
    var rows_selected = [];
    	@foreach ($property as $rec)
-		 			rows_selected.push( [ '{{ $rec->ma_accno }}','{{$loop->iteration}}', '{{ $rec->ma_accno }}', '{{ $rec->zone }}', '{{ $rec->subzone }}', '{{ $rec->to_ownname }}', '{{ $rec->ma_address1 }}', '{{ $rec->isbldg }}'] );
+		 			rows_selected.push( [ '{{ $rec->ma_accno }}','{{$loop->iteration}}', '{{ $rec->ma_accno }}', '{{ $rec->zone }}', '{{ $rec->subzone }}', '{{ $rec->to_ownname }}', '{{ $rec->ma_addr_ln1 }}', '{{ $rec->isbldg }}'] );
 		 		@endforeach
     $('#proptble').DataTable({
             data:           rows_selected,

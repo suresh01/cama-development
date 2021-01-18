@@ -185,6 +185,127 @@ class PropertyRegisterationController extends Controller
         
     }
 
+    public function maintenancepropertydetail(Request $request){
+
+        $page = $request->input('type');
+        $maxRow = $request->input('maxrow');
+        $name = $request->input('name');     
+        $pb = $request->input('pb_id');      
+        $prop_id = $request->input('prop_id');
+
+
+        //$pb = $request->input('pb');  
+        $district=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "DISTRICT" order by tdi_sort ');
+        $state=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE" order by tdi_sort '); 
+        $zone=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ZONE" order by tdi_sort ');
+        $subzone=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SUBZONE" order by tdi_sort '); 
+        $ishasbuilding=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name =  "ISHASBUILDING" order by tdi_sort ');
+
+        $lotcode=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE" order by tdi_sort ');
+        $bldgcate=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BULDINGCATEGORY" order by tdi_sort ');
+        $bldgtype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BULDINGTYPE" order by tdi_sort ');
+        $titiletype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE" order by tdi_sort ');
+        $unitsize=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SIZEUNIT" order by tdi_sort ');
+        $landcond=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDCONDITION" order by tdi_sort ');
+        $landpos=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDPOSISION" order by tdi_sort ');
+        $landuse=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDUSE" order by tdi_sort ');
+        $roadtype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROADTYPE" order by tdi_sort ');
+        $roadcaty=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROADCATEGORY" order by tdi_sort ');
+        $tnttype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENURETYPE" order by tdi_sort ');
+        $owntype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "OWNTYPE" order by tdi_sort ');
+        $race=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "RACE" order by tdi_sort ');
+        $citizen=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "CITIZEN" order by tdi_sort ');
+        $bldgcond=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BLDGCONDN" order by tdi_sort ');
+        $bldgpos=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BLDGPOSITION" order by tdi_sort ');
+        $bldgstruct=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BLDGSTRUCTURE" order by tdi_sort ');
+        $bldgstore=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BUILDINGSTOREY" order by tdi_sort ');
+        $rooftype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROOFTYPE" order by tdi_sort ');
+        $walltype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "WALLTYPE" order by tdi_sort ');
+        $fltype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "FLOORTYPE" order by tdi_sort ');
+        $arlvl=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREALEVEL" order by tdi_sort ');
+        $arcaty=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREACATEGORY" order by tdi_sort ');
+        $ceiling=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "CEILINGTYPE" order by tdi_sort ');
+        $artype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREATYPE" order by tdi_sort ');
+        $aruse=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREAUSE" order by tdi_sort ');
+        $arzone=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREAZONE" order by tdi_sort ');
+
+        $master = DB::select('select * from cm_masterlist where ma_id = ifnull("'.$prop_id.'",0)');
+
+        $iseditable = 1;
+        foreach ($master as $obj) {  
+            if($obj->ma_approvalstatus_id == "02"){
+                $iseditable = 1;
+            } else {
+                $iseditable = 0;
+            }
+        }
+        
+        //$master = DB::table('cm_masterlist')->where('ma_id', $prop_id)->first();
+        //$building = DB::select('select * from cm_bldg where bl_ma_id = ifnull("'.$prop_id.'",0)');
+        $building = DB::select('select cm_bldg.*, bldgtype.tdi_value bldgtype, tdi_parent_name
+         bldgcategory, tdi_parent_key bldgcategory_id, bldgstorey.tdi_value bldgstorey, 
+        bldgstr.tdi_value bldgstr
+        , rootype.tdi_value rootype
+         from cm_bldg left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BULDINGTYPE") bldgtype 
+         on bldgtype.tdi_key = BL_BLDGTYPE_ID
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgstorey
+        on bldgstorey.tdi_key = BL_BLDGSTOREY_ID
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BLDGSTRUCTURE") bldgstr
+        on bldgstr.tdi_key = BL_BLDGSTRUCTURE_ID
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROOFTYPE") rootype  
+        on rootype.tdi_key = BL_ROOFTYPE_ID where bl_ma_id = ifnull("'.$prop_id.'",0)');
+        //$lotlist = DB::select('select * from cm_lot where lo_ma_id = ifnull("'.$prop_id.'",0)');
+        $lotlist = DB::select('select cm_lot.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
+        , unitsize.tdi_value unitsize, concat(lotcode.tdi_value,cm_lot.LO_NO) lotnumber, concat(titletype.tdi_value,cm_lot.LO_TITLENO) titlenumber, landuse.tdi_value landuse, tentype.tdi_value tentype
+         from cm_lot left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = LO_LOTCODE_ID
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROADTYPE") roadtype on roadtype.tdi_key = LO_ROADTYPE_ID
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE") titletype on titletype.tdi_key = LO_TITLETYPE_ID
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SIZEUNIT") unitsize on unitsize.tdi_key = LO_SIZEUNIT_ID
+        left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDUSE") landuse on  LO_LANDUSE_ID = landuse.tdi_key
+        left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENURETYPE") tentype on  LO_TENURETYPE_ID = tentype.tdi_key 
+         where lo_ma_id = ifnull("'.$prop_id.'",0)');
+        //$ownerlist = DB::select('select * from cm_owner where to_ma_id = ifnull("'.$prop_id.'",0)');
+        $ownerlist = DB::select('select cm_owner.*, owntype.tdi_value owntype, state.tdi_value state
+         from cm_owner left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "OWNTYPE") owntype on owntype.tdi_key = to_owntype_id
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE") state on state.tdi_key = TO_STATE_ID
+         where  to_ma_id = ifnull("'.$prop_id.'",0)');
+
+        $bldgardetail = DB::select('select cm_bldgarea.*, cm_bldg.bl_bldg_no, ma_accno, arzone.tdi_value arzone, arlvel.tdi_value arlvel, arcate.tdi_value arcate, floortype.tdi_value floortype
+            , artype.tdi_value artype, aruse.tdi_value aruse, ceilingtype.tdi_value ceilingtype
+            from  cm_bldg, cm_masterlist, cm_bldgarea left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREATYPE") artype on artype.tdi_key = cm_bldgarea.BA_AREATYPE_ID
+            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREACATEGORY") arcate on  arcate.tdi_key = BA_AREACATEGORY_ID
+            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREALEVEL") arlvel on  arlvel.tdi_key = BA_AREALEVEL_ID 
+            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREAZONE") arzone on arzone.tdi_key = BA_AREAZONE_ID
+            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "FLOORTYPE") floortype on floortype.tdi_key = BA_FLOORTYPE_ID
+            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREAUSE") aruse on aruse.tdi_key = BA_AERAUSE_ID
+            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "CEILINGTYPE") ceilingtype on ceilingtype.tdi_key = BA_CEILINGTYPE_ID
+            where ba_bl_id = bl_id
+            and bl_ma_id = ma_id
+            and bl_ma_id = ifnull("'.$prop_id.'",0)');
+        $count = count($master);
+
+        $basket = DB::select('select * from cm_propbasket  where pb_id = ifnull("'.$pb.'",0)');
+        //$propertyDetails = Datatables::collection($property)->make(true);
+        $basket_name = '';
+        $accountnumbber = '';
+        
+        $prop = DB::select('select * from cm_propbasket inner join 
+            cm_masterlist on ma_pb_id = pb_id
+            where ma_id = ifnull("'.$prop_id.'",0)');
+        //$propertyDetails = Datatables::collection($property)->make(true);
+       
+        foreach ($basket as $obj) {  
+           $basket_name = $obj->PB_NAME;
+        }
+        foreach ($prop as $obj) {  
+           $accountnumbber = $obj->ma_accno;
+        }
+
+        return view("existspropertyregister.tab")->with('district', $district)->with('state', $state)->with('zone', $zone)->with('subzone', $subzone)->with('pb', $pb)->with(array('bldgstruct'=>$bldgstruct,'bldgstore'=>$bldgstore,'ishasbuilding'=>$ishasbuilding, 'landuse'=>$landuse, 'master'=> $master, 'lotlist'=> $lotlist, 'ownerlist'=>$ownerlist, 'building'=> $building,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstruct,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'bldgcate' => $bldgcate,'bldgtype' => $bldgtype,'count' => $count, 'bldgardetail' => $bldgardetail,'prop_id' => $prop_id,'iseditable' => $iseditable,'pb_id' => $pb,'basket_name' => $basket_name,'accountnumbber' => $accountnumbber));
+        
+        
+    }
+
     public function childparam(Request $request){
     	$param_value = $request->input('param_value');
     	$param = $request->input('param');
@@ -372,11 +493,35 @@ $master ='{"aa":"ss '.$type.'"}';
         //$propertyDetails = Datatables::collection($property)->make(true);
         
         foreach ($basket as $obj) {  
-           $basket_status = $obj->PB_APPROVED;
+           $basket_status = $obj->PB_APPROVALSTATUS_ID;
            $basket_name = $obj->PB_NAME;
         }
 
         return view("propertyregister.property")->with('pb', $pb)->with('maxRow', $maxRow)->with('propertydetail', $propertydetail)->with('basket_status', $basket_status)->with('basket_name', $basket_name);
+    }
+
+    public function existspropertyRegister(Request $request){
+        $pb = $request->input('pb');
+        $maxRow = 30;
+        //$property = '';           
+        $propertydetail = DB::select('select ifnull(property_count,0) bldgcount, ifnull(approperty_count,0) approvecount, ifnull(pending_count,0) pending_count 
+            from (select ma_pb_id,count(*) property_count from cm_masterlist 
+            inner join cm_bldg on BL_MA_ID = ma_id group by ma_pb_id) propertycount left join
+            (select ma_pb_id, count(*) approperty_count from cm_masterlist 
+            where ma_approvalstatus_id = "03" group by ma_pb_id) pendingcount on pendingcount.ma_pb_id = propertycount.ma_pb_id
+            left join
+            (select ma_pb_id, count(*) pending_count from cm_masterlist 
+            where ma_approvalstatus_id = "02" group by ma_pb_id) approvedcount on approvedcount.ma_pb_id = propertycount.ma_pb_id
+            where propertycount.ma_pb_id = ifnull("'.$pb.'",0)');
+        $basket = DB::select('select * from cm_propbasket where pb_id = ifnull("'.$pb.'",0)');
+        //$propertyDetails = Datatables::collection($property)->make(true);
+        
+        foreach ($basket as $obj) {  
+           $basket_status = $obj->PB_APPROVALSTATUS_ID;
+           $basket_name = $obj->PB_NAME;
+        }
+
+        return view("existspropertyregister.property")->with('pb', $pb)->with('maxRow', $maxRow)->with('propertydetail', $propertydetail)->with('basket_status', $basket_status)->with('basket_name', $basket_name);
     }
 
     public function propertyTables(Request $request){
@@ -386,7 +531,7 @@ $master ='{"aa":"ss '.$type.'"}';
          Log::info($pb);
         $maxRow = 30;
         //$property = '';           
-        $property = DB::select('select ma_id, ma_pb_id,  ma_accno,  zone.tdi_value zone, subzone.tdi_value subzone, ma_address1, ma_address2, 
+        $property = DB::select('select ma_id, ma_pb_id,  ma_accno,  zone.tdi_value zone, subzone.tdi_value subzone, ma_addr_ln1, ma_addr_ln2, 
         isbldg.tdi_value isbldg, owncount, ma_approvalstatus_id, propstatus.tdi_desc propstatus, applntype.tdi_value applntype
         from cm_masterlist 
         left join 
@@ -420,38 +565,112 @@ $master ='{"aa":"ss '.$type.'"}';
         } else */
         $stage = '0';
         if ( $param == '03'  ){
-             $condition = ' where PB_APPROVED  in ("03") ';
+             $condition = ' where PB_APPROVALSTATUS_ID  in ("03") ';
             $stage = '03';
         } else {
-             $condition = ' where PB_APPROVED  in ("01","02") ';
+             $condition = ' where PB_APPROVALSTATUS_ID  in ("01","02") ';
             $stage = '01';
         }
             $basket=DB::select("select pb_id basket_id, pb_name basketname,  ifnull(propcnt.propcount,0) propcount, applntype.tdi_value applntype, pb_applicationtype_id,
             pb_createby, date_format(pb_createdate,'%d/%m/%Y') createdate, pb_updateby, date_format(pb_updatedate,'%d/%m/%Y') updatedate,
-            ifnull(valprop.propcount,0) valpropcount, tbstatus.tdi_desc tdi_status, ifnull(pending_count,0) pending_count, ifnull(approved_count,0) approved_count, pb_approved
+            ifnull(valprop.propcount,0) valpropcount, tbstatus.tdi_desc tdi_status, ifnull(pending_count,0) pending_count, ifnull(approved_count,0) approved_count, PB_APPROVALSTATUS_ID
             from cm_propbasket
             left join (select ma_pb_id, count(*) propcount from cm_masterlist inner join cm_appln_valdetl on ma_id = vd_ma_id group by ma_pb_id)
             valprop on valprop.ma_pb_id = pb_id
             left join (select ma_pb_id, count(*) propcount from cm_masterlist group by ma_pb_id) propcnt
             on propcnt.ma_pb_id = pb_id
-            left join (select * from tbdefitems where tdi_td_name = 'BASKETSTAGE') tbstatus on tdi_key = PB_APPROVED
+            left join (select * from tbdefitems where tdi_td_name = 'BASKETSTAGE') tbstatus on tdi_key = PB_APPROVALSTATUS_ID
             left join (select ma_pb_id, count(*) pending_count from cm_masterlist 
             where ma_approvalstatus_id = '02' group by ma_pb_id) pendingprop on pendingprop.ma_pb_id = pb_id
             left join (select ma_pb_id, count(*) approved_count from cm_masterlist 
             where ma_approvalstatus_id = '03' group by ma_pb_id) approvedprop on approvedprop.ma_pb_id = pb_id
-            left join (select * from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype on applntype.tdi_key = PB_APPLICATIONTYPE_ID  ".$condition."
+            left join (select * from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype on applntype.tdi_key = PB_APPLICATIONTYPE_ID  ".$condition." and  PB_PROPBASKETTYE_ID = 1
             order by pb_createdate desc ");
 
-            $propertycount =DB::select('select count(*) propcount from cm_masterlist inner join cm_propbasket on PB_ID = ma_pb_id');
+            $propertycount =DB::select('select count(*) propcount from cm_masterlist inner join cm_propbasket on PB_ID = ma_pb_id
+                 where   PB_PROPBASKETTYE_ID = 1');
 
             $valproperty =DB::select('select count(*) propcount from cm_masterlist inner join cm_propbasket on PB_ID = ma_pb_id
-            inner join cm_appln_valdetl on vd_ma_id = ma_id');
+            inner join cm_appln_valdetl on vd_ma_id = ma_id where   PB_PROPBASKETTYE_ID = 1');
 
             $applntype = DB::select('select * from tbdefitems where tdi_td_name = "APPLICATIONTYPE"');
         return view('propertyregister.basket')->with('basket',$basket)->with('propertycount',$propertycount)->with('applntype',$applntype)->with('valproperty',$valproperty)->with('stage',$stage);
     }
 
-     public function propertybaskettrn(Request $request){
+    public function existspropertybasket(Request $request){   
+
+        if(userpermission::checkaccess('32')=="false"){
+            $detail = UserAcessController::accessDetail('32');
+            return view('denied')->with('detail',$detail);
+        } 
+        $param = $request->input('param'); 
+         $condition = ' ';   
+        /*if ( $param == '01'  ){
+            $condition = ' where PB_APPROVED  in ("01","02") ';
+        } else */
+        $stage = '0';
+        if ( $param == '03'  ){
+             $condition = ' where PB_APPROVALSTATUS_ID  in ("03") ';
+            $stage = '03';
+        } else {
+             $condition = ' where PB_APPROVALSTATUS_ID  in ("01","02") ';
+            $stage = '01';
+        }
+            $basket=DB::select("select pb_id basket_id, pb_name basketname,  ifnull(propcnt.propcount,0) propcount, applntype.tdi_value applntype, pb_applicationtype_id,
+            pb_createby, date_format(pb_createdate,'%d/%m/%Y') createdate, pb_updateby, date_format(pb_updatedate,'%d/%m/%Y') updatedate,
+            ifnull(valprop.propcount,0) valpropcount, tbstatus.tdi_desc tdi_status, ifnull(pending_count,0) pending_count, ifnull(approved_count,0) approved_count, PB_APPROVALSTATUS_ID
+            from cm_propbasket
+            left join (select ma_pb_id, count(*) propcount from cm_masterlist inner join cm_appln_valdetl on ma_id = vd_ma_id group by ma_pb_id)
+            valprop on valprop.ma_pb_id = pb_id
+            left join (select ma_pb_id, count(*) propcount from cm_masterlist group by ma_pb_id) propcnt
+            on propcnt.ma_pb_id = pb_id
+            left join (select * from tbdefitems where tdi_td_name = 'BASKETSTAGE') tbstatus on tdi_key = PB_APPROVALSTATUS_ID
+            left join (select ma_pb_id, count(*) pending_count from cm_masterlist 
+            where ma_approvalstatus_id = '02' group by ma_pb_id) pendingprop on pendingprop.ma_pb_id = pb_id
+            left join (select ma_pb_id, count(*) approved_count from cm_masterlist 
+            where ma_approvalstatus_id = '03' group by ma_pb_id) approvedprop on approvedprop.ma_pb_id = pb_id
+            left join (select * from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype on applntype.tdi_key = PB_APPLICATIONTYPE_ID  ".$condition." and  PB_PROPBASKETTYE_ID = 2
+            order by pb_createdate desc ");
+
+            $propertycount =DB::select('select count(*) propcount from cm_masterlist inner join cm_propbasket on PB_ID = ma_pb_id
+                 where   PB_PROPBASKETTYE_ID = 2');
+
+            $valproperty =DB::select('select count(*) propcount from cm_masterlist inner join cm_propbasket on PB_ID = ma_pb_id
+            inner join cm_appln_valdetl on vd_ma_id = ma_id where   PB_PROPBASKETTYE_ID = 2');
+
+            $applntype = DB::select('select * from tbdefitems where tdi_td_name = "APPLICATIONTYPE"');
+        return view('existspropertyregister.basket')->with('basket',$basket)->with('propertycount',$propertycount)->with('applntype',$applntype)->with('valproperty',$valproperty)->with('stage',$stage);
+    }
+
+    public function exsitspropertybaskettrn(Request $request){
+        $basket = $request->input('basket');
+        $basket_id = $request->input('basket_id');
+        $applicationtype = $request->input('applicationtype');
+        $operation = $request->input('operation');
+        if($operation != 3) {
+            $request->validate([
+                'basket' => 'required',
+                'applicationtype' => 'required',
+            ]);
+        }
+
+        $name=Auth::user()->name;
+        Log::info('call proc_cmpropbasket_trn("'.$basket.'","'.$applicationtype.'",'.$operation.','.$basket_id.',"'.$name.'")');
+        $dbh = DB::connection()->getPdo();
+        $sth = $dbh->prepare('call proc_cmpropbasket_trn("'.$basket.'","'.$applicationtype.'",'.$operation.','.$basket_id.',"'.$name.'","2")');
+        $sth->execute();
+        $message = '';
+        if($operation == 1) {
+            $message = 'Basket added successfully';
+        } else {
+            $message = 'Basket updated successfully';
+        }
+        //session(['not_msg' => $message]);
+        return redirect('existspropertybasket');//Redirect::route('role',['message'=>$message]);
+
+    }
+
+    public function propertybaskettrn(Request $request){
         $basket = $request->input('basket');
         $basket_id = $request->input('basket_id');
         $applicationtype = $request->input('applicationtype');
@@ -465,7 +684,7 @@ $master ='{"aa":"ss '.$type.'"}';
         $name=Auth::user()->name;
         Log::info('call proc_cmpropbasket_trn("'.$basket.'","'.$applicationtype.'",'.$operation.','.$basket_id.',"'.$name.'")');
         $dbh = DB::connection()->getPdo();
-        $sth = $dbh->prepare('call proc_cmpropbasket_trn("'.$basket.'","'.$applicationtype.'",'.$operation.','.$basket_id.',"'.$name.'")');
+        $sth = $dbh->prepare('call proc_cmpropbasket_trn("'.$basket.'","'.$applicationtype.'",'.$operation.','.$basket_id.',"'.$name.'","1")');
         $sth->execute();
         $message = '';
         if($operation == 1) {
@@ -553,6 +772,7 @@ $master ='{"aa":"ss '.$type.'"}';
         $module = $request->input('module');
         $param = $request->input('param');
         $param_str = $request->input('param_str');
+        $param_status = $request->input('param_status');
         $name=Auth::user()->name;
         //$param = $request->input('param');
         Log::info($module);
@@ -562,11 +782,11 @@ $master ='{"aa":"ss '.$type.'"}';
            // $property=DB::select(" select * from cm_appln_valdetl where vd_approvalstatus_id in ('06') and vd_va_id = ".$param_value);
             $propertycnt = 0;
            // if ($propertycnt == 0){
-            $register=DB::select("call proc_approvepropreg(".$param_value.",   '".$name."', '".$module."', '".$param."', '".$param_str."')");
+            $register=DB::select("call proc_approvepropreg(".$param_value.",   '".$name."', '".$module."', '".$param."', '".$param_str."', '".$param_status."')");
            // }
         } else {
-            Log::info("call proc_approvepropreg('".$param_value."',    '".$name."','".$module."', '".$param."', '".$param_str."')"); 
-            $register=DB::select("call proc_approvepropreg(".$param_value.",   '".$name."', '".$module."', '".$param."', '".$param_str."')");
+            Log::info("call proc_approvepropreg('".$param_value."',    '".$name."','".$module."', '".$param."', '".$param_str."', '".$param_status."')"); 
+            $register=DB::select("call proc_approvepropreg(".$param_value.",   '".$name."', '".$module."', '".$param."', '".$param_str."', '".$param_status."')");
 
         }
       //  Log::info("call proc_approvepropreg('".$param_value."',    '".$name."','".$module."')"); 

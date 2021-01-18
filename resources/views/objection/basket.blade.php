@@ -94,7 +94,7 @@
 									</td>
 									<td>
 										
-										@if($rec->va_approved == '12' )
+										@if($rec->va_approvalstatus_id == '12' )
 										<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveProperty('{{$rec->id}}')" disabled="true" title="Approve Valuation" href="#"></a></span>
 										@endif
 									</td>

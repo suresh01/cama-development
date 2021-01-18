@@ -41,7 +41,7 @@ class ValutionController extends Controller
          $term=DB::select("select vt_valbase_id, concat(vt_name,'', DATE_FORMAT(vt_createdate, '%d%m%Y')) termfoldername, vd_accno accountnumber, va_vt_id,
                 vt_name , applntype.tdi_value applntype, termstage.tdi_desc termstage, va_name, approval.tdi_desc approval, vd_approvalstatus_id
                 FROM cm_appln_valterm inner join cm_appln_val on va_vt_id = vt_id inner join cm_appln_valdetl on vd_va_id = va_id  
-                left join (SELECT * FROM tbdefitems where tdi_td_name = 'BASKETSTAGE') approval on approval.tdi_key = va_approved 
+                left join (SELECT * FROM tbdefitems where tdi_td_name = 'BASKETSTAGE') approval on approval.tdi_key = va_approvalstatus_id 
                 left join (select *  from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype
                 on applntype.tdi_key = vt_applicationtype_id
                 left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage

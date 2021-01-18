@@ -344,7 +344,8 @@
 	   		} else {
 	   			account=account.toString();
 	   		}
-	//	alert(account);
+		//alert(account);
+		//alert(currstatus);
 		var noty_id = noty({
 			layout : 'center',
 			text: 'Are you sure want to Submit?',
@@ -358,7 +359,7 @@
 					    headers: {
 						    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 						},
-				        data:{param_value:id,module:'tonebldg',param:currstatus },
+				        data:{param_value:id,module:'tonebldg',param:currstatus,param_str:account },
 				        success:function(data){	        	
 				        	
 							window.location.assign("tonebldg");	
@@ -384,13 +385,26 @@
 
 
 	function approve(id,currstatus,type){
-		var param_str ="";
+		var param_status ="";
 		if(type == 1){
-			param_str = 'AP';
+			param_status = 'AP';
 		} else {
-			param_str = 'RJ';
+			param_status = 'RJ';
 		}
-	
+
+		var table = $('#bldgtable').DataTable();
+		var account = $.map(table.rows('.selected').data(), function (item) {
+		// console.log(item);
+    		return item['tbldg_id']
+		});
+		if(account.length==0){
+				account=id;
+	   		} else {
+	   			account=account.toString();
+	   		}
+
+		//alert(account);
+		//alert(currstatus);
 		var noty_id = noty({
 			layout : 'center',
 			text: 'Are you sure want to Submit?',
@@ -404,7 +418,7 @@
 					    headers: {
 						    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 						},
-				        data:{param_value:id,module:'tonebldg',param:currstatus,param_str:param_str },
+				        data:{param_value:id,module:'tonebldg',param:currstatus,param_str:account,param_status:param_status },
 				        success:function(data){	 	
 				        	
 							window.location.assign("tonebldg");	
