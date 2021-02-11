@@ -81,6 +81,9 @@
 								<legend>Valuation Information</legend>
 								@include('dataenquiry.tab.valuationdetail')					
 							</fieldset>	
+							<fieldset title="Step 8">
+								<legend>Attachment</legend>				
+							</fieldset>	
 								<input type="button" onclick="close()" class="finish" id="finish" value="Close!"/>
 						</form>
 					</div>

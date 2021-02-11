@@ -13,6 +13,9 @@ use JasperPHP\JasperPHP as JasperPHP;
 |
 */ 
 
+
+
+
 Route::get('/', function () {
     return view('auth/login');
 });
@@ -22,6 +25,10 @@ Auth::routes();
 //Route::post('uservalidate','UserLoginController@login');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('locale', 'UserController@languageSetup');
+
 
 /*Route::get('dashboard', function () {
     return view('dashboard'); 

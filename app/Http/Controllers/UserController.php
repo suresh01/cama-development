@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Category;
 use userpermission;
+use App;
 
 class UserController extends Controller
 {
@@ -30,14 +31,25 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-  
+    public function languageSetup(Request $request){
+        $lang = $request->input('lang'); // passed from the form
+//Log::info("S");
+        App::setlocale('en');
+        session()->put('locale', 'en'); 
+        app()->setLocale('en');
+       /* Session::put('locale', $locale);
+
+        app()->setLocale(Session::get('locale'));*/
+ //Log::info("End");
+        return redirect('dashboard');
+    }
 
     function dashboard(){
 
         $module=DB::select('select * from tbmodule');  
         //$users = DB::connection('oracle')->select('select * from TB_AGAMA_WORK');      
         //Log::info($users);
-
+        App::setlocale('ms');
         //return view('module')->with('module',$module);
         return view('dashboard')->with('module',$module);
     }
