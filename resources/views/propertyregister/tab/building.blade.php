@@ -505,7 +505,7 @@
 				 
 					blsgardata.push( [ '{{$loop->iteration}}', $('#accnumber').val(), '{{$rec->BA_BL_ID}}', '{{$rec->artype}}','{{$rec->arcate}}','{{$rec->aruse}}','{{$rec->BA_UNITCOUNT}}','{{$rec->BA_TOTSIZE}}','{{$rec->ceilingtype}}','{{$rec->floortype}}','{{$rec->arzone}}','{{$rec->BA_AREADESC}}', '{{$rec->BA_REF}}', '{{$rec->BA_AREATYPE_ID}}','{{$rec->BA_AREACATEGORY_ID}}','{{$rec->BA_AREALEVEL_ID}}', '{{$rec->BA_AREAZONE_ID}}', '{{$rec->BA_AERAUSE_ID}}', '{{$rec->BA_AREADESC}}',  '{{$rec->BA_DIMENTION}}', '{{$rec->BA_UNITCOUNT}}', '{{$rec->BA_SIZE}}','{{$rec->BA_SIZEUNIT_ID}}', '{{$rec->BA_TOTSIZE}}', '{{$rec->BA_FLOORTYPE_ID}}','{{$rec->BA_WALLTYPE_ID}}','{{$rec->BA_CEILINGTYPE_ID}}','<span><a onclick="" class="action-icons c-edit edtbldgarrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete  deletebldgarrow" href="#" title="delete">Delete</a></span>', 'noaction','{{$rec->BA_ID}}','{{$rec->bl_bldg_no}}' ] );
 	    @endforeach
-			
+			var groupColumn = 4;
 		 $('#bldgartable1').DataTable({
         	data:           blsgardata,
             "columns":[ { "visible": false }, { "visible": false }, { "visible": false }, null, null, null, null, null,null, null, null, null, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, null,{ "visible": false },{ "visible": false }],
@@ -515,7 +515,23 @@
 		        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
 		    },
         	"bAutoWidth": false,
-			"sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>'
+        	"order": [[ groupColumn, 'asc' ]],
+			"sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>',
+			"drawCallback": function ( settings ) {
+	            var api = this.api();
+	            var rows = api.rows( {page:'current'} ).nodes();
+	            var last=null;
+	 
+	            api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+	                if ( last !== group ) {
+	                    $(rows).eq( i ).before(
+	                        '<tr class="group"><td colspan="5">'+group+'</td></tr>'
+	                    );
+	 
+	                    last = group;
+	                }
+	            } );
+	        }
 			 
 		});
 
