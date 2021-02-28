@@ -30,6 +30,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('locale', 'UserController@languageSetup');
 
 
+Route::get('termsearch','HomeController@termSearch');
+
+
+Route::get('termattachment','InspectionController@termAttachment');
+
+Route::get('termbasket','HomeController@termBasket')->name('termbasket');
+
 /*Route::get('dashboard', function () {
     return view('dashboard'); 
 });*/
@@ -175,6 +182,9 @@ Route::get('termtrn','HomeController@termTransaction');
 Route::get('group','HomeController@group')->name('group');
 Route::get('grouptrn','HomeController@groupTransaction');
 
+//valterm
+Route::get('valterm','HomeController@valterm');
+Route::get('valbasket','HomeController@valbasket')->name('valbasket');
 
 Route::get('property',  'InspectionController@property');
 Route::get('inspectionproperty', 'InspectionController@propertyTables')->name('inspectionproperty');
@@ -421,6 +431,8 @@ Route::get('ownerregistertrn','HomeController@ownerRegisterTRN');
 
 Route::get('ownertransfer','HomeController@ownerTransfer');
 
+Route::get('ownertransferapproval','HomeController@ownerTransferApproval');
+
 Route::get('ownertransferprocess','HomeController@ownerTransferProcess');
 
 Route::get('ownertransfertrn','HomeController@ownerTransferTRN');
@@ -458,9 +470,10 @@ Route::get('datasearch', 'HomeController@dataSearch');
 
 Route::get('datasearchtables', 'HomeController@dataSearchTables')->name('datasearchtables');
 
+
 Route::get('dmsSearchTables', 'FileManagerController@dmsSearchTables')->name('dmsSearchTables');
 
-Route::get('datasearchdetail', 'HomeController@datasearchTab');
+Route::get('datasearchdetail', 'HomeController@datasearchTab')->name('datasearchdetail');
 
 Route::get('groupdeactivetrn', 'HomeController@groupDeactiveTransaction');
 
@@ -531,3 +544,22 @@ Route::get('statistical', 'ReportController@statistical');
 Route::get('statisticaltable', 'ReportController@statisticalTables');
 
 Route::get('generatenewowner', 'ReportController@generateNewOwner');
+
+
+
+Route::get('accountsearch', 'HomeController@accountSearch');
+
+Route::get('accountsearchdata', 'HomeController@accountSearchData');
+
+
+Route::get('download','FileManagerController@download');
+
+Route::get('filedelete','FileManagerController@fileDelete');
+
+Route::post('upload','FileManagerController@upload');
+
+Route::get('updateattachment', 'HomeController@updateAttachment');
+
+Route::get('termattachment', 'HomeController@termAttachment');
+
+Route::post('termupload','FileManagerController@termUpload');

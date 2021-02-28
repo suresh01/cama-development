@@ -21,13 +21,11 @@
 				</div>
 				</div>
 				
-				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">
-					
+				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">					
 					<!--<a href="#" onclick="demo()">Demo</a>-->
 					@include('ownershiptransfer.search')
 				</div>
 
-				
 				<br>
         
 				<div class="widget_wrap">					
@@ -198,8 +196,7 @@ $(document).ready(function (){
 		        "serverSide": false,
 		        "retrieve": true,
 		        /*"dom": '<"toolbar">frtip',*/
-				
-								
+												
 		        // ajax: '{{ url("inspectionproperty") }}',
 		        /*"ajax": '/bookings/datatables',*/
 		        "columns": [
@@ -207,7 +204,7 @@ $(document).ready(function (){
 			        {"data": null, "name": "sno"},
 			        {"data":  function(data){
 
-			        	return "<a onclick='submitForm("+data.ma_accno+")' href=#'>"+data.ma_accno+"</a>";
+			        	return "<a onclick='edit("+data.ma_accno+")' href=#'>"+data.ma_accno+"</a>";
 			        
 			        }, "name": "account number"},
 			        {"data": "TO_OWNNAME", "name": "fileno"},
@@ -219,7 +216,8 @@ $(document).ready(function (){
 			        {"data": "ma_city", "name": "TO_OWNNAME"}, 
 			        {"data": function(data){
 			        	
-			        	return '<span><a onclick="edit('+data.ma_accno+')" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span>';
+			        	
+			        	return '<span><a onclick="submitForm('+data.ma_accno+')" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span>';
 			        
 			        }, "name": "bldgcount"}
 		   		],

@@ -48,7 +48,7 @@
 							</fieldset>
 							<fieldset title="Step 2">
 								<legend>Owner Information</legend>
-								@include('inspection.tab.ownernew')	
+								@include('inspection.tab.ownerold')	
 							</fieldset>
 							@if($applntype == 'C')
 							<fieldset title="Step 2">
@@ -74,7 +74,7 @@
 							</fieldset>
 							<fieldset title="Step 7">
 								<legend>Attachment</legend>
-								@include('inspection.tab.attachment')
+								@include('inspection.tab.attachmentnew')
 							</fieldset>			
 							@if($iseditable == 1)
 								<input type="submit" onclick="loader()" class="finish" id="finish" value="Finish!"/>	
@@ -172,6 +172,8 @@
 		  let tenantmap = new Map([["0","sno"],["1", "bldgaccnum"],  ["2", "bldgnum"], ["3", "bldgnum2"], ["4", "bldgnum4"], ["5", "bldgnum5"], ["6", "bldgnum7"], ["7", "bldgnu8m"], ["8", "bldgnu2m"],  ["9", "actioncode"], ["10", "te_id"]]);
 
 		  let attachmap = new Map([["0","sno"],["1", "filename"], ["2", "attype"], ["3", "desc"],["4", "action"], ["5", "actioncode"],["6", "id"]]);
+		
+		  let attachmentmap = new Map([["0","sno"],["1", "filename"], ["2", "vattachtype"], ["3", "atdetail"],["4", "action"], ["5", "attachmentid"],["6", "attachtype"], ["7", "atpath"], ["8", "ext"], ["9", "orgname"],["10", "actioncode"]]);
 		
            $("#propertyinspectionform").submit(function(e){
                 //alert('submit intercepted');
@@ -298,18 +300,20 @@
 				
 				var attachmentdata = [];
 
-				for (var l = 0;l<$('#attachtble').DataTable().rows().count();l++){
-					var ldata1 = $('#attachtble').DataTable().row(l).data();
-					var tempdata2 = {};
+				for (var j = 0;j<$('#attachmentdatatable').DataTable().rows().count();j++){
+					var ldata1 = $('#attachmentdatatable').DataTable().row(j).data();
+					var tempdata = {};
 					$.each(ldata1, function( key, value ) {
-						if (key !== 4 && key !== 1) {
-							tempdata2[attachmap.get(""+key+"")] = value; 
+						if (key !== 4) {
+							tempdata[attachmentmap.get(""+key+"")] = value; 
 						} 
 					//console.log(key);            
 	            	});
 	            	//console.log(templotdata);
-	            	attachmentdata.push(tempdata2);            	
+	            	attachmentdata.push(tempdata);            	
 				}
+
+				
 				//bldgdata = bldgdata).replace('[', '{');
 				//bldgdata = JSON.stringify(bldgdata).replace(']', '}');
 
@@ -344,10 +348,12 @@
 				else
 					tenantdata = JSON.stringify(tenantdata).replace(/]|[[]/g, '');
 				
-				if ($('#attachtble').DataTable().rows().count() > 1)
+				if ($('#attachmentdatatable').DataTable().rows().count() > 1)
 					attachmentdata =  "["+  JSON.stringify(attachmentdata).replace(/]|[[]/g, '') +"]";
 				else
 					attachmentdata = JSON.stringify(attachmentdata).replace(/]|[[]/g, '');
+
+				
 				
 				
 				if(bldgardata === ''){

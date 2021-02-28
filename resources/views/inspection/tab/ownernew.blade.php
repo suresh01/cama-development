@@ -7,7 +7,7 @@
 								</p>
 
 
-								<div style="display: none;" id="ownertable" class="widget_wrap">					
+								<div style="display: black;" id="ownertable" class="widget_wrap">					
 									<div class="widget_content">						
 										<table style="width: 100%" id="ownertble" class="display ">
 										<thead style="text-align: left;">
@@ -45,7 +45,7 @@
 								</div>
 
 								
-	<div class="grid_12">
+	<div class="grid_12" id="ownerdetailview" style="display: none">
 	@foreach ($ownerd as $owner)
 
 								<div class="grid_6 ">
@@ -854,9 +854,9 @@
 			
 			let ownermap = new Map([["0","sno"],["1", "ownaplntype"], ["2", "typeofown"], ["3", "ownnum"],["4", "ownname"], ["5", "ownaddr1"],["6", "ownaddr2"], ["7", "ownaddr3"],["8", "ownaddr4"], ["9", "ownpostcode"],["10", "ownstate"], ["11", "telno"],["12", "faxno"],["13", "citizen"], ["14", "race"],["15", "numerator"], ["16", "demominator"],["17", "action"], ["18", "actioncode"],["19", "ownerid"],["20","owneraccnum"]]);
  		var ownerdata = [];
-
-			 
-			
+@foreach ($ownerd as $rec)
+			 ownerdata.push( [ '{{$loop->iteration}}', '{{$rec->TO_OWNERAPPLNTYPE_ID}}', '{{$rec->TO_OWNTYPE_ID}}', '{{$rec->TO_OWNNO}}', '{{$rec->TO_OWNNAME}}', '{{$rec->TO_ADDR_LN1}}', '{{$rec->TO_ADDR_LN2}}', '{{$rec->TO_ADDR_LN3}}', '{{$rec->TO_ADDR_LN4}}', '{{$rec->TO_POSTCODE}}', '{{$rec->TO_STATE_ID}}', '{{$rec->TO_TELNO}}', '', '{{$rec->TO_CITIZEN_ID}}', '{{$rec->TO_RACE_ID}}', '{{$rec->TO_NUMETR}}', '{{$rec->TO_DENOMTR}}','<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons  dellotrow deleteownerrow" href="#" title="delete">Delete</a></span>','noation', '{{$rec->TO_ID}}' ,'newacc',			'{{$rec->TO_OWNERAPPLNTYPE_ID}} / {{$rec->owntype}}'	,'{{$rec->TO_OWNNO}}'	,'{{$rec->TO_ADDR_LN1}},  {{$rec->TO_ADDR_LN2}},   {{$rec->TO_ADDR_LN3}}  {{$rec->state}} - {{$rec->TO_POSTCODE}} '	,'{{$rec->TO_TELNO}} '	,'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons  dellotrow deleteownerrow" href="#" title="delete">Delete</a></span>' ] );
+			@endforeach
         $('#ownertble').DataTable({
             data:           ownerdata,
             "columns":[ null, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false },null,null,null,null,null],
@@ -921,7 +921,7 @@
 			$('#propertyinspectionform-next-1').hide();	
 			addDisableTab();
 
-        	$("#ownerdetail").show();
+        	$("#ownerdetailview").show();
 			$("#addowner").hide();
 			$("#ownertable").hide();
 
@@ -956,7 +956,7 @@ function editownerRow(){
 
 		row.data(data);
 
-		$("#ownerdetail").hide();
+		$("#ownerdetailview").hide();
 		$("#ownertable").show();
 		$("#addowner").show();
 		$('#propertystatus').val('');
@@ -997,7 +997,7 @@ function addownerRow(){
 			 				$('#submitaddtblowner').show();
 							$("#owner_operation2").val(1);
 							$("#owneraccnum").val($('#accnumber').val());
-							$("#ownerdetail").show();
+							$("#ownerdetailview").show();
 							$("#ownertable").hide();
 							$("#addowner").hide();
 							$("#ownersubmit").html("Save");
@@ -1027,7 +1027,7 @@ function addownerRow(){
 							$('#telno').val($('#telno'+id).val());
 							$('#faxno').val($('#faxno'+id).val());
 							//$('#landuse').val($('#active'+id).val());
-							$("#ownerdetail").show();
+							$("#ownerdetailview").show();
 							$("#addowner").hide();
 							$("#ownertable").hide();
 							$("#ownersubmit").html("Update");
@@ -1054,7 +1054,7 @@ function addownerRow(){
 							$('#demominator').val('');
 							$("#ownertable").show();
 							$("#addowner").show();
-							$("#ownerdetail").hide();
+							$("#ownerdetailview").hide();
 						 	$("label.error").remove();	
 						}
 						function ownersubmit(){						

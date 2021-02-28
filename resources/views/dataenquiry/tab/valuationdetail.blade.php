@@ -258,7 +258,7 @@
 													<div class="form_grid_6">									
 														<label class="field_title" id="luserid" for="userid">Description<span class="req">*</span></label>
 														<div class="form_input">
-															<input id="add_description" required="true"  name="add_description" type="text"  value="" />
+															<input id="add_description"  name="add_description" type="text"  value="" />
 														</div>
 														<span class=" label_intro"></span>
 													</div>
@@ -267,7 +267,7 @@
 													<div class="form_grid_6">									
 														<label class="field_title" id="luserid" for="userid">Area<span class="req">*</span></label>
 														<div class="form_input">
-															<input id="add_area" required="true" onchange="additionalCal()"  name="add_area" type="text"  value="" />
+															<input id="add_area" onchange="additionalCal()"  name="add_area" type="text"  value="" />
 														</div>
 														<span class=" label_intro"></span>
 													</div>
@@ -276,7 +276,7 @@
 													<div class="form_grid_6">									
 														<label class="field_title" id="luserid" for="userid">Rate<span class="req">*</span></label>
 														<div class="form_input">
-															<input id="add_rate" required="true" onchange="additionalCal()" name="add_rate" type="text"  value="" />
+															<input id="add_rate" onchange="additionalCal()" name="add_rate" type="text"  value="" />
 														</div>
 														<span class=" label_intro"></span>
 													</div>

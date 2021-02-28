@@ -9,6 +9,7 @@ use Session;
 use Log;
 use DataTables;
 use userpermission;
+use App;
 
 class ObjectionController extends Controller
 {
@@ -20,6 +21,7 @@ class ObjectionController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        App::setlocale(session()->get('locale'));
     }
 
     /**

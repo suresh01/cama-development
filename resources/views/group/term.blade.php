@@ -21,9 +21,16 @@
 			</form>
 		</div>
 	</div>-->
-	<div id="content">
+	<div id="content"> 
 		<div class="grid_container">
-		
+		<script>
+
+				$(document).ready(function(){
+					$('#paramterm').val('{{$param}}');
+				});
+					
+
+			</script>
 			<div id="termtable" class="grid_12">
 	
 				<br>
@@ -38,6 +45,14 @@
 						</ul>
 					</div>
 					<button id="adduser" style="float:right;margin-right: 10px;" onclick="newTerm()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Term</span></button>
+					<div  style="float:right;margin-right: 20px;">		
+							<select data-placeholder="Choose a Status..." onclick="getdata()"  style="float: left;" class="cus-select"  id="paramterm" name="paramterm" tabindex="6">						
+								<option value='A'>All</option>							
+								<option value='C'>CMK</option>							
+								<option value='K'>KAD</option>								
+							</select>	
+						<span class="clear"></span>
+					</div>
 					<br>
 				</div>		
 				<div class="widget_wrap">					
@@ -280,6 +295,16 @@
 	<span class="clear"></span>
 	
 	<script>
+		function getdata(){
+			//$('#paramterm').val('{{$param}}');
+			var param = $('#paramterm').val();
+			if (param != '0') {
+				window.location.assign('term?param='+param);
+			}
+			//window.location.assign('propertybasket?param='+zone);
+			//return;
+		}
+
 		function newTerm(){
 			$("#operation").val(1);
 			$("#termtable").hide();

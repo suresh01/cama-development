@@ -1,0 +1,47 @@
+<?php
+
+// resources/lang/en/messages.php
+
+return [
+    'title'=>'Computer Assisted Mass Appraisal',
+    'home' => 'Home',
+    'dataenquiry' => 'Data Enquiry',
+    'propertysearch' => 'Property Search',
+    'termsearch' => 'Term Search',
+    'officialsearch' => 'Official Search',
+    'datamaintenance' => 'Data Maintenance',
+    'codemaintenance' => 'Code Maintenance',
+    'masterlistregister' => 'New Masterlist Registration',
+    'masterlistmaintenance' => 'Existing Masterlist Maintenance',
+    'tenantreg' => 'Tenant Registration',
+    'ratepayerreg' => 'Ratepayer Registration',
+    'dms' => 'DMS',
+    'term' => 'Term Management',
+    'evident' => 'Evident Bank',
+    'planreg' => 'Plan Registration',
+    'ownermaintenance' => 'Property Owner Maintenance',
+    'transferapproval' => 'Owner Transfer Approval',
+    'transferreg' => 'Owner Transfer Registration',
+    'transferprocess' => 'Owner Transfer Process',
+    'addressprocess' => 'Owner Address Maintenance',
+    'transferlog' => 'Owner Transfer/Address Log',
+    'maintenanceprocess' => 'Property Information Maintenance',
+    'propertyaddress' => 'Property Address/File No Maintenance',
+    'propertylot' => 'Property Lot Maintenance',
+    'maintenancelog' => 'Property Information Log',
+    'tol' => 'Tone Of List',
+    'tolbasket' => 'Tone Basket',
+    'tolratebasket' => 'Rate Basket',
+    'tolbulding' => 'Building',
+    'tolland' => 'Land',
+    'tolallownace' => 'Allowance',
+    'toldepreciation' => 'Depreciation',
+    'standardlandarea' => 'Standard land area',
+    'tolrate' => 'Rate',
+    'valuationprocess' => 'Valuation Process',
+    'valuationmgmt' => 'Valuation Data Management',
+    'objection' => 'Objection Meeting',
+    'defunct' => 'Defunct Property',
+    'report' => 'Report'
+
+];

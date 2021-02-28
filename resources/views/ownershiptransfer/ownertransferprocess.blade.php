@@ -18,9 +18,7 @@
 	<div id="content">
 		<div class="grid_container">
 
-		<div id="usertable" class="grid_12">	
-			
-
+		<div id="usertable" class="grid_12">
 				<div style="float:right;margin-right: 0px;"  class="btn_24_blue">   
 					<a href="#" id="" onclick="closeWindow()" class=""><span>Close </span></a> 
 				</div>
@@ -84,7 +82,7 @@
 										<div class="form_grid_12">
 											<label class="field_title" id="llevel" for="level">OWNER NAME<span class="req">*</span></label>
 											<div  class="form_input">
-												<input id="ownname" readonly="true" value="{{$owner->TO_OWNNAME}}" name="ownname" tabindex="1" type="text"  maxlength="80" />
+												<input id="ownname" readonly="true" value="{{$owner->TO_OWNNAME}}" name="ownname" tabindex="1" type="text"  maxlength="200" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
@@ -122,6 +120,13 @@
 											<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="ownpostcode" value="{{$owner->TO_POSTCODE}}" readonly="true" name="ownpostcode" tabindex="1" type="number"  maxlength="50" class=""/>
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="city"  name="city" tabindex="1" type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
@@ -193,8 +198,7 @@
 										
 									</fieldset>
 										</li></ul>
-									</div>
-
+									</div>									
 										<div class="grid_6 ">
 										<ul>
 										<li>
@@ -251,7 +255,7 @@
 										<div class="form_grid_12">
 											<label class="field_title" id="llevel" for="level">OWNER NAME<span class="req">*</span></label>
 											<div  class="form_input">
-												<input id="nownname" name="nownname" tabindex="1" type="text"  maxlength="80" />
+												<input id="nownname" name="nownname" tabindex="1" type="text"  maxlength="200" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
@@ -290,6 +294,13 @@
 											<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="nownpostcode"  name="nownpostcode" tabindex="1" type="number"  maxlength="50" class=""/>
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="ncity"  name="ncity" tabindex="1" type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
@@ -411,7 +422,7 @@
 								<div class="form_grid_12">
 									<label class="field_title" id="llevel" for="level">NAME<span class="req">*</span></label>
 									<div  class="form_input">
-										<input id="addname" name="addname" tabindex="1" type="text"  maxlength="80" />
+										<input id="addname" name="addname" tabindex="1" type="text"  maxlength="200" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
@@ -841,7 +852,8 @@
 
 	function transfer(){
 		//alert($('.reason:checked').length);
-		var count = $('.reason:checked').length;
+		var count=0;
+		count = $('.reason:checked').length;
 		$('#readsoncount').val(count);
 		$("#propertyinspectionform").submit(function(e){
                 //alert('submit intercepted');
@@ -849,63 +861,61 @@
                 e.preventDefault(e);
 		var formdata = {};
 		$('#propertyinspectionform').serializeArray().map(function(x){formdata[x.name] = x.value;});
+
+	
+           
 		//console.log(formdata);
-var noty_id = noty({
+			var noty_id1 = noty({
 				layout : 'center',
-				text: 'Are want to update owner Information?',
+				text: 'Are want to Update?',
 				modal : true,
 				buttons: [
 					{type: 'button blue', text: 'Submit', click: function($noty) {
 			  
 						$noty.close();
 
-		var d=new Date();
-		$.ajax({ 
-  				type: 'GET', 
-			    url:'ownertransfertrn',
-			    headers: {
-				    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				},
-		        data:{jsondata:JSON.stringify(formdata),reasoncount:count},
-		        success:function(data){
-		        	//$('#propertystatus').val('Registered');
-					$('#finishloader').html('');
-					var msg = 'Owner Transferred successfully';
-					var type = 'Fail';
-					if  (count < 2) {
-						msg = 'Owner Transferred successfully';
-						type = 'Successs';
-					} else {
-						msg = 'Owner Transferred Rejected';
-						type = 'Fail';
-					}
-		        	var noty_id = noty({
-						layout : 'top',
-						text: msg,
-						modal : true,
-						type : 'success', 
-					});			
-		        	if('{{$page}}'==1){
-						$('#type').val(type);
-						$('#accountnumber').val('{{$account}}');
-						//$('#addDetail').modal();
-					}
-					 window.opener.HandlePopupResult(sender.getAttribute("result"));
-				
-	        	},
-		        error:function(data){
-						
-		        	$('#finishloader').html('');     	
-		        		var noty_id = noty({
-						layout : 'top',
-						text: 'Problem while update!',
-						modal : true,
-						type : 'error', 
-					});
-	        	}
-	    	});
+						var d=new Date();
+						$.ajax({ 
+				  				type: 'GET', 
+							    url:'ownertransfertrn',
+							    headers: {
+								    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+								},
+						        data:{jsondata:JSON.stringify(formdata),reasoncount:count,approval:'Yes'},
+						        success:function(data){
+						        	//$('#propertystatus').val('Registered');
+									$('#finishloader').html('');
+									
+										msg = 'Owner Detail Updated';
+										type = 'Fail';
+									
+						        	var noty_id = noty({
+										layout : 'top',
+										text: msg,
+										modal : true,
+										type : 'success', 
+									});			
+						        	if('{{$page}}'==1){
+										$('#type').val(type);
+										$('#accountnumber').val('{{$account}}');
+										//$('#addDetail').modal();
+									}
+									 window.opener.HandlePopupResult(sender.getAttribute("result"));
+								
+					        	},
+						        error:function(data){
+										
+						        	$('#finishloader').html('');     	
+						        		var noty_id = noty({
+										layout : 'top',
+										text: 'Problem while update!',
+										modal : true,
+										type : 'error', 
+									});
+					        	}
+					    	});
 
-		  }
+						  }
 					},
 					{type: 'button pink', text: 'Cancel', click: function($noty) {
 						$noty.close();
@@ -915,7 +925,10 @@ var noty_id = noty({
 				 type : 'success', 
 			 });
 		
+		
         });
+
+
 	}
 
 </script>

@@ -29,14 +29,16 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        
     }
 
     public function languageSetup(Request $request){
         $lang = $request->input('lang'); // passed from the form
 //Log::info("S");
-        App::setlocale('en');
-        session()->put('locale', 'en'); 
-        app()->setLocale('en');
+       // App::setlocale('en');
+        session()->put('locale', $lang); 
+
+       // app()->setLocale('en');
        /* Session::put('locale', $locale);
 
         app()->setLocale(Session::get('locale'));*/
@@ -49,7 +51,7 @@ class UserController extends Controller
         $module=DB::select('select * from tbmodule');  
         //$users = DB::connection('oracle')->select('select * from TB_AGAMA_WORK');      
         //Log::info($users);
-        App::setlocale('ms');
+        App::setlocale(session()->get('locale'));
         //return view('module')->with('module',$module);
         return view('dashboard')->with('module',$module);
     }
@@ -58,6 +60,7 @@ class UserController extends Controller
     function index(Request $request){
 	    $name = $request->input('username');
 	    $pass = $request->input('password');
+        $lang = $request->input('lang');
 	    $errors ="";
 	    //$query=DB::select("select user_name from tbuser where user_name = 'admin'");
 
@@ -69,9 +72,7 @@ class UserController extends Controller
         //$data=DB::select('select * from tbuser');
 
         $userlogin = DB::select(DB::raw("select * from tbuser WHERE usr_name = :uf and usr_pass = :up"), 
-            array(":uf" => $name, ":up" => $pass));
-
-        
+            array(":uf" => $name, ":up" => $pass));        
         /*
     	    $query = DB::table('tbuser');
     	    $query->where('user_name', "=" ,$name)->get();       	    
@@ -80,6 +81,7 @@ class UserController extends Controller
 
 		foreach ($userlogin as $user) {    
             Session::put('username', $name);  
+           
     	    //if($user->user_name == "admin") {
     	    return redirect('dashboard'); 
                 

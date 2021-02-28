@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use DataTables;
 use userpermission;
+use App;
 
 class PropertyRegisterationController extends Controller
 {    
@@ -21,6 +22,7 @@ class PropertyRegisterationController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        
     }
 
 
@@ -69,7 +71,7 @@ class PropertyRegisterationController extends Controller
         	$ceiling=DB::table('tbdefitems')->where('tdi_td_name', "CEILINGTYPE")->orderBy('tdi_sort')->pluck('tdi_value');
             $activeind=DB::table('tbdefitems')->where('tdi_td_name', "ACTIVEIND")->orderBy('tdi_sort')->pluck('tdi_value');
 
-
+            App::setlocale(session()->get('locale'));
             return view("propertyregister.table")->with(array('maxRow'=> $maxRow, 'district'=>$district, 'state'=> $state, 'bldgcate'=>$bldgcate,'ishasbuilding' => $ishasbuilding,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'landuse' => $landuse,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstructure,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'pb' => $pb,'activeind' => $activeind,'zone' => $zone,'subzone' => $subzone,'bldgstore' => $bldgstore,'bldgtype' => $bldgtype));                      
         } else {
 
@@ -179,6 +181,8 @@ class PropertyRegisterationController extends Controller
             foreach ($prop as $obj) {  
                $accountnumbber = $obj->ma_accno;
             }
+
+            App::setlocale(session()->get('locale'));
 
             return view("propertyregister.tab")->with('district', $district)->with('state', $state)->with('zone', $zone)->with('subzone', $subzone)->with('pb', $pb)->with(array('bldgstruct'=>$bldgstruct,'bldgstore'=>$bldgstore,'ishasbuilding'=>$ishasbuilding, 'landuse'=>$landuse, 'master'=> $master, 'lotlist'=> $lotlist, 'ownerlist'=>$ownerlist, 'building'=> $building,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstruct,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'bldgcate' => $bldgcate,'bldgtype' => $bldgtype,'count' => $count, 'bldgardetail' => $bldgardetail,'prop_id' => $prop_id,'iseditable' => $iseditable,'pb_id' => $pb,'basket_name' => $basket_name,'accountnumbber' => $accountnumbber));
         }
@@ -300,6 +304,9 @@ class PropertyRegisterationController extends Controller
         foreach ($prop as $obj) {  
            $accountnumbber = $obj->ma_accno;
         }
+
+        App::setlocale(session()->get('locale'));
+            
 
         return view("existspropertyregister.tab")->with('district', $district)->with('state', $state)->with('zone', $zone)->with('subzone', $subzone)->with('pb', $pb)->with(array('bldgstruct'=>$bldgstruct,'bldgstore'=>$bldgstore,'ishasbuilding'=>$ishasbuilding, 'landuse'=>$landuse, 'master'=> $master, 'lotlist'=> $lotlist, 'ownerlist'=>$ownerlist, 'building'=> $building,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstruct,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'bldgcate' => $bldgcate,'bldgtype' => $bldgtype,'count' => $count, 'bldgardetail' => $bldgardetail,'prop_id' => $prop_id,'iseditable' => $iseditable,'pb_id' => $pb,'basket_name' => $basket_name,'accountnumbber' => $accountnumbber));
         
@@ -497,6 +504,9 @@ $master ='{"aa":"ss '.$type.'"}';
            $basket_name = $obj->PB_NAME;
         }
 
+        App::setlocale(session()->get('locale'));
+            
+
         return view("propertyregister.property")->with('pb', $pb)->with('maxRow', $maxRow)->with('propertydetail', $propertydetail)->with('basket_status', $basket_status)->with('basket_name', $basket_name);
     }
 
@@ -521,6 +531,8 @@ $master ='{"aa":"ss '.$type.'"}';
            $basket_name = $obj->PB_NAME;
         }
 
+        App::setlocale(session()->get('locale'));
+            
         return view("existspropertyregister.property")->with('pb', $pb)->with('maxRow', $maxRow)->with('propertydetail', $propertydetail)->with('basket_status', $basket_status)->with('basket_name', $basket_name);
     }
 
@@ -558,6 +570,8 @@ $master ='{"aa":"ss '.$type.'"}';
             $detail = UserAcessController::accessDetail('32');
             return view('denied')->with('detail',$detail);
         } 
+
+        App::setlocale(session()->get('locale'));
         $param = $request->input('param'); 
          $condition = ' ';   
         /*if ( $param == '01'  ){
@@ -594,6 +608,9 @@ $master ='{"aa":"ss '.$type.'"}';
             inner join cm_appln_valdetl on vd_ma_id = ma_id where   PB_PROPBASKETTYE_ID = 1');
 
             $applntype = DB::select('select * from tbdefitems where tdi_td_name = "APPLICATIONTYPE"');
+
+        App::setlocale(session()->get('locale'));
+            
         return view('propertyregister.basket')->with('basket',$basket)->with('propertycount',$propertycount)->with('applntype',$applntype)->with('valproperty',$valproperty)->with('stage',$stage);
     }
 
@@ -639,6 +656,9 @@ $master ='{"aa":"ss '.$type.'"}';
             inner join cm_appln_valdetl on vd_ma_id = ma_id where   PB_PROPBASKETTYE_ID = 2');
 
             $applntype = DB::select('select * from tbdefitems where tdi_td_name = "APPLICATIONTYPE"');
+            
+        App::setlocale(session()->get('locale'));
+            
         return view('existspropertyregister.basket')->with('basket',$basket)->with('propertycount',$propertycount)->with('applntype',$applntype)->with('valproperty',$valproperty)->with('stage',$stage);
     }
 

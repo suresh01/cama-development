@@ -245,7 +245,7 @@
 		 			if ('{{$rec->TO_FAXNO}}' != ''){
 
 		 			}
-		 			ownerdata.push( [ '{{$loop->iteration}}', '{{$rec->TO_OWNERAPPLNTYPE_ID}}', '{{$rec->TO_OWNTYPE_ID}}', '{{$rec->TO_OWNNO}}', '{{$rec->TO_OWNNAME}}', '{{$rec->TO_ADDR_LN1}}', '{{$rec->TO_ADDR_LN2}}', '{{$rec->TO_ADDR_LN3}}', '{{$rec->TO_ADDR_LN4}}', '{{$rec->TO_POSTCODE}}', '{{$rec->TO_STATE_ID}}', '{{$rec->TO_TELNO}}', '{{$rec->TO_FAXNO}}', '{{$rec->TO_CITIZEN_ID}}', '{{$rec->TO_RACE_ID}}', '{{$rec->TO_NUMETR}}', '{{$rec->TO_DENOMTR}}','<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete dellotrow deleteownerrow" href="#" title="delete">Delete</a></span>','noation', '{{$rec->TO_ID}}' ,'newacc',			'{{$rec->TO_OWNERAPPLNTYPE_ID}} / {{$rec->owntype}}'	,'{{$rec->TO_OWNNO}}'	,'{{$rec->TO_ADDR_LN1}}  {{$rec->TO_ADDR_LN2}}   {{$rec->TO_ADDR_LN3}} <br> {{$rec->state}} - {{$rec->TO_POSTCODE}} '	,'{{$rec->TO_TELNO}} / {{$rec->TO_FAXNO}}'	,'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete dellotrow deleteownerrow" href="#" title="delete">Delete</a></span>' ] );
+		 			ownerdata.push( [ '{{$loop->iteration}}', '{{$rec->TO_OWNERAPPLNTYPE_ID}}', '{{$rec->TO_OWNTYPE_ID}}', '{{$rec->TO_OWNNO}}', '{{$rec->TO_OWNNAME}}', '{{$rec->TO_ADDR_LN1}}', '{{$rec->TO_ADDR_LN2}}', '{{$rec->TO_ADDR_LN3}}', '{{$rec->TO_ADDR_LN4}}', '{{$rec->TO_POSTCODE}}', '{{$rec->TO_STATE_ID}}', '{{$rec->TO_TELNO}}', '{{$rec->TO_FAXNO}}', '{{$rec->TO_CITIZEN_ID}}', '{{$rec->TO_RACE_ID}}', '{{$rec->TO_NUMETR}}', '{{$rec->TO_DENOMTR}}','<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete dellotrow deleteownerrow" href="#" title="delete">Delete</a></span>','noation', '{{$rec->TO_ID}}' ,'newacc',			'{{$rec->TO_OWNERAPPLNTYPE_ID}} / {{$rec->owntype}}'	,'{{$rec->TO_OWNNO}}'	,'{{$rec->TO_ADDR_LN1}}  {{$rec->TO_ADDR_LN2}}   {{$rec->TO_ADDR_LN3}} <br> {{$rec->state}} - {{$rec->TO_POSTCODE}} '	,'{{$rec->TO_TELNO}} / {{$rec->TO_FAXNO}}'	,'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span>' ] );
 		 		@endforeach
 
         $('#ownertble').DataTable({
@@ -317,8 +317,8 @@
 			$("#addowner").hide();
 			$("#ownertable").hide();
 
-			$('#submitedittblowner').show();
-			$('#submitaddtblowner').hide();
+			//$('#submitedittblowner').show();
+			//$('#submitaddtblowner').hide();
 
 
 		});
@@ -330,8 +330,8 @@ function editownerRow(){
 	if(validateOwner()) {
 		$('#propertyregsitration_from-back-2').show();
 		$('#propertyregsitration_from-next-2').show();	
-		$('#submitedittblowner').show();
-		$('#submitaddtblowner').hide();
+		//$('#submitedittblowner').show();
+		//$('#submitaddtblowner').hide();
 		var table = $('#ownertble').DataTable();
 		var account = $('#accnumber').val();
 
@@ -361,8 +361,8 @@ function addownerRow(){
 
 	if(validateOwner()){
 
-		$('#submitedittblowner').hide();
-			$('#submitaddtblowner').show();
+		//$('#submitedittblowner').hide();
+		//	$('#submitaddtblowner').show();
 
 			//$('#propertyregsitration_from-back-2').show();
 		//$('#propertyregsitration_from-next-2').show();	
@@ -387,8 +387,8 @@ function addownerRow(){
 							$('#propertyregsitration_from-back-2').hide();
 							$('#propertyregsitration_from-next-2').hide();	
 							addDisableTab();
-							$('#submitedittblowner').hide();
-			 				$('#submitaddtblowner').show();
+							//$('#submitedittblowner').hide();
+			 				//$('#submitaddtblowner').show();
 							$("#owner_operation2").val(1);
 							$("#owneraccnum").val($('#accnumber').val());
 							$("#ownerdetail").show();

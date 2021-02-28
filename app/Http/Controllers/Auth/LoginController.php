@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 use DB;
+use Session;
 
 class LoginController extends Controller
 {
@@ -72,6 +73,9 @@ class LoginController extends Controller
             
             $user = auth()->guard('web')->user();
             
+            session()->put('locale', $request->input('lang')); 
+            //Log::info($request->input('lang')."*****");
+
             return redirect($this->redirectTo);
         }   
         \Session::put('login_error', 'Your username and password wrong!!');

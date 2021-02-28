@@ -204,7 +204,7 @@
 							    @if(userpermission::checkaccess(321)=="true")
 							    <span><a class="action-icons c-delete delete_BASKET" onclick="deleteBasket('{{ $rec->basket_id }}')" href="#" title="Delete">Delete</a></span>
 							    @endif
-							    @elseif($rec->propcount == $rec->approved_count && $rec->pb_approved == '02')
+							    @elseif($rec->propcount == $rec->approved_count && $rec->PB_APPROVALSTATUS_ID == '02')
 							    @if(userpermission::checkaccess(324)=="true")
 							    <span><a class="action-icons c-approve" onclick="approveProperty('{{ $rec->basket_id }}')" title="Approve For Inspection" href="#">Approve</a></span>
 							    @endif

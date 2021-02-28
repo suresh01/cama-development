@@ -12,6 +12,7 @@ use Session;
 use JasperPHP; 
 use PHPJasper;
 use DataTables;
+use App;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        
     }
 
     /**
@@ -36,7 +38,13 @@ class HomeController extends Controller
     }
 
     public function term(Request $request){
-        $jsondata = $request->input('jsondata');        
+        $jsondata = $request->input('jsondata');    
+         $param = $request->input('param'); 
+        $cond = ' ';
+         if($param !='A' && $param !='') {
+            $cond = ' where vt_applicationtype_id =  "'.$param.'"';
+         }
+         
         $term = DB::select("select vt_valbase_id, vt_id, vt_name name, vt_createby createby,  DATE_FORMAT(vt_createdate, '%d/%m/%Y') createdate, vt_updateby updateby, applntype.tdi_value applntype, 
           DATE_FORMAT(vt_updatedate, '%d/%m/%Y')  updatedate, ifnull(basket_count,0) basket_count, ifnull(property_count,0) property_count,DATE_FORMAT(vt_termDate, '%d/%m/%Y') termDate, DATE_FORMAT(now(), '%d/%m/%Y') enforceDate,  vt_applicationtype_id,DATE_FORMAT(vt_transferDate, '%d/%m/%Y') vt_transferDate, vt_transferby,
            termstage.tdi_desc termstage, vt_approvalstatus_id,ap_basket_count, valbase.tdi_value valbase 
@@ -50,12 +58,47 @@ class HomeController extends Controller
           left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage
           on termstage.tdi_key = vt_approvalstatus_id 
         left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbase
-        on valbase.tdi_key = vt_valbase_id order by vt_termDate desc");
+        on valbase.tdi_key = vt_valbase_id ".$cond."  order by vt_termDate desc");
         $basket_count=DB::select('select  count(*) basket_count from cm_appln_val');
         $property_count=DB::select('select  count(vd_id) property_count from cm_appln_valdetl inner join cm_appln_val on va_id = vd_va_id');
             $applntype = DB::select('select * from tbdefitems where tdi_td_name = "APPLICATIONTYPE"');
             $valbase = DB::select('select * from tbdefitems where tdi_td_name = "VALUATIONBASE" ');
-        return view("group.term")->with(array('term'=> $term,'basket_count'=> $basket_count,'property_count'=> $property_count,'applntype'=> $applntype,'valbase'=> $valbase));
+
+        App::setlocale(session()->get('locale'));
+        
+        return view("group.term")->with(array('term'=> $term,'basket_count'=> $basket_count,'property_count'=> $property_count,'applntype'=> $applntype,'valbase'=> $valbase, 'param' => $param,));
+    }
+
+    public function valterm(Request $request){
+        $jsondata = $request->input('jsondata');    
+         $param = $request->input('param'); 
+        $cond = ' ';
+         if($param !='A' && $param !='') {
+            $cond = ' where vt_applicationtype_id =  "'.$param.'"';
+         }
+         
+        $term = DB::select("select vt_valbase_id, vt_id, vt_name name, vt_createby createby,  DATE_FORMAT(vt_createdate, '%d/%m/%Y') createdate, vt_updateby updateby, applntype.tdi_value applntype, 
+          DATE_FORMAT(vt_updatedate, '%d/%m/%Y')  updatedate, ifnull(basket_count,0) basket_count, ifnull(property_count,0) property_count,DATE_FORMAT(vt_termDate, '%d/%m/%Y') termDate, DATE_FORMAT(now(), '%d/%m/%Y') enforceDate,  vt_applicationtype_id,DATE_FORMAT(vt_transferDate, '%d/%m/%Y') vt_transferDate, vt_transferby,
+           termstage.tdi_desc termstage, vt_approvalstatus_id,ap_basket_count, valbase.tdi_value valbase 
+          from cm_appln_valterm
+          left join (select va_vt_id, count(*) ap_basket_count from cm_appln_val where va_approvalstatus_id = '11' group by va_vt_id) approve on approve.va_vt_id = vt_id
+          left join (select va_vt_id, count(*) basket_count from cm_appln_val group by va_vt_id) cm_appln_val on cm_appln_val.va_vt_id = vt_id
+          left join (select va_vt_id, count(vd_id) property_count from cm_appln_valdetl inner join cm_appln_val on va_id = vd_va_id
+          group by va_vt_id) cm_appln_valdetl on cm_appln_valdetl.va_vt_id = vt_id 
+          left join (select *  from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype
+          on applntype.tdi_key = vt_applicationtype_id
+          left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage
+          on termstage.tdi_key = vt_approvalstatus_id 
+        left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbase
+        on valbase.tdi_key = vt_valbase_id ".$cond."  order by vt_termDate desc");
+        $basket_count=DB::select('select  count(*) basket_count from cm_appln_val');
+        $property_count=DB::select('select  count(vd_id) property_count from cm_appln_valdetl inner join cm_appln_val on va_id = vd_va_id');
+            $applntype = DB::select('select * from tbdefitems where tdi_td_name = "APPLICATIONTYPE"');
+            $valbase = DB::select('select * from tbdefitems where tdi_td_name = "VALUATIONBASE" ');
+
+        App::setlocale(session()->get('locale'));
+        
+        return view("group.valterm")->with(array('term'=> $term,'basket_count'=> $basket_count,'property_count'=> $property_count,'applntype'=> $applntype,'valbase'=> $valbase, 'param' => $param,));
     }
     
     public function termTransaction(Request $request) {
@@ -66,7 +109,81 @@ class HomeController extends Controller
         return redirect('term');
     }
 
-    public function group(Request $request){
+    public function valbasket(Request $request){
+        $id = $request->input('id');
+       // Log::info( DB::statement('call json_procedure( )'));
+        $search=DB::select(' select sd_key, sd_label, 
+          case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
+        from tbsearchdetail mtb where sd_se_id = "18" ');
+        $termcondition = "";
+        if(userpermission::checkaccess('515') == "false"){
+          $termcondition = " where vt_approvalstatus_id in ('01','02') ";
+
+        }
+        $termfilter = DB::select("select vt_id termid, vt_name term, applntype.tdi_value applntype, 
+                termstage.tdi_desc termstage
+                from cm_appln_valterm
+                left join (select *  from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype
+                on applntype.tdi_key = vt_applicationtype_id
+                left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage
+                on termstage.tdi_key = vt_approvalstatus_id ". $termcondition ." order by vt_termDate desc");
+        $term = DB::select("select vt_valbase_id, vt_id termid, vt_name term, applntype.tdi_value applntype, 
+                termstage.tdi_desc termstage from cm_appln_valterm 
+                left join (select *  from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype
+                on applntype.tdi_key = vt_applicationtype_id
+                left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage
+                on termstage.tdi_key = vt_approvalstatus_id 
+                 where vt_approvalstatus_id = '01' and vt_id =".$id." order by vt_termDate desc");
+        $group = DB::select("select approval.tdi_desc approval,va_approvalstatus_id, va_id id, va_name l_group, va_vt_id termid, vt_name termaname, va_createby createby, DATE_FORMAT(va_createdate, '%d/%m/%Y') createdate, 
+        va_updateby updateby, DATE_FORMAT(va_updatedate, '%d/%m/%Y') updatedate, ifnull(propertycount,0) propertycount,ifnull(inspropertyccount,0) inspropertyccount , applntype.tdi_value applntype,
+         vt_applicationtype_id, ob_desc, ifnull(notiscount,0) notiscount , ifnull(objectioincount,0) objectioincount , ifnull(decisioncount,0) decisioncount , ifnull(valcount,0)  valcount
+        from cm_appln_val 
+        inner join cm_appln_valterm  on va_vt_id = vt_id
+        left join (select count(*) propertycount,vd_va_id from cm_appln_valdetl group by vd_va_id ) propcount on propcount.vd_va_id = va_id
+        left join (select count(*) inspropertyccount ,vd_va_id from cm_appln_valdetl where vd_approvalstatus_id in ('06','07','08','09','10','11','12') 
+        group by vd_va_id ) insprop on insprop.vd_va_id = va_id
+        left join (select count(*) valcount ,vd_va_id from cm_appln_valdetl where vd_approvalstatus_id in ('08','09','10','11','12')  
+        group by vd_va_id ) valprop on valprop.vd_va_id = va_id
+        left join (SELECT * FROM tbdefitems where tdi_td_name = 'BASKETSTAGE') approval on approval.tdi_key = va_approvalstatus_id 
+        left join (SELECT * FROM tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype on applntype.tdi_key = vt_applicationtype_id 
+        left join cm_objection on ob_vt_id = vt_id 
+        left join (select count(*) notiscount,vd_va_id  from cm_objection_notis 
+        inner join cm_appln_valdetl on vd_id = no_vd_id group by vd_va_id ) notis on notis.vd_va_id = va_id
+        left join (select count(*) objectioincount,vd_va_id  from cm_objection_objectionlist 
+        inner join cm_appln_valdetl on vd_id = ol_vd_id group by vd_va_id ) objection on objection.vd_va_id = va_id
+        left join (select count(*) decisioncount,vd_va_id  from cm_objection_decision 
+        inner join cm_appln_valdetl on vd_id = de_vd_id group by vd_va_id ) decision on decision.vd_va_id = va_id
+        where  va_vt_id = ifnull('".$id."',0) 
+        order by va_id desc");
+
+        $termtype = DB::select("select * from cm_appln_valterm  where vt_valbase_id = 2 and vt_id = ifnull('".$id."',0)  limit 1");
+        
+
+        $tonebasket = DB::select("select tollist_id, concat(tollis_enforceyear,' - ',tollis_desc) tonebasket from cm_toneoflistbasket where tollis_activeind_id = 1");
+        $tonetaxbasket = DB::select("select trlist_id, concat(trlist_enforceyear,' - ',trlist_desc) tonetaxbasket from cm_taxratelistbasket where trlist_activeind_id = 1");
+
+        $propcount = DB::select('select  count(*) totproperty_count from cm_appln_valdetl 
+        inner join cm_appln_val on va_id = vd_va_id where  va_vt_id = ifnull("'.$id.'",0)');
+
+        $bldgcount = DB::select('select  count(*) bldgcount from cm_appln_bldg
+          inner join cm_appln_valdetl  on ab_vd_id = vd_id 
+          inner join cm_appln_val on va_id = vd_va_id where  va_vt_id = ifnull("'.$id.'",0) ');
+
+
+        $inspropcount = DB::select('select  count(*) inscount from cm_appln_valdetl 
+        inner join cm_appln_val on va_id = vd_va_id
+        where vd_approvalstatus_id in ("06","07","08","09","10","11","12") and  va_vt_id = ifnull("'.$id.'",0)');
+
+        $valpropcount = DB::select('select  count(*) valcount from cm_appln_valdetl 
+        inner join cm_appln_val on va_id = vd_va_id where vd_approvalstatus_id in ("08","09","10","11","12") and  va_vt_id = ifnull("'.$id.'",0)');
+
+        App::setlocale(session()->get('locale'));
+        
+        return view("group.valbasket")->with(array('term'=> $term,'group'=> $group,'tonebasket'=>$tonebasket,'tonetaxbasket'=>$tonetaxbasket,'propcount'=>$propcount,'bldgcount'=>$bldgcount,'inspropcount'=>$inspropcount,'valpropcount'=>$valpropcount,'termfilter' => $termfilter, 'id' => $id, 'termtype' => $termtype));
+    }
+
+     public function group(Request $request){
         $param = $request->input('param');
        // Log::info( DB::statement('call json_procedure( )'));
         $search=DB::select(' select sd_key, sd_label, 
@@ -135,17 +252,19 @@ class HomeController extends Controller
         $valpropcount = DB::select('select  count(*) valcount from cm_appln_valdetl 
         inner join cm_appln_val on va_id = vd_va_id where vd_approvalstatus_id in ("08","09","10","11","12") and  va_vt_id = ifnull("'.$param.'",0)');
 
+        App::setlocale(session()->get('locale'));
+        
         return view("group.basket")->with(array('term'=> $term,'group'=> $group,'tonebasket'=>$tonebasket,'tonetaxbasket'=>$tonetaxbasket,'propcount'=>$propcount,'bldgcount'=>$bldgcount,'inspropcount'=>$inspropcount,'valpropcount'=>$valpropcount,'termfilter' => $termfilter, 'param' => $param, 'termtype' => $termtype));
     }
 
     public function groupTransaction(Request $request) {
         $jsondata = $request->input('jsondata');
-        $param = $request->input('param');
+        $id = $request->input('id');
         $name=Auth::user()->name;
         Log::info("call proc_cmapplnval_trn('".$jsondata."','".$name."')"); 
         $response=DB::select("call proc_cmapplnval_trn('".$jsondata."','".$name."')");
         //return redirect()->route('codemaintenancedetail', ['name' => '$td_name']);
-        return Redirect::route('group', ['param' => $param]);//('group')->with('param','100048');
+        return Redirect::route('valbasket', ['id' => $id]);//('group')->with('param','100048');
        // return redirect('group')->with('param','100048');
     }
     
@@ -245,6 +364,9 @@ inner join (select tdi_key subzone_id,tdi_parent_name zone, tdi_value subzone fr
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+
+        App::setlocale(session()->get('locale'));
+        
          return view("codemaintenance.ownershiptransfer.propertyaddress")->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     
     }
@@ -313,6 +435,9 @@ on subzone.tdi_key = ma_subzone_id where ma_accno = ifnull("'.$prop_id.'",0)');
           $state=DB::table('tbdefitems')->where('tdi_td_name', 'STATE')->get();
           $zone=DB::table('tbdefitems')->where('tdi_td_name', 'ZONE')->get();
           $subzone=DB::table('tbdefitems')->where('tdi_td_name', 'SUBZONE')->get();
+
+        App::setlocale(session()->get('locale'));
+        
          return view("codemaintenance.ownershiptransfer.ownerdetail")->with(array('district'=>$district, 'state'=>$state, 'zone'=>$zone, 'subzone'=>$subzone, 'master'=>$master));
     
     }
@@ -396,6 +521,8 @@ on subzone.tdi_key = ma_subzone_id where ma_accno = ifnull("'.$prop_id.'",0)');
           $titiletype=DB::table('tbdefitems')->where('tdi_td_name', 'TITLETYPE')->get();
           $tnttype=DB::table('tbdefitems')->where('tdi_td_name', 'TENURETYPE')->get();
 
+        App::setlocale(session()->get('locale'));
+        
          return view("codemaintenance.ownershiptransfer.propertylot")->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist)->with('lotcode',$lotcode)->with('titiletype',$titiletype)->with('tnttype',$tnttype);
     }
 
@@ -461,6 +588,9 @@ left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENUR
 
         $zone = DB::select("select tdi_key, tdi_value from tbdefitems where tdi_td_name = 'ZONE'");
             $applntype = DB::select('select * from tbdefitems where tdi_td_name = "PLANAPPLICATIONTYPE"');
+
+        App::setlocale(session()->get('locale'));
+        
         return view('group.plan')->with(array( 'applntype'=>$applntype, 'zone'=>$zone, 'plan'=>$plan, 'search'=>$search));
     }
 
@@ -515,21 +645,28 @@ left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENUR
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
         from tbsearchdetail mtb where sd_se_id = "14" ');
       $group = DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "USERGROUP"');
-        $ownregister = DB::select('select otar_id, otar_accno, otar_ownertransgroup_id, grouptb.tdi_value colgroup, statustb.tdi_value colstatus, otar_createby, DATE_FORMAT(otar_createdate, "%d/%m/%Y") otar_createdate  FROM cm_ownertrans_applnreg 
+        $ownregister = DB::select('select otar_id, otar_accno, otar_ownertransgroup_id, grouptb.tdi_value colgroup, statustb.tdi_value colstatus, otar_createby, 
+owntype.tdi_value owntype, otar_ownertranstype_id,
+DATE_FORMAT(otar_createdate, "%d/%m/%Y") otar_createdate  
+FROM cm_ownertrans_applnreg 
 inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and grouptb.tdi_td_name = "USERGROUP"
 inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE"
+inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and owntype.tdi_td_name = "OWNERSHIPTRANSTYPE"
  where otar_ownertransstatus_id in (1,2,4) ');
+
+        App::setlocale(session()->get('locale'));
+        
         return view("ownershiptransfer.ownerregister")->with(array('search' => $search, 'group' => $group, 'ownregister' => $ownregister));
     
     }
 
     public function ownerRegisterTRN(Request $request) {
       $name=Auth::user()->name;
-        
-            $jsondata = $request->input('jsondata');  
-               
-                Log::info("call proc_ownertransapplnreg_trn('".$jsondata."','".$name."')"); 
-            $transfer=DB::select("call proc_ownertransapplnreg_trn('".$jsondata."','".$name."')");   
+      
+      $jsondata = $request->input('jsondata');  
+         
+      Log::info("call proc_ownertransapplnreg_trn('".$jsondata."','".$name."')"); 
+      $transfer=DB::select("call proc_ownertransapplnreg_trn('".$jsondata."','".$name."')");   
        
         //$msg = true;
         return redirect('ownerregister');//return response()->json(array('msg'=> 'true'), 200);
@@ -565,6 +702,8 @@ inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key an
                   inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE" limit 0
                   ');
 
+        App::setlocale(session()->get('locale'));
+        
                 return view("ownershiptransfer.owneraddresstransfer")->with(array('search' => $search, 'page' => $page, 'ownertransfer' => $ownertransfer,'owner' => $owner));
             } else {
 
@@ -572,7 +711,9 @@ inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key an
                         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
                       then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
                       from tbsearchdetail mtb where sd_se_id = "18" ');
-                $ownertransfer=DB::select('select DATE_FORMAT(otar_createdate, "%d/%m/%Y")   otar_createdate1, cm_ownertrans_applnreg.*, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, state.tdi_value state, grouptb.tdi_value colgroup, statustb.tdi_value colstatus
+                $ownertransfer=DB::select('select DATE_FORMAT(otar_createdate, "%d/%m/%Y")   otar_createdate1, cm_ownertrans_applnreg.*, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, 
+                  state.tdi_value state, grouptb.tdi_value colgroup, statustb.tdi_value colstatus,
+                  transtype.tdi_value transtype, otar_ownertranstype_id
                   from cm_masterlist 
                   inner join cm_owner on to_ma_id = ma_id
                   inner join cm_ownertrans_applnreg on otar_accno = ma_accno
@@ -581,11 +722,54 @@ inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key an
                   left join (select tdi_key, tdi_value,tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone 
                   on subzone.tdi_key = ma_subzone_id
                   inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and grouptb.tdi_td_name = "USERGROUP"
-                  inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE" where otar_ownertransstatus_id in (1,2) 
+                  inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE"
+                  inner join tbdefitems transtype on otar_ownertranstype_id = transtype.tdi_key and transtype.tdi_td_name = "OWNERSHIPTRANSTYPE"
+                  where otar_ownertransstatus_id in (1,2,4,5,6) 
                   '.$condition);
 
+        App::setlocale(session()->get('locale'));
+        
                 return view("ownershiptransfer.ownertransfer")->with(array('search' => $search, 'page' => $page, 'ownertransfer' => $ownertransfer,'owner' => $owner,'param' => $param));
             }
+        
+        
+    }
+
+
+    public function ownerTransferApproval(Request $request) {
+          
+            $param = $request->input('param');  
+            if($param != ''){
+              $condition = ' and otar_ownertransgroup_id = '.$param;
+            } else {
+              $condition = '';
+            }
+           
+                  
+                  $owner = DB::select('select grouptb.tdi_key, grouptb.tdi_value  from  tbdefitems grouptb 
+          where grouptb.tdi_td_name = "USERGROUP" ');
+       
+
+             $search=DB::select(' select sd_key, sd_label, 
+                    case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+                  then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
+                  from tbsearchdetail mtb where sd_se_id = "18" ');
+            $ownertransfer=DB::select('select DATE_FORMAT(otar_createdate, "%d/%m/%Y")   otar_createdate1, cm_ownertrans_applnreg.*, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, state.tdi_value state, grouptb.tdi_value colgroup, statustb.tdi_value colstatus
+              from cm_masterlist 
+              inner join cm_owner on to_ma_id = ma_id
+              inner join cm_ownertrans_applnreg on otar_accno = ma_accno
+              left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "OWNTYPE") owntype on owntype.tdi_key = to_owntype_id
+              left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE") state on state.tdi_key = TO_STATE_ID
+              left join (select tdi_key, tdi_value,tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone 
+              on subzone.tdi_key = ma_subzone_id
+              inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and grouptb.tdi_td_name = "USERGROUP"
+              inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE" where otar_ownertransstatus_id in (1,2,3,4,5,6,7,8) 
+              '.$condition);
+
+            App::setlocale(session()->get('locale'));
+    
+            return view("ownershiptransfer.ownertransferapproval")->with(array('search' => $search,  'ownertransfer' => $ownertransfer,'owner' => $owner,'param' => $param));
+        
         
         
     }
@@ -619,6 +803,9 @@ inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key an
         where ma_accno = '.$account);
       }
       $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, usr_position FROM tbuser');
+
+        App::setlocale(session()->get('locale'));
+        
         return view("ownershiptransfer.ownertransferprocess")->with(array('state'=>$state,'owntype'=>$owntype, 'race'=>$race,'userlist' => $userlist, 'citizen'=>$citizen, 'owndetail'=>$owndetail, 'account'=>$account, 'page'=>$page));
     
     }
@@ -642,15 +829,15 @@ inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key an
         
       $jsondata = $request->input('jsondata'); 
 
+      $approval = $request->input('approval');
+
       $reasoncount = $request->input('reasoncount'); 
       $ownerdata = json_decode($jsondata,TRUE);
      // Log::info($test['ownaplntype']);
-       $status = 'NT';
-      if ($reasoncount< 1) {
+     /*  $status = 'NT';
+      if ($reasoncount < 1) {
        try {
-            // Validate 
-        
-
+            // Validate        
               $status = 'ST';
               Log::info('S');
 
@@ -659,12 +846,18 @@ inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key an
               Log::info('F');
              // return false;
           }
-      }
+      }*/
 
-               
+
+ /*   if($approval == 'No')           {
       Log::info("call proc_ownertransfer_trn('".$jsondata."','".$name."','".$status."')"); 
-      $transfer=DB::select("call proc_ownertransfer_trn('".$jsondata."','".$name."','".$status."')");   
-       
+     $transfer=DB::select("call proc_ownertransfer_trn('".$jsondata."','".$name."','".$status."')");   
+       } else {
+*/
+      Log::info("call proc_ownertransferupdate_trn('".$jsondata."','".$name."')"); 
+     $transfer=DB::select("call proc_ownertransferupdate_trn('".$jsondata."','".$name."')");   
+    //   }
+
         //$msg = true;
         //return redirect('ownerregister');//
           return response()->json(array('msg'=> 'true'), 200);
@@ -738,6 +931,9 @@ inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key an
         
        ');*/
       $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, usr_position FROM tbuser');
+
+        App::setlocale(session()->get('locale'));
+        
          return view("ownershiptransfer.ownerlog")->with(array( 'userlist'=>$userlist, 'search'=>$search));
     }
 
@@ -777,7 +973,7 @@ inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key an
                 }               
             }
             if($filterquery != ''){
-                $filterquery  = ' where '. $filterquery ;
+                $filterquery  = ' and '. $filterquery ;
             }
             Log::info($filterquery);
 
@@ -789,22 +985,26 @@ inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key an
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
-      $property = DB::select('select  date_format(ota_transtocenterdate,"%d/%m/%Y") ota_transtocenterdate1, cm_ownertrans_applnreg.*, ownstatus.tdi_value ownstatus, ttype.tdi_value ttype, tstatus.tdi_key ttypekey, tstatus.tdi_value transstauts, date_format(otar_updatedate,"%d/%m/%Y") otar_updatedate, date_format(otar_createdate,"%d/%m/%Y") otar_createdate, cm_ownertrans_appln.*, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, state.tdi_value state, ownrace.tdi_value ownrace
-        from cm_masterlist 
-        inner join cm_owner on to_ma_id = ma_id
-        inner join cm_ownertrans_appln on ota_ownno = TO_OWNNO 
-        inner join cm_ownertrans_applnreg on otar_accno = ma_accno
-        left join tbdefitems owntype on owntype.tdi_key = ota_owntype_id and owntype.tdi_td_name = "OWNTYPE"
-        left join tbdefitems ownrace on ownrace.tdi_key = ota_race_id and ownrace.tdi_td_name = "RACE"
-        left join tbdefitems state on state.tdi_key = TO_STATE_ID and state.tdi_td_name = "STATE"
-        left join tbdefitems subzone 
-        on subzone.tdi_key = ma_subzone_id and subzone.tdi_td_name = "SUBZONE"
-        left join tbdefitems tstatus 
-        on tstatus.tdi_key = ota_transtocenterstatus_id and tstatus.tdi_td_name = "OWNERSHIPSTAGE"
-        left join tbdefitems ttype  
-        on ttype.tdi_key = ota_transferapplntype_id and ttype.tdi_td_name = "TRANSFERAPPLNTYPE"
-        left join tbdefitems ownstatus 
-        on ownstatus.tdi_key = ota_transferapplntypestatus_id and ownstatus.tdi_td_name = "OWNERSHIPSTATUS"
+      $property = DB::select('select date_format(ota_transtocenterdate,"%d/%m/%Y") ota_transtocenterdate1, cm_ownertrans_applnreg.*, ownstatus.tdi_value ownstatus, 
+      ttype.tdi_value ttype, tstatus.tdi_key ttypekey, tstatus.tdi_value transstauts, date_format(otar_updatedate,"%d/%m/%Y") otar_updatedate, 
+      date_format(otar_createdate,"%d/%m/%Y") otar_createdate, cm_ownertrans_appln.*, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, 
+      state.tdi_value state, ownrace.tdi_value ownrace
+      from cm_masterlist
+      inner join cm_ownertrans_applnreg on otar_accno = ma_accno
+      left join cm_owner on TO_MA_ID = ma_id
+      left join cm_ownertrans_appln on  ota_ownno = TO_OWNNO 
+      left join tbdefitems owntype on owntype.tdi_key = ota_owntype_id and owntype.tdi_td_name = "OWNTYPE"
+      left join tbdefitems ownrace on ownrace.tdi_key = ota_race_id and ownrace.tdi_td_name = "RACE"
+      left join tbdefitems state on state.tdi_key = TO_STATE_ID and state.tdi_td_name = "STATE"
+      left join tbdefitems subzone
+      on subzone.tdi_key = ma_subzone_id and subzone.tdi_td_name = "SUBZONE"
+      left join tbdefitems tstatus 
+      on tstatus.tdi_key = ota_transtocenterstatus_id and tstatus.tdi_td_name = "OWNERSHIPSTAGE"
+      left join tbdefitems ttype  
+      on ttype.tdi_key = ota_transferapplntype_id and ttype.tdi_td_name = "TRANSFERAPPLNTYPE"
+      left join tbdefitems ownstatus 
+      on ownstatus.tdi_key = ota_transferapplntypestatus_id and ownstatus.tdi_td_name = "OWNERSHIPSTATUS"  
+      where ota_transferapplntype_id is not null
      '.$filterquery .'  order by ota_id desc');
        // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
         $propertyDetails = Datatables::collection($property)->make(true);
@@ -815,10 +1015,10 @@ inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key an
 
     public function addressLog(Request $request){
      
-                 $search=DB::select(' select sd_key, sd_label, 
-                        case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
-                      then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
-                      from tbsearchdetail mtb where sd_se_id = "0" ');
+     $search=DB::select(' select sd_key, sd_label, 
+            case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+          then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
+          from tbsearchdetail mtb where sd_se_id = "0" ');
     /*  $log = DB::select('select  date_format(ota_transtocenterdate,"%d/%m/%Y") ota_transtocenterdate, cm_ownertrans_applnreg.*, ownstatus.tdi_value ownstatus, ttype.tdi_value ttype, tstatus.tdi_value transstauts, date_format(otar_updatedate,"%d/%m/%Y") otar_updatedate, date_format(otar_createdate,"%d/%m/%Y") otar_createdate, cm_ownertrans_appln.*, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, state.tdi_value state, ownrace.tdi_value ownrace
         from cm_masterlist 
         inner join cm_owner on to_ma_id = ma_id
@@ -838,6 +1038,9 @@ inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key an
         
        ');*/
       $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, usr_position FROM tbuser');
+
+        App::setlocale(session()->get('locale'));
+        
          return view("codemaintenance.ownershiptransfer.addresslog")->with(array( 'userlist'=>$userlist, 'search'=>$search));
     }
 
@@ -947,12 +1150,12 @@ public function owneradddresTables(Request $request){
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
       $property = DB::select('select  cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, state.tdi_value state
-from cm_masterlist 
-inner join cm_owner on to_ma_id = ma_id
-left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "OWNTYPE") owntype on owntype.tdi_key = to_owntype_id
-left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE") state on state.tdi_key = TO_STATE_ID
-left join (select tdi_key, tdi_value,tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone 
-on subzone.tdi_key = ma_subzone_id 
+      from cm_masterlist 
+      inner join cm_owner on to_ma_id = ma_id
+      left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "OWNTYPE") owntype on owntype.tdi_key = to_owntype_id
+      left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE") state on state.tdi_key = TO_STATE_ID
+      left join (select tdi_key, tdi_value,tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone 
+      on subzone.tdi_key = ma_subzone_id 
      '.$filterquery .' ');
        // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
         $propertyDetails = Datatables::collection($property)->make(true);
@@ -1057,6 +1260,8 @@ on subzone.tdi_key = ma_subzone_id
 
          $reason = DB::select("select tdi_key , tdi_value  from tbdefitems where tdi_td_name = 'DEACTIVEDREASON' ");
 
+        App::setlocale(session()->get('locale'));
+        
       return view('group.deleteproperty')->with('search',$search)->with('id',$baskedid)->with('approvestatus',$approvestatus)->with('applicationtype',$applicationtype)->with('viewparambasket',$viewparambasket)->with('viewparamterm',$viewparamterm)->with('viewparambasketstatus',$viewparambasketstatus)->with('termid',$termid)->with('reason',$reason)->with('param',$param);
     }
 
@@ -1194,6 +1399,8 @@ on subzone.tdi_key = ma_subzone_id
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid ,sd_keymainfield 
         from tbsearchdetail mtb where sd_se_id = "22" order by sd_id ');
 
+        App::setlocale(session()->get('locale'));
+        
         return view('group.newdeleteproperty')->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id)->with('reason',$reason);
     }
 
@@ -1205,8 +1412,12 @@ on subzone.tdi_key = ma_subzone_id
 
 
     public function dataSearch(Redirect $request){
+
+        App::setlocale(session()->get('locale'));
+        
        if(userpermission::checkaccess('21')=="false"){
             $detail = UserAcessController::accessDetail('21');
+
             return view('denied')->with('detail',$detail);
         }
         
@@ -1258,6 +1469,7 @@ on subzone.tdi_key = ma_subzone_id
                     }
                 }               
             }
+
             if($filterquery != ''){
                 $filterquery  = ' Where '. $filterquery ;
             }
@@ -1305,10 +1517,13 @@ on subzone.tdi_key = ma_subzone_id
 
 
     public function datasearchTab(Request $request){
+      App::setlocale(session()->get('locale'));
+      
        if(userpermission::checkaccess('212')=="false"){
             $detail = UserAcessController::accessDetail('212');
             return view('denied')->with('detail',$detail);
         }
+        App::setlocale(session()->get('locale'));
            // set_time_limit(0);
         $prop_id = $request->input('prop_id');  
         $pb = $request->input('pb');  
@@ -1318,8 +1533,8 @@ on subzone.tdi_key = ma_subzone_id
           $subzone=DB::table('tbdefitems')->where('tdi_td_name', 'SUBZONE')->get();
             $ishasbuilding=DB::table('tbdefitems')->where('tdi_td_name', 'ISHASBUILDING')->get();
           $lotcode=DB::table('tbdefitems')->where('tdi_td_name', 'LOTCODE')->get();
-            $bldgcate=DB::table('tbdefitems')->where('tdi_td_name', 'BULDINGCATEGORY')->get();
-            $bldgtype=DB::table('tbdefitems')->where('tdi_td_name', 'BULDINGTYPE')->get();
+          $bldgcate=DB::table('tbdefitems')->where('tdi_td_name', 'BULDINGCATEGORY')->get();
+          $bldgtype=DB::table('tbdefitems')->where('tdi_td_name', 'BULDINGTYPE')->get();
           $titiletype=DB::table('tbdefitems')->where('tdi_td_name', 'TITLETYPE')->get();
           $unitsize=DB::table('tbdefitems')->where('tdi_td_name', 'SIZEUNIT')->get();
           $landcond=DB::table('tbdefitems')->where('tdi_td_name', 'LANDCONDITION')->get();
@@ -1463,12 +1678,13 @@ left join tbdefitems walltype on walltype.tdi_key = cm_appln_bldgarea.aba_wallty
                 and te_type_id = tenanttype_id and at_te_id =  te_id and at_vd_id = ifnull(".$prop_id.",0) ");
                
              $attachment = DB::select("
-            select at_oringinalfilename,at_id,at_attachtype_id,at_filename,at_detail,at_createby,at_createdate, attachment.tdi_value attachment from cm_attachment left join 
+            select at_name, at_fileextention,
+            at_path,at_oringinalfilename,at_id,at_attachtype_id,at_filename,at_detail,at_createby,at_createdate, attachment.tdi_value attachment from cm_attachment left join 
             (select tdi_key, tdi_value from tbdefitems where tdi_td_name = 'ATTACHMENTTYPE') attachment on attachment.tdi_key =  at_attachtype_id  where at_linkid = ifnull(".$prop_id.",0) ");
 
               $parameter = DB::select("select ap_id,ap_bldgstatus_id,ap_propertycategory_id,ap_propertytype_id,ap_propertylevel_id  FROM cm_appln_parameter where ap_vd_id  = ifnull(".$prop_id.",0) ");
 
-               $config=DB::select("select GROUP_CONCAT(config_value SEPARATOR  ':') serveradd from tbconfig ");
+               $config=DB::select("select GROUP_CONCAT(config_value SEPARATOR  ':') serveradd from tbconfig where config_name in ('host','port') ");
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
@@ -1643,7 +1859,220 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         return Redirect::route('deactive', ['param' => $param]);//('group')->with('param','100048');
     }
 
+    public function termSearch(Request $request){
+        $jsondata = $request->input('jsondata');    
+         $param = $request->input('param'); 
+        $cond = ' ';
+         if($param !='A' && $param !='') {
+            $cond = ' where vt_applicationtype_id =  "'.$param.'"';
+         }
+         
+        $term = DB::select("select vt_valbase_id, vt_id, vt_name name, vt_createby createby,  DATE_FORMAT(vt_createdate, '%d/%m/%Y') createdate, vt_updateby updateby, applntype.tdi_value applntype, 
+          DATE_FORMAT(vt_updatedate, '%d/%m/%Y')  updatedate, ifnull(basket_count,0) basket_count, ifnull(property_count,0) property_count,DATE_FORMAT(vt_termDate, '%d/%m/%Y') termDate, DATE_FORMAT(now(), '%d/%m/%Y') enforceDate,  vt_applicationtype_id,DATE_FORMAT(vt_transferDate, '%d/%m/%Y') vt_transferDate, vt_transferby,
+           termstage.tdi_desc termstage, vt_approvalstatus_id,ap_basket_count, valbase.tdi_value valbase 
+          from cm_appln_valterm
+          left join (select va_vt_id, count(*) ap_basket_count from cm_appln_val where va_approvalstatus_id = '11' group by va_vt_id) approve on approve.va_vt_id = vt_id
+          left join (select va_vt_id, count(*) basket_count from cm_appln_val group by va_vt_id) cm_appln_val on cm_appln_val.va_vt_id = vt_id
+          left join (select va_vt_id, count(vd_id) property_count from cm_appln_valdetl inner join cm_appln_val on va_id = vd_va_id
+          group by va_vt_id) cm_appln_valdetl on cm_appln_valdetl.va_vt_id = vt_id 
+          left join (select *  from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype
+          on applntype.tdi_key = vt_applicationtype_id
+          left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage
+          on termstage.tdi_key = vt_approvalstatus_id 
+        left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbase
+        on valbase.tdi_key = vt_valbase_id ".$cond."  order by vt_termDate desc");
+        $basket_count=DB::select('select  count(*) basket_count from cm_appln_val');
+        $property_count=DB::select('select  count(vd_id) property_count from cm_appln_valdetl inner join cm_appln_val on va_id = vd_va_id');
+            $applntype = DB::select('select * from tbdefitems where tdi_td_name = "APPLICATIONTYPE"');
+            $valbase = DB::select('select * from tbdefitems where tdi_td_name = "VALUATIONBASE" ');
 
+        App::setlocale(session()->get('locale'));
+        
+        return view("termsearch.valterm")->with(array('term'=> $term,'basket_count'=> $basket_count,'property_count'=> $property_count,'applntype'=> $applntype,'valbase'=> $valbase, 'param' => $param,));
+    }
+
+    public function termBasket(Request $request){
+        $id = $request->input('id');
+       // Log::info( DB::statement('call json_procedure( )'));
+        $search=DB::select(' select sd_key, sd_label, 
+          case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
+        from tbsearchdetail mtb where sd_se_id = "18" ');
+        $termcondition = "";
+        if(userpermission::checkaccess('515') == "false"){
+          $termcondition = " where vt_approvalstatus_id in ('01','02') ";
+
+        }
+        $termfilter = DB::select("select vt_id termid, vt_name term, applntype.tdi_value applntype, 
+                termstage.tdi_desc termstage
+                from cm_appln_valterm
+                left join (select *  from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype
+                on applntype.tdi_key = vt_applicationtype_id
+                left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage
+                on termstage.tdi_key = vt_approvalstatus_id ". $termcondition ." order by vt_termDate desc");
+        $term = DB::select("select vt_valbase_id, vt_id termid, vt_name term, applntype.tdi_value applntype, 
+                termstage.tdi_desc termstage from cm_appln_valterm 
+                left join (select *  from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype
+                on applntype.tdi_key = vt_applicationtype_id
+                left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage
+                on termstage.tdi_key = vt_approvalstatus_id 
+                 where vt_approvalstatus_id = '01' and vt_id =".$id." order by vt_termDate desc");
+        $group = DB::select("select approval.tdi_desc approval,va_approvalstatus_id, va_id id, va_name l_group, va_vt_id termid, vt_name termaname, va_createby createby, DATE_FORMAT(va_createdate, '%d/%m/%Y') createdate, 
+        va_updateby updateby, DATE_FORMAT(va_updatedate, '%d/%m/%Y') updatedate, ifnull(propertycount,0) propertycount,ifnull(inspropertyccount,0) inspropertyccount , applntype.tdi_value applntype,
+         vt_applicationtype_id, ob_desc, ifnull(notiscount,0) notiscount , ifnull(objectioincount,0) objectioincount , ifnull(decisioncount,0) decisioncount , ifnull(valcount,0)  valcount
+        from cm_appln_val 
+        inner join cm_appln_valterm  on va_vt_id = vt_id
+        left join (select count(*) propertycount,vd_va_id from cm_appln_valdetl group by vd_va_id ) propcount on propcount.vd_va_id = va_id
+        left join (select count(*) inspropertyccount ,vd_va_id from cm_appln_valdetl where vd_approvalstatus_id in ('06','07','08','09','10','11','12') 
+        group by vd_va_id ) insprop on insprop.vd_va_id = va_id
+        left join (select count(*) valcount ,vd_va_id from cm_appln_valdetl where vd_approvalstatus_id in ('08','09','10','11','12')  
+        group by vd_va_id ) valprop on valprop.vd_va_id = va_id
+        left join (SELECT * FROM tbdefitems where tdi_td_name = 'BASKETSTAGE') approval on approval.tdi_key = va_approvalstatus_id 
+        left join (SELECT * FROM tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype on applntype.tdi_key = vt_applicationtype_id 
+        left join cm_objection on ob_vt_id = vt_id 
+        left join (select count(*) notiscount,vd_va_id  from cm_objection_notis 
+        inner join cm_appln_valdetl on vd_id = no_vd_id group by vd_va_id ) notis on notis.vd_va_id = va_id
+        left join (select count(*) objectioincount,vd_va_id  from cm_objection_objectionlist 
+        inner join cm_appln_valdetl on vd_id = ol_vd_id group by vd_va_id ) objection on objection.vd_va_id = va_id
+        left join (select count(*) decisioncount,vd_va_id  from cm_objection_decision 
+        inner join cm_appln_valdetl on vd_id = de_vd_id group by vd_va_id ) decision on decision.vd_va_id = va_id
+        where  va_vt_id = ifnull('".$id."',0) 
+        order by va_id desc");
+
+        $termtype = DB::select("select * from cm_appln_valterm  where vt_valbase_id = 2 and vt_id = ifnull('".$id."',0)  limit 1");
+        
+
+        $tonebasket = DB::select("select tollist_id, concat(tollis_enforceyear,' - ',tollis_desc) tonebasket from cm_toneoflistbasket where tollis_activeind_id = 1");
+        $tonetaxbasket = DB::select("select trlist_id, concat(trlist_enforceyear,' - ',trlist_desc) tonetaxbasket from cm_taxratelistbasket where trlist_activeind_id = 1");
+
+        $propcount = DB::select('select  count(*) totproperty_count from cm_appln_valdetl 
+        inner join cm_appln_val on va_id = vd_va_id where  va_vt_id = ifnull("'.$id.'",0)');
+
+        $bldgcount = DB::select('select  count(*) bldgcount from cm_appln_bldg
+          inner join cm_appln_valdetl  on ab_vd_id = vd_id 
+          inner join cm_appln_val on va_id = vd_va_id where  va_vt_id = ifnull("'.$id.'",0) ');
+
+
+        $inspropcount = DB::select('select  count(*) inscount from cm_appln_valdetl 
+        inner join cm_appln_val on va_id = vd_va_id
+        where vd_approvalstatus_id in ("06","07","08","09","10","11","12") and  va_vt_id = ifnull("'.$id.'",0)');
+
+        $valpropcount = DB::select('select  count(*) valcount from cm_appln_valdetl 
+        inner join cm_appln_val on va_id = vd_va_id where vd_approvalstatus_id in ("08","09","10","11","12") and  va_vt_id = ifnull("'.$id.'",0)');
+
+        App::setlocale(session()->get('locale'));
+        
+        return view("termsearch.basket")->with(array('term'=> $term,'group'=> $group,'tonebasket'=>$tonebasket,'tonetaxbasket'=>$tonetaxbasket,'propcount'=>$propcount,'bldgcount'=>$bldgcount,'inspropcount'=>$inspropcount,'valpropcount'=>$valpropcount,'termfilter' => $termfilter, 'id' => $id, 'termtype' => $termtype));
+    }
+
+
+    public function accountSearch(Request $request){    
+        
+      $isfilter = $request->input('filter');
+      $basketid = $request->input('id');
+      $basket_id = $request->input('basket_id');
+      $type = $request->input('type');        
+    
+      $search=DB::select(' select sd_key, sd_label,  sd_keymainfield ,
+        case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid 
+        from tbsearchdetail mtb where sd_se_id = 39 ');
+      return view('ownershiptransfer.popup.accountsearch')->with('search',$search)->with('totalcount','0');
+    }
+
+
+    public function accountSearchData(Request $request){
+        Log::info('Test F');
+        ini_set('max_execution_time', '360');
+        ini_set('memory_limit', '2056M');
+        $baskedid = $request->input('id');
+        $maxRow = 30;
+
+        $isfilter = $request->input('filter');
+        $filterquery = '';
+        if($isfilter == 'true'){
+            $input = $request->input();
+            $condition = $input['condition'];
+            $value = $input['value'];
+            $logic = $input['logic'];
+            $fieldcolumn = $input['field'];
+
+             foreach ($input['field'] as $fieldindex => $field) {
+                if ($fieldcolumn[$fieldindex] == "tdi_key") {
+                    $fieldcolumn[$fieldindex] = 'tbdefitems_subzone.tdi_key';
+                }/*
+                if ($fieldcolumn[$fieldindex] == "vt_id") {
+                    $fieldcolumn[$fieldindex] = '';
+                }*/
+                if($value[$fieldindex] != ""){
+                    if($fieldindex == count($input['field']) - 1) {
+                        if($fieldcolumn[$fieldindex] != ""){
+                            $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'"';
+                         }
+                    } else {
+                        if($fieldcolumn[$fieldindex] != ""){
+                           $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'" '.$logic[$fieldindex];    
+                        }   
+                    }
+                }               
+            }
+            if($filterquery != ''){
+                $filterquery  = ' Where '. $filterquery ;
+            }
+            Log::info($filterquery);
+
+        }
+       // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
+        Log::info($filterquery);
+        /* $property = DB::table('cm_appln_valdetl')->join('cm_masterlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
+        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
+        'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
+        'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
+    // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
+       $property = DB::select('select ma_subzone_id,ma_id, ma_pb_id,  ma_accno,  zone.tdi_value zone, subzone.tdi_value subzone,
+          ma_addr_ln1, isbldg.tdi_value isbldg
+        from cm_masterlist
+        inner join tbdefitems subzone
+        on ma_subzone_id = subzone.tdi_key and subzone.tdi_td_name = "SUBZONE"
+        inner join tbdefitems  zone
+        on subzone.tdi_parent_key = zone.tdi_key and zone.tdi_td_name = "ZONE"
+        inner join tbdefitems isbldg
+        on ma_ishasbuilding_id = isbldg.tdi_key and isbldg.tdi_td_name = "ISHASBUILDING"  '. $filterquery);
+        
+        $propertyDetails = Datatables::collection($property)->make(true);
+   
+        return $propertyDetails;
+    }
+
+    public function updateAttachment(Request $request) {
+        $jsondata = $request->input('attachmentdata');
+        $prop_id = $request->input('prop_id');
+        $name=Auth::user()->name;
+       // Log::info("select fn_attachment('".$jsondata."','".$name."',".$prop_id.") from dual"); 
+        $response=DB::select("select fn_attachment('".$jsondata."','".$name."',".$prop_id.") from dual");
+        
+        //return response()->json(array('prop_id'=> $prop_id), 200);
+        return Redirect::route('datasearchdetail', ['prop_id' => $prop_id]);
+    }
+
+    public function termAttachment(Request $request){
+        $prop_id = $request->input('prop_id');
+        $year = $request->input('year');
+
+
+            $attachtype=DB::table('tbdefitems')->where('tdi_td_name', 'ATTACHMENTTYPE')->get();
+      $attachment = DB::select("
+            select at_name, at_fileextention,
+            at_path,at_oringinalfilename,at_id,at_attachtype_id,at_filename,at_detail,at_createby,at_createdate, attachment.tdi_value attachment from cm_attachment left join 
+            (select tdi_key, tdi_value from tbdefitems where tdi_td_name = 'ATTACHMENTTYPE') attachment on attachment.tdi_key =  at_attachtype_id  where at_linkid = ifnull(".$prop_id.",0) ");
+
+       return view('termsearch.popup.attachment')->with(array('attachment'=>$attachment,
+        'attachtype'=>$attachtype,'prop_id'=>$prop_id,'year'=>$year));
+    }
+
+    
 }
+
+
 
 

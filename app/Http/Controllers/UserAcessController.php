@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Log;
 use DB;
+use App;
 
 class UserAcessController extends Controller
 {

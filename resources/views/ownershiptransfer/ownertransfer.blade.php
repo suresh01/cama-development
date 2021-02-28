@@ -70,6 +70,9 @@
 									</th>		
 									<th>
 										Group
+									</th>		
+									<th>
+										Transfer Type
 									</th>	
 									<th>
 										Register By / Register Date
@@ -90,7 +93,7 @@
 											{{$loop->iteration}}
 										</td>
 										<td>
-											<a class='shobldg' onclick='submitForm("{{$rec->ma_accno}}")' href='#' >{{$rec->otar_accno}}</a>
+											<a class='shobldg' onclick="edit('{{$rec->otar_accno}}')" href='#' >{{$rec->otar_accno}}</a>
 										</td>
 										<td>
 											{{$rec->TO_OWNNAME}}
@@ -108,15 +111,26 @@
 											{{$rec->colgroup}}
 										</td>
 										<td>
+											{{$rec->transtype}}
+										</td>
+										<td>
 											{{$rec->otar_createby}} / {{$rec->otar_createdate1}}
 										</td>
 										<td>
 											{{$rec->colstatus}}
 										</td>
 										<td>
-											<span><a onclick="edit('{{$rec->otar_accno}}')" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span>
+											<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -62px !important;display: inline-block; float: left;" onclick="submitForm('{{$rec->ma_accno}}')"  title="View Log" href="#"></a></span>&nbsp;&nbsp;
 
-											<span><a class="action-icons c-Delete delete_tenant" onclick="deleteT('{$rec->otar_accno}}','{{$rec->otar_ownertransgroup_id}}')" href='#' title='Delete'>Delete</a></span>
+											
+											@if($rec->otar_ownertransstatus_id == '2')
+												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',2)"  title="Submit To Approve" href="#"></a></span>
+												<span><a class="action-icons c-Delete delete_tenant" onclick="deleteT('{$rec->otar_accno}}','{{$rec->otar_ownertransgroup_id}}')" href='#' title='Delete'>Delete</a></span>
+											@endif
+
+											@if($rec->otar_ownertransstatus_id == '5')
+												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" title="Transfer" href="#"></a></span>
+											@endif
 										</td>
 									</tr>
 									@endforeach	
@@ -126,6 +140,9 @@
 
 
 								<div class="grid_12 invoice_details">
+									<div style="display: none;" id="searchLoader">
+										<!--<img src="images/ajax-loader/ajax-loader(8).gif" alt="Loader">-->
+									</div>
 									<div class="widget_wrap collapsible_widget">
 										<div class="widget_top active">
 											<span class="h_icon"></span>
@@ -186,6 +203,7 @@
 				</div>
 			</div>
 		</div>
+		
 	<span class="clear"></span>
 	
 	<script>
@@ -207,6 +225,44 @@
 				w.resizeTo(screen.availWidth, screen.availHeight);
 			}
 		}
+
+		function approve(id,currstatus){
+			
+			var noty_id = noty({
+				layout : 'center',
+				text: 'Are you sure want to Submit?',
+				modal : true,
+				buttons: [
+					{type: 'button pink', text: 'Submit', click: function($noty) {
+						$noty.close();
+						$.ajax({
+			  				type: 'GET', 
+						    url:'approve',
+						    headers: {
+							    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+							},
+					        data:{param_value:id,module:'ownershiptrans',param:currstatus},
+					        success:function(data){
+								window.location.assign("ownertransfer?page=1");									
+				        	},
+					        error:function(data){
+								//$('#loader').css('display','none');	
+					        	alert('error');
+				        	}
+				    	});
+					  }
+					},
+					{type: 'button blue', text: 'Cancel', click: function($noty) {
+						$noty.close();
+					  }
+					}
+					],
+				 type : 'success', 
+			 });
+					
+				
+
+		}	
 
 		function deleteT(acc, groupid) {		
 		    var noty_id = noty({
@@ -280,7 +336,7 @@
 $(document).ready(function (){
 
 	$('#filterzone').val('{{$param}}');
-
+	waitingIndicator('searchLoader');
 	var table = $('#proptble').DataTable({
 		        "processing": false,
 		        "serverSide": false,
@@ -399,7 +455,7 @@ $(document).ready(function (){
 		//console.log($("#filterForm").serialize());
 
 
-
+	$('#searchLoader').attr('style','display:block');
 	var logtable = $('#logtable').DataTable({
 		        "processing": false,
 		        "serverSide": false,
@@ -547,9 +603,14 @@ $(document).ready(function (){
             type: 'GET'
         }).done(function (result) {
         	if(result.recordsTotal == 0) {
+        		$('#searchLoader').attr('style','display:none');
         		alert('No records found');
+
         	}
 	        table1.rows.add(result.data).draw();
+
+	        //$('#searchLoader').attr('style','display:none');
+
         }).fail(function (jqXHR, textStatus, errorThrown) {            	 
             console.log(errorThrown);
         });

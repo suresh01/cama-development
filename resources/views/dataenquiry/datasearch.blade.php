@@ -20,9 +20,9 @@
 				<div class="breadCrumbHolder module">	
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Enquiry</a></li>
-						<li>Data Search</li>
+						<li><a href="#">{{__('menu.home')}}</a></li>
+						<li><a href="#">{{__('menu.dataenquiry')}}</a></li>
+						<li>{{__('menu.propertysearch')}}</li>
 					</ul>
 				</div>
 				</div>
@@ -39,37 +39,37 @@
 							<div class="social_activities">
 								<div class="comments_s">
 									<div class="block_label">
-										Property Count<span id="prop_count">0</span>
+										{{__('datasearch.propertycnt')}}<span id="prop_count">0</span>
 									</div>
 								</div>
 
 
 
 								<select id='testSelect1' style="float: right;" multiple>
-									<option value='2'>ACCOUNT NUMBER</option>
-									<option value='3'>FILE NUMBER</option>
-									<option value='4'>ZONE</option>
-									<option value='5'>SUB ZONE</option>
-									<option value='6'>PROPERTY STATUS</option>
-									<option value='7'>PROPERTY TYPE</option>
-									<option value='8'>PROPERTY CATEGORY</option>
-									<option value='9'>PROPERTY STOREY</option>
-									<option value='10'>OWNER NAME</option>
-									<option value='11'>OWNER ID</option>
-									<option value='12'>LOT CODE</option>
-									<option value='13'>LOT NUMBER</option>
-									<option value='14'>ADDRESS 1</option>
-									<option value='15'>ADDRESS 2</option>
-									<option value='16'>ADDRESS 3</option>
-									<option value='17'>ADDRESS 4</option>
-									<option value='18'>POST CODE</option>
-									<option value='19'>CITY</option>
-									<option value='20'>STATE</option>
-									<option value='21'>TERM DATE</option>
-									<option value='22'>NT</option>
-									<option value='23'>RATE</option>
-									<option value='24'>ADJUSTMENT</option>
-									<option value='25'>TAX RATE</option>
+									<option value='2'>{{__('datasearch.col2')}}</option>
+									<option value='3'>{{__('datasearch.col3')}}</option>
+									<option value='4'>{{__('datasearch.col4')}}</option>
+									<option value='5'>{{__('datasearch.col5')}}</option>
+									<option value='6'>{{__('datasearch.col6')}}</option>
+									<option value='7'>{{__('datasearch.col7')}}</option>
+									<option value='8'>{{__('datasearch.col8')}}</option>
+									<option value='9'>{{__('datasearch.col9')}}</option>
+									<option value='10'>{{__('datasearch.col10')}}</option>
+									<option value='11'>{{__('datasearch.col11')}}</option>
+									<option value='12'>{{__('datasearch.col12')}}</option>
+									<option value='13'>{{__('datasearch.col13')}}</option>
+									<option value='14'>{{__('datasearch.col14')}}</option>
+									<option value='15'>{{__('datasearch.col15')}}</option>
+									<option value='16'>{{__('datasearch.col16')}}</option>
+									<option value='17'>{{__('datasearch.col17')}}</option>
+									<option value='18'>{{__('datasearch.col18')}}</option>
+									<option value='19'>{{__('datasearch.col19')}}</option>
+									<option value='20'>{{__('datasearch.col20')}}</option>
+									<option value='21'>{{__('datasearch.col21')}}</option>
+									<option value='22'>{{__('datasearch.col22')}}</option>
+									<option value='23'>{{__('datasearch.col23')}}</option>
+									<option value='24'>{{__('datasearch.col24')}}</option>
+									<option value='25'>{{__('datasearch.col25')}}</option>
 								</select>
 							</div>	
 
@@ -77,79 +77,79 @@
 								<tr>
 									<th></th>
 									<th class="table_sno">
-										S No
+										{{__('datasearch.col1')}}
 									</th>
 									<th>
-										ACCOUNT NUMBER
+										{{__('datasearch.col2')}}
 									</th>
 									<th>
-										FILE NUMBER
+										{{__('datasearch.col3')}}
 									</th>
 									<th>
-										ZONE
+										{{__('datasearch.col4')}}
 									</th>
 									<th>
-										SUBZONE
+										{{__('datasearch.col5')}}
 									</th>		
 									<th>
-										PROPERTY STATUS
+										{{__('datasearch.col6')}}
 									</th>
 									<th>
-										PROPERTY TYPE
+										{{__('datasearch.col7')}}
 									</th>	
 									<th>
-										PROPERTY CATEGORY
+										{{__('datasearch.col8')}}
 									</th>
 									<th>
-										PROPERTY STOREY
+										{{__('datasearch.col9')}}
 									</th>
 									<th>
-										OWNER NAME
+										{{__('datasearch.col10')}}
 									</th>
 									<th>
-										OWNER ID
+										{{__('datasearch.col11')}}
 									</th>
 									<th>
-										LOT CODE
+										{{__('datasearch.col12')}}
 									</th>
 									<th>
-										LOT NUMBER
+										{{__('datasearch.col13')}}
 									</th>
 									<th>
-										ADDRESS 1
+										{{__('datasearch.col14')}}
 									</th>
 									<th>
-										ADDRESS 2
+										{{__('datasearch.col15')}}
 									</th>
 									<th>
-										ADDRESS 3
+										{{__('datasearch.col16')}}
 									</th>
 									<th>
-										ADDRESS 4
+										{{__('datasearch.col17')}}
 									</th>
 									<th>
-										CITY
+										{{__('datasearch.col18')}}
 									</th>
 									<th>
-										STATE
+										{{__('datasearch.col19')}}
 									</th>
 									<th>
-										POSTCODE
+										{{__('datasearch.col20')}}
 									</th>
 									<th>
-										TERM DATE
+										{{__('datasearch.col21')}}
 									</th>
 									<th>
-										NT
+										{{__('datasearch.col22')}}
 									</th>		
 									<th>
-										RATE
+										{{__('datasearch.col23')}}
 									</th>	
 									<th>
-										ADJUSTMENT
+										{{__('datasearch.col24')}}
 									</th>
 									<th>
-										TAX RATE
+										{{__('datasearch.col25')}}
 									</th>	
 								</tr>
 							</thead>

@@ -45,7 +45,7 @@
 			</div>
 		</div>
 		<span class="clear"></span>
-    <p>{{__('message.welcome')}}</p>
+    <!--<p>{{__('message.welcome')}}</p>-->
 		<!--<div id="nav">
  <ul class="main-navigation">
   <li><a href="#">Home</a></li>

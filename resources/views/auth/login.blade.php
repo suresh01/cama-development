@@ -121,6 +121,7 @@ $(function(){
 <body id="theme-default" class="full_block">
     @guest
 <div id="login_page">
+    
     <div class="login_container">
 
 @if(Session::has('login_error'))
@@ -154,6 +155,14 @@ $(function(){
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
+            <div style="float: right;
+    margin-top: 10px;
+    margin-right: 10px;">
+      <select data-placeholder="Choose a Status..."  style="float: left;" class="cus-select"  id="lang" name="lang" tabindex="6">
+                                <option value="en">English</option>                                
+                                <option value='ms'>Malay</option>                                
+                            </select>
+                        </div>
             <div class="login_form">
                 <h3 class="blue_d">Login</h3>
                 <ul>
@@ -169,6 +178,8 @@ $(function(){
                     </li>
                 </ul>
             </div>
+
+
             <button type="submit" class="login_btn blue_lgel">{{ __('Login') }}</button>
             <ul class="login_opt_link">
                 <!--<li><a href="#">Forgot Password?</a></li>-->

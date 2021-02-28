@@ -12,6 +12,7 @@ use DB;
 use Session;
 use DataTables;
 use JasperPHP; 
+use App;
 
  
 class ReportController extends Controller
@@ -24,6 +25,7 @@ class ReportController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        App::setlocale(session()->get('locale'));
     }
 
     public function inspectionForm(Redirect $request){

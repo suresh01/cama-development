@@ -1,0 +1,47 @@
+<?php
+
+// resources/lang/en/messages.php
+
+return [
+    'title'=>'Penilaian Massa Berbantukan Komputer',
+    'home' => 'Menu Utama',
+    'dataenquiry' => 'Pertanyaan Data',
+    'propertysearch' => 'Pencarian Harta',
+    'termsearch' => 'Pencarian Istilah',
+    'officialsearch' => 'Pencarian Rasmi',
+    'datamaintenance' => 'Penyelenggaraan Data',
+    'codemaintenance' => 'Code Maintenance',
+    'masterlistregister' => 'Pendaftaran Senarai Induk Baru',
+    'masterlistmaintenance' => 'Existing Masterlist Maintenance',
+    'tenantreg' => 'Pendaftaran Penyewa',
+    'ratepayerreg' => 'Pendaftaran Pemohon Ratepayer',
+    'dms' => 'DMS',
+    'term' => 'Term Management',
+    'evident' => 'Evident Bank',
+    'planreg' => 'Plan Registration',
+    'ownermaintenance' => 'Property Owner Maintenance',
+    'transferapproval' => 'Owner Transfer Approval',
+    'transferreg' => 'Owner Transfer Registration',
+    'transferprocess' => 'Owner Transfer Process',
+    'addressprocess' => 'Owner Address Maintenance',
+    'transferlog' => 'Owner Transfer/Address Log',
+    'maintenanceprocess' => 'Property Information Maintenance',
+    'propertyaddress' => 'Property Address/File No Maintenance',
+    'propertylot' => 'Property Lot Maintenance',
+    'maintenancelog' => 'Property Information Log',
+    'tol' => 'Tone Of List',
+    'tolbasket' => 'Tone Basket',
+    'tolratebasket' => 'Rate Basket',
+    'tolbulding' => 'Building',
+    'tolland' => 'Land',
+    'tolallownace' => 'Allowance',
+    'toldepreciation' => 'Depreciation',
+    'standardlandarea' => 'Standard land area',
+    'tolrate' => 'Rate',
+    'valuationprocess' => 'Valuation Process',
+    'valuationmgmt' => 'Valuation Data Management',
+    'objection' => 'Objection Meeting',
+    'defunct' => 'Defunct Property',
+    'report' => 'Report'
+
+];

@@ -46,6 +46,9 @@
 										Group
 									</th>
 									<th>
+										Transfer Type
+									</th>
+									<th>
 										Register By
 									</th>
 									<th>
@@ -53,6 +56,9 @@
 									</th>	
 									<th>
 										Register Status
+									</th>	
+									<th>
+										Action
 									</th>			
 								</tr>
 							</thead>
@@ -73,6 +79,9 @@
 										{{$rec->colgroup}}
 									</td>
 									<td>
+										{{$rec->owntype}}
+									</td>
+									<td>
 										{{$rec->otar_createby}}
 									</td>
 									<td>
@@ -80,6 +89,9 @@
 									</td>
 									<td>
 										{{$rec->colstatus}}
+									</td>
+									<td>
+										 <span><a class="action-icons c-delete delete_term" onclick="deleteReg('{{$rec->otar_id}}')" href="#" title="Delete Term">Delete</a></span>
 									</td>
 								</tr>
 								@endforeach
@@ -92,8 +104,9 @@
 		<div style="display: none;" class="" id="register-modal-content">
 				<h3>Register Owner Transfer</h3>
 				<form action="ownerregistertrn" id="registerform" method="get" class="form_container">	
-					@csrf
-				
+				@csrf				
+				<input type="hidden" id="operation" name="operation">
+				<input type="hidden" id="id" value="0" name="id">
 				<input type="hidden" name="al_id" id="al_id" value="true">	
 						
 					<div  class="grid_6 form_container left_label">
@@ -102,13 +115,24 @@
 								<fieldset>
 									<legend>New Registeration</legend>	
 									
-									<div class="form_grid_12">
+									<!--<div class="form_grid_12">
 										<label class="field_title" id="lposition" for="position">Account Number<span class="req">*</span></label>
 										<div  class="form_input">
 											<input onchange="validateAccount()" id="accountnumber" maxlength="12" tabindex="1" name="accountnumber"  type="text" maxlength="100" class=""/>
 										</div>
 										<span class=" label_intro"></span>
-									</div>
+									</div>-->
+									<div class="form_grid_10">									
+										<label class="field_title" id="luserid" for="userid">Account Number<span class="req">*</span></label>
+										<div style=" width: 58%;    margin-left: 36%;" class="form_input">
+											<input id="accountnumber" name="accountnumber" type="text"   />
+										</div>
+										<span class=" label_intro"></span>
+									</div>									
+									<div class="form_grid_2">									
+										<input type="button" id="btn_search" onclick="openSearch()" value="Search Acc" name="">
+										<span class=" label_intro"></span>
+									</div>	
 
 									<div class="form_grid_12">
 										<label class="field_title" id="lposition" for="position">Group ID<span class="req">*</span></label>
@@ -119,6 +143,17 @@
 													@foreach ($group as $rec)
 															<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
 													@endforeach	
+										</select>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">Transaction Type<span class="req">*</span></label>
+										<div  class="form_input">
+											<select placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="trntype" name="trntype" tabindex="2">
+												<option value=""></option>
+												<option value="1">OWNERSHIP TRANSFER (FORM I)</option>	
+												<option value="2">OWNERSHIP TRANSFER (FORM J)</option>											
 										</select>
 										</div>
 										<span class=" label_intro"></span>
@@ -149,17 +184,74 @@
 	
 	<script>
 
+		/*function getAcount(){
+			var accno = $('#dpano').val();
+			$.ajax({
+			  	url: "getaccount",
+				cache: false,
+				data:{accno:accno},
+				success: function(data){
+					if(data[1][0]==null){
+					   opensearch();
+					} else{
+						$('#dpano').val(data[1][0].ma_dpano);
+						$('#filenumber').val(data[1][0].ma_fileno);
+						$('#maid').val(data[1][0].ma_id);
+						
+					}
+					
+				}
+			}); 
+		}*/
+
+		function openSearch(){
+			var w = window.open('about:blank','Popup_Window','toolbar=0,resizable=0,location=no,statusbar=0,menubar=0,width=1000,height=500,left = 312,top = 50');
+		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
+		       // w.location = "landval?id="+id;
+		      // w.location.pathname = 'valuation/popup/land.blade.php';
+		       w.location.assign("accountsearch");
+		    }
+		}
+
 		function register(){
 			$('#register-modal-content').modal();
 		}
 
 		function update(){
+			$('#operation').val('1');
 			var groupdata = {};
 			$('#registerform').serializeArray().map(function(x){groupdata[x.name] = x.value;});
             var groupjson = JSON.stringify(groupdata);
             window.location.assign('ownerregistertrn?jsondata='+groupjson);	  
 		}
 
+		function deleteReg(id){
+			
+			var noty_id = noty({
+				layout : 'center',
+				text: 'Are want to delete ?',
+				modal : true,
+				buttons: [
+					{type: 'button pink', text: 'Delete', click: function($noty) {
+						$noty.close();
+						$("#operation").val(3);
+						$("#id").val(id);
+						var termdata = {};
+			        	$('#registerform').serializeArray().map(function(x){termdata[x.name] = x.value;});
+
+			            var termjson = JSON.stringify(termdata);
+			            window.location.assign('ownerregistertrn?jsondata='+termjson)
+					  }
+					},
+					{type: 'button blue', text: 'Cancel', click: function($noty) {
+						$noty.close();
+					  }
+					}
+					],
+				 type : 'success', 
+			 });
+			
+		}
 		function validateAccount(){
 			var accountnumber = $('#accountnumber').val();
 			var valid = validateCall(accountnumber).done(function(data){

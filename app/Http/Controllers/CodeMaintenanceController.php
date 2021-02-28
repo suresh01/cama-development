@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Log;
 use DB;
+use App;
 use Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -52,6 +53,9 @@ class CodeMaintenanceController extends Controller
         $activeind = DB::select("select tdi_key activeind_id, tdi_value activeind from tbdefitems where tdi_td_name = 'ACTIVEIND'");       
         $applntype = DB::select("select tdi_key applntype_id, tdi_value applntype from tbdefitems where tdi_td_name = 'APPLICATIONTYPE'"); 
         $tenanttype = DB::select("select tdi_key tenanttype_id, tdi_value tenanttype from tbdefitems where tdi_td_name = 'RATEPAYERTYPE' ");
+
+        App::setlocale(session()->get('locale'));
+
         return view("codemaintenance.tenantreg")->with(array('tenant'=> $tenant,'state'=> $state,'citizen'=> $citizen,'race'=> $race,'activeind'=> $activeind, 'applntype' => $applntype, 'tenanttype' => $tenanttype,'search'=> $search));
     }
 
@@ -154,6 +158,9 @@ and rp_type_id = ratepayertype_id and approval_id = rp_approvalrpstatus_id");
         $activeind = DB::select("select tdi_key activeind_id, tdi_value activeind from tbdefitems where tdi_td_name = 'ACTIVEIND'");       
         $applntype = DB::select("select tdi_key applntype_id, tdi_value applntype from tbdefitems where tdi_td_name = 'APPLICATIONTYPE'"); 
         $ratepayertype = DB::select("select tdi_key ratepayertype_id, tdi_value ratepayertype from tbdefitems where tdi_td_name = 'RATEPAYERTYPE' ");
+
+        App::setlocale(session()->get('locale'));
+        
         return view("codemaintenance.ratepayer")->with(array('ratepayer'=> $ratepayer,'state'=> $state,'citizen'=> $citizen,'race'=> $race,'activeind'=> $activeind, 'applntype' => $applntype, 'ratepayertype' => $ratepayertype));
     }
 
@@ -217,6 +224,8 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
         $titletype = DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE"');
         $state = DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE"');     
 
+        App::setlocale(session()->get('locale'));
+        
         return view("codemaintenance.transaction")->with(array('transaction'=> $transaction,'transtype'=> $transtype,'lotcode'=> $lotcode,'titletype'=> $titletype,'state'=> $state,'search'=> $search));
     }
 
@@ -248,6 +257,8 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
         
         $status = DB::select("select tdi_key, tdi_value FROM cama.tbdefitems where tdi_td_name = 'ACTIVEIND'");    
 
+        App::setlocale(session()->get('locale'));
+        
         return view("tol.basket")->with(array('basket'=> $basket,'status'=> $status));
     }
 
@@ -267,6 +278,8 @@ left join (SELECT tdi_key, tdi_value FROM cama.tbdefitems where tdi_td_name = 'A
         
         $status = DB::select("select tdi_key, tdi_value FROM cama.tbdefitems where tdi_td_name = 'ACTIVEIND'");    
 
+        App::setlocale(session()->get('locale'));
+        
         return view("tol.ratebasket")->with(array('basket'=> $basket,'status'=> $status));
     }
 
@@ -317,7 +330,8 @@ where tollist_id = tbldg_tone_id');
         $trnstype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TRANSACTIONTYPE"'); 
         $basket=DB::select('select tollist_id, tollis_year, tollis_desc from cm_toneoflistbasket '); 
         
-            
+        App::setlocale(session()->get('locale'));
+                    
         return view("tol.bldg")->with(array('bldg'=> $bldg,'bldgtype'=> $bldgtype,'bldgstore'=> $bldgstore,'arlvl'=> $arlvl ,'artype'=> $artype,'arcaty'=> $arcaty,'aruse'=> $aruse,'zone'=> $zone,'subzone'=> $subzone,'basket' => $basket,'bldgcate'=> $bldgcate,'trnstype'=> $trnstype,'search'=> $search,'totalcount'=> $totalcount));
     }
 
@@ -443,6 +457,8 @@ where tollist_id = tland_tone_id');
         $basket=DB::select('select tollist_id, tollis_year, tollis_desc from cm_toneoflistbasket '); 
         $bldgcate=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BULDINGCATEGORY"');
         
+        App::setlocale(session()->get('locale'));
+        
             
         return view("tol.land")->with(array('land'=> $land,'bldgtype'=> $bldgtype,'bldgstore'=> $bldgstore,'bldgstore'=> $bldgstore ,'zone'=> $zone,'subzone'=> $subzone,'basket' => $basket,'hasbldg' => $hasbldg,'bldgcate' => $bldgcate,'search'=> $search, 'totalcount' => $totalcount));
     }
@@ -551,6 +567,8 @@ where tollist_id = tland_tone_id'  .$filterquery  );
         $allowancecate=DB::select('select * from tbdefitems where tdi_td_name = "ALLOWANCECATEGORY"');
         $allowancetype=DB::select('select * from tbdefitems where tdi_td_name = "ALLOWANCETYPE" '); 
         
+        App::setlocale(session()->get('locale'));
+        
         return view("tol.allowance")->with(array('allowance'=> $allowance,'bldgcate'=> $bldgcate,'basket' => $basket,'allowancecate' => $allowancecate,'allowancetype' => $allowancetype));
     }
 
@@ -574,6 +592,8 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
 
         $bldgcond=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BLDGCONDN"'); 
         $basket=DB::select('select tollist_id, tollis_year, tollis_desc from cm_toneoflistbasket '); 
+        
+        App::setlocale(session()->get('locale'));
         
         return view("tol.depreciation")->with(array('result'=> $result,'bldgcond'=> $bldgcond,'basket' => $basket));
     }
@@ -613,6 +633,8 @@ where tollist_id = tstand_tone_id');
         $zone=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ZONE"');
         $subzone=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SUBZONE"'); 
         $basket=DB::select('select tollist_id, tollis_year, tollis_desc from cm_toneoflistbasket '); 
+        
+        App::setlocale(session()->get('locale'));
         
         return view("tol.landstandart")->with(array('result'=> $result,'bldgtype'=> $bldgtype,'bldgcate'=> $bldgcate,'bldgstore'=> $bldgstore,'zone'=> $zone,'subzone'=> $subzone,'basket' => $basket,'search'=> $search,'totalcount'=> $totalcount));
     }
@@ -725,6 +747,8 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
         $hasbldg=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ISHASBUILDING"');
         $basket=DB::select('select trlist_id, trlist_year,trlist_desc from cm_taxratelistbasket '); 
         $bldgcate=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BULDINGCATEGORY"');
+        
+        App::setlocale(session()->get('locale'));
         
         return view("tol.taxrate")->with(array('taxrate'=> $taxrate,'bldgtype'=> $bldgtype,'zone'=> $zone,'hasbldg'=> $hasbldg,'basket' => $basket,'bldgcate' => $bldgcate,'search'=> $search,'totalcount'=> $totalcount));
     }

@@ -6,18 +6,20 @@ use Illuminate\Http\Request;
 use Log;
 use DB;
 use Session;
+use App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use DataTables;
+use Storage;
 
 class FileManagerController extends Controller
 {
     
-	/**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+	  /**
+       * Create a new controller instance.
+       *
+       * @return void
+    **/
     public function __construct()
     {
         $this->middleware('auth');
@@ -44,7 +46,9 @@ class FileManagerController extends Controller
            $serverhost = $obj->serveradd;
         }
         
-         return view("dms.dms")->with('search',$search)->with('serverhost',$serverhost)->with('attachtype',$attachtype);
+        App::setlocale(session()->get('locale'));
+        
+        return view("dms.dms")->with('search',$search)->with('serverhost',$serverhost)->with('attachtype',$attachtype);
         
         // return view("filemanager.fm")->with('serverhost',$serverhost)->with('search',$search);
     }
@@ -191,6 +195,109 @@ at_updatedate  from cm_attachment where at_linkid = ".$id);
     }
 
 
+
+    public function upload(Request $request){
+       // $type = $request->input('type');
+        $id = $request->input('id');
+        $file = $request->file('path');
+        $name = $request->input('name');
+        $ext = $request->input('ext');
+        $zone = $request->input('zone');
+        $accnumber = $request->input('accnumber');
+        $subzone = $request->input('subzone');
+        
+        $filepath ="cama/individual/".$zone."/".$subzone."/".$accnumber."/";
+        Log::info($filepath);
+        $exists = Storage::disk('local')->exists($filepath);
+        if ($exists == ''){
+            Storage::makeDirectory($filepath);
+        }
+
+        if(!empty($file)){
+            $storepath = Storage::putFileAs(
+                'cama/individual', $request->file('path'), $zone.'/'.$subzone.'/'.$accnumber.'/'.$name.'.'.$ext
+            );
+
+        }
+
+        Log::info($storepath);
+        
+       return response()->json(array('msg'=> true,'storepath'=>$storepath),200);
+    }
+
+    public function download(Request $request){
+
+        $id = $request->input('id');
+
+        $attachment=DB::select(' select at_name, at_path,at_fileextention from cm_attachment  where at_id = '.$id);
+        $headers = array();
+        foreach ($attachment as $obj) {    
+           $path = $obj->at_path; 
+           $filename = $obj->at_name.'.'.$obj->at_fileextention;
+           return Storage::download($path, $filename, $headers);
+        }
+
+        //return redirect('filemanager');
+    }
+
+    public function fileDelete(Request $request){
+        $id = $request->input('id');
+        $page = $request->input('page');
+
+        $attachment=DB::select(' select at_name, at_path,at_fileextention from cm_attachment  where at_id = '.$id);
+        $headers = array();
+        foreach ($attachment as $obj) {    
+           $path = $obj->at_path; 
+           $filename = $obj->at_name;
+           Log::info($path.'/'.$filename);
+           Storage::delete($path);
+
+        }
+
+
+        if($page == 1){
+          $username=Auth::user()->name;
+
+          $proc=DB::select("call pro_termattachment_trn(".$id.",'','','','','','',2,'".$username."')");
+        }
+
+      // Log::info("");
+
+         return response()->json(array('msg'=> true),200);
+    }
+
+    public function termUpload(Request $request){
+       // $type = $request->input('type');
+        $id = $request->input('id');
+        $file = $request->file('path');
+        $name = $request->input('name');
+        $ext = $request->input('ext');
+        $year = $request->input('year');
+        $desc = $request->input('desc');
+        $attachtype = $request->input('attachtype');
+        $orgfilename = $request->input('orgfilename');
+        
+        $filepath ="cama/term/".$year."/".$id."/";
+        Log::info($filepath);
+        $exists = Storage::disk('local')->exists($filepath);
+        if ($exists == ''){
+            Storage::makeDirectory($filepath);
+        }
+
+        if(!empty($file)){
+            $storepath = Storage::putFileAs(
+                'cama/term', $request->file('path'), $year.'/'.$id.'/'.$name.'.'.$ext
+            );
+
+        }
+$username=Auth::user()->name;
+
+        Log::info("call pro_termattachment_trn(".$id.",'".$storepath."','".$name."','".$orgfilename."','".$desc."','".$ext."','".$attachtype."',1,'".$username."')");
+        $proc=DB::select("call pro_termattachment_trn(".$id.",'".$storepath."','".$name."','".$orgfilename."','".$desc."','".$ext."','".$attachtype."',1,'".$username."')");
+
+        
+       return response()->json(array('msg'=> true,'storepath'=>$storepath),200);
+    }
         
 
 }

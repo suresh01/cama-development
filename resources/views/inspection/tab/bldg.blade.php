@@ -483,17 +483,33 @@
 		@foreach ($bldgardetail as $rec)				
 					blsgardata.push( [ '{{$loop->iteration}}', $('#accnumber').val(), '{{$rec->ab_bldg_no}}', '{{$rec->artype}}','{{$rec->arcate}}','{{$rec->aruse}}','{{$rec->arlvel}}','{{$rec->aba_unitcount}}','{{$rec->aba_totsize}}','{{$rec->ceilingtype}}','{{$rec->floortype}}','{{$rec->walltype}}','{{$rec->aba_areadesc}}', '{{$rec->aba_ref}}', '{{$rec->aba_areatype_id}}','{{$rec->aba_areacategory_id}}','{{$rec->aba_arealevel_id}}', '{{$rec->aba_areazone_id}}', '{{$rec->aba_areause_id}}', '{{$rec->aba_areadesc}}',  '{{$rec->aba_dimention}}', '{{$rec->aba_unitcount}}', '{{$rec->aba_size}}','{{$rec->aba_sizeunit_id}}', '{{$rec->aba_totsize}}', '{{$rec->aba_floortype_id}}','{{$rec->aba_walltype_id}}','{{$rec->aba_ceilingtype_id}}','<span><a onclick="" class="action-icons c-edit edtbldgarrow" href="#" title="Edit">Edit</a></span>@if($iseditable == 1)<span><a onclick="" class="action-icons    deletebldgarrow" href="#" title="delete">Delete</a></span>@endif', 'noaction','{{$rec->aba_id}}' ] );
 	    @endforeach
-			
+			var groupColumn = 4;
 		 $('#bldgartable1').DataTable({
         	data:           blsgardata,
-            "columns":[  { "visible": false }, { "visible": false }, { "visible": false }, null, null, null, null, null, null,null, null, null, null, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, null,{ "visible": false },{ "visible": false }],
+            "columns":[ null, { "visible": false }, { "visible": false }, null, null, null, null, null, null,null, null, null, null, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, null,{ "visible": false },{ "visible": false }],
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 100,
 			"oLanguage": {
 		        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
 		    },
         	"bAutoWidth": false,
-			"sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>'
+        	"order": [[ groupColumn, 'asc' ]],
+			"sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>',
+			"drawCallback": function ( settings ) {
+	            var api = this.api();
+	            var rows = api.rows( {page:'current'} ).nodes();
+	            var last=null;
+	 
+	            api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+	                if ( last !== group ) {
+	                    $(rows).eq( i ).before(
+	                        '<tr class="group"><td colspan="5">'+group+'</td></tr>'
+	                    );
+	 
+	                    last = group;
+	                }
+	            } );
+	        }
 			 
 		});
 

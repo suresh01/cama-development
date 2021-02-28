@@ -97,7 +97,7 @@
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Data Maintenance</a></li>
-						<li><a href="propertybasket">Property Registration</a></li>
+						<li><a href="existspropertybasket">Property Maintenance</a></li>
 						<li>{{$basket_name}} </li>
 					</ul>
 				</div>

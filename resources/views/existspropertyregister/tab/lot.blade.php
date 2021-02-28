@@ -347,7 +347,7 @@
  		var lotdata = [];
 		 		@foreach ($lotlist as $rec)
 		 			lotdata.push( [ '{{$loop->iteration}}', '{{$rec->LO_STATE}}', '{{$rec->LO_DISTRICT}}', '', '', '{{$rec->LO_LOTCODE_ID}}', '{{$rec->LO_NO}}', '{{$rec->LO_ALTNO}}', '{{$rec->LO_TITLETYPE_ID}}', '{{$rec->LO_TITLENO}}', '{{$rec->LO_ALTTITLENO}}', '{{$rec->LO_SIZE}}', '{{$rec->LO_SIZEUNIT_ID}}', '{{$rec->LO_LANDCONDITION_ID}}', '{{$rec->LO_LANDPOSITION_ID}}', '{{$rec->LO_ROADTYPE_ID}}', '{{$rec->LO_ROADCATEGORY_ID}}', '{{$rec->LO_LANDUSE_ID}}', '{{$rec->LO_EXCD}}', '{{$rec->LO_RTIT}}', '{{$rec->LO_TENURETYPE_ID}}', '{{$rec->LO_TENUREPERIOD}}', '{{$rec->LO_STARTDATE}}', '{{$rec->LO_EXPIREDDATE}}' ,'{{$rec->LO_ACTIVEIND_ID}}','','noation', '{{$rec->LOT_ID}}' ,'{{$rec->lotnumber}}','{{$rec->LO_ALTNO}}','{{$rec->titlenumber}}','{{$rec->LO_SIZE}}','{{$rec->landuse}}','{{$rec->tentype}}',
-		 				'<span><a onclick="" class="action-icons c-edit edtlotrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete dellotrow deletelotrow" href="#" title="delete">Delete</a></span>',account ] );
+		 				'<span><a onclick="" class="action-icons c-edit edtlotrow" href="#" title="Edit">Edit</a></span>',account ] );
 		 		@endforeach
 
         $('#lottble').DataTable({
@@ -430,15 +430,15 @@
         	$("#lotdetail").show();
 			$("#addlot").hide();
 			$("#lottable").hide();
-			$('#submitedittbllot').show();
-			$('#submitaddtbllot').hide();
+			//$('#submitedittbllot').show();
+			//$('#submitaddtbllot').hide();
 		});
 
 });
 
 function openlot() {
-	$('#submitedittbllot').hide();
-	$('#submitaddtbllot').show();
+	//$('#submitedittbllot').hide();
+	//$('#submitaddtbllot').show();
 	addDisableTab();
 	$('#propertyregsitration_from-back-1').hide();
 	$('#propertyregsitration_from-next-1').hide();
@@ -456,8 +456,8 @@ function editlotRow(){
 
 	if (validateLot()){
 		var account = $('#accnumber').val();
-		$('#submitedittbllot').show();
-			$('#submitaddtbllot').hide();
+		//$('#submitedittbllot').show();
+			//$('#submitaddtbllot').hide();
 			var table = $('#lottble').DataTable();
 			
 			var row = table.row($('#lottableindex').val());
@@ -490,8 +490,8 @@ function addlotRow(){
 		$('#propertyregsitration_from-back-1').show();
 		$('#propertyregsitration_from-next-1').show();
 			 
-		$('#submitedittbllot').hide();
-			$('#submitaddtbllot').show();
+		//$('#submitedittbllot').hide();
+			//$('#submitaddtbllot').show();
 		var operation = $("#lot_operation").val();
 		var account = $('#accnumber').val();
 		//console.log(operation);

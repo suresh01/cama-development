@@ -203,6 +203,13 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
+									<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+									<div  class="form_input">
+										<input id="owncity"  name="owncity" tabindex="1" type="text"  maxlength="50" class="large"/>
+									</div>
+									<span class=" label_intro"></span>
+								</div>
+								<div class="form_grid_12">
 									<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ownstate" name="ownstate" tabindex="1">

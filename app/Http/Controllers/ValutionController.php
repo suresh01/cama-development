@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Log;
 use DB;
 use Session;
+use App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -20,6 +21,7 @@ class ValutionController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        App::setlocale(session()->get('locale'));
     }
     
     public function approve(Request $request){
