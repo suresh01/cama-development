@@ -811,8 +811,8 @@
 
 		if(validateBldg()){
 
-			$('#propertyinspectionform-back-5').show();
-			$('#propertyinspectionform-next-5').show();
+			$('#propertyinspectionform-back-5').hide();
+			$('#propertyinspectionform-next-5').hide();
 			$('#finish').show();
 			//removeDisableTab();
 			$('#submitedittblbldg').show();
@@ -973,8 +973,8 @@ function editbldgarRow() {
 		var account = $('#accnumber').val();
 
 
-			$('#propertyinspectionform-back-5').show();
-			$('#propertyinspectionform-next-5').show();
+			$('#propertyinspectionform-back-5').hide();
+			$('#propertyinspectionform-next-5').hide();
 					
 			var row = table.row($('#bldgareatableindex').val());
 			var bldgareadata1 = table.row($('#bldgareatableindex').val()).data();
@@ -1006,8 +1006,8 @@ function editbldgarRow() {
 	
 	function closebldgar(){
 
-			$('#propertyinspectionform-back-5').show();
-			$('#propertyinspectionform-next-5').show();
+			$('#propertyinspectionform-back-5').hide();
+			$('#propertyinspectionform-next-5').hide();
 		$('#finish').show();
 		//removeDisableTab();
 		$("#bldgareatable1").show();
@@ -1103,7 +1103,7 @@ function editbldgarRow() {
 
 	function closearbldg(){
 
-			$('#propertyinspectionform-back-5').show();
+			$('#propertyinspectionform-back-5').hide();
 			$('#propertyinspectionform-next-5').show();
 		//removeDisableTab();
 		$("#addbldg").show();
@@ -1180,7 +1180,7 @@ function editbldgarRow() {
 
 	function closebldg(){		
 
-			$('#propertyinspectionform-back-5').show();
+			$('#propertyinspectionform-back-5').hide();
 			$('#propertyinspectionform-next-5').show();
 		removeDisableTab();
 		$('#finish').show();					

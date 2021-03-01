@@ -763,7 +763,7 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
               left join (select tdi_key, tdi_value,tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone 
               on subzone.tdi_key = ma_subzone_id
               inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and grouptb.tdi_td_name = "USERGROUP"
-              inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE" where otar_ownertransstatus_id in (1,2,3,4,5,6,7,8) 
+              inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE" where otar_ownertransstatus_id in (4,5,7) 
               '.$condition);
 
             App::setlocale(session()->get('locale'));

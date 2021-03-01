@@ -47,7 +47,7 @@
 					<input type="hidden" value="" id="propertystatus" >
 					<div class="widget_content">
 						<!--<h3>Property Registration</h3>-->
-						<form action="" id="propertyinspectionform" class="form_container left_label">
+						<form action="datasearch"  id="propertyinspectionform" class="form_container left_label">
 							<fieldset title="Step 1">		
 								<legend>Master Information</legend>	
 								@include('dataenquiry.tab.master')	
@@ -86,7 +86,7 @@
 								<legend>Valuation Information</legend>
 								@include('dataenquiry.tab.valuationdetail')					
 							</fieldset>	
-								<input type="submit" onclick="updateAttachment()" class="finish" id="finish" value="Submit!"/>
+								<input type="button" onclick="closePage()" class="finish" value="Close!"/>
 						</form>
 					</div>
 				</div>
@@ -98,8 +98,10 @@
 <script src="js/propertyregister/tab-script.js"></script>
 </div>
 <script>
-		function closePage(){
 
+
+		function closePage(){
+			window.location.assign('datasearch');	
 		}
 		function addTenant() {
 			

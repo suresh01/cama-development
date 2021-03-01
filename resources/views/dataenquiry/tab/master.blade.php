@@ -6,7 +6,19 @@
 				$("#state").val('{{$master->ma_state_id}}');
 				$("#bldgtype").val('{{$master->ma_ishasbuilding_id}}');
 				$("#district").val('{{$master->ma_district_id}}');
-
+				$('#propertyinspectionform-next-0').hide();
+				$('#propertyinspectionform-back-1').hide();	
+				$('#propertyinspectionform-next-1').hide();	
+				$('#propertyinspectionform-back-2').hide();
+				$('#propertyinspectionform-next-2').hide();	
+				$('#propertyinspectionform-back-3').hide();
+				$('#propertyinspectionform-next-3').hide();	
+				$('#propertyinspectionform-back-4').hide();
+				$('#propertyinspectionform-next-4').hide();		
+				$('#propertyinspectionform-back-5').hide();
+				$('#propertyinspectionform-next-5').hide();	
+				$('#propertyinspectionform-back-6').hide();
+				$('#propertyinspectionform-next-6').hide();	
 			});
 		</script>
 <div  class="grid_6 ">

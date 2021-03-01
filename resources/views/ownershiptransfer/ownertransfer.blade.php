@@ -129,7 +129,7 @@
 											@endif
 
 											@if($rec->otar_ownertransstatus_id == '5')
-												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" title="Transfer" href="#"></a></span>
+												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',5)" title="Transfer" href="#"></a></span>
 											@endif
 										</td>
 									</tr>

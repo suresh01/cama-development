@@ -178,8 +178,17 @@
 							$("#addattachmentform").hide();
 							//$("#assetdetailtable").show();
 							
-							$("#propertyinspectionform-back-5").show();
-							$("#propertyinspectionform-next-5").show();
+							$("#propertyinspectionform-back-5").hide();
+							$("#propertyinspectionform-next-5").hide();
+							sendDB();
+							//$("#propertyinspectionform").submit(function(e){
+	               
+
+				              //  e.preventDefault(e);
+				                //alert('submit intercepted');
+				               	 
+
+							//});
 						}
 					}
 				};
@@ -192,14 +201,62 @@
 
 	}
 
+	function sendDB(){
+		var attachmentdata = [];
+
+		for (var j = 0;j<$('#attachmentdatatable').DataTable().rows().count();j++){
+			var ldata1 = $('#attachmentdatatable').DataTable().row(j).data();
+			var tempdata = {};
+			$.each(ldata1, function( key, value ) {
+				if (key !== 4) {
+					tempdata[attachmentmap.get(""+key+"")] = value; 
+				} 
+			//console.log(key);            
+        	});
+        	//console.log(templotdata);
+        	attachmentdata.push(tempdata);            	
+		}
+
+		if ($('#attachmentdatatable').DataTable().rows().count() > 1)
+			attachmentdata =  "["+  JSON.stringify(attachmentdata).replace(/]|[[]/g, '') +"]";
+		else
+			attachmentdata = JSON.stringify(attachmentdata).replace(/]|[[]/g, '');
+
+		if(attachmentdata === ''){
+			attachmentdata = "{}";
+		}
+
+		console.log(attachmentdata);
+		//var prop_id = '{{$prop_id}}';
+		/*$.ajax({
+				type: 'GET', 
+		    url:'updateattachment',
+		    headers: {
+			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+	        data:{attachmentdata:attachmentdata,prop_id:prop_id},
+	        success:function(data){
+	        	alert('success');
+				//window.location.assign('property?id={{$pb}}');		        		
+	        	//$("#finish").attr("disabled", true);
+	        	//clearTableError(4);
+        	},
+	        error:function(data){
+				
+        	}
+    	});*/
+
+		window.location.assign("updateattachment?prop_id={{$prop_id}}&attachmentdata="+attachmentdata);	
+	}
+
 
 	function closeNew(){
 		$("#attachmenttable").show();
 		$("#addattachmentform").hide();
 		//$("#assetdetailtable").show();
 		
-		$("#propertyinspectionform-back-5").show();
-		$("#propertyinspectionform-next-5").show();
+		$("#propertyinspectionform-back-5").hide();
+		$("#propertyinspectionform-next-5").hide();
 	}
 
 	$(document).ready(function (){
@@ -238,6 +295,15 @@
 							var request = new XMLHttpRequest();
 							//var formdata = new FormData();
 							
+							request.onreadystatechange = function () {
+							  // In local files, status is 0 upon success in Mozilla Firefox
+								if(request.readyState === XMLHttpRequest.DONE) {
+									var status = request.status;
+									if (status === 0 || (status >= 200 && status < 400)) {
+										sendDB();
+									}
+								}
+							};
 							//formdata.append('id', data[5]);
 							//formdata.append('_token', '{{csrf_token()}}');
 							request.open('get','filedelete?id='+data[5]);

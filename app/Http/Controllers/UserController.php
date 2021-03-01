@@ -652,7 +652,7 @@ $roles = '';
         $result=DB::select('select pd_name, pd_parent, pd_desc,pd_search_mod,pd_tdi_value_lenght, (select count(*) from tbpardef t where t.pd_parent = tbpardef.pd_name) childcount, 
 (select count(tdi_key) from tbdefitems where tdi_td_name = pd_name) itemcount from tbpardef  order by pd_name');
         $searchmodule = DB::select('select se_id, se_name from tbsearch');
-
+        App::setlocale(session()->get('locale'));
        // Log::info(2);
         //$search=DB::select('select * from tbsearchdetail');
         return view('codemaintenance')->with(array('searchmodule' => $searchmodule, 'codemaintenance' =>$result));
@@ -682,6 +682,7 @@ $roles = '';
         }   else if($operation == 3) {
             $message = 'Parameter deleted successfully';
         } 
+        App::setlocale(session()->get('locale'));
         session(['not_msg' => $message]);
         return redirect('codemaintenance');
     }
@@ -810,6 +811,7 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
         $isparent=DB::select('select pd_parent,pd_tdi_value_lenght as length from tbpardef where pd_name = :td_name', 
             array(":td_name" => $td_name));
 
+        App::setlocale(session()->get('locale'));
 
 
         return view('codemaintenancedetail')->with('codedetail',$codedetail)->with('name',$td_name)->with('isparent',$isparent)->with('search',$search)->with('childparent',$childparent)->with('lastcode',$lastcode)->with('id',$id);
@@ -842,6 +844,7 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
              $user=DB::select('CALL `proc_tbdefitems_trn`("'.$td_name.'", "'.$key_name.'", "'.$value.'", "'.$desc.'","'.$parent.'", '.$sort.', "'.$name.'", '.$operation.')');
         }
 
+        App::setlocale(session()->get('locale'));
         return redirect()->route('codemaintenancedetail', ['name' => $td_name]);
     }
 

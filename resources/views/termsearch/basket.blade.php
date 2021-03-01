@@ -34,7 +34,7 @@
 					<div id="breadCrumb3"  class="breadCrumb grid_3">
 						<ul >
 							<li><a href="#">Home</a></li>
-							<li><a href="valterm">Data Enquiry</a></li>
+							<li><a href="termsearch">Data Enquiry</a></li>
 							<li>Term Search</li>
 						</ul>
 					</div>

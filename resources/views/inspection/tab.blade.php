@@ -22,8 +22,8 @@
 			<div id="breadCrumb3" class="breadCrumb grid_12">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Valuation Process</a></li>
-						<li><a href="group?param={{$termid}}">{{$viewparamterm}} </a></li>
+						<li><a href="valterm">Valuation Data Management</a></li>
+						<li><a href="valbasket?id={{$termid}}">{{$viewparamterm}} </a></li>
 						<li><a href="property?id={{$pb}}">{{$viewparambasket}} - {{$viewparambasketstatus}}</a></li>
 						<li>{{$accountnumber}} </li>
 					</ul>
@@ -125,7 +125,7 @@
 		}
 
 
-
+ 
 		function CallParent(table){
           	var id = $.map(table.rows('.selected').data(), function (item) {
         		return item[0]
@@ -157,6 +157,7 @@
 		$(document).ready(function() {
 
 
+		
 		
 		let lotmap = new Map([["0","sno"],["1", "lotstate"], ["2", "lotdistrict"], ["3", "lotcity"],["4", "presint"], ["5", "lotype"],["6", "lotnum"], ["7", "altlotnum"],["8", "lttt"], ["9", "ltnum"],["10", "altnum"], ["11", "landar"],["12", "landaruni"],["13", "landcon"], ["14", "lanpos"],["15", "roadtype"], ["16", "roadcate"],["17", "landuse"], ["18", "expcon"],["19", "interest"], ["20", "tentype"],["21", "tenduration"], ["22", "tenstart"],["23", "tenend"], ["24", "status"],["25", "action"],["26", "actioncode"],["27", "lot_id"],["28", "lotaccnum1"],["29", "lotaccnum2"],["30", "lotaccnum3"],["31", "lotaccnum4"],["32", "lotaccnum5"],["33", "lotaccnum6"],["34", "lotaccnum7"],["35", "lotaccnum"]]);
 

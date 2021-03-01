@@ -144,8 +144,8 @@
 				//console.log(file.name.split('.'));
 				//console.log(ext);
 				///console.log(file.name[0]);
-				var zone = $('#zone option:selected').text().replace(' ','_');
-				var subzone = $('#subzone option:selected').text().replace(' ','_');
+				var zone = $('#zone').val();
+				var subzone = $('#subzone').val();
 
 				var accountnumber = $('#accnumber').val();
 

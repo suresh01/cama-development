@@ -59,6 +59,7 @@ class InspectionController extends Controller
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid 
         from tbsearchdetail mtb where sd_se_id = 13 ');
+        App::setlocale(session()->get('locale'));
     	return view('inspection.newproperty')->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id);
     }
 
@@ -125,7 +126,7 @@ class InspectionController extends Controller
         on ma_ishasbuilding_id = isbldg.tdi_key and isbldg.tdi_td_name = "ISHASBUILDING" where ma_pb_id =   '.$baskedid.' '. $filterquery);
         
         $propertyDetails = Datatables::collection($property)->make(true);
-   
+        App::setlocale(session()->get('locale'));
         return $propertyDetails;
     }
 
@@ -134,7 +135,7 @@ class InspectionController extends Controller
         $aptype = $request->input('aptype');
         $basket = DB::select("select pb_id, pb_name, pb_approvedby, DATE_FORMAT(pb_approvedate, '%d/%m/%Y') pb_approvedate, (select count(*) from cm_masterlist where ma_pb_id = pb_id) propcnt from cm_propbasket where pb_approved = '03' and 
             PB_APPLICATIONTYPE_ID = '".$aptype."'");
-
+        App::setlocale(session()->get('locale'));
         return view('inspection.grab.basket')->with(array('id'=>$insbasket_id,'basket'=>$basket));
     }
 
@@ -551,6 +552,7 @@ class InspectionController extends Controller
         }   
         $isfilter = $request->input('filter');
         $baskedid = $request->input('id');
+      //  $termid = $request->input('termid');
 
         $filterquery = '';
         if($isfilter == 'true'){
@@ -605,7 +607,7 @@ class InspectionController extends Controller
             $termid = $rec->vt_id;
             $viewparamterm = "( ".$rec->applntype." ) ".$rec->vt_name." - ".$rec->termstage ;
         }
-
+        App::setlocale(session()->get('locale'));
     	return view('inspection.property')->with('search',$search)->with('id',$baskedid)->with('approvestatus',$approvestatus)->with('applicationtype',$applicationtype)->with('viewparambasket',$viewparambasket)->with('viewparamterm',$viewparamterm)->with('viewparambasketstatus',$viewparambasketstatus)->with('termid',$termid);
     }
 
@@ -847,7 +849,7 @@ left join tbdefitems walltype on walltype.tdi_key = cm_appln_bldgarea.aba_wallty
            $category = $rec->bldgcategory;
         }
 $arlvl=DB::table('tbdefitems')->where('tdi_td_name', 'AREALEVEL')->where('tdi_parent_name', $category)->orderBy('tdi_sort')->get();
-
+App::setlocale(session()->get('locale'));
             return view("inspection.bldg")->with('district', $district)->with('state', $state)->with('zone', $zone)->with('subzone', $subzone)->with(array('bldgstruct'=>$bldgstruct,'bldgstore'=>$bldgstore,'ishasbuilding'=>$ishasbuilding, 'landuse'=>$landuse, 'master'=> $master, 'lotlist'=> $lotlist, 'ownerlist'=>$ownerlist, 'building'=> $building,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstruct,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'bldgcate' => $bldgcate,'bldgtype' => $bldgtype,'count' => $count, 'bldgardetail' => $bldgardetail,'ratepayer' => $ratepayer, 'tenant' => $tenant,'prop_id' => $prop_id,'pb'=> $pb,'parameter' => $parameter,'attachment'=>$attachment,'attachtype' => $attachtype, 'termname' => $termname, 'accountnumber' => $accountnumber,'serverhost' => $serverhost, 'ownerd' => $owner, 'viewparambasket' => $viewparambasket, 'viewparambasketstatus' => $viewparambasketstatus, 'viewparamterm' => $viewparamterm, 'termid' => $termid,
                 'iseditable' => $iseditable, 'applntype' => $applntype));
     }
@@ -1007,7 +1009,7 @@ left join tbdefitems walltype on walltype.tdi_key = cm_appln_bldgarea.aba_wallty
                 and te_type_id = tenanttype_id and at_te_id =  te_id and at_vd_id = ifnull(".$prop_id.",0) ");
                
              $attachment = DB::select("
-            select at_oringinalfilename,at_id,at_path,at_attachtype_id,at_filename,at_detail,at_createby,at_createdate, attachment.tdi_value attachment from cm_attachment left join 
+            select at_name,at_fileextention ,at_oringinalfilename,at_id,at_path,at_attachtype_id,at_filename,at_detail,at_createby,at_createdate, attachment.tdi_value attachment from cm_attachment left join 
             (select tdi_key, tdi_value from tbdefitems where tdi_td_name = 'ATTACHMENTTYPE') attachment on attachment.tdi_key =  at_attachtype_id  where at_linkid = ifnull(".$prop_id.",0) ");
 
               $parameter = DB::select("select ap_id,ap_bldgstatus_id,ap_propertycategory_id,ap_propertytype_id,ap_propertylevel_id  FROM cm_appln_parameter where ap_vd_id  = ifnull(".$prop_id.",0) ");
@@ -1017,7 +1019,9 @@ left join tbdefitems walltype on walltype.tdi_key = cm_appln_bldgarea.aba_wallty
            $serverhost = $obj->serveradd;
         }
 
-            return view("inspection.tab")->with('district', $district)->with('state', $state)->with('zone', $zone)->with('subzone', $subzone)->with(array('bldgstruct'=>$bldgstruct,'bldgstore'=>$bldgstore,'ishasbuilding'=>$ishasbuilding, 'landuse'=>$landuse, 'master'=> $master, 'lotlist'=> $lotlist, 'ownerlist'=>$ownerlist, 'building'=> $building,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstruct,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'bldgcate' => $bldgcate,'bldgtype' => $bldgtype,'count' => $count, 'bldgardetail' => $bldgardetail,'ratepayer' => $ratepayer, 'tenant' => $tenant,'prop_id' => $prop_id,'pb'=> $pb,'parameter' => $parameter,'attachment'=>$attachment,'attachtype' => $attachtype, 'termname' => $termname, 'accountnumber' => $accountnumber,'serverhost' => $serverhost, 'ownerd' => $owner, 'viewparambasket' => $viewparambasket, 'viewparambasketstatus' => $viewparambasketstatus, 'viewparamterm' => $viewparamterm, 'termid' => $termid,
+        App::setlocale(session()->get('locale'));
+
+        return view("inspection.tab")->with('district', $district)->with('state', $state)->with('zone', $zone)->with('subzone', $subzone)->with(array('bldgstruct'=>$bldgstruct,'bldgstore'=>$bldgstore,'ishasbuilding'=>$ishasbuilding, 'landuse'=>$landuse, 'master'=> $master, 'lotlist'=> $lotlist, 'ownerlist'=>$ownerlist, 'building'=> $building,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstruct,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'bldgcate' => $bldgcate,'bldgtype' => $bldgtype,'count' => $count, 'bldgardetail' => $bldgardetail,'ratepayer' => $ratepayer, 'tenant' => $tenant,'prop_id' => $prop_id,'pb'=> $pb,'parameter' => $parameter,'attachment'=>$attachment,'attachtype' => $attachtype, 'termname' => $termname, 'accountnumber' => $accountnumber,'serverhost' => $serverhost, 'ownerd' => $owner, 'viewparambasket' => $viewparambasket, 'viewparambasketstatus' => $viewparambasketstatus, 'viewparamterm' => $viewparamterm, 'termid' => $termid,
                 'iseditable' => $iseditable, 'applntype' => $applntype));
     }
 
@@ -1076,6 +1080,7 @@ left join tbdefitems walltype on walltype.tdi_key = cm_appln_bldgarea.aba_wallty
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid 
         from tbsearchdetail mtb where sd_se_id = 1333 ');
+        App::setlocale(session()->get('locale'));
     	return view('searchpopup.ratepayer')->with(array('state'=> $state,'citizen'=> $citizen,'race'=> $race,'activeind'=> $activeind, 'applntype' => $applntype, 'ratepayertype' => $ratepayertype,'search'=>$search,'id'=>3,'property'=>$property));
     }
 
@@ -1131,6 +1136,7 @@ left join tbdefitems walltype on walltype.tdi_key = cm_appln_bldgarea.aba_wallty
         $activeind = DB::select("select tdi_key activeind_id, tdi_value activeind from tbdefitems where tdi_td_name = 'ACTIVEIND'");       
         $applntype = DB::select("select tdi_key applntype_id, tdi_value applntype from tbdefitems where tdi_td_name = 'APPLICATIONTYPE'"); 
         $tenanttype = DB::select("select tdi_key tenanttype_id, tdi_value tenanttype from tbdefitems where tdi_td_name = 'RATEPAYERTYPE' ");
+        App::setlocale(session()->get('locale'));
     	return view('searchpopup.tenant')->with('search',$search)->with('property',$property)->with('id',3)->with(array('state'=> $state,'citizen'=> $citizen,'race'=> $race,'activeind'=> $activeind, 'applntype' => $applntype, 'tenanttype' => $tenanttype));
     }
 

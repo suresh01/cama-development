@@ -321,8 +321,8 @@
 
 function editownerRow(){
 	if(validateOwner()) {
-		$('#propertyinspectionform-back-1').show();
-		$('#propertyinspectionform-next-1').show();	
+		$('#propertyinspectionform-back-1').hide();
+		$('#propertyinspectionform-next-1').hide();	
 		$('#submitedittblowner').show();
 		$('#submitaddtblowner').hide();
 		var table = $('#ownertble').DataTable();
@@ -357,8 +357,8 @@ function addownerRow(){
 		$('#submitedittblowner').hide();
 			$('#submitaddtblowner').show();
 
-			//$('#propertyinspectionform-back-1').show();
-		//$('#propertyinspectionform-next-1').show();	
+			//$('#propertyinspectionform-back-1').hide();
+		//$('#propertyinspectionform-next-1').hide();	
 		//var operation = $("#lot_operation").val();
 		//console.log(operation);
 		var t = $('#ownertble').DataTable();
@@ -420,8 +420,8 @@ function addownerRow(){
 							$("#ownersubmit").html("Update");
 						}
 						function closeowner(){			
-							$('#propertyinspectionform-back-1').show();
-							$('#propertyinspectionform-next-1').show();		
+							$('#propertyinspectionform-back-1').hide();
+							$('#propertyinspectionform-next-1').hide();		
 							removeDisableTab();			
 							$('#masterid').val('');
 							$('#ownaplntype').val('');

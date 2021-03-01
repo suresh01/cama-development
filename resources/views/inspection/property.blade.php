@@ -74,8 +74,8 @@
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Valuation Process</a></li>
-						<li><a href="group?param={{$termid}}">Basket</a></li>
+						<li><a href="valterm">Valuation Data Management</a></li>
+						<li><a href="valbasket?id={{$termid}}">Basket</a></li>
 						<li>Property</li>
 					</ul>
 				</div>

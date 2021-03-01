@@ -214,7 +214,7 @@
 				//$("#addbldg").removeAttr("disabled");
 			}
 		});*/
-
+			
 	});
 		
 	 function addmaster(){

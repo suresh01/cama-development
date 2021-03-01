@@ -458,8 +458,8 @@ function editlotRow(){
 
 
 
-			$('#propertyinspectionform-back-4').show();
-			$('#propertyinspectionform-next-4').show();
+			$('#propertyinspectionform-back-4').hide();
+			$('#propertyinspectionform-next-4').hide();
 		row.data(data);
 			$("#lotdetail").hide();
 		$("#lottable").show();
@@ -474,8 +474,8 @@ function addlotRow(){
 
 	if (validateLot()){
 		
-			$('#propertyinspectionform-back-4').show();
-			$('#propertyinspectionform-next-4').show();
+			$('#propertyinspectionform-back-4').hide();
+			$('#propertyinspectionform-next-4').hide();
 		$('#submitedittbllot').hide();
 			$('#submitaddtbllot').show();
 		var operation = $("#lot_operation").val();
@@ -531,8 +531,8 @@ function addlotRow(){
 						function closelot(){	
 
 							//removeDisableTab();
-			$('#propertyinspectionform-back-4').show();
-			$('#propertyinspectionform-next-4').show();					
+			$('#propertyinspectionform-back-4').hide();
+			$('#propertyinspectionform-next-4').hide();					
 							$('#lotstate').val('');
 							$('#lotdistrict').val('');
 							$('#lotype').val('');
