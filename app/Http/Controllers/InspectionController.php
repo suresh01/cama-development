@@ -133,7 +133,7 @@ class InspectionController extends Controller
     public function grabBasket(Request $request){
         $insbasket_id = $request->input('insbasket_id');
         $aptype = $request->input('aptype');
-        $basket = DB::select("select pb_id, pb_name, pb_approvedby, DATE_FORMAT(pb_approvedate, '%d/%m/%Y') pb_approvedate, (select count(*) from cm_masterlist where ma_pb_id = pb_id) propcnt from cm_propbasket where pb_approved = '03' and 
+        $basket = DB::select("select pb_id, pb_name, pb_approvedby, DATE_FORMAT(pb_approvedate, '%d/%m/%Y') pb_approvedate, (select count(*) from cm_masterlist where ma_pb_id = pb_id) propcnt from cm_propbasket where PB_APPROVALSTATUS_ID = '03' and 
             PB_APPLICATIONTYPE_ID = '".$aptype."'");
         App::setlocale(session()->get('locale'));
         return view('inspection.grab.basket')->with(array('id'=>$insbasket_id,'basket'=>$basket));
@@ -487,7 +487,7 @@ class InspectionController extends Controller
         left join (select *  from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgsotery
         on bldgsotery.tdi_key = vd_bldgstorey_id where vd_id in (select MAX(vd_id) from cm_appln_valdetl group by vd_ma_id)  '. $filterquery);
        $property = DB::select('select `vd_approvalstatus_id`, `vd_id`, `vd_va_id`, `ma_id`, `ma_pb_id`, `ma_fileno`, `ma_accno`, `vd_accno`,
-        `tbdefitems_subzone`.`tdi_parent_name` `zone`, `tbdefitems_subzone`.`tdi_value` `subzone`, `ma_addr_ln1`, 
+        `tbdefitems_subzone`.`tdi_parent_name` `zone`, `tbdefitems_subzone`.`tdi_value` `subzone`, `ma_addr_ln1`,  `ma_addr_ln2`, 
         `tbdefitems_ishasbuilding`.`tdi_value` `isbldg`, `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,bldgsotery.tdi_value bldgsotery, 
         `vt_approvednt`, `vt_approvedtax`,  `vt_proposedrate`, `vt_note`, propertstatus.tdi_desc propertstatus
         FROM `cm_appln_valdetl`
@@ -587,12 +587,12 @@ class InspectionController extends Controller
 
         $basket = DB::select('select va_approvalstatus_id FROM cm_appln_val where va_id = '.$baskedid);
             $applntype = DB::select("select vt_id,vt_applicationtype_id, va_name,  approval.tdi_desc approval, vt_name, termstage.tdi_desc termstage,
-    applntype.tdi_value applntype
-    from cm_appln_val 
-    inner join cm_appln_valterm on vt_id = va_vt_id
-    left join (SELECT * FROM tbdefitems where tdi_td_name = 'BASKETSTAGE') approval on approval.tdi_key = va_approvalstatus_id 
-    left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage on termstage.tdi_key = vt_approvalstatus_id 
-    left join (select *  from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype on applntype.tdi_key = vt_applicationtype_id where va_id = ".$baskedid);
+        applntype.tdi_value applntype
+        from cm_appln_val 
+        inner join cm_appln_valterm on vt_id = va_vt_id
+        left join (SELECT * FROM tbdefitems where tdi_td_name = 'BASKETSTAGE') approval on approval.tdi_key = va_approvalstatus_id 
+        left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage on termstage.tdi_key = vt_approvalstatus_id 
+        left join (select *  from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype on applntype.tdi_key = vt_applicationtype_id where va_id = ".$baskedid);
         foreach ($basket as $rec) {    
             $approvestatus = $rec->va_approvalstatus_id;
         }
@@ -609,6 +609,74 @@ class InspectionController extends Controller
         }
         App::setlocale(session()->get('locale'));
     	return view('inspection.property')->with('search',$search)->with('id',$baskedid)->with('approvestatus',$approvestatus)->with('applicationtype',$applicationtype)->with('viewparambasket',$viewparambasket)->with('viewparamterm',$viewparamterm)->with('viewparambasketstatus',$viewparambasketstatus)->with('termid',$termid);
+    }
+
+    public function propertyTablesIns(Request $request){
+        ini_set('memory_limit', '2056M');
+        $baskedid = $request->input('id');
+        $maxRow = 30;
+
+
+        $isfilter = $request->input('filter');
+        $filterquery = '';
+        if($isfilter == 'true'){
+            $input = $request->input();
+            $condition = $input['condition'];
+            $value = $input['value'];
+            $logic = $input['logic'];
+            $fieldcolumn = $input['field'];
+
+             foreach ($input['field'] as $fieldindex => $field) {
+                if ($fieldcolumn[$fieldindex] == "tdi_key") {
+                    $fieldcolumn[$fieldindex] = 'tbdefitems_subzone.tdi_key';
+                }
+                
+                if($value[$fieldindex] != "") {
+                    if($fieldindex == count($input['field']) - 1) {
+                        if($fieldcolumn[$fieldindex] != ""){
+                            $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'"';
+                         }
+                    } else {
+                        if($fieldcolumn[$fieldindex] != ""){
+                           $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'" '.$logic[$fieldindex];    
+                        }   
+                    }
+                }        
+            }
+            if($filterquery != ''){
+                $filterquery  = ' AND '. $filterquery ;
+            }
+            Log::info($filterquery);
+
+        }
+       // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
+        Log::info($filterquery); 
+        /* $property = DB::table('cm_appln_valdetl')->join('cm_masterlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
+        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
+        'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
+        'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
+        $property = DB::select('select `vd_approvalstatus_id`, `vd_id`, `vd_va_id`, `ma_id`, `ma_pb_id`, `ma_fileno`, `ma_accno`, `vd_accno`,
+        `tbdefitems_subzone`.`tdi_parent_name` `zone`, `tbdefitems_subzone`.`tdi_value` `subzone`, `ma_addr_ln1`, 
+        `tbdefitems_ishasbuilding`.`tdi_value` `isbldg`, `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,bldgsotery.tdi_value bldgsotery, 
+        format(`vt_approvednt`,2) vt_approvednt, format(`vt_approvedtax`,2) `vt_approvedtax`,  format(`vt_proposedrate`,2) `vt_proposedrate`, `vt_note`, propertstatus.tdi_desc propertstatus, ma_addr_ln1, ma_addr_ln2, ma_addr_ln3, ma_addr_ln4, ma_city,ma_postcode,state.tdi_value state
+        FROM `cm_appln_valdetl`
+        INNER JOIN `cm_masterlist` ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
+        LEFT JOIN `cm_appln_val_tax` ON `cm_appln_val_tax`.`vt_vd_id` = `cm_appln_valdetl`.`vd_id`
+        INNER JOIN `cm_owner` ON `TO_MA_ID` = `ma_id`
+        LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
+        LEFT JOIN `tbdefitems_ishasbuilding` ON `cm_appln_valdetl`.`vd_ishasbuilding` = `tbdefitems_ishasbuilding`.`tdi_key`
+        LEFT JOIN `tbdefitems_bldgtype` ON `tbdefitems_bldgtype`.`tdi_key` = `cm_appln_valdetl`.`vd_bldgtype_id` 
+        left join (select *  from tbdefitems where tdi_td_name = "PROPERTYSTAGE") propertstatus
+        on propertstatus.tdi_key = vd_approvalstatus_id 
+        left join (select *  from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgsotery
+        on bldgsotery.tdi_key = vd_bldgstorey_id 
+        left join (select *  from tbdefitems where tdi_td_name = "STATE") state
+        on state.tdi_key = ma_state_id  where vd_va_id = ifnull("'.$baskedid.'",0) '.$filterquery);
+               // Log::info('Test');
+
+        $propertyDetails = Datatables::collection($property)->make(true);
+   
+        return $propertyDetails;
     }
 
     public function propertyTables(Request $request){
@@ -646,7 +714,7 @@ class InspectionController extends Controller
                 }               
             }
             if($filterquery != ''){
-                $filterquery  = ' AND '. $filterquery ;
+                $filterquery  = ' Where '. $filterquery ;
             }
             Log::info($filterquery);
 
@@ -658,22 +726,20 @@ class InspectionController extends Controller
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
             $property = DB::select('select `vd_approvalstatus_id`, `vd_id`, `vd_va_id`, `ma_id`, `ma_pb_id`, `ma_fileno`, `ma_accno`, `vd_accno`,
-        `tbdefitems_subzone`.`tdi_parent_name` `zone`, `tbdefitems_subzone`.`tdi_value` `subzone`, `ma_addr_ln1`, 
-        `tbdefitems_ishasbuilding`.`tdi_value` `isbldg`, `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,bldgsotery.tdi_value bldgsotery, 
-        format(`vt_approvednt`,2) vt_approvednt, format(`vt_approvedtax`,2) `vt_approvedtax`,  format(`vt_proposedrate`,2) `vt_proposedrate`, `vt_note`, propertstatus.tdi_desc propertstatus, ma_addr_ln1, ma_addr_ln2, ma_addr_ln3, ma_addr_ln4, ma_city,ma_postcode,state.tdi_value state
-        FROM `cm_appln_valdetl`
-        INNER JOIN `cm_masterlist` ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
-        LEFT JOIN `cm_appln_val_tax` ON `cm_appln_val_tax`.`vt_vd_id` = `cm_appln_valdetl`.`vd_id`
-        INNER JOIN `cm_owner` ON `TO_MA_ID` = `ma_id`
-        LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
-        LEFT JOIN `tbdefitems_ishasbuilding` ON `cm_appln_valdetl`.`vd_ishasbuilding` = `tbdefitems_ishasbuilding`.`tdi_key`
-        LEFT JOIN `tbdefitems_bldgtype` ON `tbdefitems_bldgtype`.`tdi_key` = `cm_appln_valdetl`.`vd_bldgtype_id` 
-        left join (select *  from tbdefitems where tdi_td_name = "PROPERTYSTAGE") propertstatus
-        on propertstatus.tdi_key = vd_approvalstatus_id 
-        left join (select *  from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgsotery
-        on bldgsotery.tdi_key = vd_bldgstorey_id 
-        left join (select *  from tbdefitems where tdi_td_name = "STATE") state
-        on state.tdi_key = ma_state_id  where vd_va_id = ifnull("'.$baskedid.'",0) '.$filterquery);
+                `tbdefitems_subzone`.`tdi_parent_name` `zone`, `tbdefitems_subzone`.`tdi_value` `subzone`,
+                `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, 
+                `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,
+                bldgsotery.tdi_value bldgsotery, 
+                 propertstatus.tdi_desc propertstatus
+                FROM cm_officialsearch
+                inner join `cm_appln_valdetl` on vd_id = os_vd_id
+                inner join `cm_masterlist` ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
+                left join `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
+                left join `tbdefitems_bldgtype` ON `tbdefitems_bldgtype`.`tdi_key` = `cm_appln_valdetl`.`vd_bldgtype_id` 
+                left join (select *  from tbdefitems where tdi_td_name = "PROPERTYSTAGE") propertstatus
+                on propertstatus.tdi_key = vd_approvalstatus_id 
+                left join (select *  from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgsotery
+                on bldgsotery.tdi_key = vd_bldgstorey_id    '.$filterquery);
                // Log::info('Test');
 
         $propertyDetails = Datatables::collection($property)->make(true);
@@ -681,7 +747,7 @@ class InspectionController extends Controller
         return $propertyDetails;
     }
 
-public function inspectionDetailTab(Request $request){
+    public function inspectionDetailTab(Request $request){
            // set_time_limit(0);
             $prop_id = $request->input('prop_id');  
             $pb = $request->input('pb');  
@@ -748,19 +814,19 @@ public function inspectionDetailTab(Request $request){
             }
 
             $owner = DB::select('select cm_owner.*, owntype.tdi_value owntype, state.tdi_value state
-from  cm_appln_valdetl  inner join cm_masterlist on ma_id = vd_ma_id
-inner join cm_owner on to_ma_id = ma_id
-left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "OWNTYPE") owntype on owntype.tdi_key = to_owntype_id
-left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE") state on state.tdi_key = TO_STATE_ID
-left join (select tdi_key, tdi_value,tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone 
-on subzone.tdi_key = ma_subzone_id where vd_id = ifnull("'.$prop_id.'",0)');
+            from  cm_appln_valdetl  inner join cm_masterlist on ma_id = vd_ma_id
+            inner join cm_owner on to_ma_id = ma_id
+            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "OWNTYPE") owntype on owntype.tdi_key = to_owntype_id
+            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE") state on state.tdi_key = TO_STATE_ID
+            left join (select tdi_key, tdi_value,tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone 
+            on subzone.tdi_key = ma_subzone_id where vd_id = ifnull("'.$prop_id.'",0)');
 
         Log::info($owner);
 
             $master = DB::select('select ma_ishasbuilding_id, ma_id, ma_pb_id,  ma_accno,ma_fileno,subzone.tdi_value subzone, subzone.tdi_parent_name zone,  ma_subzone_id,subzone.tdi_parent_key zone_id, ma_district_id, ma_addr_ln1,ma_addr_ln2,ma_addr_ln3,ma_addr_ln4, ma_city, ma_state_id, ma_postcode 
-from  cm_appln_valdetl  inner join cm_masterlist on ma_id = vd_ma_id
-left join (select tdi_key, tdi_value,tdi_parent_key,tdi_parent_name from tbdefitems where tdi_td_name = "SUBZONE") subzone 
-on subzone.tdi_key = ma_subzone_id where vd_id = ifnull("'.$prop_id.'",0)');
+            from  cm_appln_valdetl  inner join cm_masterlist on ma_id = vd_ma_id
+            left join (select tdi_key, tdi_value,tdi_parent_key,tdi_parent_name from tbdefitems where tdi_td_name = "SUBZONE") subzone 
+            on subzone.tdi_key = ma_subzone_id where vd_id = ifnull("'.$prop_id.'",0)');
             //$master = DB::table('cm_masterlist')->where('ma_id', $prop_id)->first();
             //$building = DB::select('select * from cm_bldg where bl_ma_id = ifnull("'.$prop_id.'",0)');
             $building = DB::select('select DATE_FORMAT(ab_cccdate, "%d/%m/%Y") ab_cccdate1, DATE_FORMAT(ab_occupieddate, "%d/%m/%Y") ab_occupieddate1,cm_appln_bldg.*, bldgtype.tdi_value bldgtype, tdi_parent_name
@@ -794,16 +860,16 @@ on subzone.tdi_key = ma_subzone_id where vd_id = ifnull("'.$prop_id.'",0)');
              where  TO_MA_ID = ifnull("'.$prop_id.'",0)');
 
            $bldgardetail = DB::select('select  cm_appln_bldgarea.*, cm_appln_bldg.ab_bldg_no, vd_accno, arzone.tdi_value arzone, arlvel.tdi_value arlvel, arcate.tdi_value arcate, floortype.tdi_value floortype
-, artype.tdi_value artype, aruse.tdi_value aruse, ceilingtype.tdi_value ceilingtype, walltype.tdi_value walltype
-from cm_appln_valdetl join  cm_appln_bldg on ab_vd_id = vd_id join cm_appln_bldgarea on aba_ab_id = ab_id 
-left join tbdefitems artype on artype.tdi_key = cm_appln_bldgarea.ABA_AREATYPE_ID and  artype.tdi_td_name = "AREATYPE"
-left join tbdefitems arcate on arcate.tdi_key = cm_appln_bldgarea.ABA_AREACATEGORY_ID  and arcate.tdi_td_name = "AREACATEGORY"
-left join tbdefitems arlvel on arlvel.tdi_key = cm_appln_bldgarea.ABA_AREALEVEL_ID and arlvel.tdi_td_name = "AREALEVEL" 
-left join tbdefitems arzone on arzone.tdi_key = cm_appln_bldgarea.ABA_AREAZONE_ID and arzone.tdi_td_name = "AREAZONE"
-left join tbdefitems floortype on floortype.tdi_key = cm_appln_bldgarea.ABA_FLOORTYPE_ID and floortype.tdi_td_name = "FLOORTYPE"
-left join tbdefitems aruse on aruse.tdi_key = cm_appln_bldgarea.aba_areause_id  and aruse.tdi_td_name = "AREAUSE"
-left join tbdefitems ceilingtype on ceilingtype.tdi_key = cm_appln_bldgarea.ABA_CEILINGTYPE_ID and ceilingtype.tdi_td_name = "CEILINGTYPE"
-left join tbdefitems walltype on walltype.tdi_key = cm_appln_bldgarea.aba_walltype_id  and walltype.tdi_td_name = "WALLTYPE" 
+            , artype.tdi_value artype, aruse.tdi_value aruse, ceilingtype.tdi_value ceilingtype, walltype.tdi_value walltype
+            from cm_appln_valdetl join  cm_appln_bldg on ab_vd_id = vd_id join cm_appln_bldgarea on aba_ab_id = ab_id 
+            left join tbdefitems artype on artype.tdi_key = cm_appln_bldgarea.ABA_AREATYPE_ID and  artype.tdi_td_name = "AREATYPE"
+            left join tbdefitems arcate on arcate.tdi_key = cm_appln_bldgarea.ABA_AREACATEGORY_ID  and arcate.tdi_td_name = "AREACATEGORY"
+            left join tbdefitems arlvel on arlvel.tdi_key = cm_appln_bldgarea.ABA_AREALEVEL_ID and arlvel.tdi_td_name = "AREALEVEL" 
+            left join tbdefitems arzone on arzone.tdi_key = cm_appln_bldgarea.ABA_AREAZONE_ID and arzone.tdi_td_name = "AREAZONE"
+            left join tbdefitems floortype on floortype.tdi_key = cm_appln_bldgarea.ABA_FLOORTYPE_ID and floortype.tdi_td_name = "FLOORTYPE"
+            left join tbdefitems aruse on aruse.tdi_key = cm_appln_bldgarea.aba_areause_id  and aruse.tdi_td_name = "AREAUSE"
+            left join tbdefitems ceilingtype on ceilingtype.tdi_key = cm_appln_bldgarea.ABA_CEILINGTYPE_ID and ceilingtype.tdi_td_name = "CEILINGTYPE"
+            left join tbdefitems walltype on walltype.tdi_key = cm_appln_bldgarea.aba_walltype_id  and walltype.tdi_td_name = "WALLTYPE" 
                 where ab_vd_id = ifnull("'.$prop_id.'",0)');
             $count = count($master);
 
@@ -967,16 +1033,16 @@ on subzone.tdi_key = ma_subzone_id where vd_id = ifnull("'.$prop_id.'",0)');
              where  TO_MA_ID = ifnull("'.$prop_id.'",0)');
 
            $bldgardetail = DB::select('select  cm_appln_bldgarea.*, cm_appln_bldg.ab_bldg_no, vd_accno, arzone.tdi_value arzone, arlvel.tdi_value arlvel, arcate.tdi_value arcate, floortype.tdi_value floortype
-, artype.tdi_value artype, aruse.tdi_value aruse, ceilingtype.tdi_value ceilingtype, walltype.tdi_value walltype
-from cm_appln_valdetl join  cm_appln_bldg on ab_vd_id = vd_id join cm_appln_bldgarea on aba_ab_id = ab_id 
-join tbdefitems artype on artype.tdi_key = cm_appln_bldgarea.ABA_AREATYPE_ID and  artype.tdi_td_name = "AREATYPE"
-join tbdefitems arcate on arcate.tdi_key = cm_appln_bldgarea.ABA_AREACATEGORY_ID  and arcate.tdi_td_name = "AREACATEGORY"
-left join tbdefitems arlvel on arlvel.tdi_key = cm_appln_bldgarea.ABA_AREALEVEL_ID and arlvel.tdi_td_name = "AREALEVEL" 
-left join tbdefitems arzone on arzone.tdi_key = cm_appln_bldgarea.ABA_AREAZONE_ID and arzone.tdi_td_name = "AREAZONE"
-left join tbdefitems floortype on floortype.tdi_key = cm_appln_bldgarea.ABA_FLOORTYPE_ID and floortype.tdi_td_name = "FLOORTYPE"
-left join tbdefitems aruse on aruse.tdi_key = cm_appln_bldgarea.aba_areause_id  and aruse.tdi_td_name = "AREAUSE"
-left join tbdefitems ceilingtype on ceilingtype.tdi_key = cm_appln_bldgarea.ABA_CEILINGTYPE_ID and ceilingtype.tdi_td_name = "CEILINGTYPE"
-left join tbdefitems walltype on walltype.tdi_key = cm_appln_bldgarea.aba_walltype_id  and walltype.tdi_td_name = "WALLTYPE" 
+            , artype.tdi_value artype, aruse.tdi_value aruse, ceilingtype.tdi_value ceilingtype, walltype.tdi_value walltype
+            from cm_appln_valdetl join  cm_appln_bldg on ab_vd_id = vd_id join cm_appln_bldgarea on aba_ab_id = ab_id 
+            join tbdefitems artype on artype.tdi_key = cm_appln_bldgarea.ABA_AREATYPE_ID and  artype.tdi_td_name = "AREATYPE"
+            join tbdefitems arcate on arcate.tdi_key = cm_appln_bldgarea.ABA_AREACATEGORY_ID  and arcate.tdi_td_name = "AREACATEGORY"
+            left join tbdefitems arlvel on arlvel.tdi_key = cm_appln_bldgarea.ABA_AREALEVEL_ID and arlvel.tdi_td_name = "AREALEVEL" 
+            left join tbdefitems arzone on arzone.tdi_key = cm_appln_bldgarea.ABA_AREAZONE_ID and arzone.tdi_td_name = "AREAZONE"
+            left join tbdefitems floortype on floortype.tdi_key = cm_appln_bldgarea.ABA_FLOORTYPE_ID and floortype.tdi_td_name = "FLOORTYPE"
+            left join tbdefitems aruse on aruse.tdi_key = cm_appln_bldgarea.aba_areause_id  and aruse.tdi_td_name = "AREAUSE"
+            left join tbdefitems ceilingtype on ceilingtype.tdi_key = cm_appln_bldgarea.ABA_CEILINGTYPE_ID and ceilingtype.tdi_td_name = "CEILINGTYPE"
+            left join tbdefitems walltype on walltype.tdi_key = cm_appln_bldgarea.aba_walltype_id  and walltype.tdi_td_name = "WALLTYPE" 
                 where ab_vd_id = ifnull("'.$prop_id.'",0)');
             $count = count($master);
 

@@ -145,18 +145,12 @@ $(document).ready(function (){
 			        {"data": "mal_fileno", "name": "account number"},
 			        {"data": "zone", "name": "account number"},
 			        {"data": "subzone", "name": "fileno"},
-			        {"data": function(data){
-			        	 if (data.mal_address1 !== "NULL") {
-				             return data.mal_address1; 
-				         }else{
-				             return '';
-				         }
-			       		 }, "name": "zone"},
-			        {"data": "mal_address2", "name": "ishasbldg"},
-			        {"data": "mal_address3", "name": "owntype"}, 
+			        {"data": "mal_addr_ln1", "name": "zone"},
+			        {"data": "mal_addr_ln2", "name": "ishasbldg"},
+			        {"data": "mal_addr_ln3", "name": "owntype"}, 
 			        {"data": "mal_postcode", "name": "TO_OWNNAME"}, 
 			        {"data": "mal_city", "name": "bldgcount"}, 
-			        {"data": "tdi_value", "name": "bldgcount"}
+			        {"data": "tstatus", "name": "bldgcount"}
 		   		],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
 		   			var oSettings = this.fnSettings();

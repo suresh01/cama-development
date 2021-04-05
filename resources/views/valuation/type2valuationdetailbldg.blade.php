@@ -53,7 +53,6 @@
 										</div>
 									</div>
 									<div class="grid_4">		
-
 										<div style="line-height: 2;">
 											<strong><span>Property Category : </span></strong>
 											<span>{{$rec->propcategorty}}</span>
@@ -71,8 +70,7 @@
 											<span>{{$rec->bldgstorey}}</span>
 										</div>
 									</div>						
-									<!--<div class="grid_6">				
-
+									<!--<div class="grid_6">
 										<div class="grid_3 invoice_to">	
 											<strong><span>Zon : </span></strong>
 											<span>{{$rec->zone}}</span>	

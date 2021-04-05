@@ -24,6 +24,7 @@
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">
 							
 					@include('codemaintenance.ownershiptransfer.newsearch')
+					<a href="#" onclick="addProperty()">Add Property</a>
 				</div>
 				<br>
         
@@ -58,10 +59,13 @@
 										ADDRESS 3
 									</th>	
 									<th>
-										POSTCODE
-									</th>	
-									<th>
 										CITY
+									</th>
+									<th>
+										POSTCODE
+									</th>		
+									<th>
+										STATUS
 									</th>	
 									<th>
 										ACTION
@@ -110,11 +114,11 @@
 														ADDRESS 3
 													</th>	
 													<th>
-														POSTCODE
-													</th>	
-													<th>
 														CITY
 													</th>
+													<th>
+														POSTCODE
+													</th>	
 													<th>
 														STATUS
 													</th>
@@ -152,20 +156,6 @@
 		}
 
 
-		function deleteProperty(){
-			var table = $('#proptble').DataTable();
-//console.log(table.rows('.selected').data());
-			var account = $.map(table.rows('.selected').data(), function (item) {
-				//console.log(item);
-	        	return item['vd_id']
-	   		});
-			var type = "delete";
-			$('#accounts').val(account.toString());
-			$('#addDetail').modal();
-			console.log(account.toString());
-			
-			
-		}
 	
 
 		
@@ -200,6 +190,115 @@
 		   }
 		}
 
+		function approve(id,currstatus){
+
+	var table = $('#proptble').DataTable();
+		var account = $.map(table.rows('.selected').data(), function (item) {
+		// console.log(item);
+    		return item['os_id']
+		});
+		if(account.length==0){
+				account=id;
+	   		} else {
+	   			account=account.toString();
+	   		}
+		//alert(account);
+		//alert(currstatus);
+		var noty_id = noty({
+			layout : 'center',
+			text: 'Are you sure want to Submit?',
+			modal : true,
+			buttons: [
+				{type: 'button pink', text: 'Submit', click: function($noty) {
+					$noty.close();
+					$.ajax({
+		  				type: 'GET', 
+					    url:'approve',
+					    headers: {
+						    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						},
+				        data:{param_value:id,module:'propertyaddress',param:currstatus,param_str:account },
+				        success:function(data){	        	
+				        	
+							window.location.assign("propertyaddress");	
+							
+			        	},
+				        error:function(data){
+							//$('#loader').css('display','none');	
+				        	alert('error');
+			        	}
+			    	});
+				  }
+				},
+				{type: 'button blue', text: 'Cancel', click: function($noty) {
+					$noty.close();
+				  }
+				}
+				],
+			 type : 'success', 
+		});
+
+	}
+
+
+
+	function approve(id,currstatus,type){
+		var param_status ="";
+		if(type == 1){
+			param_status = 'AP';
+		} else {
+			param_status = 'RJ';
+		}
+
+		var table = $('#bldgtable').DataTable();
+		var account = $.map(table.rows('.selected').data(), function (item) {
+		// console.log(item);
+    		return item['os_id']
+		});
+		if(account.length==0){
+				account=id;
+	   		} else {
+	   			account=account.toString();
+	   		}
+
+		//alert(account);
+		//alert(currstatus);
+		var noty_id = noty({
+			layout : 'center',
+			text: 'Are you sure want to Submit?',
+			modal : true,
+			buttons: [
+				{type: 'button pink', text: 'Submit', click: function($noty) {
+					$noty.close();
+					$.ajax({
+		  				type: 'GET', 
+					    url:'approve',
+					    headers: {
+						    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						},
+				        data:{param_value:id,module:'propertyaddress',param:currstatus,param_str:account,param_status:param_status },
+				        success:function(data){	 	
+				        	
+							window.location.assign("propertyaddress");	
+							
+			        	},
+				        error:function(data){
+							//$('#loader').css('display','none');	
+				        	alert('error');
+			        	}
+			    	});
+				  }
+				},
+				{type: 'button blue', text: 'Cancel', click: function($noty) {
+					$noty.close();
+				  }
+				}
+				],
+			 type : 'success', 
+		});
+
+	}
+
 $(document).ready(function (){
 
 	
@@ -212,26 +311,53 @@ $(document).ready(function (){
 				 
 		        // ajax: '{{ url("inspectionproperty") }}',
 		        /*"ajax": '/bookings/datatables',*/
+		         "ajax": {
+		            "type": "GET",
+		            "url": 'searchpropertyaddressdata',
+		            "contentType": 'application/json; charset=utf-8',
+				    "headers": {
+					    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+		        },
 		        "columns": [
-			        {"data": "ma_id", "orderable": false, "searchable": false, "name":"_id" },
+			        {"data": "mal_id", "orderable": false, "searchable": false, "name":"_id" },
 			        {"data": null, "name": "sno"},
 			        {"data":  function(data){
 
-			        	return "<a href=#' onclick='submitLogForm("+data.ma_accno+")'>"+data.ma_accno+"</a>";
+			        	return "<a href=#' onclick='edit("+data.mal_id+")'>"+data.mal_accno+"</a>";
 			        
 			        }, "name": "account number"},
-			        {"data": "ma_fileno", "name": "fileno"},
+			        {"data": "mal_fileno", "name": "fileno"},
 			        {"data": "zone", "name": "zone"},
 			        {"data": "subzone", "name": "subzone"},
-			        {"data": "ma_addr_ln1", "name": "owner"}, 
-			        {"data": "ma_addr_ln2", "name": "ishasbldg"},
-			        {"data": "ma_addr_ln3", "name": "owntype"}, 
-			        {"data": "ma_city", "name": "TO_OWNNAME"}, 
-			        {"data": "ma_postcode", "name": "bldgcount"}, 
+			        {"data": "mal_addr_ln1", "name": "owner"}, 
+			        {"data": "mal_addr_ln2", "name": "ishasbldg"},
+			        {"data": "mal_addr_ln3", "name": "owntype"}, 
+			        {"data": "mal_city", "name": "TO_OWNNAME"}, 
+			        {"data": "mal_postcode", "name": "bldgcount"}, 
+			        {"data": "tstatus", "name": "bldgcount"}, 
 			        {"data":  function(data){
 
-			        	return '<span><a onclick="edit('+data.ma_accno+')" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span>';
-			        
+			        	var editaction ='<a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -62px !important;display: inline-block; float: right;" title="View Log" 			        	onclick="submitLogForm('+data.mal_id+')"></a></span>&nbsp;&nbsp;&nbsp;&nbsp;' ;
+
+			        	var deleteaction ="&nbsp;&nbsp;<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; float: right;'  onclick='deleteProperty("+data.mal_id+")' href='#' title='Delete'></a></span>";
+
+							if(data.mal_approvalstatus_id == '1'  || data.mal_approvalstatus_id == '6'){
+								action =  deleteaction + editaction  ;				
+
+							} else if(data.mal_approvalstatus_id == '2'){
+								action= deleteaction + editaction + '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.mal_id+',2)"  title="Submit To Approve" href="#"></a></span>'
+							
+							} else if(data.mal_approvalstatus_id == '4'){
+								action =  editaction +  '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.mal_id+',4,1)"  title="Approve" href="#"></a></span>' + 
+								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('+data.mal_id+',4,2)"  title="Reject" href="#"></a></span>';		
+
+							} else if(data.mal_approvalstatus_id == '5'){
+								action =  editaction+  '<!--<spane><a  class=" new-action-icons reverse" onclick="approve('+data.mal_id+',5)" title="Revise" href="#"></a></span>-->								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('+data.mal_id+',5)" title="Transfer" href="#"></a></span>';						
+							} 
+							
+			        		return action;
+
 			        }, "name": "bldgcount"}
 		   		],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
@@ -363,6 +489,7 @@ $(document).ready(function (){
 				 
 		      //   ajax: '{{ url("inspectionproperty") }}',
 		        /*"ajax": '/bookings/datatables',*/
+
 		        "columns": [
 			        {"data": "mal_id", "orderable": false, "searchable": false, "name":"_id" },
 			        {"data": "mal_accno", "name": "sno"},
@@ -495,6 +622,52 @@ $(document).ready(function (){
         });
 	}
 
+	function addProperty() {		
+		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0,left = 312,top = 234');
+		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
+		        w.location = "searchpropertyaddress";
+		    }	    
+		    if (w.outerWidth < screen.availWidth || w.outerHeight < screen.availHeight)
+			{
+				w.moveTo(0,0);
+				w.resizeTo(screen.availWidth, screen.availHeight);
+			}
+		}
+
+
+		function deleteProperty(id) {
+
+            	var type = "propertyaddressmaintenance";
+				
+				var noty_id = noty({
+					layout : 'center',
+					text: 'Do you want Delete?',
+					modal : true,
+					buttons: [
+						{type: 'button pink', text: 'Delete', click: function($noty) {
+				  
+							$.ajax({
+				                type:'GET',
+				                url:'grapnewdata',
+				                data:{accounts:"delete",id:id,type:type},
+				                success:function(data){           
+				                  
+				                  window.location.assign('propertyaddress');
+				                }
+				            });
+							$noty.close();
+							//noty({force: true, text: 'You clicked "Ok" button', type: 'success',layout : 'center',modal : true,});
+						  }
+						},
+						{type: 'button green', text: 'Cancel', click: function($noty) {
+							$noty.close();
+							//noty({force: true, text: 'You clicked "Cancel" button', type: 'error',layout : 'center',modal : true,});
+						  }
+						}
+						],
+					type : 'success', 
+				});
+			}
 
 	</script>
 </div>

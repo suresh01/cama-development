@@ -225,6 +225,7 @@
 							</div>
 							<span class=" label_intro"></span>
 						</div>
+						
 						<div class="form_grid_12">
 							<label class="field_title" id="llevel" for="level">FLOOR TYPE<span class="req">*</span></label>
 							<div  class="form_input">

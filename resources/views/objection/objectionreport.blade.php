@@ -35,7 +35,7 @@
 				
 				<br>
 				<div class="form_input">
-					<div id="breadCrumb3"  class="breadCrumb grid_3">
+					<div id="breadCrumb3"  class="breadCrumb grid_4">
 						<ul>
 							<li><a href="#">Home</a></li>
 							<li><a href="#">Valuation Process</a></li>
@@ -69,7 +69,8 @@
 						<div id="widget_tab">
 							<ul>
 								<li><a href="agenda?term={{$term}}&id={{$id}}" >Agenda</a></li>
-								<li><a href="notice?term={{$term}}&id={{$id}}">Notis</a></li>
+								<li><a href="newnotice?term={{$term}}&id={{$id}}">New Notis</a></li>
+								<li><a href="notice?term={{$term}}&id={{$id}}">Existing Notis</a></li>
 								<li><a href="objectionreport?term={{$term}}&id={{$id}}" class="active_tab">Objection</a></li>
 								<li><a href="decision?term={{$term}}&id={{$id}}">Decision</a></li>
 								<li><a href="result?term={{$term}}&id={{$id}}">Report</a></li>
@@ -177,14 +178,14 @@
 			<div id="addgroup" style="display:none" class="grid_10 full_block">
 				<div class="widget_wrap">
 					<div class="widget_content">
-						<h3 id="title">Add Agenda</h3>
+						<h3 id="title">Objection</h3>
 						<form id="addgroupfrom"  autocomplete="off" class="" method="post" action="#" >
 							@csrf
 							<input type="hidden" name="id" id="id" value="0">
 							<input type="hidden" name="operation" id="operation" value="0">
 							<input type="hidden" name="ob_id" id="ob_id" value="{{$id}}">
 							<input type="hidden" name="ol_id" id="ol_id" value="0">
-							<div  class="grid_6 form_container left_label">
+							<div id="valpart" class="grid_6 form_container left_label">
 								<ul>
 									<li>		
 									<fieldset>
@@ -192,28 +193,28 @@
 										<div class="form_grid_12">									
 											<label class="field_title" id="termname" for="termid">Zone<span class="req">*</span></label>
 											<div class="form_input">
-												<input id="vzone" required="true" readonly="true" name="" type="text"  value="{{ old('siries') }}" />
+												<input id="vzone" readonly="true" name="" type="text"  value="{{ old('siries') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
 											<label class="field_title" id="lblgroup" for="name">Subzone<span class="req">*</span></label>
 											<div class="form_input">
-												<input id="vsubzone" required="true"  readonly="true" name="" type="text"  value="{{ old('desc') }}" />
+												<input id="vsubzone"  readonly="true" name="" type="text"  value="{{ old('desc') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
 											<label class="field_title" id="lblgroup" for="name">Approved NT<span class="req">*</span></label>
 											<div class="form_input">
-												<input id="vaprovednt" required="true"  readonly="true" name="" type="text"  value="{{ old('desc') }}" />
+												<input id="vaprovednt"  readonly="true" name="" type="text"  value="{{ old('desc') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
 											<label class="field_title" id="lblgroup" for="name">Approved TAX<span class="req">*</span></label>
 											<div class="form_input">
-												<input id="vaprovedtax" required="true"  readonly="true" name="" type="text"  value="{{ old('desc') }}" />
+												<input id="vaprovedtax"  readonly="true" name="" type="text"  value="{{ old('desc') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>	
@@ -223,7 +224,7 @@
 								</ul>
 							</div>
 
-							<input type="hidden" name="ol_id" id="ol_id" value="0">
+							<!--<input type="hidden" name="ol_id" id="ol_id" value="0">-->
 							<div  class="grid_6 form_container left_label">
 								<ul>
 									<li>		
@@ -312,7 +313,7 @@
 												</div>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="lposition" for="position">User list<span class="req">*</span></label>
+													<label class="field_title" id="lposition" for="position">Officer Incharge<span class="req">*</span></label>
 													<div  class="form_input">
 														<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="user" tabindex="7" name="user" tabindex="20">
 																<option></option>
@@ -425,6 +426,7 @@
 			$("#operation").val(2);
 			$("#grouptable").hide();
 			$("#addgroup").show();
+			$("#valpart").show();
 
 			$("#id").val(id);
 			$("#time").val($("#time_"+id).val());
@@ -442,6 +444,7 @@
 		function updateReason(){
 			$("#operation").val(4);
 			$("#grouptable").hide();
+			$("#valpart").hide();
 			$("#addgroup").show();
 			var table = $('#agendatbl').DataTable();
 
@@ -574,12 +577,12 @@ console.log(account.toString());
 		function validateGroup(){
 			$('#addgroupfrom').validate({
 		        rules: {
-		            'termid': 'required',
-		            'name': 'required'
+		            'termid1': 'required',
+		            'name1': 'required'
 		        },
 		        messages: {
-					"term": "Please select term name",
-					"name": "Please enter basket name"
+					"term1": "Please select term name",
+					"name1": "Please enter basket name"
 		        },
 		        submitHandler: function(form) {
 					var d=new Date();		        	

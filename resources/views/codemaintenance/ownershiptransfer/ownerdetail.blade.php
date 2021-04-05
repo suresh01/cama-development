@@ -29,11 +29,11 @@
 @foreach ($master as $master)
 <script type="text/javascript">
 			$(document).ready(function(){
-				$("#subzone").val('{{$master->ma_subzone_id}}');
+				$("#subzone").val('{{$master->mal_subzone_id}}');
 				$("#zone").val('{{$master->zone_id}}');
-				$("#state").val('{{$master->ma_state_id}}');
-				$("#district").val('{{$master->ma_district_id}}');
-				$("#eaccountnumber").val('{{$master->ma_accno}}');
+				$("#state").val('{{$master->mal_state_id}}');
+				$("#district").val('{{$master->mal_district_id}}');
+				$("#eaccountnumber").val('{{$master->mal_accno}}');
 			});
 		</script>
 			<div class="grid_12 full_block">
@@ -55,7 +55,7 @@
 				<div class="form_grid_12">
 					<label class="field_title"  id="accnumberlbl" for="username">ACCOUNT NUMBER<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->ma_accno}}" maxlength="100" >
+						<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->mal_accno}}" maxlength="100" >
 					</div>
 					<span class=" label_intro"></span>
 				</div>
@@ -63,7 +63,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">FILE NUMBER<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="filenumber" tabindex="2"name="ofilenumber" readonly="true" type="text" value="{{$master->ma_fileno}}" maxlength="50" class=""/>
+						<input id="filenumber" tabindex="2"name="ofilenumber" readonly="true" type="text" value="{{$master->mal_fileno}}" maxlength="50" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
@@ -110,7 +110,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 1<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="address1" tabindex="8" readonly="true" name="oaddress1"  type="text" value="{{$master->ma_addr_ln1}}" maxlength="100" class=""/>
+						<input id="address1" tabindex="8" readonly="true" name="oaddress1"  type="text" value="{{$master->mal_addr_ln1}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
@@ -118,35 +118,35 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 2<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="address2"  tabindex="9" readonly="true" name="oaddress2"  type="text" value="{{$master->ma_addr_ln2}}" maxlength="100" class=""/>
+						<input id="address2"  tabindex="9" readonly="true" name="oaddress2"  type="text" value="{{$master->mal_addr_ln2}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 3<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="address3"  name="oaddress3" readonly="true" tabindex="10"  type="text" value="{{$master->ma_addr_ln3}}" maxlength="100" class=""/>
+						<input id="address3"  name="oaddress3" readonly="true" tabindex="10"  type="text" value="{{$master->mal_addr_ln3}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 4<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="address4"  name="oaddress4" readonly="true" tabindex="11"  type="text" value="{{$master->ma_addr_ln4}}" maxlength="100" class=""/>
+						<input id="address4"  name="oaddress4" readonly="true" tabindex="11"  type="text" value="{{$master->mal_addr_ln4}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">POST CODE<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="postcode" name="opostcode" readonly="true" tabindex="12"  type="text" value="{{$master->ma_postcode}}" maxlength="50" class=""/>
+						<input id="postcode" name="opostcode" readonly="true" tabindex="12"  type="text" value="{{$master->mal_postcode}}" maxlength="50" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="city"  name="ocity" tabindex="13" readonly="true" type="text" value="{{$master->ma_city}}" maxlength="50" class=""/>
+						<input id="city"  name="ocity" tabindex="13" readonly="true" type="text" value="{{$master->mal_city}}" maxlength="50" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
@@ -194,7 +194,30 @@
 					</div>
 					<span class=" label_intro"></span>
 				</div>
-				
+				<div class="form_grid_12">
+					<label class="field_title" id="llevel" for="level">DISTRICT<span class="req">*</span></label>
+					<div  class="form_input">
+						
+						<input id="edistrict" tabindex="8" name="edistrict" readonly="" type="text" maxlength="100" class=""/>
+					</div>
+					<span class=" label_intro"></span>
+				</div>
+		 		
+				<div class="form_grid_12">
+					<label class="field_title" id="llevel" for="level">ZONE<span class="req">*</span></label>
+					<div  class="form_input">
+						<input id="ezone" tabindex="8" name="ezone" readonly="" type="text" maxlength="100" class=""/>
+					</div>
+					<span class=" label_intro"></span>
+				</div>
+
+				<div class="form_grid_12">
+					<label class="field_title" id="llevel" for="level">SUBZONE<span class="req">*</span></label>
+					<div  class="form_input">
+						<input id="rsubzone" tabindex="8" name="rsubzone" readonly="" type="text" maxlength="100" class=""/>
+					</div>
+					<span class=" label_intro"></span>
+				</div>
 				
 				<div class="form_grid_12">
 					<label class="field_title" id="lposition" for="position">ADDRESS 1<span class="req">*</span></label>
@@ -288,9 +311,13 @@
   	}
 
 	function copyDetail(){
+		//alert($("#subzone option:selected").text());
 		if($('#copydetail').prop("checked") == true){
             $("#estate").val($("#state").val());
 			$("#efilenumber").val($("#filenumber").val());
+			$("#edistrict").val($("#district option:selected").text());
+			$("#ezone").val($("#zone option:selected").text());
+			$("#rsubzone").val($("#subzone option:selected").text());
 			$("#eaddress1").val($("#address1").val());
 			$("#eaddress2").val($("#address2").val());
 			$("#eaddress3").val($("#address3").val());
@@ -299,10 +326,13 @@
 			$("#ecity").val($("#city").val());
 
 			$("#accountnumber").val($("#accnumber").val());
-			$("#esubzone").val($("#subzone").val());
+			//$("#esubzone").val($("#subzone").val());
         }
         else if($('#copydetail').prop("checked") == false){
             $("#estate").val('');
+			$("#edistrict").val('');
+			$("#ezone").val('');
+			$("#esubzone").val('');
 			$("#efilenumber").val('');
 			$("#eaddress1").val('');
 			$("#eaddress2").val('');

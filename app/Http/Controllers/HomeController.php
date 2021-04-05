@@ -356,9 +356,7 @@ DB::statement("insert into tempQuery values(select * from )");
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
         from tbsearchdetail mtb where sd_se_id = "18" ');
-        /*$translog = DB::select("select * FROM cm_masterlist_log 
-inner join (select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = 'STATE') state on state_id = mal_state_id
-inner join (select tdi_key subzone_id,tdi_parent_name zone, tdi_value subzone from tbdefitems where tdi_td_name = 'SUBZONE') subzone on subzone_id = mal_subzone_id");*/
+        
         $config=DB::select('select config_value serveradd from tbconfig where config_name = "host" ');
         $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser FROM tbuser');
         foreach ($config as $obj) {    
@@ -371,6 +369,7 @@ inner join (select tdi_key subzone_id,tdi_parent_name zone, tdi_value subzone fr
     
     }
 
+   
      public function addressLogTables(Request $request){
         Log::info('Test');
         ini_set('memory_limit', '2056M');
@@ -426,10 +425,11 @@ inner join (select tdi_key subzone_id,tdi_parent_name zone, tdi_value subzone fr
 
     public function ownerDetail(Request $request) {
       $prop_id = $request->input('prop_id');  
-        $master = DB::select('select ma_ishasbuilding_id, ma_id, ma_pb_id,  ma_accno,ma_fileno,  ma_subzone_id,subzone.tdi_parent_key zone_id, ma_district_id, ma_addr_ln1,ma_addr_ln2,ma_addr_ln3,ma_addr_ln4, ma_city, ma_state_id, ma_postcode 
-from  cm_masterlist 
-left join (select tdi_key, tdi_value,tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone 
-on subzone.tdi_key = ma_subzone_id where ma_accno = ifnull("'.$prop_id.'",0)');
+        $master = DB::select('select  mal_id,  mal_accno,mal_fileno,  mal_subzone_id,subzone.tdi_parent_key zone_id, 
+        mal_district_id, mal_addr_ln1,mal_addr_ln2,mal_addr_ln3,mal_addr_ln4, mal_city, mal_state_id, mal_postcode 
+        from  cm_masterlist_log 
+        left join (select tdi_key, tdi_value,tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone 
+        on subzone.tdi_key = mal_subzone_id  where mal_id = ifnull("'.$prop_id.'",0)');
 
           $district= DB::table('tbdefitems')->where('tdi_td_name', 'DISTRICT')->get(); 
           $state=DB::table('tbdefitems')->where('tdi_td_name', 'STATE')->get();
@@ -1080,7 +1080,7 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
                 }               
             }
             if($filterquery != ''){
-                $filterquery  = ' where '. $filterquery ;
+                $filterquery  = ' and '. $filterquery ;
             }
             Log::info($filterquery);
 
@@ -1094,8 +1094,11 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
       $property = DB::select("select * FROM cm_masterlist_log 
 inner join (select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = 'STATE') state on state_id = mal_state_id
-inner join (select tdi_key subzone_id,tdi_parent_name zone, tdi_value subzone from tbdefitems where tdi_td_name = 'SUBZONE') subzone on subzone_id = mal_subzone_id 
-inner join (select tdi_key ,tdi_parent_name , tdi_value  from tbdefitems where tdi_td_name = 'OWNERSHIPSTAGE') tstatus on tdi_key = ota_transtocenterstatus_id ");
+inner join (select tdi_key subzone_id,tdi_parent_name zone, tdi_value subzone from tbdefitems where tdi_td_name = 'SUBZONE') subzone 
+on subzone_id = mal_subzone_id 
+inner join (select tdi_key ,tdi_parent_name , tdi_value  tstatus from tbdefitems where tdi_td_name = 'OWNERSHIPSTAGE') tstatus 
+on tdi_key = mal_approvalstatus_id
+where mal_approvalstatus_id in ('5','6','7','8') ");
        // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
         $propertyDetails = Datatables::collection($property)->make(true);
    
@@ -2068,6 +2071,308 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
 
        return view('termsearch.popup.attachment')->with(array('attachment'=>$attachment,
         'attachtype'=>$attachtype,'prop_id'=>$prop_id,'year'=>$year));
+    }
+
+     public function officialSearch(Request $request) {
+        $search=DB::select(' select sd_key, sd_label, sd_keymainfield,
+          case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
+        from tbsearchdetail mtb where sd_se_id = "18" ');
+        
+
+        App::setlocale(session()->get('locale'));
+        
+         return view("officialsearch.property")->with('search',$search);
+    
+    }
+
+    public function officialSearchData(Request $request){
+        Log::info('Test F');
+        ini_set('max_execution_time', '360');
+        ini_set('memory_limit', '2056M');
+        $baskedid = $request->input('id');
+        $maxRow = 30;
+
+        $isfilter = $request->input('filter');
+        $filterquery = '';
+        if($isfilter == 'true'){
+            $input = $request->input();
+            $condition = $input['condition'];
+            $value = $input['value'];
+            $logic = $input['logic'];
+            $fieldcolumn = $input['field'];
+
+             foreach ($input['field'] as $fieldindex => $field) {
+                if ($fieldcolumn[$fieldindex] == "tdi_key") {
+                    $fieldcolumn[$fieldindex] = 'tbdefitems_subzone.tdi_key';
+                }/*
+                if ($fieldcolumn[$fieldindex] == "vt_id") {
+                    $fieldcolumn[$fieldindex] = '';
+                }*/
+                if($value[$fieldindex] != ""){
+                    if($fieldindex == count($input['field']) - 1) {
+                        if($fieldcolumn[$fieldindex] != ""){
+                            $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'"';
+                         }
+                    } else {
+                        if($fieldcolumn[$fieldindex] != ""){
+                           $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'" '.$logic[$fieldindex];    
+                        }   
+                    }
+                }               
+            }
+            if($filterquery != ''){
+                $filterquery  = ' Where '. $filterquery ;
+            }
+            Log::info($filterquery);
+
+        }
+       // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
+        Log::info($filterquery);
+        /* $property = DB::table('cm_appln_valdetl')->join('cm_masterlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
+        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
+        'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
+        'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
+    // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
+       $property = DB::select('select cm_officialsearch.*, `vd_approvalstatus_id`, `vd_id`, `vd_va_id`, `ma_id`, `ma_pb_id`, `ma_fileno`, `ma_accno`, `vd_accno`,
+        `tbdefitems_subzone`.`tdi_parent_name` `zone`, `tbdefitems_subzone`.`tdi_value` `subzone`,
+        `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, 
+        `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,
+        bldgsotery.tdi_value bldgsotery, 
+        `tbdefitems_ishasbuilding`.`tdi_value`  propertstatus, 
+        approval.tdi_value approvalstatus,
+        state.tdi_value state,
+        os_termdate, DATE_FORMAT(os_createdate, "%d/%m/%Y") as os_createdate_frmt  
+        FROM cm_officialsearch
+        inner join `cm_appln_valdetl` on vd_id = os_vd_id
+        inner join `cm_masterlist` ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
+        left join `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
+        left join `tbdefitems_bldgtype` ON `tbdefitems_bldgtype`.`tdi_key` = `cm_appln_valdetl`.`vd_bldgtype_id` 
+        left join (select *  from tbdefitems where tdi_td_name = "PROPERTYSTAGE") propertstatus
+        on propertstatus.tdi_key = vd_approvalstatus_id 
+        left join (select *  from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgsotery
+        on bldgsotery.tdi_key = vd_bldgstorey_id 
+        LEFT JOIN `tbdefitems_ishasbuilding` ON `cm_appln_valdetl`.`vd_ishasbuilding` = `tbdefitems_ishasbuilding`.`tdi_key`
+        left join (select *  from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval
+        on approval.tdi_key = os_officialsearchstatus_id 
+        left join (select *  from tbdefitems where tdi_td_name = "STATE") state
+        on state.tdi_key = os_state     '. $filterquery);
+        
+        $propertyDetails = Datatables::collection($property)->make(true);
+   
+        return $propertyDetails;
+    }
+
+    public function addApplication(Request $request){
+        $isfilter = $request->input('filter');
+        $basketid = $request->input('id');
+        $basket_id = $request->input('basket_id');
+        $type = $request->input('type');
+        $filterquery = '';
+        if($isfilter == 'true'){
+            $input = $request->input();
+            $condition = $input['condition'];
+            $value = $input['value'];
+            $logic = $input['logic'];
+            $fieldcolumn = $input['field'];
+
+             foreach ($input['field'] as $fieldindex => $field) {
+                
+                if($value[$fieldindex] != ""){
+                    if($fieldindex == count($input['field']) - 1) {
+                        if($fieldcolumn[$fieldindex] != ""){
+                            $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'"';
+                         }
+                    } else {
+                        if($fieldcolumn[$fieldindex] != ""){
+                           $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'" '.$logic[$fieldindex];    
+                        }   
+                    }
+                }               
+            }
+            if($filterquery != ''){
+                $filterquery  = ' AND '. $filterquery ;
+            }
+            Log::info($filterquery);
+
+        }
+        $condition = '';
+        if ($type ==2 ){
+            // $condition = ' AND PB_APPROVED = 12';
+        }
+        Log::info($filterquery.''.$condition);
+       
+        
+        $search=DB::select(' select sd_key, sd_label, 
+        case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid, sd_keymainfield
+        from tbsearchdetail mtb where sd_se_id = 18 ');
+        $state = DB::select("select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = 'STATE'");
+        return view('officialsearch.addapplication')->with('state',$state)->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id);
+    }
+
+    public function updateApplication(Request $request){
+        $id = $request->input('id');
+       
+        
+        $search=DB::select(' select sd_key, sd_label, 
+        case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid, sd_keymainfield
+        from tbsearchdetail mtb where sd_se_id = 18 ');
+
+        $state = DB::select("select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = 'STATE'");
+
+         $property = DB::select('select cm_officialsearch.*, `vd_approvalstatus_id`, `vd_id`, `vd_va_id`, `ma_id`, `ma_pb_id`, `ma_fileno`, `ma_accno`, `vd_accno`,
+        `tbdefitems_subzone`.`tdi_parent_name` `zone`, `tbdefitems_subzone`.`tdi_value` `subzone`,
+        `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, 
+        `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,
+        bldgsotery.tdi_value bldgsotery, 
+        `tbdefitems_ishasbuilding`.`tdi_value`  propertstatus, 
+        approval.tdi_value approvalstatus,
+        state.tdi_value state,
+        os_termdate, os_createdate,os_createby
+        FROM cm_officialsearch
+        inner join `cm_appln_valdetl` on vd_id = os_vd_id
+        inner join `cm_masterlist` ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
+        left join `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
+        left join `tbdefitems_bldgtype` ON `tbdefitems_bldgtype`.`tdi_key` = `cm_appln_valdetl`.`vd_bldgtype_id` 
+        left join (select *  from tbdefitems where tdi_td_name = "PROPERTYSTAGE") propertstatus
+        on propertstatus.tdi_key = vd_approvalstatus_id 
+        left join (select *  from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgsotery
+        on bldgsotery.tdi_key = vd_bldgstorey_id 
+        LEFT JOIN `tbdefitems_ishasbuilding` ON `cm_appln_valdetl`.`vd_ishasbuilding` = `tbdefitems_ishasbuilding`.`tdi_key`
+        left join (select *  from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval
+        on approval.tdi_key = os_officialsearchstatus_id 
+        left join (select *  from tbdefitems where tdi_td_name = "STATE") state
+        on state.tdi_key = os_state    where os_id = '. $id);
+
+        return view('officialsearch.application')->with('state',$state)->with('search',$search)->with('id',$id)->with('property',$property);
+    }
+
+     public function  searchPropertyAddress(Request $request){
+        $isfilter = $request->input('filter');
+        $basketid = $request->input('id');
+        $basket_id = $request->input('basket_id');
+        $type = $request->input('type');
+        $filterquery = '';
+        if($isfilter == 'true'){
+            $input = $request->input();
+            $condition = $input['condition'];
+            $value = $input['value'];
+            $logic = $input['logic'];
+            $fieldcolumn = $input['field'];
+
+             foreach ($input['field'] as $fieldindex => $field) {
+                
+                if($value[$fieldindex] != ""){
+                    if($fieldindex == count($input['field']) - 1) {
+                        if($fieldcolumn[$fieldindex] != ""){
+                            $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'"';
+                         }
+                    } else {
+                        if($fieldcolumn[$fieldindex] != ""){
+                           $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'" '.$logic[$fieldindex];    
+                        }   
+                    }
+                }               
+            }
+            if($filterquery != ''){
+                $filterquery  = ' AND '. $filterquery ;
+            }
+            Log::info($filterquery);
+
+        }
+        $condition = '';
+        if ($type ==2 ){
+            // $condition = ' AND PB_APPROVED = 12';
+        }
+        Log::info($filterquery.''.$condition);
+       /* $property = DB::select('select `vd_approvalstatus_id`, `vd_id`, `vd_va_id`, `ma_id`, `ma_pb_id`, `ma_fileno`, `ma_accno`, `vd_accno`,
+        `tbdefitems_subzone`.`tdi_parent_name` `zone`, `tbdefitems_subzone`.`tdi_value` `subzone`, `ma_addr_ln1`, 
+        `tbdefitems_ishasbuilding`.`tdi_value` `isbldg`, `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,bldgsotery.tdi_value bldgsotery, 
+        `vt_approvednt`, `vt_approvedtax`,  `vt_proposedrate`, `vt_note`, propertstatus.tdi_desc propertstatus
+        FROM `cm_appln_valdetl`
+        INNER JOIN `cm_masterlist` ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
+        LEFT JOIN `cm_appln_val_tax` ON `cm_appln_val_tax`.`vt_vd_id` = `cm_appln_valdetl`.`vd_id`
+        LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
+        LEFT JOIN `tbdefitems_ishasbuilding` ON `cm_appln_valdetl`.`vd_ishasbuilding` = `tbdefitems_ishasbuilding`.`tdi_key`
+        LEFT JOIN `tbdefitems_bldgtype` ON `tbdefitems_bldgtype`.`tdi_key` = `cm_appln_valdetl`.`vd_bldgtype_id` 
+        left join (select *  from tbdefitems where tdi_td_name = "PROPERTYSTAGE") propertstatus
+        on propertstatus.tdi_key = vd_approvalstatus_id 
+        left join (select *  from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgsotery
+        on bldgsotery.tdi_key = vd_bldgstorey_id where vd_id in (select MAX(vd_id) from cm_appln_valdetl group by vd_ma_id)  '. $filterquery.''.$condition);*/
+        
+        $search=DB::select(' select sd_key, sd_label, 
+        case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid, sd_keymainfield
+        from tbsearchdetail mtb where sd_se_id = 18 ');
+
+        return view('codemaintenance.ownershiptransfer.popup.search')->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id);
+    }
+
+     public function searchPropertyAddressData(Request $request){
+        Log::info('Testvv');
+        ini_set('memory_limit', '2056M');
+       // $baskedid = $request->input('id');
+        $maxRow = 30;
+
+        $account = $request->input('account');
+        $isfilter = $request->input('filter');
+        $filterquery = '';
+        if($isfilter == 'true'){
+            $input = $request->input();
+            $condition = $input['condition'];
+            $value = $input['value'];
+            $logic = $input['logic'];
+            $fieldcolumn = $input['field'];
+
+             foreach ($input['field'] as $fieldindex => $field) {
+                if ($fieldcolumn[$fieldindex] == "tdi_key") {
+                    $fieldcolumn[$fieldindex] = 'tbdefitems_subzone.tdi_key';
+                }/*
+                if ($fieldcolumn[$fieldindex] == "vt_id") {
+                    $fieldcolumn[$fieldindex] = '';
+                }*/
+                if($value[$fieldindex] != ""){
+                    if($fieldindex == count($input['field']) - 1) {
+                        if($fieldcolumn[$fieldindex] != ""){
+                            $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'"';
+                         }
+                    } else {
+                        if($fieldcolumn[$fieldindex] != ""){
+                           $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'" '.$logic[$fieldindex];    
+                        }   
+                    }
+                }               
+            }
+            if($filterquery != ''){
+                $filterquery  = ' where '. $filterquery ;
+            }
+            Log::info($filterquery);
+
+        }
+      $property = DB::select("select * FROM cm_masterlist_log 
+      inner join (select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = 'STATE') state on state_id = mal_state_id
+      inner join (select tdi_key subzone_id,tdi_parent_name zone, tdi_value subzone from tbdefitems where tdi_td_name = 'SUBZONE') subzone on subzone_id = mal_subzone_id 
+      left join (select tdi_key ,tdi_parent_name , tdi_value tstatus from tbdefitems where tdi_td_name = 'OWNERSHIPSTAGE') tstatus 
+      on tdi_key = mal_approvalstatus_id 
+       ".$filterquery  );
+       // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
+        $propertyDetails = Datatables::collection($property)->make(true);
+   
+        return $propertyDetails;
+    }
+
+     public function addApplicationData(Request $request){        
+        $jsondata = $request->input('jsondata');
+        $basketid = $request->input('id');
+        //$accounts = implode(",",$accounts);
+        $name=Auth::user()->name;
+        //$sql = 'call proc_grabdata("'.$accounts.'",1)';
+        Log::info("call proc_cmofficialsearch('".$jsondata."',".$basketid.",'".$name."')");
+        $search=DB::select("call proc_cmofficialsearch('".$jsondata."',".$basketid.",'".$name."')"); 
+        
+        return response()->json(array('data'=> 'true'), 200);
     }
 
     

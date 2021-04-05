@@ -111,6 +111,7 @@
 			}	  
 			
 		}
+		
 		function addRatepayer() {		
 		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0,left = 312,top = 234');
 

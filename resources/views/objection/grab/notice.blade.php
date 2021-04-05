@@ -35,7 +35,7 @@
                 Basket Name
               </th>
               <th>
-                Meeting Description
+                Status
               </th>
 						</tr>
 						</thead>
@@ -216,11 +216,12 @@ function getSelectedProp(){
        return item[0]
       });
      var id= "{{$id}}";
+     var noticetype= "{{$type}}";
       var type = "add";
          $.ajax({
            type:'GET',
            url:'noticedetailtrn',
-           data:{accounts:account,id:id,type:type},
+           data:{accounts:account,id:id,type:type,noticetype:noticetype},
            success:function(data){           
                alert(data.newcount+" Record Added");
            

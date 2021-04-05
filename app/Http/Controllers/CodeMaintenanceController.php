@@ -582,7 +582,7 @@ where tollist_id = tland_tone_id'  .$filterquery  );
 
 
     public function toneDepreciation(Request $request){
-       
+        
         $result = DB::select('select `tdepre_id`,  tollis_year,  `tdepre_tone_id`,    `tdepre_bldgcondn_id`,  bldgcond.tdi_value bldgcond, `tdepre_value`,    `tdepre_createby`,
     `tdepre_createdate`,    `tdepre_updateby`,   DATE_FORMAT(`tdepre_updatedate`, "%d/%m/%Y") `tdepre_updatedate`, tdepre_approvaltdeprestatus_id, approvalstatus
 FROM cm_toneoflistbasket

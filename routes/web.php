@@ -162,12 +162,12 @@ Route::post('filemanagertrn','FileManagerController@filemanagertrn');
 Route::get('tenant','CodeMaintenanceController@tenantRegistration');
 
 Route::get('tenanttable', 'CodeMaintenanceController@tenantTable');
+
 Route::get('tenanttrn','CodeMaintenanceController@tenantRegistrationTransaction');
 
-
 Route::get('ratepayer','CodeMaintenanceController@ratepayerRegistration');
-Route::get('ratepayertrn','CodeMaintenanceController@ratepayerRegistrationTransaction');
 
+Route::get('ratepayertrn','CodeMaintenanceController@ratepayerRegistrationTransaction');
 
 Route::get('getValidRatepayer','CodeMaintenanceController@getValidRatepayer');
 
@@ -187,6 +187,9 @@ Route::get('valterm','HomeController@valterm');
 Route::get('valbasket','HomeController@valbasket')->name('valbasket');
 
 Route::get('property',  'InspectionController@property');
+
+Route::get('insproperty', 'InspectionController@propertyTablesIns');
+
 Route::get('inspectionproperty', 'InspectionController@propertyTables')->name('inspectionproperty');
 
 Route::get('newproperty', 'InspectionController@newProperty');
@@ -235,7 +238,6 @@ Route::get('tonebldg', 'CodeMaintenanceController@toneBLDG');
 
 Route::get('tonebldgtrn', 'CodeMaintenanceController@toneBLDGTransaction');
 
-
 Route::get('tonebldgtable', 'CodeMaintenanceController@tonebldgTable');
 
 Route::get('toneland', 'CodeMaintenanceController@toneLand');
@@ -268,7 +270,6 @@ Route::post('updateinspection','InspectionController@updateInspection');
 
 Route::get('evidentDetail', 'CodeMaintenanceController@evidentDetail');
 
-
 Route::get('valuationdetail', 'ValutionController@valuationDetail');
 
 Route::get('landval', 'ValutionController@landDetail'); 
@@ -281,6 +282,9 @@ Route::post('massvaluation', 'ValutionController@massValuation');
 
 Route::post('manualValuation', 'ValutionController@manualValuation');
 
+
+Route::post('manualValuationv2', 'ValutionController@manualValuationV2');
+
 Route::post('manualValuation2', 'ValutionController@manualValuation2');
 Route::get('clearValuation', 'ValutionController@resetValuation');
 
@@ -288,9 +292,7 @@ Route::get('export', 'HomeController@generateReport');
 
 Route::get('inspectionform', 'ReportController@inspectionForm');
 
-
 Route::get('inspectionformtable', 'ReportController@propertyTables');
-
 
 Route::get('valuationformtable', 'ReportController@valuationTables');
 
@@ -333,7 +335,6 @@ Route::get('/e', function () {
 // objection Route
 Route::get('objection','ObjectionController@basket');
 
-
 Route::get('objectionapprove','ObjectionController@objectionapprove');
 
 Route::get('meeting','ObjectionController@agenda');
@@ -345,6 +346,8 @@ Route::get('agenda','ObjectionController@objectionAgenda');
 Route::get('objectionbasket','ObjectionController@objectionBasket');
 
 Route::get('objectionbaskettable','ObjectionController@objectionBasketTable');
+
+Route::get('newnotice','ObjectionController@newNotice');
 
 Route::get('notice','ObjectionController@notice');
 
@@ -399,7 +402,6 @@ Route::get('decisiongrab','ObjectionController@decisionGrab');
 Route::get('decisiongrabtable','ObjectionController@decisionGrabTables');
 
 Route::get('decisiongrabtrn','ObjectionController@decisiongrabtrn');
-
 
 Route::get('decisionapprove','ObjectionController@decisionapprove');
 
@@ -459,7 +461,6 @@ Route::get('deactive','HomeController@deactivateBakset')->name('deactive');
 
 Route::get('deactiveproperty','HomeController@deactive');
 
-
 Route::get('deletepropertytables', 'HomeController@deletepropertyTables')->name('deactiveproperty');
 
 Route::get('adddeactiveproperty', 'HomeController@deleteProperty');
@@ -470,28 +471,21 @@ Route::get('datasearch', 'HomeController@dataSearch');
 
 Route::get('datasearchtables', 'HomeController@dataSearchTables')->name('datasearchtables');
 
-
 Route::get('dmsSearchTables', 'FileManagerController@dmsSearchTables')->name('dmsSearchTables');
 
 Route::get('datasearchdetail', 'HomeController@datasearchTab')->name('datasearchdetail');
 
 Route::get('groupdeactivetrn', 'HomeController@groupDeactiveTransaction');
 
-
 Route::get('zonebldgsummary', 'ReportController@zoneSummary');
-
 
 Route::get('zonesummarytable', 'ReportController@zonesummaryTables');
 
-
 Route::get('subzonesummary', 'ReportController@subzoneSummary');
-
 
 Route::get('subzonesummarytable', 'ReportController@subzonesummaryTables');
 
-
 Route::get('racesummary', 'ReportController@racSummary');
-
 
 Route::get('racesummarytable', 'ReportController@racesummaryTables');
 
@@ -501,17 +495,13 @@ Route::get('generatesummarybldg', 'ReportController@generateSummaryBLDG');
 
 Route::get('generatesummaryrace', 'ReportController@generateSummaryRace');
 
-
 Route::get('subzonecollection', 'ReportController@subzoneCollection');
-
 
 Route::get('subzonecollectiontable', 'ReportController@subzoneCollectionTables');
 
 Route::get('bldgcollection', 'ReportController@bldgCollection');
 
-
 Route::get('bldgcollectiontable', 'ReportController@bldgCollectionTables');
-
 
 Route::get('generatecollectionzone', 'ReportController@generateCollectionZone');
 
@@ -519,15 +509,13 @@ Route::get('generatecollectionbldg', 'ReportController@generateCollectionBLDG');
 
 Route::get('exportexcel', 'ReportController@exportExcel');
 
-
 Route::get('exportexceltable', 'ReportController@exportExcelTables');
 
 Route::get('districtcollection', 'ReportController@districtCollection');
 
-
 Route::get('districtcollectiontable', 'ReportController@districtCollectionTables');
-Route::get('generatecollectiondistrict', 'ReportController@generateCollectionDIS');
 
+Route::get('generatecollectiondistrict', 'ReportController@generateCollectionDIS');
 
 Route::get('borangc', 'ReportController@borangC');
 
@@ -545,12 +533,9 @@ Route::get('statisticaltable', 'ReportController@statisticalTables');
 
 Route::get('generatenewowner', 'ReportController@generateNewOwner');
 
-
-
 Route::get('accountsearch', 'HomeController@accountSearch');
 
 Route::get('accountsearchdata', 'HomeController@accountSearchData');
-
 
 Route::get('download','FileManagerController@download');
 
@@ -563,3 +548,49 @@ Route::get('updateattachment', 'HomeController@updateAttachment');
 Route::get('termattachment', 'HomeController@termAttachment');
 
 Route::post('termupload','FileManagerController@termUpload');
+
+Route::get('officialsearch', 'HomeController@officialSearch');
+
+Route::get('officialsearchdata', 'HomeController@officialSearchData');
+
+Route::get('addapplication', 'HomeController@addApplication');
+
+Route::get('updateapplication', 'HomeController@updateApplication');
+
+Route::get('addapplicationdata', 'HomeController@addApplicationData');
+
+Route::get('searchpropertyaddress', 'HomeController@searchPropertyAddress');
+
+Route::get('searchpropertyaddressdata', 'HomeController@searchPropertyAddressData');
+
+Route::get('manualvaluation', 'ValutionController@manualValuationProcess');
+
+Route::get('manualland', 'ValutionController@manualLand');
+
+Route::get('manualbldg', 'ValutionController@bldgDetailManaual');
+
+Route::get('landstarndard', 'ValutionController@landStarndard');
+
+Route::get('remisi',  function () {
+    return view('remisi.remisi'); 
+});
+
+Route::get('addremisi',  function () {
+    return view('remisi.addapplication'); 
+});
+
+Route::get('remisidetail',  function () {
+    return view('remisi.remisiregister'); 
+});
+
+Route::get('remisiregister',  function () {
+    return view('remisi.detail'); 
+});
+
+Route::get('investigation',  function () {
+    return view('remisi.investigation'); 
+});
+
+Route::get('insresult',  function () {
+    return view('remisi.investigationresult'); 
+});

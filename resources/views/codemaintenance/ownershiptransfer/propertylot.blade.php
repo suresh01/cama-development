@@ -104,13 +104,161 @@
 										<span class=" label_intro"></span>
 									</div>
 
+									<div class="form_grid_12">
+										<label class="field_title" onchange="" id="lposition" for="position">Lot List<span class="req">*</span></label>
+										<div  class="form_input">
+											<select placeholder="Choose a Status..." style="width:100%" class="cus-select" onchange="getLotDetail(this.value)" id="lotlist" name="lotlist" tabindex="1">
+												<option value="0"></option>
+											
+										</select>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+
 									
 								</fieldset>
 							</li>
 						</ul>
 					</div>
+
+					<div id="lotdetail_dy" style="display: none;" class="grid_3 form_container left_label">
+						<ul>
+							<li>				
+								<fieldset>
+									<legend>Lot Information</legend>					
+									
+									<!--<div class="form_grid_12">
+										<label class="field_title">Copy Previous Detail</label>
+										<div class="form_input">
+											<span>
+											<input name="field08" id="copydetail" onchange="copyDetail()" class="checkbox" type="checkbox"  tabindex="7">
+											
+											</span>
+										</div>
+									</div>-->
+									
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">Lot Code<span class="req">*</span></label>
+										<div  class="form_input">
+											<select placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="l3otype" name="lot3ype" tabindex="1">
+												<option value=""></option>
+											@foreach ($lotcode as $rec)
+													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+											@endforeach	
+										</select>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									
+									
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">Lot No<span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="lot3num" tabindex="8" name="lotn3um"  type="text" maxlength="100" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">Alternate Lot No<span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="altl3otnum"  tabindex="9" name="altlotn3um"  type="text"  maxlength="100" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">Title Code<span class="req">*</span></label>
+										<div  class="form_input">
+											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="l3ttt" tabindex="4" name="l3ttt" tabindex="20">
+												<option></option>
+											@foreach ($titiletype as $rec)
+													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+											@endforeach	
+										</select>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">Title No<span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="3ltnum"  name="ltnu3m" tabindex="11"  type="text"  maxlength="100" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">Altenate Title No<span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="3altnum" name="altn3um"  tabindex="12"  type="text" " maxlength="50" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">Strata No<span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="3stratano" name="str3atano"  tabindex="12"  type="text" " maxlength="50" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+								</fieldset>
+							</li>
+						</ul>
+					</div>
+
+					<div id="lotdetail_dy_part2" class="grid_3 form_container left_label">
+						<ul>
+							<li>				
+								<fieldset>
+									<legend>Lease Information</legend>					
+									
+									<!--<div class="form_grid_12">
+										<label class="field_title">Copy Previous Detail</label>
+										<div class="form_input">
+											<span>
+											<input name="field08" id="copydetail" onchange="copyDetail()" class="checkbox" type="checkbox"  tabindex="7">
+											
+											</span>
+										</div>
+									</div>-->
+									
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">Tenure Type<span class="req">*</span></label>
+										<div  class="form_input">
+											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="3tentype" tabindex="19" name="tent3ype" tabindex="20">
+												<option></option>
+											</select>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									
+									
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">Tenure Period<span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="3tenduration" tabindex="8" name="tendura3tion"  type="text" maxlength="100" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">Tenure Start Date<span class="req">*</span></label>
+										<div  class="form_input">
+										<input type="text" id="3tenstart" dateFormat='dd/mm/yyyy' name="tenst3art" tabindex="21">
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">Tenure End Date<span class="req">*</span></label>
+										<div  class="form_input">
+										<input id="t3enend"  name="3tenend" class="" type="text"  maxlength="50" />
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+								</fieldset>
+							</li>
+						</ul>
+					</div>
 	
-					<div  class="grid_3 form_container left_label">
+					<div id="lotdetail_view" style="display: none;" class="grid_3 form_container left_label">
 						<ul>
 							<li>				
 								<fieldset>
@@ -181,12 +329,19 @@
 										</div>
 										<span class=" label_intro"></span>
 									</div>
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">Strata No<span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="stratano" name="stratano"  tabindex="12"  type="text" " maxlength="50" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
 								</fieldset>
 							</li>
 						</ul>
 					</div>
 
-					<div  class="grid_3 form_container left_label">
+					<div id="lotdetail_view_part2" class="grid_3 form_container left_label">
 						<ul>
 							<li>				
 								<fieldset>
@@ -254,13 +409,26 @@
 				<input type="hidden" name="accno" id="lotaccount">
 					</form>
 			</div>
-
-
 		
 	</div>
 	<span class="clear"></span>
 	
 	<script>
+		function getLotDetail(id){
+			if(id != 0){
+				$('#lotdetail_view').show();
+				$('#lotdetail_view_part2').show();
+				$('#lotdetail_dy').hide();
+				$('#lotdetail_dy_part2').hide();
+			} else {				
+				$('#lotdetail_view').hide();
+				$('#lotdetail_view_part2').hide();
+				$('#lotdetail_dy').show();
+				$('#lotdetail_dy_part2').show();
+			}
+			
+
+		}
 
 		function submitData(){
 			var noty_id = noty({
@@ -315,7 +483,7 @@
 		$( "#tenstart").datepicker({dateFormat: 'dd/mm/yy'});
 		$( "#tenend").datepicker({dateFormat: 'dd/mm/yy'});
 			$('#lot-modal-content').modal();
-$('#accno').val(id);
+			$('#accno').val(id);
 			$.ajax({
   				type: 'POST', 
 			    url:'propertylotdetail',
@@ -328,7 +496,7 @@ $('#accno').val(id);
 		        	var id = data.lotlist[0].al_id;
 		        	$('#al_id').val(id);
 		        	//alert(id);
-
+		        	$("#lotlist").append('<option value="'+data.lotlist[0].al_lotcode_id+'">'+data.lotlist[0].al_no+' </option>');
 					$('#lotype').val(data.lotlist[0].al_lotcode_id);
 					$('#lotnum').val(data.lotlist[0].al_no);
 					$('#altlotnum').val(data.lotlist[0].al_altno);

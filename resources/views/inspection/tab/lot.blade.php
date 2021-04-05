@@ -124,6 +124,14 @@
 										</div>
 										<span class=" label_intro"></span>
 									</div>
+
+									<div class="form_grid_12">
+										<label class="field_title" id="llevel" for="level">STRATA NUMBER</label>
+										<div  class="form_input">
+											<input id="stratano" name="stratano" tabindex="6" type="text" value="4323" maxlength="8" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
 								</fieldset>
 									<fieldset>
 										<legend>Address Information</legend>

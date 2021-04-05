@@ -60,7 +60,7 @@
 									</th>	
 									<th>
 										City
-									</th>	
+									</th>
 									<th>
 										Action
 									</th>			
@@ -217,7 +217,7 @@ $(document).ready(function (){
 			        {"data": function(data){
 			        	
 			        	
-			        	return '<span><a onclick="submitForm('+data.ma_accno+')" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span>';
+			        	return ' <span><a onclick="submitForm('+data.ma_accno+')" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span>';
 			        
 			        }, "name": "bldgcount"}
 		   		],

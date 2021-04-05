@@ -199,23 +199,22 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
     public function grabNotice(Request $request){
         $term = $request->input('term');
         $id = $request->input('id');
-        $property = DB::select("select vd_id, va_id, va_vt_id, vd_accno, va_name, vt_name, ob_desc
+        $type = $request->input('type');
+        $property = DB::select("select vd_id, va_id, va_vt_id, vd_accno, va_name, vt_name, case when ob_desc is null then 'New Notice' else 'Notice Added' end as ob_desc
         from cm_appln_valdetl inner join cm_appln_val on va_id = vd_va_id
         inner join cm_appln_valterm on vt_id = va_vt_id                           
         left join (select no_vd_id,ob_listyear, ob_desc from cm_objection_notis 
         inner join cm_objection on ob_id = no_ob_id) cm_objection_notice on no_vd_id = vd_id        
-        where va_approvalstatus_id in ('08','09')  and va_vt_id =  ".$term);
+        where va_approvalstatus_id in ('11')  and va_vt_id =  ".$term);
 
 
-
-        return view('objection.grab.notice')->with(array('term'=>$term,'property'=>$property,'id'=>$id));
+        return view('objection.grab.notice')->with(array('term'=>$term,'property'=>$property,'id'=>$id,'type'=>$type));
     }
     
 
      public function objectionDetail(Request $request){
         $term = $request->input('term');
-        $id = $request->input('id');
-     
+        $id = $request->input('id');    
 
 
         $search=DB::select(' select sd_key, sd_label, 
@@ -281,7 +280,40 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         $datasetDetails = Datatables::collection($basketdataset)->make(true);
         
         return $datasetDetails;
+    } 
+
+    public function newNotice(Request $request){
+        $id = $request->input('id');
+        $term = $request->input('term');
+        $objectiondetail = ObjectionController::objectionInfo($id);
+        $search=DB::select(' select sd_key, sd_label, 
+          case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid   ,sd_keymainfield 
+        from tbsearchdetail mtb where sd_se_id = "31" ');
+
+       //  $property = DB::select('select no_id, no_vd_id, no_accno, ob_desc,ob_listyear FROM cm_objection_notis inner join cm_objection on ob_id = no_ob_id where ob_id = '.$id);
+        $agendacnt = DB::select("select count(*) agenda_count from cm_objection
+        inner join cm_objection_agenda on ag_ob_id = ob_id  where ob_id =  ".$id);
+
+        $notiscnt = DB::select("select count(*) notis_count from cm_objection
+        inner join cm_objection_notis on no_ob_id = ob_id where no_noticetype_id = 0 and ob_id =  ".$id);
+
+        $objectioncnt = DB::select("select count(*) objection_count from cm_objection
+        inner join cm_objection_objectionlist on ol_ob_id = ob_id where ob_id =  ".$id);
+
+        $propcnt = DB::select("select count(*) property_count from cm_objection
+        inner join cm_objection_agenda on ag_ob_id = ob_id
+        inner join cm_objection_agendadetail on agd_ag_id = ag_id where ob_id =  ".$id);
+
+        $config=DB::select('select config_value serveradd from tbconfig where config_name = "host" ');
+        $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser FROM tbuser');
+        foreach ($config as $obj) {    
+           $serverhost = $obj->serveradd;
+        }
+        
+        return view('objection.newnotice')->with(array('term'=>$term,'id'=>$id,'objectioncnt'=> $objectioncnt,'propcnt'=> $propcnt,'notiscnt'=> $notiscnt,'agendacnt'=> $agendacnt,'objectiondetail'=> $objectiondetail))->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
+
 
     public function notice(Request $request){
         $id = $request->input('id');
@@ -299,7 +331,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         inner join cm_objection_agenda on ag_ob_id = ob_id  where ob_id =  ".$id);
 
         $notiscnt = DB::select("select count(*) notis_count from cm_objection
-        inner join cm_objection_notis on no_ob_id = ob_id where ob_id =  ".$id);
+        inner join cm_objection_notis on no_ob_id = ob_id where no_noticetype_id = 1 and ob_id =  ".$id);
 
         $objectioncnt = DB::select("select count(*) objection_count from cm_objection
         inner join cm_objection_objectionlist on ol_ob_id = ob_id where ob_id =  ".$id);
@@ -364,15 +396,16 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         $accounts = $input['accounts'];
         //$basketid = $request->input('id');
         $type = $request->input('type');
+        $noticetype = $request->input('noticetype');
         $param = implode(",",$accounts);
 
         $objectionid = $request->input('id');
        // $id = $request->input('id');
         $name=Auth::user()->name;
-        Log::info("call proc_objection_notice_trn('".$param."','".$objectionid."','".$name.",@p_propcount,'".$type."')"); 
-        $response=DB::select("call proc_objection_notice_trn('".$param."','".$objectionid."','".$name."',@p_propcount,'".$type."')");
+        Log::info("call proc_objection_notice_trn('".$param."','".$objectionid."','".$name.",@p_propcount,'".$type."','".$noticetype."')"); 
+        $response=DB::select("call proc_objection_notice_trn('".$param."','".$objectionid."','".$name."',@p_propcount,'".$type."','".$noticetype."')");
         $result=DB::select("select @p_propcount");
-        Log::info($result);
+        Log::info($result); 
         $data = array();
         foreach ($result as $obj) {
            $data[] = (array)$obj;  
@@ -874,6 +907,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         $maxRow = 30;
 
         $id = $request->input('id');
+        $type = $request->input('type');
        
         $isfilter = $request->input('filter');
         $filterquery = '';
@@ -918,7 +952,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         FROM cm_objection_notis inner join cm_objection on ob_id = no_ob_id
         inner join cm_appln_valdetl on vd_id = no_vd_id
         inner join cm_appln_val on va_id = vd_va_id
-        inner join cm_appln_valterm on vt_id = va_vt_id where ob_id = '.$id.' '. $filterquery);
+        inner join cm_appln_valterm on vt_id = va_vt_id where no_noticetype_id ='.$type.' and ob_id = '.$id.' '. $filterquery);
         
         $propertyDetails = Datatables::collection($property)->make(true);
    

@@ -150,17 +150,15 @@
 										
 										@if($rec->plan_planstatus_id == 1)	
 										    <span><a class="action-icons c-delete delete_term" onclick="deleteTerm('{{$rec->plan_id}}')" href="#" title="Delete Term">Delete</a></span>
-										    <span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveProperty('{{$rec->plan_id}}',1)" disabled="true" title="Submit to Valuation" href="#"></a></span>
 										@endif
 
-										@if($rec->plan_planstatus_id == 2)	
-										    <span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveProperty('{{$rec->plan_id}}',2)" disabled="true" title="Accept Valuation" href="#"></a></span>
+										@if($rec->plan_planstatus_id == 9)
+										<spane><a  class=" new-action-icons reverse" onclick="approveProperty('{{$rec->plan_id}}')" title="Revise" href="#"></a></span>
 										@endif
 
-										@if($rec->plan_planstatus_id == 4)	
-										    <span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveProperty('{{$rec->plan_id}}',3)" disabled="true" title="Completed" href="#"></a></span>
-										@endif
+										@if($rec->plan_planstatus_id != 9)
 										<span><a class="action-icons c-edit" onclick="editTerm('{{$rec->plan_id}}')" title="Edit plan" href="#">Edit</a></span>
+										@endif
 									</td>
 								</tr>
 								<div style="display: none;">
@@ -173,6 +171,7 @@
 									<input type="text" id="cccdate_{{$rec->plan_id}}" value="{{$rec->plan_cccdate1}}">
 									<input type="text" id="valdate_{{$rec->plan_id}}" value="{{$rec->plan_valuationdate1}}">
 									<input type="text" id="note_{{$rec->plan_id}}" value="{{$rec->plan_note}}">
+									<input type="text" id="status_{{$rec->plan_id}}" value="{{$rec->plan_planstatus_id}}">
 								</div>
 								@endforeach				
 							</tbody>
@@ -202,7 +201,7 @@
 										<div class="form_grid_12">									
 											<label class="field_title" id="luserid" for="userid">Plan Desc<span class="req">*</span></label>
 											<div class="form_input">
-												<input id="plandesc" required="true" class="" name="plandesc" type="text"  value="{{ old('term') }}" />
+												<textarea id="plandesc" required="true" class="" name="plandesc" ></textarea>
 											</div>
 											<span class=" label_intro"></span>
 										</div>	
@@ -261,10 +260,23 @@
 										<div class="form_grid_12">									
 											<label class="field_title" id="luserid" for="userid">Note<span class="req">*</span></label>
 											<div class="form_input">
-												<input id="note" required="true" class="" name="note" type="text"  value="{{ old('term') }}" />
+												<textarea id="note" required="true" class="" name="note" ></textarea>
 											</div>
 											<span class=" label_intro"></span>
-										</div>					
+										</div>										
+										<div class="form_grid_12">									
+											<label class="field_title" id="luserid" for="userid">Status<span class="req">*</span></label>
+											<div class="form_input">
+
+												<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="status" name="status" tabindex="20">
+													<option></option>		
+													<option value="2">SUBMITED TO VALUATION</option>
+													<option value="4">VALUATION ACCEPT</option>
+													<option value="9">COMPLETED</option>
+												</select>
+											</div>
+											<span class=" label_intro"></span>
+										</div>				
 									</li>
 								</ul>
 							</div>
@@ -288,8 +300,8 @@
 	<span class="clear"></span>
 	
 	<script>
-		function approveProperty(id, type){
-			var pland = $('#plandate_'+id).val();
+		function approveProperty(id){
+			/*var pland = $('#plandate_'+id).val();
 			var cccd = $('#cccdate_'+id).val()
 			var vald = $('#valdate_'+id).val();
 			var status = false;
@@ -298,10 +310,10 @@
 			} else if(type != 3) {
 				status = true;
 			}
-			if (status){			
+			if (status){*/			
 				var noty_id = noty({
 					layout : 'center',
-					text: 'Are want to approve?',
+					text: 'Are want to revise?',
 					modal : true,
 					buttons: [
 						{type: 'button pink', text: 'Send', click: function($noty) {
@@ -312,7 +324,7 @@
 							    headers: {
 								    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 								},
-						        data:{param_value:id,module:'planapprove'+type},
+						        data:{param_value:id,module:'planapprove'},
 						        success:function(data){
 						        	window.location.assign("plan");		        		
 						        	//$("#finish").attr("disabled", true);
@@ -338,9 +350,9 @@
 						],
 					 type : 'success', 
 				 });
-			} else {
+			/*} else {
 				alert('Please update all date before Complete.');
-			}
+			}*/
 
 		}	
 
@@ -369,6 +381,7 @@
 			$('#cccdate').val($('#cccdate_'+id).val());
 			$('#note').val($('#note_'+id).val());
 			$('#valdate').val($('#valdate_'+id).val());
+			$('#status').val($('#status_'+id).val());
 
 			$("#addsubmit").html("Save");
 			$("#title").html("Edit Plan");

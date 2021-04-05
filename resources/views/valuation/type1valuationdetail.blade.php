@@ -39,7 +39,6 @@
 							<div class="invoice_container">	
 								@foreach ($master as $rec)
 								<fieldset>
-									<!--<legend>Location Information</legend>	-->
 									<div class="grid_4">		
 
 
@@ -71,36 +70,15 @@
 											<span>{{$rec->bldgstorey}}</span>
 										</div>
 									</div>
-									<!--<div class="grid_12">						
-										<div class="grid_3 invoice_to">	
-											<strong><span>Zon : </span></strong>
-											<span>{{$rec->zone}}</span>	
-										</div>
-										<div class="grid_3 invoice_to">		
-											<strong><span>Sub Zon : </span></strong>
-											<span>{{$rec->subzone}}</span>
-										</div>
-										<div class="grid_3 invoice_from">
-											<strong><span>Property Category : </span></strong>
-											<span>{{$rec->propcategorty}}</span>
-										</div>
-										<div class="grid_3 invoice_from">
-											<strong><span>Property Type : </span></strong>
-											<span>{{$rec->proptype}}</span>
-										</div>
-									</div>
-									<br /><br />
-									<div class="grid_12">
-										<div class="grid_3 invoice_from">
-											<strong><span>Property Status : </span></strong>
-											<span>{{$rec->bldgstatus}}</span>
-										</div>
-									</div>-->
 								</fieldset>
 								@endforeach
 
 								<span class="clear"></span>
 								<div class="grid_12 invoice_details">
+									<!--<div style="float:right;margin-right: 30px;"  class="btn_24_blue">
+										<a href="#" onclick="addLand()">Add Land</a>	
+									</div>
+									<br>-->
 									<div class="widget_wrap collapsible_widget">
 										<div class="widget_top active">
 											<span class="h_icon"></span>
@@ -546,14 +524,10 @@
 													<span class=" label_intro"></span>
 												</div>
 												</div>
-											
-												
 												</li>
 											</ul>
 									</div>
-
-									<div style="height: 48px; float: right; " class="grid_12">
-                
+									<div style="height: 48px; float: right; " class="grid_12">                
 					                  <div class="form_input">
 					                  	@if($iseditable == 1)
 					                    <button id="addsubmit" name="adduser" style="float: right; "  onclick="updateValuation()" type="button" class="btn_small btn_blue"><span>Update</span></button>      
@@ -773,6 +747,17 @@
 <script>
 	var w;
 	let tempmap = new Map([["0","sno"],["1", "add_description"],["2", "add_area"],["3", "add_rate"],["4", "add_grossvalue"],["5", "add_roundvalue"]]);
+
+	function addLand(){
+		var w = window.open('about:blank','Popup_Window','toolbar=0,resizable=0,location=no,statusbar=0,menubar=0,width=1000,height=500,left = 312,top = 50');
+	    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
+	       // w.location = "landval?id="+id;
+	      // w.location.pathname = 'valuation/popup/land.blade.php';
+	       w.location.assign("manualland");
+	    }
+	}
+
+
 	function addTanah(id,i) {
 	    w = window.open('about:blank','Popup_Window','toolbar=0,resizable=0,location=no,statusbar=0,menubar=0,width=0,height=0,left = 312,top = 234');
 	    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {

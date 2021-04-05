@@ -27,7 +27,7 @@
 			<div id="grouptable" class="grid_12">
 				<br>
 				<div class="form_input">
-					<div id="breadCrumb3"  class="breadCrumb grid_3">
+					<div id="breadCrumb3"  class="breadCrumb grid_4">
 						<ul>
 							<li><a href="#">Home</a></li>
 							<li><a href="#">Valuation Process</a></li>
@@ -48,7 +48,8 @@
 						<div id="widget_tab">
 							<ul>
 								<li><a href="agenda?term={{$term}}&id={{$id}}" >Agenda</a></li>
-								<li><a href="notice?term={{$term}}&id={{$id}}">Notis</a></li>
+								<li><a href="newnotice?term={{$term}}&id={{$id}}">New Notis</a></li>
+								<li><a href="notice?term={{$term}}&id={{$id}}">Existing Notis</a></li>
 								<li><a href="objectionreport?term={{$term}}&id={{$id}}" >Objection</a></li>
 								<li><a href="decision?term={{$term}}&id={{$id}}">Decision</a></li>
 								<li><a href="result?term={{$term}}&id={{$id}}"  class="active_tab">Report</a></li>
@@ -216,7 +217,7 @@
 												<legend>Additional Information</legend>												
 											
 												<div class="form_grid_12">
-													<label class="field_title" id="lposition" for="position">User list<span class="req">*</span></label>
+													<label class="field_title" id="lposition" for="position">Officer Incharge<span class="req">*</span></label>
 													<div  class="form_input">
 														<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="user" tabindex="7" name="user" tabindex="20">
 																<option></option>

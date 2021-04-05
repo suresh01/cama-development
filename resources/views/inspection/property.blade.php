@@ -97,21 +97,6 @@
 
 				</div>
 				<br>
-
- <!--   <div class="selectBox" onclick="showCheckboxes()">
-      <select>
-        <option>Select an column</option>
-      </select>
-      <div class="overSelect"></div>
-    </div>
-    <div id="checkboxes">
-      <label for="one">
-        <input type="checkbox" id="2" onclick="hidecl(2)" value="2" id="one" />ACCOUNT NUMBER</label>
-      <label for="two">
-        <input type="checkbox" id="3" onclick="hidecl(3)"  value="3" id="two" />FILE NUMBER</label>
-      <label for="three">
-        <input type="checkbox" id="4" onclick="hidecl(4)"  value="4" id="three" />ZONE</label>
-    </div>-->
   
 
 				<div class="widget_wrap">					
@@ -294,6 +279,7 @@
 									<input type="hidden" id="basket">
 									<input type="hidden" value="0" id="property">
 									<input type="hidden" value="0" id="tableindex">
+									<input type="hidden" value="0" id="propstatus">
 								</div>
 							</div>
 						</li>
@@ -322,18 +308,24 @@ function showCheckboxes() {
   }
 }
 
-function hidecl(id){
-var table = $('#proptble').DataTable();
-	var column = table.column( id);
-	 //alert($('#'+id).prop("checked"));
-	  column.visible( $('#'+id).prop("checked"));
- 		
+		function hidecl(id){
+			var table = $('#proptble').DataTable();
+			var column = table.column( id);
+			 //alert($('#'+id).prop("checked"));
+			  column.visible( $('#'+id).prop("checked"));
+		 		
 
-}
+		}
+
 		function regirect(){
 			var url = $('#stage').val();
 			var basket = $('#basket').val();
 			var property = $('#property').val();
+			var propstatus = $('#propstatus').val();
+			//alert(propstatus);
+			if(propstatus == "7" || propstatus == "9"){
+				url="manualvaluation";
+			}
 			//alwet(basket+" "+property)
 			if (property != "0") {
 				window.location.assign(url+"?prop_id="+property+"&pb="+basket);
@@ -341,9 +333,10 @@ var table = $('#proptble').DataTable();
 			
 		}
 
-		function stageOption(property, Basket){
+		function stageOption(property, Basket, status){
 			$('#basket').val(Basket);
 			$('#property').val(property);
+			$('#propstatus').val(status);
 			$('#open-modal-content').modal();
 		}
 		
@@ -523,7 +516,7 @@ var table = $('#proptble').DataTable({
 		        /*"dom": '<"toolbar">frtip',*/
 		        "ajax": {
 		            "type": "GET",
-		            "url": 'inspectionproperty?id={{$id}}',
+		            "url": 'insproperty?id={{$id}}',
 		            "contentType": 'application/json; charset=utf-8',
 				    "headers": {
 					    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -537,26 +530,12 @@ var table = $('#proptble').DataTable({
 			        {"data": "ma_accno", "orderable": false, "searchable": false, "name":"_id" },
 			        {"data": null, "name": "sno"},
 			        {"data": function(data){
-
 			        	if(data.vd_approvalstatus_id == '04' || data.vd_approvalstatus_id == '05' || data.vd_approvalstatus_id == '06'){
 			        		return "<a href='inspection?prop_id="+data.vd_id+"&pb="+data.vd_va_id+"'>"+data.ma_accno+"</a>";
-			        	} else {//if(data.vd_approvalstatus_id == '08' || data.vd_approvalstatus_id == '09' || data.vd_approvalstatus_id == '10'){
-			        		return "<a onclick='stageOption("+data.vd_id+","+data.vd_va_id+")' href='#'>"+data.ma_accno+"</a>";
-			        		//return "<a onclick='stageOption()' href='valuationdetail?prop_id="+data.vd_id+"&pb="+data.vd_va_id+"'>"+data.ma_accno+"</a>";
-			        	}  /*else {
-			        		return "<a href='#'>"+data.ma_accno+"</a>";
-			        	}*/
-
-
+			        	} else {
+			        		return "<a onclick='stageOption("+data.vd_id+","+data.vd_va_id+","+data.vd_approvalstatus_id+")' href='#'>"+data.ma_accno+"</a>";
+			        	}
 			        	return '';
-			           /* return "<a href='@if($approvestatus == '04' || $approvestatus == '05' )	"+
-										"inspection" +
-										"@elseif($approvestatus == '07' ) "+
-										"valuationdetail"+
-										"@else"+
-										"#"+
-										"@endif"+
-										"?prop_id="+data.vd_id+"&pb="+data.vd_va_id+"'>"+data.ma_accno+"</a>";*/
 			        }, "name": "account number"},
 			        {"data": "ma_fileno", "name": "zone"},
 			        {"data": "zone", "name": "subzone"},
@@ -580,6 +559,7 @@ var table = $('#proptble').DataTable({
 			        	var deleteuri = '&nbsp;&nbsp;&nbsp;<span><a class="action-icons  "  onclick="deleteProperty('+data.vd_id+')" disabled="true" title="Delete Property" href="#"></a></span>';
 			        	var approveuri = '<span><a class="action-icons c-approve "  onclick="approveProperty('+data.vd_id+')"  title="Approve Property" href="#"></a></span>';
 			        	var edituri = '<span><a class="action-icons c-edit editbldg"  onclick="updateProperty('+data.vd_id+')"  title="Update Property" href="#"></a></span>';
+
 			        	if('{{$approvestatus}}' == '04'  ){
 				        	if(data.vd_approvalstatus_id == '05' ){
 				        		return approveuri+deleteuri+edituri;
@@ -599,12 +579,10 @@ var table = $('#proptble').DataTable({
 				        		return '<span><a onclick="reviseProperty('+data.vd_id+')" class="new-action-icons reverse" href="#" title="Revise Inspection">Cancel</a></span>'+edituri;
 				        	} else if(data.vd_approvalstatus_id == '05' ){
 				        		return approveuri+deleteuri+edituri;
-				        		//return deleteuri+deleteuri;
 				        	} else if(data.vd_approvalstatus_id == '11' ){
 			        			return '<span><a onclick="reviseOption('+data.vd_id+')" class="new-action-icons reverse" href="#" title="Revise Property">Cancel</a></span>'+edituri;
 			        		}
-			        	} 
-
+			        	}
 			        	return '';
 			        }, "name": "propertstatus"}
 		   		],
@@ -629,24 +607,24 @@ var table = $('#proptble').DataTable({
              return '<input type="checkbox">';
          }
       }],
-      'rowCallback': function(row, data, dataIndex){
-         // Get row ID
-         var rowId = data[0];
-
-         // If row ID is in the list of selected row IDs
-         if($.inArray(rowId, rows_selected) !== -1){
-            $(row).find('input[type="checkbox"]').prop('checked', true);
-            $(row).addClass('selected');
-         }
-      },
+	    'rowCallback': function(row, data, dataIndex){
+	         // Get row ID
+	        var rowId = data[0];
+	        
+	         // If row ID is in the list of selected row IDs
+	        if($.inArray(rowId, rows_selected) !== -1){
+	            $(row).find('input[type="checkbox"]').prop('checked', true);
+	            $(row).addClass('selected');
+	        }
+	    },
         	"bAutoWidth": false,
 			"sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>'
 			});
-   // Array holding selected row IDs
-   var rows_selected = [];
-   
-    
-   hideCol('proptble', [11,12,13,14,15,16,17]);
+	    // Array holding selected row IDs
+	    var rows_selected = [];
+	   
+	    
+	    hideCol('proptble', [11,12,13,14,15,16,17]);
 		
 		defaultDatatableColumn(["2","3","4","5","6","7","8","9","10"]);
 

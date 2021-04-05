@@ -406,7 +406,7 @@ $('.mainNav li:has(ul)').addClass('has-child');
 			            <a style="padding: 5px;width: 100%;"  onclick="check_access('21','termsearch')" class="test" href="#">{{__('menu.termsearch')}}<span class="caret"></span></a>
 			        </li>
 			        <li class="dropdown-submenu">
-			            <a style="padding: 5px;width: 100%;" class="test" href="#">{{__('menu.officialsearch')}}<span class="caret"></span></a>
+			            <a style="padding: 5px;width: 100%;" onclick="check_access('21','officialsearch')" class="test" href="#">{{__('menu.officialsearch')}}<span class="caret"></span></a>
 			        </li>			        
     			</ul>
 			</li>
@@ -427,9 +427,9 @@ $('.mainNav li:has(ul)').addClass('has-child');
 			        <li class="dropdown-submenu">
 			            <a style="padding: 5px;width: 100%;" onclick="check_access('34','ratepayer')" class="test" href="#">{{__('menu.ratepayerreg')}}<span class="caret"></span></a>
 			        </li>
-			        <li class="dropdown-submenu">
+			       <!-- <li class="dropdown-submenu">
 			            <a style="padding: 5px;width: 100%;" onclick="check_access('35','filemanager')" class="test" href="#">{{__('menu.dms')}}<span class="caret"></span></a>
-			        </li>
+			        </li>-->
 			        <li class="dropdown-submenu">
 			            <a style="padding: 5px;width: 100%;" onclick="check_access('36','term')" class="test" href="#">{{__('menu.term')}}<span class="caret"></span></a>
 			        </li>
@@ -473,6 +473,9 @@ $('.mainNav li:has(ul)').addClass('has-child');
 							</li>
 			            </ul>
 		          	</li>
+			        <li class="dropdown-submenu">
+			            <a style="padding: 5px;width: 100%;" onclick="check_access('38','remisi')" class="test" href="#">Remisi<span class="caret"></span></a>
+			        </li>
     			</ul>
 			</li>
 			<li class="dropdown-submenu dropdown"><a style="{{ $page == 'TOL' ? 'background-color: #95C9F5;' : '' }}"  href="#" class="test"><span class="stats_icon finished_work_sl"></span><span class="label">{{__('menu.tol')}}</span></a>

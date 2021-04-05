@@ -74,6 +74,9 @@
 													<th>
 														AREA USE
 													</th>
+													<th>
+														STATUS
+													</th>
 												</tr>
 												</thead>
 												<tbody>
@@ -82,7 +85,11 @@
 														{{$loop->iteration}}
 													</td>
 													<td>
-														<a id="bldglinkid_{{$loop->iteration}}" class="bldg-modal" onclick="addbldg('{{$loop->iteration}}')" href="#">{{$rec->zone}}</a>
+														@if($rec->approvalstatus == '')
+															<a id="bldglinkid_{{$loop->iteration}}" class="bldg-modal" onclick="addbldg('{{$loop->iteration}}')" href="#">{{$rec->zone}}</a>
+														@else
+															{{$rec->zone}}
+														@endif
 													</td>
 													<td>{{$rec->subzone}}
 													</td>
@@ -106,6 +113,9 @@
 													</td>
 													<td>
 														{{$rec->aruse}}	
+													</td>
+													<td>
+														{{$rec->approvalstatus}}	
 													</td>
 												</tr>
 												<div style="display:none">
@@ -312,6 +322,9 @@
 													<th>
 														BUILDING CONDITION
 													</th>
+													<th>
+														STATUS
+													</th>
 												</tr>
 												</thead>
 												<tbody>
@@ -319,7 +332,15 @@
 													<td style="width: 40px;">
 														{{$loop->iteration}}
 													</td>
-													<td><a class="dep-modal" onclick="editDep('{{$loop->iteration}}')" href="#">{{$rec->bldgcond}}</a>
+													<td>
+														@if($rec->approvalstatus == '')
+															<a class="dep-modal" onclick="editDep('{{$loop->iteration}}')" href="#">{{$rec->bldgcond}}</a>
+														@else
+															{{$rec->bldgcond}}
+														@endif
+													</td>
+													<td style="width: 190px;">
+														{{$rec->approvalstatus}}
 													</td>
 												</tr>
 												<div style="display:none">
@@ -426,6 +447,9 @@
 														<th>
 															Property Storey
 														</th>
+														<th>
+															STATUS
+														</th>
 														
 													</tr>
 												</thead>
@@ -436,7 +460,12 @@
 														{{$loop->iteration}}
 													</td>
 													<td>
-														<a class="bldg-modal" onclick="addLand('{{$loop->iteration}}')" href="#">{{$rec->zone}}</a>
+														@if($rec->approvalstatus == '')
+															<a class="bldg-modal" onclick="addLand('{{$loop->iteration}}')" href="#">{{$rec->zone}}</a>
+														@else
+															{{$rec->zone}}
+														@endif
+														
 													</td>
 													<td>{{$rec->subzone}}
 													</td>
@@ -451,6 +480,9 @@
 													</td>
 													<td>
 														{{$rec->bldglevel}}
+													</td>
+													<td style="width: 190px;">
+														{{$rec->approvalstatus}}
 													</td>
 													</tr>
 													<div style="display:none">
@@ -596,6 +628,9 @@
 													<th>
 														BUILDING STOREY
 													</th>
+													<th>
+														STATUS
+													</th>
 												</tr>
 												</thead>
 												<tbody>
@@ -604,7 +639,12 @@
 														{{$loop->iteration}}
 													</td>
 													<td>
-														<a class="bldg-modal" onclick="addLandSd('{{$loop->iteration}}')" href="#">{{$rec->zone}}</a>
+
+														@if($rec->approvalstatus == '')
+															<a class="bldg-modal" onclick="addLandSd('{{$loop->iteration}}')" href="#">{{$rec->zone}}</a>
+														@else
+															{{$rec->zone}}
+														@endif
 													</td>
 													<td>{{$rec->subzone}}
 													</td>
@@ -616,6 +656,9 @@
 													</td>
 													<td>
 														{{$rec->bldglevel}}
+													</td>
+													<td style="width: 190px;">
+														{{$rec->approvalstatus}}
 													</td>
 												</tr>
 												<div style="display:none">
@@ -649,8 +692,7 @@
 															<input type="hidden" name="landstd_id" id="landstd_id">
 									<fieldset>
 										<legend>Basket Information</legend>
-										
-										
+																			
 										
 										<div class="form_grid_12">
 											<label class="field_title" id="accnumberlbl" for="username">SUBZONE<span class="req">*</span></label>
@@ -663,9 +705,7 @@
 												</select>
 											</div>
 											<span class=" label_intro"></span>
-										</div>
-
-										
+										</div>										
 
 										<div class="form_grid_12">
 											<label class="field_title" id="accnumberlbl" for="username">PROPERTY TYPE<span class="req">*</span></label>
@@ -763,6 +803,9 @@
 													<th>
 														BUILDING STATUS
 													</th>
+													<th>
+														STATUS
+													</th>
 												</tr>
 												</thead>
 												<tbody>
@@ -770,7 +813,12 @@
 													<td style="width: 40px;">
 														{{$loop->iteration}}
 													</td>
-													<td><a id="linkid_{{$loop->iteration}}" class="bldg-modal" onclick="editTax('{{$loop->iteration}}')" href="#">{{$rec->zone}}</a>
+													<td>
+														@if($rec->approvalstatus == '')
+															<a id="linkid_{{$loop->iteration}}" class="bldg-modal" onclick="editTax('{{$loop->iteration}}')" href="#">{{$rec->zone}}</a>
+														@else
+															{{$rec->zone}}
+														@endif
 													</td>
 													<td>
 														{{$rec->bldgcategory}}
@@ -780,6 +828,9 @@
 													</td>
 													<td>
 														{{$rec->bldgstatus}}
+													</td>
+													<td  style="width: 190px;">
+														{{$rec->approvalstatus}}
 													</td>
 												</tr>
 												<div style="display:none">

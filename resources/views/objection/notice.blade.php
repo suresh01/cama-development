@@ -12,7 +12,7 @@
 			<div class="grid_12">	
 					<br>
 				<div class="breadCrumbHolder module">	
-				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
+				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_4">
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Valuation Process</a></li>
@@ -91,7 +91,8 @@
 						<div id="widget_tab">
 							<ul>
 								<li><a href="agenda?term={{$term}}&id={{$id}}" >Agenda</a></li>
-								<li><a href="notice?term={{$term}}&id={{$id}}" class="active_tab">Notis</a></li>
+								<li><a href="newnotice?term={{$term}}&id={{$id}}">New Notis</a></li>
+								<li><a href="notice?term={{$term}}&id={{$id}}" class="active_tab">Existing Notis</a></li>
 								<li><a href="objectionreport?term={{$term}}&id={{$id}}">Objection</a></li>
 								<li><a href="decision?term={{$term}}&id={{$id}}">Decision</a></li>
 								<li><a href="result?term={{$term}}&id={{$id}}">Report</a></li>
@@ -213,7 +214,7 @@
 		function openNotice(){
 			var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0,left = 312,top = 234');
 		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
-		        w.location = "getnotice?term={{$term}}&id={{$id}}";
+		        w.location = "getnotice?type=1&term={{$term}}&id={{$id}}";
 		    }	    
 		    if (w.outerWidth < screen.availWidth || w.outerHeight < screen.availHeight)
 			{
@@ -346,7 +347,7 @@ $(document).ready(function (){
 		        /*"dom": '<"toolbar">frtip',*/
 				 "ajax": {
 		            "type": "GET",
-		            "url": 'noticeTables?id={{$id}}',
+		            "url": 'noticeTables?type=1&id={{$id}}',
 		            "contentType": 'application/json; charset=utf-8',
 				    "headers": {
 					    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
