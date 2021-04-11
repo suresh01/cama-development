@@ -137,20 +137,24 @@ class HomeController extends Controller
                  where vt_approvalstatus_id = '01' and vt_id =".$id." order by vt_termDate desc");
         
         $group = DB::select("select approval.tdi_desc approval,va_approvalstatus_id, va_id id, va_name l_group, va_vt_id termid, vt_name termaname, va_createby createby, DATE_FORMAT(va_createdate, '%d/%m/%Y') createdate, 
-        va_updateby updateby, DATE_FORMAT(va_updatedate, '%d/%m/%Y') updatedate, ifnull(propertycount,0) propertycount,0 inspropertyccount , applntype.tdi_value applntype,
-         vt_applicationtype_id, ob_desc, ifnull(notiscount,0) notiscount , ifnull(objectioincount,0) objectioincount , ifnull(decisioncount,0) decisioncount , 0  valcount
-        from cm_appln_val 
-        inner join cm_appln_valterm  on va_vt_id = vt_id
-        left join (select count(*) propertycount,vd_va_id from cm_appln_valdetl group by vd_va_id ) propcount on propcount.vd_va_id = va_id
-        left join (SELECT * FROM tbdefitems where tdi_td_name = 'BASKETSTAGE') approval on approval.tdi_key = va_approvalstatus_id 
-        left join (SELECT * FROM tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype on applntype.tdi_key = vt_applicationtype_id 
-        left join cm_objection on ob_vt_id = vt_id 
-        left join (select count(*) notiscount,vd_va_id  from cm_objection_notis 
-        inner join cm_appln_valdetl on vd_id = no_vd_id group by vd_va_id ) notis on notis.vd_va_id = va_id
-        left join (select count(*) objectioincount,vd_va_id  from cm_objection_objectionlist 
-        inner join cm_appln_valdetl on vd_id = ol_vd_id group by vd_va_id ) objection on objection.vd_va_id = va_id
-        left join (select count(*) decisioncount,vd_va_id  from cm_objection_decision 
-        inner join cm_appln_valdetl on vd_id = de_vd_id group by vd_va_id ) decision on decision.vd_va_id = va_id
+va_updateby updateby, DATE_FORMAT(va_updatedate, '%d/%m/%Y') updatedate, ifnull(propertycount,0) propertycount,ifnull(inspropertyccount,0) inspropertyccount , applntype.tdi_value applntype,
+vt_applicationtype_id, ob_desc, ifnull(notiscount,0) notiscount , ifnull(objectioincount,0) objectioincount , ifnull(decisioncount,0) decisioncount , ifnull(valcount,0)  valcount
+from cm_appln_val 
+inner join cm_appln_valterm  on va_vt_id = vt_id
+left join (select count(*) propertycount,vd_va_id from cm_appln_valdetl group by vd_va_id ) propcount on propcount.vd_va_id = va_id
+left join (select count(*) inspropertyccount ,vd_va_id from cm_appln_valdetl where vd_approvalstatus_id in ('06','07','08','09','10','11','12') 
+group by vd_va_id ) insprop on insprop.vd_va_id = va_id
+left join (select count(*) valcount ,vd_va_id from cm_appln_valdetl where vd_approvalstatus_id in ('08','09','10','11','12')  
+group by vd_va_id ) valprop on valprop.vd_va_id = va_id
+left join (SELECT * FROM tbdefitems where tdi_td_name = 'BASKETSTAGE') approval on approval.tdi_key = va_approvalstatus_id 
+left join (SELECT * FROM tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype on applntype.tdi_key = vt_applicationtype_id 
+left join cm_objection on ob_vt_id = vt_id 
+left join (select count(*) notiscount,vd_va_id  from cm_objection_notis 
+inner join cm_appln_valdetl on vd_id = no_vd_id group by vd_va_id ) notis on notis.vd_va_id = va_id
+left join (select count(*) objectioincount,vd_va_id  from cm_objection_objectionlist 
+inner join cm_appln_valdetl on vd_id = ol_vd_id group by vd_va_id ) objection on objection.vd_va_id = va_id
+left join (select count(*) decisioncount,vd_va_id  from cm_objection_decision 
+inner join cm_appln_valdetl on vd_id = de_vd_id group by vd_va_id ) decision on decision.vd_va_id = va_id
         where  va_vt_id = ifnull('".$id."',0) 
         order by va_id desc");
 
