@@ -185,7 +185,7 @@ class HomeController extends Controller
     }
 
      public function group(Request $request){
-        $param = $request->input('param');
+        /*$param = $request->input('param');
        // Log::info( DB::statement('call json_procedure( )'));
         $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
@@ -249,9 +249,9 @@ class HomeController extends Controller
         $valpropcount = DB::select('select  count(*) valcount from cm_appln_valdetl 
         inner join cm_appln_val on va_id = vd_va_id where vd_approvalstatus_id in ("08","09","10","11","12") and  va_vt_id = ifnull("'.$param.'",0)');
 
-        App::setlocale(session()->get('locale'));
+        App::setlocale(session()->get('locale'));*/
         
-        return view("group.basket")->with(array('term'=> $term,'group'=> $group,'tonebasket'=>$tonebasket,'tonetaxbasket'=>$tonetaxbasket,'propcount'=>$propcount,'bldgcount'=>$bldgcount,'inspropcount'=>$inspropcount,'valpropcount'=>$valpropcount,'termfilter' => $termfilter, 'param' => $param, 'termtype' => $termtype));
+        return view("group.basket");//->with(array('term'=> $term,'group'=> $group,'tonebasket'=>$tonebasket,'tonetaxbasket'=>$tonetaxbasket,'propcount'=>$propcount,'bldgcount'=>$bldgcount,'inspropcount'=>$inspropcount,'valpropcount'=>$valpropcount,'termfilter' => $termfilter, 'param' => $param, 'termtype' => $termtype));
     }
 
     public function groupTransaction(Request $request) {
