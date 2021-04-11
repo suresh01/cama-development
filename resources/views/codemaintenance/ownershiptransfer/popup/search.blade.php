@@ -133,11 +133,16 @@ $(document).ready(function (){
 	//	$('#id').val(id);
    // $("#usertable").hide();
       //    $("#addgroup").show();
-      var type = "addproperty";
+    var type = "addproperty";
+    var accounts = "add";
+    if('{{$page}}' == 'lot'){
+ 		accounts ="addlot";
+    }
+      //var type = "addproperty";
    		$.ajax({
 	        type:'GET',
 	        url:'grapnewdata',
-	        data:{accounts:"add",id:id,type:type},
+	        data:{accounts:accounts,id:id,type:type},
 	        success:function(data){	        	
 	        	
             alert(" Record Added");
@@ -149,7 +154,7 @@ $(document).ready(function (){
  
   
   
-  function closeWindow(){
+function closeWindow(){
     window.opener.location.reload();
     try {
         window.opener.HandlePopupResult(sender.getAttribute("result"));

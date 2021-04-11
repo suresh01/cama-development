@@ -15,12 +15,12 @@
 				
 				<div id="breadCrumb3"  class="breadCrumb grid_3">
 					<ul >
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Tone of List</a></li>
-						<li>Tone Basket</li>
+						<li><a href="#">{{__('toneoflist.home')}}</a></li>
+						<li><a href="#">{{__('toneoflist.tol')}}</a></li>
+						<li>{{__('toneoflist.tbasket')}}</li>
 					</ul>
 				</div>
-				<button id="addtrans" onclick="openBasket()" style="float:right;" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Basket</span></button>
+				<button id="addtrans" onclick="openBasket()" style="float:right;" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('toneoflist.addbasket')}}</span></button>
 				<br>
 			</div>
 		
@@ -30,28 +30,28 @@
 					<thead style="text-align: left;">
 					<tr>
 						<th class="table_sno">
-							S No
+							{{__('toneoflist.sno')}}
 						</th>
 						<th>
-							ID
+							{{__('toneoflist.id')}}
 						</th>
 						<th>
-							TOL Year
+							{{__('toneoflist.tolyear')}}
 						</th>
 						<th>
-							Enforcement Year
+							{{__('toneoflist.enforcementyear')}}
 						</th>
 						<th>
-							Description 
+							{{__('toneoflist.description')}}
 						</th>
 						<th>
-							Status
+							{{__('toneoflist.status')}}
 						</th>
 						<th>
-							Update by / Update date
+							{{__('toneoflist.updateby')}} / {{__('toneoflist.updatedate')}}
 						</th>
 						<th>
-							Action
+							{{__('toneoflist.action')}}
 						</th>
 						
 					</tr>
@@ -112,7 +112,7 @@
 			<div class="widget_wrap">
 				
 				<div class="widget_content">
-					<h3 id="title">Add Basket</h3>
+					<h3 id="title">{{__('toneoflist.addbasket')}}</h3>
 					<form id="basketform" autocomplete="off" method="post" action="#" >
 						<div  class="grid_6 form_container left_label">
 							<ul>
@@ -121,9 +121,9 @@
 									<input type="hidden" name="basketid" id="basketid">
 									<input type="hidden" name="jsondata" id="jsondata">
 									<fieldset>
-										<legend>Basket Information</legend>
+										<legend>{{__('toneoflist.basketinfo')}}</legend>
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">YEAR<span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('toneoflist.year')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="year" name="year"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -131,7 +131,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">ENFORCEMENT YEAR<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('toneoflist.enforcementyear')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="eyear" name="eyear"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -139,7 +139,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">DESCRIPTION<span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('toneoflist.description')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="desc" name="desc"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -147,7 +147,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">STATUS<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('toneoflist.status')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="status" name="status" tabindex="20">
 													<option></option>
@@ -168,9 +168,9 @@
 						
 						<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">							
 							<div class="form_input">
-								<button id="addsubmit" name="adduser" onclick="validateBasket()" class="btn_small btn_blue"><span>Submit</span></button>									
+								<button id="addsubmit" name="adduser" onclick="validateBasket()" class="btn_small btn_blue"><span>{{__('toneoflist.submit')}}</span></button>									
 								
-								<button id="close" onclick="closeBasket()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+								<button id="close" onclick="closeBasket()" name="close" type="button" class="btn_small btn_blue"><span>{{__('toneoflist.close')}}</span></button>
 								<span class=" label_intro"></span>
 							</div>								
 							<span class="clear"></span>

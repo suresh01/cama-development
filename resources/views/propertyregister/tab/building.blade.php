@@ -842,12 +842,32 @@
 				operation = "New";
 				operation_code = "new";
 			}
-
+			
 			//var row = table.row(table.row( $(this).parents('tr') ).index()),
 			//data = row.data();
 			var updatebldgno = $('#bldgnum').val();
 			data=[operation,'<a class="shobldg" onclick="showBldgAr('+$('#bldgid').val()+')" href="#">'+updatebldgno+'</a><input type="hidden" value="'+$('#bldgcate').val()+'" id="bldgcategory_'+temp_id+'"><input type="hidden" value="'+$('#bldgttype').val()+'" id="bldgtype_'+$('#bldgid').val()+'"><input type="hidden" value="'+updatebldgno+'" id="'+$('#bldgid').val()+'">', updatebldgno, $('#bldgcate option:selected').text() +' / '+ $('#bldgttype option:selected').text(), $('#bldgstorey option:selected').text(), $('#bldgstructure option:selected').text(),$('#rooftype option:selected').text(), $('#bldgttype').val(), $('#bldgstorey').val(),  $('#bldgcond').val(), $('#bldgpos').val(), $('#bldgstructure').val(),$('#rooftype').val(), $('#walltype').val(), $('#floortype').val(),$('#cccdt').val(), $('#occupieddt').val(), $('#mainbldg').val(), '<span><a onclick="" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span><span><a onclick="openbldgarea('+$('#bldgid').val()+')" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span>&nbsp;&nbsp;&nbsp;<span><a onclick="" class="action-icons c-delete  deletebldgrow" href="#" title="delete">Delete</a></span>',operation_code, temp_id, account ];
 
+
+			var parenttable = $('#bldgartable1').DataTable();
+		    //var landtotal = 0;
+		    for (var m = 0;m < parenttable.rows().count() ;m++){
+		      var parenttableldata = parenttable.row(m).data();
+
+		      var parenttablerow = parenttable.row(m);
+
+		      var parenttabledata = parenttablerow.data();
+		      if (parenttableldata[2] == temp_id) {        
+		        parenttabledata[30]=updatebldgno;
+		        /*parenttabledata[4]=$('#allowancetotal').val();
+		        parenttabledata[5]=$('#depvalue').val();
+		        parenttabledata[6]=$('#netbldg').val();
+		        parenttabledata[7]=$('#roundbldg').val();*/
+		        parenttablerow.data(parenttabledata);
+		      }
+		//console.log(parenttabledata[4]);		   
+
+		    }
 			row.data(data);
 			$('#propertystatus').val('');
 			//alert('Record is successfully added');

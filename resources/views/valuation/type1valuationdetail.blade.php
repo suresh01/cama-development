@@ -576,6 +576,9 @@
                   <th>
                     lot id
                   </th>
+                  <th>
+                    actioncode
+                  </th>
 			</tr>
 		</thead>
 		<tbody>
@@ -601,6 +604,9 @@
 					</td> 
 					<td style="text-align:right;">
 					{{$rec->vla_vt_id}}                                  
+					</td>  
+					<td style="text-align:right;">
+					noaction                                
 					</td>   
     			</tr>
 			@endforeach						

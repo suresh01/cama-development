@@ -449,6 +449,7 @@ Route::get('addresslogtables','HomeController@addressLogTables');
 
 Route::get('addresslog','HomeController@addressLog');
 
+
 Route::get('propaddresslogtables','HomeController@propAddressLogTables');
 
 Route::get('generateOwnershipreport','HomeController@generateOwnershipreport');
@@ -563,6 +564,8 @@ Route::get('searchpropertyaddress', 'HomeController@searchPropertyAddress');
 
 Route::get('searchpropertyaddressdata', 'HomeController@searchPropertyAddressData');
 
+Route::get('propertylotdata', 'HomeController@propertyLotData');
+
 Route::get('manualvaluation', 'ValutionController@manualValuationProcess');
 
 Route::get('manualland', 'ValutionController@manualLand');
@@ -575,17 +578,15 @@ Route::get('remisi',  function () {
     return view('remisi.remisi'); 
 });
 
-Route::get('addremisi',  function () {
-    return view('remisi.addapplication'); 
-});
+Route::get('addremisi', 'HomeController@addRemisi'); 
 
-Route::get('remisidetail',  function () {
-    return view('remisi.remisiregister'); 
-});
+Route::get('remisisearchdata', 'HomeController@remisiSearchData');
 
-Route::get('remisiregister',  function () {
-    return view('remisi.detail'); 
-});
+Route::get('remisidetail',  'HomeController@remisiDetail'); 
+
+Route::get('remisiregister',  'HomeController@remisiRegister'); 
+
+Route::get('remisitrn','HomeController@remisiTRN');
 
 Route::get('investigation',  function () {
     return view('remisi.investigation'); 

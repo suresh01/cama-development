@@ -50,6 +50,7 @@
 					<div  style="float:right;margin-right: 20px;">		
 							<select onchange="getdata()" data-placeholder="Choose a Status..."  style="float: left;" class="cus-select"  id="paramterm" name="paramterm" tabindex="6">
 								<option value="0">Please Select a Filter...</option>
+								<option value="All">All Basket</option>
 								@foreach ($termfilter as $rec)
 									<option value='{{ $rec->termid }}'>( {{ $rec->applntype }} ) {{ $rec->term }} - {{ $rec->termstage }}</option>
 								@endforeach	

@@ -32,30 +32,42 @@
 						<table id="proptble" class="display select">
 							<thead style="text-align: left;">
 								<tr>
-									<th></th>
+									<th><input name="select_all" value="1" type="checkbox"></th>
 									<th class="table_sno">
 										S No
 									</th>
 									<th>
-										No Account
+										Account Number
 									</th>
 									<th>
-										Zone
+										Zone 
 									</th>
 									<th>
-										Sub Zone
+										Sub Zone 
 									</th>
 									<th>
 										Property Building Status
-									</th>
+									</th>	
 									<th>
-										Property Category		
-									</th>		
+										Property Category
+									</th>			
 									<th>
 										Property Type
 									</th>		
 									<th>
 										Property Storey
+									</th>	
+									<th>
+										Term Date
+									</th>	
+									<th>
+										Register By
+									</th>	
+									<th>
+										Register Date
+									</th>
+									<th>
+										Status
 									</th>	
 									<th>
 										Action
@@ -64,36 +76,7 @@
 							</thead>
 							<tbody>		
 									
-									<tr>
-										<td></td>
-										<td>
-											1
-										</td>
-										<td>
-											<a class='shobldg' onclick="onclick=remisiDetail()" href='#' >112213000055</a>
-										</td>
-										<td>
-											ZON 11	
-										</td>
-										<td>
-											SUB ZON 122	
-										</td>
-										<td>
-											BUILDING LOT
-										</td>
-										<td>
-											KEDIAMAN
-										</td>
-										<td>
-											BERKEMBAR
-										</td>
-										<td>
-											TINGKAT 01
-										</td>
-										<td>
-											<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick='deleteBasket()' href='#' title='Delete'></a></span>
-										</td>
-									</tr>
+									
 								
 								
 							</tbody>
@@ -122,10 +105,10 @@
 			}
 		}
 		
-		function remisiDetail() {		
+		function remisiDetail(id) {		
 		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0,left = 312,top = 234');
 		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
-		        w.location = "remisidetail";
+		        w.location = "remisidetail?id="+id;
 		    }	    
 		    if (w.outerWidth < screen.availWidth || w.outerHeight < screen.availHeight)
 			{
@@ -134,17 +117,109 @@
 			}
 		}
 
+		function approve(id,currstatus){
+			
+			var noty_id = noty({
+				layout : 'center',
+				text: 'Are you sure want to Submit?',
+				modal : true,
+				buttons: [
+					{type: 'button pink', text: 'Submit', click: function($noty) {
+						$noty.close();
+						$.ajax({
+			  				type: 'GET', 
+						    url:'approve',
+						    headers: {
+							    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+							},
+					        data:{param_value:id,module:'remisi',param:currstatus},
+					        success:function(data){
+								window.location.assign("remisi");									
+				        	},
+					        error:function(data){
+								//$('#loader').css('display','none');	
+					        	alert('error');
+				        	}
+				    	});
+					  }
+					},
+					{type: 'button blue', text: 'Cancel', click: function($noty) {
+						$noty.close();
+					  }
+					}
+					],
+				 type : 'success', 
+			 });
+		}
+
 $(document).ready(function (){
 
-	
 	var table = $('#proptble').DataTable({
-		        "processing": false,
+		       "processing": false,
 		        "serverSide": false,
-		        "retrieve": true,
+		        /*"dom": '<"toolbar">frtip',*/
+		        "ajax": {
+		            "type": "GET",
+		            "url": 'remisisearchdata',
+		            "contentType": 'application/json; charset=utf-8',
+				    "headers": {
+					    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+		        },
+					"lengthMenu":  [100, 200, 500, 1000],		
+				 	
+		       // ajax: '{{ url("inspectionproperty") }}',
+		        /*"ajax": '/bookings/datatables',*/
+		        "columns": [
+			        {"data": "ma_accno", "orderable": false, "searchable": false, "name":"_id" },
+			        {"data": null, "name": "sno"},
+			        {"data": function(data){
+
+			        	return "<a onclick='remisiDetail("+data.rg_id+")' href='#'>"+data.ma_accno+"</a>";
+
+			        }, "name": "account number"},
+			        {"data": "zone", "name": "zone"},
+			        {"data": "subzone", "name": "subzone"},
+			        {"data": "propertstatus", "name": "address"},
+			        {"data": "bldgcategory", "name": "owner", }, 
+			        {"data": "bldgtype", "name": "ishasbldg", }, 
+			        {"data": "bldgsotery", "name": "ishasbldg", }, 
+			        {"data": function(data){
+			        	return "";
+			        }, "name": "propertstatus"}, 
+			        {"data": "rg_createby", "name": "ishasbldg"}, 
+			        {"data": "rg_createat_frmt", "name": "propertstatus"}, 
+			        {"data": "approvalstatus", "name": "ishasbldg"}, 
+			        {"data":  function(data){
+			        	
+			        	var action = "";
+			        		
+							var editaction =
+							"&nbsp;&nbsp;<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick='deleteBasket("+data.rg_id+")' href='#' title='Delete'></a></span>";
+
+							if(data.rg_remisistatus_id == '0'  ){
+								action = editaction +  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',0)"  title="Submit For Investigation" href="#"></a></span>';							
+							} else if(data.rg_remisistatus_id == '2'){
+								action = editaction +  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',2)"  title="Submit For Proposed" href="#"></a></span>';
+						
+							} else if(data.rg_remisistatus_id == '3'){
+								action = editaction +  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',3)"  title="Submit For Decision" href="#"></a></span>';
+						
+							} else if(data.rg_remisistatus_id == '4'){
+								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',5)"  title="Approve" href="#"></a></span>' + 
+								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',6)"  title="Reject" href="#"></a></span>';							
+							}
+							
+
+			        		return action;
+
+			        	return '';
+			        }, "name": "propertstatus"}
+		   		],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
-		   			var oSettings = this.fnSettings();
-  	
-			        $("td:nth-child(2)", nRow).html(oSettings._iDisplayStart+iDisplayIndex +1);
+			        $("td:nth-child(2)", nRow).html(iDisplayIndex + 1);
+			        var count = $('#proptble').DataTable().rows().count();
+					$('#prop_count').html(count);
 			        return nRow;
 			    },
 			    "sPaginationType": "full_numbers",
@@ -154,7 +229,7 @@ $(document).ready(function (){
 		    },
 		    'columnDefs': [{
          'targets': 0,
-         'searchable': true,
+         'searchable': false,
          'orderable': false,
          'width': '1%',
          'className': 'dt-body-center',

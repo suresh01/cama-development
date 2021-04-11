@@ -19,13 +19,14 @@
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Data Maintenance</a></li>
-						<li>Property Address</li>
+						<li>Property Lot Transfer</li>
 					</ul>
 				</div>
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">		
 					@include('codemaintenance.ownershiptransfer.newsearch')
+					<a href="#" onclick="addProperty()">Add Property</a>
 				</div>
 				<br>
         
@@ -39,31 +40,34 @@
 										S No
 									</th>
 									<th>
-										ACCOUNT NUMBER
+										LOT TYPE / NUMBER
 									</th>
 									<th>
-										FILE NUMBER
+										LOT TITLE TYPE / NUMBER
 									</th>
 									<th>
-										ZONE
+										ALTERNATIF LOT NUMBER
 									</th>
 									<th>
-										SUBZONE
+										STRATA NUMBER
 									</th>
 									<th>
-										ADDRESS 1
+										TENANT TYPE
 									</th>	
 									<th>
-										ADDRESS 2
+										TENURE PERIOD
 									</th>	
 									<th>
-										ADDRESS 3
+										START DATE
 									</th>	
 									<th>
-										POSTCODE
-									</th>	
+										END DATE
+									</th>
 									<th>
-										CITY
+										STATUS
+									</th>		
+									<th>
+										ACTION
 									</th>		
 								</tr>
 							</thead>
@@ -92,7 +96,7 @@
 						<ul>
 							<li>				
 								<fieldset>
-									<legend>Account Information</legend>					
+									<legend>Account Information</legend>				
 									
 									
 									
@@ -325,14 +329,14 @@
 									<div class="form_grid_12">
 										<label class="field_title" id="lposition" for="position">Altenate Title No<span class="req">*</span></label>
 										<div  class="form_input">
-											<input id="altnum" name="altnum"  tabindex="12"  type="text" " maxlength="50" class=""/>
+											<input id="altnum" name="altnum"  tabindex="12"  type="text"  maxlength="50" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
 										<label class="field_title" id="lposition" for="position">Strata No<span class="req">*</span></label>
 										<div  class="form_input">
-											<input id="stratano" name="stratano"  tabindex="12"  type="text" " maxlength="50" class=""/>
+											<input id="stratano" name="stratano"  tabindex="12"  type="text"  maxlength="50" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
@@ -414,6 +418,19 @@
 	<span class="clear"></span>
 	
 	<script>
+
+		function addProperty() {		
+		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0,left = 312,top = 234');
+		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
+		        w.location = "searchpropertyaddress?page=lot";
+		    }	    
+		    if (w.outerWidth < screen.availWidth || w.outerHeight < screen.availHeight)
+			{
+				w.moveTo(0,0);
+				w.resizeTo(screen.availWidth, screen.availHeight);
+			}
+		}
+
 		function getLotDetail(id){
 			if(id != 0){
 				$('#lotdetail_view').show();
@@ -478,12 +495,122 @@
 			 });
 		}
 
-		function lotDetail(id){
+		function approve(id,currstatus){
+
+	var table = $('#proptble').DataTable();
+		var account = $.map(table.rows('.selected').data(), function (item) {
+		// console.log(item);
+    		return item['log_id']
+		});
+		if(account.length==0){
+				account=id;
+	   		} else {
+	   			account=account.toString();
+	   		}
+		//alert(account);
+		//alert(currstatus);
+		var noty_id = noty({
+			layout : 'center',
+			text: 'Are you sure want to Submit?',
+			modal : true,
+			buttons: [
+				{type: 'button pink', text: 'Submit', click: function($noty) {
+					$noty.close();
+					$.ajax({
+		  				type: 'GET', 
+					    url:'approve',
+					    headers: {
+						    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						},
+				        data:{param_value:id,module:'propertylotaddress',param:currstatus,param_str:account },
+				        success:function(data){	        	
+				        	
+							window.location.assign("propertylot");	
+							
+			        	},
+				        error:function(data){
+							//$('#loader').css('display','none');	
+				        	alert('error');
+			        	}
+			    	});
+				  }
+				},
+				{type: 'button blue', text: 'Cancel', click: function($noty) {
+					$noty.close();
+				  }
+				}
+				],
+			 type : 'success', 
+		});
+
+	}
+
+
+
+	function approve(id,currstatus,type){
+		var param_status ="";
+		if(type == 1){
+			param_status = 'AP';
+		} else {
+			param_status = 'RJ';
+		}
+
+		var table = $('#bldgtable').DataTable();
+		var account = $.map(table.rows('.selected').data(), function (item) {
+		// console.log(item);
+    		return item['log_id']
+		});
+		if(account.length==0){
+				account=id;
+	   		} else {
+	   			account=account.toString();
+	   		}
+
+		//alert(account);
+		//alert(currstatus);
+		var noty_id = noty({
+			layout : 'center',
+			text: 'Are you sure want to Submit?',
+			modal : true,
+			buttons: [
+				{type: 'button pink', text: 'Submit', click: function($noty) {
+					$noty.close();
+					$.ajax({
+		  				type: 'GET', 
+					    url:'approve',
+					    headers: {
+						    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						},
+				        data:{param_value:id,module:'propertylotaddress',param:currstatus,param_str:account,param_status:param_status },
+				        success:function(data){	 	
+				        	
+							window.location.assign("propertylot");	
+							
+			        	},
+				        error:function(data){
+							//$('#loader').css('display','none');	
+				        	alert('error');
+			        	}
+			    	});
+				  }
+				},
+				{type: 'button blue', text: 'Cancel', click: function($noty) {
+					$noty.close();
+				  }
+				}
+				],
+			 type : 'success', 
+		});
+
+	}
+
+		function lotDetail(id,log_id){
 			$('#accno').val(id);
 		$( "#tenstart").datepicker({dateFormat: 'dd/mm/yy'});
 		$( "#tenend").datepicker({dateFormat: 'dd/mm/yy'});
 			$('#lot-modal-content').modal();
 			$('#accno').val(id);
+			$('#al_id').val(log_id);
 			$.ajax({
   				type: 'POST', 
 			    url:'propertylotdetail',
@@ -493,8 +620,8 @@
 		        data:{prop_id:id},
 		        success:function(data){
 		        	//alert(data.lotlist[0].al_id);
-		        	var id = data.lotlist[0].al_id;
-		        	$('#al_id').val(id);
+		        	//var id = data.lotlist[0].al_id;
+		        	
 		        	//alert(id);
 		        	$("#lotlist").append('<option value="'+data.lotlist[0].al_lotcode_id+'">'+data.lotlist[0].al_no+' </option>');
 					$('#lotype').val(data.lotlist[0].al_lotcode_id);
@@ -582,29 +709,60 @@ $(document).ready(function (){
 
 
 	var table = $('#proptble').DataTable({
-		        "processing": false,
-		        "serverSide": false,
+		        "processing": true,
+		        "serverSide": true,
 		        "retrieve": true,
 		        /*"dom": '<"toolbar">frtip',*/
-				 
-		        // ajax: '{{ url("inspectionproperty") }}',
+				 "ajax": {
+		            "type": "GET",
+		            "url": 'propertylotdata',
+		            "contentType": 'application/json; charset=utf-8',
+				    "headers": {
+					    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				},
+		        //ajax: '{{ url("propertylotdata") }}',
 		        /*"ajax": '/bookings/datatables',*/
 		        "columns": [
-			        {"data": "ma_id", "orderable": false, "searchable": false, "name":"_id" },
+			        {"data": "log_id", "orderable": false, "searchable": false, "name":"_id" },
 			        {"data": null, "name": "sno"},
 			        {"data":  function(data){
 
-			        	return "<a onclick='lotDetail("+data.ma_accno+")' href='#'>"+data.ma_accno+"</a>";
+			        	return "<a onclick='lotDetail("+data.ma_accno+","+data.log_id+")' href='#'>"+data.lotnumber+"</a>";
 			        
 			        }, "name": "account number"},
-			        {"data": "ma_fileno", "name": "fileno"},
-			        {"data": "zone", "name": "zone"},
-			        {"data": "subzone", "name": "subzone"},
-			        {"data": "ma_addr_ln1", "name": "owner"}, 
-			        {"data": "ma_addr_ln2", "name": "ishasbldg"},
-			        {"data": "ma_addr_ln3", "name": "owntype"}, 
-			        {"data": "ma_city", "name": "TO_OWNNAME"}, 
-			        {"data": "ma_postcode", "name": "bldgcount"}
+			        {"data": "titlenumber", "name": "fileno"},
+			        {"data": "log_altno", "name": "zone"},
+			        {"data": "log_stratano", "name": "subzone"},
+			        {"data": "tentype", "name": "owner"}, 
+			        {"data": "log_tenureperiod", "name": "ishasbldg"},
+			        {"data": "log_startdate", "name": "owntype"}, 
+			        {"data": "log_expireddate", "name": "TO_OWNNAME"}, 
+			        {"data": "tstatus", "name": "bldgcount"},
+			        {"data":  function(data){
+
+			        	var editaction ='<a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -62px !important;display: inline-block; float: right;" title="View Log" 			        	onclick="submitLogForm('+data.log_id+')"></a></span>&nbsp;&nbsp;&nbsp;&nbsp;' ;
+
+			        	var deleteaction ="&nbsp;&nbsp;<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; float: right;'  onclick='deleteProperty("+data.log_id+")' href='#' title='Delete'></a></span>";
+
+							if(data.log_approvalstatus_id == '1'  || data.log_approvalstatus_id == '6'){
+								action =  deleteaction + editaction  ;				
+
+							} else if(data.log_approvalstatus_id == '2'){
+								action= deleteaction + editaction + '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.log_id+',2)"  title="Submit To Approve" href="#"></a></span>'
+							
+							} else if(data.log_approvalstatus_id == '4'){
+								action =  editaction +  '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.log_id+',4,1)"  title="Approve" href="#"></a></span>' + 
+								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('+data.log_id+',4,2)"  title="Reject" href="#"></a></span>';		
+
+							} else if(data.log_approvalstatus_id == '5'){
+								action =  editaction+  '<!--<spane><a  class=" new-action-icons reverse" onclick="approve('+data.log_id+',5)" title="Revise" href="#"></a></span>-->								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('+data.log_id+',5)" title="Transfer" href="#"></a></span>';						
+							} 
+							
+			        		return action;
+
+			        }, "name": "sno"}
+			        
 		   		],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
 		   			var oSettings = this.fnSettings();

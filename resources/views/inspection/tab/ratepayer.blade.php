@@ -1,6 +1,6 @@
 	            
 								
-								<button id="addratepayer" onclick="addRatepayer()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Ratepayer</span></button>
+							<button id="addratepayer" onclick="addRatepayer()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Ratepayer</span></button>
 
 								<div id="ratepayertable" class="widget_wrap">
 

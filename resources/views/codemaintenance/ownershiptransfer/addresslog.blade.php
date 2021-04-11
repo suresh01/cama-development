@@ -130,7 +130,7 @@ $(document).ready(function (){
 		        /*"dom": '<"toolbar">frtip',*/
 				  "ajax": {
 		            "type": "GET",
-		            "url": 'propaddresslogtables',
+		            "url": 'propaddresslogtables?page=1',
 		            "contentType": 'application/json; charset=utf-8',
 				    "headers": {
 					    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

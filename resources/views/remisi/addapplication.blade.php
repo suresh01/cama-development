@@ -17,9 +17,9 @@
           
           <a href="#" id="" onclick="closeWindow()" class=""><span>Close </span></a> 
 				</div>
-				<div style="float:right;margin-right: 15px;"  class="btn_24_blue">					
-					<a href="#"  >Add Filter</a>
-				</div>
+        <div style="float:right;margin-right: 15px;"  class="btn_24_blue">          
+          @include('inspection.grab.search')
+        </div>
 				<br>
         
 				<div class="widget_wrap">					
@@ -167,6 +167,25 @@ $(document).ready(function (){
    // Handle form submission event
 
 });
+
+function addApplication(id){
+  //  $('#id').val(id);
+   // $("#usertable").hide();
+      //    $("#addgroup").show();
+    var type = "addremisi";
+    
+      //var type = "addproperty";
+      $.ajax({
+          type:'GET',
+          url:'grapnewdata',
+          data:{accounts:"add",id:id,type:type},
+          success:function(data){           
+            
+            alert(" Record Added");
+            closeWindow();
+          }
+    });
+  }
 
 
   

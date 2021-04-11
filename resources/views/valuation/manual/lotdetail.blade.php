@@ -317,46 +317,49 @@ function updateCalculation(){
     
     var lotareatable = $("#landdetail").DataTable();
     
-    /*for (var l = 0;l < lotareatable.rows().count() ;l++){
-        var ldata = lotareatable.row(l).data();
-        
-        //if (ldata[6] == {{$id}}) {
-            var row = window.opener.$("#hiddenlandarea").DataTable().row(l);
-            var data = row.data();
-            var temptable = $("#landdetail").DataTable();
-            for (var k = 0;k<temptable.rows().count() ;k++){
-                var localdata = temptable.row(k).data();
-                //if (localdata[8] == ldata[5]) {
-                  //data[2] = localdata[6];
-                  //data[3] = localdata[7];
-                 // data[4] = localdata[5];
-                  row.data(data);
-              //  }
-              //  lotareatable.row.add([ ldata[1], ldata[2], ldata[6], ldata[7], ldata[5],ldata[8],ldata[9] ]).draw(false);   
-            }            
-      // }
-    }*/
-
-//console.log(parenrowid);
+    
     var parenttable = window.opener.$('#landtable').DataTable();
     var landtotal = 0;
+
     for (var m = 0;m < parenttable.rows().count() ;m++){
       var parenttableldata = parenttable.row(m).data();
 
       var parenttablerow = parenttable.row(m);
 
       var parenttabledata = parenttablerow.data();
-   //   if (parenttableldata[5] == {{$id}}) {        
-        parenttabledata[3]=$('#netlandvalue').val();
-        parenttabledata[4]=$('#roundnetlandvalue').val();
-        parenttablerow.data(parenttabledata);
-     // }
-//console.log(parenttabledata[4]);
-    if (parenttabledata[4] != undefined)
-      landtotal = landtotal + Number(removeCommas(parenttabledata[4]));
+        
+      parenttabledata[3]=$('#netlandvalue').val();
+      parenttabledata[4]=$('#roundnetlandvalue').val();
+      parenttablerow.data(parenttabledata);
+    
+      if (parenttabledata[4] != undefined)
+        landtotal = landtotal + Number(removeCommas(parenttabledata[4]));
 
     }
-     
+
+    var lotareatable = window.opener.$("#hiddenlandarea").DataTable();
+    
+    for (var l = 0;l < lotareatable.rows().count() ;l++){
+        var ldata = lotareatable.row(l).data();
+        
+        if (ldata[6] == {{$id}}) {
+            var row = window.opener.$("#hiddenlandarea").DataTable().row(l);
+            var data = row.data();
+            var temptable = $("#landdetail").DataTable();
+            for (var k = 0;k<temptable.rows().count() ;k++){
+                var localdata = temptable.row(k).data();
+                if (localdata[8] == ldata[5]) {
+                  data[2] = localdata[6];
+                  data[3] = localdata[7];
+                  data[4] = localdata[5];
+                  row.data(data);
+                }
+                //lotareatable.row.add([ ldata[1], ldata[2], ldata[6], ldata[7], ldata[5],ldata[8],ldata[9] ]).draw(false);   
+            }            
+        } else {
+          
+        }
+    }
     window.opener.$('#landtotal').val( formatMoneyHas(landtotal));
     window.opener.taxDriveCalculation();
     window.close();

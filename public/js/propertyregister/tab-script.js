@@ -234,13 +234,13 @@ var validateBldg = function() {
             $.each(ldata, function( key, value ) {
                 if (value == 'Y'){
                     mainbldg = value; 
-                    mainbldgnumber = ldata[2]; 
+                    mainbldgnumber = ldata[20]; 
                 }          
             });
         }
         //alert(mainbldgnumber);
         //alert($('#bldgnum').val());
-        if (mainbldgnumber !== $('#bldgnum').val()){
+        if (mainbldgnumber !== $('#bldgtemp').val()){
             if(mainbldg == 'Y' && $('#mainbldg').val() == 'Y'){
 
                 alert('Only one building should be main building');

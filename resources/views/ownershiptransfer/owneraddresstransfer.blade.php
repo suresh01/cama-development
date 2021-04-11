@@ -21,11 +21,21 @@
 				</div>
 				</div>
 				
-				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">					
-					<!--<a href="#" onclick="demo()">Demo</a>-->
-					@include('ownershiptransfer.search')
+				
+				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">
+					
+					<a href="#" onclick="getdata()" >Apply Search</a>
 				</div>
-
+				<div  style="float:right;margin-right: 20px;">
+						
+										
+										
+										
+										
+										<span class="clear"></span>
+					
+					
+				</div>
 				<br>
         
 				<div class="widget_wrap">					
@@ -50,29 +60,83 @@
 										Owner Id No
 									</th>
 									<th>
-										Address 1
+										Address
 									</th>		
 									<th>
-										Address 2
+										Group
+									</th>		
+									<th>
+										Transfer Type
 									</th>	
 									<th>
-										Address 2
+										Register By / Register Date
 									</th>	
 									<th>
-										City
-									</th>
+										Register Status
+									</th>	
 									<th>
 										Action
 									</th>			
 								</tr>
 							</thead>
 							<tbody>		
-									
+									@foreach ($ownertransfer as $rec)
+									<tr>
+										<td></td>
+										<td>
+											{{$loop->iteration}}
+										</td>
+										<td>
+											<a class='shobldg' onclick="edit('{{$rec->ma_accno}}')" href='#' >{{$rec->otar_accno}}</a>
+										</td>
+										<td>
+											{{$rec->TO_OWNNAME}}
+										</td>
+										<td>
+											{{$rec->owntype}}
+										</td>
+										<td>
+											{{$rec->TO_OWNNO}}
+										</td>
+										<td>
+											{{$rec->TO_ADDR_LN1}}
+										</td>
+										<td>
+											{{$rec->colgroup}}
+										</td>
+										<td>
+											{{$rec->transtype}}
+										</td>
+										<td>
+											{{$rec->otar_createby}} / {{$rec->otar_createdate1}}
+										</td>
+										<td>
+											{{$rec->colstatus}}
+										</td>
+										<td>
+											<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -62px !important;display: inline-block; float: left;" onclick="submitForm('{{$rec->ma_accno}}')"  title="View Log" href="#"></a></span>&nbsp;&nbsp;
+
+											
+											@if($rec->otar_ownertransstatus_id == '2')
+												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',2)"  title="Submit To Approve" href="#"></a></span>
+												<span><a class="action-icons c-Delete delete_tenant" onclick="deleteT('{$rec->otar_accno}}','{{$rec->otar_ownertransgroup_id}}')" href='#' title='Delete'>Delete</a></span>
+											@endif
+
+											@if($rec->otar_ownertransstatus_id == '5')
+												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',5)" title="Transfer" href="#"></a></span>
+											@endif
+										</td>
+									</tr>
+									@endforeach	
+								
 							</tbody>
 						</table>
 
 
 								<div class="grid_12 invoice_details">
+									<div style="display: none;" id="searchLoader">
+										<!--<img src="images/ajax-loader/ajax-loader(8).gif" alt="Loader">-->
+									</div>
 									<div class="widget_wrap collapsible_widget">
 										<div class="widget_top active">
 											<span class="h_icon"></span>
@@ -90,10 +154,10 @@
 														Application ID
 													</th>
 													<th>
-														Transfer Type
+														Application Type
 													</th>
 													<th>
-														Transfer Status
+														Application Status
 													</th>
 													<th>
 														Register Date
@@ -116,10 +180,13 @@
 													<th>
 														Owner Race
 													</th>
+													<!--<th>
+														Action
+													</th>-->
 												</tr>
 												</thead>
 												<tbody>
-													
+													 
 												</tbody>
 												</table>
 											</div>
@@ -130,9 +197,16 @@
 				</div>
 			</div>
 		</div>
+		
 	<span class="clear"></span>
 	
 	<script>
+		function getdata(){
+			var zone = $('#filterzone').val();
+			//alert();
+			window.location.assign('ownertransfer?page=2&param='+zone);
+			//return;
+		}
 
 		function edit(acc) {		
 		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0,left = 312,top = 234');
@@ -144,6 +218,72 @@
 				w.moveTo(0,0);
 				w.resizeTo(screen.availWidth, screen.availHeight);
 			}
+		}
+
+		function approve(id,currstatus){
+			
+			var noty_id = noty({
+				layout : 'center',
+				text: 'Are you sure want to Submit?',
+				modal : true,
+				buttons: [
+					{type: 'button pink', text: 'Submit', click: function($noty) {
+						$noty.close();
+						$.ajax({
+			  				type: 'GET', 
+						    url:'approve',
+						    headers: {
+							    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+							},
+					        data:{param_value:id,module:'ownershiptrans',param:currstatus},
+					        success:function(data){
+								window.location.assign("ownertransfer?page=2");									
+				        	},
+					        error:function(data){
+								//$('#loader').css('display','none');	
+					        	alert('error');
+				        	}
+				    	});
+					  }
+					},
+					{type: 'button blue', text: 'Cancel', click: function($noty) {
+						$noty.close();
+					  }
+					}
+					],
+				 type : 'success', 
+			 });
+					
+				
+
+		}	
+
+		function deleteT(acc, groupid) {		
+		    var noty_id = noty({
+				layout : 'center',
+				text: 'Do you want Delete?',
+				modal : true,
+				buttons: [
+					{type: 'button pink', text: 'Delete', click: function($noty) {
+			  
+						// this = button element
+						// $noty = $noty element
+			  			
+			            //$('#jsondata').val(tenantjson);
+			            //console.log(tenantjson);
+			           // window.location.assign('tenanttrn?account='+acc+'&groupid='+groupid);
+						$noty.close();
+						//noty({force: true, text: 'You clicked "Ok" button', type: 'success',layout : 'center',modal : true,});
+					  }
+					},
+					{type: 'button green', text: 'Cancel', click: function($noty) {
+						$noty.close();
+						//noty({force: true, text: 'You clicked "Cancel" button', type: 'error',layout : 'center',modal : true,});
+					  }
+					}
+					],
+				type : 'success', 
+			});
 		}
 
 		function register(){
@@ -189,39 +329,16 @@
 
 $(document).ready(function (){
 
-	
-
+	$('#filterzone').val('{{$param}}');
+	waitingIndicator('searchLoader');
 	var table = $('#proptble').DataTable({
 		        "processing": false,
 		        "serverSide": false,
 		        "retrieve": true,
 		        /*"dom": '<"toolbar">frtip',*/
-												
+				 
 		        // ajax: '{{ url("inspectionproperty") }}',
 		        /*"ajax": '/bookings/datatables',*/
-		        "columns": [
-			        {"data": "ma_id", "orderable": false, "searchable": false, "name":"_id" },
-			        {"data": null, "name": "sno"},
-			        {"data":  function(data){
-
-			        	return "<a onclick='edit("+data.ma_accno+")' href=#'>"+data.ma_accno+"</a>";
-			        
-			        }, "name": "account number"},
-			        {"data": "TO_OWNNAME", "name": "fileno"},
-			        {"data": "owntype", "name": "zone"},
-			        {"data": "TO_OWNNO", "name": "subzone"},
-			        {"data": "ma_addr_ln1", "name": "owner"}, 
-			        {"data": "ma_addr_ln2", "name": "ishasbldg"},
-			        {"data": "ma_addr_ln3", "name": "owntype"}, 
-			        {"data": "ma_city", "name": "TO_OWNNAME"}, 
-			        {"data": function(data){
-			        	
-			        	
-			        	return ' <span><a onclick="submitForm('+data.ma_accno+')" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span>';
-			        
-			        }, "name": "bldgcount"}
-		   		],
-		         
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
 		   			var oSettings = this.fnSettings();
   	
@@ -332,7 +449,7 @@ $(document).ready(function (){
 		//console.log($("#filterForm").serialize());
 
 
-
+	$('#searchLoader').attr('style','display:block');
 	var logtable = $('#logtable').DataTable({
 		        "processing": false,
 		        "serverSide": false,
@@ -345,14 +462,25 @@ $(document).ready(function (){
 			        {"data": "ota_id", "orderable": false, "searchable": false, "name":"_id" },
 			        {"data": "ota_id", "name": "sno"},
 			        {"data": "ttype", "name": "account number"},
-			        {"data": "transstauts", "name": "account number"},
+			        {"data": "ownstatus", "name": "account number"},
 			        {"data": "otar_createdate", "name": "fileno"},
 			        {"data": "otar_updatedate", "name": "zone"},
 			        {"data": "ota_ownname", "name": "ishasbldg"},
 			        {"data": "owntype", "name": "owntype"}, 
 			        {"data": "ota_ownno", "name": "TO_OWNNAME"}, 
 			        {"data": "ota_addr_ln1", "name": "bldgcount"},
-			        {"data": "ownrace", "name": "ownrace"}
+			        {"data": "ownrace", "name": "ownrace"}/*,
+			        {"data": function(data){
+			        	//console.log("LOG :    "+data.ota_transferapplntypestatus_id);
+			        	if(data.ota_transtocenterstatus_id == 4){
+
+			        		return "<a href=#' onclick='retry("+data.ota_id+")'>Retry</a>";
+			        	} else {
+			        		return "";
+			        	}
+			        	
+			        
+			        }, "name": "ownrace"}*/
 		   		],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
 		   			var oSettings = this.fnSettings();
@@ -469,12 +597,45 @@ $(document).ready(function (){
             type: 'GET'
         }).done(function (result) {
         	if(result.recordsTotal == 0) {
+        		$('#searchLoader').attr('style','display:none');
         		alert('No records found');
+
         	}
 	        table1.rows.add(result.data).draw();
+
+	        //$('#searchLoader').attr('style','display:none');
+
         }).fail(function (jqXHR, textStatus, errorThrown) {            	 
             console.log(errorThrown);
         });
+	}
+
+	function retry(id){
+		var noty_id = noty({
+				layout : 'center',
+				text: 'Are want to transfer again?',
+				modal : true,
+				buttons: [
+					{type: 'button blue', text: 'Submit', click: function($noty) {
+			  
+						$noty.close();
+
+			        	var noty_id = noty({
+							layout : 'top',
+							text: ' Transferred successfully!',
+							modal : true,
+							type : 'success', 
+						});			
+
+					}},
+					{type: 'button pink', text: 'Cancel', click: function($noty) {
+						$noty.close();
+					  }
+					}
+					],
+				 type : 'success', 
+
+			 });
 	}
 
 
