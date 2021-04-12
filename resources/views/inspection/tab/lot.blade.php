@@ -309,8 +309,8 @@
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="status" tabindex="22" name="status" tabindex="20">	
 												<option></option>										
-												<option value='Y'>Y</option>
-												<option value='N'>N</option>											
+												<option value='1'>Y</option>
+												<option value='2'>N</option>											
 										</select>
 										</div>
 										<span class=" label_intro"></span>

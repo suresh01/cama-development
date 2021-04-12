@@ -235,7 +235,7 @@
 				  	
 				  		$("#accnumber").val(account+""+data.checkdigit);
 				    	
-				    	var valid = validateAccount(this.value).done(function(data){
+				    	var valid = validateAccount(account+""+data.checkdigit).done(function(data){
 					       var count = data.res_arr;
 							if (count > 0 ) {
 								$('#accnumber').focus();

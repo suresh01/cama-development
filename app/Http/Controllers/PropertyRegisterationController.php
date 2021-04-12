@@ -749,6 +749,8 @@ $master ='{"aa":"ss '.$type.'"}';
                  $res_arr = $obj->count;
             }
         }
+        Log::info($param_value);
+        Log::info($result);
         return response()->json(array('res_arr'=> $res_arr), 200);
     }
 

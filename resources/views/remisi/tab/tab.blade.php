@@ -109,6 +109,10 @@
 					instabledata = JSON.stringify(instabledata).replace(/]|[[]/g, '');
 		
            
+
+            if(instabledata === ''){
+				instabledata = "{}";
+			}
 		//console.log(formdata);
 			var noty_id1 = noty({
 				layout : 'center',

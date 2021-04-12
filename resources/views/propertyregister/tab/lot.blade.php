@@ -494,8 +494,8 @@ function editlotRow(){
 function addlotRow(){
 
 	if (validateLot()){
-		$('#propertyregsitration_from-back-1').show();
-		$('#propertyregsitration_from-next-1').show();
+		//$('#propertyregsitration_from-back-1').show();
+		//$('#propertyregsitration_from-next-1').show();
 			 
 		$('#submitedittbllot').hide();
 			$('#submitaddtbllot').show();

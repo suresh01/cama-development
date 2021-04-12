@@ -509,14 +509,15 @@
 			var groupColumn = 4;
 		 $('#bldgartable1').DataTable({
         	data:           blsgardata,
-            "columns":[ { "visible": false }, { "visible": false }, { "visible": false }, null, null, null, null, null,null, null, null, null, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, null,{ "visible": false },{ "visible": false }],
+            "columns":[ null, { "visible": false }, { "visible": false }, null, null, null, null, null,null, null, null, null, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, null,{ "visible": false },{ "visible": false }],
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
 			"oLanguage": {
 		        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
 		    },
+		   
+		       
         	"bAutoWidth": false,
-        	"order": [[ groupColumn, 'asc' ]],
 			"sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>',
 			"drawCallback": function ( settings ) {
 	            var api = this.api();
