@@ -56,6 +56,9 @@
 										No Account
 									</th>
 									<th>
+										Application Type
+									</th>	
+									<th>
 										Owner Name
 									</th>
 									<th>
@@ -77,9 +80,6 @@
 										Register Status
 									</th>	
 									<th>
-										Application Status
-									</th>	
-									<th>
 										Action
 									</th>			
 								</tr>
@@ -97,6 +97,9 @@
 											@else
 											<a class='shobldg' onclick="edit('{{$rec->otar_accno}}',1)" href='#' >{{$rec->otar_accno}}</a>
 											@endif
+										</td>
+										<td>
+											{{$rec->transtype}}
 										</td>
 										<td>
 											{{$rec->TO_OWNNAME}}
@@ -118,9 +121,6 @@
 										</td>
 										<td>
 											{{$rec->colstatus}}
-										</td>
-										<td>
-											{{$rec->transtype}}
 										</td>
 										<td>
 											@if($rec->otar_ownertransstatus_id == '4')
