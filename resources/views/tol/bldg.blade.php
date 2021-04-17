@@ -46,77 +46,74 @@
 							</div>
 							
 							<select id='testSelect1' style="float: right;" multiple>
-								<option value='1'>Rate Basket</option>
-								<option value='2'>Transaction Type</option>
-								<option value='3'>ZONE</option>
-								<option value='4'>Subzone</option>
-								<option value='5'>Property Category</option>
-								<option value='6'>Property Type</option>
-								<option value='7'>Property Storey</option>
-								<option value='8'>Area Type</option>
-								<option value='9'>Area Level</option>
-								<option value='10'>Area Category</option>
-								<option value='11'>Area Use</option>
-								<option value='12'>Value</option>
-								<option value='13'>Update by / Update date</option>
-								<option value='14'>Update by / Update date</option>
-							</select>
-								
+								<option value='2'>{{__('toneoflist.col2')}}</option>
+								<option value='3'>{{__('toneoflist.col3')}}</option>
+								<option value='4'>{{__('toneoflist.col4')}}</option>
+								<option value='5'>{{__('toneoflist.col5')}}</option>
+								<option value='6'>{{__('toneoflist.col6')}}</option>
+								<option value='7'>{{__('toneoflist.col7')}}</option>
+								<option value='8'>{{__('toneoflist.col8')}}</option>
+								<option value='9'>{{__('toneoflist.col9')}}</option>
+								<option value='10'>{{__('toneoflist.col10')}}</option>
+								<option value='11'>{{__('toneoflist.col11')}}</option>
+								<option value='12'>{{__('toneoflist.col12')}}</option>
+								<option value='13'>{{__('toneoflist.col13')}}</option>
+								<option value='14'>{{__('toneoflist.col14')}}</option>
+							</select>								
 						</div>	
-
 					<thead style="text-align: left;"> 
 					<tr>
 						<th><input name="select_all" value="1" type="checkbox"></th>
 						<th class="table_sno">
-							S No
+							{{__('toneoflist.col1')}}
 						</th>
 						<th>
-							ID
+							{{__('toneoflist.col17')}}
 						</th>
 						<th>
-							Tone Basket
+							{{__('toneoflist.col2')}}
 						</th>
 						<th>
-							Transaction Type
+							{{__('toneoflist.col3')}}
 						</th>
 						<th>
-							Zone
+							{{__('toneoflist.col4')}}
 						</th>
 						<th>
-							Subzone
+							{{__('toneoflist.col5')}}
+						</th>		
+						<th>
+							{{__('toneoflist.col6')}}
 						</th>
 						<th>
-							Property Category 
+							{{__('toneoflist.col7')}}
+						</th>	
+						<th>
+							{{__('toneoflist.col8')}}
 						</th>
 						<th>
-							Property Type
+							{{__('toneoflist.col9')}}
 						</th>
 						<th>
-							Property Storey 
+							{{__('toneoflist.col10')}}
 						</th>
 						<th>
-							Area Type
+							{{__('toneoflist.col11')}}
 						</th>
 						<th>
-							Area Level
+							{{__('toneoflist.col12')}}
 						</th>
 						<th>
-							Area Category
+							{{__('toneoflist.col13')}}
 						</th>
 						<th>
-							Area Use
+							{{__('toneoflist.col14')}}
 						</th>
 						<th>
-							Value
+							{{__('toneoflist.col15')}}
 						</th>
 						<th>
-							Update by / Update date
-						</th>
-						<th>
-							Status
-						</th>
-						<th>
-							Action
+							{{__('toneoflist.col16')}}
 						</th>
 						
 					</tr>
@@ -739,9 +736,21 @@
 			    },
 			    "sPaginationType": "full_numbers",
 			"iDisplayLength": 100,
-			"oLanguage": {
-		        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
-		    },
+		    oLanguage: {
+	            oPaginate: {
+	                sFirst: "{{__('datatable.first')}}",
+	                sLast: "{{__('datatable.last')}}",
+	                sNext: "{{__('datatable.next')}}",
+	                sPrevious: "{{__('datatable.previous')}}"
+	            },
+	            sEmptyTable: "{{__('datatable.emptytable')}}" ,
+	            sInfoEmpty: "Showing 0 to 0 of 0 entries",
+	            sThousands: ",",
+	            sLoadingRecords: "{{__('datatable.loading')}}...",
+	            sProcessing: "{{__('datatable.processing')}}...",
+	            sSearch: "{{__('datatable.search')}}:",	            
+		        sLengthMenu: "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>{{__('datatable.lengthmenu')}}:</span>",	
+	        },
 		    'columnDefs': [{
          'targets': 0,
          'searchable': true,

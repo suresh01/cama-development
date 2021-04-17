@@ -103,14 +103,22 @@
 								<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">TEL NO<span class="req">*</span></label>
 										<div  class="form_input">
-											<input id="telno" name="telno" tabindex="1" type="text" value="" maxlength="15" class="large"/>
+											<input id="telno" name="telno" tabindex="1" type="text" value="" maxlength="15" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">FAX NO<span class="req">*</span></label>
 										<div  class="form_input">
-											<input id="faxno" name="faxno" tabindex="1" type="text" value="" maxlength="15" class="large"/>
+											<input id="faxno" name="faxno" tabindex="1" type="text" value="" maxlength="15" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+
+									<div class="form_grid_12">
+										<label class="field_title" id="llevel" for="level">EMAIL ID<span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="faxno" name="faxno" tabindex="1" type="text" value="" maxlength="15" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
@@ -196,16 +204,17 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
 									<div  class="form_input">
-										<input id="ownpostcode"  name="ownpostcode" tabindex="1" type="number"  maxlength="50" class="large"/>
+										<input id="owncity"  name="owncity" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
+
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
 									<div  class="form_input">
-										<input id="owncity"  name="owncity" tabindex="1" type="text"  maxlength="50" class="large"/>
+										<input id="ownpostcode"  name="ownpostcode" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>

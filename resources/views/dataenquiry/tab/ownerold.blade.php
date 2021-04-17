@@ -102,14 +102,21 @@
 								<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">TEL NO<span class="req">*</span></label>
 										<div  class="form_input">
-											<input id="telno" name="telno" readonly="true" tabindex="1" type="text" value="" maxlength="15" class="large"/>
+											<input id="telno" name="telno" readonly="true" tabindex="1" type="text" value="" maxlength="15" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">FAX NO<span class="req">*</span></label>
 										<div  class="form_input">
-											<input id="faxno" name="faxno" readonly="true" tabindex="1" type="text" value="" maxlength="15" class="large"/>
+											<input id="faxno" name="faxno" readonly="true" tabindex="1" type="text" value="" maxlength="15" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									<div class="form_grid_12">
+										<label class="field_title" id="llevel" for="level">EMAIL ID<span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="faxno" name="emailid" readonly="true" tabindex="1" type="text" value="" maxlength="15" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
@@ -195,9 +202,17 @@
 								</div>
 
 								<div class="form_grid_12">
+									<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+									<div  class="form_input">
+										<input id="city"  name="city" readonly="" tabindex="1" type="number"  maxlength="50" class=""/>
+									</div>
+									<span class=" label_intro"></span>
+								</div>
+
+								<div class="form_grid_12">
 									<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
 									<div  class="form_input">
-										<input id="ownpostcode"  name="ownpostcode" readonly="" tabindex="1" type="number"  maxlength="50" class="large"/>
+										<input id="ownpostcode"  name="ownpostcode" readonly="" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
@@ -249,10 +264,22 @@
             "columns":[ null, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false },null,null,null,null,null],
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
-        	"bAutoWidth": false,
-			"oLanguage": {
-		        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
-		    },
+        	"bAutoWidth": false,			
+		    oLanguage: {
+	            oPaginate: {
+	                sFirst: "{{__('datatable.first')}}",
+	                sLast: "{{__('datatable.last')}}",
+	                sNext: "{{__('datatable.next')}}",
+	                sPrevious: "{{__('datatable.previous')}}"
+	            },
+	            sEmptyTable: "{{__('datatable.emptytable')}}" ,
+	            sInfoEmpty: "Showing 0 to 0 of 0 entries",
+	            sThousands: ",",
+	            sLoadingRecords: "{{__('datatable.loading')}}...",
+	            sProcessing: "{{__('datatable.processing')}}...",
+	            sSearch: "{{__('datatable.search')}}:",	            
+		        sLengthMenu: "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>{{__('datatable.lengthmenu')}}:</span>",	
+	        },
 			"sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>'
 			 
 		});

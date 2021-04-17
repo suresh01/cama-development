@@ -146,7 +146,7 @@
 										{{$loop->iteration}}
 									</td>
 									<td>
-										<a href="termbasket?id={{$rec->vt_id}}">{{$rec->name}}</a>
+										<a href="termbasket?id={{$rec->vt_id}}&ts=1">{{$rec->name}}</a>
 									</td>
 									<td>
 										{{$rec->applntype}}

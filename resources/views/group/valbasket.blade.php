@@ -104,7 +104,7 @@
 										{{$loop->iteration}}
 									</td>
 									<td>
-										<a onclick="isUrlAllowed(514,'property?id={{$rec->id}}')" href="#">{{$rec->l_group}}</a>
+										<a onclick="isUrlAllowed(514,'property?id={{$rec->id}}&ts=1')" href="#">{{$rec->l_group}}</a>
 									</td>
 									<td>
 										{{$rec->applntype}}

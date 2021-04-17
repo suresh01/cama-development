@@ -75,7 +75,7 @@
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="valterm">Valuation Data Management</a></li>
-						<li><a href="valbasket?id={{$termid}}">Basket</a></li>
+						<li><a href="valbasket?id={{$termid}}&ts=1">Basket</a></li>
 						<li>Property</li>
 					</ul>
 				</div>
@@ -516,7 +516,7 @@ var table = $('#proptble').DataTable({
 		        /*"dom": '<"toolbar">frtip',*/
 		        "ajax": {
 		            "type": "GET",
-		            "url": 'insproperty?id={{$id}}',
+		            "url": 'insproperty?id={{$id}}&ts=1',
 		            "contentType": 'application/json; charset=utf-8',
 				    "headers": {
 					    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -734,7 +734,7 @@ function reviseProperty(id){
 				        data:{param_value:0,module:'REVINS',param:id},
 				        success:function(data){		
 							
-							window.location.assign('property?id={{$id}}');		        		
+							window.location.assign('property?id={{$id}}&ts=1');		        		
 				        	//$("#finish").attr("disabled", true);
 				        	//clearTableError(4); 
 			        	},
@@ -793,7 +793,7 @@ function approveProperty(id){
 				        data:{param_value:0,module:'APINS',param:id},
 				        success:function(data){		
 							
-							window.location.assign('property?id={{$id}}');		        		
+							window.location.assign('property?id={{$id}}&ts=1');		        		
 				        	//$("#finish").attr("disabled", true);
 				        	//clearTableError(4); 
 			        	},
@@ -851,7 +851,7 @@ function approveValuation(id){
 				        data:{param_value:0,module:'APVAL',param:id},
 				        success:function(data){
 							
-							window.location.assign('property?id={{$id}}');		        		
+							window.location.assign('property?id={{$id}}&ts=1');		        		
 				        	//$("#finish").attr("disabled", true);
 				        	//clearTableError(4); 
 			        	},
@@ -912,7 +912,7 @@ function approveValuation(id){
 				        data:{param_value:$('#val_id').val(),module:'REVVAL',param:$('#revisestage').val(),param_str:id},
 				        success:function(data){		
 							
-							window.location.assign('property?id={{$id}}');		        		
+							window.location.assign('property?id={{$id}}&ts=1');		        		
 				        	//$("#finish").attr("disabled", true);
 				        	//clearTableError(4); 
 			        	},

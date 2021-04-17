@@ -23,8 +23,8 @@
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="valterm">Valuation Data Management</a></li>
-						<li><a href="valbasket?id={{$termid}}">{{$viewparamterm}} </a></li>
-						<li><a href="property?id={{$pb}}">{{$viewparambasket}} - {{$viewparambasketstatus}}</a></li>
+						<li><a href="valbasket?id={{$termid}}&ts=1">{{$viewparamterm}} </a></li>
+						<li><a href="property?id={{$pb}}&ts=1">{{$viewparambasket}} - {{$viewparambasketstatus}}</a></li>
 						<li>{{$accountnumber}} </li>
 					</ul>
 				</div>
@@ -95,7 +95,7 @@
 <script>
 		function closePage(){
 			//alert();
-			window.location.assign('property?id={{$pb}}');	
+			window.location.assign('property?id={{$pb}}&ts=1');	
 		}
 		function addTenant() {
 			
@@ -182,7 +182,7 @@
 
                 e.preventDefault(e);
                 if({{$iseditable}} == 0) {
-                	window.location.assign('property?id={{$pb}}');
+                	window.location.assign('property?id={{$pb}}&ts=1');
                 } 	else {
 		
 			var noty_id = noty({
@@ -427,7 +427,7 @@ var status = $('#propertystatus').val();
 									modal : true,
 									type : 'success', 
 								});			
-								window.location.assign('property?id={{$pb}}');		        		
+								window.location.assign('property?id={{$pb}}&ts=1');		        		
 					        	//$("#finish").attr("disabled", true);
 					        	//clearTableError(4);
 				        	},

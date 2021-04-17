@@ -109,7 +109,15 @@
 									<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">FAX NO<span class="req">*</span></label>
 										<div  class="form_input">
-											<input id="faxno" readonly="true" name="faxno" value="{{$owner->TO_FAXNO}}" tabindex="1" type="text" value="" maxlength="15" class=""/>
+											<input id="faxno" readonly="true" name="faxno" value="{{$owner->TO_FAXNO}}" tabindex="1" type="text"  maxlength="15" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+
+									<div class="form_grid_12">
+										<label class="field_title" id="llevel" for="level">EMAIL ID<span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="emailid" readonly="true" name="faxno" value="" tabindex="1" type="text"  maxlength="15" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
@@ -182,6 +190,13 @@
 									<span class=" label_intro"></span>
 								</div>
 
+								<div class="form_grid_12">
+									<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+									<div  class="form_input">
+										<input id="city"  readonly="true" name="ownpostcode" value="" tabindex="1" type="text"  maxlength="50" class=""/>
+									</div>
+									<span class=" label_intro"></span>
+								</div>
 								<div class="form_grid_12">
 									<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
 									<div  class="form_input">

@@ -23,8 +23,8 @@
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Valuation Process</a></li>
-						<li><a href="group?param={{$termid}}">{{$viewparamterm}} </a></li>
-						<li><a href="property?id={{$pb}}">{{$viewparambasket}} - {{$viewparambasketstatus}}</a></li>
+						<li><a href="valbasket?id={{$termid}}&ts=1">{{$viewparamterm}} </a></li>
+						<li><a href="property?id={{$pb}}&ts=1">{{$viewparambasket}} - {{$viewparambasketstatus}}</a></li>
 						<li>{{$accountnumber}} </li>
 					</ul>
 				</div>

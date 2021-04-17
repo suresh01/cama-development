@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Data Search</title>
+<title>{{__('menu.dataenquiry')}}</title>
 <style type="text/css">
   td.numericCol {
     text-align: right;
@@ -239,7 +239,7 @@
 		        		alert("You Don't have permission");
 		        		return;
 		        	} else {
-		        		window.open("datasearchdetail?prop_id="+id, '_blank');
+		        		window.open("datasearchdetail?ts=1&prop_id="+id, '_blank');
 						//window.location.href = "datasearchdetail?prop_id="+id;
 		        	}
 		        }
@@ -250,29 +250,29 @@
 		
 $(document).ready(function (){
 
-document.multiselect('#testSelect1');
+	document.multiselect('#testSelect1');
 
 	$('.multiselect-checkbox').click(function() {
-  // alert($(this).attr('data-val'););
-var id  = $(this).attr('data-val');
-    var table = $('#proptble').DataTable();
-	var column = table.column( id);
-	 //alert($('#'+id).prop("checked"));
-	if (id != '-1'){
-		column.visible( $(this).prop("checked"));
-	}
-
-	if (id == '-1'){
-		for(i=1;i<=25;i++){
-			var column = table.column( i);
+  		// alert($(this).attr('data-val'););
+		var id  = $(this).attr('data-val');
+	    var table = $('#proptble').DataTable();
+		var column = table.column( id);
+		 //alert($('#'+id).prop("checked"));
+		if (id != '-1'){
 			column.visible( $(this).prop("checked"));
 		}
-		//console.log(table.columns().length );
-		//column.visible( $(this).prop("checked"));
-	}
+
+		if (id == '-1'){
+			for(i=1;i<=25;i++){
+				var column = table.column( i);
+				column.visible( $(this).prop("checked"));
+			}
+			//console.log(table.columns().length );
+			//column.visible( $(this).prop("checked"));
+		}
 
 
-});
+	});
 
 	//var visiblecolumn = ["1","2","3","4","5","6","7","21","22","23","24"];
 	defaultDatatableColumn(["1","2","3","4","5","6","7","22","23","24","25"]);
@@ -343,32 +343,47 @@ var id  = $(this).attr('data-val');
 			    },
 			    "sPaginationType": "full_numbers",
 			"iDisplayLength": 100,
-			"oLanguage": {
+			/*"oLanguage": {
 		        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
-		    },
+		    },*/
+		    oLanguage: {
+	            oPaginate: {
+	                sFirst: "{{__('datatable.first')}}",
+	                sLast: "{{__('datatable.last')}}",
+	                sNext: "{{__('datatable.next')}}",
+	                sPrevious: "{{__('datatable.previous')}}"
+	            },
+	            sEmptyTable: "{{__('datatable.emptytable')}}" ,
+	            sInfoEmpty: "Showing 0 to 0 of 0 entries",
+	            sThousands: ",",
+	            sLoadingRecords: "{{__('datatable.loading')}}...",
+	            sProcessing: "{{__('datatable.processing')}}...",
+	            sSearch: "{{__('datatable.search')}}:",	            
+		        sLengthMenu: "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>{{__('datatable.lengthmenu')}}:</span>",	
+	        },
 		    'columnDefs': [{
-         'targets': 0,
-         'searchable': true,
-         'orderable': false,
-         'width': '1%',
-         'className': 'dt-body-center',
-         'render': function (data, type, full, meta){
-             return '<input type="checkbox">';
-         }
-      }],
-      'rowCallback': function(row, data, dataIndex){
-         // Get row ID
-         var rowId = data[0];
+		         'targets': 0,
+		         'searchable': true,
+		         'orderable': false,
+		         'width': '1%',
+		         'className': 'dt-body-center',
+		         'render': function (data, type, full, meta){
+		             return '<input type="checkbox">';
+		         }
+      		}],
+			'rowCallback': function(row, data, dataIndex){
+			 // Get row ID
+				var rowId = data[0];
 
-         // If row ID is in the list of selected row IDs
-         if($.inArray(rowId, rows_selected) !== -1){
-            $(row).find('input[type="checkbox"]').prop('checked', true);
-            $(row).addClass('selected');
-         }
-      },
+				// If row ID is in the list of selected row IDs
+				if($.inArray(rowId, rows_selected) !== -1){
+				    $(row).find('input[type="checkbox"]').prop('checked', true);
+				    $(row).addClass('selected');
+				}
+			},
         	"bAutoWidth": false,
 			"sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>'
-			});
+		});
    // Array holding selected row IDs
    var rows_selected = [];
    
