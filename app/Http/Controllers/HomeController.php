@@ -2072,42 +2072,25 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
     public function testBasket(Request $request){
         $id = $request->input('id');
       
-        $group = DB::select("select approval.tdi_desc approval,va_approvalstatus_id, va_id id, va_name l_group, va_vt_id termid, vt_name termaname, va_createby createby, DATE_FORMAT(va_createdate, '%d/%m/%Y') createdate, 
-        va_updateby updateby, DATE_FORMAT(va_updatedate, '%d/%m/%Y') updatedate, ifnull(propertycount,0) propertycount,ifnull(inspropertyccount,0) inspropertyccount , applntype.tdi_value applntype,
-         vt_applicationtype_id, ob_desc, ifnull(notiscount,0) notiscount , ifnull(objectioincount,0) objectioincount , ifnull(decisioncount,0) decisioncount , ifnull(valcount,0)  valcount
+        $group = DB::select("select *
         from cm_appln_val 
-        inner join cm_appln_valterm  on va_vt_id = vt_id
-        left join (select count(*) propertycount,vd_va_id from cm_appln_valdetl group by vd_va_id ) propcount on propcount.vd_va_id = va_id
-        left join (select count(*) inspropertyccount ,vd_va_id from cm_appln_valdetl where vd_approvalstatus_id in ('06','07','08','09','10','11','12') 
-        group by vd_va_id ) insprop on insprop.vd_va_id = va_id
-        left join (select count(*) valcount ,vd_va_id from cm_appln_valdetl where vd_approvalstatus_id in ('08','09','10','11','12')  
-        group by vd_va_id ) valprop on valprop.vd_va_id = va_id
-        left join (SELECT * FROM tbdefitems where tdi_td_name = 'BASKETSTAGE') approval on approval.tdi_key = va_approvalstatus_id 
-        left join (SELECT * FROM tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype on applntype.tdi_key = vt_applicationtype_id 
-        left join cm_objection on ob_vt_id = vt_id 
-        left join (select count(*) notiscount,vd_va_id  from cm_objection_notis 
-        inner join cm_appln_valdetl on vd_id = no_vd_id group by vd_va_id ) notis on notis.vd_va_id = va_id
-        left join (select count(*) objectioincount,vd_va_id  from cm_objection_objectionlist 
-        inner join cm_appln_valdetl on vd_id = ol_vd_id group by vd_va_id ) objection on objection.vd_va_id = va_id
-        left join (select count(*) decisioncount,vd_va_id  from cm_objection_decision 
-        inner join cm_appln_valdetl on vd_id = de_vd_id group by vd_va_id ) decision on decision.vd_va_id = va_id
-        where  va_vt_id =102049
+        where  va_vt_id =ifnull(".$id.",0)
         order by va_id desc");
 
          $propcount = DB::select('select  count(*) totproperty_count from cm_appln_valdetl 
-        inner join cm_appln_val on va_id = vd_va_id where  va_vt_id = 0');
+        inner join cm_appln_val on va_id = vd_va_id where  va_vt_id = ifnull("'.$id.'",0)');
 
         $bldgcount = DB::select('select  count(*) bldgcount from cm_appln_bldg
           inner join cm_appln_valdetl  on ab_vd_id = vd_id 
-          inner join cm_appln_val on va_id = vd_va_id where  va_vt_id = 0');
+          inner join cm_appln_val on va_id = vd_va_id where  va_vt_id = ifnull("'.$id.'",0)');
 
 
         $inspropcount = DB::select('select  count(*) inscount from cm_appln_valdetl 
         inner join cm_appln_val on va_id = vd_va_id
-        where vd_approvalstatus_id in ("06","07","08","09","10","11","12") and  va_vt_id = 0');
+        where vd_approvalstatus_id in ("06","07","08","09","10","11","12") and  va_vt_id = ifnull("'.$id.'",0)');
 
         $valpropcount = DB::select('select  count(*) valcount from cm_appln_valdetl 
-        inner join cm_appln_val on va_id = vd_va_id where vd_approvalstatus_id in ("08","09","10","11","12") and  va_vt_id = 0');
+        inner join cm_appln_val on va_id = vd_va_id where vd_approvalstatus_id in ("08","09","10","11","12") and  va_vt_id = ifnull("'.$id.'",0)');
 
         App::setlocale(session()->get('locale'));
         

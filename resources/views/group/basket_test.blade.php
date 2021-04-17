@@ -104,49 +104,45 @@
 										{{$loop->iteration}}
 									</td>
 									<td>
-										<a onclick="isUrlAllowed(514,'property?id={{$rec->id}}')" href="#">{{$rec->l_group}}</a>
+										<a onclick="isUrlAllowed(514,'property?id=')" href="#">{{$rec->va_name}}</a>
 									</td>
 									<td>
-										{{$rec->applntype}}
+										
 									</td>
 									<td>
-										{{$rec->termaname}}
+										
 									</td>
 									<td>
-										{{$rec->propertycount}}
+										
 									</td>
 									<td>
-										{{$rec->inspropertyccount}}
+										
 									</td>
 									<td>
-										{{$rec->valcount}}
+										
 									</td>
 									<td>
-										{{$rec->ob_desc}}
+										
 									</td>
-									<td>{{$rec->approval}}										
+									<td>										
 									</td>
 									<td style="display: none;">
-										{{$rec->updateby}} /
-										{{$rec->updatedate}}
+										
 									</td>
 									<td style="display: none;">
-										{{$rec->createby}} / 
-										{{$rec->createdate}}
+										
 									</td>
-									<td style="display: none;">{{$rec->notiscount}}										
+									<td style="display: none;">										
 									</td>
-									<td style="display: none;">{{$rec->objectioincount}}										
+									<td style="display: none;">										
 									</td>
-									<td style="display: none;">{{$rec->decisioncount}}										
+									<td style="display: none;">									
 									</td>
 									<td>
 										
 									</td>
 								</tr>
 								<div style="display: none;">
-									<input type="text" id="name_{{ $rec->id }}" value="{{ $rec->l_group }}">
-									<input type="text" id="term_{{ $rec->id }}" value="{{ $rec->termid }}">
 								</div>
 								@endforeach						
 							</tbody>
