@@ -120,4 +120,29 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
           //return Excel::download($test, 'data.xlsx');
     
     }
+
+    public function testBasket(Request $request){
+        $basketid = $request->input('basketid');
+      
+        $group = DB::select("select va_approvalstatus_id, va_id id, va_name l_group, va_vt_id termid, vt_name termaname, va_createby createby, DATE_FORMAT(va_createdate, '%d/%m/%Y') createdate, 
+        va_updateby updateby, DATE_FORMAT(va_updatedate, '%d/%m/%Y') updatedate, 
+         vt_applicationtype_id, ob_desc
+        from cm_appln_val 
+        inner join cm_appln_valterm  on va_vt_id = vt_id
+        left join cm_objection on ob_vt_id = vt_id 
+        left join (select count(*) notiscount,vd_va_id  from cm_objection_notis 
+        inner join cm_appln_valdetl on vd_id = no_vd_id group by vd_va_id ) notis on notis.vd_va_id = va_id
+        left join (select count(*) objectioincount,vd_va_id  from cm_objection_objectionlist 
+        inner join cm_appln_valdetl on vd_id = ol_vd_id group by vd_va_id ) objection on objection.vd_va_id = va_id
+        left join (select count(*) decisioncount,vd_va_id  from cm_objection_decision 
+        inner join cm_appln_valdetl on vd_id = de_vd_id group by vd_va_id ) decision on decision.vd_va_id = va_id
+        
+        order by va_id desc");
+
+      
+
+       
+        
+        return view("group.basket_test")->with(array('group'=> $group, 'basketid' => $basketid));
+    }
 }
