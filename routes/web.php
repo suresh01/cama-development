@@ -37,7 +37,7 @@ Route::get('termattachment','InspectionController@termAttachment');
 
 Route::get('termbasket','HomeController@termBasket')->name('termbasket');
 
-Route::get('testbasket','HomeController@testBasket');
+Route::get('testbasket','UserController@testBasket');
 
 /*Route::get('dashboard', function () {
     return view('dashboard'); 
