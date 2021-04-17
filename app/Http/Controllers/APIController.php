@@ -143,6 +143,6 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
 
        
         
-        return view("group.basket_test")->with(array('group'=> $group, 'basketid' => $basketid));
+        return view("group.basket_test")->with(array('group'=> $group));
     }
 }
