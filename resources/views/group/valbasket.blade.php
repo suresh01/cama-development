@@ -43,8 +43,7 @@
 					<br>
 				</div>		
 				<div class="widget_wrap">					
-					<div class="widget_content">	
-										
+					<div class="widget_content">										
 						<br>					
 						<table id="baskttable" class="display tbl_details">
 							<thead style="text-align: left;">
