@@ -117,7 +117,7 @@ class HomeController extends Controller
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
         from tbsearchdetail mtb where sd_se_id = "18" ');
         $termcondition = "";
-        if(userpermission::checkaccess('515') == "false"){
+       /* if(userpermission::checkaccess('515') == "false"){
           $termcondition = " where vt_approvalstatus_id in ('01','02') ";
 
         }
@@ -131,7 +131,7 @@ class HomeController extends Controller
                 on applntype.tdi_key = vt_applicationtype_id
                 left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage
                 on termstage.tdi_key = vt_approvalstatus_id ". $termcondition ." order by vt_termDate desc");*/
-        $term = DB::select("select vt_valbase_id, vt_id termid, vt_name term, applntype.tdi_value applntype, 
+      /*  $term = DB::select("select vt_valbase_id, vt_id termid, vt_name term, applntype.tdi_value applntype, 
                 termstage.tdi_desc termstage from cm_appln_valterm 
                 left join (select *  from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype
                 on applntype.tdi_key = vt_applicationtype_id
@@ -182,9 +182,9 @@ inner join cm_appln_valdetl on vd_id = de_vd_id group by vd_va_id ) decision on 
         $valpropcount = DB::select('select  count(*) valcount from cm_appln_valdetl 
         inner join cm_appln_val on va_id = vd_va_id where vd_approvalstatus_id in ("08","09","10","11","12") and  va_vt_id = ifnull("'.$id.'",0)');
 
-        App::setlocale(session()->get('locale'));
+        App::setlocale(session()->get('locale'));*/
         
-        return view("group.valbasket")->with(array('term'=> $term,'group'=> $group,'tonebasket'=>$tonebasket,'tonetaxbasket'=>$tonetaxbasket,'propcount'=>$propcount,'bldgcount'=>$bldgcount,'inspropcount'=>$inspropcount,'valpropcount'=>$valpropcount, 'id' => $id, 'termtype' => $termtype));
+        return view("group.valbasket");//->with(array('term'=> $term,'group'=> $group,'tonebasket'=>$tonebasket,'tonetaxbasket'=>$tonetaxbasket,'propcount'=>$propcount,'bldgcount'=>$bldgcount,'inspropcount'=>$inspropcount,'valpropcount'=>$valpropcount, 'id' => $id, 'termtype' => $termtype));
     }
 
      public function group(Request $request){
