@@ -1214,7 +1214,7 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
         inner join cm_appln_valdetl on vd_id = ol_vd_id group by vd_va_id ) objection on objection.vd_va_id = va_id
         left join (select count(*) decisioncount,vd_va_id  from cm_objection_decision 
         inner join cm_appln_valdetl on vd_id = de_vd_id group by vd_va_id ) decision on decision.vd_va_id = va_id
-        where  va_vt_id =ifnull(".$basketid.",0)
+        
         order by va_id desc");
 
       
