@@ -612,8 +612,6 @@ $('.mainNav li:has(ul)').addClass('has-child');
 						</li>
 		            </ul>
 		          </li>
-		          <li><a style="" tabindex="-1" href="#">Transfer Data</a></li>
-		          <li><a style="" tabindex="-1" href="#">Active Account</a></li>
 		          <li><a style="" tabindex="-1" onclick="return check_access('73','search');" href="#">Search Parameter Management</a></li>
 		        </ul>
       		</li>

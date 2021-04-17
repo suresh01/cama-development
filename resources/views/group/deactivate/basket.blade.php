@@ -311,7 +311,7 @@
 			//$('#paramterm').val('{{$param}}');
 			var param = $('#paramterm').val();
 			if (param != '0') {
-				window.location.assign('deactive?param='+param);
+				window.location.assign('deactive?param='+param+'&ts=1');
 			}
 			//window.location.assign('propertybasket?param='+zone);
 			//return;
