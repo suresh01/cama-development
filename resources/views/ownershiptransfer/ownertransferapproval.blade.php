@@ -77,6 +77,9 @@
 										Register Status
 									</th>	
 									<th>
+										Application Status
+									</th>	
+									<th>
 										Action
 									</th>			
 								</tr>
@@ -89,7 +92,11 @@
 											{{$loop->iteration}}
 										</td>
 										<td>
-											<a class='shobldg' onclick="edit('{{$rec->otar_accno}}')" href='#' >{{$rec->otar_accno}}</a>
+											@if($rec->otar_ownertranstype_id == '3')
+											<a class='shobldg' onclick="edit('{{$rec->otar_accno}}',2)" href='#' >{{$rec->otar_accno}}</a>
+											@else
+											<a class='shobldg' onclick="edit('{{$rec->otar_accno}}',1)" href='#' >{{$rec->otar_accno}}</a>
+											@endif
 										</td>
 										<td>
 											{{$rec->TO_OWNNAME}}
@@ -111,6 +118,9 @@
 										</td>
 										<td>
 											{{$rec->colstatus}}
+										</td>
+										<td>
+											{{$rec->transtype}}
 										</td>
 										<td>
 											@if($rec->otar_ownertransstatus_id == '4')
@@ -141,10 +151,10 @@
 			//return;
 		}
 
-		function edit(acc) {		
+		function edit(acc,page) {		
 		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0,left = 312,top = 234');
 		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
-		        w.location = "ownertransferprocess?account="+acc+"";
+		        w.location = "ownertransferprocess?account="+acc+"&page="+page;
 		    }	    
 		    if (w.outerWidth < screen.availWidth || w.outerHeight < screen.availHeight)
 			{

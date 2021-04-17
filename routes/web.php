@@ -580,6 +580,8 @@ Route::get('remisi',  function () {
 
 Route::get('addremisi', 'HomeController@addRemisi'); 
 
+Route::POST('manaualvaluationprocess', 'ValutionController@manaualValuationProcess'); 
+
 Route::get('remisisearchdata', 'HomeController@remisiSearchData');
 
 Route::get('remisidetail',  'HomeController@remisiDetail'); 

@@ -24,33 +24,35 @@
                 
                 <fieldset>
                   <legend>Land Detail</legend>             
-                 
+                  @foreach ($lotdetail as $rec)
                   <div class="grid_3 invoice_to"> 
                     <strong><span>Code Lot / No : </span></strong>
-                    <span></span>  
+                    <span>{{$rec->lotnumber}}</span>  
                   </div>
                   <div class="grid_3 invoice_to">   
                     <strong><span>Lot Position : </span></strong>
-                    <span></span>
+                    <span>{{$rec->landposition}}</span>
                   </div>
                   <div class="grid_3 invoice_from">
                     <strong><span>Alternate Lot No : </span></strong>
-                    <span></span>
+                    <span>{{$rec->titlenumber}}</span>
                   </div>
                   <div class="grid_3 invoice_from">
                     <strong><span>Tenure Type : </span></strong>
-                    <span></span>
+                    <span>{{$rec->tentype}}</span>
                   </div>
                   <br>  <br>  <br>
                   <div class="grid_3 invoice_from">
                     <strong><span>Land Area : </span></strong>
-                    <span></span>
+                    <span>{{$rec->al_size}}</span>
+                    <input type="hidden" id="landsize" value="{{$rec->al_size}}">
                   </div>
                   <div class="grid_3 invoice_from">
                     <strong><span>Tenure Duration : </span></strong>
-                    <span></span>
+                    <span>{{$rec->duration}}</span>
                   </div>
                
+            @endforeach
             
                 <span class="clear"></span>
                 <div class="grid_12 invoice_details">
@@ -83,6 +85,18 @@
                           </th>
                           <th>
                             Action
+                          </th>
+                          <th>
+                            rate
+                          </th>
+                          <th>
+                            discountreate
+                          </th>
+                          <th>
+                            lotareaid
+                          </th>
+                          <th >
+                            lotid
                           </th>
                         </tr>
                         </thead>
@@ -163,12 +177,19 @@
                       <span class=" label_intro"></span>
                     </div>                 
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">Balance Area<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">Total Area<span class="req">*</span></label>
                       <div class="form_input">
-                        <input id="balsize" readonly="true"  name="balsize" type="text"  value="300" />
+                        <input id="totsize" readonly="true"  name="totsize" type="text"  value="" />
                       </div>
                       <span class=" label_intro"></span>
-                    </div>              
+                    </div>                  
+                    <div class="form_grid_12">                  
+                      <label class="field_title" id="lblgroup" for="name">Balance Area<span class="req">*</span></label>
+                      <div class="form_input">
+                        <input id="balancesize" readonly="true"  name="balancesize" type="text"  value="" />
+                      </div>
+                      <span class=" label_intro"></span>
+                    </div>            
                     <!--<div class="form_grid_12">                  
                       <label class="field_title" id="lblgroup" for="name">Discount<span class="req">*</span></label>
                       <div class="form_input">
@@ -206,9 +227,19 @@
 </div>
 <script>
   function calBalance(){
+    var balance = $('#balancesize').val();
     var size = $('#size').val();
-    $('#balsize').val(300 - size);
-
+    var bal = parseInt(balance) - parseInt(size);
+    if(bal >= 0){
+      if(size != ''){
+        $('#balancesize').val(bal);
+      }
+      
+    } else {
+      alert('Area size exceed. Avaialable limit is '+balance);
+      $('#size').val('');
+      $('#balancesize').val(balance);
+    }
   }
 //var parenrowid = 0;
 $(document).ready(function(){
@@ -216,7 +247,7 @@ $(document).ready(function(){
     //parenrowid = prmstr[2];
 
     $('#landdetail').DataTable({
-      "columns":[ null, null, null, null, null,  { className: "numericCol" },null],
+      "columns":[ null, null, null, null, null,  { className: "numericCol" },null, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}],
         "sPaginationType": "full_numbers",
         "iDisplayLength": 5,
         "lengthMenu": [5, 10, 15],
@@ -244,16 +275,20 @@ $(document).ready(function(){
     //alert(lotareatable.rows().count());
     for (var i = 0;i<lotareatable.rows().count();i++){
           var ldata = lotareatable.row(i).data();
-          if (ldata[6] == {{$id}}){
+         // if (ldata[6] == {{$id}}){
             rate = ldata[2];
             calucatedrate = ldata[3];
             grossvalue = ldata[4];
             var rowid = i+1;
-             $('#landdetail').DataTable().row.add([ rowid,ldata[0], ldata[1], '<input type="text" class="editrate" style="text-align:right;" id="rate_'+rowid+'" value="'+rate+'" name="rate">', '<input type="text" style="text-align:right;" class="editcalrate" id="calucatedrate_'+rowid+'" value="'+calucatedrate+'" name="rate">', grossvalue,rate,calucatedrate,ldata[5], ldata[6] ]).draw( false );      
+             $('#landdetail').DataTable().row.add([ rowid,ldata[0], ldata[1], '<input type="text" class="editrate" style="text-align:right;" id="rate_'+rowid+'" value="'+rate+'" name="rate">', '<input type="text" style="text-align:right;"  class="editcalrate" id="calucatedrate_'+rowid+'" value="'+calucatedrate+'" name="rate">', grossvalue,'<span><a class="action-icons c-Delete delete_tenant" onclick="deleteBasket()" href="#" title="Delete">Delete</a></span>', rate,calucatedrate,0,0]).draw( false );      
              
               totalgross = totalgross + Number(removeCommas(grossvalue));
-          }
+          //}
     }
+
+    
+    formatMoney('netlandvalue',totalgross);
+    formatMoney('roundnetlandvalue',customround(totalgross,3));
 
 
     var table = $('#landdetail').DataTable();
@@ -261,23 +296,24 @@ $(document).ready(function(){
         var row = table.row(table.row( $(this).parents('tr') ).index());
         var data = row.data();
 
-        // console.log(data);
-        var rowid =  data[0];
-        var rate = $('#rate').val();
-        var calucaterate =  $('#calrate').val();
+       // table.row( $(this).parents('tr')).index();
+        var rowid =  table.row( $(this).parents('tr')).index() +1;
+        //console.log(rowid);
+        var rate = $('#rate_'+rowid).val();
+        var calucaterate =  $('#calucatedrate_'+rowid).val();
         var area =  data[2];
         console.log(calucaterate);
         console.log(area);
         area = removeCommas(area);
         rate = removeCommas(rate);
         calucaterate = removeCommas(calucaterate);
-    
+        
         var gross = area * rate * (1 - (calucaterate / 100));
-        data[3] = '<input type="text" class="editrate" style="text-align:right;" id="rate" value="'+rate+'" name="rate">';
-        data[4] = '<input type="text" class="editcalrate"  style="text-align:right;" id="calrate" value="'+calucaterate+'" name="rate">';
+        data[3] = '<input type="text" class="editrate" style="text-align:right;" id="rate_'+rowid+'" value="'+rate+'" name="rate">';
+        data[4] = '<input type="text" class="editcalrate"  style="text-align:right;" id="calucatedrate_'+rowid+'" value="'+calucaterate+'" name="rate">';
         data[5] = formatMoneyHas(gross);
-        data[6] = rate;
-        data[7] = calucaterate;
+        data[7] = rate;
+        data[8] = calucaterate;
         row.data(data);
 
         var grossland = 0;
@@ -295,6 +331,24 @@ $(document).ready(function(){
 });
 
 function addLand(){
+  $('#totsize').val($('#landsize').val());
+  var usedsize=0;
+  var landdetailtable = $("#landdetail").DataTable();
+  for (var l = 0;l < landdetailtable.rows().count() ;l++){
+      var ldata = landdetailtable.row(l).data();
+     usedsize = parseInt(usedsize) + parseInt(ldata[2]);
+  }
+ // alert(usedsize);
+  var balance = $('#landsize').val() - parseInt(usedsize);
+  if(balance < 0){
+    $('#balancesize').val(0);
+  } else {
+    $('#balancesize').val(balance);
+  }
+
+  $('#desc').val('');
+  $('#size').val('');
+  
   $('#vlottable').hide();
   $('#addgroup').show();
 }
@@ -306,7 +360,8 @@ function closeLand(){
 
 function addLanddetail(){
     var t = $('#landdetail').DataTable();
-    t.row.add([ 'New', $('#desc').val(), $('#size').val(), '<input type="text" class="editrate" style="text-align:right;" value="0" id="rate">', '<input type="text" class="editcalrate" style="text-align:right;" value="0" id="calrate">', '<input type="text" class="editgross" style="text-align:right;" readonly="true" value="0" id="grossvalue">','<span><a class="action-icons c-Delete delete_tenant" onclick="deleteBasket()" href="#" title="Delete">Delete</a></span>']).draw( false );  
+    var rowid = (t.rows().count())+1;
+    t.row.add([ 'New', $('#desc').val(), $('#size').val(), '<input type="text" class="editrate" style="text-align:right;" value="0" id="rate_'+rowid+'">', '<input type="text" class="editcalrate" style="text-align:right;" value="0" id="calucatedrate_'+rowid+'">', '<input type="text" class="editgross" style="text-align:right;" readonly="true" value="0" id="grossvalue_'+rowid+'">','<span><a class="action-icons c-Delete delete_tenant" onclick="deleteBasket()" href="#" title="Delete">Delete</a></span>',0,0,0,0]).draw( false );  
     $('#vlottable').show();
     $('#addgroup').hide();
 }
@@ -338,27 +393,21 @@ function updateCalculation(){
     }
 
     var lotareatable = window.opener.$("#hiddenlandarea").DataTable();
+    var landdetailtable = $("#landdetail").DataTable();
     
-    for (var l = 0;l < lotareatable.rows().count() ;l++){
-        var ldata = lotareatable.row(l).data();
+    for (var l = 0;l < landdetailtable.rows().count() ;l++){
+        var ldata = landdetailtable.row(l).data();
         
-        if (ldata[6] == {{$id}}) {
-            var row = window.opener.$("#hiddenlandarea").DataTable().row(l);
+      //  if (ldata[6] == {{$id}}) {
+            var row = landdetailtable.row(l);
             var data = row.data();
-            var temptable = $("#landdetail").DataTable();
-            for (var k = 0;k<temptable.rows().count() ;k++){
-                var localdata = temptable.row(k).data();
-                if (localdata[8] == ldata[5]) {
-                  data[2] = localdata[6];
-                  data[3] = localdata[7];
-                  data[4] = localdata[5];
-                  row.data(data);
-                }
-                //lotareatable.row.add([ ldata[1], ldata[2], ldata[6], ldata[7], ldata[5],ldata[8],ldata[9] ]).draw(false);   
-            }            
-        } else {
+            var temptable = $("#landdetail").DataTable();            
+
+            lotareatable.row.add([ ldata[1], ldata[2],ldata[7], ldata[8], ldata[5], ldata[9],ldata[10],ldata[0] ]).draw(false);   
+                        
+      //  } else {
           
-        }
+       // }
     }
     window.opener.$('#landtotal').val( formatMoneyHas(landtotal));
     window.opener.taxDriveCalculation();

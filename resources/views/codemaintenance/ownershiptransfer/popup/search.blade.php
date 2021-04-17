@@ -45,9 +45,9 @@
 									<th>
 										IS EMPTY LOT
 									</th>		
-                  <th>
-                    ACTION
-                  </th>			
+					                <th>
+					                    ACTION
+					                </th>			
 								</tr>
 							</thead>
 							<tbody>			
@@ -137,6 +137,10 @@ $(document).ready(function (){
     var accounts = "add";
     if('{{$page}}' == 'lot'){
  		accounts ="addlot";
+    }
+    
+    if('{{$page}}' == 'ownaddress'){
+ 		accounts ="ownaddress";
     }
       //var type = "addproperty";
    		$.ajax({

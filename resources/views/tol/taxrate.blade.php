@@ -46,6 +46,7 @@
 
 					<thead style="text-align: left;">
 					<tr>
+						<th><input name="select_all" value="1" type="checkbox"></th>
 						<th class="table_sno">
 							S No
 						</th>
@@ -408,6 +409,7 @@
 		        },
 		        /*"ajax": '/bookings/datatables',*/
 		        "columns": [
+			        {"data": "tland_id", "orderable": false, "searchable": false, "name":"_id" },
 			        {"data": null, "name": "sno", "title": "S No"},
 			        {"data": "trate_id", "name": "fileno"},
 			        {"data": "trlist_year", "name": "fileno"},
@@ -444,22 +446,6 @@
 								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.trate_id+',5)"  title="Approve Revise" href="#"></a></span>';						
 							} 
 			        		
-							/*var editaction = "<span><a class='action-icons c-edit' onclick='editBasket("+data.trate_id+")' href='#' title='Edit'>Edit</a></span> " +
-							"<span><a class='action-icons c-Delete delete_tenant' onclick='deleteBasket("+data.trate_id+")' href='#' title='Delete'>Delete</a></span>";
-			        	
-
-							if(data.trate_approvaltratestatus_id == '1'){
-								action = editaction +  '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.trate_id+',1)"  title="Ready To Approve" href="#"></a></span>';							
-							} else if(data.trate_approvaltratestatus_id == '2'){
-								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.trate_id+',2)"  title="Approve" href="#"></a></span>';							
-							} else if(data.trate_approvaltratestatus_id == '3'){
-								action =  '<spane><a  class=" new-action-icons reverse" onclick="approve('+data.trate_id+',3)" title="Revise" href="#"></a></span>';
-						
-							} else if(data.trate_approvaltratestatus_id == '4'){
-								action =   editaction +  '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.trate_id+',4)"  title="Revise Ready To Approve" href="#"></a></span>';							
-							}  else if(data.trate_approvaltratestatus_id == '5'){
-								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.trate_id+',5)"  title="Approve" href="#"></a></span>';							
-							} */
 							
 
 			        		return action;
@@ -471,7 +457,7 @@
 		   			var oSettings = this.fnSettings();
   					var count = $('#taxtable').DataTable().rows().count();
 					$('#prop_count').html(count);
-			        $("td:nth-child(1)", nRow).html(oSettings._iDisplayStart+iDisplayIndex +1);
+			        $("td:nth-child(2)", nRow).html(oSettings._iDisplayStart+iDisplayIndex +1);
 			        return nRow;
 			    },
 			    "sPaginationType": "full_numbers",
@@ -506,7 +492,59 @@
 	    var count = $('#taxtable').DataTable().rows().count();
 		$('#prop_count').html(count);
 		//$('#testSelect1_input').val('Columns');
+			$('.multiselect-wrapper .multiselect-list span:first').html('');
+		//$('.multiselect-wrapper .multiselect-list hr:first').html('');
+ $('#taxtable tbody').on('click', 'input[type="checkbox"]', function(e){
+      var $row = $(this).closest('tr');
 
+      // Get row data
+      var data = $('#taxtable').DataTable().row($row).data();
+
+      // Get row ID
+      var rowId = data[0];
+
+      // Determine whether row ID is in the list of selected row IDs
+      var index = $.inArray(rowId, rows_selected);
+
+      // If checkbox is checked and row ID is not in list of selected row IDs
+      if(this.checked && index === -1){
+         rows_selected.push(rowId);
+
+      // Otherwise, if checkbox is not checked and row ID is in list of selected row IDs
+      } else if (!this.checked && index !== -1){
+         rows_selected.splice(index, 1);
+      }
+
+      if(this.checked){
+         $row.addClass('selected');
+      } else {
+         $row.removeClass('selected');
+      }
+
+      // Update state of "Select all" control
+      updateDataTableSelectAllCtrl($('#taxtable').DataTable());
+
+      // Prevent click event from propagating to parent
+      e.stopPropagation();
+   });
+
+  
+
+   // Handle click on "Select all" control
+   $('thead input[name="select_all"]', $('#taxtable').DataTable().table().container()).on('click', function(e){
+      if(this.checked){
+        $('#taxtable tbody input[type="checkbox"]').prop('checked', true);
+         $('#taxtable tbody tr').addClass('selected');
+         $('#info').html(selectedrow() + " Row Selected");
+      } else {
+         $('#taxtable tbody input[type="checkbox"]').prop('checked', false);
+         $('#taxtable tbody tr').removeClass('selected');
+         $('#info').html(selectedrow() + " Row Selected");
+      }
+
+      // Prevent click event from propagating to parent
+      e.stopPropagation();
+   });
 
 	    $("#bldgcate").change(function() {
 	    	//console.log(this.value);

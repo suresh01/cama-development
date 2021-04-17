@@ -118,14 +118,47 @@
 												</tr>
 												</thead>
 												<tbody>
-												</tbody>
+												
+												@php($totalland1 = 0)
+													@php($totalbldg = 0)
+													@foreach ($lot as $rec)
+													<tr>
+														<td>
+															{{$loop->iteration}}
+														</td>
+														<td>
+															<a href="#" onclick="addLandStandard()">{{$rec->lotnumber}}</a>
+														</td>
+														<td style="text-align:right;">
+															{{$rec->vl_size}}
+														</td>
+														<td id="gross_{{$loop->iteration}}" style="text-align:right;">
+															{{number_format($rec->vl_grosslandvalue,2)}}
+
+														</td>
+														<td id="netvalue_{{$loop->iteration}}" style="text-align:right;">
+															{{number_format($rec->vl_roundnetlandvalue,2)}}
+														</td>
+														<td>
+															<span><a onclick="" class="action-icons c-edit editaddrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="delete">Delete</a></span>
+														</td>
+														<td style="display: none;">
+															{{$rec->vl_id}}
+														</td>
+														<td style="display: none;">
+															noaction
+														</td>
+														@php($totalland1 = $totalland1 + $rec->vl_roundnetlandvalue)
+													</tr>
+												@endforeach	
+												</tbody>	
 													<tr>
 														<td colspan="4" class="grand_total">
 															
 															Total Land Value:
 														</td>
 														<td>
-															<input type="text" readonly="true" onchange="taxCalculation()" style="float: right; "  value="" class="tbl-total" id="landtotal">
+															<input type="text" readonly="true" onchange="taxCalculation()" style="float: right; "  value="{{number_format($totalland1,2)}}" class="tbl-total" id="landtotal">
 														</td>
 													</tr>
 												</table>
@@ -434,7 +467,7 @@
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
-														<input id="taxapprovedtax" value=""  readonly="true" tabindex="2" name="taxapprovedtax"  type="text"  maxlength="50" class="right-text " />
+														<input id="taxapprovedtax" value="0"  readonly="true" tabindex="2" name="taxapprovedtax"  type="text"  maxlength="50" class="right-text " />
 													</div>
 													<span class=" label_intro"></span>
 												</div>
@@ -504,10 +537,40 @@
 				<th>
 					lot id
 				</th>
+				<th>
+					Actioncode
+				</th>
 			</tr>
 		</thead>
 		<tbody>
-									
+			@foreach ($lotarea as $rec)
+			 	<tr>
+					<td>
+					{{$rec->vla_desc}}
+					</td>
+					<td style="text-align:right;">
+					{{$rec->vla_area}}
+					</td>
+					<td >
+					{{$rec->vla_landrate}}
+					</td>
+					<td >
+					{{$rec->vla_discountrate}}                           
+					</td>
+					<td style="text-align:right;">
+					{{$rec->vla_roundnetareavalue}}                                  
+					</td>   
+					<td style="text-align:right;">
+					{{$rec->vla_id}}                                  
+					</td> 
+					<td style="text-align:right;">
+					{{$rec->vla_vt_id}}                                  
+					</td> 
+					<td>
+						noaction
+					</td>  
+    			</tr>
+			@endforeach						
 		</tbody>
 	</table>	
 
@@ -544,7 +607,38 @@
             </tr>
         </thead>
         <tbody>		
-                                        
+            @foreach ($bldgar as $rec)
+	            <tr>
+					<td>
+					{{$rec->artype}}
+					</td>
+					<td>
+					{{$rec->arlvel}}
+					</td>
+					<td>
+					{{$rec->arcate}}
+					</td>
+					<td >
+					{{$rec->aruse}}
+					</td>
+					<td style="text-align:right;">
+					{{$rec->vba_totsize}}
+					</td>
+					<td style="text-align:right;">
+					{{$rec->vba_bldgrate}}
+					</td>
+					<td style="text-align:right;">
+					{{$rec->vba_netareavalue}}
+					</td>
+					<td style="text-align:right;">
+					{{$rec->vba_id}}
+					</td>
+					<td style="text-align:right;">
+					{{$rec->vb_id}}
+					</td>
+	            </tr>
+            
+            @endforeach                       
         </tbody>
     </table>
 	    
@@ -716,6 +810,24 @@
 	}
 
 	
+	    @foreach ($tax as $rec)
+			formatMoney('taxvaluerdiscretion','{{$rec -> vt_valuedescretion}}');
+			formatMoney('taxapprovednt','{{$rec -> vt_approvednt}}');
+			formatMoney('taxapprovedrate','{{$rec -> vt_approvedrate}}');
+			formatMoney('taxadjustment','{{$rec -> vt_adjustment}}');
+			formatMoney('taxapprovedtax','{{$rec -> vt_approvedtax}}');
+			formatMoney('taxgrossnt','{{$rec -> vt_grossvalue}}');
+			formatMoney('taxproposedrate','{{$rec -> vt_proposedrate}}');
+			formatMoney('taxproposednt','{{$rec -> vt_proposednt}}');
+			formatMoney('taxcalculaterate','{{$rec -> vt_calculatedrate}}');
+			formatMoney('taxproposedtax','{{$rec -> vt_proposedtax}}');
+			formatMoney('taxdrivevalue','{{$rec -> vt_derivedvalue}}');
+			formatMoney('taxdriverate','{{$rec -> vt_derivedrate}}');
+
+			
+
+			$('#taxnotes').val('{{$rec -> vt_note}}');
+		@endforeach
 
 	function formatMoney(field, n, c, d, t) {
 		var c = isNaN(c = Math.abs(c)) ? 2 : c,
@@ -778,6 +890,8 @@
 	
 
 	$(document).ready(function(){
+
+
 
 	    $('#additionaltable').DataTable({
             "columns":[ null, null, null, null, null, null, null, { "visible": false }],
@@ -905,9 +1019,8 @@
 			disable_search_threshold: 4	
 		});
 
-
 		 $('#landtable').DataTable({
-            "columns":[ null, null, null, null, null,null],
+            "columns":[ null, null, null, null, null,null,{ "visible": false },{ "visible": false }],
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
 			"oLanguage": {
@@ -927,7 +1040,6 @@
 	    $('#landtable_paginate').remove();
 	    $('#landtable_length').remove();
 
-	    
     	
 	});
 
@@ -1039,14 +1151,13 @@
     };
 
     function updateValuation(){
-	    let maplottable = new Map([["0","sno"],["1", "lotno"], ["2", "lotarea"], ["3", "netvalue"],["4", "roundvalue"], ["5", "lotid"], ["6", "actioncode"]]);
+	    let maplottable = new Map([["0","sno"],["1", "lotno"], ["2", "lotarea"], ["3", "netvalue"],["4", "roundvalue"],["5", "action"], ["6", "lotid"], ["7", "actioncode"]]);
 
 	    let mapbldgtable = new Map([["0","sno"],["1", "bldgcategory"], ["2", "bldgtype"], ["3", "bldgvalue"],["4", "allowancevalue"], ["5", "depvalue"],["6", "netbldgvalue"], ["7", "roundbldgvalue"],["8", "bldgid"]]);
 
 	    let mapadditionaltable = new Map([["0","sno"],["1", "desc"],["2", "area"],["3", "rate"],["4", "grossvalue"],["5", "roundvalue"],["6", "action"],  ["7", "actioncode"],  ["8", "addadditionalid"]]);
-
 	    
-	    let maplotareatable = new Map([["0","arname"],["1", "area"],  ["2", "rate"], ["3", "calculatedrate"], ["4", "grossvalue"], ["5", "lotareaid"], ["6", "lotid"]]);
+	    let maplotareatable = new Map([["0","arname"],["1", "area"],  ["2", "rate"], ["3", "calculatedrate"], ["4", "grossvalue"], ["5", "lotareaid"], ["6", "lotid"], ["7", "actioncode"]]);
 
 	    let mapbldgareatable = new Map([["0","artype"],["1", "arlevel"],  ["2", "arcategory"], ["3", "arused"], ["4", "area"], ["5", "arearate"], ["6", "grossareavalue"],["7", "bldgarid"],["9", "bldgid"]]);
 
@@ -1065,8 +1176,10 @@
 			var ldata = $('#landtable').DataTable().row(i).data();
 			var tempdata1 = {};
 			$.each(ldata, function( key, value ) {
-				if (key !== 5) {
-				tempdata1[maplottable.get(""+key+"")] = value; 
+				if ( key !== 1) {
+					if ( key !== 5) {
+						tempdata1[maplottable.get(""+key+"")] = value; 
+					}
 				}
 			//console.log(key);            
         	});
@@ -1080,9 +1193,11 @@
 			var ldata = $('#bldgtable').DataTable().row(i).data();
 			var tempdata1 = {};
 			$.each(ldata, function( key, value ) {
-				if (key !== 1) {
-					tempdata1[mapbldgtable.get(""+key+"")] = value; 
-				 }
+				if ( key !== 1) {
+					if (key !== 8) {
+						tempdata1[mapbldgtable.get(""+key+"")] = value; 
+					}
+				}
 			//console.log(key);            
         	});
         	//console.log(templotdata);
@@ -1096,7 +1211,7 @@
 			var tempdata1 = {};
 			$.each(ldata, function( key, value ) {
 				if (key !== 6) {
-				tempdata1[mapadditionaltable.get(""+key+"")] = value; 
+					tempdata1[mapadditionaltable.get(""+key+"")] = value; 
 				} 
 			//console.log(key);            
         	});
@@ -1114,7 +1229,9 @@
 			var tempdata1 = {};
 			$.each(ldata, function( key, value ) {
 				
-				tempdata1[maplotareatable.get(""+key+"")] = value; 
+					tempdata1[maplotareatable.get(""+key+"")] = value; 
+				
+				
 				
 			//console.log(key);            
         	});
@@ -1169,9 +1286,16 @@
 		console.log(taxdata);
 		var prop_id = '{{$prop_id}}';
 		var d=new Date();
-					$.ajax({
+					console.log("lotdata");
+		console.log(lotdata);
+		console.log("lotareadata");
+		console.log(lotareadata);
+
+
+
+						$.ajax({
 			  				type: 'POST', 
-						    url:'manualValuationv2',
+						    url:'manaualvaluationprocess',
 						    headers: {
 							    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 							},
@@ -1199,6 +1323,7 @@
 								});
 				        	}
 				    	});
+
 						$noty.close();
 						}
 						},

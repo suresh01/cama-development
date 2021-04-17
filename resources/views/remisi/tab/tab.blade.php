@@ -71,7 +71,7 @@
 </div>
 <script>
 
-	let invesitagemap = new Map([["0","sno"],["1", "officertxt"],["2", "insdate"],["3", "action"],["4", "actioncode"],["5", "id"],["6", "instype"], ["7", "insofficer"],  ["8", "review"],["9", "reason1"], ["10", "reason2"],["11", "reason3"], ["12", "reason4"],["13", "reason5"]]);
+	let invesitagemap = new Map([["0","sno"],["1", "typetxt"],["2", "officertxt"],["3", "insvdate"],["4", "action"],["5", "actioncode"],["6", "insid"],["7", "instype"], ["8", "insofficer"],  ["9", "review"],["10", "finreason1"], ["11", "finreason2"],["12", "finreason3"], ["13", "finreason4"],["14", "finreason5"]]);
 	function closeWindow(){
 	    
 	    window.close();
@@ -94,7 +94,7 @@
 				var ldata = $('#invesitgatetable').DataTable().row(i).data();
 				var tempdata1 = {};
 				$.each(ldata, function( key, value ) {
-					if (key !== 3) {
+					if (key !== 4) {
 						tempdata1[invesitagemap.get(""+key+"")] = value; 
 					} 
 				//console.log(key);            
@@ -175,6 +175,8 @@
 
 
 	}
+
+	
 
 </script>
 </body>

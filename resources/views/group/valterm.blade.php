@@ -134,9 +134,6 @@
 									<th>
 										Status
 									</th>
-									<th>
-										Action
-									</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -191,10 +188,6 @@
 									</td>
 									<td>
 										{{$rec->termstage}}
-									</td>
-									<td>
-										<span><a class="action-icons c-edit" onclick="editTerm('{{$rec->vt_id}}')" title="Attachment List" href="#"></a></span>
-										
 									</td>
 								</tr>
 								<div style="display: none;">

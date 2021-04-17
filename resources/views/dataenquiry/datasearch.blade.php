@@ -303,16 +303,16 @@ var id  = $(this).attr('data-val');
 			        {"data": "bldgsotery", "name": "address", "visible": false},
 			        {"data": "TO_OWNNAME", "name": "TO_OWNNAME", "visible": false},
 			        {"data": "TO_OWNNO", "name": "TO_OWNNO", "visible": false},
-			        {"data": "TO_OWNNAME", "name": "TO_OWNNAME", "visible": false},
-			        {"data": "TO_OWNNO", "name": "TO_OWNNO", "visible": false},
+			        {"data": "lotcode", "name": "TO_OWNNAME", "visible": false},
+			        {"data": "al_no", "name": "TO_OWNNO", "visible": false},
 			        {"data": "ma_addr_ln1", "name": "address", "visible": false},
 			        {"data": "ma_addr_ln2", "name": "address", "visible": false},
 			        {"data": "ma_addr_ln3", "name": "address", "visible": false},
 			        {"data": "ma_addr_ln4", "name": "address", "visible": false},
-			        {"data": "ma_addr_ln1", "name": "address", "visible": false},
-			        {"data": "ma_addr_ln1", "name": "address", "visible": false},
-			        {"data": "ma_addr_ln1", "name": "address", "visible": false},
-			        {"data": "ma_addr_ln1", "name": "address", "visible": false},
+			        {"data": "ma_city", "name": "address", "visible": false},
+			        {"data": "state", "name": "address", "visible": false},
+			        {"data": "ma_postcode", "name": "address", "visible": false},
+			        {"data": "vt_termDate", "name": "address", "visible": false},
 			        {"data": function(data){
 			        		//var url = 'datasearchdetail?prop_id='+data.vd_id; formatMoneyHas
 			        		return formatMoneyHas(data.vt_approvednt);

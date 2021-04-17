@@ -294,24 +294,24 @@ left join (SELECT tdi_key, tdi_value FROM cama.tbdefitems where tdi_td_name = 'A
     public function toneBLDG(Request $request){
        
         $bldg = DB::select('select `tbldg_id`, tollis_year,   `tbldg_tone_id`, subzone.tdi_parent_key zoneid,  subzone.tdi_parent_name zone,  `tbldg_subzon_id`, 
-subzone.tdi_value subzone,bldgtype.tdi_parent_key propcategory, bldgtype.tdi_parent_name category, `tbldg_proptype_id`, bldgtype.tdi_value bldgtype,   `tbldg_propstorey_id`,
-bldgstorey.tdi_value bldgstorey, `tbldg_areatype_id`, artype.tdi_value artype,   `tbldg_arealevel_id`,  arlvel.tdi_value arlvl,  `tbldg_areacategory_id`,  arcate.tdi_value arcategory,
-   `tbldg_areause_id`, aruse.tdi_value aruse,
-    `tbldg_value`,    `tbldg_createby`,    `tbldg_createdate`,   `tbldg_udpateby`,   trnstype.tdi_value trnstype,  tbldg_transtype_id, DATE_FORMAT(`tbldg_updatedate`, "%d/%m/%Y") tbldg_updatedate 
-    , tbldg_approvalbldgstatus_id, approvalstatus
-FROM cm_toneoflistbasket, `cm_tone_building`
-left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgstorey on bldgstorey.tdi_key = tbldg_propstorey_id
-left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BULDINGTYPE") bldgtype on bldgtype.tdi_key = tbldg_proptype_id 
-left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREATYPE") artype on artype.tdi_key = tbldg_areatype_id
-left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREACATEGORY") arcate on arcate.tdi_key = tbldg_areacategory_id
-left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREALEVEL") arlvel on arlvel.tdi_key = tbldg_arealevel_id
-left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREAUSE") aruse on aruse.tdi_key = tbldg_areause_id
-left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone on subzone.tdi_key = tbldg_subzon_id
-left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "TRANSACTIONTYPE") trnstype on trnstype.tdi_key = tbldg_transtype_id
-left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = tbldg_approvalbldgstatus_id
-where tollist_id = tbldg_tone_id');
+        subzone.tdi_value subzone,bldgtype.tdi_parent_key propcategory, bldgtype.tdi_parent_name category, `tbldg_proptype_id`, bldgtype.tdi_value bldgtype,   `tbldg_propstorey_id`,
+        bldgstorey.tdi_value bldgstorey, `tbldg_areatype_id`, artype.tdi_value artype,   `tbldg_arealevel_id`,  arlvel.tdi_value arlvl,  `tbldg_areacategory_id`,  arcate.tdi_value arcategory,
+           `tbldg_areause_id`, aruse.tdi_value aruse,
+            `tbldg_value`,    `tbldg_createby`,    `tbldg_createdate`,   `tbldg_udpateby`,   trnstype.tdi_value trnstype,  tbldg_transtype_id, DATE_FORMAT(`tbldg_updatedate`, "%d/%m/%Y") tbldg_updatedate 
+            , tbldg_approvalbldgstatus_id, approvalstatus
+        FROM cm_toneoflistbasket, `cm_tone_building`
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgstorey on bldgstorey.tdi_key = tbldg_propstorey_id
+        left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BULDINGTYPE") bldgtype on bldgtype.tdi_key = tbldg_proptype_id 
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREATYPE") artype on artype.tdi_key = tbldg_areatype_id
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREACATEGORY") arcate on arcate.tdi_key = tbldg_areacategory_id
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREALEVEL") arlvel on arlvel.tdi_key = tbldg_arealevel_id
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREAUSE") aruse on aruse.tdi_key = tbldg_areause_id
+        left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone on subzone.tdi_key = tbldg_subzon_id
+        left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "TRANSACTIONTYPE") trnstype on trnstype.tdi_key = tbldg_transtype_id
+        left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = tbldg_approvalbldgstatus_id
+        where tollist_id = tbldg_tone_id');
 
-         $search=DB::select(' select sd_key, sd_label, 
+        $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid , sd_keymaintable , sd_keymainfield
         from tbsearchdetail mtb where sd_se_id = "24" ');

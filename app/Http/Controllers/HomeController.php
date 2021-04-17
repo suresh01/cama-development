@@ -121,6 +121,9 @@ class HomeController extends Controller
           $termcondition = " where vt_approvalstatus_id in ('01','02') ";
 
         }
+        if($id==''){
+          $id=0;
+        }
       /*  $termfilter = DB::select("select vt_id termid, vt_name term, applntype.tdi_value applntype, 
                 termstage.tdi_desc termstage
                 from cm_appln_valterm
@@ -134,7 +137,7 @@ class HomeController extends Controller
                 on applntype.tdi_key = vt_applicationtype_id
                 left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage
                 on termstage.tdi_key = vt_approvalstatus_id 
-                 where vt_approvalstatus_id = '01' and vt_id =".$id." order by vt_termDate desc");
+                 where vt_approvalstatus_id = '01' and vt_id = ifnull(".$id.",0) order by vt_termDate desc");
         
         $group = DB::select("select approval.tdi_desc approval,va_approvalstatus_id, va_id id, va_name l_group, va_vt_id termid, vt_name termaname, va_createby createby, DATE_FORMAT(va_createdate, '%d/%m/%Y') createdate, 
 va_updateby updateby, DATE_FORMAT(va_updatedate, '%d/%m/%Y') updatedate, ifnull(propertycount,0) propertycount,ifnull(inspropertyccount,0) inspropertyccount , applntype.tdi_value applntype,
@@ -698,12 +701,11 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
                   left join (select tdi_key, tdi_value,tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone 
                   on subzone.tdi_key = ma_subzone_id
                   inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and grouptb.tdi_td_name = "USERGROUP"
-                  inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE"
-                  inner join tbdefitems transtype on otar_ownertranstype_id = transtype.tdi_key and transtype.tdi_td_name = "OWNERSHIPTRANSTYPE"
-                  where otar_ownertransstatus_id in (1,2,4,5,6) 
+                  inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE" 
+                  where otar_ownertransstatus_id in (1,2,4,5,6) and otar_ownertranstype_id = 3
                   ');
 
-        App::setlocale(session()->get('locale'));
+                App::setlocale(session()->get('locale'));
         
                 return view("ownershiptransfer.owneraddresstransfer")->with(array('search' => $search, 'page' => $page, 'ownertransfer' => $ownertransfer,'owner' => $owner,'param' => $param));
             } else {
@@ -755,7 +757,7 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
                     case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
                   then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
                   from tbsearchdetail mtb where sd_se_id = "18" ');
-            $ownertransfer=DB::select('select DATE_FORMAT(otar_createdate, "%d/%m/%Y")   otar_createdate1, cm_ownertrans_applnreg.*, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, state.tdi_value state, grouptb.tdi_value colgroup, statustb.tdi_value colstatus
+            $ownertransfer=DB::select('select DATE_FORMAT(otar_createdate, "%d/%m/%Y")   otar_createdate1, cm_ownertrans_applnreg.*, cm_masterlist.*,cm_owner.*, owntype.tdi_value owntype, state.tdi_value state, grouptb.tdi_value colgroup, statustb.tdi_value colstatus, transtype.tdi_value transtype
               from cm_masterlist 
               inner join cm_owner on to_ma_id = ma_id
               inner join cm_ownertrans_applnreg on otar_accno = ma_accno
@@ -764,7 +766,9 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
               left join (select tdi_key, tdi_value,tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone 
               on subzone.tdi_key = ma_subzone_id
               inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and grouptb.tdi_td_name = "USERGROUP"
-              inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE" where otar_ownertransstatus_id in (4,5) 
+              inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE" 
+              inner join tbdefitems transtype on otar_ownertranstype_id = transtype.tdi_key and transtype.tdi_td_name = "OWNERSHIPTRANSTYPE"
+              where otar_ownertransstatus_id in (4,5) 
               '.$condition);
 
             App::setlocale(session()->get('locale'));
@@ -1520,16 +1524,16 @@ public function owneradddresTables(Request $request){
       `cm_owner`.`TO_OWNNAME`,  `cm_owner`.`TO_OWNNO`, (select count(*) from cm_appln_bldg where ab_vd_id = vd_id) bldgcount,
       `cm_appln_valdetl`.`vd_approvalstatus_id`, `cm_appln_valdetl`.`vd_id`, `cm_appln_valdetl`.`vd_va_id`, `cm_masterlist`.`ma_id`, `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, `tbdefitems_ishasbuilding`.`tdi_value` `isbldg`,
       `cm_masterlist`.`ma_pb_id`        , `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,bldgsotery.tdi_value bldgsotery, 
-      `vt_approvednt`, `vt_approvedtax`,  `vt_proposedrate`, `vt_note`,vt_adjustment 
+      `vt_approvednt`, `vt_approvedtax`,  `vt_proposedrate`, `vt_note`,vt_adjustment , DATE_FORMAT(vt_termDate, "%d/%m/%Y") as vt_termDate, ma_city, ma_postcode, al_no,  state.tdi_value state, lotcode.tdi_value lotcode
       FROM `cm_appln_valdetl`
       inner JOIN (select * from `cm_masterlist` where not exists (select 1 from cm_appln_deactivedetl where dad_accno = ma_accno )) cm_masterlist ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
       JOIN `cm_owner` ON `ma_id` = `TO_MA_ID`
       join cm_appln_lot on vd_id = al_vd_id
       join cm_appln_val on va_id = vd_va_id
-      inner join (select MAX(vd_id) exsistid from cm_appln_valdetl
+      inner join (select MAX(vd_id) exsistid, vt_termDate from cm_appln_valdetl
       inner join cm_appln_val on va_id = vd_va_id
       inner join cm_appln_valterm on vt_id = va_vt_id
-      where vt_approvalstatus_id = "05" group by vd_ma_id) exsitsproperty on exsitsproperty.exsistid = vd_id
+      where vt_approvalstatus_id = "05" group by vd_ma_id,vt_termDate) exsitsproperty on exsitsproperty.exsistid = vd_id
       LEFT JOIN `cm_appln_val_tax` ON `cm_appln_val_tax`.`vt_vd_id` = `cm_appln_valdetl`.`vd_id`
       LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
       LEFT JOIN `tbdefitems` as owntype on `TO_OWNTYPE_ID` = `owntype`.`tdi_key` and owntype.tdi_td_name = "OWNTYPE"
@@ -1539,6 +1543,8 @@ public function owneradddresTables(Request $request){
       on bldgsotery.tdi_key = vd_bldgstorey_id 
       LEFT JOIN `tbdefitems_ishasbuilding` ON `cm_appln_valdetl`.`vd_ishasbuilding` = `tbdefitems_ishasbuilding`.`tdi_key`
       LEFT JOIN `tbdefitems_bldgtype` ON `tbdefitems_bldgtype`.`tdi_key` = `cm_appln_valdetl`.`vd_bldgtype_id` 
+      left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = al_lotcode_id
+      left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE") state on state.tdi_key = ma_state_id 
      '.$filterquery);
        // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
         $propertyDetails = Datatables::collection($property)->make(true);

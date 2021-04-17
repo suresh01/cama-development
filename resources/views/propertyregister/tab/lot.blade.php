@@ -431,8 +431,8 @@
             	$('#'+key).val(val);
 			});
 
-			$('#propertyregsitration_from-back-1').hide();
-			$('#propertyregsitration_from-next-1').hide();
+			$('#propertyregsitration_from-back-2').hide();
+			$('#propertyregsitration_from-next-2').hide();
 
         	$("#lotdetail").show();
 			$("#addlot").hide();
@@ -447,8 +447,8 @@ function openlot() {
 	$('#submitedittbllot').hide();
 	$('#submitaddtbllot').show();
 	addDisableTab();
-	$('#propertyregsitration_from-back-1').hide();
-	$('#propertyregsitration_from-next-1').hide();
+	$('#propertyregsitration_from-back-2').hide();
+	$('#propertyregsitration_from-next-2').hide();
 	$("#lot_operation").val(1);
 	$("#lotaccnum").val($('#accnumber').val());
 	$("#lotdetail").val();
@@ -479,8 +479,8 @@ function editlotRow(){
 	    data=[operation,$('#lotstate').val(), $('#lotdistrict').val(), $('#lotcity').val(), '', $('#lotype').val(), $('#lotnum').val(), $('#altlotnum').val(),$('#lttt').val(), $('#ltnum').val(), $('#altnum').val(),$('#landar').val(), $('#landaruni').val(), $('#landcon').val(), $('#lanpos').val(), $('#roadtype').val(), $('#roadcate').val(),$('#landuse').val(), $('#expcon').val(), $('#interest').val(), $('#tentype').val(), $('#tenduration').val(),$('#tenstart').val(), $('#tenend').val(),$('#status').val(), '',operation_code, $('#lot_id').val(),  $('#lotype option:selected').text()+$('#lotnum').val(),$('#altlotnum').val(),$('#lttt option:selected').text()+$('#ltnum').val(),$('#landar').val(), $('#landuse option:selected').text(),  $('#tentype option:selected').text(),  '<span><a onclick="" class="action-icons c-edit edtlotrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete deletelotrow dellotrow" href="#" title="delete">Delete</a></span>',account ];
 
 
-		$('#propertyregsitration_from-back-1').show();
-		$('#propertyregsitration_from-next-1').show();
+		$('#propertyregsitration_from-back-2').show();
+		$('#propertyregsitration_from-next-2').show();
 		row.data(data);
 			$("#lotdetail").hide();
 		$("#lottable").show();
@@ -552,8 +552,8 @@ function addlotRow(){
 						function closelot(){	
 
 							removeDisableTab();
-							$('#propertyregsitration_from-back-1').show();
-							$('#propertyregsitration_from-next-1').show();						
+							$('#propertyregsitration_from-back-2').show();
+							$('#propertyregsitration_from-next-2').show();						
 							$('#lotstate').val('');
 							$('#lotdistrict').val('');
 							$('#lotype').val('');

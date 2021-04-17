@@ -57,6 +57,7 @@
 						</div>	
 					<thead style="text-align: left;">
 					<tr>
+						<th><input name="select_all" value="1" type="checkbox"></th>
 						<th class="table_sno">
 							S No
 						</th>
@@ -470,6 +471,7 @@
 		        },
 		        /*"ajax": '/bookings/datatables',*/
 		        "columns": [
+			        {"data": "tland_id", "orderable": false, "searchable": false, "name":"_id" },
 			        {"data": null, "name": "sno", "title": "S No"},
 			        {"data": "tland_id", "name": "fileno"},
 			        {"data": "tollis_year", "name": "fileno"},
@@ -534,7 +536,7 @@
 		   			var oSettings = this.fnSettings();
   					var count = $('#landtable').DataTable().rows().count();
 					$('#prop_count').html(count);
-			        $("td:nth-child(1)", nRow).html(oSettings._iDisplayStart+iDisplayIndex +1);
+			        $("td:nth-child(2)", nRow).html(oSettings._iDisplayStart+iDisplayIndex +1);
 			        return nRow;
 			    },
 			    "sPaginationType": "full_numbers",
@@ -589,6 +591,61 @@
 
 		$('.multiselect-wrapper .multiselect-list span:first').html('');
 		$('#testSelect1_input').val('Columns');
+
+
+			$('.multiselect-wrapper .multiselect-list span:first').html('');
+		//$('.multiselect-wrapper .multiselect-list hr:first').html('');
+ $('#landtable tbody').on('click', 'input[type="checkbox"]', function(e){
+      var $row = $(this).closest('tr');
+
+      // Get row data
+      var data = $('#landtable').DataTable().row($row).data();
+
+      // Get row ID
+      var rowId = data[0];
+
+      // Determine whether row ID is in the list of selected row IDs
+      var index = $.inArray(rowId, rows_selected);
+
+      // If checkbox is checked and row ID is not in list of selected row IDs
+      if(this.checked && index === -1){
+         rows_selected.push(rowId);
+
+      // Otherwise, if checkbox is not checked and row ID is in list of selected row IDs
+      } else if (!this.checked && index !== -1){
+         rows_selected.splice(index, 1);
+      }
+
+      if(this.checked){
+         $row.addClass('selected');
+      } else {
+         $row.removeClass('selected');
+      }
+
+      // Update state of "Select all" control
+      updateDataTableSelectAllCtrl($('#landtable').DataTable());
+
+      // Prevent click event from propagating to parent
+      e.stopPropagation();
+   });
+
+  
+
+   // Handle click on "Select all" control
+   $('thead input[name="select_all"]', $('#landtable').DataTable().table().container()).on('click', function(e){
+      if(this.checked){
+        $('#landtable tbody input[type="checkbox"]').prop('checked', true);
+         $('#landtable tbody tr').addClass('selected');
+         $('#info').html(selectedrow() + " Row Selected");
+      } else {
+         $('#landtable tbody input[type="checkbox"]').prop('checked', false);
+         $('#landtable tbody tr').removeClass('selected');
+         $('#info').html(selectedrow() + " Row Selected");
+      }
+
+      // Prevent click event from propagating to parent
+      e.stopPropagation();
+   });
 		
 		var count = $('#landtable').DataTable().rows().count();
 		$('#prop_count').html(count);

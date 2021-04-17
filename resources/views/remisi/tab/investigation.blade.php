@@ -12,6 +12,9 @@
 					S No
 				</th>
 				<th>
+					Investigation Type
+				</th>
+				<th>
 					Investigation Officer
 				</th>
 				<th>
@@ -59,10 +62,13 @@
 </div>
 <div id="addform" class="grid_12" style="display: none;">
 	<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
-		<button id="submitaddtbllot" onclick="addRow()"  name="adduser" type="button" class="btn_small btn_blue"><span>Add New</span></button>	
+		<button id="addbtn" onclick="addRow()"  name="adduser" type="button" class="btn_small btn_blue"><span>Add</span></button>	
+		<button id="updatebtn" onclick="updateRow()"  name="adduser" type="button" class="btn_small btn_blue"><span>Update</span></button>
 		<button id="close" onclick="closeIns()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
 	</div>
 	<br><br><br>
+	<input id="insid"  name="insid" type="hidden" value="0" maxlength="100" >
+	<input id="instableindex"  name="instableindex" type="hidden" value="0" maxlength="100" >
 	<ul>
 		<li>
 			<fieldset>
@@ -186,6 +192,7 @@
 						<textarea rows="4" id="review" name="review" cols="50"></textarea>
 						<span class=" label_intro"></span>
 					</div>
+
 				</div>
 			</fieldset>
 		</li>
@@ -194,22 +201,45 @@
 <script>
 	function addInvestigation(){
 		//alert();
+		$('#instype').val('');
+		$('#instableindex').val(0);
+		$('#insofficer').val('');
+		$('#insvdate').val('');
+		$('#finreason1').val('');
+		$('#finreason2').val('');
+		$('#finreason3').val('');
+		$('#finreason4').val('');
+		$('#review').val('');
+		$('#propertyinspectionform-back-2').hide();
+		$('#propertyinspectionform-next-2').hide();
 		$('#instable').hide();
 		$('#addform').show();
+		$('#addbtn').show();
+		$('#updatebtn').hide();
 	}
 	function closeIns(){
 		//alert();
+		$('#propertyinspectionform-back-2').show();
+		$('#propertyinspectionform-next-2').show();
 		$('#instable').show();
 		$('#addform').hide();
 	}
 
 
 	function addRow(){
-		
-		var t = $('#invesitgatetable').DataTable();
-						
-		t.row.add([ 'New', $('#insofficer option:selected').text(), $('#insvdate').val(),  '<span><a onclick="" class="action-icons c-edit edtlotrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deletelotrow dellotrow" href="#" title="delete">Delete</a></span>','new','0', $('#instype').val(),$('#insofficer').val(),$('#review').val(),$('#finreason1').val(),$('#finreason2').val(),$('#finreason3').val(),$('#finreason4').val(),$('#finreason5').val() ]).draw( false );			
+		var index = instableindex;
+		//alert(index);
+	//	if(index < 0){
+			var t = $('#invesitgatetable').DataTable();
+				
+			t.row.add([ 'New', $('#instype option:selected').text(), $('#insofficer option:selected').text(), $('#insvdate').val(),  '<span><a onclick="" class="action-icons c-edit editrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deleterow " href="#" title="delete">Delete</a></span>','new',$('#insid').val(), $('#instype').val(),$('#insofficer').val(),$('#review').val(),$('#finreason1').val(),$('#finreason2').val(),$('#finreason3').val(),$('#finreason4').val(),$('#finreason5').val() ]).draw( false );			
+			
+		//} else {
+		//	editINSRow();
+		//}
+
 		closeIns();
+		
 	}
 
 	$(document).ready(function() {
@@ -217,11 +247,11 @@
 
 		var insdata = [];
 	 		@foreach ($insdata as $rec)
-	 			insdata.push( [ '{{$loop->iteration}}', '{{$rec->officername}}', '{{$rec->ri_insofficerdate}}', '<span><a onclick="" class="action-icons c-edit edtlotrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deletelotrow dellotrow" href="#" title="delete">Delete</a></span>', 'noaction', '{{$rec->ri_id}}',  '{{$rec->ri_instype_id}}', '{{$rec->ri_insofficer}}','{{$rec->ri_review}}', '{{$rec->ri_insfind1}}', '{{$rec->ri_insfind2}}', '{{$rec->ri_insfind3}}', '{{$rec->ri_insfind4}}', '{{$rec->ri_insfind5}}' ] );
+	 			insdata.push( [ '{{$loop->iteration}}', '{{$rec->tdi_value}}','{{$rec->officername}}', '{{$rec->ri_insofficerdate}}', '<span><a onclick="" class="action-icons c-edit editrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deleterow " href="#" title="delete">Delete</a></span>', 'noaction', '{{$rec->ri_id}}',  '{{$rec->ri_instype_id}}', '{{$rec->ri_insofficer}}','{{$rec->ri_review}}', '{{$rec->ri_insfind1}}', '{{$rec->ri_insfind2}}', '{{$rec->ri_insfind3}}', '{{$rec->ri_insfind4}}', '{{$rec->ri_insfind5}}' ] );
 	 		@endforeach
 		$('#invesitgatetable').DataTable({
             data:           insdata,
-            "columns": [ null, null,null,null,{ "visible": false}, { "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false}],
+            "columns": [ null, null, null,null,null,{ "visible": false}, { "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false},{ "visible": false}],
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
 			"oLanguage": {
@@ -235,5 +265,85 @@
 		$(".tbl_length").chosen({
 			disable_search_threshold: 4	
 		});
+
+		var table =$('#invesitgatetable').DataTable();
+		$('#invesitgatetable tbody').on( 'click', '.editrow', function () {
+			//var editlotdata = JSON.stringify(table.row( $(this).parents('tr') ).data());
+			var ldata = table.row( table.row( $(this).parents('tr') ).index()).data();
+			$('#instableindex').val(table.row( $(this).parents('tr') ).index());
+			var lotdata = {};
+			
+			$.each( ldata, function( key, value ) {
+				lotdata[invesitagemap.get(""+key+"")] = value;              
+            });
+
+            $.each( lotdata, function( key, val ) {
+            	$('#'+key).val(val);
+			});
+
+			
+			//$('#addform').val('Update');
+			$('#propertyinspectionform-back-2').hide();
+			$('#propertyinspectionform-next-2').hide();
+			$('#instable').hide();
+			$('#addform').show();
+			$('#addbtn').hide();
+			$('#updatebtn').show();
+		});
+
+		$('#invesitgatetable tbody').on( 'click', '.deleterow', function () {
+
+			var row = table.row(table.row( $(this).parents('tr') ).index()),
+			    data = row.data();
+			    data[0]='Deleted';
+				data[5]='delete';
+				data[4]='';
+				var noty_id = noty({
+					layout : 'center',
+					text: 'Are you want to delete?',
+					modal : true,
+					buttons: [
+						{type: 'button pink', text: 'Delete', click: function($noty) {
+					  			row.data(data);
+								$noty.close();
+						  	}
+						},
+						{type: 'button blue', text: 'Cancel', click: function($noty) {
+								$noty.close();
+						  	}
+						}
+						],
+					type : 'success', 
+			 	});
+			
+		   // table.row($(this).parents('tr') ).remove().draw();
+		});
 	});
+
+	function updateRow(){	
+			
+			
+		var table = $('#invesitgatetable').DataTable();
+		
+		var row = table.row($('#instableindex').val());
+		var data = table.row($('#instableindex').val()).data();
+		var recordtype = data[0];
+		var operation = "Updated";
+		var operation_code = "update";
+		if (recordtype==='New'){
+			operation = "New";
+			operation_code = "new";
+		}
+
+
+		data=[operation,$('#instype option:selected').text(),  $('#insofficer option:selected').text(), $('#insvdate').val(),  '<span><a onclick="" class="action-icons c-edit editrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deleterow " href="#" title="delete">Delete</a></span>',operation_code,$('#insid').val(), $('#instype').val(),$('#insofficer').val(),$('#review').val(),$('#finreason1').val(),$('#finreason2').val(),$('#finreason3').val(),$('#finreason4').val(),$('#finreason5').val() ];
+		
+		row.data(data);
+		closeIns();
+		/*$('#propertyinspectionform-back-2').show();
+		$('#propertyinspectionform-next-2').show();
+		$('#instable').show();
+		$('#addform').hide();	*/	
+		
+	}
 </script>

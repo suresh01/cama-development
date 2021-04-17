@@ -22,9 +22,8 @@
 				</div>
 				
 				
-				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">
-					
-					<a href="#" onclick="getdata()" >Apply Search</a>
+				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">					
+					<a href="#" onclick="addProperty()">Add Property</a>
 				</div>
 				<div  style="float:right;margin-right: 20px;">
 						
@@ -206,6 +205,18 @@
 			//alert();
 			window.location.assign('ownertransfer?page=2&param='+zone);
 			//return;
+		}
+
+		function addProperty() {		
+		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0,left = 312,top = 234');
+		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
+		        w.location = "searchpropertyaddress?page=ownaddress";
+		    }	    
+		    if (w.outerWidth < screen.availWidth || w.outerHeight < screen.availHeight)
+			{
+				w.moveTo(0,0);
+				w.resizeTo(screen.availWidth, screen.availHeight);
+			}
 		}
 
 		function edit(acc) {		

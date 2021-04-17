@@ -74,7 +74,7 @@
 										<div class="form_grid_12">
 											<label class="field_title" id="llevel" for="level">Applicant Postcode<span class="req">*</span></label>
 											<div  class="form_input">
-												<input id="apppostcode" tabindex="1" name="apppostcode" type="text" value="" maxlength="100" >
+												<input id="apppostcode" tabindex="1" name="apppostcode" type="text" value="{{$master->rg_applntpostcode}}" maxlength="100" >
 											</div>
 											<span class=" label_intro"></span>
 										</div>
@@ -133,7 +133,7 @@
 								</li>
 							</ul>
 						</div>
-					@endforeach
+					
 <script type="text/javascript">
 
 	$(document).ready(function() {
@@ -143,6 +143,10 @@
 		$( "#regdate" ).datepicker({dateFormat: 'dd/mm/yy'});
 		$( "#insvdate" ).datepicker({dateFormat: 'dd/mm/yy'});
 
+
+		$( "#appstate" ).val('{{$master->rg_applntstate_id}}');
+		$( "#refoff" ).val('{{$master->rg_regofficer}}');
+		
 
 		$( "#impldate " ).datepicker({dateFormat: 'dd/mm/yy'});
 		$( "#vacantedate" ).datepicker({dateFormat: 'dd/mm/yy'});
@@ -155,3 +159,4 @@
 		}
 	});
 </script>
+@endforeach

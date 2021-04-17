@@ -173,16 +173,20 @@ function addApplication(id){
    // $("#usertable").hide();
       //    $("#addgroup").show();
     var type = "addremisi";
-    
       //var type = "addproperty";
       $.ajax({
           type:'GET',
           url:'grapnewdata',
           data:{accounts:"add",id:id,type:type},
           success:function(data){           
+            var count = data.newcount;
+            if(count==0){
+               alert("Account Number already exists in Remisi");
+            } else {
+              alert("Account Number Added");
+              closeWindow();
+            }
             
-            alert(" Record Added");
-            closeWindow();
           }
     });
   }

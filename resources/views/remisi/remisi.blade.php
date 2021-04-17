@@ -58,13 +58,13 @@
 										Property Storey
 									</th>	
 									<th>
-										Term Date
-									</th>	
-									<th>
 										Register By
 									</th>	
 									<th>
 										Register Date
+									</th>
+									<th>
+										Decision
 									</th>
 									<th>
 										Status
@@ -184,11 +184,17 @@ $(document).ready(function (){
 			        {"data": "bldgcategory", "name": "owner", }, 
 			        {"data": "bldgtype", "name": "ishasbldg", }, 
 			        {"data": "bldgsotery", "name": "ishasbldg", }, 
-			        {"data": function(data){
-			        	return "";
-			        }, "name": "propertstatus"}, 
 			        {"data": "rg_createby", "name": "ishasbldg"}, 
 			        {"data": "rg_createat_frmt", "name": "propertstatus"}, 
+			        {"data": function(data){
+			        	if(data.rg_redecision_id == 1 ){
+			        		return 'Approved';
+			        	} else if(data.rg_redecision_id == 2 ){
+			        		return 'Rejected';
+			        	} else {
+			        		return '';
+			        	}
+			        }, "name": "ishasbldg"}, 
 			        {"data": "approvalstatus", "name": "ishasbldg"}, 
 			        {"data":  function(data){
 			        	
@@ -206,8 +212,10 @@ $(document).ready(function (){
 								action = editaction +  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',3)"  title="Submit For Decision" href="#"></a></span>';
 						
 							} else if(data.rg_remisistatus_id == '4'){
-								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',5)"  title="Approve" href="#"></a></span>' + 
-								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',6)"  title="Reject" href="#"></a></span>';							
+								action =     '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',5)"  title="Approve" href="#"></a></span>' + 
+								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('+data.rg_id+',6)"  title="Reject" href="#"></a></span>' + editaction;							
+							} else if(data.rg_remisistatus_id == '5'){
+								action =   '<spane><a style="width: 14px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat -843px -102px !important;display: inline-block; float: left;"  disabled="true" title="Report " href="#"></a></span>';							
 							}
 							
 

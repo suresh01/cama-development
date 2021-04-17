@@ -33,6 +33,8 @@
 											<th>ACTIONCODE</th>
 											<th>TO ID</th>
 											<th>accoumnum</th>
+											<th>Email</th>
+											<th>city</th>
 											<th>APP TYPE / ID TYPE</th>
 											<th>ID NUMBER</th>
 											<th>ADDRESS </th>
@@ -104,22 +106,29 @@
 								<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">TEL NO<span class="req">*</span></label>
 										<div  class="form_input">
-											<input id="telno" name="telno" tabindex="1" type="text" value="" maxlength="15" class="large"/>
+											<input id="telno" name="telno" tabindex="1" type="text" value="" maxlength="80" />
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">FAX NO<span class="req">*</span></label>
 										<div  class="form_input">
-											<input id="faxno" name="faxno" tabindex="1" type="text" value="" maxlength="15" class="large"/>
+											<input id="faxno" name="faxno" tabindex="1" type="text" value="" maxlength="80" />
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									<div class="form_grid_12">
+										<label class="field_title" id="llevel" for="level">EMAIL ID<span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="emailno" name="emailno" tabindex="1" type="text" value="" maxlength="50" />
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 								</fieldset>
 
 
-									<fieldset>
-										<legend>Other Information</legend>
+								<fieldset>
+									<legend>Other Information</legend>
 								<div class="form_grid_12">
 									<label class="field_title" id="llevel" for="level">CITIZENSHIP<span class="req">*</span></label>
 									<div  class="form_input">
@@ -197,9 +206,17 @@
 								</div>
 
 								<div class="form_grid_12">
+									<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+									<div  class="form_input">
+										<input id="owncity"  name="owncity" tabindex="1" type="text"  maxlength="50" class=""/>
+									</div>
+									<span class=" label_intro"></span>
+								</div>
+
+								<div class="form_grid_12">
 									<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
 									<div  class="form_input">
-										<input id="ownpostcode"  name="ownpostcode" tabindex="1" type="number"  maxlength="50" class="large"/>
+										<input id="ownpostcode"  name="ownpostcode" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
@@ -238,19 +255,19 @@
 					<script type="text/javascript">
 						 $(document).ready(function() {
 			
-			let ownermap = new Map([["0","sno"],["1", "ownaplntype"], ["2", "typeofown"], ["3", "ownnum"],["4", "ownname"], ["5", "ownaddr1"],["6", "ownaddr2"], ["7", "ownaddr3"],["8", "ownaddr4"], ["9", "ownpostcode"],["10", "ownstate"], ["11", "telno"],["12", "faxno"],["13", "citizen"], ["14", "race"],["15", "numerator"], ["16", "demominator"],["17", "action"], ["18", "actioncode"],["19", "ownerid"],["20","owneraccnum"]]);
+			let ownermap = new Map([["0","sno"],["1", "ownaplntype"], ["2", "typeofown"], ["3", "ownnum"],["4", "ownname"], ["5", "ownaddr1"],["6", "ownaddr2"], ["7", "ownaddr3"],["8", "ownaddr4"], ["9", "ownpostcode"],["10", "ownstate"], ["11", "telno"],["12", "faxno"],["13", "citizen"], ["14", "race"],["15", "numerator"], ["16", "demominator"],["17", "action"], ["18", "actioncode"],["19", "ownerid"],["20","owneraccnum"],["21","owncity"],["22","emailno"]]);
  		var ownerdata = [];
 		 		@foreach ($ownerlist as $rec)
 
 		 			if ('{{$rec->TO_FAXNO}}' != ''){
 
 		 			}
-		 			ownerdata.push( [ '{{$loop->iteration}}', '{{$rec->TO_OWNERAPPLNTYPE_ID}}', '{{$rec->TO_OWNTYPE_ID}}', '{{$rec->TO_OWNNO}}', '{{$rec->TO_OWNNAME}}', '{{$rec->TO_ADDR_LN1}}', '{{$rec->TO_ADDR_LN2}}', '{{$rec->TO_ADDR_LN3}}', '{{$rec->TO_ADDR_LN4}}', '{{$rec->TO_POSTCODE}}', '{{$rec->TO_STATE_ID}}', '{{$rec->TO_TELNO}}', '{{$rec->TO_FAXNO}}', '{{$rec->TO_CITIZEN_ID}}', '{{$rec->TO_RACE_ID}}', '{{$rec->TO_NUMETR}}', '{{$rec->TO_DENOMTR}}','<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete dellotrow deleteownerrow" href="#" title="delete">Delete</a></span>','noation', '{{$rec->TO_ID}}' ,'newacc',			'{{$rec->TO_OWNERAPPLNTYPE_ID}} / {{$rec->owntype}}'	,'{{$rec->TO_OWNNO}}'	,'{{$rec->TO_ADDR_LN1}}  {{$rec->TO_ADDR_LN2}}   {{$rec->TO_ADDR_LN3}} <br> {{$rec->state}} - {{$rec->TO_POSTCODE}} '	,'{{$rec->TO_TELNO}} / {{$rec->TO_FAXNO}}'	,'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete dellotrow deleteownerrow" href="#" title="delete">Delete</a></span>' ] );
+		 			ownerdata.push( [ '{{$loop->iteration}}', '{{$rec->TO_OWNERAPPLNTYPE_ID}}', '{{$rec->TO_OWNTYPE_ID}}', '{{$rec->TO_OWNNO}}', '{{$rec->TO_OWNNAME}}', '{{$rec->TO_ADDR_LN1}}', '{{$rec->TO_ADDR_LN2}}', '{{$rec->TO_ADDR_LN3}}', '{{$rec->TO_ADDR_LN4}}', '{{$rec->TO_POSTCODE}}', '{{$rec->TO_STATE_ID}}', '{{$rec->TO_TELNO}}', '{{$rec->TO_FAXNO}}', '{{$rec->TO_CITIZEN_ID}}', '{{$rec->TO_RACE_ID}}', '{{$rec->TO_NUMETR}}', '{{$rec->TO_DENOMTR}}','<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete dellotrow deleteownerrow" href="#" title="delete">Delete</a></span>','noation', '{{$rec->TO_ID}}' ,'newacc',	'{{$rec->TO_CITY}}'	, '{{$rec->TO_EMAIL}}'	,	'{{$rec->TO_OWNERAPPLNTYPE_ID}} / {{$rec->owntype}}'	,'{{$rec->TO_OWNNO}}'	,'{{$rec->TO_ADDR_LN1}}  {{$rec->TO_ADDR_LN2}}   {{$rec->TO_ADDR_LN3}} <br> {{$rec->state}} - {{$rec->TO_POSTCODE}} '	,'{{$rec->TO_TELNO}} / {{$rec->TO_FAXNO}}'	,'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete dellotrow deleteownerrow" href="#" title="delete">Delete</a></span>' ] );
 		 		@endforeach
 
         $('#ownertble').DataTable({
             data:           ownerdata,
-            "columns":[ null, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false },null,null,null,null,null],
+            "columns":[ null, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false },null,null,null,null,null],
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
         	"bAutoWidth": false,
@@ -309,8 +326,8 @@
             	$('#'+key).val(val);
 			});
 
-            $('#propertyregsitration_from-back-2').hide();
-			$('#propertyregsitration_from-next-2').hide();	
+            $('#propertyregsitration_from-back-1').hide();
+			$('#propertyregsitration_from-next-1').hide();	
 			addDisableTab();
 
         	$("#ownerdetail").show();
@@ -328,8 +345,8 @@
 
 function editownerRow(){
 	if(validateOwner()) {
-		$('#propertyregsitration_from-back-2').show();
-		$('#propertyregsitration_from-next-2').show();	
+		$('#propertyregsitration_from-back-1').show();
+		$('#propertyregsitration_from-next-1').show();	
 		$('#submitedittblowner').show();
 		$('#submitaddtblowner').hide();
 		var table = $('#ownertble').DataTable();
@@ -346,7 +363,7 @@ function editownerRow(){
 				operation_code = "new";
 			}
 
-		data=[operation,$('#ownaplntype').val(),$('#typeofown').val(), $('#ownnum').val(), $('#ownname').val(),  $('#ownaddr1').val(), $('#ownaddr2').val(), $('#ownaddr3').val(),$('#ownaddr4').val(), $('#ownpostcode').val(), $('#ownstate').val(),$('#telno').val(), $('#faxno').val(), $('#citizen').val(), $('#race').val(), $('#numerator').val(), $('#demominator').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>',operation_code, $('#ownerid').val(),account, $('#ownaplntype').val()+' / '+$('#typeofown option:selected').text(),$('#ownnum').val(),$('#ownaddr1').val()+'<br>'+$('#ownaddr2').val()+'<br>'+$('#ownpostcode').val()+'<br>'+$('#ownstate option:selected').text(),$('#telno').val()+' / '+$('#faxno').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>'];
+		data=[operation,$('#ownaplntype').val(),$('#typeofown').val(), $('#ownnum').val(), $('#ownname').val(),  $('#ownaddr1').val(), $('#ownaddr2').val(), $('#ownaddr3').val(),$('#ownaddr4').val(), $('#ownpostcode').val(), $('#ownstate').val(),$('#telno').val(), $('#faxno').val(), $('#citizen').val(), $('#race').val(), $('#numerator').val(), $('#demominator').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>',operation_code, $('#ownerid').val(),account, $('#owncity').val(),$('#emailno').val(),$('#ownaplntype').val()+' / '+$('#typeofown option:selected').text(),$('#ownnum').val(),$('#ownaddr1').val()+'<br>'+$('#ownaddr2').val()+'<br>'+$('#ownpostcode').val()+'<br>'+$('#ownstate option:selected').text(),$('#telno').val()+' / '+$('#faxno').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>'];
 
 		row.data(data);
 
@@ -364,15 +381,15 @@ function addownerRow(){
 		$('#submitedittblowner').hide();
 			$('#submitaddtblowner').show();
 
-			//$('#propertyregsitration_from-back-2').show();
-		//$('#propertyregsitration_from-next-2').show();	
+			//$('#propertyregsitration_from-back-1').show();
+		//$('#propertyregsitration_from-next-1').show();	
 		//var operation = $("#lot_operation").val();
 		//console.log(operation);
 		var t = $('#ownertble').DataTable();
 
 		var account = $('#accnumber').val();
 									
-		t.row.add([ 'New',$('#ownaplntype').val(),$('#typeofown').val(), $('#ownnum').val(), $('#ownname').val(),  $('#ownaddr1').val(), $('#ownaddr2').val(), $('#ownaddr3').val(),$('#ownaddr4').val(), $('#ownpostcode').val(), $('#ownstate').val(),$('#telno').val(), $('#faxno').val(), $('#citizen').val(), $('#race').val(), $('#numerator').val(), $('#demominator').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>','new', $('#ownerid').val(),account  , $('#ownaplntype').val()+' / '+$('#typeofown option:selected').text(),$('#ownnum').val(),$('#ownaddr1').val()+'<br>'+$('#ownaddr2').val()+'<br>'+$('#ownpostcode').val()+'<br>'+$('#ownstate option:selected').text(),$('#telno').val()+' / '+$('#faxno').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>']).draw( false );
+		t.row.add([ 'New',$('#ownaplntype').val(),$('#typeofown').val(), $('#ownnum').val(), $('#ownname').val(),  $('#ownaddr1').val(), $('#ownaddr2').val(), $('#ownaddr3').val(),$('#ownaddr4').val(), $('#ownpostcode').val(), $('#ownstate').val(),$('#telno').val(), $('#faxno').val(), $('#citizen').val(), $('#race').val(), $('#numerator').val(), $('#demominator').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>','new', $('#ownerid').val(),account  ,  $('#owncity').val(),$('#emailno').val(), $('#ownaplntype').val()+' / '+$('#typeofown option:selected').text(),$('#ownnum').val(),$('#ownaddr1').val()+'<br>'+$('#ownaddr2').val()+'<br>'+$('#ownpostcode').val()+'<br>'+$('#ownstate option:selected').text(),$('#telno').val()+' / '+$('#faxno').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>']).draw( false );
 		$('#propertystatus').val('');
 		alert('Record is successfully added');
 		/*$("#ownerdetail").hide();
@@ -384,8 +401,8 @@ function addownerRow(){
 
 
 						function openowner(){
-							$('#propertyregsitration_from-back-2').hide();
-							$('#propertyregsitration_from-next-2').hide();	
+							$('#propertyregsitration_from-back-1').hide();
+							$('#propertyregsitration_from-next-1').hide();	
 							addDisableTab();
 							$('#submitedittblowner').hide();
 			 				$('#submitaddtblowner').show();
@@ -427,8 +444,8 @@ function addownerRow(){
 							$("#ownersubmit").html("Update");
 						}
 						function closeowner(){			
-							$('#propertyregsitration_from-back-2').show();
-							$('#propertyregsitration_from-next-2').show();		
+							$('#propertyregsitration_from-back-1').show();
+							$('#propertyregsitration_from-next-1').show();		
 							removeDisableTab();			
 							$('#masterid').val('');
 							$('#ownaplntype').val('');
