@@ -44,60 +44,7 @@
 				</div>		
 				<div class="widget_wrap">					
 					<div class="widget_content">	
-					@php 
-							$l_bldgcount = 0;
-							$l_inscount = 0;
-							$l_valcount = 0;
-							$l_propcount = 0;
-						@endphp		
-						@foreach($bldgcount as $rec)
-							@php 
-								$l_bldgcount = $rec->bldgcount;
-							@endphp
-						@endforeach
-						@foreach($inspropcount as $rec)
-							@php 
-								$l_inscount = $rec->inscount;
-							@endphp
-						@endforeach
-						@foreach($propcount as $rec)
-							@php 
-								$l_propcount = $rec->totproperty_count;
-							@endphp
-						@endforeach
-						@foreach($valpropcount as $rec)
-							@php 
-								$l_valcount = $rec->valcount;
-							@endphp
-						@endforeach
-						<div class="social_activities">
-							<div class="comments_s">
-								<div class="block_label">
-									Basket Count<span id="bst_count">0</span>
-								</div>
-							</div>
-							<div class="comments_s">
-								<div class="block_label">
-									Property Count<span>{{$l_propcount}}</span>
-								</div>
-							</div>
-							<div class="comments_s">
-								<div class="block_label">
-									Buliding Count<span>{{$l_bldgcount}}</span>
-								</div>
-							</div>
-							<div style="width: 220px;" class="comments_s">
-								<div style="width: 220px;" class="block_label">
-									Inspection Property Count<span>{{$l_inscount}}</span>
-								</div>
-							</div>
-							<div style="width: 200px;" class="comments_s">
-								<div style="width: 200px;" class="block_label">
-									Valuation Property Count<span>{{$l_valcount}}</span>
-								</div>
-							</div>
-						</div>				
-						<br>						
+											
 						<table id="baskttable" class="display tbl_details">
 							<thead style="text-align: left;">
 			  					<tr>

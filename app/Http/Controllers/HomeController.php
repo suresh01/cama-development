@@ -2095,19 +2095,19 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         order by va_id desc", array($id));
 
          $propcount = DB::select('select  count(*) totproperty_count from cm_appln_valdetl 
-        inner join cm_appln_val on va_id = vd_va_id where  va_vt_id = ?', array($id));
+        inner join cm_appln_val on va_id = vd_va_id where  va_vt_id = 0');
 
         $bldgcount = DB::select('select  count(*) bldgcount from cm_appln_bldg
           inner join cm_appln_valdetl  on ab_vd_id = vd_id 
-          inner join cm_appln_val on va_id = vd_va_id where  va_vt_id = 102049');
+          inner join cm_appln_val on va_id = vd_va_id where  va_vt_id = 0');
 
 
         $inspropcount = DB::select('select  count(*) inscount from cm_appln_valdetl 
         inner join cm_appln_val on va_id = vd_va_id
-        where vd_approvalstatus_id in ("06","07","08","09","10","11","12") and  va_vt_id = 102049');
+        where vd_approvalstatus_id in ("06","07","08","09","10","11","12") and  va_vt_id = 0');
 
         $valpropcount = DB::select('select  count(*) valcount from cm_appln_valdetl 
-        inner join cm_appln_val on va_id = vd_va_id where vd_approvalstatus_id in ("08","09","10","11","12") and  va_vt_id = 102049');
+        inner join cm_appln_val on va_id = vd_va_id where vd_approvalstatus_id in ("08","09","10","11","12") and  va_vt_id = 0');
 
         App::setlocale(session()->get('locale'));
         
