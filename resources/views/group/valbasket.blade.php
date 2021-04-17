@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width"/>
 <title>Basket</title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
-
+@include('includes.header', ['page' => 'VP'])
 	<!--<div class="page_title">
 		<span class="title_icon"><span class="blocks_images"></span></span>
 		<h3>Users</h3>
