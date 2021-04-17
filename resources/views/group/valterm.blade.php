@@ -143,7 +143,7 @@
 										{{$loop->iteration}}
 									</td>
 									<td>
-										<a href="valbasket?id={{$rec->vt_id}}">{{$rec->name}}</a>
+										<a href="testbasket?id={{$rec->vt_id}}">{{$rec->name}}</a>
 									</td>
 									<td>
 										{{$rec->applntype}}
