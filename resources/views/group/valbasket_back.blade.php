@@ -211,7 +211,7 @@
 										<spane><a style=""  class="basic-modal-c new-action-icons reverse" onclick="resetValuation('{{$rec->id}}')" disabled="true" title="Delete Valuation" href="#"></a></span>
 										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->id}}')" disabled="true" title="Approve Valuation" href="#"></a></span>
 										@elseif($rec->propertycount == $rec->valcount && $rec->applntype == 'CMK' )
-										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->id}}')" disabled="true" title="Approve Valuation" href="#"></a></span>
+										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(. ./images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->id}}')" disabled="true" title="Approve Valuation" href="#"></a></span>
 										@elseif($rec->va_approvalstatus_id == '07' )		
 										<spane><a  class="basic-modal-c  new-action-icons reverse" onclick="resetValuation('{{$rec->id}}')" disabled="true" title="Delete Valuation" href="#"></a></span>
 
