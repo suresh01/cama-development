@@ -239,24 +239,11 @@ inner join cm_appln_valdetl on vd_id = de_vd_id group by vd_va_id ) decision on 
         $tonebasket = DB::select("select tollist_id, concat(tollis_enforceyear,' - ',tollis_desc) tonebasket from cm_toneoflistbasket where tollis_activeind_id = 1");
         $tonetaxbasket = DB::select("select trlist_id, concat(trlist_enforceyear,' - ',trlist_desc) tonetaxbasket from cm_taxratelistbasket where trlist_activeind_id = 1");
 
-        $propcount = DB::select('select  count(*) totproperty_count from cm_appln_valdetl 
-        inner join cm_appln_val on va_id = vd_va_id where  va_vt_id = ifnull("'.$id.'",0)');
-
-        $bldgcount = DB::select('select  count(*) bldgcount from cm_appln_bldg
-          inner join cm_appln_valdetl  on ab_vd_id = vd_id 
-          inner join cm_appln_val on va_id = vd_va_id where  va_vt_id = ifnull("'.$id.'",0) ');
-
-
-        $inspropcount = DB::select('select  count(*) inscount from cm_appln_valdetl 
-        inner join cm_appln_val on va_id = vd_va_id
-        where vd_approvalstatus_id in ("06","07","08","09","10","11","12") and  va_vt_id = ifnull("'.$id.'",0)');
-
-        $valpropcount = DB::select('select  count(*) valcount from cm_appln_valdetl 
-        inner join cm_appln_val on va_id = vd_va_id where vd_approvalstatus_id in ("08","09","10","11","12") and  va_vt_id = ifnull("'.$id.'",0)');
+        
 
         App::setlocale(session()->get('locale'));
         
-        return view("group.valbasket")->with(array('term'=> $term,'group'=> $group,'tonebasket'=>$tonebasket,'tonetaxbasket'=>$tonetaxbasket,'propcount'=>$propcount,'bldgcount'=>$bldgcount,'inspropcount'=>$inspropcount,'valpropcount'=>$valpropcount, 'id' => $id, 'termtype' => $termtype));
+        return view("group.valbasket")->with(array('term'=> $term,'group'=> $group,'tonebasket'=>$tonebasket,'tonetaxbasket'=>$tonetaxbasket, 'id' => $id, 'termtype' => $termtype));
     }
 
      public function group(Request $request){
