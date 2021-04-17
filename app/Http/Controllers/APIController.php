@@ -121,8 +121,8 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
     
     }
 
-    public function testBasket(Request $request){
-        $basketid = $request->input('basketid');
+    public function testBasket(){
+       
       
         $group = DB::select("select va_approvalstatus_id, va_id id, va_name l_group, va_vt_id termid, vt_name termaname, va_createby createby, DATE_FORMAT(va_createdate, '%d/%m/%Y') createdate, 
         va_updateby updateby, DATE_FORMAT(va_updatedate, '%d/%m/%Y') updatedate, 
