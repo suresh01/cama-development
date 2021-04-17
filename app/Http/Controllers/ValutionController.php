@@ -548,18 +548,18 @@ left join (SELECT * FROM tbdefitems where tdi_td_name = "APPLICATIONTYPE") appln
             return view('valuation.valuationpass')->with(array('valuationbasket'=>$valuationbasket,'tonebasket'=>$tonebasket,'tonetaxbasket'=>$tonetaxbasket,'drivedrate'=>$drivedrate,'valuatuion_id'=>$valuatuion_id,'valpropcount' => $valpropcount));
        } else {
 
-        $bldgcate=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BULDINGCATEGORY"');
-        $bldgtype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BULDINGTYPE"');
-        $bldgstore=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BUILDINGSTOREY"');
-        $hasbldg=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ISHASBUILDING"');
-        $arlvl=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREALEVEL"');
-        $arcaty=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREACATEGORY"');
-        $artype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREATYPE"');
-        $aruse=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREAUSE"');
-        $zone=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ZONE"');
-        $subzone=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SUBZONE"');
-        $transtype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TRANSACTIONTYPE"');
-        $bldgcond=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BLDGCONDN"');
+            $bldgcate=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BULDINGCATEGORY"');
+            $bldgtype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BULDINGTYPE"');
+            $bldgstore=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BUILDINGSTOREY"');
+            $hasbldg=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ISHASBUILDING"');
+            $arlvl=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREALEVEL"');
+            $arcaty=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREACATEGORY"');
+            $artype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREATYPE"');
+            $aruse=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREAUSE"');
+            $zone=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ZONE"');
+            $subzone=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SUBZONE"');
+            $transtype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TRANSACTIONTYPE"');
+            $bldgcond=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BLDGCONDN"');
             return view('valuation.valuationfail')->with(array('bldgar'=>$bldgar,'depreciation'=>$depreciation,'land'=>$land,'landstandard'=>$landstandard,'tax'=>$tax, 'bldgtype'=> $bldgtype,'bldgstore'=> $bldgstore,'arlvl'=> $arlvl ,'artype'=> $artype,'arcaty'=> $arcaty,'aruse'=> $aruse,'zone'=> $zone,'subzone'=> $subzone,'bldgcate'=> $bldgcate,'tonetaxbasket_id'=>$tonetaxbasket_id,'tonebasket_id'=>$tonebasket_id,'hasbldg'=> $hasbldg,'bldgcond'=> $bldgcond,'transtype'=> $transtype));
        }
     }

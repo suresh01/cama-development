@@ -2,7 +2,7 @@
 						<div id="tab3">
 							<h4>Owner</h4>
 								<p>
-									Account Number = <span id="ownerlabel"></span>
+									{{__('datasearch.account')}} = <span id="ownerlabel"></span>
 								</p>
 
 
@@ -11,7 +11,7 @@
 										<table style="width: 100%" id="ownertble" class="display ">
 										<thead style="text-align: left;">
 								  		<tr>
-											<th class="table_sno">S No</th>
+											<th class="table_sno">{{__('datasearch.col1')}}</th>
 											<th>OWNER APPLICATION TYPE</th>
 											<th>TYPE OF OWNER</th>
 											<th>OWNER NO</th>
@@ -32,11 +32,11 @@
 											<th>ACTIONCODE</th>
 											<th>TO ID</th>
 											<th>accoumnum</th>
-											<th>APP TYPE / ID TYPE</th>
-											<th>ID NUMBER</th>
-											<th>ADDRESS </th>
-											<th>TEL NUMBER / FAXNUMBER</th>
-											<th>ACTION</th>
+											<th>{{__('datasearch.owncol1')}}</th>
+											<th>{{__('datasearch.owncol2')}}</th>
+											<th>{{__('datasearch.owncol3')}} </th>
+											<th>{{__('datasearch.owncol4')}}</th>
+											<th>{{__('datasearch.owncol5')}}</th>
 										</tr>
 										</thead>
 										</table>
@@ -46,7 +46,7 @@
 								<div id="owner_form"  autocomplete="off" onsubmit="return false;" class=" left_label" method="post" action="#" >
 										<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
 									
-								<button id="close" onclick="closeowner()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+								<button id="close" onclick="closeowner()" name="close" type="button" class="btn_small btn_blue"><span>{{__('datasearch.close')}}</span></button>
 								</div>
 								<div class="grid_6 ">
 								<ul>
@@ -58,10 +58,10 @@
 									<input type="hidden" value="0" name="tableindex" id="tableindex">
 								
 								<fieldset>
-										<legend>Owner Information</legend>
+										<legend>{{__('datasearch.owninfo')}}</legend>
 
 										<div class="form_grid_12">
-									<label class="field_title" id="lusername" for="username">OWNER APPLICATION TYPE<span class="req">*</span></label>
+									<label class="field_title" id="lusername" for="username">{{__('datasearch.ownapplntype')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." disabled="" style="width:100%" class="cus-select" id="ownaplntype" name="ownaplntype" tabindex="1">
 											<option></option>
@@ -73,7 +73,7 @@
 								</div>
 								
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">TYPE OF OWNER<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('datasearch.typeown')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." disabled="" style="width:100%" class="cus-select" id="typeofown" name="typeofown" tabindex="1">
 											<option></option>
@@ -86,35 +86,35 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER NUMBER<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('datasearch.ownno')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="ownnum" name="ownnum" readonly="true"  type="text" tabindex="1"  maxlength="15" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER NAME<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('datasearch.ownname')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="ownname" name="ownname" readonly="true" tabindex="1" type="text"  maxlength="80" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TEL NO<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('datasearch.owntel')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="telno" name="telno" readonly="true" tabindex="1" type="text" value="" maxlength="15" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">FAX NO<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('datasearch.ownfax')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="faxno" name="faxno" readonly="true" tabindex="1" type="text" value="" maxlength="15" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">EMAIL ID<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('datasearch.ownemail')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="faxno" name="emailid" readonly="true" tabindex="1" type="text" value="" maxlength="15" class=""/>
 										</div>
@@ -124,9 +124,9 @@
 
 
 									<fieldset>
-										<legend>Other Information</legend>
+										<legend>{{__('datasearch.otherinfo')}}</legend>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">CITIZENSHIP<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('datasearch.owncitizen')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." disabled="" style="width:100%" class="cus-select" id="citizen" name="citizen" tabindex="1">
 											<option></option>
@@ -138,7 +138,7 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">RACE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('datasearch.ownrace')}}<span class="req">*</span></label>
 									<div  class="form_input"><select disabled="" data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="race" name="race" tabindex="1">
 											<option></option>
 											@foreach ($race as $rec)
@@ -149,14 +149,14 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">NUMERATOR</label>
+									<label class="field_title" id="lposition" for="position">{{__('datasearch.numerator')}}</label>
 									<div  class="form_input">
 										<input id="numerator" readonly="true" tabindex="1" name="numerator" value="0" maxlength="5"  type="number" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">DENOMINATOR</label>
+									<label class="field_title" id="lposition" for="position">{{__('datasearch.denominator')}}</label>
 									<div  class="form_input">
 										<input id="demominator" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name="demominator" value="0"  readonly="true" type="number" tabindex="1"  maxlength="5" class=""/>
 									</div>
@@ -170,16 +170,16 @@
 								<ul>
 								<li >
 									<fieldset>
-										<legend>Address Information</legend>
+										<legend>{{__('datasearch.accountinfo')}}</legend>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER ADDRES 1<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('datasearch.address1')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="ownaddr1" name="ownaddr1" readonly="" tabindex="1"  type="text"  maxlength="50" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER ADDRES 2</label>
+									<label class="field_title" id="llevel" for="level">{{__('datasearch.address2')}}</label>
 									<div  class="form_input">
 										<input id="ownaddr2" name="ownaddr2" readonly="" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -187,14 +187,14 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER ADDRES 3</label>
+									<label class="field_title" id="llevel" for="level">{{__('datasearch.address3')}}</label>
 									<div  class="form_input">
 										<input id="ownaddr3" name="ownaddr3" readonly="" tabindex="1"  type="text"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">OWNER ADDRES 4</label>
+									<label class="field_title" id="lposition" for="position">{{__('datasearch.address4')}}</label>
 									<div  class="form_input">
 										<input id="ownaddr4" name="ownaddr4" readonly="" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -202,7 +202,7 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('datasearch.city')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="city"  name="city" readonly="" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
@@ -210,14 +210,14 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('datasearch.postcode')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="ownpostcode"  name="ownpostcode" readonly="" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('datasearch.state')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." disabled="" style="width:100%" class="cus-select" id="ownstate" name="ownstate" tabindex="1">
 											<option></option>

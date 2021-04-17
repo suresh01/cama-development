@@ -706,6 +706,7 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
                   on subzone.tdi_key = ma_subzone_id
                   inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and grouptb.tdi_td_name = "USERGROUP"
                   inner join tbdefitems statustb on otar_ownertransstatus_id = statustb.tdi_key and statustb.tdi_td_name = "OWNERSHIPSTAGE" 
+                  inner join tbdefitems transtype on otar_ownertranstype_id = transtype.tdi_key and transtype.tdi_td_name = "OWNERSHIPTRANSTYPE"
                   where otar_ownertransstatus_id in (1,2,4,5,6) and otar_ownertranstype_id = 3
                   ');
 

@@ -220,7 +220,7 @@
 					var ldata1 = $('#ownertble').DataTable().row(j).data();
 					var tempdata2 = {};
 					$.each(ldata1, function( key, value ) {
-						if (key !== 17 && key !== 25) {
+						if (key !== 17 && key !== 27) {
 							tempdata2[ownermap.get(""+key+"")] = value; 
 						} 
 					//console.log(key);            

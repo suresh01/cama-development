@@ -29,9 +29,9 @@
 		<div id="usertable" class="grid_12">	
 			<div id="breadCrumb3" class="breadCrumb grid_12">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Enquiry</a></li>
-						<li>Data Searchdetail</li>
+						<li><a href="#">{{__('menu.home')}}</a></li>
+						<li><a href="#">{{__('menu.dataenquiry')}}</a></li>
+						<li>{{__('menu.propertysearch')}}</li>
 					</ul>
 				</div>
 			<br>
@@ -40,7 +40,7 @@
 				<div class="widget_wrap">
 					<div class="widget_top">
 						<!--<span class="h_icon list"></span>-->
-						<h6>Property Detail</h6>
+						<h6>{{__('datasearch.propdetail')}}</h6>
 						<div id="top_tabby">
 						</div>
 					</div>
@@ -48,42 +48,42 @@
 					<div class="widget_content">
 						<!--<h3>Property Registration</h3>-->
 						<form action="datasearch"  id="propertyinspectionform" class="form_container left_label">
-							<fieldset title="Step 1">		
-								<legend>Master Information</legend>	
+							<fieldset title="{{__('datasearch.step')}} 1">		
+								<legend>{{__('datasearch.masinfo')}}</legend>	
 								@include('dataenquiry.tab.master')	
 							</fieldset>
-							<fieldset title="Step 2">
-								<legend>Owner Information</legend>
+							<fieldset title="{{__('datasearch.step')}} 2">
+								<legend>{{__('datasearch.owninfo')}}</legend>
 								@include('dataenquiry.tab.ownerold')	
 							</fieldset>
 							@if($applntype == 'C')
-							<fieldset title="Step 2">
-								<legend>Ratepayer Information</legend>
+							<fieldset title="{{__('datasearch.step')}} 2">
+								<legend>{{__('datasearch.rateinfo')}}</legend>
 								@include('dataenquiry.tab.ratepayer')	
 							</fieldset>
-							<fieldset title="Step 3">
-								<legend>Tenant Information</legend>									
+							<fieldset title="{{__('datasearch.step')}} 3">
+								<legend>{{__('datasearch.tenantinfo')}}</legend>									
 								@include('dataenquiry.tab.tenant')							
 							</fieldset>
 							@endif
-							<fieldset title="Step 4">
-								<legend>Lot Information</legend>
+							<fieldset title="{{__('datasearch.step')}} 4">
+								<legend>{{__('datasearch.lotinfo')}}</legend>
 								@include('dataenquiry.tab.lot')	
 							</fieldset>
-							<fieldset title="Step 5">
-								<legend>Property Use</legend>
+							<fieldset title="{{__('datasearch.step')}} 5">
+								<legend>{{__('datasearch.propuse')}}</legend>
 								@include('dataenquiry.tab.parameter')
 							</fieldset>
-							<fieldset title="Step 6">
-								<legend>Building Information</legend>
+							<fieldset title="{{__('datasearch.step')}} 6">
+								<legend>{{__('datasearch.bldginfo')}}</legend>
 								@include('dataenquiry.tab.bldg')					
 							</fieldset>	
-							<fieldset title="Step 7">
-								<legend>Attachment</legend>	
+							<fieldset title="{{__('datasearch.step')}} 7">
+								<legend>{{__('datasearch.attachment')}}</legend>	
 								@include('dataenquiry.tab.attachment_2')				
 							</fieldset>	
-							<fieldset title="Step 8">
-								<legend>Valuation Information</legend>
+							<fieldset title="{{__('datasearch.step')}} 8">
+								<legend>{{__('datasearch.valinfo')}}</legend>
 								@include('dataenquiry.tab.valuationdetail')					
 							</fieldset>	
 								<input type="button" onclick="closePage()" class="finish" value="Close!"/>

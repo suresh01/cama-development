@@ -116,9 +116,21 @@ $(document).ready(function (){
             "retrieve": true,
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 100,
-			"oLanguage": {
-		        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
-		    },
+			oLanguage: {
+              oPaginate: {
+                  sFirst: "{{__('datatable.first')}}",
+                  sLast: "{{__('datatable.last')}}",
+                  sNext: "{{__('datatable.next')}}",
+                  sPrevious: "{{__('datatable.previous')}}"
+              },
+              sEmptyTable: "{{__('datatable.emptytable')}}" ,
+              sInfoEmpty: "Showing 0 to 0 of 0 entries",
+              sThousands: ",",
+              sLoadingRecords: "{{__('datatable.loading')}}...",
+              sProcessing: "{{__('datatable.processing')}}...",
+              sSearch: "{{__('datatable.search')}}:",             
+            sLengthMenu: "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>{{__('datatable.lengthmenu')}}:</span>", 
+          },
         "columns": [
               {"data": "vd_id", "name": "sno"},              
               {"data": "ma_accno", "name": "zone"},

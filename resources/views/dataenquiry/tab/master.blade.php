@@ -25,9 +25,9 @@
 	<ul>
 	<li>
 		<fieldset>
-			<legend>Account Information</legend>
+			<legend>{{__('datasearch.accountinfo')}}</legend>
 				<div class="form_grid_12">
-					<label class="field_title"  id="accnumberlbl" for="username">{{__('message.account')}}<span class="req">*</span></label>
+					<label class="field_title"  id="accnumberlbl" for="username">{{__('datasearch.account')}}<span class="req">*</span></label>
 					<div  class="form_input">
 						<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->ma_accno}}" maxlength="100" >
 					</div>
@@ -35,7 +35,7 @@
 				</div>
 				
 				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">{{__('message.fileno')}}<span class="req">*</span></label>
+					<label class="field_title" id="lposition" for="position">{{__('datasearch.fileno')}}<span class="req">*</span></label>
 					<div  class="form_input">
 						<input id="filenumber" tabindex="2" readonly="true" name="filenumber"  type="text" value="{{$master->ma_fileno}}" maxlength="50" class=""/>
 					</div>
@@ -43,7 +43,7 @@
 				</div>
 				
 				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">{{__('message.district')}}<span class="req">*</span></label>
+					<label class="field_title" id="llevel" for="level">{{__('datasearch.district')}}<span class="req">*</span></label>
 					<div  class="form_input">
 						<select data-placeholder="Choose a Status..." disabled="" style="width:100%" class="cus-select" id="district" name="district" tabindex="3">
 							<option></option>
@@ -56,7 +56,7 @@
 				</div>
 		 		
 				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">{{__('message.zone')}}<span class="req">*</span></label>
+					<label class="field_title" id="llevel" for="level">{{__('datasearch.zone')}}<span class="req">*</span></label>
 					<div  class="form_input">
 						<select data-placeholder="Choose a Status..." disabled="" style="width:100%" class="cus-select" id="zone" name="zone" tabindex="4">
 							<option></option>
@@ -69,7 +69,7 @@
 				</div>
 
 				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">{{__('message.subzone')}}<span class="req">*</span></label>
+					<label class="field_title" id="llevel" for="level">{{__('datasearch.subzone')}}<span class="req">*</span></label>
 					<div  class="form_input">
 						<select data-placeholder="Choose a Status..." disabled="" style="width:100%" class="cus-select"  id="subzone" name="subzone" tabindex="5">
 							<option></option>
@@ -101,9 +101,9 @@
 	<ul>
 		<li>				
 			<fieldset>
-				<legend>Address Information</legend>					
+				<legend>{{__('datasearch.addinfo')}}</legend>					
 				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">{{__('message.address1')}}<span class="req">*</span></label>
+					<label class="field_title" id="lposition" for="position">{{__('datasearch.address1')}}<span class="req">*</span></label>
 					<div  class="form_input">
 						<input id="address1" tabindex="8" name="address1"  readonly="true" type="text" value="{{$master->ma_addr_ln1}}" maxlength="100" class=""/>
 					</div>
@@ -111,42 +111,42 @@
 				</div>
 
 				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">{{__('message.address2')}}<span class="req">*</span></label>
+					<label class="field_title" id="lposition" for="position">{{__('datasearch.address2')}}<span class="req">*</span></label>
 					<div  class="form_input">
 						<input id="address2"  tabindex="9" name="address2"  readonly="true" type="text" value="{{$master->ma_addr_ln2}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">{{__('message.address3')}}<span class="req">*</span></label>
+					<label class="field_title" id="lposition" for="position">{{__('datasearch.address3')}}<span class="req">*</span></label>
 					<div  class="form_input">
 						<input id="address3"  name="address3" tabindex="10"  readonly="true" type="text" value="{{$master->ma_addr_ln3}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">{{__('message.address4')}}<span class="req">*</span></label>
+					<label class="field_title" id="lposition" for="position">{{__('datasearch.address4')}}<span class="req">*</span></label>
 					<div  class="form_input">
 						<input id="address4"  name="address4" tabindex="11"  readonly="true" type="text" value="{{$master->ma_addr_ln4}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">{{__('message.postcode')}}<span class="req">*</span></label>
+					<label class="field_title" id="lposition" for="position">{{__('datasearch.postcode')}}<span class="req">*</span></label>
 					<div  class="form_input">
 						<input id="postcode" name="postcode" tabindex="12"  readonly="true" type="text" value="{{$master->ma_postcode}}" maxlength="50" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+					<label class="field_title" id="lposition" for="position">{{__('datasearch.city')}}<span class="req">*</span></label>
 					<div  class="form_input">
 						<input id="city"  name="city" tabindex="13"  readonly="true" type="text" value="{{$master->ma_city}}" maxlength="50" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
+					<label class="field_title" id="llevel" for="level">{{__('datasearch.state')}}<span class="req">*</span></label>
 					<div  class="form_input">
 						<select data-placeholder="Choose a Status..." disabled="" style="width:100%" class="cus-select"  id="state" name="state" tabindex="14">
 							<option></option>

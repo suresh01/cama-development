@@ -36,13 +36,13 @@
 											<th>ACTION</th>
 											<th>ACTIONCODE</th>
 											<th>lot_id</th>
-											<th>LOT NUMBER</th>
-											<th>ALT LOT NUMBER</th>
-											<th>TITLE NUMBER</th>
-											<th>LAND AREA </th>
-											<th>LAND USED</th>
-											<th>TENURE TYPE</th>
-											<th>ACTION</th>
+											<th>{{__('datasearch.lotcol1')}}</th>
+											<th>{{__('datasearch.lotcol2')}}</th>
+											<th>{{__('datasearch.lotcol3')}}</th>
+											<th>{{__('datasearch.lotcol4')}} </th>
+											<th>{{__('datasearch.lotcol5')}}</th>
+											<th>{{__('datasearch.lotcol6')}}</th>
+											<th>{{__('datasearch.lotcol7')}}</th>
 											<th>accnum</th>
 										</tr>
 										</thead>
@@ -55,7 +55,7 @@
 								
 								<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
 									
-								<button id="close" onclick="closelot()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+								<button id="close" onclick="closelot()" name="close" type="button" class="btn_small btn_blue"><span>{{__('datasearch.close')}}</span></button>
 								</div>
 									<div  class="grid_6">
 									<ul>
@@ -69,7 +69,7 @@
 										<fieldset>
 										<legend>Lot Information</legend>
 									<div class="form_grid_12">
-										<label class="field_title" id="lusername" for="username">LOT TYPE<span class="req">*</span></label>
+										<label class="field_title" id="lusername" for="username">{{__('datasearch.lotype')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lotype" name="lotype" tabindex="1">
 												<option value=""></option>
@@ -82,7 +82,7 @@
 									</div>
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">LOT NUMBER<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('datasearch.lotnum')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="lotnum" tabindex="2" name="lotnum" type="text" value="" maxlength="15" class=""/>
 										</div>
@@ -90,14 +90,14 @@
 									</div>
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">ALTERNATIVE LOT NUMBER</label>
+										<label class="field_title" id="llevel" for="level">{{__('datasearch.allotnum')}}</label>
 										<div  class="form_input">
 											<input id="altlotnum" tabindex="3" name="altlotnum" type="text" value="" maxlength="15" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">LOT TITLE TYPE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('datasearch.lottitle')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lttt" tabindex="4" name="lttt" tabindex="20">
 												<option></option>
@@ -109,7 +109,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">LOT TITLE NUMBER</label>
+										<label class="field_title" id="llevel" for="level">{{__('datasearch.lottittleno')}}</label>
 										<div  class="form_input">
 											<input id="ltnum" name="ltnum" tabindex="5" type="text" value="" maxlength="8" class=""/>
 										</div>
@@ -117,7 +117,7 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">ALTERNATIVE TITLE NUMBER</label>
+										<label class="field_title" id="llevel" for="level">{{__('datasearch.altittleno')}}</label>
 										<div  class="form_input">
 											<input id="altnum" name="altnum" tabindex="6" type="text" value="" maxlength="8" class=""/>
 										</div>
@@ -127,7 +127,7 @@
 									<fieldset>
 										<legend>Address Information</legend>
 									<div class="form_grid_12">
-										<label class="field_title" id="lusername" for="username">STATE<span class="req">*</span></label>
+										<label class="field_title" id="lusername" for="username">{{__('datasearch.state')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lotstate" tabindex="7" name="lotstate" tabindex="20">
 												<option></option>
@@ -139,7 +139,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lusername" for="username">DISCTRICT<span class="req">*</span></label>
+										<label class="field_title" id="lusername" for="username">{{__('datasearch.district')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lotdistrict" tabindex="8" name="lotdistrict" tabindex="20">
 												<option></option>
@@ -151,7 +151,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">CITY<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('datasearch.city')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="lotcity" name="lotcity" tabindex="9" type="text" value="" maxlength="50" class="large"/>
 										</div>
@@ -164,9 +164,9 @@
 									<ul>
 									<li>
 									<fieldset>
-										<legend>Other Information</legend>										
+										<legend>{{__('datasearch.otherinfo')}}</legend>										
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">LAND AREA<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('datasearch.landarea')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="landar" name="landar" tabindex="10" onKeyDown="if(this.value.length==15 && event.keyCode>47 && event.keyCode < 58) return false;" type="number" value="" maxlength="15" class=""/>
 										</div>
@@ -174,7 +174,7 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">LAND AREA UNIT<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('datasearch.landunit')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="landaruni" tabindex="11" name="landaruni" tabindex="20">
 												<option></option>
@@ -186,7 +186,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">LAND CONDITION<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('datasearch.cond')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="landcon" tabindex="12" name="landcon" tabindex="20">
 												<option></option>
@@ -198,7 +198,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">LAND POSITION<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('datasearch.pos')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lanpos" tabindex="13" name="lanpos" tabindex="20">
 												<option></option>
@@ -210,7 +210,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">ROAD TYPE<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('datasearch.road')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="roadtype" tabindex="14" name="roadtype" tabindex="20">
 												<option></option>
@@ -222,7 +222,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">ROAD CATEGOORY<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('datasearch.rcategory')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="roadcate" tabindex="15" name="roadcate" tabindex="20">
 												<option></option>
@@ -234,7 +234,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">LAND USE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('datasearch.landuse')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="landuse" tabindex="16" name="landuse" tabindex="20">
 												<option></option>
@@ -246,21 +246,21 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">Express Condition<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('datasearch.expressioncond')}}<span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="expcon"  name="expcon" tabindex="17" class="" type="text"  maxlength="50" />
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">Restriction of interest<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('datasearch.restiction')}}<span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="interest"  name="interest" tabindex="18" class="" type="text"  maxlength="50" />
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TENURE TYPE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('datasearch.tenuretype')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="tentype" tabindex="19" name="tentype" tabindex="20">
 												<option></option>
@@ -272,14 +272,14 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TENURE PERIOD<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('datasearch.tenureperiod')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="tenduration" tabindex="20" step="0" name="tenduration" class="" type="number" value="0" maxlength="3" onKeyDown="if(this.value.length==3 && event.keyCode>47 && event.keyCode < 58) return false;" class="large"/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TENDURE START DATE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('datasearch.tenurestart')}}<span class="req">*</span></label>
 										<div  class="form_input">
 										<!--<input id="tenstart"  name="tenstart" tabindex="21" class="" type="date"  maxlength="50" />-->
 										<input type="text" id="tenstart" dateFormat='dd/mm/yyyy' name="tenstart" tabindex="21">
@@ -288,7 +288,7 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TENDURE END DATE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('datasearch.tenureend')}}<span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="tenend"  name="tenend" class="" type="text"  maxlength="50" />
 										</div>
@@ -296,12 +296,12 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">INDICATOR FOR LAND IS ACTIVE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('datasearch.lotstatus')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="status" tabindex="22" name="status" tabindex="20">	
 												<option></option>										
-												<option value='Y'>Y</option>
-												<option value='N'>N</option>											
+												<option value='1'>Y</option>
+												<option value='2'>N</option>											
 										</select>
 										</div>
 										<span class=" label_intro"></span>

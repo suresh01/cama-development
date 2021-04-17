@@ -33,7 +33,6 @@
 						<table id="proptble" class="display select">
 							<thead style="text-align: left;">
 								<tr>
-									<th></th>
 									<th class="table_sno">
 										S No
 									</th>
@@ -320,7 +319,6 @@ $(document).ready(function (){
 					}
 		        },
 		        "columns": [
-			        {"data": "mal_id", "orderable": false, "searchable": false, "name":"_id" },
 			        {"data": null, "name": "sno"},
 			        {"data":  function(data){
 
@@ -363,7 +361,7 @@ $(document).ready(function (){
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
 		   			var oSettings = this.fnSettings();
   	
-			        $("td:nth-child(2)", nRow).html(oSettings._iDisplayStart+iDisplayIndex +1);
+			        $("td:nth-child(1)", nRow).html(oSettings._iDisplayStart+iDisplayIndex +1);
 			        return nRow;
 			    },
 			    "sPaginationType": "full_numbers",

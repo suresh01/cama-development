@@ -49,7 +49,6 @@
 						<table id="proptble" class="display select">
 							<thead style="text-align: left;">
 								<tr>
-									<th></th>
 									<th class="table_sno">
 										S No
 									</th>
@@ -88,7 +87,6 @@
 							<tbody>		
 									@foreach ($ownertransfer as $rec)
 									<tr>
-										<td></td>
 										<td>
 											{{$loop->iteration}}
 										</td>
@@ -348,7 +346,7 @@ $(document).ready(function (){
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
 		   			var oSettings = this.fnSettings();
   	
-			        $("td:nth-child(2)", nRow).html(oSettings._iDisplayStart+iDisplayIndex +1);
+			        $("td:nth-child(1)", nRow).html(oSettings._iDisplayStart+iDisplayIndex +1);
 			        return nRow;
 			    },
 			    "sPaginationType": "full_numbers",

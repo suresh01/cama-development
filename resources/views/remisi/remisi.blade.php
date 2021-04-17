@@ -15,6 +15,8 @@
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
 						<li><a href="#">Home</a></li>
+						<li><a href="#">Data Maintenance</a></li>
+						<li>Remisi</li>
 					</ul>
 				</div>
 				</div>			
@@ -232,9 +234,21 @@ $(document).ready(function (){
 			    },
 			    "sPaginationType": "full_numbers",
 			"iDisplayLength": 100,
-			"oLanguage": {
-		        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
-		    },
+			oLanguage: {
+	            oPaginate: {
+	                sFirst: "{{__('datatable.first')}}",
+	                sLast: "{{__('datatable.last')}}",
+	                sNext: "{{__('datatable.next')}}",
+	                sPrevious: "{{__('datatable.previous')}}"
+	            },
+	            sEmptyTable: "{{__('datatable.emptytable')}}" ,
+	            sInfoEmpty: "Showing 0 to 0 of 0 entries",
+	            sThousands: ",",
+	            sLoadingRecords: "{{__('datatable.loading')}}...",
+	            sProcessing: "{{__('datatable.processing')}}...",
+	            sSearch: "{{__('datatable.search')}}:",	            
+		        sLengthMenu: "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>{{__('datatable.lengthmenu')}}:</span>",	
+	        },
 		    'columnDefs': [{
          'targets': 0,
          'searchable': false,
