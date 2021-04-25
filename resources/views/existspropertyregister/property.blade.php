@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Property Registeration</title>
+<title>{{__('existspropertyregisyter.Property_Registration')}}</title>
 <style type="text/css">
 
 #proptble td.numericCol {
@@ -50,152 +50,151 @@
 	<div id="content">
 		<div class="grid_container">
 
-		<div id="usertable" class="grid_12">	
-			<br>
-			<div class="form_input">
-				<div  id="basic-modal-content">
-				<h3>Property Registration</h3>
-				<form onsubmit="target_popup(this)" action="tableview" id="filterForm" method="get" class="form_container">	 
-				@csrf
-				<input type="hidden" name="pb_id" value="{{$pb}}">
-				<input type="hidden" name="pb" value="{{$pb}}">	
-				<input type="hidden" name="filter" value="true">			
+	<div id="usertable" class="grid_12">
+		<br>
+		<div class="form_input">
+			<div  id="basic-modal-content">
+				<h3>{{__('existspropertyregisyter.Property_Registration')}}</h3>
+				<form onsubmit="target_popup(this)" action="tableview" id="filterForm" method="get" class="form_container">
+					@csrf
+					<input type="hidden" name="pb_id" value="{{$pb}}">
+					<input type="hidden" name="pb" value="{{$pb}}">
+					<input type="hidden" name="filter" value="true">
 					<ul id="filterrow">
 						<li>
-						<div class="form_grid_12">
-							<label class="field_title" id="llevel" for="level">Page Type<span class="req">*</span></label>
-							<div class="form_input ">
-								<select style="width: 50%;" onchange="changeField(this.value)" data-placeholder="Choose a Role..." class="cus-select" id="pagetype" name="type" tabindex="20">							
-									<option value='tab'>Tab View</option>						
-									<option value='table'>Table View</option>		
-								</select>
+							<div class="form_grid_12">
+								<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Page_Type')}} <span class="req">*</span></label>
+								<div class="form_input ">
+									<select style="width: 50%;" onchange="changeField(this.value)" data-placeholder="Choose a Role..." class="cus-select" id="pagetype" name="type" tabindex="20">
+										<option value='tab'>Tab View</option>
+										<option value='table'>Table View</option>
+									</select>
+								</div>
+								<span class=" label_intro"></span>
 							</div>
-							<span class=" label_intro"></span>
-						</div>
-						<div id="maxrow" style="display:none;" class="form_grid_12">
-							<label class="field_title" id="llevel" for="level">Max Row<span class="req">*</span></label>
-							<div class="form_input ">
-								<input id="username" style="width: 50%;" required="true" name="maxrow" type="text"  value="" />
+							<div id="maxrow" style="display:none;" class="form_grid_12">
+								<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Max_Row')}}<span class="req">*</span></label>
+								<div class="form_input ">
+									<input id="username" style="width: 50%;" required="true" name="maxrow" type="text"  value="" />
+								</div>
+								<span class=" label_intro"></span>
 							</div>
-							<span class=" label_intro"></span>
-						</div>
-						</li>				
-					</ul>	
-				
-					<div class="btn_24_blue">									
-						<!--<button id="addsubmit"type="submit" class="btn_small btn_blue"><span>Submit</span></button>-->	
-						<a href="#" onclick="submitForm()" class=""><span>Submit </span></a>					
+						</li>
+					</ul>
+					
+					<div class="btn_24_blue">
+						<!--<button id="addsubmit"type="submit" class="btn_small btn_blue"><span>Submit</span></button>-->
+						<a href="#" onclick="submitForm()" class=""><span>{{__('common.Submit')}}  </span></a>
 					</div>
 					<div class="btn_24_blue">
-						<a href="#" class="simplemodal-close"><span>Close </span></a>
+						<a href="#" class="simplemodal-close"><span>{{__('common.Close')}}  </span></a>
 					</div>
-					</form>
+				</form>
 			</div>
+		</div>
+		<div class="breadCrumbHolder module">
+			<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_6">
+				<ul>
+					<li><a href="#">{{__('existspropertyregisyter.Home')}} </a></li>
+					<li><a href="#">{{__('existspropertyregisyter.Data_Maintenance')}} </a></li>
+					<li><a href="existspropertybasket">{{__('existspropertyregisyter.Property_Maintenance')}} </a></li>
+					<li>{{$basket_name}} </li>
+				</ul>
+			</div>
+		</div>
+		@if($basket_status != '03')
+		<div style="float:right;margin-right: 10px;"  class="btn_24_blue">
+			<!--<a href="#" class="basic-modal"><span>Add Property</span></a>-->
+			<a href="#" onclick="addExisitingProperty()">{{__('existspropertyregisyter.Add_Exsisting_Property')}} </a>
+		</div>
+		@endif
+		<br>
+		<div class="widget_wrap">
+			<div class="widget_content">
+				@php
+				$bldgcount = '0';
+				$approvecount = 0;
+				$pending_count = 0;
+				@endphp
+				@foreach($propertydetail as $rec)
+				@php
+				$bldgcount = $rec->bldgcount;
+				$approvecount = $rec->approvecount;
+				$pending_count = $rec->pending_count;
+				@endphp
+				@endforeach
+				<div class="social_activities">
+					<div style="width: 200px;" class="comments_s">
+						<div style="width: 200px;" class="block_label">
+							{{__('existspropertyregisyter.Total_Building_Count')}} <span id="">{{$bldgcount}}</span>
+						</div>
+					</div>
+					<div class="comments_s">
+						<div class="block_label">
+							{{__('existspropertyregisyter.Total_Property')}} <span id="prop_count">0</span>
+						</div>
+					</div>
+					<div class="comments_s">
+						<div class="block_label">
+							{{__('existspropertyregisyter.Approved')}} <span>{{$approvecount}}</span>
+						</div>
+					</div>
+					<div class="comments_s">
+						<div class="block_label">
+							{{__('existspropertyregisyter.Pending')}}  <span>{{$pending_count}}</span>
+						</div>
+					</div>
 				</div>
-				<div class="breadCrumbHolder module">	
-				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_6">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-						<li><a href="existspropertybasket">Property Maintenance</a></li>
-						<li>{{$basket_name}} </li>
-					</ul>
-				</div>
-				</div>
-				@if($basket_status != '03')
-				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">
-						<!--<a href="#" class="basic-modal"><span>Add Property</span></a>-->
-					<a href="#" onclick="addExisitingProperty()">Add Exsisting Property</a>
-				</div>
-				@endif			
+				
 				<br>
-
-				<div class="widget_wrap">					
-					<div class="widget_content">
-						@php 
-							$bldgcount = '0';
-							$approvecount = 0;
-							$pending_count = 0;
-						@endphp		
-						@foreach($propertydetail as $rec)
-							@php 
-								$bldgcount = $rec->bldgcount;
-								$approvecount = $rec->approvecount;
-								$pending_count = $rec->pending_count;
-							@endphp
-						@endforeach
-						<div class="social_activities">
-							<div style="width: 200px;" class="comments_s">
-								<div style="width: 200px;" class="block_label">
-									TOTAL Building Count<span id="">{{$bldgcount}}</span>
-								</div>
-							</div>
-							<div class="comments_s">
-								<div class="block_label">
-									TOTAL Property<span id="prop_count">0</span>
-								</div>
-							</div>
-							<div class="comments_s">
-								<div class="block_label">
-									Approved<span>{{$approvecount}}</span>
-								</div>
-							</div>
-							<div class="comments_s">
-								<div class="block_label">
-									Pending <span>{{$pending_count}}</span>
-								</div>
-							</div>
-						</div>	
+				
+				<div><p id="info">0 {{__('existspropertyregisyter.Row_Selected')}} </p></div>
+				<table id="propertytable" class="display select">
+					<thead style="text-align: left;">
+						<tr>
+							<th><input name="select_all" value="1" type="checkbox"></th>
+							<th class="table_sno">
+								{{__('existspropertyregisyter.SNo')}}
+							</th>
+							<th>
+								{{__('existspropertyregisyter.Account_Number')}} 
+							</th>
+							<th>
+								{{__('existspropertyregisyter.Application_Type')}} 
+							</th>
+							<th>
+								{{__('existspropertyregisyter.Zone')}} 
+							</th>
+							<th>
+								{{__('existspropertyregisyter.SubZone')}}
+							</th>
+							<th>
+								{{__('existspropertyregisyter.Is_Empty_Lot')}}
+							</th>
+							<th>
+								{{__('existspropertyregisyter.Address1')}} 
+							</th>
+							<th>
+								{{__('existspropertyregisyter.Address2')}} 
+							</th>
+							<th>
+								{{__('existspropertyregisyter.Owner_Count')}}
+							</th>
+							<th>
+								{{__('existspropertyregisyter.Status')}} 
+							</th>
+							<th>
+								{{__('existspropertyregisyter.Action')}} 
+							</th>
+						</tr>
+					</thead>
+					<tbody>
 						
-						<br>		
-						
-            <div><p id="info">0 Row Selected</p></div>		
-						<table id="propertytable" class="display select">
-							<thead style="text-align: left;">
-								<tr>
-									<th><input name="select_all" value="1" type="checkbox"></th>
-									<th class="table_sno">
-										S No
-									</th>
-									<th>
-										ACCOUNT NUMBER
-									</th>
-									<th>
-										APPLICATION TYPE
-									</th>
-									<th>
-										ZONE
-									</th>
-									<th>
-										SUBZONE
-									</th>		
-									<th>
-										IS EMPTY LOT
-									</th>
-									<th>
-										ADDRESS 1
-									</th>	
-									<th>
-										ADDRESS 2
-									</th>		
-									<th>
-										OWNER COUNT
-									</th>		
-									<th>
-										STATUS
-									</th>		
-									<th>
-										ACTION
-									</th>			
-								</tr>
-							</thead>
-							<tbody>			
-							
-							</tbody>
-						</table>
-					</div>
-				</div>
+					</tbody>
+				</table>
 			</div>
+		</div>
+	</div>
 				
 		
 		

@@ -6,7 +6,7 @@
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>Property Address</title>
+<title>{{__('CodeMaintenance.Property_Address')}}</title>
 <style>
 .disabled-btn{
     pointer-events:none;
@@ -15,32 +15,31 @@
 </style>
 @include('includes.header-popup', ['page' => 'VP'])
 	
-	<div id="content">
-		<div class="grid_container">
-
-		<div id="usertable" class="grid_12">	
+<div id="content">
+	<div class="grid_container">
+		<div id="usertable" class="grid_12">
 			<div id="breadCrumb3" class="breadCrumb grid_12">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-					</ul>
-				</div>
+				<ul>
+					<li><a href="#">{{__('CodeMaintenance.Home')}} </a></li>
+					<li><a href="#">{{__('CodeMaintenance.Data_Maintenance')}}</a></li>
+				</ul>
+			</div>
 			<br>
-@foreach ($master as $master)
-<script type="text/javascript">
-			$(document).ready(function(){
-				$("#subzone").val('{{$master->mal_subzone_id}}');
-				$("#zone").val('{{$master->zone_id}}');
-				$("#state").val('{{$master->mal_state_id}}');
-				$("#district").val('{{$master->mal_district_id}}');
-				$("#eaccountnumber").val('{{$master->mal_accno}}');
-			});
-		</script>
+			@foreach ($master as $master)
+			<script type="text/javascript">
+						$(document).ready(function(){
+							$("#subzone").val('{{$master->mal_subzone_id}}');
+							$("#zone").val('{{$master->zone_id}}');
+							$("#state").val('{{$master->mal_state_id}}');
+							$("#district").val('{{$master->mal_district_id}}');
+							$("#eaccountnumber").val('{{$master->mal_accno}}');
+						});
+			</script>
 			<div class="grid_12 full_block">
 				<div class="widget_wrap">
 					<div class="widget_top">
 						<!--<span class="h_icon list"></span>-->
-						<h6>Property Address Information</h6>
+						<h6>{{__('CodeMaintenance.Property_Address_Information')}} </h6>
 						<div id="top_tabby">
 						</div>
 					</div>
@@ -48,254 +47,249 @@
 					<div class="widget_content">
 						<!--<h3>Property Registration</h3>-->
 						<div  class="grid_6 form_container left_label">
-	<ul>
-	<li>
-		<fieldset>
-			<legend>OLD Address Information</legend>
-				<div class="form_grid_12">
-					<label class="field_title"  id="accnumberlbl" for="username">ACCOUNT NUMBER<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->mal_accno}}" maxlength="100" >
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-				
-				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">FILE NUMBER<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="filenumber" tabindex="2"name="ofilenumber" readonly="true" type="text" value="{{$master->mal_fileno}}" maxlength="50" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-				
-				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">DISTRICT<span class="req">*</span></label>
-					<div  class="form_input">
-						<select data-placeholder="Choose a Status..." disabled=""  style="width:100%" class="cus-select" id="district" name="odistrict" tabindex="3">
-							<option></option>
-						@foreach ($district as $rec)
-								<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
-						@endforeach	
-						</select>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-		 		
-				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">ZONE<span class="req">*</span></label>
-					<div  class="form_input">
-						<select data-placeholder="Choose a Status..." disabled=""  style="width:100%" class="cus-select" id="zone" name="ozone" tabindex="4">
-							<option></option>
-						@foreach ($zone as $rec)
-								<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
-						@endforeach	
-						</select>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-
-				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">SUBZONE<span class="req">*</span></label>
-					<div  class="form_input">
-						<select data-placeholder="Choose a Status..." disabled=""  style="width:100%" class="cus-select"  id="subzone" name="osubzone" tabindex="5">
-							<option></option>
-						@foreach ($subzone as $rec)
-								<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
-						@endforeach	
-						</select>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-				
-				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">ADDRESS 1<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="address1" tabindex="8" readonly="true" name="oaddress1"  type="text" value="{{$master->mal_addr_ln1}}" maxlength="100" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-
-				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">ADDRESS 2<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="address2"  tabindex="9" readonly="true" name="oaddress2"  type="text" value="{{$master->mal_addr_ln2}}" maxlength="100" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">ADDRESS 3<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="address3"  name="oaddress3" readonly="true" tabindex="10"  type="text" value="{{$master->mal_addr_ln3}}" maxlength="100" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">ADDRESS 4<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="address4"  name="oaddress4" readonly="true" tabindex="11"  type="text" value="{{$master->mal_addr_ln4}}" maxlength="100" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">POST CODE<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="postcode" name="opostcode" readonly="true" tabindex="12"  type="text" value="{{$master->mal_postcode}}" maxlength="50" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="city"  name="ocity" tabindex="13" readonly="true" type="text" value="{{$master->mal_city}}" maxlength="50" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
-					<div  class="form_input">
-						<select data-placeholder="Choose a Status..." disabled=""  style="width:100%" class="cus-select"  id="state" name="ostate" tabindex="14">
-							<option></option>
-					@foreach ($state as $rec)
-							<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
-					@endforeach	
-						</select>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-				
-			</fieldset>
-		</li>
-	</ul>
-</div>
-
-@endforeach
-<form id="addressform" autocomplete="off" method="post" action="#" >
-<div  class="grid_6 form_container left_label">
-	<ul>
-		<li>		
-			<fieldset>
-				<legend>New Address Information</legend>					
-				<input type="hidden" id="eaccountnumber" name="accountnumber">
-				<div class="form_grid_12">
-					<label class="field_title">Copy Previous Detail</label>
-					<div class="form_input">
-						<span>
-						<input name="field08" id="copydetail" onchange="copyDetail()" class="checkbox" type="checkbox"  tabindex="7">
-						
-						</span>
-					</div>
-				</div>
-				<input id="esubzone" tabindex="2" name="subzone" type="hidden"  maxlength="50" class=""/>
-				<input id="accountnumber" tabindex="2" name="accountnumber" type="hidden"  maxlength="50" class=""/>
-				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">FILE NUMBER<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="efilenumber" tabindex="2" name="filenumber" type="text"  maxlength="50" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">DISTRICT<span class="req">*</span></label>
-					<div  class="form_input">
-						
-						<input id="edistrict" tabindex="8" name="edistrict" readonly="" type="text" maxlength="100" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-		 		
-				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">ZONE<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="ezone" tabindex="8" name="ezone" readonly="" type="text" maxlength="100" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-
-				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">SUBZONE<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="rsubzone" tabindex="8" name="rsubzone" readonly="" type="text" maxlength="100" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-				
-				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">ADDRESS 1<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="eaddress1" tabindex="8" name="address1"  type="text" maxlength="100" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-
-				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">ADDRESS 2<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="eaddress2"  tabindex="9" name="address2"  type="text"  maxlength="100" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">ADDRESS 3<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="eaddress3"  name="address3" tabindex="10"  type="text" maxlength="100" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">ADDRESS 4<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="eaddress4"  name="address4" tabindex="11"  type="text"  maxlength="100" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">POST CODE<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="epostcode" name="postcode"  tabindex="12"  type="text" " maxlength="50" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
-					<div  class="form_input">
-						<input id="ecity"  name="city" tabindex="13" type="text"  maxlength="50" class=""/>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
-					<div  class="form_input">
-						<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="estate" name="state" tabindex="14">
-							<option></option>
-					@foreach ($state as $rec)
-							<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
-					@endforeach	
-						</select>
-					</div>
-					<span class=" label_intro"></span>
-				</div>
-			</fieldset>
-		</li>
-	</ul>
-</div>
-<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">							
-							<div class="form_input">
-								<button id="addsubmit" name="adduser" onclick="validateDetail()" class="btn_small btn_blue"><span>Submit</span></button>									
-								
-								<button id="close" onclick="closeTenant()" name="close" type="button" class="btn_small btn_blue"><span>Close	</span></button>
-								<span class=" label_intro"></span>
-							</div>								
-							<span class="clear"></span>
+							<ul>
+								<li>
+									<fieldset>
+										<legend>{{__('CodeMaintenance.Old_Address_Information')}}</legend>
+										<div class="form_grid_12">
+											<label class="field_title"  id="accnumberlbl" for="username">{{__('CodeMaintenance.Account_Number')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->mal_accno}}" maxlength="100" >
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										
+										<div class="form_grid_12">
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.File_Number')}}<span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="filenumber" tabindex="2"name="ofilenumber" readonly="true" type="text" value="{{$master->mal_fileno}}" maxlength="50" class=""/>
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										
+										<div class="form_grid_12">
+											<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.District')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<select data-placeholder="Choose a Status..." disabled=""  style="width:100%" class="cus-select" id="district" name="odistrict" tabindex="3">
+													<option></option>
+													@foreach ($district as $rec)
+													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+													@endforeach
+												</select>
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										
+										<div class="form_grid_12">
+											<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.Zone')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<select data-placeholder="Choose a Status..." disabled=""  style="width:100%" class="cus-select" id="zone" name="ozone" tabindex="4">
+													<option></option>
+													@foreach ($zone as $rec)
+													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+													@endforeach
+												</select>
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.SubZone')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<select data-placeholder="Choose a Status..." disabled=""  style="width:100%" class="cus-select"  id="subzone" name="osubzone" tabindex="5">
+													<option></option>
+													@foreach ($subzone as $rec)
+													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+													@endforeach
+												</select>
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										
+										<div class="form_grid_12">
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address1')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="address1" tabindex="8" readonly="true" name="oaddress1"  type="text" value="{{$master->mal_addr_ln1}}" maxlength="100" class=""/>
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address2')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="address2"  tabindex="9" readonly="true" name="oaddress2"  type="text" value="{{$master->mal_addr_ln2}}" maxlength="100" class=""/>
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address3')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="address3"  name="oaddress3" readonly="true" tabindex="10"  type="text" value="{{$master->mal_addr_ln3}}" maxlength="100" class=""/>
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address4')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="address4"  name="oaddress4" readonly="true" tabindex="11"  type="text" value="{{$master->mal_addr_ln4}}" maxlength="100" class=""/>
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Post_Code')}}<span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="postcode" name="opostcode" readonly="true" tabindex="12"  type="text" value="{{$master->mal_postcode}}" maxlength="50" class=""/>
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.City')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="city"  name="ocity" tabindex="13" readonly="true" type="text" value="{{$master->mal_city}}" maxlength="50" class=""/>
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.State')}}<span class="req">*</span></label>
+											<div  class="form_input">
+												<select data-placeholder="Choose a Status..." disabled=""  style="width:100%" class="cus-select"  id="state" name="ostate" tabindex="14">
+													<option></option>
+													@foreach ($state as $rec)
+													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+													@endforeach
+												</select>
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										
+									</fieldset>
+								</li>
+							</ul>
 						</div>
-</form>
+						@endforeach
+						<form id="addressform" autocomplete="off" method="post" action="#" >
+							<div  class="grid_6 form_container left_label">
+								<ul>
+									<li>
+										<fieldset>
+											<legend>{{__('CodeMaintenance.New_Address_Information')}} </legend>
+											<input type="hidden" id="eaccountnumber" name="accountnumber">
+											<div class="form_grid_12">
+												<label class="field_title">{{__('CodeMaintenance.Copy_Previous_Detail')}} </label>
+												<div class="form_input">
+													<span>
+														<input name="field08" id="copydetail" onchange="copyDetail()" class="checkbox" type="checkbox"  tabindex="7">
+														
+													</span>
+												</div>
+											</div>
+											<input id="esubzone" tabindex="2" name="subzone" type="hidden"  maxlength="50" class=""/>
+											<input id="accountnumber" tabindex="2" name="accountnumber" type="hidden"  maxlength="50" class=""/>
+											<div class="form_grid_12">
+												<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.File_Number')}} <span class="req">*</span></label>
+												<div  class="form_input">
+													<input id="efilenumber" tabindex="2" name="filenumber" type="text"  maxlength="50" class=""/>
+												</div>
+												<span class=" label_intro"></span>
+											</div>
+											<div class="form_grid_12">
+												<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.District')}} <span class="req">*</span></label>
+												<div  class="form_input">
+													
+													<input id="edistrict" tabindex="8" name="edistrict" readonly="" type="text" maxlength="100" class=""/>
+												</div>
+												<span class=" label_intro"></span>
+											</div>
+											
+											<div class="form_grid_12">
+												<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.Zone')}} <span class="req">*</span></label>
+												<div  class="form_input">
+													<input id="ezone" tabindex="8" name="ezone" readonly="" type="text" maxlength="100" class=""/>
+												</div>
+												<span class=" label_intro"></span>
+											</div>
+											<div class="form_grid_12">
+												<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.SubZone')}} <span class="req">*</span></label>
+												<div  class="form_input">
+													<input id="rsubzone" tabindex="8" name="rsubzone" readonly="" type="text" maxlength="100" class=""/>
+												</div>
+												<span class=" label_intro"></span>
+											</div>
+											
+											<div class="form_grid_12">
+												<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address1')}} <span class="req">*</span></label>
+												<div  class="form_input">
+													<input id="eaddress1" tabindex="8" name="address1"  type="text" maxlength="100" class=""/>
+												</div>
+												<span class=" label_intro"></span>
+											</div>
+											<div class="form_grid_12">
+												<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address2')}} <span class="req">*</span></label>
+												<div  class="form_input">
+													<input id="eaddress2"  tabindex="9" name="address2"  type="text"  maxlength="100" class=""/>
+												</div>
+												<span class=" label_intro"></span>
+											</div>
+											<div class="form_grid_12">
+												<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address3')}} <span class="req">*</span></label>
+												<div  class="form_input">
+													<input id="eaddress3"  name="address3" tabindex="10"  type="text" maxlength="100" class=""/>
+												</div>
+												<span class=" label_intro"></span>
+											</div>
+											<div class="form_grid_12">
+												<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address4')}} <span class="req">*</span></label>
+												<div  class="form_input">
+													<input id="eaddress4"  name="address4" tabindex="11"  type="text"  maxlength="100" class=""/>
+												</div>
+												<span class=" label_intro"></span>
+											</div>
+											<div class="form_grid_12">
+												<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Post_Code')}}<span class="req">*</span></label>
+												<div  class="form_input">
+													<input id="epostcode" name="postcode"  tabindex="12"  type="text" maxlength="50" class=""/>
+												</div>
+												<span class=" label_intro"></span>
+											</div>
+											<div class="form_grid_12">
+												<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.City')}} <span class="req">*</span></label>
+												<div  class="form_input">
+													<input id="ecity"  name="city" tabindex="13" type="text"  maxlength="50" class=""/>
+												</div>
+												<span class=" label_intro"></span>
+											</div>
+											<div class="form_grid_12">
+												<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.State')}}<span class="req">*</span></label>
+												<div  class="form_input">
+													<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="estate" name="state" tabindex="14">
+														<option></option>
+														@foreach ($state as $rec)
+														<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+														@endforeach
+													</select>
+												</div>
+												<span class=" label_intro"></span>
+											</div>
+										</fieldset>
+									</li>
+								</ul>
+							</div>
+							<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
+								<div class="form_input">
+									<button id="addsubmit" name="adduser" onclick="validateDetail()" class="btn_small btn_blue"><span>{{__('common.Submit')}} </span></button>
+									
+									<button id="close" onclick="closeTenant()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}} 	</span></button>
+									<span class=" label_intro"></span>
+								</div>
+								<span class="clear"></span>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
-			</div>	
+		</div>
 	</div>
 	<div class="" id="finishloader"></div>
 	<span class="clear"></span>
-<script src="js/propertyregister/tab-script.js"></script>
+	<script src="js/propertyregister/tab-script.js"></script>
 </div>
 
 <script type="text/javascript">

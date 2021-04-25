@@ -13,9 +13,9 @@
 	<ul>
 	<li>
 		<fieldset>
-			<legend>Account Information</legend>
+			<legend>{{__('inspection.Account_Information')}}</legend>
 				<div class="form_grid_12">
-					<label class="field_title"  id="accnumberlbl" for="username">ACCOUNT NUMBER<span class="req">*</span></label>
+					<label class="field_title"  id="accnumberlbl" for="username">{{__('inspection.Account_Number')}} <span class="req">*</span></label>
 					<div  class="form_input">
 						<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->ma_accno}}" maxlength="100" >
 					</div>
@@ -23,7 +23,7 @@
 				</div>
 				
 				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">FILE NUMBER<span class="req">*</span></label>
+					<label class="field_title" id="lposition" for="position">{{__('inspection.File_Number')}} <span class="req">*</span></label>
 					<div  class="form_input">
 						<input id="filenumber" tabindex="2"name="filenumber"  type="text" value="{{$master->ma_fileno}}" maxlength="50" class=""/>
 					</div>
@@ -31,7 +31,7 @@
 				</div>
 				
 				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">DISTRICT<span class="req">*</span></label>
+					<label class="field_title" id="llevel" for="level">{{__('inspection.District')}} <span class="req">*</span></label>
 					<div  class="form_input">
 						<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="district" name="district" tabindex="3">
 							<option></option>
@@ -44,7 +44,7 @@
 				</div>
 		 		
 				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">ZONE<span class="req">*</span></label>
+					<label class="field_title" id="llevel" for="level">{{__('inspection.Zone')}} <span class="req">*</span></label>
 					<div  class="form_input">
 						<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="zone" name="zone" tabindex="4">
 							<option></option>
@@ -57,7 +57,7 @@
 				</div>
 
 				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">SUBZONE<span class="req">*</span></label>
+					<label class="field_title" id="llevel" for="level">{{__('inspection.Subzone')}} <span class="req">*</span></label>
 					<div  class="form_input">
 						<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="subzone" name="subzone" tabindex="5">
 							<option></option>
@@ -70,7 +70,7 @@
 				</div>
 				
 				<!--<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">IS BUILDING<span class="req">*</span></label>
+					<label class="field_title" id="llevel" for="level">{{__('inspection.Account_Information')}} IS BUILDING<span class="req">*</span></label>
 					<div  class="form_input">
 						<select data-placeholder="Choose a Status..."  style="width:100%" class="cus-select"  id="bldgtype" name="bldgtype" tabindex="6">
 							<option></option>
@@ -89,9 +89,9 @@
 	<ul>
 		<li>				
 			<fieldset>
-				<legend>Address Information</legend>					
+				<legend>{{__('inspection.Address_Information')}}</legend>					
 				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">ADDRESS 1<span class="req">*</span></label>
+					<label class="field_title" id="lposition" for="position">{{__('inspection.Address1')}} <span class="req">*</span></label>
 					<div  class="form_input">
 						<input id="address1" tabindex="8" name="address1"  type="text" value="{{$master->ma_addr_ln1}}" maxlength="100" class=""/>
 					</div>
@@ -99,42 +99,42 @@
 				</div>
 
 				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">ADDRESS 2</label>
+					<label class="field_title" id="lposition" for="position">{{__('inspection.Address2')}} </label>
 					<div  class="form_input">
 						<input id="address2"  tabindex="9" name="address2"  type="text" value="{{$master->ma_addr_ln2}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">ADDRESS 3</label>
+					<label class="field_title" id="lposition" for="position">{{__('inspection.Address3')}} </label>
 					<div  class="form_input">
 						<input id="address3"  name="address3" tabindex="10"  type="text" value="{{$master->ma_addr_ln3}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">ADDRESS 4</label>
+					<label class="field_title" id="lposition" for="position">{{__('inspection.Address4')}} </label>
 					<div  class="form_input">
 						<input id="address4"  name="address4" tabindex="11"  type="text" value="{{$master->ma_addr_ln4}}" maxlength="100" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">POST CODE<span class="req">*</span></label>
+					<label class="field_title" id="lposition" for="position">{{__('inspection.Post_Code')}} <span class="req">*</span></label>
 					<div  class="form_input">
 						<input id="postcode" name="postcode" tabindex="12"  type="text" value="{{$master->ma_postcode}}" maxlength="50" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
-					<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+					<label class="field_title" id="lposition" for="position">{{__('inspection.City')}} <span class="req">*</span></label>
 					<div  class="form_input">
 						<input id="city"  name="city" tabindex="13"  type="text" value="{{$master->ma_city}}" maxlength="50" class=""/>
 					</div>
 					<span class=" label_intro"></span>
 				</div>
 				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
+					<label class="field_title" id="llevel" for="level">{{__('inspection.State')}} <span class="req">*</span></label>
 					<div  class="form_input">
 						<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="state" name="state" tabindex="14">
 							<option></option>

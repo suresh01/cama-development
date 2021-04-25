@@ -6,7 +6,7 @@
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>Evident Management</title>
+<title>{{__('CodeMaintenance.Evident_Management')}}</title>
 @include('includes.header', ['page' => 'datamaintenance'])
 	
 	<div id="content">
@@ -19,15 +19,15 @@
  
 				<div id="breadCrumb3"class="breadCrumb grid_3">
 					<ul >
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-						<li>Evident Management</li>
+						<li><a href="#">{{__('CodeMaintenance.Home')}} </a></li>
+						<li><a href="#">{{__('CodeMaintenance.Data_Maintenance')}} </a></li>
+						<li>{{__('CodeMaintenance.Evident_Management')}}</li>
 					</ul>
 				</div>
 
 				@include('search.searchcustom',['tableid'=>'tenanttable', 'action' => 'tenanttable', 'searchid' => '26'])
 
-				<button id="addtrans" onclick="openTrans()" style="float:right;"  name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Transaction</span></button>
+				<button id="addtrans" onclick="openTrans()" style="float:right;"  name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('CodeMaintenance.Evident_Management')}}</span></button>
 
 				<br>
 			</div>
@@ -38,7 +38,7 @@
 						<div class="social_activities">
 								<div class="comments_s">
 									<div class="block_label">
-										Property Count<span id="prop_count">0</span>
+										{{__('CodeMaintenance.Property_Count')}} <span id="prop_count">0</span>
 									</div>
 								</div>
 
@@ -51,37 +51,37 @@
 					<thead style="text-align: left;">
 					<tr>
 						<th class="table_sno">
-							S No
+							{{__('CodeMaintenance.SNo')}}
 						</th>
 						<th>
-							Transaction Type
+							{{__('CodeMaintenance.Transaction_Type')}}
 						</th>
 						<th>
-							Lot Number
+							{{__('CodeMaintenance.Lot_Number')}}
 						</th>
 						<th>
-							Title Number
+							{{__('CodeMaintenance.Title_Number')}} 
 						</th>
 						<th>
-							Transaction Date
+							{{__('CodeMaintenance.Transaction_Date')}} 
 						</th>
 						<th>
-							Price
+							{{__('CodeMaintenance.Price')}} 
 						</th>
 						<th>
-							Duration
+							{{__('CodeMaintenance.Duration')}} 
 						</th>
 						<th>
-							Address
+							{{__('CodeMaintenance.Address')}} 
 						</th>
 						<th>
-							Postcode
+							{{__('CodeMaintenance.Post_Code')}}
 						</th>
 						<th>
-							Status
+							{{__('CodeMaintenance.Status')}} 
 						</th>
 						<th>
-							Action
+							{{__('CodeMaintenance.Action')}} 
 						</th>
 						
 					</tr>
@@ -121,23 +121,23 @@
 						</td>
 						<td class="">
 							@if($rec->trans_approvaltransstatus_id == '1' || $rec->trans_approvaltransstatus_id == '6')
-							<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editTrans('{{ $rec->trans_id }}')" href='#' title='Edit'></a></span>&nbsp;&nbsp;
-								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick="deleteTrans('{{ $rec->trans_id }}')" href='#' title='Delete'></a></span>
+							<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editTrans('{{ $rec->trans_id }}')" href='#' title="{{__('common.Edit')}}"></a></span>&nbsp;&nbsp;
+								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick="deleteTrans('{{ $rec->trans_id }}')" href='#' title="{{__('common.Delete')}}"></a></span>
 								
-								 <span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',1)"  title="Submit To Approve" href="#"></a></span>'						
+								 <span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',1)"  title="{{__('CodeMaintenance.Submit_To_Approve')}}" href="#"></a></span>'						
 							@elseif($rec->trans_approvaltransstatus_id == '2')
-								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',2,1)"  title="Approve" href="#"></a></span>
-								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',2,2)"  title="Reject" href="#"></a></span>
+								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',2,1)"  title="{{__('CodeMaintenance.Approve')}} " href="#"></a></span>
+								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',2,2)"  title="{{__('CodeMaintenance.Reject')}} " href="#"></a></span>
 							@elseif($rec->trans_approvaltransstatus_id == '3')
-								<spane><a class=" new-action-icons reverse" onclick="approve('{{$rec->trans_id}}',3)" title="Revise" href="#"></a></span>	
+								<spane><a class=" new-action-icons reverse" onclick="approve('{{$rec->trans_id}}',3)" title="{{__('CodeMaintenance.Revise')}} " href="#"></a></span>	
 
 							@elseif($rec->trans_approvaltransstatus_id == '4')
-								<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editTrans('{{ $rec->trans_id }}')" href='#' title='Edit'></a></span>&nbsp;&nbsp;
-								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block;'  onclick="deleteTrans('{{ $rec->trans_id }}')" href='#' title='Delete'></a></span>
+								<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editTrans('{{ $rec->trans_id }}')" href='#' title="{{__('common.Edit')}}"></a></span>&nbsp;&nbsp;
+								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block;'  onclick="deleteTrans('{{ $rec->trans_id }}')" href='#' title="{{__('common.Delete')}}"></a></span>
 								
-								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',1)"  title="Submit To Approve" href="#"></a></span>				
+								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',1)"  title="{{__('CodeMaintenance.Submit_To_Approve')}}" href="#"></a></span>				
 							@elseif($rec->trans_approvaltransstatus_id == '5')
-								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',5)"  title="Approve Revision" href="#"></a></span>						
+								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',5)"  title="{{__('CodeMaintenance.Approve_Revision')}}" href="#"></a></span>						
 							@endif
 						</td>
 					</tr>
@@ -171,7 +171,7 @@
 			<div class="widget_wrap">
 				
 				<div class="widget_content">
-					<h3 id="title">Add Ratepayer</h3>
+					<h3 id="title">{{__('CodeMaintenance.Add_Transaction')}}</h3>
 					<form id="tenantform" autocomplete="off" method="post" action="#" >
 						<div  class="grid_6 form_container left_label">
 							<ul>
@@ -180,9 +180,9 @@
 									<input type="hidden" name="transactionid" id="transactionid">
 									<input type="hidden" name="jsondata" id="jsondata">
 									<fieldset>
-										<legend>Transaction Information</legend>
+										<legend>{{__('CodeMaintenance.Transaction_Information')}}</legend>
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">TRANSACTION TYPE<span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('CodeMaintenance.Transaction_Type')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="transtype" name="transtype" tabindex="20">
 													<option></option>
@@ -195,7 +195,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">TRANSACTION LINKID<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Transaction_linkID')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="linkid" name="linkid"  type="text"  maxlength="12" class="required"/>
 											</div>
@@ -203,7 +203,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">LOT CODE<span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('CodeMaintenance.Lot_Code')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="lotcode" name="lotcode" tabindex="20">
 													<option></option>
@@ -216,7 +216,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">LOT NUMBER<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.Lot_Number')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="lotno" name="lotno"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -224,7 +224,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">TITLE TYPE<span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('CodeMaintenance.Title_Type')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="titletype" name="titletype" tabindex="20">
 													<option></option>
@@ -237,7 +237,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">TITLE NUMBER<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.Title_Number')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="titltno" name="titltno"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -246,9 +246,9 @@
 									</fieldset>
 
 									<fieldset>
-										<legend>Other Information</legend>
+										<legend>{{__('CodeMaintenance.Other_Information')}}</legend>
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">TRANSACTION DATE<span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('CodeMaintenance.Transaction_Date')}} TRANSACTION DATE<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="transdate" name="transdate" type="text"  maxlength="50" class="required"/>
 											</div>
@@ -256,7 +256,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">PRICE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Price')}} PRICE<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="price" name="price"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -265,7 +265,7 @@
 										
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">DURATION<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.Duration')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="duration" name="duration"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -281,9 +281,9 @@
 							<ul>
 								<li>				
 									<fieldset>
-										<legend>Address Information</legend>					
+										<legend>{{__('CodeMaintenance.Address_Information')}}</legend>					
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">ADDRESS 1<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address1')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="address1" name="address1"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -291,42 +291,42 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">ADDRESS 2</label>
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address2')}}</label>
 											<div  class="form_input">
 												<input id="address2"  name="address2"  type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">ADDRESS 3</label>
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address3')}}</label>
 											<div  class="form_input">
 												<input id="address3"  name="address3"  type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">ADDRESS 4</label>
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address4')}}</label>
 											<div  class="form_input">
 												<input id="address4"  name="address4"  type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">POST CODE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Post_Code')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="postcode" name="postcode"  type="text"  maxlength="50" class="required"/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.City')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="city" name="city"  type="text"  maxlength="50" class="required"/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.State')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="state" name="state" tabindex="20">
 													<option></option>
@@ -344,9 +344,9 @@
 						</div>
 						<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">							
 							<div class="form_input">
-								<button id="addsubmit" name="adduser" onclick="validateTrans()" class="btn_small btn_blue"><span>Submit</span></button>									
+								<button id="addsubmit" name="adduser" onclick="validateTrans()" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>									
 								
-								<button id="close" onclick="closeTrans()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+								<button id="close" onclick="closeTrans()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 								<span class=" label_intro"></span>
 							</div>								
 							<span class="clear"></span>

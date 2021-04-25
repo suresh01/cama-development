@@ -6,7 +6,7 @@
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>Property Inspection</title>
+<title>{{__('inspection.Property_Inspection')}}</title>
 <style>
 .disabled-btn{
     pointer-events:none;
@@ -21,8 +21,8 @@
 		<div id="usertable" class="grid_12">	
 			<div id="breadCrumb3" class="breadCrumb grid_12">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="valterm">Valuation Data Management</a></li>
+						<li><a href="#">{{__('inspection.Home')}} </a></li>
+						<li><a href="valterm">{{__('inspection.Valuation_Data_Management')}} </a></li>
 						<li><a href="valbasket?id={{$termid}}&ts=1">{{$viewparamterm}} </a></li>
 						<li><a href="property?id={{$pb}}&ts=1">{{$viewparambasket}} - {{$viewparambasketstatus}}</a></li>
 						<li>{{$accountnumber}} </li>
@@ -34,7 +34,7 @@
 				<div class="widget_wrap">
 					<div class="widget_top">
 						<!--<span class="h_icon list"></span>-->
-						<h6>Property Inspection</h6>
+						<h6>{{__('inspection.Property_Inspection')}}</h6>
 						<div id="top_tabby">
 						</div>
 					</div>
@@ -43,37 +43,37 @@
 						<!--<h3>Property Registration</h3>-->
 						<form action="" id="propertyinspectionform" class="form_container left_label">
 							<fieldset title="Step 1">		
-								<legend>Master Information</legend>	
+								<legend>{{__('inspection.Master_Information')}}</legend>	
 								@include('inspection.tab.master')	
 							</fieldset>
 							<fieldset title="Step 2">
-								<legend>Owner Information</legend>
+								<legend>{{__('inspection.Owner_Information')}}</legend>
 								@include('inspection.tab.ownerold')	
 							</fieldset>
 							@if($applntype == 'C')
 							<fieldset title="Step 2">
-								<legend>Ratepayer Information</legend>
+								<legend>{{__('inspection.Ratepayer_Information')}}</legend>
 								@include('inspection.tab.ratepayer')	
 							</fieldset>
 							<fieldset title="Step 3">
-								<legend>Tenant Information</legend>									
+								<legend>{{__('inspection.Tenant_Information')}}</legend>									
 								@include('inspection.tab.tenant')							
 							</fieldset>
 							@endif
 							<fieldset title="Step 4">
-								<legend>Lot Information</legend>
+								<legend>{{__('inspection.Lot_Information')}}</legend>
 								@include('inspection.tab.lot')	
 							</fieldset>
 							<fieldset title="Step 5">
-								<legend>Property Use</legend>
+								<legend>{{__('inspection.Property_Use')}}</legend>
 								@include('inspection.tab.parameter')
 							</fieldset>
 							<fieldset title="Step 6">
-								<legend>Building Information</legend>
+								<legend>{{__('inspection.Building_Information')}}</legend>
 								@include('inspection.tab.bldg')					
 							</fieldset>
 							<fieldset title="Step 7">
-								<legend>Attachment</legend>
+								<legend>{{__('inspection.Attachment')}}</legend>
 								@include('inspection.tab.attachmentnew')
 							</fieldset>			
 							@if($iseditable == 1)

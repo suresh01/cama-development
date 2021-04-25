@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Tenant Registration</title>
+<title>{{__('CodeMaintenance.Tenant_Registration')}}</title>
 @include('includes.header', ['page' => 'datamaintenance'])
 	
 	<div id="content">
@@ -20,15 +20,15 @@
 
 				<div id="breadCrumb3"  class="breadCrumb grid_3">
 					<ul >
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-						<li>Tenant Registration</li>
+						<li><a href="#">{{__('CodeMaintenance.Home')}}</a></li>
+						<li><a href="#">{{__('CodeMaintenance.Data_Maintenance')}} </a></li>
+						<li>{{__('CodeMaintenance.Tenant_Registration')}}</li>
 					</ul>
 				</div>
 
 				@include('search.searchcustom',['tableid'=>'tenanttable', 'action' => 'tenanttable', 'searchid' => '25'])
 
-				<button id="addtenant" onclick="openTenantUser()" style="float:right;"  name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Tenant</span></button>
+				<button id="addtenant" onclick="openTenantUser()" style="float:right;"  name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('CodeMaintenance.Add_Tenant')}}</span></button>
 				<br>
 			</div>
 		
@@ -39,7 +39,7 @@
 						<div class="social_activities">
 							<div class="comments_s">
 								<div class="block_label">
-									Count<span id="prop_count">0</span>
+									{{__('CodeMaintenance.Count')}}<span id="prop_count">0</span>
 								</div>
 							</div>
 
@@ -49,31 +49,31 @@
 					<thead style="text-align: left;">
 					<tr>
 						<th class="table_sno">
-							S No
+							{{__('CodeMaintenance.SNo')}}
 						</th>
 						<th>
-							Application Type
+							{{__('CodeMaintenance.Application_Type')}} 
 						</th>
 						<th>
-							Tenant Type
+							{{__('CodeMaintenance.Tenant_Type')}} 
 						</th>
 						<th>
-							Number
+							{{__('CodeMaintenance.Tenant_Number')}}
 						</th>
 						<th>
-							Name
+							{{__('CodeMaintenance.Name')}} 
 						</th>
 						<th>
-							Address 1
+							{{__('CodeMaintenance.Address1')}}  
 						</th>
 						<th>
-							State
+							{{__('CodeMaintenance.State')}} 
 						</th>
 						<th>
-							Status
+							{{__('CodeMaintenance.Status')}} 
 						</th>
 						<th>
-							Action
+							{{__('CodeMaintenance.Action')}} 
 						</th>
 						
 					</tr>
@@ -110,7 +110,7 @@
 			<div class="widget_wrap">
 				
 				<div class="widget_content">
-					<h3 id="title">Add Tenant</h3>
+					<h3 id="title">{{__('CodeMaintenance.Add_Tenant')}}  </h3>
 					<form id="tenantform" autocomplete="off" method="post" action="tenanttrn" >
 						<div  class="grid_6 form_container left_label">
 							<ul>
@@ -119,9 +119,9 @@
 									<input type="hidden" name="tenantid" id="tenantid">
 									<input type="hidden" name="jsondata" id="jsondata">
 									<fieldset>
-										<legend>Tenant Information</legend>
+										<legend>{{__('CodeMaintenance.Tenant_Information')}}</legend>
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">APPLICATION TYPE<span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('CodeMaintenance.Application_Type')}}  <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="applntypeid" name="applntypeid" tabindex="20">
 													@foreach ($applntype as $rec)
@@ -133,7 +133,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">TENANT TYPE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Tenant_Type')}}  <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="typeid" name="typeid" tabindex="20">
 													@foreach ($tenanttype as $rec)
@@ -146,7 +146,7 @@
 										
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">TENANT NUMBER<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.Tenant_Number')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="number" name="number"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -154,14 +154,14 @@
 										</div>
 								 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">NAME<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.Name')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="name" name="name"  type="text"  maxlength="50" class=" required "/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">PHONE NUMBER<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.Phone_Number')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="phoneno" name="phoneno"  type="text"  maxlength="12" class="required"/>
 											</div>
@@ -169,7 +169,7 @@
 										</div>
 								 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">EMAIL ID<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.EmailID')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="emailid" name="emailid"  type="text"  maxlength="50" class=" required "/>
 											</div>
@@ -179,9 +179,9 @@
 									</fieldset>
 
 									<fieldset>
-										<legend>Other Information</legend>
+										<legend>{{__('CodeMaintenance.Other_Information')}}</legend>
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">CITIZEN<span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('CodeMaintenance.Citizen')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="citizenid" name="citizenid" tabindex="20">
 													@foreach ($citizen as $rec)
@@ -193,7 +193,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">RACE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Race')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="raceid" name="raceid" tabindex="20">
 													@foreach ($race as $rec)
@@ -206,7 +206,7 @@
 										
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">STATUS<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.Status')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="activeindid" name="activeindid" tabindex="20">
 													@foreach ($activeind as $rec)
@@ -226,9 +226,9 @@
 							<ul>
 								<li>				
 									<fieldset>
-										<legend>Address Information</legend>					
+										<legend>{{__('CodeMaintenance.Address_Information')}}</legend>					
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">ADDRESS 1<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address1')}}  <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="addr1" name="addr1"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -236,35 +236,35 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">ADDRESS 2</label>
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address2')}}  </label>
 											<div  class="form_input">
 												<input id="addr2"  name="addr2"  type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">ADDRESS 3</label>
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address3')}}  </label>
 											<div  class="form_input">
 												<input id="addr3"  name="addr3"  type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">ADDRESS 4</label>
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address4')}}  </label>
 											<div  class="form_input">
 												<input id="addr4"  name="addr4"  type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">POST CODE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Post_Code')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="postcode" name="postcode"  type="text"  maxlength="50" class="required"/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.State')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="stateid" name="stateid" tabindex="20">
 													@foreach ($state as $rec)
@@ -281,9 +281,9 @@
 						</div>
 						<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">							
 							<div class="form_input">
-								<button id="addsubmit" name="adduser" onclick="validateTenant()" class="btn_small btn_blue"><span>Submit</span></button>									
+								<button id="addsubmit" name="adduser" onclick="validateTenant()" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>									
 								
-								<button id="close" onclick="closeTenant()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+								<button id="close" onclick="closeTenant()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 								<span class=" label_intro"></span>
 							</div>								
 							<span class="clear"></span>

@@ -1,9 +1,9 @@
 
 						<div id="tab3">
 							
-							<h4>Owner</h4>
+							<h4>{{__('tab.Owner')}}</h4>
 								<p>
-									Account Number = <span id="ownerlabel"></span>
+									{{__('tab.ACCOUNT_NUMBER')}} = <span id="ownerlabel"></span>
 								</p>
 
 
@@ -12,32 +12,32 @@
 										<table style="width: 100%" id="ownertble" class="display ">
 										<thead style="text-align: left;">
 								  		<tr>
-											<th class="table_sno">S No</th>
-											<th>OWNER APPLICATION TYPE</th>
-											<th>TYPE OF OWNER</th>
-											<th>OWNER NO</th>
-											<th>OWNER NAME</th>
-											<th>OWNER ADDRES 1</th>
-											<th>OWNER ADDRES 2</th>
-											<th>OWNER ADDRES 3</th>
-											<th>OWNER ADDRES 4</th>
-											<th>POSTCODE</th>
-											<th>STATE</th>
-											<th>TEL NUMBER</th>
-											<th>FAX NUMBER</th>
-											<th>Citizenship</th>
-											<th>RACE</th>
-											<th>Numerator</th>
-											<th>Denominator</th>
-											<th>Action</th>
-											<th>ACTIONCODE</th>
-											<th>TO ID</th>
-											<th>accoumnum</th>
-											<th>APP TYPE / ID TYPE</th>
-											<th>ID NUMBER</th>
-											<th>ADDRESS </th>
-											<th>TEL NUMBER / FAXNUMBER</th>
-											<th>ACTION</th>
+											<th class="table_sno">{{__('tab.S_No')}}</th>
+											<th>{{__('tab.OWNER_APPLICATION_TYPE')}}</th>
+											<th>{{__('tab.TYPE_OF_OWNER')}}</th>
+											<th>{{__('tab.OWNER_NO')}}</th>
+											<th>{{__('tab.OWNER_NAME')}}</th>
+											<th>{{__('tab.OWNER_ADDRES_1')}}</th>
+											<th>{{__('tab.OWNER_ADDRES_2')}}</th>
+											<th>{{__('tab.OWNER_ADDRES_3')}}</th>
+											<th>{{__('tab.OWNER_ADDRES_4')}}</th>
+											<th>{{__('tab.POSTCODE')}}</th>
+											<th>{{__('tab.STATE')}}</th>
+											<th>{{__('tab.TEL_NUMBER')}}</th>
+											<th>{{__('tab.FAX_NUMBER')}}</th>
+											<th>{{__('tab.Citizenship')}}</th>
+											<th>{{__('tab.RACE')}}</th>
+											<th>{{__('tab.Numerator')}}</th>
+											<th>{{__('tab.Denominator')}}</th>
+											<th>{{__('tab.Action')}}</th>
+											<th>{{__('tab.Actioncode')}}</th>
+											<th>{{__('tab.TO_ID')}}</th>
+											<th>{{__('tab.accoumnum')}}</th>
+											<th>{{__('tab.APP_TYPE_ID')}}</th>
+											<th>{{__('tab.ID_NUMBER')}}</th>
+											<th>{{__('tab.ADDRESS')}}</th> 
+											<th>{{__('tab.TEL_NUMBER_FAXNUMBER')}}</th>
+											<th>{{__('tab.Action')}}</th>
 										</tr>
 										</thead>
 										</table>
@@ -58,10 +58,10 @@
 							
 								
 								<fieldset>
-										<legend>Owner Information</legend>
+										<legend>{{__('tab.Owner_Information')}}</legend>
 
 										<div class="form_grid_12">
-									<label class="field_title" id="lusername" for="username">OWNER APPLICATION TYPE<span class="req">*</span></label>
+									<label class="field_title" id="lusername" for="username"> {{__('tab.OWNER_APPLICATION_TYPE')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ownaplntype" name="ownaplntype" tabindex="1">
 											<option></option>
@@ -73,7 +73,7 @@
 								</div>
 								
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">TYPE OF OWNER<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.TYPE_OF_OWNER')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="typeofown" name="typeofown" tabindex="1">
 											<option></option>
@@ -86,28 +86,28 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER NUMBER<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.OWNER_NO')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="ownnum" readonly="true" value="{{$owner->TO_OWNNO}}" name="ownnum"  type="text" tabindex="1"  maxlength="15" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER NAME<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.OWNER_NAME')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="ownname" readonly="true" value="{{$owner->TO_OWNNAME}}" name="ownname" tabindex="1" type="text"  maxlength="80" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TEL NO<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level"> {{__('tab.TEL_NUMBER')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="telno" readonly="true" value="{{$owner->TO_TELNO}}" name="telno" tabindex="1" type="text" value="" maxlength="15" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">FAX NO<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level"> {{__('tab.FAX_NUMBER')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="faxno" readonly="true" name="faxno" value="{{$owner->TO_FAXNO}}" tabindex="1" type="text"  maxlength="15" class=""/>
 										</div>
@@ -115,7 +115,7 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">EMAIL ID<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level"> {{__('tab.EMAIL_ID')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="emailid" readonly="true" name="faxno" value="" tabindex="1" type="text"  maxlength="15" class=""/>
 										</div>
@@ -123,7 +123,7 @@
 									</div>
 								
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">CITIZENSHIP<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.Citizenship')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="citizen" name="citizen" tabindex="1">
 											<option></option>
@@ -135,7 +135,7 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">RACE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.RACE')}} <span class="req">*</span></label>
 									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="race" name="race" tabindex="1">
 											<option></option>
 											@foreach ($race as $rec)
@@ -146,14 +146,14 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">NUMERATOR</label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.Numerator')}} </label>
 									<div  class="form_input">
 										<input id="numerator" readonly="true" tabindex="1"value="{{$owner->TO_NUMETR}}"  name="numerator" value="0" maxlength="5"  type="number" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">DENOMINATOR</label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.Denominator')}} DENOMINATOR</label>
 									<div  class="form_input">
 										<input id="demominator" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" value="{{$owner->TO_DENOMTR}}" name="demominator" value="0" readonly="true"  type="number" tabindex="1"  maxlength="5" class=""/>
 									</div>
@@ -161,14 +161,14 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER ADDRES 1<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.OWNER_ADDRES_1')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="ownaddr1" readonly="true" name="ownaddr1" value="{{$owner->TO_ADDR_LN1}}" tabindex="1"  type="text"  maxlength="50" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER ADDRES 2</label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.OWNER_ADDRES_2')}} </label>
 									<div  class="form_input">
 										<input id="ownaddr2" readonly="true" name="ownaddr2" value="{{$owner->TO_ADDR_LN2}}" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -176,14 +176,14 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER ADDRES 3</label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.OWNER_ADDRES_3')}} </label>
 									<div  class="form_input">
 										<input id="ownaddr3" readonly="true" name="ownaddr3" value="{{$owner->TO_ADDR_LN3}}" tabindex="1"  type="text"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">OWNER ADDRES 4</label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.OWNER_ADDRES_4')}} </label>
 									<div  class="form_input">
 										<input id="ownaddr4" readonly="true" name="ownaddr4" value="{{$owner->TO_ADDR_LN4}}" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -191,21 +191,21 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.CITY')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="city"  readonly="true" name="ownpostcode" value="" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.POSTCODE')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="ownpostcode"  readonly="true" name="ownpostcode" value="{{$owner->TO_POSTCODE}}" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.STATE')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ownstate" name="ownstate" tabindex="1">
 											<option></option>
@@ -230,10 +230,10 @@
 									<input type="hidden" value="0" name="tableindex" id="tableindex">
 								
 								<fieldset>
-										<legend>New Owner Information</legend>
+										<legend>{{__('tab.New_Owner_Information')}}</legend>
 
 										<div class="form_grid_12">
-											<label class="field_title">Copy Previous Owner Detail</label>
+											<label class="field_title">{{__('tab.Copy_Previous_Owner_Detail')}}</label>
 											<div class="form_input">
 												<span>
 												<input name="field08" id="copydetail" onchange="copyDetail()" class="checkbox" type="checkbox"  tabindex="7">
@@ -242,7 +242,7 @@
 											</div>
 										</div>
 										<div class="form_grid_12">
-									<label class="field_title" id="lusername" for="username">OWNER APPLICATION TYPE<span class="req">*</span></label>
+									<label class="field_title" id="lusername" for="username"> {{__('tab.OWNER_APPLICATION_TYPE')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="nownaplntype" name="nownaplntype" tabindex="1">
 											<option></option>
@@ -254,7 +254,7 @@
 								</div>
 								
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">TYPE OF OWNER<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.TYPE_OF_OWNER')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ntypeofown" name="ntypeofown" tabindex="1">
 											<option></option>
@@ -267,28 +267,28 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER NUMBER<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.OWNER_NO')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="nownnum" name="nownnum"  type="text" tabindex="1"  maxlength="15" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER NAME<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.OWNER_NAME')}} OWNER NAME<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="nownname" name="nownname" tabindex="1" type="text"  maxlength="80" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TEL NO<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level"> {{__('tab.TEL_NUMBER')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="ntelno" name="ntelno" tabindex="1" type="text" value="" maxlength="15" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">FAX NO<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level"> {{__('tab.FAX_NUMBER')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="nfaxno" name="nfaxno" tabindex="1" type="text" value="" maxlength="15" class=""/>
 										</div>
@@ -296,7 +296,7 @@
 									</div>
 								
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">CITIZENSHIP<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.Citizenship')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ncitizen" name="ncitizen" tabindex="1">
 											<option></option>
@@ -308,7 +308,7 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">RACE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.RACE')}} <span class="req">*</span></label>
 									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="nrace" name="nrace" tabindex="1">
 											<option></option>
 											@foreach ($race as $rec)
@@ -319,14 +319,14 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">NUMERATOR</label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.Numerator')}}</label>
 									<div  class="form_input">
 										<input id="nnumerator" tabindex="1" name="nnumerator" value="0" maxlength="5"  type="number" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">DENOMINATOR</label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.Denominator')}} </label>
 									<div  class="form_input">
 										<input id="demominator" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name="demominator" value="0"  type="number" tabindex="1"  maxlength="5" class=""/>
 									</div>
@@ -334,14 +334,14 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER ADDRES 1<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.OWNER_ADDRES_1')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="nownaddr1" name="nownaddr1" tabindex="1"  type="text"  maxlength="50" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER ADDRES 2</label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.OWNER_ADDRES_2')}}</label>
 									<div  class="form_input">
 										<input id="nownaddr2" name="nownaddr2" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -349,14 +349,14 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER ADDRES 3</label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.OWNER_ADDRES_3')}}</label>
 									<div  class="form_input">
 										<input id="nownaddr3" name="nownaddr3" tabindex="1"  type="text"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">OWNER ADDRES 4</label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.OWNER_ADDRES_4')}}</label>
 									<div  class="form_input">
 										<input id="nownaddr4" name="nownaddr4" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -364,14 +364,14 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.POSTCODE')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="nownpostcode"  name="nownpostcode" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.STATE')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="nownstate" name="nownstate" tabindex="1">
 											<option></option>
@@ -397,10 +397,10 @@
 									<input type="hidden" value="0" name="tableindex" id="tableindex">
 								
 								<fieldset>
-										<legend>Applicant Information</legend>
+										<legend>{{__('tab.Applicant_Information')}}</legend>
 
 										<div class="form_grid_6">
-											<label class="field_title">is Applicant</label>
+											<label class="field_title">{{__('tab.is_Applicant')}} </label>
 											<div class="form_input">
 												<span>
 												<input name="field08" id="copyadddetail" onchange="copyAddDetail()" class="checkbox" type="checkbox"  tabindex="7">
@@ -411,7 +411,7 @@
 								
 								
 								<div class="form_grid_6">
-									<label class="field_title" id="llevel" for="level">NAME<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('tab.NAME')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addname" name="addname" tabindex="1" type="text"  maxlength="80" />
 									</div>
@@ -420,14 +420,14 @@
 								
 
 								<div class="form_grid_6">
-									<label class="field_title" id="llevel" for="level">ADDRES 1<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('tab.ADDRES_1')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addaddr1" name="addaddr1" tabindex="1"  type="text"  maxlength="50" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_6">
-									<label class="field_title" id="llevel" for="level">ADDRES 2</label>
+									<label class="field_title" id="llevel" for="level">{{__('tab.ADDRES_2')}}</label>
 									<div  class="form_input">
 										<input id="addaddr2" name="addaddr2" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -435,14 +435,14 @@
 								</div>
 
 								<div class="form_grid_6">
-									<label class="field_title" id="llevel" for="level">ADDRES 3</label>
+									<label class="field_title" id="llevel" for="level">{{__('tab.ADDRES_3')}}</label>
 									<div  class="form_input">
 										<input id="addaddr3" name="addaddr3" tabindex="1"  type="text"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_6">
-									<label class="field_title" id="lposition" for="position">ADDRES 4</label>
+									<label class="field_title" id="lposition" for="position">{{__('tab.ADDRES_4')}}</label>
 									<div  class="form_input">
 										<input id="addaddr4" name="addaddr4" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -450,14 +450,14 @@
 								</div>
 
 								<div class="form_grid_6">
-									<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('tab.POSTCODE')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addpostcode"  name="addpostcode" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_6">
-									<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('tab.STATE')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="addstate" name="addstate" tabindex="1">
 											<option></option>
@@ -470,7 +470,7 @@
 								</div>
 
 								<div class="form_grid_6">
-										<label class="field_title" id="llevel" for="level">REQUEST DATE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('tab.REQUEST_DATE')}}<span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="reqdate"  name="reqdate" class="" type="text"  maxlength="50" />
 										</div>
@@ -478,7 +478,7 @@
 								</div>
 
 								<div class="form_grid_6">
-										<label class="field_title" id="llevel" for="level">ACCEPT DATE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('tab.ACCEPT_DATE')}} <span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="addacceptdt"  name="addacceptdt" class="" type="text"  maxlength="50" />
 										</div>
@@ -486,7 +486,7 @@
 								</div>
 
 								<div class="form_grid_6">
-										<label class="field_title" id="llevel" for="level">TRANSACTION DATE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('tab.TRANSACTION_DATE')}} <span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="addtrndate"  name="addtrndate" class="" type="text"  maxlength="50" />
 										</div>
@@ -494,7 +494,7 @@
 								</div>
 
 								<div class="form_grid_6">
-									<label class="field_title" id="lposition" for="position">TRANACTION VALUE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('tab.TRANACTION_VALUE')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addtrnvalue" value="0" name="addtrnvalue" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
@@ -502,7 +502,7 @@
 								</div>
 
 								<div class="form_grid_6">
-									<label class="field_title" id="lposition" for="position">REFERENCE NO<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('tab.REFERENCE_NO')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addref"  name="addref" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -510,7 +510,8 @@
 								</div>
 
 								<div class="form_grid_6">
-									<label class="field_title" id="lposition" for="position">APPLICANT REFERENCE NO<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('tab.APPLICANT_REFERENCE_NO')}} 
+										<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addapplicatref"  name="addapplicatref" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -531,7 +532,7 @@
 									<input type="hidden" value="0" name="tableindex" id="tableindex">
 								
 								<fieldset>
-										<legend>Reason </legend>
+										<legend>{{__('tab.Reason')}}  </legend>
 
 										<div class="form_grid_2">
 											
@@ -543,7 +544,7 @@
 											</div>
 										</div>
 										<div class="form_grid_10">
-											<label style="width: 80%;" class="field_title">the registered owner's name differs from our records</label>
+											<label style="width: 80%;" class="field_title">{{__('tab.Reason1')}} </label>
 											
 										</div>
 										<div class="form_grid_2">
@@ -556,7 +557,7 @@
 											</div>
 										</div>
 										<div class="form_grid_10">
-											<label style="width: 80%;" class="field_title">the premises have not been rated yet
+											<label style="width: 80%;" class="field_title">{{__('tab.Reason2')}}
 											</label>
 										</div>
 
@@ -670,9 +671,9 @@
 								<div style="display:none;" id="ownerdetail" >
 								<div id="owner_form"  autocomplete="off" onsubmit="return false;" class=" left_label" method="post" action="#" >
 										<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
-									<button id="submitaddtblowner" onclick="addownerRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Add New</span></button>	
+									<button id="submitaddtblowner" onclick="addownerRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Add_New')}}</span></button>	
 									<button id="submitedittblowner" onclick="editownerRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Update</span></button>	
-								<button id="close" onclick="closeowner()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+								<button id="close" onclick="closeowner()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 								</div>
 
 								
@@ -687,10 +688,11 @@
 									<input type="hidden" value="0" name="tableindex" id="tableindex">
 								
 								<fieldset>
-										<legend>Owner Information</legend>
+										<legend>{{__('tab.Owner_Information')}} </legend>
 
 										<div class="form_grid_12">
-									<label class="field_title" id="lusername" for="username">OWNER APPLICATION TYPE<span class="req">*</span></label>
+									<label class="field_title" id="lusername" for="username"> {{__('tab.OWNER_APPLICATION_TYPE')}}
+										<span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ownaplntype" name="ownaplntype" tabindex="1">
 											<option></option>
@@ -702,7 +704,7 @@
 								</div>
 								
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">TYPE OF OWNER<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.TYPE_OF_OWNER')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="typeofown" name="typeofown" tabindex="1">
 											<option></option>
@@ -715,28 +717,29 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER NUMBER<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.OWNER_NO')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="ownnum" name="ownnum"  type="text" tabindex="1"  maxlength="15" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER NAME<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.OWNER_NAME')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="ownname" name="ownname" tabindex="1" type="text"  maxlength="80" />
 									</div>
 									<span class=" label_intro"></span>
+
 								</div>
 								<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TEL NO<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level"> {{__('tab.TEL_NUMBER')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="telno" name="telno" tabindex="1" type="text" value="" maxlength="15" class="large"/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">FAX NO<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level"> {{__('tab.FAX_NUMBER')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="faxno" name="faxno" tabindex="1" type="text" value="" maxlength="15" class="large"/>
 										</div>
@@ -746,9 +749,9 @@
 
 
 									<fieldset>
-										<legend>Other Information</legend>
+										<legend>{{__('tab.Other_Information')}}</legend>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">CITIZENSHIP<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.Citizenship')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="citizen" name="citizen" tabindex="1">
 											<option></option>
@@ -760,7 +763,7 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">RACE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.RACE')}}<span class="req">*</span></label>
 									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="race" name="race" tabindex="1">
 											<option></option>
 											@foreach ($race as $rec)
@@ -771,14 +774,14 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">NUMERATOR</label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.Numerator')}} </label>
 									<div  class="form_input">
 										<input id="numerator" tabindex="1" name="numerator" value="0" maxlength="5"  type="number" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">DENOMINATOR</label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.Denominator')}} </label>
 									<div  class="form_input">
 										<input id="demominator" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name="demominator" value="0"  type="number" tabindex="1"  maxlength="5" class=""/>
 									</div>
@@ -794,14 +797,14 @@
 									<fieldset>
 										<legend>Address Information</legend>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER ADDRES 1<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.OWNER_ADDRES_1')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="ownaddr1" name="ownaddr1" tabindex="1"  type="text"  maxlength="50" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER ADDRES 2</label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.OWNER_ADDRES_2')}}</label>
 									<div  class="form_input">
 										<input id="ownaddr2" name="ownaddr2" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -809,14 +812,14 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER ADDRES 3</label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.OWNER_ADDRES_3')}}</label>
 									<div  class="form_input">
 										<input id="ownaddr3" name="ownaddr3" tabindex="1"  type="text"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">OWNER ADDRES 4</label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.OWNER_ADDRES_4')}}</label>
 									<div  class="form_input">
 										<input id="ownaddr4" name="ownaddr4" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -824,14 +827,14 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position"> {{__('tab.POSTCODE')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="ownpostcode"  name="ownpostcode" tabindex="1" type="number"  maxlength="50" class="large"/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level"> {{__('tab.STATE')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ownstate" name="ownstate" tabindex="1">
 											<option></option>

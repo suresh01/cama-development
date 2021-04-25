@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Basket</title>
+<title>{{__('inspection.Basket')}} </title>
 @include('includes.header-popup')
 
 	<div id="content">
@@ -11,7 +11,7 @@
 		  <div id="usertable" class="grid_12">
 		  		<br>
 				<div style="float:right;margin-right: 0px;"  class="btn_24_blue">   
-					<a href="#" id="" onclick="closeWindow()" class=""><span>Close </span></a> 
+					<a href="#" id="" onclick="closeWindow()" class=""><span>{{__('common.Close')}}  </span></a> 
 				</div>
 				<br>
 				<div class="widget_wrap">					
@@ -20,19 +20,19 @@
 					<thead style="text-align: left;">
 			  		<tr>
 							<th class="table_sno">
-								 S No
+								 {{__('inspection.SNo')}} 
 							</th>
 							<th>
-								Bakset Name
+								{{__('inspection.Bakset_Name')}}
 							</th>
 							<th>
-								Term Name
+								{{__('inspection.Term_Name')}} 
 							</th>
 							<th>
-								Property Count
+								{{__('inspection.Property_Count')}} 
 							</th>
 							<th>
-								Term Date
+								{{__('inspection.Term_Date')}}
 							</th>
 						</tr>
 						</thead>

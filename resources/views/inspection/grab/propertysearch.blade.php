@@ -1,6 +1,6 @@
 
 			<div  id="basic-modal-content">
-				<h3>Filter</h3>
+				<h3>{{__('search.filter')}}</h3>
 				<form action="newproperty?basket_id={{$basket_id}}&id={{$id}}" id="filterForm" method="post" class="form_container">	
 					@csrf
 				<input type="hidden" name="filter" value="true">			
@@ -9,27 +9,27 @@
 								<div class="form_grid_12 multiline">
 									<div class="form_input">
 										<div class="form_grid_3">
-											<span class=" label_intro">Field</span>
-											<select onchange="" data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="custom" name="field[]" tabindex="20"><option value="0">Please select Filter</option>
+											<span class=" label_intro">{{__('search.field')}}</span>
+											<select onchange="" data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="custom" name="field[]" tabindex="20"><option value="0">{{__('search.selectfilter')}}</option>
 												@foreach ($search as $rec)
 												<option value="{{ $rec->sd_definitionkeyid }}">{{ $rec->sd_label }}</option>
 												@endforeach
 											</select>
 										</div>
 										<div class="form_grid_2">
-											<span class=" label_intro">Condition</span>
+											<span class=" label_intro">{{__('search.condition')}}</span>
 											<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select" id="condition" name="condition[]" tabindex="20">
 												<option value="=">Equal</option>
 												<option value="LIKE">Like</option>
 												<option value="<>">Not Equal</option>
 											</select>
 										</div>
-										 <input type="hidden" class="firstrow" value="firstrow" id="firstrow"><div class="value form_grid_3"><span class="label_intro">Value</span>
+										 <input type="hidden" class="firstrow" value="firstrow" id="firstrow"><div class="value form_grid_3"><span class="label_intro">{{__('search.value')}}</span>
 											
 											<input class="value" type="text" name="value[]" >
 										</div>
 										<div class="form_grid_2">
-											<span class=" label_intro">Relation</span>
+											<span class=" label_intro">{{__('search.relation')}}</span>
 											<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select" id="relation" name="logic[]" tabindex="20">
 												<option value="AND">AND</option>
 												<option value="OR">OR</option>
@@ -42,19 +42,19 @@
 					</ul>
 					
 					<div class="btn_24_blue">
-						<a href="#" onclick="addfilter(1)" class=""><span>Add </span></a>
+						<a href="#" onclick="addfilter(1)" class=""><span>{{__('search.add')}} </span></a>
 					</div>
 					<div class="btn_24_blue">						
 						<!--<button id="addsubmit"type="submit" class="btn_small btn_blue"><span>Submit</span></button>	-->
-						<a href="#" onclick="submitForm()" class=""><span>Submit </span></a>	
+						<a href="#" onclick="submitForm()" class=""><span>{{__('search.submit')}} </span></a>	
 					</div>
 					<div class="btn_24_blue">
 						<!--<a href="#" class="simplemodal-custom-close"><span>Close </span></a>-->
-            <a href="#" class="simplemodal-close"><span>Close </span></a>
+            <a href="#" class="simplemodal-close"><span>{{__('search.close')}} </span></a>
 					</div>
 					</form>
 			</div>
-			<a href="#" class="basic-custom-modal1">Add Filter</a>
+			<a href="#" class="basic-custom-modal1">{{__('search.addfilter')}}</a>
 <script>
 
 	$(document).ready(function (){
@@ -240,7 +240,7 @@
 		var $valueLbl = "";
 		if(isFirstRow == 1){
 			$removeRow ='<div class=""> <div class="btn_24_blue"> '+
-						'<a href="#" style="color:#111;" class="remove"><span class="icon cross_co"></span><span>Remove </span></a>'+
+						'<a href="#" style="color:#111;" class="remove"><span class="icon cross_co"></span><span>{{__("search.remove")}} </span></a>'+
 						' </div></div>';
 
 				$valueLbl = "";

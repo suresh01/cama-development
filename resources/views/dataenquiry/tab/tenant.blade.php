@@ -8,17 +8,17 @@
 										<table style="width:100%" id="tenanttble" class="display ">
 										<thead style="text-align: left;">
 								  		<tr>
-											<th class="table_sno">S No</th>
-											<th>APPLN TYPE</th>
-											<th>TENANT NUMBER / NAME</th>
-											<th>ADDRESS 1</th>
-											<th>ADDRESS 2</th>
-											<th>ADDRESS 3</th>
-											<th>POST CODE </th>
-											<th>STATE</th>
-											<th>ACTION</th>
-											<th>actioncode</th>
-											<th>tenantid</th>
+								  			<th class="table_sno">{{__('tab.S_No')}}</th>
+											<th>{{__('tab.APPLN_TYPE')}}</th>
+											<th>{{__('tab.TENANT_NUMBER_NAME')}}</th>
+											<th>{{__('tab.ADDRES_1')}}</th>
+											<th>{{__('tab.ADDRES_2')}}</th>
+											<th>{{__('tab.ADDRES_3')}}</th>
+											<th>{{__('tab.POSTCODE')}} </th>
+											<th>{{__('tab.STATE')}} </th>
+											<th>{{__('tab.Action')}} </th>
+											<th>{{__('tab.Actioncode')}} </th>
+											<th>{{__('tab.tenantid')}}</th>
 										</tr>
 										</thead>
 										<tbody>										

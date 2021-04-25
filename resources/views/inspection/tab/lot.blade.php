@@ -1,6 +1,6 @@
 	            
 								@if($iseditable == 1)
-								<button onclick="openlot()" id="addlot" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Lot</span></button>
+								<button onclick="openlot()" id="addlot" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('inspection.Add_Lot')}}</span></button>
 								@endif
 								<div id="lottable" class="widget_wrap">
 
@@ -8,42 +8,42 @@
 										<table style="width:100%" id="lottble" class="display ">
 										<thead style="text-align: left;">
 								  		<tr>
-											<th class="table_sno">S No</th>
-											<th>STATE</th>
-											<th>DISCTRICT</th>
-											<th>CITY</th>
-											<th>PRESINT</th>
-											<th>LOT TYPE</th>
-											<th>LOT NUMBER</th>
-											<th>ALTERNATIF LOT NUMBER</th>
-											<th>LOT TITLE TYPE</th>
-											<th>LOT TITLE NUMBER</th>
-											<th>ALTERNATIF TITLE NUMBER</th>
-											<th>LAND AREA</th>
-											<th>LAND AREA UNIT</th>
-											<th>LAND CONDITION</th>
-											<th>LAND POSISION</th>
-											<th>ROAD TYPE</th>
-											<th>ROAD CATEGORY</th>
-											<th>LAND USE</th>
-											<th>Express Condition</th>
-											<th>Restriction of interest</th>
-											<th>TENURE TYPE</th>
-											<th>TENURE PERIOD</th>
-											<th>TENURE START DATE</th>
-											<th>TENURE END DATE</th>
-											<th>IS ACTIVE</th>
-											<th>ACTION</th>
-											<th>ACTIONCODE</th>
-											<th>lot_id</th>
-											<th>LOT NUMBER</th>
-											<th>ALT LOT NUMBER</th>
-											<th>TITLE NUMBER</th>
-											<th>LAND AREA </th>
-											<th>LAND USED</th>
-											<th>TENURE TYPE</th>
-											<th>ACTION</th>
-											<th>accnum</th>
+											<th class="table_sno">{{__('inspection.SNo')}}</th>
+											<th>{{__('inspection.State')}} </th>
+											<th>{{__('inspection.District')}} </th>
+											<th>{{__('inspection.City')}} </th>
+											<th>{{__('inspection.Presint')}} </th>
+											<th>{{__('inspection.Lot_Type')}} </th>
+											<th>{{__('inspection.Lot_Number')}} </th>
+											<th>{{__('inspection.Alternative_Lot_Number')}} </th>
+											<th>{{__('inspection.Lot_Title_Type')}} </th>
+											<th>{{__('inspection.Lot_Title_Number')}} </th>
+											<th>{{__('inspection.Alternative_Title_Number')}} </th>
+											<th>{{__('inspection.Land_Area')}} </th>
+											<th>{{__('inspection.Land_Area_Unit')}} </th>
+											<th>{{__('inspection.Land_Condition')}} </th>
+											<th>{{__('inspection.Land_Posision')}} </th>
+											<th>{{__('inspection.Road_Type')}} </th>
+											<th>{{__('inspection.Road_Category')}} </th>
+											<th>{{__('inspection.Land_Use')}} </th>
+											<th>{{__('inspection.Express_Condition')}} </th>
+											<th>{{__('inspection.Restriction_Of_Interest')}} </th>
+											<th>{{__('inspection.Tenure_Type')}} </th>
+											<th>{{__('inspection.Tenure_Period')}} </th>
+											<th>{{__('inspection.Tenure_Start_Date')}} </th>
+											<th>{{__('inspection.Tenure_End_Date')}} </th>
+											<th>{{__('inspection.Is_Active')}} </th>
+											<th>{{__('inspection.Action')}} </th>
+											<th>{{__('inspection.Actioncode')}} </th>
+											<th>{{__('inspection.Lot_Id')}} </th>
+											<th>{{__('inspection.Lot_Number')}} </th>
+											<th>{{__('inspection.Alt_Lot_Number')}} </th>
+											<th>{{__('inspection.Title_Number')}} </th>
+											<th>{{__('inspection.Land_Area')}} </th>
+											<th>{{__('inspection.Land_Used')}} </th>
+											<th>{{__('inspection.Tenure_Type')}} </th>
+											<th>{{__('inspection.Action')}} </th>
+											<th>{{__('inspection.Accnum')}} </th>
 										</tr>
 										</thead>
 										<tbody>										
@@ -54,9 +54,9 @@
 								<div style="display:none;" id="lotdetail" >
 								
 								<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
-									<button id="submitaddtbllot" onclick="addlotRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Add New</span></button>	
-									<button id="submitedittbllot" onclick="editlotRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Update</span></button>	
-								<button id="close" onclick="closelot()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+									<button id="submitaddtbllot" onclick="addlotRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Add_New')}} Add New</span></button>	
+									<button id="submitedittbllot" onclick="editlotRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Update')}} </span></button>	
+								<button id="close" onclick="closelot()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}} </span></button>
 								</div>
 									<div  class="grid_6">
 									<ul>
@@ -68,9 +68,9 @@
 										
 									<input type="hidden" value="0" name="lottableindex" id="lottableindex">
 										<fieldset>
-										<legend>Lot Information</legend>
+										<legend>{{__('inspection.Lot_Information')}} </legend>
 									<div class="form_grid_12">
-										<label class="field_title" id="lusername" for="username">LOT TYPE<span class="req">*</span></label>
+										<label class="field_title" id="lusername" for="username">{{__('inspection.Lot_Type')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lotype" name="lotype" tabindex="1">
 												<option value=""></option>
@@ -83,7 +83,7 @@
 									</div>
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">LOT NUMBER<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('inspection.Lot_Number')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="lotnum" tabindex="2" name="lotnum" type="text" value="" maxlength="15" class=""/>
 										</div>
@@ -91,14 +91,14 @@
 									</div>
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">ALTERNATIVE LOT NUMBER</label>
+										<label class="field_title" id="llevel" for="level">{{__('inspection.Alternative_Lot_Number')}} </label>
 										<div  class="form_input">
 											<input id="altlotnum" tabindex="3" name="altlotnum" type="text" value="" maxlength="15" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">LOT TITLE TYPE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('inspection.Lot_Title_Type')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lttt" tabindex="4" name="lttt" tabindex="20">
 												<option></option>
@@ -110,7 +110,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">LOT TITLE NUMBER</label>
+										<label class="field_title" id="llevel" for="level">{{__('inspection.Lot_Title_Number')}} </label>
 										<div  class="form_input">
 											<input id="ltnum" name="ltnum" tabindex="5" type="text" value="" maxlength="8" class=""/>
 										</div>
@@ -118,7 +118,7 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">ALTERNATIVE TITLE NUMBER</label>
+										<label class="field_title" id="llevel" for="level">{{__('inspection.Alternative_Title_Number')}} </label>
 										<div  class="form_input">
 											<input id="altnum" name="altnum" tabindex="6" type="text" value="" maxlength="8" class=""/>
 										</div>
@@ -126,7 +126,7 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">STRATA NUMBER</label>
+										<label class="field_title" id="llevel" for="level">{{__('inspection.Strata_Number')}} </label>
 										<div  class="form_input">
 											<input id="stratano" name="stratano" tabindex="6" type="text" value="4323" maxlength="8" class=""/>
 										</div>
@@ -134,9 +134,9 @@
 									</div>
 								</fieldset>
 									<fieldset>
-										<legend>Address Information</legend>
+										<legend>{{__('inspection.Address_Information')}} </legend>
 									<div class="form_grid_12">
-										<label class="field_title" id="lusername" for="username">STATE<span class="req">*</span></label>
+										<label class="field_title" id="lusername" for="username">{{__('inspection.State')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lotstate" tabindex="7" name="lotstate" tabindex="20">
 												<option></option>
@@ -148,7 +148,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lusername" for="username">DISCTRICT<span class="req">*</span></label>
+										<label class="field_title" id="lusername" for="username">{{__('inspection.District')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lotdistrict" tabindex="8" name="lotdistrict" tabindex="20">
 												<option></option>
@@ -160,7 +160,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">CITY<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('inspection.City')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="lotcity" name="lotcity" tabindex="9" type="text" value="" maxlength="50" class="large"/>
 										</div>
@@ -173,9 +173,9 @@
 									<ul>
 									<li>
 									<fieldset>
-										<legend>Other Information</legend>										
+										<legend>{{__('inspection.SNo')}} Other Information</legend>										
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">LAND AREA<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('inspection.Land_Area')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="landar" name="landar" tabindex="10" onKeyDown="if(this.value.length==15 && event.keyCode>47 && event.keyCode < 58) return false;" type="number" value="" maxlength="15" class=""/>
 										</div>
@@ -183,7 +183,7 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">LAND AREA UNIT<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('inspection.Land_Area_Unit')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="landaruni" tabindex="11" name="landaruni" tabindex="20">
 												<option></option>
@@ -195,7 +195,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">LAND CONDITION<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('inspection.Land_Condition')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="landcon" tabindex="12" name="landcon" tabindex="20">
 												<option></option>
@@ -207,7 +207,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">LAND POSITION<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('inspection.Land_Position')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lanpos" tabindex="13" name="lanpos" tabindex="20">
 												<option></option>
@@ -219,7 +219,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">ROAD TYPE<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('inspection.Road_Type')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="roadtype" tabindex="14" name="roadtype" tabindex="20">
 												<option></option>
@@ -231,7 +231,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">ROAD CATEGOORY<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('inspection.Road_Category')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="roadcate" tabindex="15" name="roadcate" tabindex="20">
 												<option></option>
@@ -243,7 +243,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">LAND USE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('inspection.Land_Use')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="landuse" tabindex="16" name="landuse" tabindex="20">
 												<option></option>
@@ -255,21 +255,21 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">Express Condition</label>
-										<div  class="form_input">
+										<label class="field_title" id="llevel" for="level">{{__('inspection.Express_Condition')}} </label>
+										<div  class="form_iput">
 										<input id="expcon"  name="expcon" tabindex="17" class="" type="text"  maxlength="50" />
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">Restriction of interest</label>
+										<label class="field_title" id="llevel" for="level">{{__('inspection.Restriction_Of_Interest')}} </label>
 										<div  class="form_input">
 										<input id="interest"  name="interest" tabindex="18" class="" type="text"  maxlength="50" />
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TENURE TYPE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('inspection.Tenure_Type')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="tentype" tabindex="19" name="tentype" tabindex="20">
 												<option></option>
@@ -281,14 +281,14 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TENURE PERIOD<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('inspection.Tenure_Period')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="tenduration" tabindex="20" step="0" name="tenduration" class="" type="number" value="0" maxlength="3" onKeyDown="if(this.value.length==3 && event.keyCode>47 && event.keyCode < 58) return false;" class="large"/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TENDURE START DATE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('inspection.Tenure_Start_Date')}} <span class="req">*</span></label>
 										<div  class="form_input">
 										<!--<input id="tenstart"  name="tenstart" tabindex="21" class="" type="date"  maxlength="50" />-->
 										<input type="text" id="tenstart" dateFormat='dd/mm/yyyy' name="tenstart" tabindex="21">
@@ -297,7 +297,7 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TENDURE END DATE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('inspection.Tenure_End_Date')}} <span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="tenend"  name="tenend" class="" type="text"  maxlength="50" />
 										</div>
@@ -305,7 +305,7 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">INDICATOR FOR LAND IS ACTIVE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('inspection.Indicator_For_Land_Is_Active')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="status" tabindex="22" name="status" tabindex="20">	
 												<option></option>										

@@ -1,454 +1,442 @@
+<span class="clear"></span>
+<div class="grid_12 invoice_details">
+	<div class="widget_wrap collapsible_widget">
+		<div class="widget_top active">
+			<span class="h_icon"></span>
+			<h6>{{__('tab.Land_Calculation')}}</h6>
+		</div>
+		<div class="widget_content">
+			<div class="invoice_tbl">
+				<table id="landtable">
+					<thead>
+						<tr class=" gray_sai">
+							<th style="width: 40px;">
+								{{__('tab.S_No')}}
+							</th>
+							<th>
+								{{__('tab.Lot_Code_No')}}
+							</th>
+							<th>
+								{{__('tab.Land_Area')}} 
+							</th>
+							<th>
+								{{__('tab.Net_Value')}}
+							</th>
+							<th>
+								{{__('tab.Round_Value')}} 
+							</th>
+							<th style="display: none;">
+								{{__('tab.Lot_id')}}
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						@php($totalland1 = 0)
+						@php($totalbldg = 0)
+						@foreach ($lot as $rec)
+						<td style="width: 40px;">
+							{{$loop->iteration}}
+						</td>
+						<td>
+							<a href="#" onclick="addTanah('{{$rec->vl_id}}','{{$loop->iteration}}')">{{$rec->lotnumber}}</a>
+						</td>
+						<td style="text-align:right;">
+							{{$rec->vl_size}}
+						</td>
+						<td id="gross_{{$loop->iteration}}" style="text-align:right;">
+							{{number_format($rec->vl_grosslandvalue,2)}}
+						</td>
+						<td id="netvalue_{{$loop->iteration}}" style="text-align:right;">
+							{{number_format($rec->vl_roundnetlandvalue,2)}}
+						</td>
+						<td>
+							{{$rec->vl_id}}
+						</td>
+						@php($totalland1 = $totalland1 + $rec->vl_roundnetlandvalue)
+					</tr>
+					@endforeach
+					<tr>
+						<td colspan="4" class="grand_total">
+							{{__('tab.Total_Land_Value')}} :
+						</td>
+						<td>
+							<input type="text" readonly="true" onchange="taxCalculation()" style="float: right; "  value="{{number_format($totalland1,2)}}" class="tbl-total" id="landtotal">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="widget_wrap collapsible_widget">
+	<div class="widget_top active">
+		<span class="h_icon"></span>
+		<h6>{{__('tab.Building_Calculation')}} </h6>
+	</div>
+	<div class="widget_content">
+		<div class="invoice_tbl">
+			<table id="bldgtable">
+				<thead>
+					<tr class=" gray_sai">
+						<th style="width: 40px;">
+							{{__('tab.S_No')}} 
+						</th>
+						<th>
+							{{__('tab.Building_Category')}} 
+						</th>
+						<th>
+							{{__('tab.Building_Type')}} 
+						</th>
+						<!--<th>
+								Building Area
+						</th>-->
+						<th>
+							{{__('tab.Building_Value')}} 
+						</th>
+						<th>
+							{{__('tab.Allowancess_Value')}} 
+						</th>
+						<th>
+							{{__('tab.Depreciation_Value')}}
+						</th>
+						<th>
+							{{__('tab.Net_Building_Value')}}
+						</th>
+						<th>
+							{{__('tab.Round_Value')}}
+						</th>
+						<th style="display: none;">
+							{{__('tab.bldgid')}} 
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach ($bldg as $rec)
+					<tr>
+						<td style="width: 40px;">
+							{{$loop->iteration}}
+						</td>
+						<td>
+							<a href="#" onclick="addBldg('{{$rec->vb_id}}','{{$loop->iteration}}')">{{$rec->bldgcategory}} </a>
+						</td>
+						<td>
+							{{$rec->bldgtype}}
+						</td>
+						<!--<td>
+								
+						</td>-->
+						<td  style="text-align:right;">
+							{{number_format($rec->vb_grossfloorvalue,2)}}
+						</td>
+						<td style="text-align:right;">
+							{{number_format($rec->vb_grossallowancevalue,2)}}
+						</td>
+						<td style="text-align:right;">
+							{{number_format($rec->vb_grossnt,2)}}
+						</td>
+						<td style="text-align:right;">
+							{{number_format($rec->vb_netnt,2)}}
+						</td>
+						<td style="text-align:right;">
+							{{number_format($rec->vb_roundnetnt,2)}}
+						</td>
+						<td style="text-align:right;display: none;">
+							{{$rec->vb_id}}
+						</td>
+						@php($totalbldg = $totalbldg + $rec->vb_roundnetnt)
+					</tr>
+					@endforeach
+					<tr>
+						<td colspan="7" class="grand_total">
+							{{__('tab.Total_Building_Net_Value')}} 
+						</td>
+						<td>
+							<input type="text" style="float: right; " readonly="true" value="{{number_format($totalbldg,2)}}" class="tbl-total" id="vd_bldgtotal">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="widget_wrap collapsible_widget">
+	<div class="widget_top active">
+		<span class="h_icon"></span>
+		<h6>{{__('tab.Additional_Calculation')}} </h6>
+	</div>
+	<div class="widget_content">
+		<div class="invoice_tbl">
+			<table id="additionaltable">
+				<thead>
+					<tr class=" gray_sai">
+						<th style="width: 40px;">
+							{{__('tab.S_No')}}
+						</th>
+						<th>
+							{{__('tab.Description')}}
+						</th>
+						<th>
+							{{__('tab.Area')}} 
+						</th>
+						<th>
+							{{__('tab.Rate')}}
+						</th>
+						<th>
+							{{__('tab.Gross_Value')}} 
+						</th>
+						<th>
+							{{__('tab.Round_Value')}} 
+						</th>
+						<th>
+							{{__('tab.Action')}}
+						</th>
+						<th style="display: none;">
+							{{__('tab.Actioncode')}}
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					@php($totaladditonal = 0)
+					@foreach ($additional as $rec)
+					<td style="width: 40px;">
+						{{$loop->iteration}}
+					</td>
+					<td>
+						{{$rec->vad_desc}}
+					</td>
+					<td style="text-align:right;">
+						{{$rec->vad_area}}
+					</td>
+					<td style="text-align:right;">
+						{{number_format($rec->vad_rate,2)}}
+					</td>
+					<td style="text-align:right;">
+						{{number_format($rec->vad_grossvalue,2)}}
+					</td>
+					<td style="text-align:right;">
+						{{number_format($rec->vad_roundnetvalue,2)}}
+					</td>
+					<td>
+						<span><a class="action-icons c-edit editaddrow"  href="#" title="Edit">{{__('common.Edit')}} </a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="delete">{{__('common.Delete')}} </a></span>
+					</td>
+					<td style="display: none;">noaction</td>
+					@php($totaladditonal = $totaladditonal + $rec->vad_roundnetvalue)
+				</tr>
+				@endforeach
+				
+				
+				
+			</tbody>
+			<tr>
+				<td colspan="6" class="grand_total">
+					@if($iseditable == 1)
+					<button id="addadditional" onclick="openModal()" name="adduser" style="float: left; "  type="button" class=" basic-modal btn_small btn_blue "><span>{{__('tab.Add_Additional_value')}} </span></button>@endif
+					{{__('tab.Add_Additional_value')}}:
+				</td>
+				<td>
+					<input type="text" readonly="true"  style="float: right; "  value="{{number_format($totaladditonal,2)}}" class="tbl-total" id="additionaltotal">
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+</div>
+</div>
+<div  id="basic-modal-content">
+<h3>{{__('tab.Additional_Valuation')}}</h3>
+<div  class="grid_12 form_container left_label">
+<ul>
+	<li class="li">
+		<input type="hidden" id="index">
+		<div class="form_grid_12">
+			<div class="form_grid_6">
+				<label class="field_title" id="luserid" for="userid">{{__('tab.Description')}}<span class="req">*</span></label>
+				<div class="form_input">
+					<input id="add_description"  name="add_description" type="text"  value="" />
+				</div>
+				<span class=" label_intro"></span>
+			</div>
+		</div>
+		<div class="form_grid_12">
+			<div class="form_grid_6">
+				<label class="field_title" id="luserid" for="userid">{{__('tab.Area')}} <span class="req">*</span></label>
+				<div class="form_input">
+					<input id="add_area" onchange="additionalCal()"  name="add_area" type="text"  value="" />
+				</div>
+				<span class=" label_intro"></span>
+			</div>
+		</div>
+		<div class="form_grid_12">
+			<div class="form_grid_6">
+				<label class="field_title" id="luserid" for="userid">{{__('tab.Rate')}}<span class="req">*</span></label>
+				<div class="form_input">
+					<input id="add_rate" onchange="additionalCal()" name="add_rate" type="text"  value="" />
+				</div>
+				<span class=" label_intro"></span>
+			</div>
+		</div>
+		<div class="form_grid_12">
+			<div class="form_grid_6">
+				<label class="field_title" id="luserid" for="userid">{{__('tab.Grass_value')}}<span class="req">*</span></label>
+				<div class="form_input">
+					<input id="add_grossvalue" readonly="true"  name="add_grossvalue" type="text"  value="" />
+				</div>
+				<span class=" label_intro"></span>
+			</div>
+		</div>
+		<div class="form_grid_12">
+			<div class="form_grid_6">
+				<label class="field_title" id="luserid" for="userid">{{__('tab.Gross_Value')}} <span class="req">*</span></label>
+				<div class="form_input">
+					<input id="add_roundvalue" readonly="true"  name="add_roundvalue" type="text"  value="" />
+				</div>
+				<span class=" label_intro"></span>
+			</div>
+		</div>
+	</li>
+</ul>
+</div>
+<span class="clear"></span>
+<div class="btn_24_blue">
+<a href="#" id="add" onclick="addAdditional()" class=""><span>{{__('common.Add')}}  </span></a>
+<a href="#" id="edit" onclick="editAdditional()" class=""><span>{{__('common.Update')}}  </span></a>
+</div>
+<div class="btn_24_blue">
+<a href="#" class="simplemodal-close"><span>{{__('common.Close')}}  </span></a>
+</div>
 
-					<span class="clear"></span>
-								<div class="grid_12 invoice_details">
-									<div class="widget_wrap collapsible_widget">
-										<div class="widget_top active">
-											<span class="h_icon"></span>
-											<h6>Land Calculation</h6>
-										</div>
-										<div class="widget_content">
-											<div class="invoice_tbl">
-												<table id="landtable">
-												<thead>
-												<tr class=" gray_sai">
-													<th style="width: 40px;">
-														S No
-													</th>
-													<th>
-														Lot Code / Lot No
-													</th>
-													<th>
-														Land Area
-													</th>
-													<th>
-														Net Value
-													</th>
-													<th>
-														Round Value
-													</th>													
-													<th style="display: none;">
-														Lot id
-													</th>
-												</tr>
-												</thead>
-												<tbody>
-													@php($totalland1 = 0)
-													@php($totalbldg = 0)
-													@foreach ($lot as $rec)
-													<td style="width: 40px;">
-														{{$loop->iteration}}
-													</td>
-													<td>
-														<a href="#" onclick="addTanah('{{$rec->vl_id}}','{{$loop->iteration}}')">{{$rec->lotnumber}}</a>
-													</td>
-													<td style="text-align:right;">
-														{{$rec->vl_size}}
-													</td>
-													<td id="gross_{{$loop->iteration}}" style="text-align:right;">
-														{{number_format($rec->vl_grosslandvalue,2)}}
-
-													</td>
-													<td id="netvalue_{{$loop->iteration}}" style="text-align:right;">
-														{{number_format($rec->vl_roundnetlandvalue,2)}}
-													</td>
-													<td>
-														{{$rec->vl_id}}
-													</td>
-													@php($totalland1 = $totalland1 + $rec->vl_roundnetlandvalue)
-												</tr>
-												@endforeach												
-												<tr>
-													<td colspan="4" class="grand_total">
-														Total Land Value:
-													</td>
-													<td>
-														<input type="text" readonly="true" onchange="taxCalculation()" style="float: right; "  value="{{number_format($totalland1,2)}}" class="tbl-total" id="landtotal">
-													</td>
-												</tr>
-												</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-
-									<div class="widget_wrap collapsible_widget">
-										<div class="widget_top active">
-											<span class="h_icon"></span>
-											<h6>Building Calculation</h6>
-										</div>
-										<div class="widget_content">
-											<div class="invoice_tbl">
-												<table id="bldgtable">
-												<thead>
-												<tr class=" gray_sai">
-													<th style="width: 40px;">
-														S No
-													</th>
-													<th>
-														Building Category
-													</th>
-													<th>
-														Building Type
-													</th>
-													<!--<th>
-														Building Area
-													</th>-->
-													<th>
-														Building Value
-													</th>
-													<th>
-														Allowancess Value
-													</th>
-													<th>
-														Depreciation Value
-													</th>
-													<th>
-														Net Building Value
-													</th>
-													<th>
-														Round Value 
-													</th>
-													<th style="display: none;">
-														bldgid 
-													</th>
-												</tr>
-												</thead>
-												<tbody>
-												@foreach ($bldg as $rec)
-												<tr>
-													<td style="width: 40px;">
-														{{$loop->iteration}}
-													</td>
-													<td>
-														<a href="#" onclick="addBldg('{{$rec->vb_id}}','{{$loop->iteration}}')">{{$rec->bldgcategory}} </a>
-													</td>
-													<td>
-														{{$rec->bldgtype}} 
-													</td>
-													<!--<td>
-														
-													</td>-->
-													<td  style="text-align:right;">
-														{{number_format($rec->vb_grossfloorvalue,2)}}
-													</td>
-													<td style="text-align:right;">
-														{{number_format($rec->vb_grossallowancevalue,2)}}
-													</td>
-													<td style="text-align:right;">
-														{{number_format($rec->vb_grossnt,2)}}
-													</td>
-													<td style="text-align:right;">
-														{{number_format($rec->vb_netnt,2)}}
-													</td>
-													<td style="text-align:right;">
-														{{number_format($rec->vb_roundnetnt,2)}} 
-													</td>
-													<td style="text-align:right;display: none;">
-														{{$rec->vb_id}} 
-													</td>
-													@php($totalbldg = $totalbldg + $rec->vb_roundnetnt)
-												</tr>												
-												@endforeach
-												<tr>
-													<td colspan="7" class="grand_total">
-														Total Building Net Value
-													</td>
-													<td>
-														<input type="text" style="float: right; " readonly="true" value="{{number_format($totalbldg,2)}}" class="tbl-total" id="vd_bldgtotal">
-													</td>
-												</tr>
-												</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-
-
-									<div class="widget_wrap collapsible_widget">
-										<div class="widget_top active">
-											<span class="h_icon"></span>
-											<h6>Additional Calculation</h6>
-										</div>
-										<div class="widget_content">
-											<div class="invoice_tbl">
-												<table id="additionaltable">
-												<thead>
-												<tr class=" gray_sai">
-													<th style="width: 40px;">
-														S No
-													</th>
-													<th>
-														Description
-													</th>
-													<th>
-														Area
-													</th>
-													<th>
-														Rate
-													</th>
-													<th>
-														Gross Value
-													</th>
-													<th>
-														Round Value
-													</th>
-													<th>
-														Action 
-													</th>
-													<th style="display: none;">
-														actioncode 
-													</th>
-												</tr>
-												</thead>
-												<tbody>
-													@php($totaladditonal = 0)
-													@foreach ($additional as $rec)
-													<td style="width: 40px;">
-														{{$loop->iteration}}
-													</td>
-													<td>
-														{{$rec->vad_desc}}
-													</td>
-													<td style="text-align:right;">
-														{{$rec->vad_area}}
-													</td>
-													<td style="text-align:right;">
-														{{number_format($rec->vad_rate,2)}}
-
-													</td>
-													<td style="text-align:right;">
-														{{number_format($rec->vad_grossvalue,2)}}
-													</td>
-													<td style="text-align:right;">
-														{{number_format($rec->vad_roundnetvalue,2)}}
-													</td>
-													<td>
-														<span><a class="action-icons c-edit editaddrow"  href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="delete">Delete</a></span>
-													</td>
-													<td style="display: none;">noaction</td>
-													@php($totaladditonal = $totaladditonal + $rec->vad_roundnetvalue)
-												</tr>
-												@endforeach	
-																								
-												
-												
-												</tbody>
-												<tr>
-													<td colspan="6" class="grand_total">
-														@if($iseditable == 1)
-														<button id="addadditional" onclick="openModal()" name="adduser" style="float: left; "  type="button" class=" basic-modal btn_small btn_blue "><span>Add Additional value</span></button>@endif							
-														Total Additional Value:
-													</td>
-													<td>
-														<input type="text" readonly="true"  style="float: right; "  value="{{number_format($totaladditonal,2)}}" class="tbl-total" id="additionaltotal">
-													</td>
-												</tr>
-												</table>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div  id="basic-modal-content">
-									<h3>Additional Valuation</h3>
-									<div  class="grid_12 form_container left_label">
-										<ul>	
-											<li class="li">
-												<input type="hidden" id="index">
-												<div class="form_grid_12">
-													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Description<span class="req">*</span></label>
-														<div class="form_input">
-															<input id="add_description"  name="add_description" type="text"  value="" />
-														</div>
-														<span class=" label_intro"></span>
-													</div>
-												</div>
-												<div class="form_grid_12">
-													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Area<span class="req">*</span></label>
-														<div class="form_input">
-															<input id="add_area" onchange="additionalCal()"  name="add_area" type="text"  value="" />
-														</div>
-														<span class=" label_intro"></span>
-													</div>
-												</div>
-												<div class="form_grid_12">
-													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Rate<span class="req">*</span></label>
-														<div class="form_input">
-															<input id="add_rate" onchange="additionalCal()" name="add_rate" type="text"  value="" />
-														</div>
-														<span class=" label_intro"></span>
-													</div>
-												</div>
-												<div class="form_grid_12">
-													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Grass value<span class="req">*</span></label>
-														<div class="form_input">
-															<input id="add_grossvalue" readonly="true"  name="add_grossvalue" type="text"  value="" />
-														</div>
-														<span class=" label_intro"></span>
-													</div>
-												</div>
-												<div class="form_grid_12">
-													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Round Value<span class="req">*</span></label>
-														<div class="form_input">
-															<input id="add_roundvalue" readonly="true"  name="add_roundvalue" type="text"  value="" />
-														</div>
-														<span class=" label_intro"></span>
-													</div>
-												</div>
-											</li>				
-										</ul>	
-									</div>
-									<span class="clear"></span>
-										<div class="btn_24_blue">
-											<a href="#" id="add" onclick="addAdditional()" class=""><span>Add </span></a>
-											<a href="#" id="edit" onclick="editAdditional()" class=""><span>Update </span></a>
-										</div>
-										<div class="btn_24_blue">
-											<a href="#" class="simplemodal-close"><span>Close </span></a>
-										</div>
-									
-								</div>
-
-
-
-
-									<div style="float: right;" class="grid_5 form_container left_label">
-											<ul>
-												<li>
-													<div class="form_grid_4">
-													<label class="field_title"   id="accnumberlbl" style="width: 100%;" for="username">Valuer Discretion<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxvaluerdiscretion" class="right-text " tabindex="1" style="width: 100%;" name="taxvaluerdiscretion" value="" onchange="taxCalculation()" type="text" maxlength="100" >
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-													<div class="form_grid_4">
-													<label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">Gross NT<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxgrossnt" tabindex="1" value=""  readonly="true" style="width: 100%;" name="taxgrossnt" type="text" maxlength="100" class="right-text " >
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-										
-												<div class="form_grid_4">
-													<label class="field_title" id="accnumberlbl" style="width: 100%;" id="lposition" for="position">Proposed NT<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  classs="form_input" style="width: 70%;  margin-left: 30%;  position: relative;">
-														<input id="taxproposednt" style=""  readonly="true" value="" tabindex="2" name="taxproposednt"  type="text"  maxlength="50" class="right-text "/>
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-											
-												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Proposed Rate<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxproposedrate" style="width: 100%;"  value="" tabindex="2"name="taxproposedrate"  onchange="taxCalculation()" type="text"  maxlength="50" class="right-text "/>
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-										 	
-												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Calculated Rate (%)<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxcalculaterate" style="width: 100%;" value="" tabindex="2" name="taxcalculaterate"  type="text" onchange="taxCalculation()"  maxlength="50" class="right-text "/>
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-											
-												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Proposed Tax<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxproposedtax"
-														value=""  tabindex="2" name="taxproposedtax"  readonly="true" type="text"  maxlength="50" class="right-text "/>
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-												
-												</li>
-											</ul>
-									</div>
-									<div class="grid_5 form_container left_label">
-										<ul>
-											<li>													
-												<br /><br /><br /><br /><br />
-												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Approved NT<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxapprovednt" class="right-text allow_only_numbers" style="width: 100%;"  onchange="taxApprovedCalculation()"  tabindex="2" name="taxapprovednt"  type="text" value="" maxlength="50" class=""/>
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-											
-												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Approved Rate<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxapprovedrate" class="right-text " style="width: 100%;"  tabindex="2" name="taxapprovedrate"  type="text"value=""  readonly="true"  maxlength="50" class=""/>
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-										 		
-												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Adjustment<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxadjustment" class="right-text " style="width: 100%;" tabindex="2" name="taxadjustment" value="" onchange="taxApprovedCalculation()"  type="text"  maxlength="50" class=""/>
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-											
-												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Approved Tax<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxapprovedtax" value=""  readonly="true" tabindex="2" name="taxapprovedtax"  type="text"  maxlength="50" class="right-text " />
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-												
-												</li>
-											</ul>
-									</div>
-
-									<div class="grid_12 form_container left_label">
-										<ul>
-											<li>													
-												<br /><br /><br /><br /><br />
-												<div class="form_grid_2">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">NOTES<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_9">
-													<div style="margin-left: 0px"  class="form_input"> 
-													<textarea rows="4" id="taxnotes" name="taxnotes" cols="50"></textarea>
-													<span class=" label_intro"></span>
-												</div>
-												</div>
-											
-												
-												</li>
-											</ul>
-									</div>
-
+</div>
+<div style="float: right;" class="grid_5 form_container left_label">
+<ul>
+<li>
+	<div class="form_grid_4">
+		<label class="field_title"   id="accnumberlbl" style="width: 100%;" for="username">{{__('tab.Valuer_Discretion')}} <span class="req">*</span></label>
+	</div>
+	<div class="form_grid_8">
+		<div  class="form_input">
+			<input id="taxvaluerdiscretion" class="right-text " tabindex="1" style="width: 100%;" name="taxvaluerdiscretion" value="" onchange="taxCalculation()" type="text" maxlength="100" >
+		</div>
+		<span class=" label_intro"></span>
+	</div>
+	<div class="form_grid_4">
+		<label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">{{__('tab.Gross_NT')}} <span class="req">*</span></label>
+	</div>
+	<div class="form_grid_8">
+		<div  class="form_input">
+			<input id="taxgrossnt" tabindex="1" value=""  readonly="true" style="width: 100%;" name="taxgrossnt" type="text" maxlength="100" class="right-text " >
+		</div>
+		<span class=" label_intro"></span>
+	</div>
+	
+	<div class="form_grid_4">
+		<label class="field_title" id="accnumberlbl" style="width: 100%;" id="lposition" for="position">{{__('tab.Proposed_NT')}} <span class="req">*</span></label>
+	</div>
+	<div class="form_grid_8">
+		<div  classs="form_input" style="width: 70%;  margin-left: 30%;  position: relative;">
+			<input id="taxproposednt" style=""  readonly="true" value="" tabindex="2" name="taxproposednt"  type="text"  maxlength="50" class="right-text "/>
+		</div>
+		<span class=" label_intro"></span>
+	</div>
+	
+	<div class="form_grid_4">
+		<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('tab.Proposed_Rate')}} <span class="req">*</span></label>
+	</div>
+	<div class="form_grid_8">
+		<div  class="form_input">
+			<input id="taxproposedrate" style="width: 100%;"  value="" tabindex="2"name="taxproposedrate"  onchange="taxCalculation()" type="text"  maxlength="50" class="right-text "/>
+		</div>
+		<span class=" label_intro"></span>
+	</div>
+	
+	<div class="form_grid_4">
+		<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('tab.Calculated_Rate')}} (%)<span class="req">*</span></label>
+	</div>
+	<div class="form_grid_8">
+		<div  class="form_input">
+			<input id="taxcalculaterate" style="width: 100%;" value="" tabindex="2" name="taxcalculaterate"  type="text" onchange="taxCalculation()"  maxlength="50" class="right-text "/>
+		</div>
+		<span class=" label_intro"></span>
+	</div>
+	
+	<div class="form_grid_4">
+		<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('tab.Proposed_Tax')}} \<span class="req">*</span></label>
+	</div>
+	<div class="form_grid_8">
+		<div  class="form_input">
+			<input id="taxproposedtax"
+			value=""  tabindex="2" name="taxproposedtax"  readonly="true" type="text"  maxlength="50" class="right-text "/>
+		</div>
+		<span class=" label_intro"></span>
+	</div>
+	
+</li>
+</ul>
+</div>
+<div class="grid_5 form_container left_label">
+<ul>
+<li>
+	<br /><br /><br /><br /><br />
+	<div class="form_grid_4">
+		<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('tab.Approved_NT')}} <span class="req">*</span></label>
+	</div>
+	<div class="form_grid_8">
+		<div  class="form_input">
+			<input id="taxapprovednt" class="right-text allow_only_numbers" style="width: 100%;"  onchange="taxApprovedCalculation()"  tabindex="2" name="taxapprovednt"  type="text" value="" maxlength="50" class=""/>
+		</div>
+		<span class=" label_intro"></span>
+	</div>
+	
+	<div class="form_grid_4">
+		<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('tab.Approved_Rate')}} <span class="req">*</span></label>
+	</div>
+	<div class="form_grid_8">
+		<div  class="form_input">
+			<input id="taxapprovedrate" class="right-text " style="width: 100%;"  tabindex="2" name="taxapprovedrate"  type="text"value=""  readonly="true"  maxlength="50" class=""/>
+		</div>
+		<span class=" label_intro"></span>
+	</div>
+	
+	<div class="form_grid_4">
+		<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('tab.Adjustment')}} <span class="req">*</span></label>
+	</div>
+	<div class="form_grid_8">
+		<div  class="form_input">
+			<input id="taxadjustment" class="right-text " style="width: 100%;" tabindex="2" name="taxadjustment" value="" onchange="taxApprovedCalculation()"  type="text"  maxlength="50" class=""/>
+		</div>
+		<span class=" label_intro"></span>
+	</div>
+	
+	<div class="form_grid_4">
+		<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('tab.Approved_Tax')}}<span class="req">*</span></label>
+	</div>
+	<div class="form_grid_8">
+		<div  class="form_input">
+			<input id="taxapprovedtax" value=""  readonly="true" tabindex="2" name="taxapprovedtax"  type="text"  maxlength="50" class="right-text " />
+		</div>
+		<span class=" label_intro"></span>
+	</div>
+	
+</li>
+</ul>
+</div>
+<div class="grid_12 form_container left_label">
+<ul>
+<li>
+	<br /><br /><br /><br /><br />
+	<div class="form_grid_2">
+		<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('tab.NOTES')}} <span class="req">*</span></label>
+	</div>
+	<div class="form_grid_9">
+		<div style="margin-left: 0px"  class="form_input">
+			<textarea rows="4" id="taxnotes" name="taxnotes" cols="50"></textarea>
+			<span class=" label_intro"></span>
+		</div>
+	</div>
+	
+	
+</li>
+</ul>
+</div>
 									
 					           
 

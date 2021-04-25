@@ -162,7 +162,20 @@
                         <input id="letterdate"  name="letterdate" type="text"  value="{{ old('term') }}" />
                       </div>
                       <span class=" label_intro"></span>
-                    </div>         
+                    </div>                  
+                    <div class="form_grid_12">                  
+                      <label class="field_title" id="lblgroup" for="name">Group Id<span class="req">*</span></label>
+                      <div class="form_input">
+                        
+                        <select placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="group" name="group" tabindex="2">
+                          <option value=""></option>                          
+                            @foreach ($group as $rec)
+                                <option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+                            @endforeach 
+                        </select>
+                      </div>
+                      <span class=" label_intro"></span>
+                    </div>        
                   </li>
                 </ul>
               </div>

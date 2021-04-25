@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Deactivate  Delete Property</title>
+<title>{{__('group.Deactivate_Delete_Property')}}</title>
 @include('includes.header', ['page' => 'VP'])
 	<!--<div class="page_title">
 		<span class="title_icon"><span class="blocks_images"></span></span>
@@ -31,16 +31,16 @@
 				<div class="breadCrumbHolder module">	
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="deactive?param={{$param}}">Valuation Process</a></li>
-						<li>Deactivate Property</li>
+						<li><a href="#">{{__('group.Home')}} </a></li>
+						<li><a href="deactive?param={{$param}}">{{__('group.Valuation_Process')}} </a></li>
+						<li>{{__('group.Deactivate_Property')}}</li>
 					</ul>
 				</div>
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">
 						
-					<a href="#" onclick="addExisitingProperty()">Add Property</a>
+					<a href="#" onclick="addExisitingProperty()">{{__('group.Add_Property')}}</a>
 
 					 @include('objection.search.newsearch',['tableid'=>'proptble', 'action' => 'deletepropertytables', 'searchid' => '32'])
 					
@@ -54,13 +54,13 @@
 							<div class="social_activities">
 								<div class="comments_s">
 									<div class="block_label">
-										Property Count<span id="prop_count">0</span>
+										{{__('group.Property_Count')}}<span id="prop_count">0</span>
 									</div>
 								</div>
 
 								<div style="width: 520px;" class="comments_s">
 									<div style="width: 520px;" class="block_label">
-										Basket<span>{{$viewparambasket}} </span>
+										{{__('group.Basket')}}<span>{{$viewparambasket}} </span>
 									</div>
 								</div>
 								
@@ -74,22 +74,22 @@
 								<tr>
 									<th><input name="select_all" value="1" type="checkbox"></th>
 									<th class="table_sno">
-										S No
+										{{__('group.SNo')}} 
 									</th>
 									<th>
-										ACCOUNT NUMBER
+										{{__('group.Account_Number')}}
 									</th>
 									<th>
-										FILE NUMBER
+										{{__('group.File_Number')}}
 									</th>
 									<th>
-										ZONE 
+										{{__('group.Zone')}} 
 									</th>
 									<th>
-										STATUS HARTA
+										{{__('group.Status_Harta')}}
 									</th>	
 									<th>
-										PROPERTY 
+										{{__('group.Property')}} 
 									</th>		
 									<!--<th>
 										OWNER NAME
@@ -99,22 +99,22 @@
 										OWNER TYPE / OWNER NUMBER
 									</th>-->	
 									<th>
-										NT
+										{{__('group.NT')}}
 									</th>		
 									<th>
-										RATE
+										{{__('group.Rate')}} 
 									</th>	
 									<th>
-										TAX RATE
+										{{__('group.Tax_Rate')}}
 									</th>	
 									<th>
-										REASON
+										{{__('group.Reason')}} 
 									</th>
 									<th>
-										DESC
+										{{__('group.Description')}}
 									</th>	
 									<th>
-										ACTION
+										{{__('group.Action')}} 
 									</th>				
 								</tr>
 							</thead>
@@ -122,7 +122,7 @@
 								
 							</tbody>
 						</table>
-            <div><p id="info">0 Row Selected</p></div>
+            <div><p id="info">0 {{__('group.Row_Selected')}}</p></div>
 					</div>
 				</div>
 			</div>
@@ -130,7 +130,7 @@
 		<div id="addgroup" style="display:none" class="grid_10 full_block">
 				<div class="widget_wrap">
 					<div class="widget_content">
-						<h3 id="title">Edit Detail</h3>
+						<h3 id="title">{{__('group.Edit_Detail')}}</h3>
 						<form id="addgroupfrom"  autocomplete="off" class="" method="post" action="#" >
 							@csrf
 							<input type="hidden" name="id" id="id" value="0">
@@ -139,7 +139,7 @@
 								<ul>
 									<li>								
 										<div class="form_grid_12">	
-                      <label class="field_title" id="lblgroup" for="name">Reason Name<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('group.Reason_Name')}}<span class="req">*</span></label>
 											<div class="form_input">
 												 <select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="termid" name="termid" tabindex="20">
 						                          <option></option>
@@ -151,7 +151,7 @@
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">Description<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('group.Description')}} <span class="req">*</span></label>
 						                      <div class="form_input">
 						                        <input id="desc" required="true"  name="name" type="text"  value="{{ old('term') }}" />
 						                      </div>
@@ -165,9 +165,9 @@
 							<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
 								
 								<div class="form_input">
-									<button id="addsubmit" name="adduser" type="submit" onclick="validateGroup()" class="btn_small btn_blue"><span>Submit</span></button>			
+									<button id="addsubmit" name="adduser" type="submit" onclick="validateGroup()" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>			
 														
-									<button id="close" onclick="closeGroup()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+									<button id="close" onclick="closeGroup()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 									<span class=" label_intro"></span>
 								</div>
 								

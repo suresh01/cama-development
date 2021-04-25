@@ -1,65 +1,65 @@
 	            
 								<p>
-									Account Number = <span id="acclabel"></span>
+									{{__('existspropertyregisyter.Account_Number')}} = <span id="acclabel"></span>
 								</p>
 								@if($iseditable == 1)
-								<button onclick="openlot()" id="addlot" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Lot</span></button>
+								<button onclick="openlot()" id="addlot" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('existspropertyregisyter.Add_Lot')}}</span></button>
 								@endif
 								<div id="lottable" class="widget_wrap">
 
-									<div class="widget_content">						
-										<table style="width:100%" id="lottble" class="display ">
+								<div class="widget_content">
+									<table style="width:100%" id="lottble" class="display ">
 										<thead style="text-align: left;">
-								  		<tr>
-											<th class="table_sno">S No</th>
-											<th>STATE</th>
-											<th>DISCTRICT</th>
-											<th>CITY</th>
-											<th>PRESINT</th>
-											<th>LOT TYPE</th>
-											<th>LOT NUMBER</th>
-											<th>ALTERNATIF LOT NUMBER</th>
-											<th>LOT TITLE TYPE</th>
-											<th>LOT TITLE NUMBER</th>
-											<th>ALTERNATIF TITLE NUMBER</th>
-											<th>LAND AREA</th>
-											<th>LAND AREA UNIT</th>
-											<th>LAND CONDITION</th>
-											<th>LAND POSISION</th>
-											<th>ROAD TYPE</th>
-											<th>ROAD CATEGORY</th>
-											<th>LAND USE</th>
-											<th>Express Condition</th>
-											<th>Restriction of interest</th>
-											<th>TENURE TYPE</th>
-											<th>TENURE PERIOD</th>
-											<th>TENURE START DATE</th>
-											<th>TENURE END DATE</th>
-											<th>IS ACTIVE</th>
-											<th>ACTION</th>
-											<th>ACTIONCODE</th>
-											<th>lot_id</th>
-											<th>LOT NUMBER</th>
-											<th>ALT LOT NUMBER</th>
-											<th>TITLE NUMBER</th>
-											<th>LAND AREA </th>
-											<th>LAND USED</th>
-											<th>TENURE TYPE</th>
-											<th>ACTION</th>
-											<th>accnum</th>
-										</tr>
+											<tr>
+												<th class="table_sno">{{__('existspropertyregisyter.SNo')}}</th>
+												<th>{{__('existspropertyregisyter.State')}}</th>
+												<th>{{__('existspropertyregisyter.Disctrict')}}</th>
+												<th>{{__('existspropertyregisyter.City')}}</th>
+												<th>{{__('existspropertyregisyter.Presint')}}</th>
+												<th>{{__('existspropertyregisyter.Lot_Type')}}</th>
+												<th>{{__('existspropertyregisyter.Lot_Number')}}</th>
+												<th>{{__('existspropertyregisyter.Alternative_Lot_Number')}}</th>
+												<th>{{__('existspropertyregisyter.Lot_Title_Type')}}</th>
+												<th>{{__('existspropertyregisyter.Lot_Title_Number')}}</th>
+												<th>{{__('existspropertyregisyter.Alternative_Title_Number')}}</th>
+												<th>{{__('existspropertyregisyter.Land_Area')}}</th>
+												<th>{{__('existspropertyregisyter.Land_Area')}}</th>
+												<th>{{__('existspropertyregisyter.Land_Condition')}}</th>
+												<th>{{__('existspropertyregisyter.Land_Posision')}}</th>
+												<th>{{__('existspropertyregisyter.Road_Type')}}</th>
+												<th>{{__('existspropertyregisyter.Road_Category')}}</th>
+												<th>{{__('existspropertyregisyter.Land_Use')}}</th>
+												<th>{{__('existspropertyregisyter.Express_Condition')}}</th>
+												<th>{{__('existspropertyregisyter.Restriction_Of_Interest')}}</th>
+												<th>{{__('existspropertyregisyter.Tenure_Type')}}</th>
+												<th>{{__('existspropertyregisyter.Tenure_Period')}}</th>
+												<th>{{__('existspropertyregisyter.Tenure_Start_Date')}}</th>
+												<th>{{__('existspropertyregisyter.Tenure_End_Date')}}</th>
+												<th>{{__('existspropertyregisyter.Is_Active')}}</th>
+												<th>{{__('existspropertyregisyter.Action')}}</th>
+												<th>{{__('existspropertyregisyter.Actioncode')}}</th>
+												<th>{{__('existspropertyregisyter.Lot_Id')}}</th>
+												<th>{{__('existspropertyregisyter.Lot_Number')}}</th>
+												<th>{{__('existspropertyregisyter.Alt_Lot_Number')}}</th>
+												<th>{{__('existspropertyregisyter.Title_Number')}}</th>
+												<th>{{__('existspropertyregisyter.Land_Area')}}</th>
+												<th>{{__('existspropertyregisyter.Land_Used')}}</th>
+												<th>{{__('existspropertyregisyter.Tenure_Type')}}</th>
+												<th>{{__('existspropertyregisyter.Action')}}</th>
+												<th>{{__('existspropertyregisyter.Accnum')}}</th>
+											</tr>
 										</thead>
-										<tbody>										
+										<tbody>
 										</tbody>
-										</table>
-									</div>
+									</table>
+								</div>
 								</div>
 								<div style="display:none;" id="lotdetail" >
 								
 								<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
-									<button id="submitaddtbllot" onclick="addlotRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Add New</span></button>	
-									<button id="submitedittbllot" onclick="editlotRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Update</span></button>	
-								<button id="close" onclick="closelot()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+									<button id="submitaddtbllot" onclick="addlotRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Add_New')}} </span></button>	
+									<button id="submitedittbllot" onclick="editlotRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Update')}}</span></button>	
+								<button id="close" onclick="closelot()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 								</div>
 									<div  class="grid_6">
 									<ul>
@@ -71,9 +71,9 @@
 										
 									<input type="hidden" value="0" name="lottableindex" id="lottableindex">
 										<fieldset>
-										<legend>Lot Information</legend>
+										<legend>{{__('existspropertyregisyter.Lot_Information')}}</legend>
 									<div class="form_grid_12">
-										<label class="field_title" id="lusername" for="username">LOT TYPE<span class="req">*</span></label>
+										<label class="field_title" id="lusername" for="username">{{__('existspropertyregisyter.Lot_Type')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lotype" name="lotype" tabindex="1">
 												<option value=""></option>
@@ -86,7 +86,7 @@
 									</div>
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">LOT NUMBER<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Lot_Number')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="lotnum" tabindex="2" name="lotnum" type="text" value="" maxlength="15" class=""/>
 										</div>
@@ -94,14 +94,14 @@
 									</div>
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">ALTERNATIVE LOT NUMBER</label>
+										<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Alt_Lot_Number')}} </label>
 										<div  class="form_input">
 											<input id="altlotnum" tabindex="3" name="altlotnum" type="text" value="" maxlength="15" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">LOT TITLE TYPE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Lot_Title_Type')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lttt" tabindex="4" name="lttt" tabindex="20">
 												<option></option>
@@ -113,7 +113,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">LOT TITLE NUMBER</label>
+										<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Lot_Title_Number')}}</label>
 										<div  class="form_input">
 											<input id="ltnum" name="ltnum" tabindex="5" type="text" value="" maxlength="8" class=""/>
 										</div>
@@ -121,14 +121,14 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">ALTERNATIVE TITLE NUMBER</label>
+										<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Alternative_Title_Number')}} </label>
 										<div  class="form_input">
 											<input id="altnum" name="altnum" tabindex="6" type="text" value="" maxlength="8" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">STRATA NUMBER</label>
+										<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Strata_Number')}} </label>
 										<div  class="form_input">
 											<input id="stratano" name="stratano" tabindex="6" type="text" value="4323" maxlength="8" class=""/>
 										</div>
@@ -136,9 +136,9 @@
 									</div>
 								</fieldset>
 									<fieldset>
-										<legend>Address Information</legend>
+										<legend>{{__('existspropertyregisyter.Address_Information')}}</legend>
 									<div class="form_grid_12">
-										<label class="field_title" id="lusername" for="username">STATE<span class="req">*</span></label>
+										<label class="field_title" id="lusername" for="username">{{__('existspropertyregisyter.State')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lotstate" tabindex="7" name="lotstate" tabindex="20">
 												<option></option>
@@ -150,7 +150,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lusername" for="username">DISCTRICT<span class="req">*</span></label>
+										<label class="field_title" id="lusername" for="username">{{__('existspropertyregisyter.Disctrict')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lotdistrict" tabindex="8" name="lotdistrict" tabindex="20">
 												<option></option>
@@ -162,7 +162,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">CITY<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.City')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="lotcity" name="lotcity" tabindex="9" type="text" value="" maxlength="50" class="large"/>
 										</div>
@@ -175,9 +175,9 @@
 									<ul>
 									<li>
 									<fieldset>
-										<legend>Other Information</legend>										
+										<legend>{{__('existspropertyregisyter.Other_Information')}}</legend>										
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">LAND AREA<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Land_Area')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="landar" name="landar" tabindex="10" onKeyDown="if(this.value.length==15 && event.keyCode>47 && event.keyCode < 58) return false;" type="number" value="" maxlength="15" class=""/>
 										</div>
@@ -185,7 +185,7 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">LAND AREA UNIT<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Land_Area_Unit')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="landaruni" tabindex="11" name="landaruni" tabindex="20">
 												<option></option>
@@ -197,7 +197,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">LAND CONDITION<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Land_Condition')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="landcon" tabindex="12" name="landcon" tabindex="20">
 												<option></option>
@@ -209,7 +209,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">LAND POSITION<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Land_Position')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lanpos" tabindex="13" name="lanpos" tabindex="20">
 												<option></option>
@@ -221,7 +221,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">ROAD TYPE<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Road_Type')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="roadtype" tabindex="14" name="roadtype" tabindex="20">
 												<option></option>
@@ -233,7 +233,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">ROAD CATEGOORY<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Road_Category')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="roadcate" tabindex="15" name="roadcate" tabindex="20">
 												<option></option>
@@ -245,7 +245,7 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">LAND USE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Land_Use')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="landuse" tabindex="16" name="landuse" tabindex="20">
 												<option></option>
@@ -257,21 +257,21 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">Express Condition<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Express_Condition')}} <span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="expcon"  name="expcon" tabindex="17" class="" type="text"  maxlength="50" />
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">Restriction of interest<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Restriction_Of_Interest')}} <span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="interest"  name="interest" tabindex="18" class="" type="text"  maxlength="50" />
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TENURE TYPE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Tenure_Type')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="tentype" tabindex="19" name="tentype" tabindex="20">
 												<option></option>
@@ -283,14 +283,14 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TENURE PERIOD<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Tenure_Period')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="tenduration" tabindex="20" step="0" name="tenduration" class="" type="number" value="0" maxlength="3" onKeyDown="if(this.value.length==3 && event.keyCode>47 && event.keyCode < 58) return false;" class="large"/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TENDURE START DATE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Tenure_Start_Date')}} <span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="tenstart"  name="tenstart" tabindex="21" class="" type="text"  maxlength="50" />
 										</div>
@@ -298,7 +298,7 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TENDURE END DATE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Tenure_End_Date')}} <span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="tenend" onchange="dayCal()" name="tenend" class="" type="text"  maxlength="50" />
 										</div>
@@ -306,7 +306,7 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">INDICATOR FOR LAND IS ACTIVE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Indicator_For_Land_Is_Active')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="status" tabindex="22" name="status" tabindex="20">	
 												<option></option>										

@@ -6,7 +6,7 @@
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>Property Detail</title>
+<title>{{__('tab.Property_Detail')}}</title>
 <style>
 .disabled-btn{
     pointer-events:none;

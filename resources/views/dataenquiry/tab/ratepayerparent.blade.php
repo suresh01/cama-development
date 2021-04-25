@@ -112,25 +112,25 @@
 										<input name="checkbox" type="checkbox" value="" class="checkall">
 									</th>
 									<th class="table_sno">
-										S No
+										{{__('tab.S_No')}}
 									</th>
 									<th>
-										RATEPAYER NUMBER / NAME
+										{{__('tab.RATEPAYER_NUMBER_NAME')}}
 									</th>
 									<th>
-										ADDRESS 1
+										{{__('tab.ADDRES_1')}}
 									</th>
 									<th>
-										ADDRESS 2
+										{{__('tab.ADDRES_2')}}
 									</th>	
 									<th>
-										STATE
+										{{__('tab.STATE')}}
 									</th>	
 									<th>
-										POSTCODE
+										{{__('tab.POSTCODE')}}
 									</th>		
 									<th>
-										ACTION
+										{{__('tab.Action')}}
 									</th>					
 								</tr>
 							</thead>

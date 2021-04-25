@@ -157,6 +157,13 @@
 												<span class=" label_intro"></span>
 											</div>
 										
+											<div class="form_grid_12">
+												<label class="field_title" id="llevel" for="level">Email ID<span class="req">*</span></label>
+												<div  class="form_input">
+													<input id="emailid" name="emailid" tabindex="1" type="text" value="" maxlength="15" class=""/>
+												</div>
+												<span class=" label_intro"></span>
+											</div>
 										<div class="form_grid_12">
 											<label class="field_title" id="llevel" for="level">CITIZENSHIP<span class="req">*</span></label>
 											<div  class="form_input">
@@ -198,6 +205,24 @@
 										
 									</fieldset>
 										</li></ul>
+										<script type="text/javascript">
+								$(document).ready(function(){
+									$("#ownstate").val('{{$owner->TO_STATE_ID}}');
+									$("#race").val('{{$owner->TO_RACE_ID}}');
+									$("#citizen").val('{{$owner->TO_CITIZEN_ID}}');
+									$("#typeofown").val('{{$owner->TO_OWNTYPE_ID}}');
+									$("#ownaplntype").val('{{$owner->TO_OWNERAPPLNTYPE_ID}}');
+
+									$( "#addtrndate" ).datepicker({dateFormat: 'dd/mm/yy'});
+						 			//$( "#addacceptdt" ).datepicker({dateFormat: 'dd/mm/yy'});
+						 			$( "#reqdate" ).datepicker({dateFormat: 'dd/mm/yy'});
+						 			$("#addacceptdt").val('{{$owner->otar_createdate}}');
+						 			$("#addref").val('{{$owner->ma_fileno}}');
+								});
+							</script>
+							@endforeach
+							@foreach ($newowndetail as $owner)
+							
 									</div>									
 										<div class="grid_6 ">
 										<ul>
@@ -248,14 +273,14 @@
 										<div class="form_grid_12">
 											<label class="field_title" id="llevel" for="level">OWNER NUMBER<span class="req">*</span></label>
 											<div  class="form_input">
-												<input id="nownnum" name="nownnum"  type="text" tabindex="1"  maxlength="15" />
+												<input id="nownnum" name="nownnum" value="{{$owner->ota_ownno}}" type="text" tabindex="1"  maxlength="15" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
 											<label class="field_title" id="llevel" for="level">OWNER NAME<span class="req">*</span></label>
-											<div  class="form_input">
-												<input id="nownname" name="nownname" tabindex="1" type="text"  maxlength="200" />
+											<div  class="form_input"> 
+												<input id="nownname" name="nownname" value="{{$owner->ota_ownname}}" tabindex="1" type="text"  maxlength="200" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
@@ -263,14 +288,14 @@
 										<div class="form_grid_12">
 											<label class="field_title" id="llevel" for="level">OWNER ADDRES 1<span class="req">*</span></label>
 											<div  class="form_input">
-												<input id="nownaddr1" name="nownaddr1" tabindex="1"  type="text"  maxlength="50" />
+												<input id="nownaddr1" name="nownaddr1" value="{{$owner->ota_addr_ln1}}" tabindex="1"  type="text"  maxlength="50" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
 											<label class="field_title" id="llevel" for="level">OWNER ADDRES 2</label>
 											<div  class="form_input">
-												<input id="nownaddr2" name="nownaddr2" tabindex="1" type="text"  maxlength="50" class=""/>
+												<input id="nownaddr2" name="nownaddr2" value="{{$owner->ota_addr_ln2}}" tabindex="1" type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
@@ -278,14 +303,14 @@
 										<div class="form_grid_12">
 											<label class="field_title" id="llevel" for="level">OWNER ADDRES 3</label>
 											<div  class="form_input">
-												<input id="nownaddr3" name="nownaddr3" tabindex="1"  type="text"  maxlength="50" class=""/>
+												<input id="nownaddr3" value="{{$owner->ota_addr_ln3}}" name="nownaddr3" tabindex="1"  type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
 											<label class="field_title" id="lposition" for="position">OWNER ADDRES 4</label>
 											<div  class="form_input">
-												<input id="nownaddr4" name="nownaddr4" tabindex="1" type="text"  maxlength="50" class=""/>
+												<input id="nownaddr4" value="{{$owner->ota_addr_ln4}}" name="nownaddr4" tabindex="1" type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
@@ -293,14 +318,14 @@
 										<div class="form_grid_12">
 											<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
 											<div  class="form_input">
-												<input id="nownpostcode"  name="nownpostcode" tabindex="1" type="number"  maxlength="50" class=""/>
+												<input id="nownpostcode"  name="nownpostcode" tabindex="1" type="number" value="{{$owner->ota_postcode}}" maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
 											<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
 											<div  class="form_input">
-												<input id="ncity"  name="ncity" tabindex="1" type="text"  maxlength="50" class=""/>
+												<input id="ncity" value="{{$owner->ota_city}}"  name="ncity" tabindex="1" type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
@@ -319,7 +344,7 @@
 										<div class="form_grid_12">
 												<label class="field_title" id="llevel" for="level">TEL NO<span class="req">*</span></label>
 												<div  class="form_input">
-													<input id="ntelno" name="ntelno" tabindex="1" type="text" value="" maxlength="15" class=""/>
+													<input id="ntelno" name="ntelno" tabindex="1" type="text" value="{{$owner->ota_phoneno}}" maxlength="15" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
@@ -327,6 +352,13 @@
 												<label class="field_title" id="llevel" for="level">FAX NO<span class="req">*</span></label>
 												<div  class="form_input">
 													<input id="nfaxno" name="nfaxno" tabindex="1" type="text" value="" maxlength="15" class=""/>
+												</div>
+												<span class=" label_intro"></span>
+											</div>
+											<div class="form_grid_12">
+												<label class="field_title" id="llevel" for="level">Email ID<span class="req">*</span></label>
+												<div  class="form_input">
+													<input id="nemailid" name="nemailid" tabindex="1" type="text" value="" maxlength="15" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
@@ -357,14 +389,14 @@
 										<div class="form_grid_12">
 											<label class="field_title" id="lposition" for="position">NUMERATOR</label>
 											<div  class="form_input">
-												<input id="nnumerator" tabindex="1" name="nnumerator" value="0" maxlength="5"  type="number" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" />
+												<input id="nnumerator" tabindex="1" name="nnumerator" value="{{$owner->ota_numetr}}" maxlength="5"  type="number" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
 											<label class="field_title" id="lposition" for="position">DENOMINATOR</label>
 											<div  class="form_input">
-												<input id="demominator" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name="demominator" value="0"  type="number" tabindex="1"  maxlength="5" class=""/>
+												<input id="demominator" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name="demominator" value="{{$owner->ota_denomtr}}"  type="number" tabindex="1"  maxlength="5" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
@@ -376,22 +408,7 @@
 
 								</div>	
 							</fieldset>
-							<script type="text/javascript">
-								$(document).ready(function(){
-									$("#ownstate").val('{{$owner->TO_STATE_ID}}');
-									$("#race").val('{{$owner->TO_RACE_ID}}');
-									$("#citizen").val('{{$owner->TO_CITIZEN_ID}}');
-									$("#typeofown").val('{{$owner->TO_OWNTYPE_ID}}');
-									$("#ownaplntype").val('{{$owner->TO_OWNERAPPLNTYPE_ID}}');
 
-									$( "#addtrndate" ).datepicker({dateFormat: 'dd/mm/yy'});
-						 			//$( "#addacceptdt" ).datepicker({dateFormat: 'dd/mm/yy'});
-						 			$( "#reqdate" ).datepicker({dateFormat: 'dd/mm/yy'});
-						 			$("#addacceptdt").val('{{$owner->otar_createdate}}');
-						 			$("#addref").val('{{$owner->ma_fileno}}');
-								});
-							</script>
-							@endforeach
 							<fieldset title="Step 2">
 								<legend>Applicant Information</legend>
 								<div>
@@ -422,7 +439,7 @@
 								<div class="form_grid_12">
 									<label class="field_title" id="llevel" for="level">NAME<span class="req">*</span></label>
 									<div  class="form_input">
-										<input id="addname" name="addname" tabindex="1" type="text"  maxlength="200" />
+										<input id="addname" name="addname" value="{{$owner->ota_agentname}}" tabindex="1" type="text"  maxlength="200" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
@@ -431,14 +448,14 @@
 								<div class="form_grid_12">
 									<label class="field_title" id="llevel" for="level">ADDRES 1<span class="req">*</span></label>
 									<div  class="form_input">
-										<input id="addaddr1" name="addaddr1" tabindex="1"  type="text"  maxlength="50" />
+										<input id="addaddr1" value="{{$owner->ota_agentaddr_ln1}}"  name="addaddr1" tabindex="1"  type="text"  maxlength="50" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
 									<label class="field_title" id="llevel" for="level">ADDRES 2</label>
 									<div  class="form_input">
-										<input id="addaddr2" name="addaddr2" tabindex="1" type="text"  maxlength="50" class=""/>
+										<input id="addaddr2" value="{{$owner->ota_agentaddr_ln2}}"  name="addaddr2" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
@@ -446,14 +463,14 @@
 								<div class="form_grid_12">
 									<label class="field_title" id="llevel" for="level">ADDRES 3</label>
 									<div  class="form_input">
-										<input id="addaddr3" name="addaddr3" tabindex="1"  type="text"  maxlength="50" class=""/>
+										<input id="addaddr3" value="{{$owner->ota_agentaddr_ln3}}"  name="addaddr3" tabindex="1"  type="text"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
 									<label class="field_title" id="lposition" for="position">ADDRES 4</label>
 									<div  class="form_input">
-										<input id="addaddr4" name="addaddr4" tabindex="1" type="text"  maxlength="50" class=""/>
+										<input id="addaddr4" value="{{$owner->ota_agentaddr_ln4}}"  name="addaddr4" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
@@ -461,7 +478,7 @@
 								<div class="form_grid_12">
 									<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
 									<div  class="form_input">
-										<input id="addpostcode"  name="addpostcode" tabindex="1" type="number"  maxlength="50" class=""/>
+										<input id="addpostcode"  value="{{$owner->ota_agentpostcode}}"  name="addpostcode" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
@@ -488,7 +505,7 @@
 								<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">REQUEST DATE<span class="req">*</span></label>
 										<div  class="form_input">
-										<input id="reqdate"  name="reqdate" class="" type="text"  maxlength="50" />
+										<input id="reqdate"  value="{{$owner->ota_applydate}}"  name="reqdate" class="" type="text"  maxlength="50" />
 										</div>
 										<span class=" label_intro"></span>
 								</div>
@@ -496,7 +513,7 @@
 								<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">ACCEPT DATE<span class="req">*</span></label>
 										<div  class="form_input">
-										<input id="addacceptdt" readonly="" name="addacceptdt" class="" type="text"  maxlength="50" />
+										<input id="addacceptdt" readonly="" name="addacceptdt" class="" type="text"  value="{{$owner->ota_recievedate}}"   maxlength="50" />
 										</div>
 										<span class=" label_intro"></span>
 								</div>
@@ -504,7 +521,7 @@
 								<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">TRANSACTION DATE<span class="req">*</span></label>
 										<div  class="form_input">
-										<input id="addtrndate"  name="addtrndate" class="" type="text"  maxlength="50" />
+										<input id="addtrndate"  value="{{$owner->ota_transactiondate}}"  name="addtrndate" class="" type="text"  maxlength="50" />
 										</div>
 										<span class=" label_intro"></span>
 								</div>
@@ -512,7 +529,7 @@
 								<div class="form_grid_12">
 									<label class="field_title" id="lposition" for="position">TRANACTION VALUE<span class="req">*</span></label>
 									<div  class="form_input">
-										<input id="addtrnvalue" value="0" name="addtrnvalue" tabindex="1" type="number"  maxlength="50" class=""/>
+										<input id="addtrnvalue"  value="{{$owner->ota_transactionprice}}"  name="addtrnvalue" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
@@ -528,7 +545,7 @@
 								<div class="form_grid_12">
 									<label class="field_title" id="lposition" for="position">APPLICANT REFERENCE NO<span class="req">*</span></label>
 									<div  class="form_input">
-										<input id="addapplicatref"  name="addapplicatref" tabindex="1" type="text"  maxlength="50" class=""/>
+										<input id="addapplicatref"  name="addapplicatref" tabindex="1" type="text"  value="{{$owner->ota_agentrefno}}"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
@@ -597,8 +614,7 @@
 											
 											<div style="width: 20%;" class="form_input ">
 												<span>
-												<input name="reason4" value="1" class="checkbox reason" type="checkbox"  tabindex="7">
-												
+												<input name="reason4" value="1" class="checkbox reason" type="checkbox"  tabindex="7">												
 												</span>
 											</div>
 										</div>
@@ -692,6 +708,24 @@
 							</div>
 							</fieldset>	
 							@endif
+
+							<script type="text/javascript">
+								$(document).ready(function(){
+									$("#nownstate").val('{{$owner->ota_owntype_id}}');
+									$("#nrace").val('{{$owner->ota_race_id}}');
+									$("#ncitizen").val('{{$owner->ota_citizen_id}}');
+									$("#ntypeofown").val('{{$owner->ota_owntype_id}}');
+									$("#nownaplntype").val('{{$owner->ota_transferapplntype_id}}');
+									$("#addstate").val('{{$owner->ota_agentstate_id}}');
+
+									$( "#addtrndate" ).datepicker({dateFormat: 'dd/mm/yy'});
+						 			//$( "#addacceptdt" ).datepicker({dateFormat: 'dd/mm/yy'});
+						 			$( "#reqdate" ).datepicker({dateFormat: 'dd/mm/yy'});
+						 			$("#addacceptdt").val('{{$owner->otar_createdate}}');
+						 			$("#addref").val('{{$owner->ma_fileno}}');
+								});
+							</script>
+							@endforeach
 							<input type="submit" onclick="transfer()" class="finish" id="finish" value="Finish!"/>
 						</form>
 					</div>
@@ -881,7 +915,7 @@
 							    headers: {
 								    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 								},
-						        data:{jsondata:JSON.stringify(formdata),reasoncount:count,approval:'Yes'},
+						        data:{jsondata:JSON.stringify(formdata),reasoncount:count,approval:'Yes',account:'{{$account}}'},
 						        success:function(data){
 						        	//$('#propertystatus').val('Registered');
 									$('#finishloader').html('');

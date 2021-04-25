@@ -91,7 +91,7 @@
 											{{$loop->iteration}}
 										</td>
 										<td>
-											<a class='shobldg' onclick="edit('{{$rec->otar_accno}}')" href='#' >{{$rec->otar_accno}}</a>
+											<a class='shobldg' onclick="edit('{{$rec->otar_id}}')" href='#' >{{$rec->otar_accno}}</a>
 										</td>
 										<td>
 											{{$rec->TO_OWNNAME}}
@@ -122,6 +122,7 @@
 
 											
 											@if($rec->otar_ownertransstatus_id == '2')
+											<a href='#'  style='	width: 14px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -843px -102px!important;display: inline-block; float: left;' title=' Report'></a>
 												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',2)"  title="Submit To Approve" href="#"></a></span>
 												<span><a class="action-icons c-Delete delete_tenant" onclick="deleteT('{$rec->otar_accno}}','{{$rec->otar_ownertransgroup_id}}')" href='#' title='Delete'>Delete</a></span>
 											@endif

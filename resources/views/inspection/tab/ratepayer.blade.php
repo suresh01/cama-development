@@ -1,6 +1,6 @@
 	            
 								
-							<button id="addratepayer" onclick="addRatepayer()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Ratepayer</span></button>
+							<button id="addratepayer" onclick="addRatepayer()" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('inspection.Add_Ratepayer')}}</span></button>
 
 								<div id="ratepayertable" class="widget_wrap">
 
@@ -8,17 +8,17 @@
 										<table style="width:100%" id="ratepayertble" class="display ">
 										<thead style="text-align: left;">
 								  		<tr>
-											<th class="table_sno">S No</th>
-											<th>APPLN TYPE</th>
-											<th>RATEPAYER NUMBER / NAME</th>
-											<th>ADDRESS 1</th>
-											<th>ADDRESS 2</th>
-											<th>ADDRESS 3</th>
-											<th>POST CODE </th>
-											<th>STATE</th>
-											<th>ACTION</th>
-											<th>actioncode</th>
-											<th>rapyerid</th>
+											<th class="table_sno">{{__('inspection.SNo')}} </th>
+											<th>{{__('inspection.Appln_Type')}} </th>
+											<th>{{__('inspection.Ratepayer_Number_Name')}} </th>
+											<th>{{__('inspection.Address1')}} </th>
+											<th>{{__('inspection.Address2')}} </th>
+											<th>{{__('inspection.Address3')}} </th>
+											<th>{{__('inspection.Post_Code')}} </th>
+											<th>{{__('inspection.State')}} </th>
+											<th>{{__('inspection.Action')}} </th>
+											<th>{{__('inspection.Actioncode')}} </th>
+											<th>{{__('inspection.Rapyerid')}} </th>
 										</tr>
 										</thead>
 										<tbody>										

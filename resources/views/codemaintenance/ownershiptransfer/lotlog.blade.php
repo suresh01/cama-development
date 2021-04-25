@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Property Information</title>
+<title>{{__('CodeMaintenance.Property_Information')}}</title>
 
 @include('includes.header', ['page' => 'datamaintenance'])
 					
@@ -14,9 +14,9 @@
 				<div class="breadCrumbHolder module">	
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-						<li>Property Address Log</li>
+						<li><a href="#">{{__('CodeMaintenance.Home')}} </a></li>
+						<li><a href="#">{{__('CodeMaintenance.Data_Maintenance')}} </a></li>
+						<li>{{__('CodeMaintenance.Property_Address_Log')}} </li>
 					</ul>
 				</div>
 				</div>
@@ -27,46 +27,44 @@
 				</div>
 				<br>
         
-				<div class="widget_wrap">					
-					<div class="widget_content">						
-						<table id="proptble" class="display select">
-							<thead style="text-align: left;">
-								<tr>
-									<th>
-														
-													</th>
-									<th>
-														S No
-													</th>
-													<th>
-														ACCOUNT NUMBER
-													</th>
-													<th>
-														LOT NUMBER
-													</th>
-													<th>
-														TITLE NUMBER
-													</th>
-													<th>
-														TENANT TYPE
-													</th>
-													<th>
-														STATA NUMBER
-													</th>
-													<th>
-														STATUS
-													</th>		
-								</tr>
-							</thead>
-							<tbody>			
-								
-							</tbody>
-						</table>
-
-
-								
-				</div>
-			</div>
+<div class="widget_wrap">
+	<div class="widget_content">
+		<table id="proptble" class="display select">
+			<thead style="text-align: left;">
+				<tr>
+					<th>
+						
+					</th>
+					<th>
+						{{__('CodeMaintenance.SNo')}}
+					</th>
+					<th>
+						{{__('CodeMaintenance.Account_Number')}}
+					</th>
+					<th>
+						{{__('CodeMaintenance.Lot_Number')}}
+					</th>
+					<th>
+						{{__('CodeMaintenance.Title_Number')}}
+					</th>
+					<th>
+						{{__('CodeMaintenance.Tenant_Type')}}
+					</th>
+					<th>
+						{{__('CodeMaintenance.Stata_Number')}}
+					</th>
+					<th>
+						{{__('CodeMaintenance.Status')}}
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+		</table>
+		
+	</div>
+</div>
 			
 		<!-- <form style="display: hidden;" id="generateform" method="GET" action="generateinspectionreport">
             @csrf

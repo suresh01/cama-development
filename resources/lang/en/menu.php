@@ -42,6 +42,7 @@ return [
     'valuationmgmt' => 'Valuation Data Management',
     'objection' => 'Objection Meeting',
     'defunct' => 'Defunct Property',
-    'report' => 'Report'
+    'report' => 'Report',
+    'remisi' => 'Remisi'
 
 ];

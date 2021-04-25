@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Basket</title>
+<title>{{__('group.Basket')}}</title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @include('includes.header', ['page' => 'VP'])
 	<!--<div class="page_title">
@@ -40,17 +40,17 @@
 
 					<div id="breadCrumb3"  class="breadCrumb grid_3">
 						<ul >
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Valuation Process</a></li>
-							<li>Deactivate Property</li>
+							<li><a href="#">{{__('group.Home')}} </a></li>
+							<li><a href="#">{{__('group.Valuation_Process')}} </a></li>
+							<li>{{__('group.Deactivate_Property')}} </li>
 						</ul>
 					</div>
 					<button id="adduser" style="float:right;margin-right: 10px;" onclick="newGroup()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Basket</span></button>
 					
 					<div  style="float:right;margin-right: 20px;">		
 							<select onchange="getdata()" data-placeholder="Choose a Status..."  style="float: left;" class="cus-select"  id="paramterm" name="paramterm" tabindex="6">
-								<option value="0">Please Select a Filter...</option>
-								<option value="All">All Basket</option>
+								<option value="0">{{__('group.Please_Select_a_Filter')}}...</option>
+								<option value="All">{{__('group.All_Basket')}}</option>
 								@foreach ($termfilter as $rec)
 									<option value='{{ $rec->termid }}'>( {{ $rec->applntype }} ) {{ $rec->term }} - {{ $rec->termstage }}</option>
 								@endforeach	
@@ -65,36 +65,16 @@
 						<table id="baskttable" class="display tbl_details">
 							<thead style="text-align: left;">
 			  					<tr>
-									<th class="table_sno">
-										S No
-									</th>
-									<th>
-										Basket Name
-									</th>
-									<th>
-										Term Type
-									</th>
-									<th>
-										Term Name
-									</th>
-									<th>
-										Update By 
-									</th>
-									<th>
-										Update At
-									</th>
-									<th>
-										Create By
-									</th>
-									<th>
-										Create At
-									</th>
-									<th>
-										Property Count
-									</th>
-									<th>
-										Action
-									</th>
+									<th class="table_sno"> {{__('group.SNo')}}  </th>
+									<th>{{__('group.Basket_Name')}} </th>
+									<th>{{__('group.Term_Type')}} </th>
+									<th>{{__('group.Term_Name')}} </th>
+									<th>{{__('group.Update_By')}} </th>
+									<th>{{__('group.Update_At')}}</th>
+									<th>{{__('group.Create_By')}}</th>
+									<th>{{__('group.Create_At')}}</th>
+									<th>{{__('group.Property_Count')}}</th>
+									<th>{{__('group.Action')}} </th>
 								</tr>
 							</thead>
 							<tbody>
@@ -128,14 +108,13 @@
 									</td>
 									<td>
 										@if($rec->porpcount == 0)
-											<span><a class="action-icons c-delete delete_term"  onclick="delProperty('{{$rec->da_id}}')" disabled="true" title="Delete Basket" href="#"></a></span>										
+											<span><a class="action-icons c-delete delete_term"  onclick="delProperty('{{$rec->da_id}}')" disabled="true" title="{{__('group.Delete_Basket')}}" href="#"></a></span>										
 										@endif
 										@if($rec->da_approved == '01')
-										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->da_id}}')" disabled="true" title="Approve Deletion" href="#"></a></span>									
+										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->da_id}}')" disabled="true" title="{{__('group.Approve_Deletion')}}" href="#"></a></span>									
 										@endif
-										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -121px !important;display: inline-block; float: left;" onclick="editGroup('{{ $rec->da_id }}')" disabled="true" title="Edit Basket" href="#"></a></span>
-										<!--<span><a class="action-icons c-edit " onclick="editGroup('{{ $rec->da_id }}')" href="#" title="Edit">Edit</a></span>-->
-										
+										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -121px !important;display: inline-block; float: left;" onclick="editGroup('{{ $rec->da_id }}')" disabled="true" title="{{__('group.Edit_Basket')}}" href="#"></a></span>
+										<!--<span><a class="action-icons c-edit " onclick="editGroup('{{ $rec->da_id }}')" href="#" title="Edit">Edit</a></span>-->										
 									</td>
 								</tr>
 								<div style="display: none;">
@@ -150,7 +129,7 @@
 			</div>
 
 			<div id="basic-modal-content">
-				<h3>Valuation Detail</h3>
+				<h3>{{__('group.Valuation_Detail')}}</h3>
 				<form action="validateValuation" id="valuationcheckform" method="post" class="form_container">	
 					@csrf
 				<input type="hidden" name="filter" value="true">			
@@ -160,7 +139,7 @@
 								<div class="form_input">
 									<div class="form_grid_6">
 										<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="tonebasket_id" name="tonebasket_id" tabindex="20">
-											<option value="0">Please select TOL</option>
+											<option value="0">{{__('group.Please_select_TOL')}} </option>
 											@foreach ($tonebasket as $rec)
 											<option value="{{ $rec->tollist_id }}">{{ $rec->tonebasket }}</option>
 											@endforeach
@@ -176,7 +155,7 @@
 								<div class="form_input">
 									<div class="form_grid_6">
 										<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="tonetaxbasket_id" name="tonetaxbasket_id" tabindex="20">
-											<option value="0">Please select TOL Tax Basket</option>
+											<option value="0">{{__('group.Please_select_TOL_Tax_Basket')}}</option>
 											@foreach ($tonetaxbasket as $rec)
 											<option value="{{ $rec->trlist_id }}">{{ $rec->tonetaxbasket }}</option>
 											@endforeach
@@ -190,10 +169,10 @@
 					
 					<div class="btn_24_blue">						
 						<!--<button id="addsubmit"type="submit" class="btn_small btn_blue"><span>Submit</span></button>	-->
-						<a href="#" onclick="submitValuationCheck()" class=""><span>Validate Data </span></a>	
+						<a href="#" onclick="submitValuationCheck()" class=""><span>{{__('group.Validate_Data')}} </span></a>	
 					</div>
 					<div class="btn_24_blue">
-						<a href="#" class="simplemodal-close"><span>Close </span></a>
+						<a href="#" class="simplemodal-close"><span>{{__('common.Close')}} </span></a>
 					</div>
 					</form>
 			</div>
@@ -202,7 +181,7 @@
 			<div id="addgroup" style="display:none" class="grid_10 full_block">
 				<div class="widget_wrap">
 					<div class="widget_content">
-						<h3 id="title">Add Basket</h3>
+						<h3 id="title">{{__('group.Add_Basket')}}</h3>
 						<form id="addgroupfrom"  autocomplete="off" class="" method="post" action="#" >
 							@csrf
 							<input type="hidden" name="id" id="id" value="0">
@@ -211,7 +190,7 @@
 								<ul>
 									<li>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="termname" for="termid">Term Name<span class="req">*</span></label>
+											<label class="field_title" id="termname" for="termid">{{__('group.Term_Name')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="termid" name="termid" tabindex="20">
 													<option></option>
@@ -223,7 +202,7 @@
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">Basket Name<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('group.Basket_Name')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="name" required="true"  name="name" type="text"  value="{{ old('term') }}" />
 											</div>
@@ -236,9 +215,9 @@
 							<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
 								
 								<div class="form_input">
-									<button id="addsubmit" name="adduser" type="submit" onclick="validateGroup()" class="btn_small btn_blue"><span>Submit</span></button>			
+									<button id="addsubmit" name="adduser" type="submit" onclick="validateGroup()" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>			
 														
-									<button id="close" onclick="closeGroup()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+									<button id="close" onclick="closeGroup()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 									<span class=" label_intro"></span>
 								</div>
 								

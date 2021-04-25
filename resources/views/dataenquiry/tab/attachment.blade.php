@@ -1,6 +1,6 @@
 	            
 
-<button onclick="openattach()" id="addattach" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Attachment</span></button>
+<button onclick="openattach()" id="addattach" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('tab.Add_Attachment')}}</span></button>
 
 <div id="attachtable" class="widget_wrap">
 
@@ -8,14 +8,14 @@
 		<table style="width:100%" id="attachtble" class="display ">
 			<thead style="text-align: left;">
 				<tr>
-					<th class="table_sno">S No</th>
-					<th>FILENAME</th>
-					<th>ATTACHMENT TYPE</th>
-					<th>DECRIPTION</th>
-					<th>ACTION</th>
-					<th>actioncode</th>
-					<th>id</th>
-					<th>orginalfilename</th>
+					<th class="table_sno">{{__('tab.S_No')}}</th>
+					<th> {{__('tab.File_Name')}}</th>
+					<th> {{__('tab.Attachment_Type')}}</th>
+					<th> {{__('tab.Description')}}</th>
+					<th> {{__('tab.Action')}}</th>
+					<th> {{__('tab.Actioncode')}}</th>
+					<th> {{__('tab.id')}}</th>
+					<th> {{__('tab.orginalfilename')}}</th>
 				</tr>
 			</thead>
 			<tbody>										
@@ -26,26 +26,26 @@
 <div style="display:none;" id="attachdetail" >
 
 	<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
-		<button id="submitaddattachment" onclick="addAttachment()"  name="adduser" type="button" class="btn_small btn_blue"><span>Add New</span></button>
-		<button id="close" onclick="closeattach()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+		<button id="submitaddattachment" onclick="addAttachment()"  name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Add_New')}} </span></button>
+		<button id="close" onclick="closeattach()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}} </span></button>
 	</div>
 
 	<div  class="grid_12">
 		<ul>
 			<li>
 				<fieldset>
-					<legend>Attachment</legend>
+					<legend>{{__('tab.Attachment')}}</legend>
 					<div class="form_grid_6">
-						<label class="field_title" id="lusername" for="username">File Name<span class="req">*</span></label>
+						<label class="field_title" id="lusername" for="username">{{__('tab.File_Name')}}<span class="req">*</span></label>
 						<div  class="form_input">
 					<input id="filename" tabindex="3" onkeypress="return alpha(event)" name="filename" type="text" value="" maxlength="50" class=""/>
 						</div>
 						<span class=" label_intro"></span>
 					</div>
 					<div class="form_grid_6">
-						<label class="field_title" id="lusername" for="username">Attachment Type<span class="req">*</span></label>
+						<label class="field_title" id="lusername" for="username">{{__('tab.Attachment_Type')}}<span class="req">*</span></label>
 						<div  class="form_input">
-							<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="attachtype" name="attachtype" tabindex="1">
+							<select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="attachtype" name="attachtype" tabindex="1">
 								<option></option>
 								@foreach ($attachtype as $rec)
 										<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -55,14 +55,14 @@
 						<span class=" label_intro"></span>
 					</div>
 					<div class="form_grid_6">
-						<label class="field_title" id="lusername" for="username">Description<span class="req">*</span></label>
+						<label class="field_title" id="lusername" for="username">{{__('tab.Description')}}<span class="req">*</span></label>
 						<div  class="form_input">
 					<input id="filedesc" tabindex="3" name="filedesc" type="text" value="" maxlength="15" class=""/>
 						</div>
 						<span class=" label_intro"></span>
 					</div>
 					<div class="form_grid_6">
-						<label class="field_title" id="lusername" for="username">File<span class="req">*</span></label>
+						<label class="field_title" id="lusername" for="username">{{__('tab.File')}}<span class="req">*</span></label>
 						<div  class="form_input">
 					<input id="filepath" tabindex="3" name="filepath" type="file" value=""  class=""/>
 						</div>

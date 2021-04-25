@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>Basket</title>
+<title>{{__('existspropertyregisyter.Basket')}} </title>
 @include('includes.header', ['page' => 'datamaintenance'])
 	<!--<div class="page_title">
 		<span class="title_icon"><span class="blocks_images"></span></span>
@@ -67,151 +67,124 @@
 		@endif
 		-->
 		
-		<div id="usertable" class="grid_12">
-	
+	<div id="usertable" class="grid_12">
+		
+		<br>
+		<div class="form_input">
+			<div id="breadCrumb3"  class="breadCrumb grid_3">
+				<ul >
+					<li><a href="#">{{__('existspropertyregisyter.Home')}} </a></li>
+					<li><a href="#">{{__('existspropertyregisyter.Data_Maintenance')}} </a></li>
+					<li>{{__('existspropertyregisyter.Existing_Masterlist_Maintenance')}} </li>
+				</ul>
+			</div>
+			@if(userpermission::checkaccess(321)=="true")
+			
+			<div style="float:right;margin-right: 10px;">
+				<button id="adduser"   onclick="openAddUser()" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('existspropertyregisyter.Add_Basket')}}</span></button>
+			</div>
+			@endif
+			<div  style="float:right;margin-right: 20px;">
+				<select onchange="getdata()" data-placeholder="Choose a Status..."  style="float: left;" class="cus-select"  id="parambldgcategory" name="parambldgcategory" tabindex="6">
+					<option value="0">{{__('existspropertyregisyter.Please_Select_a_Filter')}}...</option>
+					<option value="01">{{__('existspropertyregisyter.Property_Registration_Basket')}} </option>
+					<option value="03">{{__('existspropertyregisyter.Inspection_Stage_Basket')}} </option>
+				</select>
+				<span class="clear"></span>
+			</div>
 			<br>
-			<div class="form_input">
-				<div id="breadCrumb3"  class="breadCrumb grid_3">
-					<ul >
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-						<li>Existing Masterlist Maintenance</li>
-					</ul>
-				</div>
-
-				@if(userpermission::checkaccess(321)=="true")
-				
-				<div style="float:right;margin-right: 10px;">
-					<button id="adduser"   onclick="openAddUser()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Basket</span></button>			
-				</div>
-				@endif
-
-				<div  style="float:right;margin-right: 20px;">		
-						<select onchange="getdata()" data-placeholder="Choose a Status..."  style="float: left;" class="cus-select"  id="parambldgcategory" name="parambldgcategory" tabindex="6">
-							<option value="0">Please Select a Filter...</option>
-							<option value="01">Property Registration Basket</option>
-							<option value="03">Inspection Stage Basket</option>
-						</select>	
-					<span class="clear"></span>
-				</div>
-			<br>					
-
-			</div>		
-				<div class="widget_wrap">					
-					<div class="widget_content">		
-					<div class="social_activities">
-						<div class="comments_s">
-							<div class="block_label">
-								Basket Count<span id="bst_count">0</span>
-							</div>
+		</div>
+		<div class="widget_wrap">
+			<div class="widget_content">
+				<div class="social_activities">
+					<div class="comments_s">
+						<div class="block_label">
+							{{__('existspropertyregisyter.File_Name')}} Basket_Count<span id="bst_count">0</span>
 						</div>
-						<div class="comments_s">
-							<div class="block_label">
-								Property Count<span>@foreach ($propertycount as $rec)
-											{{$rec->propcount}}									
-										@endforeach	</span>
-							</div>
+					</div>
+					<div class="comments_s">
+						<div class="block_label">
+							Property Count<span>@foreach ($propertycount as $rec)
+								{{$rec->propcount}}
+							@endforeach	</span>
 						</div>
-						<div style="width: 200px;" class="comments_s">
-							<div style="width: 200px;" class="block_label">
-								Valuation Property Count<span>@foreach ($valproperty as $rec)
-											{{$rec->propcount}}									
-										@endforeach	</span>
-							</div>
+					</div>
+					<div style="width: 200px;" class="comments_s">
+						<div style="width: 200px;" class="block_label">
+							Valuation Property Count<span>@foreach ($valproperty as $rec)
+								{{$rec->propcount}}
+							@endforeach	</span>
 						</div>
-					</div>				
+					</div>
+				</div>
 				<br>
-						<table id="baskettbl" class="display data_tbl">
+				<table id="baskettbl" class="display data_tbl">
 					<thead style="text-align: left;">
-			  		<tr>
-							<th class="table_sno">
-								 S No
-							</th>
-							<th>
-								Bakset Name
-							</th>
-							<th>
-								Application Type
-							</th>
-							<th>
-								Property Count
-							</th>
-							<th>
-								Property Count in Valuation
-							</th>
-							<th>
-								Pending Count
-							</th>
-							<th>
-								Approved Count
-							</th>
-							<th>
-								Create By /
-								Create At
-							</th>
-							<th>
-								Update By /
-								Update At
-							</th>
-							<th>
-								Status 
-							</th>
-							<th>
-								Action
-							</th>
+						<tr>
+							<th class="table_sno">{{__('existspropertyregisyter.SNo')}}</th>
+							<th>{{__('existspropertyregisyter.Basket_Name')}}</th>
+							<th>{{__('existspropertyregisyter.Application_Type')}}</th>
+							<th>{{__('existspropertyregisyter.Property_Count')}}</th>
+							<th>{{__('existspropertyregisyter.Property_Count_in_Valuation')}}</th>
+							<th>{{__('existspropertyregisyter.Pending_Count')}}</th>
+							<th>{{__('existspropertyregisyter.Approved_Count')}}</th>
+							<th>{{__('existspropertyregisyter.Create_By_At')}}</th>
+							<th>{{__('existspropertyregisyter.Update_By_At')}}</th>
+							<th>{{__('existspropertyregisyter.Status')}}</th>
+							<th>{{__('existspropertyregisyter.Action')}}</th>
 						</tr>
-						</thead>
-						<tbody>
-							@foreach ($basket as $rec)
+					</thead>
+					<tbody>
+						@foreach ($basket as $rec)
 						<tr>
 							<td>
 								{{$loop->iteration}}
 							</td>
 							<td>
-								 @if(userpermission::checkaccess(323)=="true")
-								 <a href="existspropertyregister?pb={{ $rec->basket_id }}">{{ $rec->basketname }}</a>
-								 @else 
-								 <a href="#">{{ $rec->basketname }}</a>
-								 @endif
+								@if(userpermission::checkaccess(323)=="true")
+								<a href="existspropertyregister?pb={{ $rec->basket_id }}">{{ $rec->basketname }}</a>
+								@else
+								<a href="#">{{ $rec->basketname }}</a>
+								@endif
 							</td>
 							<td>
-								 {{ $rec->applntype }}
+								{{ $rec->applntype }}
 							</td>
 							<td>
-								 {{ $rec->propcount }}
+								{{ $rec->propcount }}
 							</td>
 							<td>
-								 {{ $rec->valpropcount }}
+								{{ $rec->valpropcount }}
 							</td>
 							<td>
-								 {{ $rec->pending_count }}
+								{{ $rec->pending_count }}
 							</td>
 							<td>
-								 {{ $rec->approved_count }}
+								{{ $rec->approved_count }}
 							</td>
 							<td>
-								 {{ $rec->pb_createby }} -
-								 {{ $rec->createdate }}
+								{{ $rec->pb_createby }} -
+								{{ $rec->createdate }}
 							</td>
 							<td>
-								 {{ $rec->pb_updateby }} -
-								 {{ $rec->updatedate }}
+								{{ $rec->pb_updateby }} -
+								{{ $rec->updatedate }}
 							</td>
 							<td>{{ $rec->tdi_status }}
 							</td>
-							<td>	
-							    @if($rec->propcount == 0)	
-							    @if(userpermission::checkaccess(321)=="true")
-							    <span><a class="action-icons c-delete delete_BASKET" onclick="deleteBasket('{{ $rec->basket_id }}')" href="#" title="Delete">Delete</a></span>
-							    @endif
-							    @elseif($rec->propcount == $rec->approved_count && $rec->PB_APPROVALSTATUS_ID == '02')
-							    @if(userpermission::checkaccess(324)=="true")
-							    <span><a class="action-icons c-approve" onclick="approveProperty('{{ $rec->basket_id }}')" title="Approve For Inspection" href="#">Approve</a></span>
-							    @endif
-							    @endif
-							    @if(userpermission::checkaccess(322)=="true")
-							    <span><a class="action-icons c-edit edtlotrow" onclick="openEdit('{{ $rec->basket_id }}')" href="#" title="Edit">Edit</a></span>
-							    @endif
+							<td>
+								@if($rec->propcount == 0)
+								@if(userpermission::checkaccess(321)=="true")
+								<span><a class="action-icons c-delete delete_BASKET" onclick="deleteBasket('{{ $rec->basket_id }}')" href="#" title="Delete">{{__('common.Delete')}} </a></span>
+								@endif
+								@elseif($rec->propcount == $rec->approved_count && $rec->PB_APPROVALSTATUS_ID == '02')
+								@if(userpermission::checkaccess(324)=="true")
+								<span><a class="action-icons c-approve" onclick="approveProperty('{{ $rec->basket_id }}')" title="Approve For Inspection" href="#">{{__('existspropertyregisyter.Approve')}} </a></span>
+								@endif
+								@endif
+								@if(userpermission::checkaccess(322)=="true")
+								<span><a class="action-icons c-edit edtlotrow" onclick="openEdit('{{ $rec->basket_id }}')" href="#" title="Edit">{{__('common.Edit')}} </a></span>
+								@endif
 							</td>
 						</tr>
 						<div style="display: none;">
@@ -219,16 +192,16 @@
 							<input type="text" id="type_{{ $rec->basket_id }}" value="{{ $rec->pb_applicationtype_id }}">
 						</div>
 						@endforeach
-						</tbody>
-						</table>
-					</div>
-				</div>
+					</tbody>
+				</table>
 			</div>
+		</div>
+	</div>
 		
 		<div id="adduserform" style="display:none" class="grid_10 full_block">
 			<div class="widget_wrap">
 				<div class="widget_content">
-					<h3 id="title">Add Basket</h3>
+					<h3 id="title">{{__('existspropertyregisyter.Add_Basket')}} Add Basket</h3>
 					<form id="usertransform"  autocomplete="off" class="" method="post" action="exsitspropertybaskettrn" >
 						@csrf
 						<input type="hidden" name="basket_id" id="basket_id" value="0">
@@ -238,7 +211,7 @@
 							<ul>
 								<li>								
 									<div class="form_grid_12">									
-										<label class="field_title" id="luserid" for="userid">Basket Name<span class="req">*</span></label>
+										<label class="field_title" id="luserid" for="userid">{{__('existspropertyregisyter.Basket_Name')}} <span class="req">*</span></label>
 										<div class="form_input">
 											<input id="basket" name="basket" type="text"  value="{{ old('basket') }}" />
 										</div>
@@ -246,7 +219,7 @@
 									</div>
 
 									<div class="form_grid_12">									
-										<label class="field_title" id="luserid" for="userid">Application Type<span class="req">*</span></label>
+										<label class="field_title" id="luserid" for="userid">{{__('existspropertyregisyter.Application_Type')}} <span class="req">*</span></label>
 										<div class="form_input">
 											<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="applicationtype" name="applicationtype" tabindex="20">
 												<option></option>
@@ -265,9 +238,9 @@
 						<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
 							
 							<div class="form_input">
-								<button id="addsubmit" name="adduser" type="submit" class="btn_small btn_blue"><span>Submit</span></button>			
+								<button id="addsubmit" name="adduser" type="submit" class="btn_small btn_blue"><span>{{__('common.Submit')}} </span></button>			
 														
-								<button id="close" onclick="closeAddUser()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+								<button id="close" onclick="closeAddUser()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 								<span class=" label_intro"></span>
 							</div>
 						

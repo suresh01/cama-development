@@ -3,36 +3,36 @@
 	
 	@if($iseditable == 1)
 
-	<button onclick="openbldg()" id="addbldg" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Building</span></button>
+	<button onclick="openbldg()" id="addbldg" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('datasearch.addbldg')}}</span></button>
 
 	@endif
 	<div id="bldgtable" class="widget_wrap">					
 		<div class="widget_content">						
 			<table style="width:100%" id="bldgtble" class="display ">
 			<thead style="text-align: left;">
-	  		<tr>
-				<th class="table_sno">S No</th>
-				<th>BUILDING NUMBER</th>
-				<th>BUILDING NUMBER1s</th>
-				<th>BUILDING CATEGORY / BUILDING TYPE</th>
-				<th>BUILDING STOREY</th>
-				<th>BUILDING STRUCTURE</th>
-				<th>ROOF TYPE</th>
-				<th>BUILDING TYPE</th>
-				<th>BUILDING STOREY</th>
-				<th>BUILDING CONDITION</th>
-				<th>BUILDING POSITION</th>
-				<th>BUILDING STRUCTURE</th>
-				<th>ROOF TYPE</th>
-				<th>WALL TYPE</th>
-				<th>FLOOR TYPE</th>
-				<th>CCC DATE</th>
-				<th>OCCUPIED DATE</th>
-				<th>MAIN BUILDING</th>
-				<th>Action</th>
-				<th>actioncode</th>
-				<th>blsdgid</th>
-				<th>account</th>
+			<tr>
+				<th class="table_sno">{{__('tab.S_No')}}</th>				
+				<th>{{__('tab.BUILDING_NUMBER')}}</th>
+				<th>{{__('tab.BUILDING_NUMBER1s')}}</th>
+				<th>{{__('tab.BUILDING_CATEGORY_TYPE')}}</th>
+				<th>{{__('tab.BUILDING_STOREY')}}</th>
+				<th>{{__('tab.BUILDING_STRUCTURE')}}</th>
+				<th>{{__('tab.ROOF_TYPE')}}</th>
+				<th>{{__('tab.BUILDING_TYPE')}}</th>
+				<th>{{__('tab.BUILDING_STOREY')}}</th>
+				<th>{{__('tab.BUILDING_CONDITION')}}</th>
+				<th>{{__('tab.BUILDING_POSITION')}}</th>
+				<th>{{__('tab.BUILDING_STRUCTURE')}}</th>
+				<th>{{__('tab.ROOF_TYPE')}}</th>
+				<th>{{__('tab.WALL_TYPE')}}</th>
+				<th>{{__('tab.FLOOR_TYPE')}}</th>
+				<th>{{__('tab.CCC_DATE')}}</th>
+				<th>{{__('tab.OCCUPIED_DATE')}}</th>
+				<th>{{__('tab.MAIN_BUILDING')}}</th>
+				<th>{{__('tab.Action')}}</th>
+				<th>{{__('tab.Actioncode')}}</th>
+				<th>{{__('tab.blsdgid')}}</th>
+				<th>{{__('tab.account')}}</th>
 			</tr>
 			</thead>
 			<tbody></tbody>
@@ -49,7 +49,7 @@
 								
 					<div class="comments_s">
 						<div class="block_label">
-							Building Number<span id="disbldgno"></span>
+							{{__('tab.BUILDING_NUMBER')}}<span id="disbldgno"></span>
 						</div>
 					</div>
 
@@ -58,38 +58,38 @@
 				</div>	
 
 			<thead style="text-align: left;">
-	  		<tr>					
-				<th  class="table_sno">S No</th>
-				<th>ACCOUNT NUMBER</th>
-				<th>BUILDING NUMBER</th>
-				<th>AREA TYPE</th>
-				<th>AREA CATEGORY</th>
-				<th>AREA USE</th>
-				<th>AREA LEVEL</th>
-				<th>AREA COUNT</th>
-				<th>TOTAL SIZE</th>
-				<th>CEILING TYPE</th>
-				<th>FLOOR TYPE</th>
-				<th>WALL TYPE</th>
-				<th>AREA DESCRIPTION</th>
-				<th>REFF INFORMATION</th>
-				<th>AREA TYPE</th>
-				<th>AREA CATEGORY</th>
-				<th>AREA LEVEL</th>
-				<th>AREA ZONE</th>
-				<th>AREA USE</th>
-				<th>AREA DESCRIPTION</th>
-				<th>DIMENTION</th>
-				<th>AREA COUNT</th>
-				<th>MEASUREMENT</th>
-				<th>UNIT OF MEASUREMENT</th>
-				<th>TOTAL SIZE</th>
-				<th>FLOOR TYPE</th>
-				<th>WALL TYPE</th>
-				<th>CEILLING TYPE</th>
-				<th>Action</th>
-				<th>actioncode</th>
-				<th>detailid</th>
+			<tr>					
+				<th  class="table_sno">{{__('tab.S_No')}}</th>
+				<th>{{__('tab.ACCOUNT_NUMBER')}}</th>
+				<th>{{__('tab.BUILDING_NUMBER')}}</th>
+				<th>{{__('tab.AREA_TYPE')}}</th>
+				<th>{{__('tab.AREA_CATEGORY')}}</th>
+				<th>{{__('tab.AREA_USE')}}</th>
+				<th>{{__('tab.AREA_LEVEL')}}</th>
+				<th>{{__('tab.AREA_COUNT')}}</th>
+				<th>{{__('tab.TOTAL_SIZE')}}</th>
+				<th>{{__('tab.CEILING_TYPE')}}</th>
+				<th>{{__('tab.FLOOR_TYPE')}}</th>
+				<th>{{__('tab.WALL_TYPE')}}</th>
+				<th>{{__('tab.AREA_DESCRIPTION')}}</th>
+				<th>{{__('tab.REFF_INFORMATION')}}</th>
+				<th>{{__('tab.AREA_TYPE')}}</th>
+				<th>{{__('tab.AREA_CATEGORY')}}</th>
+				<th>{{__('tab.AREA_LEVEL')}}</th>
+				<th>{{__('tab.AREA_ZONE')}}</th>
+				<th>{{__('tab.AREA_USE')}}</th>
+				<th>{{__('tab.AREA_DESCRIPTION')}}</th>
+				<th>{{__('tab.DIMENTION')}}</th>
+				<th>{{__('tab.AREA_COUNT')}}</th>
+				<th>{{__('tab.MEASUREMENT')}}</th>
+				<th>{{__('tab.UNIT_OF_MEASUREMENT')}}</th>
+				<th>{{__('tab.TOTAL_SIZE')}}</th>
+				<th>{{__('tab.FLOOR_TYPE')}}</th>
+				<th>{{__('tab.WALL_TYPE')}}</th>
+				<th>{{__('tab.CEILLING_TYPE')}}</th>
+				<th>{{__('tab.Action')}}</th>
+				<th>{{__('tab.Actioncode')}}</th>
+				<th>{{__('tab.detailid')}}</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -105,7 +105,7 @@
 		<div id="bldgform"  autocomplete="off" onsubmit="return false;" class=" left_label" method="post" action="#" >
 			<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
 					
-				<button id="close" onclick="closebldg()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+				<button id="close" onclick="closebldg()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 			</div>
 			<div class="grid_6 ">
 				<ul>
@@ -118,7 +118,7 @@
 						<input type="hidden" value="0" name="bldgareatableindex" id="bldgareatableindex">
 
 						<div class="form_grid_12">
-							<label class="field_title" id="lusername" for="username">BUILDING NUMBER<span class="req">*</span></label>
+							<label class="field_title" id="lusername" for="username">{{__('tab.BUILDING_NUMBER')}}<span class="req">*</span></label>
 							<div  class="form_input">
 								<input id="bldgnum" tabindex="1" name="bldgnum"  type="text"  maxlength="15" class=""/>
 							</div>
@@ -126,9 +126,9 @@
 						</div>
 					
 						<div class="form_grid_12">
-							<label class="field_title" id="lposition" for="position">BUILDING CATEGORY<span class="req">*</span></label>
+							<label class="field_title" id="lposition" for="position">{{__('tab.BUILDING_CATEGORY_TYPE')}}<span class="req">*</span></label>
 							<div  class="form_input">
-								<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="bldgcate" name="bldgcate" tabindex="1">
+								<select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="bldgcate" name="bldgcate" tabindex="1">
 									<option></option>
 									@foreach ($bldgcate as $rec)
 											<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -139,8 +139,8 @@
 						</div>
 						
 						<div class="form_grid_12">
-							<label class="field_title" id="llevel" for="level">BUILDING TYPE<span class="req">*</span></label>
-							<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="bldgttype" name="bldgttype" tabindex="1">
+							<label class="field_title" id="llevel" for="level">{{__('tab.BUILDING_TYPE')}}<span class="req">*</span></label>
+							<div  class="form_input"><select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="bldgttype" name="bldgttype" tabindex="1">
 									<option></option>
 									@foreach ($bldgtype as $rec)
 											<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -150,8 +150,8 @@
 							<span class=" label_intro"></span>
 						</div>
 						<div class="form_grid_12">
-							<label class="field_title" id="llevel" for="level">BUILDING STOREY<span class="req">*</span></label>
-							<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="bldgstorey" name="bldgstorey" tabindex="1">
+							<label class="field_title" id="llevel" for="level">{{__('tab.BUILDING_STOREY')}} <span class="req">*</span></label>
+							<div  class="form_input"><select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="bldgstorey" name="bldgstorey" tabindex="1">
 									<option></option>
 									@foreach ($bldgstore as $rec)
 											<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -161,8 +161,8 @@
 							<span class=" label_intro"></span>
 						</div>
 						<div class="form_grid_12">
-							<label class="field_title" id="llevel" for="level">BUILDING CONDITION<span class="req">*</span></label>
-							<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="bldgcond" name="bldgcond" tabindex="1">
+							<label class="field_title" id="llevel" for="level">{{__('tab.BUILDING_CONDITION')}} <span class="req">*</span></label>
+							<div  class="form_input"><select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="bldgcond" name="bldgcond" tabindex="1">
 									<option></option>
 									@foreach ($bldgcond as $rec)
 											<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -172,8 +172,8 @@
 							<span class=" label_intro"></span>
 						</div>
 						<div class="form_grid_12">
-							<label class="field_title" id="llevel" for="level">BUILDING POSITION<span class="req">*</span></label>
-							<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="bldgpos" name="bldgpos" tabindex="1">
+							<label class="field_title" id="llevel" for="level">{{__('tab.BUILDING_POSITION')}} <span class="req">*</span></label>
+							<div  class="form_input"><select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="bldgpos" name="bldgpos" tabindex="1">
 									<option></option>
 									@foreach ($bldgpos as $rec)
 											<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -184,8 +184,8 @@
 						</div>
 
 						<div class="form_grid_12">
-							<label class="field_title" id="llevel" for="level">BUILDING STRUCTURE<span class="req">*</span></label>
-							<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="bldgstructure" name="bldgstructure" tabindex="1">
+							<label class="field_title" id="llevel" for="level">{{__('tab.BUILDING_STRUCTURE')}} <span class="req">*</span></label>
+							<div  class="form_input"><select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="bldgstructure" name="bldgstructure" tabindex="1">
 									<option></option>
 									@foreach ($bldgstruct as $rec)
 											<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -202,8 +202,8 @@
 					<li >
 			
 						<div class="form_grid_12">
-							<label class="field_title" id="lposition" for="position">ROOF TYPE<span class="req">*</span></label>
-							<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="rooftype" name="rooftype" tabindex="1">
+							<label class="field_title" id="lposition" for="position">{{__('tab.ROOF_TYPE')}} <span class="req">*</span></label>
+							<div  class="form_input"><select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="rooftype" name="rooftype" tabindex="1">
 									<option></option>
 									@foreach ($rooftype as $rec)
 											<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -214,8 +214,8 @@
 						</div>
 
 						<div class="form_grid_12">
-							<label class="field_title" id="lposition" for="position">WALL TYPE<span class="req">*</span></label>
-							<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="walltype" name="walltype" tabindex="20">
+							<label class="field_title" id="lposition" for="position">{{__('tab.WALL_TYPE')}}<span class="req">*</span></label>
+							<div  class="form_input"><select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="walltype" name="walltype" tabindex="20">
 									<option></option>
 									@foreach ($walltype as $rec)
 											<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -225,9 +225,9 @@
 							<span class=" label_intro"></span>
 						</div>
 						<div class="form_grid_12">
-							<label class="field_title" id="llevel" for="level">FLOOR TYPE<span class="req">*</span></label>
+							<label class="field_title" id="llevel" for="level">{{__('tab.FLOOR_TYPE')}} <span class="req">*</span></label>
 							<div  class="form_input">
-								<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="floortype" name="floortype" tabindex="1">
+								<select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="floortype" name="floortype" tabindex="1">
 									<option></option>
 									@foreach ($fltype as $rec)
 											<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -237,23 +237,23 @@
 							<span class=" label_intro"></span>
 						</div>
 						<div class="form_grid_12">
-							<label class="field_title" id="llevel" for="level">CCC DATE<span class="req">*</span></label>
+							<label class="field_title" id="llevel" for="level">{{__('tab.CCC_DATE')}}<span class="req">*</span></label>
 							<div  class="form_input">
 								<input id="cccdt"  name="cccdt" class="datepicker" type="text" tabindex="1" maxlength="50" />
 							</div>
 							<span class=" label_intro"></span>
 						</div>
 						<div class="form_grid_12">
-							<label class="field_title" id="lposition" for="position">OCCUPIED DATE<span class="req">*</span></label>
+							<label class="field_title" id="lposition" for="position">{{__('tab.OCCUPIED_DATE')}} <span class="req">*</span></label>
 							<div  class="form_input">
 								<input id="occupieddt"  name="occupieddt" class="datepicker" tabindex="1" type="text"  maxlength="50"/>
 							</div>
 							<span class=" label_intro"></span>
 						</div>
 						<div class="form_grid_12">
-							<label class="field_title" id="lposition" for="position">MAIN BUILDING<span class="req">*</span></label>
+							<label class="field_title" id="lposition" for="position">{{__('tab.MAIN_BUILDING')}} <span class="req">*</span></label>
 							<div  class="form_input">
-								<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="mainbldg" name="mainbldg" tabindex="1">
+								<select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="mainbldg" name="mainbldg" tabindex="1">
 									<option></option>
 									<option value='Y'>Y</option>
 									<option value='N'>N</option>
@@ -275,7 +275,7 @@
 								<div id="bldgarform" autocomplete="off" onsubmit="return false;" class="form_container left_label" method="post" action="#" >
 									<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
 										
-								<button id="close" onclick="closebldgar()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+								<button id="close" onclick="closebldgar()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 								</div>
 								<div class="grid_6 ">
 								<ul>
@@ -289,14 +289,14 @@
 								<!--<div class="form_grid_12">
 									<label class="field_title" id="lposition" for="position">Builiding Number<span class="req">*</span></label>
 									<div  class="form_input">
-										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="bldgnumar" name="bldgnumar" tabindex="20">				
+										<select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="bldgnumar" name="bldgnumar" tabindex="20">				
 											
 										</select>
 									</div>
 									<span class=" label_intro"></span>
 								</div>-->
 								<div class="form_grid_12">
-									<label class="field_title" id="lusername" for="username">REFF INFORMATION<span class="req">*</span></label>
+									<label class="field_title" id="lusername" for="username">{{__('tab.REFF_INFORMATION')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="reffinfo"  name="reffinfo" tabindex="1" type="text"  maxlength="50" class="large"/>
 									</div>
@@ -304,9 +304,9 @@
 								</div>
 								
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">AREA TYPE</label>
+									<label class="field_title" id="lposition" for="position">{{__('tab.AREA_TYPE')}}  </label>
 									<div  class="form_input">
-										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="artype" name="artype" tabindex="1">
+										<select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="artype" name="artype" tabindex="1">
 											<option></option>
 											@foreach ($artype as $rec)
 													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -317,8 +317,8 @@
 								</div>
 								
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">AREA CATEGORY<span class="req">*</span></label>
-									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="arcate" name="arcate" tabindex="1">
+									<label class="field_title" id="llevel" for="level">{{__('tab.AREA_CATEGORY')}} <span class="req">*</span></label>
+									<div  class="form_input"><select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="arcate" name="arcate" tabindex="1">
 											<option></option>
 											@foreach ($arcaty as $rec)
 													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -328,8 +328,8 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">AREA LEVEL<span class="req">*</span></label>
-									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="arlevel" name="arlevel" tabindex="1">
+									<label class="field_title" id="llevel" for="level">{{__('tab.AREA_LEVEL')}} <span class="req">*</span></label>
+									<div  class="form_input"><select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="arlevel" name="arlevel" tabindex="1">
 											<option></option>
 											@foreach ($arlvl as $rec)
 													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -339,8 +339,8 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">AREA ZONE<span class="req">*</span></label>
-									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="arzone" name="arzone" tabindex="1">
+									<label class="field_title" id="llevel" for="level">{{__('tab.AREA_ZONE')}} <span class="req">*</span></label>
+									<div  class="form_input"><select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="arzone" name="arzone" tabindex="1">
 											<option></option>
 											@foreach ($arzone as $rec)
 													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -350,8 +350,8 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">AREA USE<span class="req">*</span></label>
-									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="aruse" name="aruse" tabindex="1">
+									<label class="field_title" id="llevel" for="level">{{__('tab.AREA_USE')}}<span class="req">*</span></label>
+									<div  class="form_input"><select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="aruse" name="aruse" tabindex="1">
 											<option></option>
 											@foreach ($aruse as $rec)
 													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -361,7 +361,7 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">AREA DESCRIPTION</label>
+									<label class="field_title" id="lposition" for="position">{{__('tab.AREA_DESCRIPTION')}} </label>
 									<div  class="form_input">
 										<input id="ardesc"  name="ardesc"  type="text" tabindex="1" maxlength="50" />
 									</div>
@@ -377,8 +377,8 @@
 								<li >
 									
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">CELING TYPE<span class="req">*</span></label>
-									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="celingtype" name="celingtype" tabindex="1">
+									<label class="field_title" id="llevel" for="level">{{__('tab.CEILLING_TYPE')}} <span class="req">*</span></label>
+									<div  class="form_input"><select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="celingtype" name="celingtype" tabindex="1">
 											<option></option>
 											@foreach ($ceiling as $rec)
 												<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -389,8 +389,8 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">WALL TYPE<span class="req">*</span></label>
-									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="dwalltype" name="walltype" tabindex="1">
+									<label class="field_title" id="lposition" for="position">{{__('tab.WALL_TYPE')}} <span class="req">*</span></label>
+									<div  class="form_input"><select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="dwalltype" name="walltype" tabindex="1">
 											<option></option>
 											@foreach ($walltype as $rec)
 													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -400,9 +400,9 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">FLOOR TYPE<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('tab.FLOOR_TYPE')}}  <span class="req">*</span></label>
 									<div  class="form_input">
-										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="fltype" name="fltype" tabindex="1">
+										<select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="fltype" name="fltype" tabindex="1">
 											<option></option>
 											@foreach ($fltype as $rec)
 													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -412,30 +412,30 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">DIMENTION<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('tab.DIMENTION')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="dimention"  name="dimention" value="0" type="text" tabindex="1" maxlength="50" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">AREA COUNT<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('tab.AREA_COUNT')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="arcnt" onKeyDown="if(this.value.length==6 && event.keyCode>47 && event.keyCode < 58) return false;" value="0" onchange="caltotsize()" name="arcnt" value="1" onchange="caltotsize()" tabindex="1" type="number"  maxlength="50"/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">MEASUREMENT<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('tab.MEASUREMENT')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="size"  name="size" onKeyDown="if(this.value.length==8 && event.keyCode>47 && event.keyCode < 58) return false;" value="0" onchange="caltotsize()" type="number" tabindex="1" maxlength="50" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">UNIT OF MEASUREMENT<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('tab.UNIT_OF_MEASUREMENT')}} <span class="req">*</span></label>
 									<div  class="form_input">
-										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="uom" name="uom" tabindex="1">
+										<select data-placeholder="{{__('common.Choose_a_Status')}}" style="width:100%" class="cus-select" id="uom" name="uom" tabindex="1">
 											<option></option>
 											@foreach ($unitsize as $rec)
 													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -445,7 +445,7 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">TOTAL SIZE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('tab.TOTAL_SIZE')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="totsize" onKeyDown="if(this.value.length==8 && event.keyCode>47 && event.keyCode < 58) return false;" value="0" onchange="caltotsize()" name="totsize" value="0" type="number" tabindex="1" maxlength="50"/>
 									</div>
@@ -477,32 +477,32 @@
 		
 		let bldgarmap = new Map([["0","sno"],["1", "bldgaccnum"],  ["2", "bldgnum"], ["3", "bldgnum2"], ["4", "bldgnum4"], ["5", "bldgnum5"], ["6", "bldgnum7"], ["7", "bldgnu8m"], ["8", "bldgnu2m"], ["9", "bldgnum7"], ["10", "bldgnu8m"], ["11", "bldgnu2m"], ["12", "bldgnu80m"],["13", "reffinfo"], ["14", "artype"],["15", "arcate"], ["16", "arlevel"],["17", "arzone"], ["18", "aruse"],["19", "ardesc"], ["20", "dimention"],["21", "arcnt"],["22", "size"],["23", "uom"],["24", "totsize"],["25", "fltype"],["26","dwalltype"],["27", "celingtype"],["28", "action"],["29","actioncode"],["30","bldgarid"]]);
 			
-	 	var blsgardata = [];
+		var blsgardata = [];
 		@foreach ($bldgardetail as $rec)				
 					blsgardata.push( [ '{{$loop->iteration}}', $('#accnumber').val(), '{{$rec->ab_bldg_no}}', '{{$rec->artype}}','{{$rec->arcate}}','{{$rec->aruse}}','{{$rec->arlvel}}','{{$rec->aba_unitcount}}','{{$rec->aba_totsize}}','{{$rec->ceilingtype}}','{{$rec->floortype}}','{{$rec->walltype}}','{{$rec->aba_areadesc}}', '{{$rec->aba_ref}}', '{{$rec->aba_areatype_id}}','{{$rec->aba_areacategory_id}}','{{$rec->aba_arealevel_id}}', '{{$rec->aba_areazone_id}}', '{{$rec->aba_areause_id}}', '{{$rec->aba_areadesc}}',  '{{$rec->aba_dimention}}', '{{$rec->aba_unitcount}}', '{{$rec->aba_size}}','{{$rec->aba_sizeunit_id}}', '{{$rec->aba_totsize}}', '{{$rec->aba_floortype_id}}','{{$rec->aba_walltype_id}}','{{$rec->aba_ceilingtype_id}}','<span><a onclick="" class="action-icons c-edit edtbldgarrow" href="#" title="Edit">Edit</a></span>', 'noaction','{{$rec->aba_id}}' ] );
-	    @endforeach
+		@endforeach
 			
 		 $('#bldgartable1').DataTable({
-        	data:           blsgardata,
-            "columns":[  { "visible": false }, { "visible": false }, { "visible": false }, null, null, null, null, null, null,null, null, null, null, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, null,{ "visible": false },{ "visible": false }],
-            "sPaginationType": "full_numbers",
+			data:           blsgardata,
+			"columns":[  { "visible": false }, { "visible": false }, { "visible": false }, null, null, null, null, null, null,null, null, null, null, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, null,{ "visible": false },{ "visible": false }],
+			"sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
-		    oLanguage: {
-	            oPaginate: {
-	                sFirst: "{{__('datatable.first')}}",
-	                sLast: "{{__('datatable.last')}}",
-	                sNext: "{{__('datatable.next')}}",
-	                sPrevious: "{{__('datatable.previous')}}"
-	            },
-	            sEmptyTable: "{{__('datatable.emptytable')}}" ,
-	            sInfoEmpty: "Showing 0 to 0 of 0 entries",
-	            sThousands: ",",
-	            sLoadingRecords: "{{__('datatable.loading')}}...",
-	            sProcessing: "{{__('datatable.processing')}}...",
-	            sSearch: "{{__('datatable.search')}}:",	            
-		        sLengthMenu: "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>{{__('datatable.lengthmenu')}}:</span>",	
-	        },
-        	"bAutoWidth": false,
+			oLanguage: {
+				oPaginate: {
+					sFirst: "{{__('datatable.first')}}",
+					sLast: "{{__('datatable.last')}}",
+					sNext: "{{__('datatable.next')}}",
+					sPrevious: "{{__('datatable.previous')}}"
+				},
+				sEmptyTable: "{{__('datatable.emptytable')}}" ,
+				sInfoEmpty: "Showing 0 to 0 of 0 entries",
+				sThousands: ",",
+				sLoadingRecords: "{{__('datatable.loading')}}...",
+				sProcessing: "{{__('datatable.processing')}}...",
+				sSearch: "{{__('datatable.search')}}:",	            
+				sLengthMenu: "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>{{__('datatable.lengthmenu')}}:</span>",	
+			},
+			"bAutoWidth": false,
 			"sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>'
 			 
 		});
@@ -513,13 +513,13 @@
 			disable_search_threshold: 4	
 		});
 
-       
+	   
 
 		$('#bldgartable1 tbody').on( 'click', '.deletebldgarrow', function () {
 			 var tablear = $('#bldgartable1').DataTable();
 			var row = tablear.row(tablear.row( $(this).parents('tr') ).index());
-			    data = row.data();
-			    data[0]='Deleted';
+				data = row.data();
+				data[0]='Deleted';
 				data[29]='delete';
 				data[28]='';
 				var noty_id = noty({
@@ -528,17 +528,17 @@
 					modal : true,
 					buttons: [
 						{type: 'button pink', text: 'Delete', click: function($noty) {
-					  			row.data(data);
+								row.data(data);
 								$noty.close();
-						  	}
+							}
 						},
 						{type: 'button blue', text: 'Cancel', click: function($noty) {
 								$noty.close();
-						  	}
+							}
 						}
 						],
 					type : 'success', 
-			 	});
+				});
 		   // table.row($(this).parents('tr') ).remove().draw();
 		});
 
@@ -559,20 +559,20 @@
 				cache: false,
 				data:{param_value:bldgcategotyid,param:param},
 				success: function(data){
-		    		createDropDownOptions(data.res_arr, 'arlevel');
-		    		createDropDownOptions(data.storey_arr, 'aruse');
+					createDropDownOptions(data.res_arr, 'arlevel');
+					createDropDownOptions(data.storey_arr, 'aruse');
 					//console.log(data.storey_arr);
 					//console.log(data.res_arr);
 					$.each( ldata, function( key, value ) {
 						bldgardata[bldgarmap.get(""+key+"")] = value;  
-						           
-		            });
-		    
+								   
+					});
+			
 					$.each( bldgardata, function( key, val ) {				
-		        		$('#'+key).val(val);
-		        		if(key === 'bldgnum'){
-		        			$('#bldgnumar').val(val);
-		        			//alert(val);
+						$('#'+key).val(val);
+						if(key === 'bldgnum'){
+							$('#bldgnumar').val(val);
+							//alert(val);
 						}
 
 						//alert(key+" : "+val);
@@ -583,7 +583,7 @@
 				}
 			});
 			
-        	$("#bldgardetail1").show();
+			$("#bldgardetail1").show();
 			$("#addbldgar").hide();
 			$("#bldgdetail").hide();
 			$("#addbldg").hide();
@@ -594,7 +594,7 @@
 			$('#propertyinspectionform-next-5').hide();
 			//addDisableTab();
 							//$('#finish').hide();
-            //console.log( table.row( $(this).parents('tr') ).index() );		
+			//console.log( table.row( $(this).parents('tr') ).index() );		
 			//$('#lot_operation').val(2);
 			 //$('#tableindex').val(table.row( $(this).parents('tr') ).index());  
 			 //table.row( $(this).parents('tr') ).remove().draw();
@@ -605,47 +605,47 @@
 		});
 		var bldgartable1 = $('#bldgartable1').DataTable();
 		 /* $('#bldgartable1').DataTable({
-		  	"responsive": true,
-            "columns":[ null, { "visible": false }, { "visible": false }, null, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, null, { "visible": false }, { "visible": false}, null, { "visible": false}, null, { "visible": false }, { "visible": false }, { "visible": false }, null,{ "visible": false },{ "visible": false }],
-            "sPaginationType": "full_numbers",
+			"responsive": true,
+			"columns":[ null, { "visible": false }, { "visible": false }, null, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, null, { "visible": false }, { "visible": false}, null, { "visible": false}, null, { "visible": false }, { "visible": false }, { "visible": false }, null,{ "visible": false },{ "visible": false }],
+			"sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
 			"paging": false,
 			"searching": false,
 			"oLanguage": {
-		        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>"
-		    },
+				"sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>"
+			},
 			"sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>'
 			 
 		});*/
 		var account = $('#accnumber').val();
 		let bldgmap = new Map([["0","sno"],["1", "url"],["2", "bldgnum"],["3", "bldgnum1"],["4", "bldgnum2"],["5", "bldgnum3"],["6", "bldgnum4"],  ["7", "bldgttype"],["8", "bldgstorey"], ["9", "bldgcond"],["10", "bldgpos"], ["11", "bldgstructure"],["12", "rooftype"], ["13", "walltype"],["14", "floortype"], ["15", "cccdt"],["16", "occupieddt"],["17", "mainbldg"],["18", "action"],["19", "actioncode"],["20", "bldgid"],["21","bldgaccnum"]]);
 
-	 	var blsgdata = [];
+		var blsgdata = [];
 		@foreach ($building as $rec)
 			blsgdata.push( [ '{{$loop->iteration}}', "<a class='shobldg' onclick='showBldgAr({{$rec->ab_id}})' href='#' >{{ $rec->ab_bldg_no}}<input type='hidden' value='{{ $rec->ab_bldgtype_id}}' id='bldgtype_{{$rec->ab_id}}'><input type='hidden' value='{{ $rec->bldgcategory_id}}' id='bldgcate_{{$rec->ab_id}}'><input type='hidden' value='{{ $rec->ab_bldg_no}}' id='{{$rec->ab_id}}'></a>", '{{$rec->ab_bldg_no}}','{{$rec->bldgcategory}} / {{$rec->bldgtype}}','{{$rec->bldgstorey}}','{{$rec->bldgstr}}','{{$rec->rootype}}','{{$rec->ab_bldgtype_id}}', '{{$rec->ab_bldgstorey_id}}', '{{$rec->ab_bldgcondn_id}}', '{{$rec->ab_bldgposition_id}}', '{{$rec->ab_bldgstructure_id}}', '{{$rec->ab_rooftype_id}}', '{{$rec->ab_walltype_id}}','{{$rec->ab_floortype_id}}',  '{{$rec->ab_cccdate1}}', '{{$rec->ab_occupieddate1}}','{{$rec->ab_ismainbldg_id}}','<span><a onclick="edit({{$rec->ab_id}})" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span>','noation', '{{$rec->ab_id}}',account]);
 		@endforeach
 
-	    $('#bldgtble').DataTable({
-	        data:           blsgdata,
-	        "columns":[ null, null, { "visible": false }, null, null, null, null,{ "visible": false },  { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, null, null, null, null, { "visible": false }, { "visible": false }, { "visible": false }],
-	        "sPaginationType": "full_numbers",
+		$('#bldgtble').DataTable({
+			data:           blsgdata,
+			"columns":[ null, null, { "visible": false }, null, null, null, null,{ "visible": false },  { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, null, null, null, null, { "visible": false }, { "visible": false }, { "visible": false }],
+			"sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
-        	"bAutoWidth": false,
-		    oLanguage: {
-	            oPaginate: {
-	                sFirst: "{{__('datatable.first')}}",
-	                sLast: "{{__('datatable.last')}}",
-	                sNext: "{{__('datatable.next')}}",
-	                sPrevious: "{{__('datatable.previous')}}"
-	            },
-	            sEmptyTable: "{{__('datatable.emptytable')}}" ,
-	            sInfoEmpty: "Showing 0 to 0 of 0 entries",
-	            sThousands: ",",
-	            sLoadingRecords: "{{__('datatable.loading')}}...",
-	            sProcessing: "{{__('datatable.processing')}}...",
-	            sSearch: "{{__('datatable.search')}}:",	            
-		        sLengthMenu: "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>{{__('datatable.lengthmenu')}}:</span>",	
-	        },
+			"bAutoWidth": false,
+			oLanguage: {
+				oPaginate: {
+					sFirst: "{{__('datatable.first')}}",
+					sLast: "{{__('datatable.last')}}",
+					sNext: "{{__('datatable.next')}}",
+					sPrevious: "{{__('datatable.previous')}}"
+				},
+				sEmptyTable: "{{__('datatable.emptytable')}}" ,
+				sInfoEmpty: "Showing 0 to 0 of 0 entries",
+				sThousands: ",",
+				sLoadingRecords: "{{__('datatable.loading')}}...",
+				sProcessing: "{{__('datatable.processing')}}...",
+				sSearch: "{{__('datatable.search')}}:",	            
+				sLengthMenu: "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>{{__('datatable.lengthmenu')}}:</span>",	
+			},
 			"sDom": '<"table_top"fl<"clear">>,<"table_content"t>,<"table_bottom"p<"clear">>'
 			 
 		});
@@ -654,13 +654,13 @@
 			disable_search_threshold: 4
 		});
 
-	    var table = $('#bldgtble').DataTable();
+		var table = $('#bldgtble').DataTable();
 
 		$('#bldgtble tbody').on( 'click', '.deletebldgrow', function () {
 
 			var row = table.row(table.row( $(this).parents('tr') ).index()),
-			    data = row.data();
-			    data[0]='Deleted';
+				data = row.data();
+				data[0]='Deleted';
 				data[19]='delete';
 				data[18]='';
 				var noty_id = noty({
@@ -669,17 +669,17 @@
 					modal : true,
 					buttons: [
 						{type: 'button pink', text: 'Delete', click: function($noty) {
-					  			row.data(data);
+								row.data(data);
 								$noty.close();
-						  	}
+							}
 						},
 						{type: 'button blue', text: 'Cancel', click: function($noty) {
 								$noty.close();
-						  	}
+							}
 						}
 						],
 					type : 'success', 
-			 	});
+				});
 		   // table.row($(this).parents('tr') ).remove().draw();
 		});
 		var copybldgnumber = 0;
@@ -691,10 +691,10 @@
 				if(key == 2){
 					copybldgnumber= value;
 				}
-	        });
-	        if 	(copybldgnumber !== 0){
-	        	alert('Building Area copied');
-	        }
+			});
+			if 	(copybldgnumber !== 0){
+				alert('Building Area copied');
+			}
 		});
 
 		$('#bldgtble tbody').on( 'click', '.pastebldgar', function () {
@@ -709,8 +709,8 @@
 					pastebldgnumber= value;
 				}	
 						
-				          
-	        });
+						  
+			});
 			if 	(copybldgnumber == 0){
 				alert('Please copy building area.');
 			} else if( copybldgnumber === pastebldgnumber){
@@ -722,11 +722,11 @@
 					modal : true,
 					buttons: [
 						{type: 'button pink', text: 'Paste', click: function($noty) {					  		
-				        	console.log('copybldgnumber : '+copybldgnumber);
-				        	console.log('pastebldgnumber : '+pastebldgnumber);
-			       		 	var pastecount = bldgartable1.rows().count();
-			        		console.log('pastecount : '+pastecount);
-			        		for(var i=0;i<=pastecount;i++){
+							console.log('copybldgnumber : '+copybldgnumber);
+							console.log('pastebldgnumber : '+pastebldgnumber);
+							var pastecount = bldgartable1.rows().count();
+							console.log('pastecount : '+pastecount);
+							for(var i=0;i<=pastecount;i++){
 								var tempdata = $('#bldgartable1').DataTable().row(i).data();	
 								if(tempdata[2]==copybldgnumber){
 									var cpdata = $('#bldgartable1').DataTable().row(i).data();	
@@ -742,15 +742,15 @@
 								}
 							}
 							$noty.close();
-					  	}
+						}
 					},
 					{type: 'button blue', text: 'Cancel', click: function($noty) {
 							$noty.close();
-					  	}
+						}
 					}
 					],
 					type : 'success', 
-			 	});
+				});
 			}
 			
 		});
@@ -766,28 +766,28 @@
 
 			$.each( ldata, function( key, value ) {
 				bldgdata[bldgmap.get(""+key+"")] = value;              
-	        });
+			});
 
-	        $.each( bldgdata, function( key, val ) {
-	        	$('#'+key).val(val);
+			$.each( bldgdata, function( key, val ) {
+				$('#'+key).val(val);
 			});
 
 			var param_value = $('#bldgcate').val();
-	    	var param = 'bldgtype';
-	        $.ajax({
+			var param = 'bldgtype';
+			$.ajax({
 			  url: "subCategory",
 			  cache: false,
 			  data:{param_value:param_value,param:param},
 			  success: function(data){
-	    		createDropDownOptions(data.res_arr, 'bldgttype');
-	    		createDropDownOptions(data.res_arr2, 'bldgstorey');
-	    		$.each( bldgdata, function( key, val ) {
-	        		$('#'+key).val(val);
+				createDropDownOptions(data.res_arr, 'bldgttype');
+				createDropDownOptions(data.res_arr2, 'bldgstorey');
+				$.each( bldgdata, function( key, val ) {
+					$('#'+key).val(val);
 				});
 			  }
 			});
 
-	    	$("#bldgdetail").show();
+			$("#bldgdetail").show();
 			$("#addbldg").hide();
 			$("#bldgtable").hide();
 
@@ -798,7 +798,7 @@
 			$('#finish').hide();
 			//addDisableTab();
 			$("#bldgardetail1").hide();
-	        //console.log( table.row( $(this).parents('tr') ).index() );		
+			//console.log( table.row( $(this).parents('tr') ).index() );		
 			//$('#lot_operation').val(2);
 			 //$('#tableindex').val(table.row( $(this).parents('tr') ).index());  
 			 //table.row( $(this).parents('tr') ).remove().draw();
@@ -811,19 +811,19 @@
 		});
 
 		$("#bldgcate").change(function() {
-	    	//console.log(this.value);
-	    	var param_value = this.value;
-	    	var param = 'bldgtype';
-	        $.ajax({
+			//console.log(this.value);
+			var param_value = this.value;
+			var param = 'bldgtype';
+			$.ajax({
 			  url: "subCategory",
 			  cache: false,
 			  data:{param_value:param_value,param:param},
 			  success: function(data){
-	    		createDropDownOptions(data.res_arr, 'bldgttype');
-	    		createDropDownOptions(data.res_arr2, 'bldgstorey');
+				createDropDownOptions(data.res_arr, 'bldgttype');
+				createDropDownOptions(data.res_arr2, 'bldgstorey');
 			  }
 			});
-	    });
+		});
 
 	});
 
@@ -872,9 +872,9 @@
 
 	function random(){
 		 var min=1000; 
-	    var max=9000;  
+		var max=9000;  
 	   // var random =Math.floor(Math.random() * (+max - +min)) + +min;
-	    return Math.floor(Math.random() * (+max - +min)) + +min
+		return Math.floor(Math.random() * (+max - +min)) + +min
 	}
 
 	function addbldgRow(){
@@ -882,20 +882,20 @@
 		if(validateBldg()){
 			var duplicate = false;
 			for (var i = 0;i<$('#bldgtble').DataTable().rows().count();i++){
-            var ldata = $('#bldgtble').DataTable().row(i).data();
-            //var tempdata1 = {};
-	            $.each(ldata, function( key, value ) {
-	                if (key === 2){
-	                    if ($('#bldgnum').val() === value){
-	                       // alert('Building number already exsits');
-	                        //return false;  
-	                        duplicate = true;                      
-	                    }
-	                }
-	            //console.log(key);            
-	            });
-        	}
-        	if(!duplicate){
+			var ldata = $('#bldgtble').DataTable().row(i).data();
+			//var tempdata1 = {};
+				$.each(ldata, function( key, value ) {
+					if (key === 2){
+						if ($('#bldgnum').val() === value){
+						   // alert('Building number already exsits');
+							//return false;  
+							duplicate = true;                      
+						}
+					}
+				//console.log(key);            
+				});
+			}
+			if(!duplicate){
 				var operation = $("#lot_operation").val();
 				//console.log(operation);
 				var account = $('#accnumber').val();
@@ -949,8 +949,8 @@
 			cache: false,
 			data:{param_value:bldgtype_id,param:param},
 			success: function(data){
-	    		createDropDownOptions(data.res_arr, 'arlevel');
-	    		createDropDownOptions(data.storey_arr, 'aruse');
+				createDropDownOptions(data.res_arr, 'arlevel');
+				createDropDownOptions(data.storey_arr, 'aruse');
 				//console.log(data.storey_arr);
 				//console.log(data.res_arr);
 			}
@@ -1010,10 +1010,10 @@ function editbldgarRow() {
 				operation = "New";
 				operation_code = "new";
 			}
-	 	//var row = table.row(table.row( $(this).parents('tr') ).index()),
+		//var row = table.row(table.row( $(this).parents('tr') ).index()),
 	   // data = row.data();
 	 
-	    data=[operation,$('#accnumber').val(), $('#bldgnumar').val(), $('#artype option:selected').text(), $('#arcate option:selected').text(),$('#aruse option:selected').text(), $('#arlevel  option:selected').text(), $('#arcnt').val(), $('#totsize').val(),$('#celingtype option:selected').text(), $('#fltype option:selected').text(), $('#dwalltype option:selected').text(), $('#ardesc').val(), $('#reffinfo').val(),  $('#artype').val(), $('#arcate').val(), $('#arlevel').val(),$('#arzone').val(), $('#aruse').val(), $('#ardesc').val(),$('#dimention').val(), $('#arcnt').val(), $('#size').val(),$('#uom').val(), $('#totsize').val(), $('#fltype').val(), $('#dwalltype').val(), $('#celingtype').val(), '<span><a onclick="" class="action-icons c-edit edtbldgarrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete deletebldgarrow " href="#" title="delete">Delete</a></span>', operation_code, $('#bldgarid').val()];
+		data=[operation,$('#accnumber').val(), $('#bldgnumar').val(), $('#artype option:selected').text(), $('#arcate option:selected').text(),$('#aruse option:selected').text(), $('#arlevel  option:selected').text(), $('#arcnt').val(), $('#totsize').val(),$('#celingtype option:selected').text(), $('#fltype option:selected').text(), $('#dwalltype option:selected').text(), $('#ardesc').val(), $('#reffinfo').val(),  $('#artype').val(), $('#arcate').val(), $('#arlevel').val(),$('#arzone').val(), $('#aruse').val(), $('#ardesc').val(),$('#dimention').val(), $('#arcnt').val(), $('#size').val(),$('#uom').val(), $('#totsize').val(), $('#fltype').val(), $('#dwalltype').val(), $('#celingtype').val(), '<span><a onclick="" class="action-icons c-edit edtbldgarrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete deletebldgarrow " href="#" title="delete">Delete</a></span>', operation_code, $('#bldgarid').val()];
 
 		row.data(data);
 		$("#bldgardetail1").hide();
@@ -1023,7 +1023,7 @@ function editbldgarRow() {
 		$("#bldgdetail").hide();
 		$("#addbldg").show();
 		$("#bldgtable").show();
-	 	$("label.error").remove();
+		$("label.error").remove();
 	 }
 
 }
@@ -1040,7 +1040,7 @@ function editbldgarRow() {
 		$("#bldgtable").show();
 		$("#addbldg").show();
 		$("#bldgdetail").hide();
-	 	$("label.error").remove();
+		$("label.error").remove();
 	}		
 
 	function showBldgAr(id){
@@ -1054,8 +1054,8 @@ function editbldgarRow() {
 			cache: false,
 			data:{param_value:bldgcategotyid,param:param},
 			success: function(data){
-	    		createDropDownOptions(data.res_arr, 'arlevel');
-	    		createDropDownOptions(data.storey_arr, 'aruse');
+				createDropDownOptions(data.res_arr, 'arlevel');
+				createDropDownOptions(data.storey_arr, 'aruse');
 				//console.log(data.storey_arr);
 				//console.log(data.res_arr);
 			}
@@ -1068,27 +1068,27 @@ function editbldgarRow() {
 		$('#disbldgno').html(bldgno);
 		var tablear = $('#bldgartable1').DataTable();
 		$.fn.dataTable.ext.search.pop();
-    	//tablear.draw();
+		//tablear.draw();
 		//alert(bldgno);
 
 		
 	$.fn.dataTable.ext.search.push(
-	     function(settings, data, dataIndex) {
-	     	//alert(settings.nTable.id);
+		 function(settings, data, dataIndex) {
+			//alert(settings.nTable.id);
 			if (settings.nTable.id === 'bldgartable1') {
-			    if (data[2] === bldgno){
+				if (data[2] === bldgno){
 
-		      		return true;
-		      	}
-	        }
-	        if (settings.nTable.id !== 'bldgartable1') {
-			   	return true;
-	        }
+					return true;
+				}
+			}
+			if (settings.nTable.id !== 'bldgartable1') {
+				return true;
+			}
 
 		}       
 	);
-	    tablear.draw();
-    	
+		tablear.draw();
+		
 		 $('#submitedittblbldgar').show();
 		 $('#submitaddtblbldgar').hide();
 
@@ -1226,7 +1226,7 @@ function editbldgarRow() {
 		$("#addbldg").show();
 		$("#bldgdetail").hide();
 
-	 	$("label.error").remove();	
+		$("label.error").remove();	
 	}
 
 							
@@ -1240,42 +1240,42 @@ function editbldgarRow() {
 			   'ownnum': 'This field is required'
 			},
 			submitHandler: function(form) {
-			    //form.submit();
+				//form.submit();
 				$('#bldgsubmit').text('Please Wait');
-				    //console.log('validation true');
-				    	var bldgdata = {};
+					//console.log('validation true');
+						var bldgdata = {};
 				$('#bldgform').serializeArray().map(function(x){bldgdata[x.name] = x.value;});
 				//alert(3);
 				//console.log(masterdata);
 				var bldgjson = JSON.stringify(bldgdata);
 				var pb = '{{$pb}}';
 				$.ajax({
-			        type:'POST',
-			        url:'registerproperty',
-				    headers: {
-					    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					type:'POST',
+					url:'registerproperty',
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 					},
-			        data:{form:'bldg',type:'tab',jsondata:bldgjson,pb:pb},
-			        success:function(data){	       	
-			        	$('#bldgsubmit').text('Submit');
-			        	var noty_id = noty({
+					data:{form:'bldg',type:'tab',jsondata:bldgjson,pb:pb},
+					success:function(data){	       	
+						$('#bldgsubmit').text('Submit');
+						var noty_id = noty({
 							layout : 'top',
 							text: 'bldg detail updated successfully!',
 							modal : true,
 							type : 'success', 
 						});
-			        	
-			        },
-			        error:function(data){	
-			        	console.log(data);
-			        	$('#bldgsubmit').text('Submit');        	
-			        	var noty_id = noty({
+						
+					},
+					error:function(data){	
+						console.log(data);
+						$('#bldgsubmit').text('Submit');        	
+						var noty_id = noty({
 							layout : 'top',
 							text: 'error while adding bldg detail!',
 							modal : true,
 							type : 'error', 
 						});
-			        }
+					}
 				});
 						
 			}
@@ -1285,16 +1285,16 @@ function editbldgarRow() {
 
 	function bldgareasubmit(){
 		$('#bldgarform').validate({
-		  	rules: {
-		    	'ownnum': 'required'
-		  	},
-		  	messages: {
-		    	'ownnum': 'This field is required'
-		   	},
+			rules: {
+				'ownnum': 'required'
+			},
+			messages: {
+				'ownnum': 'This field is required'
+			},
 			submitHandler: function(form) {
-				    //form.submit();
+					//form.submit();
 				$('#bldgarsubmit').text('Please Wait');
-					    //console.log('validation true');
+						//console.log('validation true');
 				var bldgardata = {};
 				$('#bldgarform').serializeArray().map(function(x){bldgardata[x.name] = x.value;});
 					
@@ -1302,32 +1302,32 @@ function editbldgarRow() {
 				var bldgarjson = JSON.stringify(bldgardata);
 				var pb = '{{$pb}}';
 				$.ajax({
-			        type:'POST',
-			        url:'registerproperty',
-				    headers: {
-					    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					type:'POST',
+					url:'registerproperty',
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 					},
-			        data:{form:'bldgar',type:'tab',jsondata:bldgarjson,pb:pb},
-			        success:function(data){	       	
-			        	$('#bldgarsubmit').text('Submit');
-			        	var noty_id = noty({
+					data:{form:'bldgar',type:'tab',jsondata:bldgarjson,pb:pb},
+					success:function(data){	       	
+						$('#bldgarsubmit').text('Submit');
+						var noty_id = noty({
 							layout : 'top',
 							text: 'bldg detail updated successfully!',
 							modal : true,
 							type : 'success', 
 						});
-			        	
-			        },
-			        error:function(data){
-			        	console.log(data);
-			        	$('#bldgarsubmit').text('Submit');        	
-			        	var noty_id = noty({
+						
+					},
+					error:function(data){
+						console.log(data);
+						$('#bldgarsubmit').text('Submit');        	
+						var noty_id = noty({
 							layout : 'top',
 							text: 'error while adding bldg detail!',
 							modal : true,
 							type : 'error', 
 						});
-			        }
+					}
 				});
 						
 			}

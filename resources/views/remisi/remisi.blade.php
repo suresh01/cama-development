@@ -14,17 +14,17 @@
 				<div class="breadCrumbHolder module">	
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-						<li>Remisi</li>
+						<li><a href="#">{{__('menu.home')}}</a></li>
+						<li><a href="#">{{__('menu.datamaintenance')}}</a></li>
+						<li>{{__('menu.remisi')}}</li>
 					</ul>
 				</div>
 				</div>			
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">
 					
-					<a href="#" onclick="addApplication()" >Add Application</a>
-					<a href="#"  >Add Filter</a>
+					<a href="#" onclick="addApplication()" >{{__('remisi.addapplication')}}</a>
+					
 				</div>
 
 				<br>
@@ -36,44 +36,50 @@
 								<tr>
 									<th><input name="select_all" value="1" type="checkbox"></th>
 									<th class="table_sno">
-										S No
+										{{__('remisi.col1')}}
 									</th>
 									<th>
-										Account Number
+										{{__('remisi.col2')}}
 									</th>
 									<th>
-										Zone 
+										{{__('remisi.col3')}}
 									</th>
 									<th>
-										Sub Zone 
+										{{__('remisi.col4')}}
 									</th>
 									<th>
-										Property Building Status
-									</th>	
-									<th>
-										Property Category
-									</th>			
-									<th>
-										Property Type
+										{{__('remisi.col5')}}
 									</th>		
 									<th>
-										Property Storey
-									</th>	
-									<th>
-										Register By
-									</th>	
-									<th>
-										Register Date
+										{{__('remisi.col6')}}
 									</th>
 									<th>
-										Decision
-									</th>
-									<th>
-										Status
+										{{__('remisi.col7')}}
 									</th>	
 									<th>
-										Action
-									</th>			
+										{{__('remisi.col8')}}
+									</th>
+									<th>
+										{{__('remisi.col9')}}
+									</th>
+									<th>
+										{{__('remisi.col10')}}
+									</th>
+									<th>
+										{{__('remisi.col11')}}
+									</th>
+									<th>
+										Land Value
+									</th>
+									<th>
+										Building Value
+									</th>	
+									<th>
+										{{__('remisi.col12')}}
+									</th>
+									<th>
+										{{__('remisi.col13')}}
+									</th>		
 								</tr>
 							</thead>
 							<tbody>		
@@ -197,6 +203,8 @@ $(document).ready(function (){
 			        		return '';
 			        	}
 			        }, "name": "ishasbldg"}, 
+			        {"data": "landvalue", "name": "ishasbldg"}, 
+			        {"data": "bldgvalue", "name": "ishasbldg"}, 
 			        {"data": "approvalstatus", "name": "ishasbldg"}, 
 			        {"data":  function(data){
 			        	

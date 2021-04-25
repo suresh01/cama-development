@@ -1,38 +1,38 @@
 
 <div id="tab4">
-	<h4>Building</h4>
+	<h4>{{__('existspropertyregisyter.Building')}} </h4>
 	<p>
-		Account Number = <span id="bldglabel"></span>
+		{{__('existspropertyregisyter.Account_Number')}} = <span id="bldglabel"></span>
 	</p>
 
-	@if($iseditable == 1)<button onclick="openbldg()" id="addbldg" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Building</span></button>@endif
+	@if($iseditable == 1)<button onclick="openbldg()" id="addbldg" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('existspropertyregisyter.Add_Building')}}</span></button>@endif
 	<div id="bldgtable" class="widget_wrap">					
 		<div class="widget_content">						
 			<table style="width:100%" id="bldgtble" class="display ">
 			<thead style="text-align: left;">
 	  		<tr>
-				<th class="table_sno">S No</th>
-				<th>BUILDING NUMBER</th>
-				<th>BUILDING NUMBER1s</th>
-				<th>BUILDING CATEGORY / BUILDING TYPE</th>
-				<th>BUILDING STOREY</th>
-				<th>BUILDING STRUCTURE</th>
-				<th>ROOF TYPE</th>
-				<th>BUILDING TYPE</th>
-				<th>BUILDING STOREY</th>
-				<th>BUILDING CONDITION</th>
-				<th>BUILDING POSITION</th>
-				<th>BUILDING STRUCTURE</th>
-				<th>ROOF TYPE</th>
-				<th>WALL TYPE</th>
-				<th>FLOOR TYPE</th>
-				<th>CCC DATE</th>
-				<th>OCCUPIED DATE</th>
-				<th>MAIN BUILDING</th>
-				<th>Action</th>
-				<th>actioncode</th>
-				<th>blsdgid</th>
-				<th>account</th>
+				<th class="table_sno">{{__('existspropertyregisyter.SNo')}}</th>
+				<th>{{__('existspropertyregisyter.Building_Number')}}</th>
+				<th>{{__('existspropertyregisyter.Building_Number1S')}}</th>
+				<th>{{__('existspropertyregisyter.Building_Category_Type')}}</th>
+				<th>{{__('existspropertyregisyter.Building_Storey')}}</th>
+				<th>{{__('existspropertyregisyter.Building_Structure')}}</th>
+				<th>{{__('existspropertyregisyter.Roof_Type')}}</th>
+				<th>{{__('existspropertyregisyter.Building_Type')}}</th>
+				<th>{{__('existspropertyregisyter.Building_Storey')}}</th>
+				<th>{{__('existspropertyregisyter.Building_Condition')}}</th>
+				<th>{{__('existspropertyregisyter.Building_Position')}}</th>
+				<th>{{__('existspropertyregisyter.Building_Structure')}}</th>
+				<th>{{__('existspropertyregisyter.Roof_Type')}}</th>
+				<th>{{__('existspropertyregisyter.Wall_Type')}}</th>
+				<th>{{__('existspropertyregisyter.Floor_Type')}}</th>
+				<th>{{__('existspropertyregisyter.Ccc_Date')}}</th>
+				<th>{{__('existspropertyregisyter.Occupied_Date')}}</th>
+				<th>{{__('existspropertyregisyter.Main_Building')}}</th>
+				<th>{{__('existspropertyregisyter.Action')}}</th>
+				<th>{{__('existspropertyregisyter.Actioncode')}}</th>
+				<th>{{__('existspropertyregisyter.Blsdgid')}}</th>
+				<th>{{__('existspropertyregisyter.Account')}}</th>
 			</tr>
 			</thead>
 			<tbody></tbody>
@@ -40,61 +40,57 @@
 		</div>
 	</div>
 
-	<div id="bldgareatable1" style="display: none;" class="widget_wrap">					
+	<div id="bldgareatable1" style="display: none;" class="widget_wrap">
 		<div class="widget_content">
-								
+			
 			<table  id="bldgartable1" class="display" style="width:100%">
-
 				<div class="social_activities">
-								
+					
 					<div class="comments_s">
 						<div class="block_label">
-							Building Number<span id="disbldgno">ALL</span>
+							{{__('existspropertyregisyter.Building_Number')}}<span id="disbldgno">{{__('existspropertyregisyter.All')}}</span>
 							<input type="hidden" id="hbldgid">
 						</div>
 					</div>
-
 					<br>
-
 				</div>
-
-			<thead style="text-align: left;">
-	  		<tr>					
-				<th  class="table_sno">S No</th>
-				<th>ACCOUNT NUMBER</th>
-				<th>BUILDING NUMBER</th>
-				<th>AREA TYPE</th>
-				<th>AREA CATEGORY</th>
-				<th>AREA USE</th>
-				<th>AREA COUNT</th>
-				<th>TOTAL SIZE</th>
-				<th>CEILING TYPE</th>
-				<th>FLOOR TYPE</th>
-				<th>WALL TYPE</th>
-				<th>AREA DESCRIPTION</th>
-				<th>REFF INFORMATION</th>
-				<th>AREA TYPE</th>
-				<th>AREA CATEGORY</th>
-				<th>AREA LEVEL</th>
-				<th>AREA ZONE</th>
-				<th>AREA USE</th>
-				<th>AREA DESCRIPTION</th>
-				<th>DIMENTION</th>
-				<th>AREA COUNT</th>
-				<th>MEASUREMENT</th>
-				<th>UNIT OF MEASUREMENT</th>
-				<th>TOTAL SIZE</th>
-				<th>FLOOR TYPE</th>
-				<th>WALL TYPE</th>
-				<th>CEILLING TYPE</th>
-				<th>Action</th>
-				<th>actioncode</th>
-				<th>detailid</th>
-			</tr>
-			</thead>
-			<tbody>
-				
-			</tbody>
+				<thead style="text-align: left;">
+					<tr>
+						<th class="table_sno">{{__('existspropertyregisyter.SNo')}}</th>
+						<th>{{__('existspropertyregisyter.Account_Number')}}</th>
+						<th>{{__('existspropertyregisyter.Building_Number')}}</th>
+						<th>{{__('existspropertyregisyter.Area_Type')}}</th>
+						<th>{{__('existspropertyregisyter.Area_Category')}}</th>
+						<th>{{__('existspropertyregisyter.Area_Use')}}</th>
+						<th>{{__('existspropertyregisyter.Area_Count')}}</th>
+						<th>{{__('existspropertyregisyter.Total_Size')}}</th>
+						<th>{{__('existspropertyregisyter.Ceiling_Type')}}</th>
+						<th>{{__('existspropertyregisyter.Floor_Type')}}</th>
+						<th>{{__('existspropertyregisyter.Wall_Type')}}</th>
+						<th>{{__('existspropertyregisyter.Area_Description')}}</th>
+						<th>{{__('existspropertyregisyter.Reff_Information')}}</th>
+						<th>{{__('existspropertyregisyter.Area_Type')}}</th>
+						<th>{{__('existspropertyregisyter.Area_Category')}}</th>
+						<th>{{__('existspropertyregisyter.Area_Level')}}</th>
+						<th>{{__('existspropertyregisyter.Area_Zone')}}</th>
+						<th>{{__('existspropertyregisyter.Area_Use')}}</th>
+						<th>{{__('existspropertyregisyter.Area_Description')}}</th>
+						<th>{{__('existspropertyregisyter.Dimention')}}</th>
+						<th>{{__('existspropertyregisyter.Area_Count')}}</th>
+						<th>{{__('existspropertyregisyter.Measurement')}}</th>
+						<th>{{__('existspropertyregisyter.Unit_Of_Measurement')}}</th>
+						<th>{{__('existspropertyregisyter.Total_Size')}}</th>
+						<th>{{__('existspropertyregisyter.Floor_Type')}}</th>
+						<th>{{__('existspropertyregisyter.Wall_Type')}}</th>
+						<th>{{__('existspropertyregisyter.Ceilling_Type')}}</th>
+						<th>{{__('existspropertyregisyter.Action')}}</th>
+						<th>{{__('existspropertyregisyter.Actioncode')}}</th>
+						<th>{{__('existspropertyregisyter.Detailid')}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+				</tbody>
 			</table>
 		</div>
 	</div>
@@ -104,9 +100,9 @@
 	<div style="display:none;" id="bldgdetail" >
 		<div id="bldgform"  autocomplete="off" onsubmit="return false;" class=" left_label" method="post" action="#" >
 			<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
-				<button id="submitaddtblbldg" onclick="addbldgRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Add New</span></button>	
-				<button id="submitedittblbldg" onclick="editbldgRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Update</span></button>	
-				<button id="close" onclick="closebldg()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+				<button id="submitaddtblbldg" onclick="addbldgRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Add_New')}}</span></button>	
+				<button id="submitedittblbldg" onclick="editbldgRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Update')}}</span></button>	
+				<button id="close" onclick="closebldg()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 			</div>
 			<div class="grid_6 ">
 				<ul>
@@ -119,7 +115,7 @@
 						<input type="hidden" value="0" name="bldgareatableindex" id="bldgareatableindex">
 
 						<div class="form_grid_12">
-							<label class="field_title" id="lusername" for="username">BUILDING NUMBER<span class="req">*</span></label>
+							<label class="field_title" id="lusername" for="username">{{__('existspropertyregisyter.Building_Number')}}<span class="req">*</span></label>
 							<div  class="form_input">
 								<input id="bldgnum" tabindex="1" name="bldgnum"  type="text"  maxlength="15" class=""/>
 							</div>
@@ -127,7 +123,7 @@
 						</div>
 					
 						<div class="form_grid_12">
-							<label class="field_title" id="lposition" for="position">BUILDING CATEGORY<span class="req">*</span></label>
+							<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Building_Category')}} <span class="req">*</span></label>
 							<div  class="form_input">
 								<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="bldgcate" name="bldgcate" tabindex="1">
 									<option></option>
@@ -140,7 +136,7 @@
 						</div>
 						
 						<div class="form_grid_12">
-							<label class="field_title" id="llevel" for="level">BUILDING TYPE<span class="req">*</span></label>
+							<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Building_Type')}}<span class="req">*</span></label>
 							<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="bldgttype" name="bldgttype" tabindex="1">
 									<option></option>
 									@foreach ($bldgtype as $rec)
@@ -151,7 +147,7 @@
 							<span class=" label_intro"></span>
 						</div>
 						<div class="form_grid_12">
-							<label class="field_title" id="llevel" for="level">BUILDING STOREY<span class="req">*</span></label>
+							<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Building_Storey')}}<span class="req">*</span></label>
 							<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="bldgstorey" name="bldgstorey" tabindex="1">
 									<option></option>
 									@foreach ($bldgstore as $rec)
@@ -162,7 +158,7 @@
 							<span class=" label_intro"></span>
 						</div>
 						<div class="form_grid_12">
-							<label class="field_title" id="llevel" for="level">BUILDING CONDITION<span class="req">*</span></label>
+							<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Building_Condition')}}<span class="req">*</span></label>
 							<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="bldgcond" name="bldgcond" tabindex="1">
 									<option></option>
 									@foreach ($bldgcond as $rec)
@@ -173,7 +169,7 @@
 							<span class=" label_intro"></span>
 						</div>
 						<div class="form_grid_12">
-							<label class="field_title" id="llevel" for="level">BUILDING POSITION<span class="req">*</span></label>
+							<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Building_Position')}}<span class="req">*</span></label>
 							<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="bldgpos" name="bldgpos" tabindex="1">
 									<option></option>
 									@foreach ($bldgpos as $rec)
@@ -185,7 +181,7 @@
 						</div>
 
 						<div class="form_grid_12">
-							<label class="field_title" id="llevel" for="level">BUILDING STRUCTURE<span class="req">*</span></label>
+							<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Building_Structure')}}<span class="req">*</span></label>
 							<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="bldgstructure" name="bldgstructure" tabindex="1">
 									<option></option>
 									@foreach ($bldgstruct as $rec)
@@ -203,7 +199,7 @@
 					<li >
 			
 						<div class="form_grid_12">
-							<label class="field_title" id="lposition" for="position">ROOF TYPE<span class="req">*</span></label>
+							<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Roof_Type')}}<span class="req">*</span></label>
 							<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="rooftype" name="rooftype" tabindex="1">
 									<option></option>
 									@foreach ($rooftype as $rec)
@@ -215,7 +211,7 @@
 						</div>
 
 						<div class="form_grid_12">
-							<label class="field_title" id="lposition" for="position">WALL TYPE<span class="req">*</span></label>
+							<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Wall_Type')}}<span class="req">*</span></label>
 							<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="walltype" name="walltype" tabindex="20">
 									<option></option>
 									@foreach ($walltype as $rec)
@@ -226,7 +222,7 @@
 							<span class=" label_intro"></span>
 						</div>
 						<div class="form_grid_12">
-							<label class="field_title" id="llevel" for="level">FLOOR TYPE<span class="req">*</span></label>
+							<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Floor_Type')}}<span class="req">*</span></label>
 							<div  class="form_input">
 								<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="floortype" name="floortype" tabindex="1">
 									<option></option>
@@ -238,21 +234,21 @@
 							<span class=" label_intro"></span>
 						</div>
 						<div class="form_grid_12">
-							<label class="field_title" id="llevel" for="level">CCC DATE<span class="req">*</span></label>
+							<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Ccc_Date')}}<span class="req">*</span></label>
 							<div  class="form_input">
 								<input id="cccdt"  name="cccdt"  type="text" tabindex="1" maxlength="50" />
 							</div>
 							<span class=" label_intro"></span>
 						</div>
 						<div class="form_grid_12">
-							<label class="field_title" id="lposition" for="position">OCCUPIED DATE<span class="req">*</span></label>
+							<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Occupied_Date')}} <span class="req">*</span></label>
 							<div  class="form_input">
 								<input id="occupieddt"  name="occupieddt" tabindex="1" type="text"  maxlength="50"/>
 							</div>
 							<span class=" label_intro"></span>
 						</div>
 						<div class="form_grid_12">
-							<label class="field_title" id="lposition" for="position">MAIN BUILDING<span class="req">*</span></label>
+							<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Main_Building')}} <span class="req">*</span></label>
 							<div  class="form_input">
 								<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="mainbldg" name="mainbldg" tabindex="1">
 									<option></option>
@@ -277,7 +273,7 @@
 								
 					<div class="comments_s">
 						<div class="block_label">
-							Building Number<span id="dispbldgnum2"></span>
+							{{__('existspropertyregisyter.Building_Number')}}<span id="dispbldgnum2"></span>
 						</div>
 					</div>
 
@@ -286,9 +282,9 @@
 				</div>
 								<div id="bldgarform" autocomplete="off" onsubmit="return false;" class="form_container left_label" method="post" action="#" >
 									<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
-									<button id="submitaddtblbldgar" onclick="addbldgarRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Add New</span></button>	
-									<button id="submitedittblbldgar" onclick="editbldgarRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Update</span></button>	
-								<button id="close" onclick="closebldgar()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+									<button id="submitaddtblbldgar" onclick="addbldgarRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Add_New')}} </span></button>	
+									<button id="submitedittblbldgar" onclick="editbldgarRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Update')}}</span></button>	
+								<button id="close" onclick="closebldgar()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 								</div>
 								<div class="grid_6 ">
 								<ul>
@@ -300,7 +296,7 @@
 									<input type="hidden" value="0" name="bldgnumar" id="bldgnumar">
 
 								<!--<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">Builiding Number<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position"> Builiding Number<span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="bldgnumar" name="bldgnumar" tabindex="20">				
 											
@@ -309,7 +305,7 @@
 									<span class=" label_intro"></span>
 								</div>-->
 								<div class="form_grid_12">
-									<label class="field_title" id="lusername" for="username">REFF INFORMATION<span class="req">*</span></label>
+									<label class="field_title" id="lusername" for="username">{{__('existspropertyregisyter.Reff_Information')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="reffinfo"  name="reffinfo" tabindex="1" type="text"  maxlength="50" />
 									</div>
@@ -317,7 +313,7 @@
 								</div>
 								
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">AREA TYPE</label>
+									<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Area_Type')}}</label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="artype" name="artype" tabindex="1">
 											<option></option>
@@ -330,7 +326,7 @@
 								</div>
 								
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">AREA CATEGORY<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Area_Category')}}<span class="req">*</span></label>
 									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="arcate" name="arcate" tabindex="1">
 											<option></option>
 											@foreach ($arcaty as $rec)
@@ -341,7 +337,7 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">AREA LEVEL<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Area_Level')}}<span class="req">*</span></label>
 									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="arlevel" name="arlevel" tabindex="1">
 											<option></option>
 											@foreach ($arlvl as $rec)
@@ -352,7 +348,7 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">AREA ZONE<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Area_Zone')}}<span class="req">*</span></label>
 									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="arzone" name="arzone" tabindex="1">
 											<option></option>
 											@foreach ($arzone as $rec)
@@ -363,7 +359,7 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">AREA USE<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Area_Use')}} <span class="req">*</span></label>
 									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="aruse" name="aruse" tabindex="1">
 											<option></option>
 											@foreach ($aruse as $rec)
@@ -374,7 +370,7 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">AREA DESCRIPTION</label>
+									<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Area_Description')}} </label>
 									<div  class="form_input">
 										<input id="ardesc"  name="ardesc"  type="text" tabindex="1" maxlength="50" />
 									</div>
@@ -390,7 +386,7 @@
 								<li >
 									
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">CELING TYPE<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Celing_Type')}} <span class="req">*</span></label>
 									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="celingtype" name="celingtype" tabindex="1">
 											<option></option>
 											@foreach ($ceiling as $rec)
@@ -402,7 +398,7 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">WALL TYPE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Wall_Type')}}<span class="req">*</span></label>
 									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="dwalltype" name="walltype" tabindex="1">
 											<option></option>
 											@foreach ($walltype as $rec)
@@ -413,7 +409,7 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">FLOOR TYPE<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Floor_Type')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="fltype" name="fltype" tabindex="1">
 											<option></option>
@@ -425,28 +421,28 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">DIMENTION<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Dimention')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="dimention"  name="dimention" value="0" type="text" tabindex="1" maxlength="50" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">AREA COUNT<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Area_Count')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="arcnt" onKeyDown="if(this.value.length==6 && event.keyCode>47 && event.keyCode < 58) return false;" value="0" onchange="caltotsize()" name="arcnt" value="1" onchange="caltotsize()" tabindex="1" type="number"  maxlength="50"/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">MEASUREMENT<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('existspropertyregisyter.Measurement')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="size"  name="size" onKeyDown="if(this.value.length==8 && event.keyCode>47 && event.keyCode < 58) return false;" value="0" onchange="caltotsize()" type="number" tabindex="1" maxlength="50" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">UNIT OF MEASUREMENT<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Unit_Of_Measurement')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="uom" name="uom" tabindex="1">
 											<option></option>
@@ -458,7 +454,7 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">TOTAL SIZE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('existspropertyregisyter.Total_Size')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="totsize" onKeyDown="if(this.value.length==8 && event.keyCode>47 && event.keyCode < 58) return false;" value="0" onchange="caltotsize()" name="totsize" value="0" type="number" tabindex="1" maxlength="50"/>
 									</div>

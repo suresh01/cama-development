@@ -415,18 +415,7 @@
 			        {"data": "owntype", "name": "owntype"}, 
 			        {"data": "ota_ownno", "name": "TO_OWNNAME"}, 
 			        {"data": "ota_addr_ln1", "name": "bldgcount"},
-			        {"data": "ownrace", "name": "ownrace"}/*,
-			        {"data": function(data){
-			        	//console.log("LOG :    "+data.ota_transferapplntypestatus_id);
-			        	if(data.ota_transtocenterstatus_id == 4){
-
-			        		return "<a href=#' onclick='retry("+data.ota_id+")'>Retry</a>";
-			        	} else {
-			        		return "";
-			        	}
-			        	
-			        
-			        }, "name": "ownrace"}*/
+			        {"data": "ownrace", "name": "ownrace"}
 		   		],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
 		   			var oSettings = this.fnSettings();

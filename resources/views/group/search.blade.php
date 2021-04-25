@@ -1,6 +1,6 @@
 
 			<div  id="basic-modal-content">
-				<h3>Filter</h3>
+				<h3>{{__('search.filter')}}</h3>
 				<form action="inspectionform" id="filterForm" method="get" class="form_container">	
 					@csrf
 				<input type="hidden" name="filter" value="true">			
@@ -8,18 +8,18 @@
 					</ul>	
 					
 					<div class="btn_24_blue">
-						<a href="#" onclick="addfilter(1)" class=""><span>Add </span></a>
+						<a href="#" onclick="addfilter(1)" class=""><span>{{__('search.add')}}  </span></a>
 					</div>
 					<div class="btn_24_blue">						
 						<!--<button id="addsubmit"type="submit" class="btn_small btn_blue"><span>Submit</span></button>	-->
-						<a href="#" onclick="submitSearchForm()" class=""><span>Submit </span></a>	
+						<a href="#" onclick="submitSearchForm()" class=""><span>{{__('search.submit')}}  </span></a>	
 					</div>
 					<div class="btn_24_blue">
-						<a href="#" class="simplemodal-close"><span>Close </span></a>
+						<a href="#" class="simplemodal-close"><span>{{__('search.close')}}  </span></a>
 					</div>
 					</form>
 			</div>
-			<a href="#" onclick="addfilter(0)" class="basic-modal">Add Filter</a>
+			<a href="#" onclick="addfilter(0)" class="basic-modal">{{__('search.addfilter')}}</a>
 <script>
 	var i = 0;
 	var BULDINGTYPE = "";

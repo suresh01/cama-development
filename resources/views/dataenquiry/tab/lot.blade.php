@@ -8,34 +8,35 @@
 										<table style="width:100%" id="lottble" class="display ">
 										<thead style="text-align: left;">
 								  		<tr>
-											<th class="table_sno">S No</th>
-											<th>STATE</th>
-											<th>DISCTRICT</th>
-											<th>CITY</th>
-											<th>PRESINT</th>
-											<th>LOT TYPE</th>
-											<th>LOT NUMBER</th>
-											<th>ALTERNATIF LOT NUMBER</th>
-											<th>LOT TITLE TYPE</th>
-											<th>LOT TITLE NUMBER</th>
-											<th>ALTERNATIF TITLE NUMBER</th>
-											<th>LAND AREA</th>
-											<th>LAND AREA UNIT</th>
-											<th>LAND CONDITION</th>
-											<th>LAND POSISION</th>
-											<th>ROAD TYPE</th>
-											<th>ROAD CATEGORY</th>
-											<th>LAND USE</th>
-											<th>Express Condition</th>
-											<th>Restriction of interest</th>
-											<th>TENURE TYPE</th>
-											<th>TENURE PERIOD</th>
-											<th>TENURE START DATE</th>
-											<th>TENURE END DATE</th>
-											<th>IS ACTIVE</th>
-											<th>ACTION</th>
-											<th>ACTIONCODE</th>
-											<th>lot_id</th>
+											<th class="table_sno">{{__('tab.S_No')}}</th>
+											
+											<th>{{__('tab.STATE')}}</th>
+											<th>{{__('tab.DISCTRICT')}}</th>
+											<th>{{__('tab.CITY')}}</th>
+											<th>{{__('tab.PRESINT')}}</th>
+											<th>{{__('tab.LOT_TYPE')}}</th>
+											<th>{{__('tab.LOT_NUMBER')}}</th>
+											<th>{{__('tab.ALTERNATIF_LOT_NUMBER')}}</th>
+											<th>{{__('tab.LOT_TITLE_TYPE')}}</th>
+											<th>{{__('tab.LOT_TITLE_NUMBER')}}</th>
+											<th>{{__('tab.ALTERNATIF_TITLE_NUMBER')}}</th>
+											<th>{{__('tab.LAND_AREA')}}</th>
+											<th>{{__('tab.LAND_AREA_UNILAND_AREAT')}}</th>
+											<th>{{__('tab.LAND_CONDITION')}}</th>
+											<th>{{__('tab.LAND_POSISION')}}</th>
+											<th>{{__('tab.ROAD_TYPE')}}</th>
+											<th>{{__('tab.ROAD_CATEGORY')}}</th>
+											<th>{{__('tab.LAND_USE')}}</th>
+											<th>{{__('tab.Express_Condition')}}</th>
+											<th>{{__('tab.Restriction_of_interest')}}</th>
+											<th>{{__('tab.TENURE_TYPE')}}</th>
+											<th>{{__('tab.TENURE_PERIOD')}}</th>
+											<th>{{__('tab.TENURE_START_DATE')}}</th>
+											<th>{{__('tab.TENURE_END_DATE')}}</th>
+											<th>{{__('tab.IS_ACTIVE')}}</th>
+											<th>{{__('tab.Action')}}</th>
+											<th>{{__('tab.Actioncode')}}</th>
+											<th>{{__('tab.lot_id')}}</th>
 											<th>{{__('datasearch.lotcol1')}}</th>
 											<th>{{__('datasearch.lotcol2')}}</th>
 											<th>{{__('datasearch.lotcol3')}}</th>
@@ -43,7 +44,7 @@
 											<th>{{__('datasearch.lotcol5')}}</th>
 											<th>{{__('datasearch.lotcol6')}}</th>
 											<th>{{__('datasearch.lotcol7')}}</th>
-											<th>accnum</th>
+											<th>{{__('tab.accnum')}}</th>
 										</tr>
 										</thead>
 										<tbody>										
@@ -67,7 +68,7 @@
 										
 									<input type="hidden" value="0" name="lottableindex" id="lottableindex">
 										<fieldset>
-										<legend>Lot Information</legend>
+										<legend>{{__('tab.Lot_Information')}}</legend>
 									<div class="form_grid_12">
 										<label class="field_title" id="lusername" for="username">{{__('datasearch.lotype')}}<span class="req">*</span></label>
 										<div  class="form_input">

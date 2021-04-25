@@ -111,7 +111,7 @@ return [
     'lotstatus' => 'INDICATOR FOR LAND IS ACTIVE',
 
 
-    'bldgno' => 'BUILDING NUMBER',
+    /*'bldgno' => 'BUILDING NUMBER',
     'bldgcate' => 'BUILDING CATEGORY',
     'bldgtype' => 'BUILDING TYPE',
     'bldgstorey' => 'BUILDING STOREY',
@@ -133,7 +133,7 @@ return [
     'totsize' => 'TOTAL SIZE',
     'ceilingtype' => 'CEILING TYPE',
     'ardesc' => 'AREA DESCRIPTION',
-    'ref' => 'REFF INFORMATION'
+    'ref' => 'REFF INFORMATION'*/
 
 
 

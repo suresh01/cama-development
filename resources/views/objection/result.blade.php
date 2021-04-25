@@ -48,8 +48,9 @@
 						<div id="widget_tab">
 							<ul>
 								<li><a href="agenda?term={{$term}}&id={{$id}}" >Agenda</a></li>
-								<li><a href="newnotice?term={{$term}}&id={{$id}}">New Notis</a></li>
-								<li><a href="notice?term={{$term}}&id={{$id}}">Existing Notis</a></li>
+								
+								<!--<li><a href="newnotice?term={{$term}}&id={{$id}}">New Notis</a></li>-->
+								<li><a href="notice?term={{$term}}&id={{$id}}">Notis</a></li>
 								<li><a href="objectionreport?term={{$term}}&id={{$id}}" >Objection</a></li>
 								<li><a href="decision?term={{$term}}&id={{$id}}">Decision</a></li>
 								<li><a href="result?term={{$term}}&id={{$id}}"  class="active_tab">Report</a></li>

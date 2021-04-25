@@ -6,7 +6,7 @@
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>Property Lot Information</title>
+<title>{{__('CodeMaintenance.Property_Lot_Information')}} </title>
 
 @include('includes.header', ['page' => 'datamaintenance'])
 					
@@ -17,16 +17,16 @@
 				<div class="breadCrumbHolder module">	
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-						<li>Property Lot Transfer</li>
+						<li><a href="#">{{__('CodeMaintenance.Home')}} </a></li>
+						<li><a href="#">{{__('CodeMaintenance.Data_Maintenance')}} </a></li>
+						<li>{{__('CodeMaintenance.Property_Lot_Transfer')}} </li>
 					</ul>
 				</div>
 				</div>
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">		
 					@include('codemaintenance.ownershiptransfer.newsearch')
-					<a href="#" onclick="addProperty()">Add Property</a>
+					<a href="#" onclick="addProperty()">{{__('CodeMaintenance.Add_Property')}}</a>
 				</div>
 				<br>
         
@@ -36,37 +36,37 @@
 							<thead style="text-align: left;">
 								<tr>
 									<th class="table_sno">
-										S No
+									{{__('CodeMaintenance.SNo')}}
 									</th>
 									<th>
-										LOT TYPE / NUMBER
+									{{__('CodeMaintenance.Lot_Type_Number')}} 
 									</th>
 									<th>
-										LOT TITLE TYPE / NUMBER
+									{{__('CodeMaintenance.Lot_Title_Type_Number')}} 
 									</th>
 									<th>
-										ALTERNATIF LOT NUMBER
+									{{__('CodeMaintenance.Alternatif_Lot_Number')}} 
 									</th>
 									<th>
-										STRATA NUMBER
+									{{__('CodeMaintenance.Strata_Number')}} 
 									</th>
 									<th>
-										TENANT TYPE
+									{{__('CodeMaintenance.Tenant_Type')}} 
 									</th>	
 									<th>
-										TENURE PERIOD
+									{{__('CodeMaintenance.Tenure_Period')}} 
 									</th>	
 									<th>
-										START DATE
+									{{__('CodeMaintenance.Start_Date')}} 
 									</th>	
 									<th>
-										END DATE
+									{{__('CodeMaintenance.End_Date')}} 
 									</th>
 									<th>
-										STATUS
+									{{__('CodeMaintenance.Status')}} 
 									</th>		
 									<th>
-										ACTION
+									{{__('CodeMaintenance.Action')}} 
 									</th>		
 								</tr>
 							</thead>
@@ -85,7 +85,7 @@
 		</form>-->
 		
 		<div style="display: none;" class="grid_12" id="lot-modal-content">
-				<h3>Lot Detail</h3>
+				<h3>{{__('CodeMaintenance.Lot_Detail')}}</h3>
 				<form action="validateValuation" id="valuationcheckform" method="post" class="form_container">	
 					@csrf
 				
@@ -95,12 +95,12 @@
 						<ul>
 							<li>				
 								<fieldset>
-									<legend>Account Information</legend>				
+									<legend>{{__('CodeMaintenance.Account_Information')}} </legend>				
 									
 									
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Account No<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Account_No')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="accno" tabindex="8" name="accno"  type="text" readonly="" class=""/>
 										</div>
@@ -108,7 +108,7 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" onchange="" id="lposition" for="position">Lot List<span class="req">*</span></label>
+										<label class="field_title" onchange="" id="lposition" for="position">{{__('CodeMaintenance.Lot_List')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select placeholder="Choose a Status..." style="width:100%" class="cus-select" onchange="getLotDetail(this.value)" id="lotlist" name="lotlist" tabindex="1">
 												<option value="0"></option>
@@ -128,7 +128,7 @@
 						<ul>
 							<li>				
 								<fieldset>
-									<legend>Lot Information</legend>					
+									<legend>{{__('CodeMaintenance.Lot_Information')}} </legend>					
 									
 									<!--<div class="form_grid_12">
 										<label class="field_title">Copy Previous Detail</label>
@@ -141,7 +141,7 @@
 									</div>-->
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Lot Code<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Lot_Code')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="l3otype" name="lot3ype" tabindex="1">
 												<option value=""></option>
@@ -155,7 +155,7 @@
 									
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Lot No<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Lot_No')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="lot3num" tabindex="8" name="lotn3um"  type="text" maxlength="100" class=""/>
 										</div>
@@ -163,14 +163,14 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Alternate Lot No<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Alternate_Lot_No')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="altl3otnum"  tabindex="9" name="altlotn3um"  type="text"  maxlength="100" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Title Code<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Title_Code')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="l3ttt" tabindex="4" name="l3ttt" tabindex="20">
 												<option></option>
@@ -182,21 +182,21 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Title No<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Title_No')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="3ltnum"  name="ltnu3m" tabindex="11"  type="text"  maxlength="100" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Altenate Title No<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Altenate_Title_No')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="3altnum" name="altn3um"  tabindex="12"  type="text" " maxlength="50" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Strata No<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Strata_No')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="3stratano" name="str3atano"  tabindex="12"  type="text" " maxlength="50" class=""/>
 										</div>
@@ -211,7 +211,7 @@
 						<ul>
 							<li>				
 								<fieldset>
-									<legend>Lease Information</legend>					
+									<legend>{{__('CodeMaintenance.Lease_Information')}} </legend>					
 									
 									<!--<div class="form_grid_12">
 										<label class="field_title">Copy Previous Detail</label>
@@ -224,7 +224,7 @@
 									</div>-->
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Tenure Type<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Tenure_Type')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="3tentype" tabindex="19" name="tent3ype" tabindex="20">
 												<option></option>
@@ -235,7 +235,7 @@
 									
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Tenure Period<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Tenure_Period')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="3tenduration" tabindex="8" name="tendura3tion"  type="text" maxlength="100" class=""/>
 										</div>
@@ -243,14 +243,14 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Tenure Start Date<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Tenure_Start_Date')}} <span class="req">*</span></label>
 										<div  class="form_input">
 										<input type="text" id="3tenstart" dateFormat='dd/mm/yyyy' name="tenst3art" tabindex="21">
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Tenure End Date<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Tenure_End_Date')}}<span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="t3enend"  name="3tenend" class="" type="text"  maxlength="50" />
 										</div>
@@ -265,7 +265,7 @@
 						<ul>
 							<li>				
 								<fieldset>
-									<legend>Lot Information</legend>					
+									<legend>{{__('CodeMaintenance.Lot_Information')}} </legend>					
 									
 									<!--<div class="form_grid_12">
 										<label class="field_title">Copy Previous Detail</label>
@@ -278,7 +278,7 @@
 									</div>-->
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Lot Code<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Lot_Code')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lotype" name="lotype" tabindex="1">
 												<option value=""></option>
@@ -292,7 +292,7 @@
 									
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Lot No<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Lot_No')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="lotnum" tabindex="8" name="lotnum"  type="text" maxlength="100" class=""/>
 										</div>
@@ -300,14 +300,14 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Alternate Lot No<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Alternate_Lot_No')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="altlotnum"  tabindex="9" name="altlotnum"  type="text"  maxlength="100" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Title Code<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Title_Code')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lttt" tabindex="4" name="lttt" tabindex="20">
 												<option></option>
@@ -319,21 +319,21 @@
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Title No<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Title_No')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="ltnum"  name="ltnum" tabindex="11"  type="text"  maxlength="100" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Altenate Title No<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Altenate_Title_No')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="altnum" name="altnum"  tabindex="12"  type="text"  maxlength="50" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Strata No<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Strata_No')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="stratano" name="stratano"  tabindex="12"  type="text"  maxlength="50" class=""/>
 										</div>
@@ -348,7 +348,7 @@
 						<ul>
 							<li>				
 								<fieldset>
-									<legend>Lease Information</legend>					
+									<legend>{{__('CodeMaintenance.Lease_Information')}} </legend>					
 									
 									<!--<div class="form_grid_12">
 										<label class="field_title">Copy Previous Detail</label>
@@ -361,7 +361,7 @@
 									</div>-->
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Tenure Type<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Tenure_Type')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="tentype" tabindex="19" name="tentype" tabindex="20">
 												<option></option>
@@ -375,7 +375,7 @@
 									
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Tenure Period<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Tenure_Period')}}<span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="tenduration" tabindex="8" name="tenduration"  type="text" maxlength="100" class=""/>
 										</div>
@@ -383,14 +383,14 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Tenure Start Date<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Tenure_Start_Date')}} <span class="req">*</span></label>
 										<div  class="form_input">
 										<input type="text" id="tenstart" dateFormat='dd/mm/yyyy' name="tenstart" tabindex="21">
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
-										<label class="field_title" id="lposition" for="position">Tenure End Date<span class="req">*</span></label>
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Tenure_End_Date')}}<span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="tenend"  name="tenend" class="" type="text"  maxlength="50" />
 										</div>
@@ -403,10 +403,10 @@
 					
 					<div class="btn_24_blue">						
 						<!--<button id="addsubmit"type="submit" class="btn_small btn_blue"><span>Submit</span></button>	-->
-						<a href="#" onclick="submitData()" class=""><span>Update Data </span></a>	
+						<a href="#" onclick="submitData()" class=""><span>{{__('common.Update_Data')}}  </span></a>	
 					</div>
 					<div class="btn_24_blue">
-						<a href="#" class="simplemodal-close"><span>Close </span></a>
+						<a href="#" class="simplemodal-close"><span>{{__('common.Close')}}  </span></a>
 					</div>
 				</div>
 				<input type="hidden" name="accno" id="lotaccount">

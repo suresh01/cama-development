@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Plan</title>
+<title>{{__('group.Plan')}} </title>
 @include('includes.header', ['page' => 'datamaintenance'])
 	<!--<div class="page_title">
 		<span class="title_icon"><span class="blocks_images"></span></span>
@@ -31,15 +31,15 @@
 					
 					<div id="breadCrumb3"  class="breadCrumb grid_3">
 						<ul >
-							<li><a href="#">Home</a></li>
-							<li>Plan Registeration</li>
+							<li><a href="#">{{__('group.Home')}} </a></li>
+							<li>{{__('group.Plan_Registeration')}} </li>
 						</ul>
 					</div>
 
 
 					@include('search.searchcustom',['tableid'=>'termtbl', 'action' => 'tenanttable', 'searchid' => '25'])
 
-					<button id="adduser" style="float:right;margin-right: 10px;" onclick="newTerm()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Plan</span></button>
+					<button id="adduser" style="float:right;margin-right: 10px;" onclick="newTerm()" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('group.Add_Plan')}}</span></button>
 					<br>
 				</div>		
 				<div class="widget_wrap">					
@@ -51,53 +51,49 @@
 							<thead style="text-align: left;">
 			  					<tr>
 									<th class="table_sno">
-										S No
+										{{__('group.SNo')}} 
 									</th>
 									<th>
-										File Number
+										{{__('group.File_Number')}}
 									</th>
 									<th>
-										Development Title
+										{{__('group.Development_Title')}} 
 									</th>
 									<th>
-										Plan Application Type
+										{{__('group.Plan_Application_Type')}} 
 									</th>
 									<th>
-										Zone
+										{{__('group.Zone')}} 
 									</th>
 									<th>
-										No Lot
+										{{__('group.No_Lot')}}
 									</th>
 									<th style="display: none;">
-										Create By -
-										Create At
+										{{__('group.Create_By_At')}}
 									</th>
 									<th style="display: none;">
-										Create By -
-										Create At
+										{{__('group.Create_By_At')}}
 									</th>
 									<th style="display: none;">
-										Update By -
-										Update At
+										{{__('group.Update_By_At')}}
 									</th>
 									<th style="display: none;">
-										Update By -
-										Update At
+										{{__('group.Update_By_At')}}
 									</th>
 									<th>
-										Plan Date
+										{{__('group.Plan_Date')}}
 									</th>
 									<th>
-										CCC Date
+										{{__('group.CCC_Date')}}
 									</th>
 									<th>
-										Valuation Date
+										{{__('group.Valuation_Date')}}
 									</th>
 									<th>
-										Plan Status
+										{{__('group.Status')}} 
 									</th>
 									<th>
-										Action
+										{{__('group.Action')}} 
 									</th>
 								</tr>
 							</thead>
@@ -108,7 +104,7 @@
 										{{$loop->iteration}}
 									</td>
 									<td>
-										{{$rec->plan_fileno}}
+										<a class="" onclick="editTerm('{{$rec->plan_id}}')" title="Edit plan" href="#">{{$rec->plan_fileno}} </a>
 									</td>
 									<td>
 										{{$rec->plan_desc}}
@@ -149,7 +145,7 @@
 									<td>
 										
 										@if($rec->plan_planstatus_id == 1)	
-										    <span><a class="action-icons c-delete delete_term" onclick="deleteTerm('{{$rec->plan_id}}')" href="#" title="Delete Term">Delete</a></span>
+										    <span><a class="action-icons c-delete delete_term" onclick="deleteTerm('{{$rec->plan_id}}')" href="#" title="Delete Term">{{__('common.Delete')}}</a></span>
 										@endif
 
 										@if($rec->plan_planstatus_id == 9)
@@ -157,8 +153,9 @@
 										@endif
 
 										@if($rec->plan_planstatus_id != 9)
-										<span><a class="action-icons c-edit" onclick="editTerm('{{$rec->plan_id}}')" title="Edit plan" href="#">Edit</a></span>
+										<!--<span><a class="action-icons c-edit" onclick="editTerm('{{$rec->plan_id}}')" title="Edit plan" href="#">{{__('common.Edit')}} </a></span>-->
 										@endif
+										<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -982px  -2px !important;display: inline-block; float: left;" onclick="attachment('{{$rec->plan_id}}')"  title="Attachment" href="#"></a></span>
 									</td>
 								</tr>
 								<div style="display: none;">
@@ -183,7 +180,7 @@
 			<div id="addterm" style="display:none" class="grid_10 full_block">
 				<div class="widget_wrap">
 					<div class="widget_content">
-						<h3 id="title">Add Plan</h3>
+						<h3 id="title">{{__('group.Add_Plan')}}</h3>
 						<form id="addtermfrom"  autocomplete="off" class="" method="post" action="#" >
 							@csrf
 							<input type="hidden" name="id" id="id" value="0">
@@ -192,21 +189,21 @@
 								<ul>
 									<li>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="luserid" for="userid">File Number<span class="req">*</span></label>
+											<label class="field_title" id="luserid" for="userid">{{__('group.File_Number')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="fileno" required="true"  name="fileno" type="text"  />
 											</div>
 											<span class=" label_intro"></span>
 										</div>							
 										<div class="form_grid_12">									
-											<label class="field_title" id="luserid" for="userid">Plan Desc<span class="req">*</span></label>
+											<label class="field_title" id="luserid" for="userid">{{__('group.Description')}} <span class="req">*</span></label>
 											<div class="form_input">
 												<textarea id="plandesc" required="true" class="" name="plandesc" ></textarea>
 											</div>
 											<span class=" label_intro"></span>
 										</div>	
 										<div class="form_grid_12">									
-											<label class="field_title" id="luserid" for="userid">Application Type<span class="req">*</span></label>
+											<label class="field_title" id="luserid" for="userid">{{__('group.Plan_Application_Type')}} <span class="req">*</span></label>
 											<div class="form_input">
 												<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="applicationtype" name="applicationtype" tabindex="20">
 													<option></option>
@@ -218,7 +215,7 @@
 											<span class=" label_intro"></span>
 										</div>		
 										<div class="form_grid_12">									
-											<label class="field_title" id="luserid" for="userid">Zone<span class="req">*</span></label>
+											<label class="field_title" id="luserid" for="userid">{{__('group.Zone')}} <span class="req">*</span></label>
 											<div class="form_input">
 												<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="zone" name="zone" tabindex="20">
 													<option></option>
@@ -230,49 +227,49 @@
 											<span class=" label_intro"></span>
 										</div>							
 										<div class="form_grid_12">									
-											<label class="field_title" id="luserid" for="userid">No Lot<span class="req">*</span></label>
+											<label class="field_title" id="luserid" for="userid">{{__('group.Description')}} No_Lot<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="nolot" required="true" class="" name="nolot" type="text"  value="{{ old('term') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>							
 										<div class="form_grid_12">									
-											<label class="field_title" id="luserid" for="userid">Plan Date</label>
+											<label class="field_title" id="luserid" for="userid">{{__('group.Plan_Date')}}</label>
 											<div class="form_input">
 												<input id="plandate" class="" name="plandate" type="text"  value="{{ old('term') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>							
 										<div class="form_grid_12">									
-											<label class="field_title" id="luserid" for="userid">CCC Date</label>
+											<label class="field_title" id="luserid" for="userid">{{__('group.CCC_Date')}} </label>
 											<div class="form_input">
 												<input id="cccdate" class="" name="cccdate" type="text"  value="{{ old('term') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>									
 										<div class="form_grid_12">									
-											<label class="field_title" id="luserid" for="userid">Valuation Date</label>
+											<label class="field_title" id="luserid" for="userid">{{__('group.Valuation_Date')}}</label>
 											<div class="form_input">
 												<input id="valdate" class="" name="valdate" type="text"  value="{{ old('term') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>									
 										<div class="form_grid_12">									
-											<label class="field_title" id="luserid" for="userid">Note<span class="req">*</span></label>
+											<label class="field_title" id="luserid" for="userid">{{__('group.Note')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<textarea id="note" required="true" class="" name="note" ></textarea>
 											</div>
 											<span class=" label_intro"></span>
 										</div>										
 										<div class="form_grid_12">									
-											<label class="field_title" id="luserid" for="userid">Status<span class="req">*</span></label>
+											<label class="field_title" id="luserid" for="userid">{{__('group.Status')}} <span class="req">*</span></label>
 											<div class="form_input">
 
 												<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="status" name="status" tabindex="20">
 													<option></option>		
-													<option value="2">SUBMITED TO VALUATION</option>
-													<option value="4">VALUATION ACCEPT</option>
-													<option value="9">COMPLETED</option>
+													<option value="2">{{__('group.Submited_To_Valuation')}} </option>
+													<option value="4">{{__('group.Valuation_Accept')}} </option>
+													<option value="9">{{__('group.Completed')}} </option>
 												</select>
 											</div>
 											<span class=" label_intro"></span>
@@ -284,9 +281,9 @@
 							<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
 							
 								<div class="form_input">
-									<button id="addsubmit" name="adduser" type="submit" onclick="validateTerm()" class="btn_small btn_blue"><span>Submit</span></button>			
+									<button id="addsubmit" name="adduser" type="submit" onclick="validateTerm()" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>			
 														
-									<button id="close" onclick="closeTerm()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+									<button id="close" onclick="closeTerm()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 									 <span class=" label_intro"></span>
 								</div>
 								
@@ -300,6 +297,18 @@
 	<span class="clear"></span>
 	
 	<script>
+
+
+		function attachment(id){
+			//termdate = termdate.split("/").pop();
+			var w = window.open('about:blank','Popup_Window','toolbar=0,resizable=0,location=no,statusbar=0,menubar=0,width=1000,height=700,left = 312,top = 50');
+		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
+		       // w.location = "landval?id="+id;
+		      // w.location.pathname = 'valuation/popup/land.blade.php';
+		       w.location.assign("termattachment?prop_id="+id+"&year=");
+		    }
+		}
+
 		function approveProperty(id){
 			/*var pland = $('#plandate_'+id).val();
 			var cccd = $('#cccdate_'+id).val()

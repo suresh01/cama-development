@@ -6,7 +6,7 @@
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>Property Maintenance</title>
+<title>{{__('existspropertyregisyter.Property_Maintenance')}} </title>
 <style>
 .disabled-btn{
     pointer-events:none;
@@ -21,9 +21,9 @@
 		<div id="usertable" class="grid_12">	
 			<div id="breadCrumb3" class="breadCrumb grid_12">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-						<li><a href="existspropertybasket">Property Registeration </a></li>
+						<li><a href="#">{{__('existspropertyregisyter.Home')}} </a></li>
+						<li><a href="#">{{__('existspropertyregisyter.Data_Maintenance')}} </a></li>
+						<li><a href="existspropertybasket">{{__('existspropertyregisyter.Property_Registration')}} </a></li>
 						<li><a href="existspropertyregister?pb={{$pb}}">{{$basket_name}}</a></li>
 						<li>{{$accountnumbber}}</li>
 					</ul>
@@ -43,21 +43,21 @@
 						<!--<h3>Property Registration</h3>-->
 						<form action="" id="existspropertyregsitration_from" class="form_container left_label">
 							<fieldset title="Step 1">		
-								<legend>Master Information</legend>					
+								<legend>{{__('existspropertyregisyter.Master_Information')}} </legend>					
 								
 				            	@include('existspropertyregister.tab.master')
 				            								
 							</fieldset>
 							<fieldset title="Step 2">
-								<legend>Lot Inforamtion</legend>
+								<legend>{{__('existspropertyregisyter.Lot_Inforamtion')}} </legend>
 								@include('existspropertyregister.tab.lot')
 							</fieldset>
 							<fieldset title="Step 3">
-								<legend>Owner Information</legend>
+								<legend>{{__('existspropertyregisyter.Owner_Information')}} </legend>
 								@include('existspropertyregister.tab.owner')
 							</fieldset>
 							<fieldset title="Step 4">
-								<legend>Building Inforamtion</legend>
+								<legend>{{__('existspropertyregisyter.Building_Inforamtion')}}  </legend>
 								@include('existspropertyregister.tab.building')
 							</fieldset>
 							@if($iseditable == 1)

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Property Information</title>
+<title>{{__('CodeMaintenance.Property_Information')}}</title>
 
 @include('includes.header', ['page' => 'datamaintenance'])
 					
@@ -14,9 +14,9 @@
 				<div class="breadCrumbHolder module">	
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-						<li>Property Address</li>
+						<li><a href="#">{{__('CodeMaintenance.Home')}} </a></li>
+						<li><a href="#">{{__('CodeMaintenance.Data_Maintenance')}} </a></li>
+						<li>{{__('CodeMaintenance.Property_Address')}} </li>
 					</ul>
 				</div>
 				</div>
@@ -24,7 +24,7 @@
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">
 							
 					@include('codemaintenance.ownershiptransfer.newsearch')
-					<a href="#" onclick="addProperty()">Add Property</a>
+					<a href="#" onclick="addProperty()">{{__('CodeMaintenance.Add_Property')}}</a>
 				</div>
 				<br>
         
@@ -34,40 +34,40 @@
 							<thead style="text-align: left;">
 								<tr>
 									<th class="table_sno">
-										S No
+										{{__('CodeMaintenance.SNo')}}
 									</th>
 									<th>
-										ACCOUNT NUMBER
+										{{__('CodeMaintenance.Account_Number')}}
 									</th>
 									<th>
-										FILE NUMBER
+										{{__('CodeMaintenance.File_Number')}}
 									</th>
 									<th>
-										ZONE
+										{{__('CodeMaintenance.Zone')}}
 									</th>
 									<th>
-										SUBZONE
+										{{__('CodeMaintenance.SubZone')}}
 									</th>
 									<th>
-										ADDRESS 1
+										{{__('CodeMaintenance.Address1')}}
 									</th>	
 									<th>
-										ADDRESS 2
+										{{__('CodeMaintenance.Address2')}}
 									</th>	
 									<th>
-										ADDRESS 3
+										{{__('CodeMaintenance.Address3')}}
 									</th>	
 									<th>
-										CITY
+										{{__('CodeMaintenance.City')}}
 									</th>
 									<th>
-										POSTCODE
+										{{__('CodeMaintenance.Post_Code')}}
 									</th>		
 									<th>
-										STATUS
+										{{__('CodeMaintenance.Status')}}
 									</th>	
 									<th>
-										ACTION
+										{{__('CodeMaintenance.Action')}}
 									</th>		
 								</tr>
 							</thead>
@@ -81,7 +81,7 @@
 									<div class="widget_wrap collapsible_widget">
 										<div class="widget_top active">
 											<span class="h_icon"></span>
-											<h6>Log Information</h6>
+											<h6>{{__('CodeMaintenance.Log_Information')}}</h6>
 										</div>
 										<div class="widget_content">
 											<div class="invoice_tbl">
@@ -89,37 +89,37 @@
 												<thead>
 												<tr class=" gray_sai">
 													<th>
-														Log Id
+														{{__('CodeMaintenance.Log_Id')}} 
 													</th>
 													<th>
-														ACCOUNT NUMBER
+														{{__('CodeMaintenance.Account_Number')}} 
 													</th>
 													<th>
-														FILE NUMBER
+														{{__('CodeMaintenance.Property_Address')}} File_Number
 													</th>
 													<th>
-														ZONE
+														{{__('CodeMaintenance.Zone')}} 
 													</th>
 													<th>
-														SUBZONE
+														{{__('CodeMaintenance.SubZone')}} 
 													</th>
 													<th>
-														ADDRESS 1
+														{{__('CodeMaintenance.Address1')}}
 													</th>	
 													<th>
-														ADDRESS 2
+														{{__('CodeMaintenance.Address2')}}
 													</th>	
 													<th>
-														ADDRESS 3
+														{{__('CodeMaintenance.Address3')}}
 													</th>	
 													<th>
-														CITY
+														{{__('CodeMaintenance.City')}}
 													</th>
 													<th>
-														POSTCODE
-													</th>	
+														{{__('CodeMaintenance.Post_Code')}}
+													</th>		
 													<th>
-														STATUS
+														{{__('CodeMaintenance.Status')}}
 													</th>
 												</tr>
 												</thead>

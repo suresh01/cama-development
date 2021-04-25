@@ -104,7 +104,14 @@
 					<div class="form_grid_12">
 						<label class="field_title" id="llevel" for="level">implemented DATE<span class="req">*</span></label>
 						<div  class="form_input">
-							<input id="impldate" tabindex="1" name="impldate" type="text" value="{{$master->rg_reimplementdate}}" maxlength="100" >
+							<!--<input id="impldate" tabindex="1" name="impldate" type="text" value="{{$master->rg_reimplementdate}}" maxlength="100" >-->
+
+							<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"   id="impldate" name="impldate" tabindex="14">
+								<option></option>
+								@foreach ($term as $rec)
+										<option value='{{ $rec->vt_termDate }}'>{{ $rec->termDate }}</option>
+								@endforeach	
+							</select>
 						</div>
 						<span class=" label_intro"></span>
 					</div>
@@ -191,6 +198,7 @@
 			}
 
 			$('#resultoffi').val('{{$master->rg_reofficer}}');
+			$('#impldate').val('{{$master->rg_reimplementdate}}');
 
 			
 			if('{{$master->rg_rerejectreason1}}' == 1){				

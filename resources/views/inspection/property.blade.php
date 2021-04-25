@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Inspection Property</title>
+<title>{{__('inspection.Inspection_Property')}}</title>
 <style type="text/css">
 
 #proptble td.numericCol {
@@ -73,10 +73,10 @@
 				<div class="breadCrumbHolder module">	
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="valterm">Valuation Data Management</a></li>
-						<li><a href="valbasket?id={{$termid}}&ts=1">Basket</a></li>
-						<li>Property</li>
+						<li><a href="#">{{__('inspection.Home')}} </a></li>
+						<li><a href="valterm">{{__('inspection.Valuation_Data_Management')}} </a></li>
+						<li><a href="valbasket?id={{$termid}}&ts=1"> {{__('inspection.Basket')}}</a></li>
+						<li>{{__('inspection.Property')}}</li>
 					</ul>
 				</div>
 				</div>
@@ -87,8 +87,8 @@
 
 					@include('inspection.bldgarea')
 					@if($approvestatus == '04' )	
-					<a href="#" onclick="addProperty()">New Property</a>
-					<a href="#" onclick="addExisitingProperty()">Add Exsisting Property</a>
+					<a href="#" onclick="addProperty()">{{__('inspection.New_Property')}} </a>
+					<a href="#" onclick="addExisitingProperty()">{{__('inspection.Add_Exsisting_Property')}} </a>
 					<!--<a href="#" onclick="deleteProperty()">Delete Property</a>-->
 
 
@@ -107,38 +107,38 @@
 
 								<div style="width: 420px;" class="comments_s">
 									<div style="width: 420px;" class="block_label">
-										Term<span>{{$viewparamterm}}</span>
+										{{__('inspection.Term')}} <span>{{$viewparamterm}}</span>
 									</div>
 								</div>
 
 								<div style="width: 520px;" class="comments_s">
 									<div style="width: 520px;" class="block_label">
-										Basket<span>{{$viewparambasket}} - {{$viewparambasketstatus}}</span>
+										{{__('inspection.Basket')}} <span>{{$viewparambasket}} - {{$viewparambasketstatus}}</span>
 									</div>
 								</div>
 
 								<div class="comments_s">
 									<div class="block_label">
-										Property Count<span id="prop_count">0</span>
+										{{__('inspection.Property_Count')}} <span id="prop_count">0</span>
 									</div>
 								</div>
 
 								<select id='testSelect1' style="float: right;" multiple>
-									<option value='3'>FILE NUMBER</option>
-									<option value='4'>ZONE</option>
-									<option value='5'>STATUS HARTA</option>
-									<option value='6'>PROPERTY CATEGORY</option>
-									<option value='7'>NT</option>
-									<option value='8'>RATE</option>
-									<option value='9'>TAX RATE</option>
-									<option value='10'>STATUS</option>
-									<option value='11'>ADDRESS 1</option>
-									<option value='12'>ADDRESS 2</option>
-									<option value='13'>ADDRESS 3</option>
-									<option value='14'>ADDRESS 4</option>
-									<option value='15'>POST CODE</option>
-									<option value='16'>CITY</option>
-									<option value='17'>STATE</option>
+									<option value='3'>{{__('inspection.File_Number')}}</option> 
+									<option value='4'>{{__('inspection.Zone')}}</option> 
+									<option value='5'>{{__('inspection.Status_Harta')}}</option> 
+									<option value='6'>{{__('inspection.Property_Category')}}</option> 
+									<option value='7'>{{__('inspection.Nt')}}</option> 
+									<option value='8'>{{__('inspection.Rate')}}</option> 
+									<option value='9'>{{__('inspection.Tax_Rate')}}</option> 
+									<option value='10'>{{__('inspection.Status')}}</option> 
+									<option value='11'>{{__('inspection.Address1')}}</option> 
+									<option value='12'>{{__('inspection.Address2')}}</option> 
+									<option value='13'>{{__('inspection.Address3')}}</option> 
+									<option value='14'>{{__('inspection.Address4')}}</option> 
+									<option value='15'>{{__('inspection.Post_Code')}}</option> 
+									<option value='16'>{{__('inspection.City')}}</option> 
+									<option value='17'>{{__('inspection.State')}}</option> 
 								</select>
 							</div>	
 
@@ -149,85 +149,41 @@
 							<thead style="text-align: left;">
 								<tr>
 									<th><input name="select_all" value="1" type="checkbox"></th>
-									<th class="table_sno">
-										S No
-									</th>
-									<th>
-										ACCOUNT NUMBER
-									</th>
-									<th>
-										FILE NUMBER
-									</th>
-									<th>
-										ZONE 
-									</th>
-									<th>
-										STATUS HARTA
-									</th>	
-									<th>
-										PROPERTY CATEGORY
-									</th>		
-									<!--<th>
-										OWNER NAME
-									</th>	
-										
-									<th>
-										OWNER TYPE / OWNER NUMBER
-									</th>-->	
-									<th>
-										NT
-									</th>		
-									<th>
-										RATE
-									</th>	
-									<th>
-										TAX RATE
-									</th>	
-									<th>
-										STATUS
-									</th>	
-									<th>
-										ADDRESS 1
-									</th>
-									<th>
-										ADDRESS 2
-									</th>
-									<th>
-										ADDRESS 3
-									</th>
-									<th>
-										ADDRESS 4
-									</th>	
-									<th>
-										POST CODE
-									</th>
-									<th>
-										CITY
-									</th>
-									<th>
-										STATE
-									</th>	
-									<th>
-										Action
-									</th>			
+									<th class="table_sno">{{__('inspection.SNo')}}</th>
+									<th>{{__('inspection.Account_Number')}}</th>
+									<th>{{__('inspection.File_Number')}}</th>
+									<th>{{__('inspection.Zone')}} </th>
+									<th>{{__('inspection.Status_Harta')}}</th>	
+									<th>{{__('inspection.Property_Category')}}</th>		
+									<!--<th>{{__('inspection.owner')}}Owner Name</th>											
+									<th>{{__('inspection.owner')}}Owner Type / Owner Number</th>-->	
+									<th>{{__('inspection.Nt')}}</th>		
+									<th>{{__('inspection.Rate')}}</th>	
+									<th>{{__('inspection.Tax_Rate')}}</th>	
+									<th>{{__('inspection.Status')}}</th>	
+									<th>{{__('inspection.Address_1')}}</th>
+									<th>{{__('inspection.Address_2')}}</th>
+									<th>{{__('inspection.Address_3')}}</th>
+									<th>{{__('inspection.Address_4')}}</th>	
+									<th>{{__('inspection.Post_Code')}}</th>
+									<th>{{__('inspection.City')}}</th>
+									<th>{{__('inspection.State')}}</th>	
+									<th>{{__('inspection.Action')}}</th>
 								</tr>
 							</thead>
 							<tbody>			
 								
 							</tbody>
 						</table>
-            <div><p id="info">0 Row Selected</p></div>
+            			<div><p id="info">0 {{__('inspection.Row_Selected')}}</p></div>
 					</div>
 				</div>
 			</div>
-				
-		
-		
-	</div>
+		</div>
 
 
 		<div style="display: none;"  id="revice-modal-content">
-				<h3>Revise Information</h3>
+				<h3>{{__('inspection.Revise_Information')}}</h3>
 				<form action="validateValuation" id="valuationcheckform" method="post" class="form_container">	
 					@csrf
 				<input type="hidden" id="val_id" name="val_id" >			
@@ -236,10 +192,10 @@
 							<div class="form_grid_12 multiline">
 								<div class="form_input">
 									<div class="form_grid_6">
-										<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="revisestage" name="revisestage" tabindex="20">
-											<option value="0">Please select Revise stage</option>
-											<option value="INS">Inspection</option>				
-											<option value="VAL">Valuation</option>								
+										<select data-placeholder="{{__('common.Choose_a_Custom')}}..." style="width:100%" class="cus-select field" id="revisestage" name="revisestage" tabindex="20">
+											<option value="0">{{__('inspection.Please_select_Stage')}} </option>
+											<option value="INS">{{__('inspection.Inspection')}} </option>				
+											<option value="VAL">{{__('inspection.Valuation')}} </option>								
 										</select>
 										<input type="hidden" value="" name="valuatuion_id" id="valuatuion_id">
 									</div>
@@ -251,16 +207,16 @@
 					
 					<div class="btn_24_blue">						
 						<!--<button id="addsubmit"type="submit" class="btn_small btn_blue"><span>Submit</span></button>	-->
-						<a href="#" onclick="submitRevise()" class=""><span>Revise </span></a>	
+						<a href="#" onclick="submitRevise()" class=""><span>{{__('common.Revise')}}  </span></a>	
 					</div>
 					<div class="btn_24_blue">
-						<a href="#" class="simplemodal-close"><span>Close </span></a>
+						<a href="#" class="simplemodal-close"><span>{{__('common.Close')}}  </span></a>
 					</div>
 					</form>
 			</div>
 
 			<div style="display: none;height: 160px;"  id="open-modal-content">
-				<h3>Stage Information</h3>
+				<h3>{{__('inspection.Stage_Information')}} </h3>
 				<form action="validateValuation" id="valuationcheckform" method="post" class="form_container">	
 					@csrf
 				<input type="hidden" id="val_id" name="val_id" >			
@@ -269,10 +225,10 @@
 							<div class="form_grid_12 multiline">
 								<div class="form_input">
 									<div class="form_grid_6">
-										<select onchange="regirect()" data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="stage" name="stage" tabindex="20">
-											<option value="#">Please select Stage</option>
-											<option value="inspection">Inspection</option>				
-											<option value="valuationdetail">Valuation</option>						
+										<select onchange="regirect()" data-placeholder="{{__('common.Choose_a_Custom')}}..." style="width:100%" class="cus-select field" id="stage" name="stage" tabindex="20">
+											<option value="#">{{__('inspection.Please_select_Stage')}} </option>
+											<option value="inspection">{{__('inspection.Inspection')}}</option>				
+											<option value="valuationdetail">{{__('inspection.Valuation')}} </option>						
 										</select>
 									</div>
 									<span class="clear"></span>
@@ -287,7 +243,7 @@
 					
 					
 					<div class="btn_24_blue">
-						<a href="#" class="simplemodal-close"><span>Close </span></a>
+						<a href="#" class="simplemodal-close"><span>{{__('common.Close')}}  </span></a>
 					</div>
 					</form>
 			</div>

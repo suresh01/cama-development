@@ -112,6 +112,9 @@
 										S No
 									</th>
 									<th>
+										Group
+									</th>
+									<th>
 										Account Number
 									</th>
 									<th>
@@ -131,9 +134,6 @@
 									</th>		
 									<th>
 										Property Storey
-									</th>	
-									<th>
-										Term Date
 									</th>	
 									<th>
 										Register By
@@ -393,6 +393,7 @@ var table = $('#proptble').DataTable({
 		        "columns": [
 			        {"data": "ma_accno", "orderable": false, "searchable": false, "name":"_id" },
 			        {"data": null, "name": "sno"},
+			        {"data": "ugroup", "name": "ugroup"},
 			        {"data": function(data){
 
 			        	return "<a onclick='updateApplication("+data.os_id+")' href='#'>"+data.ma_accno+"</a>";
@@ -404,7 +405,6 @@ var table = $('#proptble').DataTable({
 			        {"data": "bldgcategory", "name": "owner", "sClass": "numericCol"}, 
 			        {"data": "bldgtype", "name": "ishasbldg", "sClass": "numericCol"}, 
 			        {"data": "bldgsotery", "name": "ishasbldg", "sClass": "numericCol"}, 
-			        {"data": "os_termdate", "name": "propertstatus"}, 
 			        {"data": "os_createby", "name": "ishasbldg"}, 
 			        {"data": "os_createdate_frmt", "name": "propertstatus"}, 
 			        {"data": "approvalstatus", "name": "ishasbldg"}, 
@@ -457,6 +457,22 @@ var table = $('#proptble').DataTable({
              return '<input type="checkbox">';
          }
       }],
+			"drawCallback": function ( settings ) {
+	            var api = this.api();
+	            var rows = api.rows( {page:'current'} ).nodes();
+	            var last=null;
+	 
+	            api.column(2, {page:'current'} ).data().each( function ( group, i ) {
+	            	
+	                if ( last !== group ) {
+	                    $(rows).eq( i ).before(
+	                        '<tr class="group"><td colspan="5">'+group+'</td></tr>'
+	                    );
+	 
+	                    last = group;
+	                }
+	            } );
+	        },
       'rowCallback': function(row, data, dataIndex){
          // Get row ID
          var rowId = data[0];

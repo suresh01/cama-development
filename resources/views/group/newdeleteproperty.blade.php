@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>New Property</title>
+<title>{{__('group.New_Property')}}</title>
 
 
 @include('includes.header-popup')
@@ -17,9 +17,9 @@
         </div>
 				<div style="float:right;margin-right: 0px;"  class="btn_24_blue">	      
          
-					<a href="#" id="" onclick="getSelectedProp1()" class=""><span>Add Property </span></a>	
-          <a href="#" id="" onclick="back()" class=""><span>Back </span></a> 
-          <a href="#" id="" onclick="closeWindow()" class=""><span>Close </span></a> 
+					<a href="#" id="" onclick="getSelectedProp1()" class=""><span>{{__('group.Add_Property')}}  </span></a>	
+          <a href="#" id="" onclick="back()" class=""><span>{{__('common.Back')}}  </span></a> 
+          <a href="#" id="" onclick="closeWindow()" class=""><span>{{__('common.Close')}}  </span></a> 
 				</div>
 				<div style="float:right;margin-right: 15px;"  class="btn_24_blue">					
 				
@@ -35,22 +35,22 @@
 									<th><input name="select_all" value="1" type="checkbox">
 									</th>
 									<th class="table_sno">
-										S No
+										{{__('group.SNo')}} 
 									</th>
 									<th>
-										ACCOUNT NUMBER
+										{{__('group.Account_Number')}}
 									</th>
 									<th>
-										ZONE
+										{{__('group.Zone')}} ZONE
 									</th>
 									<th>
-										SUBZONE
+										{{__('group.Subzone')}}
 									</th>	
 									<th>
-										PROPERTY ADDRESS 1
+										{{__('group.Property_Address1')}} 
 									</th>		
 									<th>
-										IS EMPTY LOT
+										{{__('group.Is_Empty_Lot')}}
 									</th>					
 								</tr>
 							</thead>
@@ -58,7 +58,7 @@
 							
 							</tbody>
 						</table>
-            <div><p id="info">0 Row Selected</p></div>
+            <div><p id="info">0 {{__('group.Row_Selected')}}</p></div>
 					</div>
 				</div>
 			</div>
@@ -66,7 +66,7 @@
 	<span class="clear"></span>
 </div>
 <div style="display: none;"  id="revice-modal-content2">
-        <h3>General Information</h3>
+        <h3>{{__('group.General_Information')}}</h3>
         <form action="#" id="valuationcheckform" method="post" class="form_container">  
           @csrf
          
@@ -75,7 +75,7 @@
               <div class="form_grid_12 multiline">
                 <div class="form_input">
                   <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">Reason Name<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('group.Reason_Name')}}<span class="req">*</span></label>
                       <div class="form_input">
                        <select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="termid" name="termid" tabindex="20">
                           <option></option>
@@ -87,7 +87,7 @@
                       <span class=" label_intro"></span>
                     </div>  
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">Description<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('group.Description')}} <span class="req">*</span></label>
                       <div class="form_input">
                         <input id="desc" required="true"  name="name" type="text"  value="{{ old('term') }}" />
                       </div>
@@ -101,10 +101,10 @@
           
           <div class="btn_24_blue">           
             <!--<button id="addsubmit"type="submit" class="btn_small btn_blue"><span>Submit</span></button> -->
-            <a href="#" onclick="submitRevise()" class=""><span>Submit </span></a>  
+            <a href="#" onclick="submitRevise()" class=""><span>{{__('common.Submit')}}  </span></a>  
           </div>
           <div class="btn_24_blue">
-            <a href="#" class="simplemodal-close"><span>Close </span></a>
+            <a href="#" class="simplemodal-close"><span>{{__('common.Close')}}  </span></a>
           </div>
           </form>
       </div>

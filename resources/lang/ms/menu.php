@@ -3,18 +3,18 @@
 // resources/lang/en/messages.php
 
 return [
-    'title'=>'Penilaian Massa Berbantukan Komputer',
-    'home' => 'Menu Utama',
-    'dataenquiry' => 'Pertanyaan Data',
-    'propertysearch' => 'Pencarian Harta',
-    'termsearch' => 'Pencarian Istilah',
-    'officialsearch' => 'Pencarian Rasmi',
-    'datamaintenance' => 'Penyelenggaraan Data',
+    'title'=>'Computer Assisted Mass Appraisal',
+    'home' => 'Home',
+    'dataenquiry' => 'Data Enquiry',
+    'propertysearch' => 'Property Search',
+    'termsearch' => 'Term Search',
+    'officialsearch' => 'Official Search',
+    'datamaintenance' => 'Data Maintenance',
     'codemaintenance' => 'Code Maintenance',
-    'masterlistregister' => 'Pendaftaran Senarai Induk Baru',
+    'masterlistregister' => 'New Masterlist Registration',
     'masterlistmaintenance' => 'Existing Masterlist Maintenance',
-    'tenantreg' => 'Pendaftaran Penyewa',
-    'ratepayerreg' => 'Pendaftaran Pemohon Ratepayer',
+    'tenantreg' => 'Tenant Registration',
+    'ratepayerreg' => 'Ratepayer Registration',
     'dms' => 'DMS',
     'term' => 'Term Management',
     'evident' => 'Evident Bank',
@@ -42,6 +42,7 @@ return [
     'valuationmgmt' => 'Valuation Data Management',
     'objection' => 'Objection Meeting',
     'defunct' => 'Defunct Property',
-    'report' => 'Report'
+    'report' => 'Report',
+    'remisi' => 'Remisi'
 
 ];

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>New Property</title>
+<title>{{__('inspection.New_Property')}}</title>
 
 
 @include('includes.header-popup')
@@ -15,9 +15,9 @@
         
 				<div style="float:right;margin-right: 0px;"  class="btn_24_blue">	      
           
-					<a href="#" id="" onclick="getSelectedProp()" class=""><span>Add Property </span></a>	
-          <a href="#" id="" onclick="back()" class=""><span>Back </span></a> 
-          <a href="#" id="" onclick="closeWindow()" class=""><span>Close </span></a> 
+					<a href="#" id="" onclick="getSelectedProp()" class=""><span>{{__('inspection.Add_Property')}} </span></a>	
+          <a href="#" id="" onclick="back()" class=""><span>{{__('common.Back')}}  </span></a> 
+          <a href="#" id="" onclick="closeWindow()" class=""><span>{{__('common.Close')}}  </span></a> 
 				</div>
 				<div style="float:right;margin-right: 15px;"  class="btn_24_blue">					
 					@include('inspection.grab.propertysearch')
@@ -31,34 +31,20 @@
 								<tr>
 									<th><input name="select_all" value="1" type="checkbox">
 									</th>
-									<th class="table_sno">
-										S No
-									</th>
-									<th>
-										ACCOUNT NUMBER
-									</th>
-									<th>
-										ZONE
-									</th>
-									<th>
-										SUBZONE
-									</th>	
-									<th>
-										OWNER
-									</th>
-									<th>
-										PROPERTY ADDRESS 1
-									</th>		
-									<th>
-										IS EMPTY LOT
-									</th>					
+									<th class="table_sno">{{__('inspection.SNO')}}</th>
+									<th>{{__('inspection.Account_Number')}} </th>
+									<th>{{__('inspection.Zone')}} </th>
+									<th>{{__('inspection.Subzone')}} </th>	
+									<th>{{__('inspection.owner')}} </th>
+									<th>{{__('inspection.Property_Address1')}}</th>		
+									<th>{{__('inspection.Is_Empty_Lot')}} </th>					
 								</tr>
 							</thead>
 							<tbody>			
 							
 							</tbody>
 						</table>
-            <div><p id="info">0 Row Selected</p></div>
+            <div><p id="info">0 {{__('inspection.Row_Selected')}}</p></div>
 					</div>
 				</div>
 			</div>

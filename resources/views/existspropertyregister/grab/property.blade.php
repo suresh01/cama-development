@@ -3,68 +3,50 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>New Property</title>
+<title>{{__('existspropertyregisyter.New_Property')}}</title>
 
 
 @include('includes.header-popup')
 	<div id="content">
 		<div class="grid_container">
 
-		<div id="usertable" class="grid_12">	
-			<br>
-        
-				<div style="float:right;margin-right: 0px;"  class="btn_24_blue">	      
+    <br>
+
+    <div style="float:right;margin-right: 0px;"  class="btn_24_blue">
+      
+      <a href="#" id="" onclick="getSelectedProp()" class=""><span>{{__('existspropertyregisyter.Add_Property')}}  </span></a>
+      <!--<a href="#" id="" onclick="back()" class=""><span>Back </span></a> -->
+      <a href="#" id="" onclick="closeWindow()" class=""><span>{{__('common.Close')}}  </span></a>
+    </div>
+    <div style="float:right;margin-right: 15px;"  class="btn_24_blue">
+      @include('existspropertyregister.grab.search')
+    </div>
+    <br>
+
+    <div class="widget_wrap">
+      <div class="widget_content">
+        <table id="proptble" class="display select">
+          <thead style="text-align: left;">
+            <tr>
+              <th><input name="select_all" value="1" type="checkbox">
+            </th>
+            <th class="table_sno">{{__('existspropertyregisyter.SNo')}}</th>
+            <th>{{__('existspropertyregisyter.Account_Number')}} </th>
+            <th>{{__('existspropertyregisyter.Zone')}} </th>
+            <th>{{__('existspropertyregisyter.SubZone')}}</th>
+            <th>{{__('existspropertyregisyter.Property_Address1')}}</th>
+            <th>{{__('existspropertyregisyter.Is_Empty_Lot')}}   </th>
+            <th>{{__('existspropertyregisyter.Term')}}</th>
+            <th>{{__('existspropertyregisyter.Term_Status')}} </th>
+          </tr>
+        </thead>
+        <tbody>
           
-					<a href="#" id="" onclick="getSelectedProp()" class=""><span>Add Property </span></a>	
-          <!--<a href="#" id="" onclick="back()" class=""><span>Back </span></a> -->
-          <a href="#" id="" onclick="closeWindow()" class=""><span>Close </span></a> 
-				</div>
-				<div style="float:right;margin-right: 15px;"  class="btn_24_blue">					
-					@include('existspropertyregister.grab.search')
-				</div>
-				<br>
-        
-				<div class="widget_wrap">					
-					<div class="widget_content">						
-						<table id="proptble" class="display select">
-							<thead style="text-align: left;">
-								<tr>
-									<th><input name="select_all" value="1" type="checkbox">
-									</th>
-									<th class="table_sno">
-										S No
-									</th>
-									<th>
-										ACCOUNT NUMBER
-									</th>
-									<th>
-										ZONE
-									</th>
-									<th>
-										SUBZONE
-									</th>	
-									<th>
-										PROPERTY ADDRESS 1
-									</th>		
-									<th>
-										IS EMPTY LOT
-									</th>	
-                  <th>
-                    TERM
-                  </th>   
-                  <th>
-                    TERM STATUS
-                  </th> 				
-								</tr>
-							</thead>
-							<tbody>			
-							
-							</tbody>
-						</table>
-            <div><p id="info">0 Row Selected</p></div>
-					</div>
-				</div>
-			</div>
+        </tbody>
+      </table>
+      <div><p id="info">0 {{__('existspropertyregisyter.Row_Selected')}}</p></div>
+    </div>
+</div>
 	</div>
 	<span class="clear"></span>
 </div>

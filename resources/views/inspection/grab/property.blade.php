@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>New Property</title>
+<title>{{__('inspection.New_Property')}}</title>
 
 @include('includes.header-popup')
    
@@ -13,7 +13,7 @@
 		<div id="usertable" class="grid_12">	
 			<br>
 				<div style="float:right;margin-right: 0px;"  class="btn_24_blue">	
-					<a href="#" id="" onclick="getSelectedProp()" class=""><span>Add Property </span></a>	
+					<a href="#" id="" onclick="getSelectedProp()" class=""><span>{{__('inspection.Add_Property')}}  </span></a>	
 				</div>
 				<div style="float:right;margin-right: 15px;"  class="btn_24_blue">					
 					@include('search.inspectionsearch')
@@ -27,25 +27,25 @@
 									<th>
 									</th>
 									<th class="table_sno">
-										S No
+										{{__('inspection.SNo')}} 
 									</th>
 									<th>
-										ACCOUNT NUMBER
+										{{__('inspection.Account_Number')}}
 									</th>
 									<th>
-										ZONE
+										{{__('inspection.Zone')}} 
 									</th>
 									<th>
-										SUBZONE
+										{{__('inspection.Subzone')}} 
 									</th>	
 									<th>
-										OWNER
+										{{__('inspection.owner')}} 
 									</th>
 									<th>
-										PROPERTY ADDRESS 1
+										{__('inspection.Property_Address1')}
 									</th>		
 									<th>
-										IS EMPTY LOT
+										{{__('inspection.Is_Empty_Lot')}}
 									</th>					
 								</tr>
 							</thead>
