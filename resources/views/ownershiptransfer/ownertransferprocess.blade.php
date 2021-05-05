@@ -160,7 +160,7 @@
 											<div class="form_grid_12">
 												<label class="field_title" id="llevel" for="level">Email ID<span class="req">*</span></label>
 												<div  class="form_input">
-													<input id="emailid" name="emailid" tabindex="1" type="text" value="" maxlength="15" class=""/>
+													<input id="emailid" name="emailid" tabindex="1" type="text" value="" maxlength="" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
@@ -351,15 +351,15 @@
 											<div class="form_grid_12">
 												<label class="field_title" id="llevel" for="level">FAX NO<span class="req">*</span></label>
 												<div  class="form_input">
-													<input id="nfaxno" name="nfaxno" tabindex="1" type="text" value="" maxlength="15" class=""/>
+													<input id="nfaxno" name="nfaxno" tabindex="1" type="text" value="{{$owner->ota_faxno}}" maxlength="15" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
 											<div class="form_grid_12">
 												<label class="field_title" id="llevel" for="level">Email ID<span class="req">*</span></label>
 												<div  class="form_input">
-													<input id="nemailid" name="nemailid" tabindex="1" type="text" value="" maxlength="15" class=""/>
-												</div>
+													<input id="nemailid" name="nemailid" tabindex="1" type="text" value="{{$owner->ota_emailid}}" maxlength="" class=""/>
+												</div> 
 												<span class=" label_intro"></span>
 											</div>
 										
@@ -396,7 +396,7 @@
 										<div class="form_grid_12">
 											<label class="field_title" id="lposition" for="position">DENOMINATOR</label>
 											<div  class="form_input">
-												<input id="demominator" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name="demominator" value="{{$owner->ota_denomtr}}"  type="number" tabindex="1"  maxlength="5" class=""/>
+												<input id="ndemominator" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name="ndemominator" value="{{$owner->ota_denomtr}}"  type="number" tabindex="1"  maxlength="5" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>

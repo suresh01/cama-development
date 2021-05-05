@@ -126,19 +126,22 @@
 								<select id='testSelect1' style="float: right;" multiple>
 									<option value='3'>{{__('inspection.File_Number')}}</option> 
 									<option value='4'>{{__('inspection.Zone')}}</option> 
-									<option value='5'>{{__('inspection.Status_Harta')}}</option> 
-									<option value='6'>{{__('inspection.Property_Category')}}</option> 
-									<option value='7'>{{__('inspection.Nt')}}</option> 
-									<option value='8'>{{__('inspection.Rate')}}</option> 
-									<option value='9'>{{__('inspection.Tax_Rate')}}</option> 
-									<option value='10'>{{__('inspection.Status')}}</option> 
-									<option value='11'>{{__('inspection.Address1')}}</option> 
-									<option value='12'>{{__('inspection.Address2')}}</option> 
-									<option value='13'>{{__('inspection.Address3')}}</option> 
-									<option value='14'>{{__('inspection.Address4')}}</option> 
-									<option value='15'>{{__('inspection.Post_Code')}}</option> 
-									<option value='16'>{{__('inspection.City')}}</option> 
-									<option value='17'>{{__('inspection.State')}}</option> 
+									<option value='5'>{{__('inspection.Subzone')}}</option> 
+									<option value='6'>{{__('inspection.Status_Harta')}}</option> 
+									<option value='7'>{{__('inspection.Property_Category')}}</option> 
+									<option value='8'>Land Value</option> 
+									<option value='9'>Building Value</option> 
+									<option value='10'>{{__('inspection.Nt')}}</option> 
+									<option value='11'>{{__('inspection.Rate')}}</option> 
+									<option value='12'>{{__('inspection.Tax_Rate')}}</option> 
+									<option value='13'>{{__('inspection.Status')}}</option> 
+									<option value='14'>{{__('inspection.Address1')}}</option> 
+									<option value='15'>{{__('inspection.Address2')}}</option> 
+									<option value='16'>{{__('inspection.Address3')}}</option> 
+									<option value='17'>{{__('inspection.Address4')}}</option> 
+									<option value='18'>{{__('inspection.Post_Code')}}</option> 
+									<option value='19'>{{__('inspection.City')}}</option> 
+									<option value='20'>{{__('inspection.State')}}</option> 
 								</select>
 							</div>	
 
@@ -153,10 +156,13 @@
 									<th>{{__('inspection.Account_Number')}}</th>
 									<th>{{__('inspection.File_Number')}}</th>
 									<th>{{__('inspection.Zone')}} </th>
+									<th>{{__('inspection.Subzone')}} </th>
 									<th>{{__('inspection.Status_Harta')}}</th>	
-									<th>{{__('inspection.Property_Category')}}</th>		
+									<th>{{__('inspection.Property_Category')}}</th>	
 									<!--<th>{{__('inspection.owner')}}Owner Name</th>											
 									<th>{{__('inspection.owner')}}Owner Type / Owner Number</th>-->	
+									<th>Land Value</th>
+									<th>Building Value</th>	
 									<th>{{__('inspection.Nt')}}</th>		
 									<th>{{__('inspection.Rate')}}</th>	
 									<th>{{__('inspection.Tax_Rate')}}</th>	
@@ -495,10 +501,13 @@ var table = $('#proptble').DataTable({
 			        }, "name": "account number"},
 			        {"data": "ma_fileno", "name": "zone"},
 			        {"data": "zone", "name": "subzone"},
+			        {"data": "subzone", "name": "subzone"},
 			        {"data": "isbldg", "name": "address"},
 			        {"data": function(data){
 			            return data.bldgcategory+" || "+data.bldgtype+" || "+data.bldgsotery;
 			        }, "name": "owner"}, 
+			        {"data": "landvalue", "name": "ishasbldg"}, 
+			        {"data": "bldgvalue", "name": "propertstatus"}, 
 			        {"data": "vt_approvednt", "name": "owner", "sClass": "numericCol"}, 
 			        {"data": "vt_proposedrate", "name": "ishasbldg", "sClass": "numericCol"}, 
 			        {"data": "vt_approvedtax", "name": "ishasbldg", "sClass": "numericCol"}, 
@@ -509,7 +518,7 @@ var table = $('#proptble').DataTable({
 			        {"data": "ma_addr_ln4", "name": "ishasbldg","visible":false}, 
 			        {"data": "ma_postcode", "name": "propertstatus","visible":false}, 
 			        {"data": "ma_city", "name": "ishasbldg","visible":false}, 
-			        {"data": "state", "name": "propertstatus","visible":false}, 
+			        {"data": "state", "name": "propertstatus","visible":false},  
 			        {"data":  function(data){
 			        	
 			        	var deleteuri = '&nbsp;&nbsp;&nbsp;<span><a class="action-icons  "  onclick="deleteProperty('+data.vd_id+')" disabled="true" title="Delete Property" href="#"></a></span>';

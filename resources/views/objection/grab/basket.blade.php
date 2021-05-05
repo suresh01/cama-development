@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Add Agenda Property</title>
+<title>{{__('objection.Add_Agenda_Property')}}</title>
 @include('includes.header-popup')
  
 	<div id="content">
@@ -12,8 +12,8 @@
 		  		<br>
          
 				<div style="float:right;"  class="btn_24_blue">   
-           <a href="#" id="" onclick="getSelectedProp()" class=""><span>Add Basket </span></a>  
-			     <a href="#" id="" onclick="closeWindow()" class=""><span>Close </span></a> 
+           <a href="#" id="" onclick="getSelectedProp()" class=""><span>{{__('objection.Add_Basket')}} </span></a>  
+			     <a href="#" id="" onclick="closeWindow()" class=""><span>{{__('common.Close')}} </span></a> 
 
            
 				</div>
@@ -32,19 +32,19 @@
 									<th><input name="select_all" value="1" type="checkbox">
 									</th>
 							<th class="table_sno">
-								 S No
+								 {{__('objection.SNO')}}
 							</th>
 							<th>
-								Account Number
+								{{__('objection.Account_number')}}
 							</th>
               <th>
-                Basket Name
+                {{__('objection.Basket_Name')}} 
               </th>
 							<th>
-								Siries
+								{{__('objection.Siries')}}
 							</th>
               <th>
-                Year List
+                {{__('objection.Year_List')}}
               </th>
 						</tr>
 						</thead>
@@ -52,7 +52,7 @@
 						
 						</tbody>
 						</table>
-            <div><p id="info">0 Row Selected</p></div>
+            <div><p id="info">0 {{__('objection.Row_Selected')}}</p></div>
 					</div>
 				</div>
 			</div>

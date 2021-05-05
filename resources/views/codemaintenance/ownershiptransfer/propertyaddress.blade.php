@@ -154,12 +154,6 @@
 			}
 		}
 
-
-	
-
-		
-
-
 		function updateDataTableSelectAllCtrl(table){
 		   var $table             = table.table().node();
 		   var $chkbox_all        = $('tbody input[type="checkbox"]', $table);

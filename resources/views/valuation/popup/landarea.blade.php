@@ -199,11 +199,11 @@ $(document).ready(function(){
     //Manual Rate Calculation
     var table = $('#landdetail').DataTable();
     $('#landdetail tbody').on('change', '.editrate', function () {
-        var row = table.row(table.row( $(this).parents('tr') ).index());
-        var data = row.data();
-
+        var lrow = table.row(table.row( $(this).parents('tr') ).index());
+        var ldata = lrow.data();
+        var lrowid =  ldata[0];
         // console.log(data);
-        var rowid =  data[0];
+       /* var rowid =  data[0];
         var rate = $('#rate_'+rowid).val();
         var calucaterate =  $('#calucatedrate_'+rowid).val();
         var area =  data[2];
@@ -218,7 +218,31 @@ $(document).ready(function(){
         data[5] = formatMoneyHas(gross);
         data[6] = rate;
         data[7] = calucaterate;
-        row.data(data);
+        row.data(data);*/
+
+        for (var i = 0;i<table.rows().count();i++){
+            var row = table.row(table.row(i).index());
+            var data = table.row(i).data();
+            //var id_val = i+1;
+            var rowid =  data[0];
+            var rate = $('#rate_'+lrowid).val();
+            var calucaterate =  $('#calucatedrate_'+rowid).val();
+            var area =  data[2];
+            //console.log(calucaterate);
+            area = removeCommas(area);
+            rate = removeCommas(rate);
+            calucaterate = removeCommas(calucaterate);
+           // data[1]  = data[1];
+            var gross = area * rate * (1 - (calucaterate / 100));
+            data[3] = '<input type="text" class="editrate" style="text-align:right;" id="rate_'+rowid+'" value="'+rate+'" name="rate">';
+            data[4] = '<input type="text" class="editcalrate"  style="text-align:right;" id="calucatedrate_'+rowid+'" value="'+calucaterate+'" name="rate">';
+            data[5] = formatMoneyHas(gross);
+            data[6] = rate;
+            data[7] = calucaterate;
+            row.data(data);
+            //totalgross = totalgross + Number(removeCommas(grossvalue));
+         
+        }
 
         var grossland = 0;
         for (var j= 0;j<$('#landdetail').DataTable().rows().count();j++){

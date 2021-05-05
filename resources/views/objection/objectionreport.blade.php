@@ -134,6 +134,12 @@
 										Sub Zone 
 									</th>
 									<th>
+										Land Value 
+									</th>
+									<th>
+										Buliding Value
+									</th>
+									<th>
 										Proposed NT 
 									</th>
 									<th>
@@ -144,6 +150,12 @@
 									</th>
 									<th>
 										Valuer Recommend 
+									</th>
+									<th style="display: none;">
+										Difference
+									</th>
+									<th style="display: none;">
+										Percentage
 									</th>
 									<th style="display: none;">
 										ID
@@ -678,10 +690,14 @@ $(document).ready(function (){
 	                {"data": "ol_reason", "name": "subzone"},
 	                {"data": "zone", "name": "address"},
 	                {"data": "subzone", "name": "account number"},
+	                {"data": "landvalue", "name": "zone", "sClass": "numericCol"},
+	                {"data": "bldgvalue", "name": "subzone", "sClass": "numericCol"},
 	                {"data": "vt_proposednt", "name": "zone", "sClass": "numericCol"},
 	                {"data": "vt_proposedrate", "name": "subzone", "sClass": "numericCol"},
 	                {"data": "vt_proposedtax", "name": "address", "sClass": "numericCol"},
 	                {"data": "ol_valuerrecommend", "name": "address", "sClass": "numericCol"},
+	                {"data": "diff", "name": "address", "sClass": "numericCol","visible":false},
+	                {"data": "percentage", "name": "address", "sClass": "numericCol","visible":false},
 	                {"data":  function(data){
 			        	return '<span><a onclick="updateMeeting('+data.ol_id+')" class="action-icons c-edit  edtlotrow" href="#" title="Update Agenda">New Agenda</a></span>';
 			        }, "name": "address"}

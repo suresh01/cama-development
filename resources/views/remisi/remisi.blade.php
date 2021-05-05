@@ -69,10 +69,10 @@
 										{{__('remisi.col11')}}
 									</th>
 									<th>
-										Land Value
+										Decision Officer
 									</th>
 									<th>
-										Building Value
+										Decision Date
 									</th>	
 									<th>
 										{{__('remisi.col12')}}
@@ -203,8 +203,8 @@ $(document).ready(function (){
 			        		return '';
 			        	}
 			        }, "name": "ishasbldg"}, 
-			        {"data": "landvalue", "name": "ishasbldg"}, 
-			        {"data": "bldgvalue", "name": "ishasbldg"}, 
+			        {"data": "rg_desiofficer", "name": "ishasbldg"}, 
+			        {"data": "rg_desiofficerdate_frmt", "name": "ishasbldg"}, 
 			        {"data": "approvalstatus", "name": "ishasbldg"}, 
 			        {"data":  function(data){
 			        	

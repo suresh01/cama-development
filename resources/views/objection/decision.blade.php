@@ -112,6 +112,12 @@
 										Basket Name
 									</th>
 									<th>
+										Land Value 
+									</th>
+									<th>
+										Buliding Value
+									</th>
+									<th>
 										Proposed NT
 									</th>
 									<th>
@@ -128,6 +134,12 @@
 									</th>
 									<th>
 										Approved Tax
+									</th>
+									<th >
+										Difference
+									</th>
+									<th>
+										Percentage
 									</th>
 									<th>
 										Action
@@ -166,6 +178,9 @@
 									<input type="text" id="vt_proposedrate_{{$rec->de_id}}" value="{{$rec->vt_proposedrate}}">
 									<input type="text" id="vt_proposedtax_{{$rec->de_id}}" value="{{$rec->vt_proposedtax}}">
 									<input type="text" id="note_{{$rec->de_id}}" value="{{$rec->vt_note}}">
+									<input type="text" id="landvalue_{{$rec->de_id}}" value="{{$rec->landvalue}}">
+									<input type="text" id="bldgvalue_{{$rec->de_id}}" value="{{$rec->bldgvalue}}">
+									<input type="text" id="valid_{{$rec->de_id}}" value="{{$rec->vd_id}}">
 								</div>
 								@endforeach	
 			</div>
@@ -255,6 +270,36 @@
 									</li>
 								</ul>
 							</div>
+
+							<div  class="grid_12 form_container left_label">
+								<ul>
+									<li>		
+									<fieldset>
+										<legend>Land / Building Information</legend>						
+										<div class="form_grid_10">									
+											<label class="field_title" id="termname" for="termid">Land Value<span class="req">*</span></label>
+											<div class="form_input">
+												<input id="landvalue" readonly="true"   name="landvalue" type="text"  value="{{ old('time') }}" />
+											</div>
+											<span class=" label_intro"></span>
+										</div>	
+										<div class="form_grid_2">	
+											<div style="float:right;margin-right: 30px;"  class="btn_24_blue">
+												<a href="#" onclick="udpateland()">Update Valuation</a>
+											</div>		
+										</div>					
+										<div class="form_grid_10">									
+											<label class="field_title" id="lblgroup" for="name">Building Value<span class="req">*</span></label>
+											<div class="form_input">
+												<input id="bldgvalue"  readonly="true" name="bldgvalue" type="text"  value="{{ old('reason') }}" />
+											</div>
+											<span class=" label_intro"></span>
+										</div>	
+										</fieldset>
+										
+									</li>
+								</ul>
+							</div>
 							<div  class="grid_12 form_container left_label">
 								<ul>
 									<li>		
@@ -267,7 +312,7 @@
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
-														<input id="taxapprovednt" class="right-text allow_only_numbers" style="width: 100%;"  onchange="taxApprovedCalculation()"  tabindex="2" name="taxapprovednt"  type="text" value="" maxlength="50" class=""/>
+														<input id="taxapprovednt" class="right-text allow_only_numbers" style="width: 100%;"  onchange="taxApprovedCalculation()"  tabindex="2" name="taxapprovednt" readonly="true"  type="text" maxlength="50" class=""/>
 													</div>
 													<span class=" label_intro"></span>
 												</div>
@@ -297,7 +342,7 @@
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
-														<input id="taxapprovedtax" value=""  readonly="true" tabindex="2" name="taxapprovedtax"  type="text"  maxlength="50" class="right-text " />
+														<input id="taxapprovedtax" value=""  readonly="true" tabindex="2"  name="taxapprovedtax"  type="text"  maxlength="50" class="right-text " />
 													</div>
 													<span class=" label_intro"></span>
 												</div>	
@@ -409,6 +454,69 @@
 	<span class="clear"></span>
 	
 	<script>
+
+		function taxCalculation(){
+	    	var landtotal = removeCommas($('#landvalue').val());
+	    	var bldgtotal = removeCommas($('#bldgvalue').val());
+	    	var taxvaluerdiscretion = removeCommas($('#taxvaluerdiscretion').val());
+	    	var taxproposedrate = removeCommas($('#taxproposedrate').val());
+	    	var taxcalculaterate = removeCommas($('#taxcalculaterate').val());
+	    	var taxapprovednt = removeCommas($('#taxapprovednt').val());
+	    	var taxadjustment = removeCommas($('#taxadjustment').val());
+	    	var grossnt = Number(landtotal) + Number(bldgtotal) + Number(taxvaluerdiscretion);
+	    	//var grossnt = Number(landtotal) + Number(additionaltotal) + Number(taxvaluerdiscretion);
+	    	//alert(bldgtotal);
+	    	//console.log(grossnt);
+	    	var propsednt = customround(grossnt,3);// Math.floor(grossnt/1000)*1000;
+	    	var propsedtax = propsednt * (Number(taxproposedrate) / 100) * ( Number(taxcalculaterate) / 100 );
+	    	var approvedtax = Number(taxapprovednt) * (Number(taxproposedrate) / 100) * ( Number(taxcalculaterate) / 100 ) + Number(taxadjustment);
+
+	    	$('#taxgrossnt').val(formatMoneyHas(grossnt));
+	    	$('#taxproposednt').val(formatMoneyHas(propsednt));
+	    	$('#taxapprovednt').val(formatMoneyHas(propsednt));
+	    	$('#taxproposedtax').val(formatMoneyHas(propsedtax));
+	    	$('#taxapprovedtax').val(formatMoneyHas(approvedtax));
+	    	$('#taxapprovedrate').val(taxproposedrate);
+	    	taxApprovedCalculation();
+	    }
+
+
+
+	    function taxApprovedCalculation(){
+	    	
+	    	var taxapprovednt = removeCommas($('#taxapprovednt').val());
+	    	var taxapprovedrate = removeCommas($('#taxapprovedrate').val());
+	    	var taxadjustment = removeCommas($('#taxadjustment').val());
+	    	var taxcalculaterate = removeCommas($('#taxcalculaterate').val());
+	    	
+	    	var approvedtax = Number(taxapprovednt) * (Number(taxapprovedrate) / 100) * ( Number(taxcalculaterate) / 100 ) + Number(taxadjustment);
+
+	    	$('#taxapprovedtax').val(formatMoneyHas(approvedtax));
+   		}
+
+		function udpateland() {
+			//alert();
+			var id =$('#vd_id').val();
+		    w = window.open('about:blank','Popup_Window','toolbar=0,resizable=0,location=no,statusbar=0,menubar=0,width=0,height=0,left = 312,top = 234');
+		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
+		       // w.location = "landval?id="+id;
+		      // w.location.pathname = 'valuation/popup/land.blade.php';
+		       w.location.assign("decisioncal?id="+id);
+		    }	    
+		    if (w.outerWidth < screen.availWidth || w.outerHeight < screen.availHeight)
+			{
+				w.moveTo(0,0);
+				w.resizeTo(screen.availWidth, screen.availHeight);
+
+			}
+			//w.document.write($("#landpagecontent").html());
+			/*var win = window.open('','printwindow'); resizable=0,
+			win.document.write('<html><head><title>Print it!</title><link rel="stylesheet" type="text/css" href="styles.css"></head><body>');
+			win.document.write($("#content").html());
+			win.document.write('</body></html>');*/
+			//win.print();
+			//win.close();
+		}
 		
 		function submitForm(){
 		    //console.log($("#filterForm").serialize());
@@ -499,18 +607,27 @@
 			$("#propcate").val($("#propcate_"+id).val());
 			$("#taxnotes").val($("#note_"+id).val());
 
+			$("#landvalue").val($("#landvalue_"+id).val());
+			$("#bldgvalue").val($("#bldgvalue_"+id).val());
+
+
+			$("#taxapprovednt").val($("#nt_"+id).val());
+			$("#taxproposednt").val($("#vt_proposednt_"+id).val());
+			
 			formatMoney("taxvaluerdiscretion",$("#vt_valuedescretion_"+id).val());
 			formatMoney("taxgrossnt",$("#vt_grossvalue_"+id).val());
 			formatMoney("taxcalculaterate",$("#vt_calculatedrate_"+id).val());
-			formatMoney("taxproposednt",$("#vt_proposednt_"+id).val());
+			//formatMoney("taxproposednt",$("#vt_proposednt_"+id).val());
 			formatMoney("taxproposedrate",$("#vt_proposedrate_"+id).val());
 			formatMoney("taxproposedtax",$("#vt_proposedtax_"+id).val());
-			formatMoney("taxapprovednt",$("#nt_"+id).val());
+			//formatMoney("taxapprovednt",$("#nt_"+id).val());
 			formatMoney("taxapprovedrate",$("#rate_"+id).val());
 			formatMoney("taxadjustment",$("#adjust_"+id).val());
 			formatMoney("taxapprovedtax",$("#tax_"+id).val());
 			
-			
+			//console.log($("#nt_"+id).val());
+			//console.log($("#vt_proposednt_"+id).val());
+
 			$("#addsubmit").html("Update");
 		 	$("label.error").remove();	
 		}
@@ -742,23 +859,26 @@ $(document).ready(function (){
                 "contentType": 'application/json; charset=utf-8',
             "headers": {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-            },
-              
-              
-           // ajax: '{{ url("inspectionproperty") }}',
+          		}
+            },              
+
+            // ajax: '{{ url("inspectionproperty") }}',
             /*"ajax": '/bookings/datatables',*/
             "columns": [
               {"data": "de_id", "name": "account number"},
               {"data": null, "name": "sno"},
               {"data": "de_accno", "name": "account number"},
               {"data": "va_name", "name": "account number"},
+              {"data": "landvalue", "name": "zone", "sClass": "numericCol"},
+              {"data": "bldgvalue", "name": "subzone", "sClass": "numericCol"},
               {"data": "vt_proposednt", "name": "zone", "sClass": "numericCol"},
               {"data": "vt_proposedrate", "name": "subzone", "sClass": "numericCol"},
               {"data": "vt_proposedtax", "name": "address", "sClass": "numericCol"},
               {"data": "ol_valuerrecommend", "name": "account number", "sClass": "numericCol"},
               {"data": "vt_approvednt", "name": "zone", "sClass": "numericCol"},
               {"data": "vt_approvedtax", "name": "subzone", "sClass": "numericCol"},
+              {"data": "diff", "name": "address", "sClass": "numericCol"},
+              {"data": "percentage", "name": "address", "sClass": "numericCol"},
               {"data":function(data){
 			        	return '<span><a onclick="updateMeeting('+data.de_id+')" class="action-icons c-edit  edtlotrow" href="#" title="New Agenda">New Agenda</a></span>';
 			        }, "name": "address"}

@@ -159,9 +159,7 @@
 									<td>
 										
 										@if($rec->basket_count == 0)	
-										@if($rec->vt_approvalstatus_id == '01')
-										<!--<span><a class="action-icons c-edit" onclick="editTerm('{{$rec->vt_id}}')" title="Edit Term" href="#">Edit</a></span>-->
-										
+										@if($rec->vt_approvalstatus_id == '01')										
 										    <span><a class="action-icons c-delete delete_term" onclick="deleteTerm('{{$rec->vt_id}}')" href="#" title="Delete Term">Delete</a></span>
 
 										<span><a class="action-icons c-edit" onclick="editTerm('{{$rec->vt_id}}')" title="Edit Term" href="#">Edit</a></span>
@@ -180,6 +178,7 @@
 									<input type="text" id="termdate_{{$rec->vt_id}}" value="{{$rec->termDate}}">
 									<input type="text" id="appln_{{$rec->vt_id}}" value="{{$rec->vt_applicationtype_id}}">
 									<input type="text" id="valbase_{{$rec->vt_id}}" value="{{$rec->vt_valbase_id}}">
+									<input type="text" id="valtermtype_{{$rec->vt_id}}" value="{{$rec->vt_termtype_id}}">
 								</div>
 								@endforeach						
 							</tbody>
@@ -217,7 +216,7 @@
 										<div class="form_grid_12">									
 											<label class="field_title" id="luserid" for="userid">{{__('group.Application_Type')}}<span class="req">*</span></label>
 											<div class="form_input">
-												<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="applicationtype" name="applicationtype" tabindex="20">
+												<select onchange="application()"  data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="applicationtype" name="applicationtype" tabindex="20">
 													<option></option>
 													@foreach ($applntype as $rec)
 													<option value="{{ $rec->tdi_key }}">{{ $rec->tdi_value }}</option>
@@ -226,8 +225,19 @@
 											</div>
 											<span class=" label_intro"></span>
 										</div>	
+										<div style="display: none;" id="applntyhpeblock" class="form_grid_12">									
+											<label class="field_title" id="luserid" for="userid">{{__('group.Term_Type')}}<span class="req">*</span></label>
+											<div class="form_input">
+												<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="capplicationtype" name="capplicationtype" tabindex="20">
+													<option></option>
+													<option value="1">KAD - New</option>
+													<option value="2">KAD - Exists</option>		
+												</select>
+											</div>
+											<span class=" label_intro"></span>
+										</div>	
 										<div class="form_grid_12">									
-											<label class="field_title" id="luserid" for="userid">{{__('group.Term_Type')}} <span class="req">*</span></label>
+											<label class="field_title" id="luserid" for="userid">{{__('group.Term_Base')}} <span class="req">*</span></label>
 											<div class="form_input">
 												<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="termbase" name="termbase" tabindex="20">
 													<option></option>
@@ -271,6 +281,18 @@
 			//return;
 		}
 
+		function application(){
+			var applntyp = $("#applicationtype").val();
+			//alert(applntyp);
+			if (applntyp == 'K'){
+				$("#applntyhpeblock").show();
+			} else {
+				$("#applntyhpeblock").hide();
+			}
+			
+			
+		}
+
 		function newTerm(){
 			$("#operation").val(1);
 			$("#termtable").hide();
@@ -289,6 +311,12 @@
 			$('#termdate').val($('#termdate_'+id).val());
 			$('#termbase').val($('#valbase_'+id).val());
 			$('#applicationtype').val($('#appln_'+id).val());
+			$('#capplicationtype').val($('#valtermtype_'+id).val());
+			if($('#appln_'+id).val() == 'K'){
+				$('#applntyhpeblock').show();
+			} else {
+				$('#applntyhpeblock').hide();
+			}
 			$("#addsubmit").html("Save");
 			$("#title").html("Edit Term");
 		 	$("label.error").remove();	

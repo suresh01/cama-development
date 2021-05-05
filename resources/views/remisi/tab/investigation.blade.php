@@ -291,6 +291,10 @@
 
             $.each( lotdata, function( key, val ) {
             	$('#'+key).val(val);
+            	if(key.includes("finreason") && val ==1) {
+	            	var checkbox = $("#uniform-"+key).find('span');
+					checkbox.attr("class", "checked");
+				}
 			});
 
 			

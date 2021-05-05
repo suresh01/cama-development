@@ -48,14 +48,17 @@
 										Application Type
 									</th>
 									<th>
-										Transfer Status
+										Transfer Status 
 									</th>
 									<th>
 										Register Date
 									</th>		
 									<th>
-										Transfer Date
+										Transfer by /Date
 									</th>
+									<th>
+										Updated by / Date
+									</th>	
 									<th>
 										Applicator Name
 									</th>
@@ -290,9 +293,16 @@ $(document).ready(function (){
 			        {"data": "ota_id", "name": "account number"},
 			        {"data": "otar_accno", "name": "fileno"},
 			        {"data": "ttype", "name": "zone"},
-			        {"data": "transstauts", "name": "zone"},
+			        {"data": "logstatus", "name": "zone"},
 			        {"data": "otar_createdate", "name": "subzone"},
 			        {"data": "ota_transtocenterdate1", "name": "owner"}, 
+			        {"data": function(data){
+			        	var update = data.otar_updatedate;
+			        		if(data.otar_updatedate == null){
+			        			update = 'NA';
+			        		}
+			        	return data.ota_updateby +" / "+update;
+			        }, "name": "owner"}, 
 			        {"data": "ota_agentname", "name": "ishasbldg"},
 			        {"data": "owntype", "name": "owntype"}, 
 			        {"data": "TO_OWNNO", "name": "TO_OWNNAME"}, 
@@ -303,7 +313,7 @@ $(document).ready(function (){
 			        	var abdstr='';
 			        	if(data.ttypekey == 4) {
 							abdstr="<a href='#' style='	width: 14px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -963px -2px;!important;display: inline-block; float: left;' title='Retry Transfer' onclick='Resend("+data.ota_id+")'></a>";
-								return abdstr;
+								//return abdstr;
 						} else {
 				        	if(data.ota_transtocenterstatus_id == 3) {
 								return "<a href='#'  style='	width: 14px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -843px -102px!important;display: inline-block; float: left;' title='Success Report' onclick='reportSuccess("+data.otar_accno+")'></a>"+abdstr;

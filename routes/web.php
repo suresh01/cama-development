@@ -373,6 +373,8 @@ Route::get('decision','ObjectionController@decision');
 
 Route::get('decisiontable','ObjectionController@decisionTable');
 
+Route::get('decisioncal','ObjectionController@decisionCalculation');
+
 Route::get('generateAgenda','ReportController@generateAgenda');
 
 Route::get('generateNotis','ReportController@generateNotis');

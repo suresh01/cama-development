@@ -222,6 +222,9 @@
 			//return;
 		}
 
+		
+
+
 		function newTerm(){
 			$("#operation").val(1);
 			$("#termtable").hide();

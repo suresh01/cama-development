@@ -387,7 +387,7 @@ function hideCol(id, col){
 
 function customround(num, inputcategory){
     var tmp=1;
-    var temp1 = 0.0;
+    var temp1 = 0;
 	var temp2 = 0.0;
 	var temp3 = 0.0;
 	var  diffParam = 0;
@@ -395,7 +395,7 @@ function customround(num, inputcategory){
 	if (num >= 10000){
         diffParam = 1000;
     } else if (num < 10000 && num >= 1000) {
-        diffParam = 500;
+        diffParam = 1000;
     } else if (num < 1000 && num >= 10) {
         diffParam = 100;
     } else if (num < 10) {
@@ -435,7 +435,59 @@ function customround(num, inputcategory){
 
 		return temp3 * diffParam;
 	} 
-	
 
-   
+}
+
+
+function customroundnt(num, inputcategory){
+    var tmp=1;
+    var temp1 = 0;
+	var temp2 = 0.0;
+	var temp3 = 0.0;
+	var  diffParam = 0;
+
+	if (num >= 10000){
+        diffParam = 5000;
+    } else if (num < 10000 && num >= 1000) {
+        diffParam = 5000;
+    } else if (num < 1000 && num >= 10) {
+        diffParam = 100;
+    } else if (num < 10) {
+        diffParam = 1;
+    }
+
+    // Nearest Round
+    if (inputcategory == 1 ) {
+		
+         while(num>diffParam){
+	        num = Math.round(num/diffParam);
+	        tmp*=diffParam;
+	    }
+
+	    return num*tmp;
+
+	} else  if (inputcategory == 2 ){ // Upper Round
+		temp1 = diffParam / 2;
+		// temp1 = 1000/2 = 500
+        temp2 = num % diffParam;
+        //temp2 = 5550 % 1000 = 550
+        temp3 = parseInt(num / diffParam);
+        //temp3 = parseInt(5550/1000) = 5
+
+        temp3 = temp3 + 1;
+       
+		return temp3 * diffParam;
+
+	} else  if (inputcategory == 3 ){ // Lower Round
+		temp1 = diffParam / 2;
+		// temp1 = 1000/2 = 500
+        temp2 = num % diffParam;
+        //temp2 = 5550 % 1000 = 550
+        temp3 = parseInt(num / diffParam);
+        //temp3 = parseInt(5550/1000) = 5
+       
+
+		return temp3 * diffParam;
+	} 
+
 }

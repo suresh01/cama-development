@@ -558,7 +558,7 @@ where tollist_id = tland_tone_id'  .$filterquery  );
     FROM cm_toneoflistbasket,`cm_tone_bldg_allowances`
     left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BULDINGCATEGORY") bldgate on bldgate.tdi_key = tallo_buldingcategory_id
     left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "ALLOWANCETYPE") alltype
-    on alltype.tdi_key = tallo_allowancetype_id
+    on alltype.tdi_key = tallo_allowancetype_id 
     left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = tallo_approvaltallostatus_id
     where tollist_id = tallo_tone_id');
 

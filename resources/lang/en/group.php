@@ -76,6 +76,7 @@ return [
 	'Total_Property_Count'=>'Total Property Count',
 	'Term_Date'=>'Term Date',
 	'Term_Type'=>'Term Type',
+	'Term_Base'=>'Term Base',
 	'id'=>'Id',
 	'base'=>'base',
 	// valbasket.blade.php

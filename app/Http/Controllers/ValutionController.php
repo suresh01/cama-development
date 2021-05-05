@@ -319,19 +319,21 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
 
     public function landDetail(Request $request){
         $id = $request->input('id');
+        //$page  = $request->input('page');
 
-        $lotdetail = DB::select('select DATEDIFF(vl_startdate,vl_expireddate) duration, landposition.tdi_value landposition, DATE_FORMAT(vl_startdate, "%d/%m/%Y") vl_startdate1, DATE_FORMAT(vl_expireddate, "%d/%m/%Y") vl_expireddate1,cm_appln_val_lot.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
-        , unitsize.tdi_value unitsize, concat(lotcode.tdi_value,vl_no) lotnumber, concat(titletype.tdi_value,vl_titleno) titlenumber, landuse.tdi_value landuse, tentype.tdi_value tentype
-         from cm_appln_val_lot left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = vl_lotcode_id
-        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROADTYPE") roadtype on roadtype.tdi_key = vl_roadtype_id
-        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE") titletype on titletype.tdi_key = vl_titletype_id
-        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SIZEUNIT") unitsize on unitsize.tdi_key = vl_sizeunit_id
-        left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDUSE") landuse on  vl_landuse_id = landuse.tdi_key
-        left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENURETYPE") tentype on  vl_tenuretype_id = tentype.tdi_key 
-        left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDPOSITION") landposition on  vl_landposision_id = landposition.tdi_key 
-        where vl_id = ifnull("'.$id.'",0)');
-            
-       $lot = DB::select('select * from cm_appln_val_lotarea where vla_vt_id =  ifnull("'.$id.'",0)');
+
+            $lotdetail = DB::select('select DATEDIFF(vl_startdate,vl_expireddate) duration, landposition.tdi_value landposition, DATE_FORMAT(vl_startdate, "%d/%m/%Y") vl_startdate1, DATE_FORMAT(vl_expireddate, "%d/%m/%Y") vl_expireddate1,cm_appln_val_lot.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
+            , unitsize.tdi_value unitsize, concat(lotcode.tdi_value,vl_no) lotnumber, concat(titletype.tdi_value,vl_titleno) titlenumber, landuse.tdi_value landuse, tentype.tdi_value tentype
+             from cm_appln_val_lot left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = vl_lotcode_id
+            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROADTYPE") roadtype on roadtype.tdi_key = vl_roadtype_id
+            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE") titletype on titletype.tdi_key = vl_titletype_id
+            left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SIZEUNIT") unitsize on unitsize.tdi_key = vl_sizeunit_id
+            left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDUSE") landuse on  vl_landuse_id = landuse.tdi_key
+            left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENURETYPE") tentype on  vl_tenuretype_id = tentype.tdi_key 
+            left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDPOSITION") landposition on  vl_landposision_id = landposition.tdi_key 
+            where vl_id = ifnull("'.$id.'",0)');
+     
+        $lot = DB::select('select * from cm_appln_val_lotarea where vla_vt_id =  ifnull("'.$id.'",0)');
         
         return view('valuation.popup.landarea')->with(array('lot'=>$lot,'lotdetail'=>$lotdetail,'id'=>$id));
     }

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Add Property</title>
+<title>{{__('objection.Add_Property')}}</title>
 @include('includes.header-popup')
 
 	<div id="content">
@@ -11,8 +11,8 @@
 		  <div id="usertable" class="grid_12">
 		  		<br>
 				<div style="float:right;margin-right: 0px;"  class="btn_24_blue">   
-               <a href="#" id="" onclick="getSelectedProp()" class=""><span>Add Property </span></a>  
-					<a href="#" id="" onclick="closeWindow()" class=""><span>Close </span></a> 
+               <a href="#" id="" onclick="getSelectedProp()" class=""><span>{{__('objection.Add_Property')}} </span></a>  
+					<a href="#" id="" onclick="closeWindow()" class=""><span>{{__('common.Close')}} </span></a> 
 				</div>
           <div style="float:right;margin-right: 10px;"  class="btn_24_blue">   
           @include('objection.search.newsearch',['tableid'=>'baskettbl', 'action' => '', 'searchid' => '36'])
@@ -27,19 +27,19 @@
 									<th><input name="select_all" value="1" type="checkbox">
 									</th>
 							<th class="table_sno">
-								 S No
-							</th>
-							<th>
-								Account number
-							</th>
-              <th>
-                Basket Name
+								{{__('objection.SNO')}}
               </th>
               <th>
-                Term Name
+                {{__('objection.Account_number')}}
+              </th>
+              <th>
+                {{__('objection.Basket_Name')}} 
+              </th>
+              <th>
+                {{__('objection.Term_Name')}}
               </th>
 							<th>
-								Meeting Description
+								{{__('objection.Meeting_Description')}}
 							</th>
 						</tr>
 						</thead>
@@ -47,7 +47,7 @@
 						
 						</tbody>
 						</table>
-            <div><p id="info">0 Row Selected</p></div>
+            <div><p id="info">0 {{__('objection.Row_Selected')}}</p></div>
 					</div>
 				</div>
 			</div>

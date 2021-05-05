@@ -187,6 +187,22 @@
 											<span class=" label_intro"></span>
 										</div>
 
+										<div class="form_grid_12">
+											<label class="field_title" id="llevel" for="level">Land Value<span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->landvalue}}" maxlength="100" >
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+
+										<div class="form_grid_12">
+											<label class="field_title" id="llevel" for="level">Building Value<span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->bldgvalue}}" maxlength="100" >
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+
 									</fieldset>
 								</li>
 							</ul>

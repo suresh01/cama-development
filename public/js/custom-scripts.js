@@ -2037,6 +2037,9 @@ $(function() {
     		'<td>Update By:</td><td>'+aData[9]+'</td><td>Update At:</td><td>'+aData[10]+'</td></tr>';
     sOut += '<tr><td>Transfer By:</td><td>'+aData[14]+'</td><td>Transfer At:</td><td>'+aData[11]+'</td></tr>';
     sOut += '<tr><td>Term Id:</td><td>'+aData[12]+'</td><td>Val Base:</td><td>'+aData[13]+'</td></tr>';
+    sOut += '<tr><td>Meeting Date:</td><td></td><td>Notis 8 Date:</td><td></td><td>Notis 8 Hijridate:</td><td>'+
+    '</td><td>Notis 9 Date:</td><td></td><td>Notis 9 Hijridate:</td><td></td></tr>';
+    sOut += '<tr><td>Notis 10 Date:</td><td></td><td>Notis 10 Hijridate:</td><td></td><td>Notis 8 Printdate:</td><td></td></tr>';
     sOut += '</table>';
      
     return sOut;

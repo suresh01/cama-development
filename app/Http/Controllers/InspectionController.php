@@ -649,20 +649,21 @@ class InspectionController extends Controller
             Log::info($filterquery);
 
         }
-       // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
+        
         Log::info($filterquery); 
-        /* $property = DB::table('cm_appln_valdetl')->join('cm_masterlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
-        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
-        'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
-        'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
+          
         $property = DB::select('select `vd_approvalstatus_id`, `vd_id`, `vd_va_id`, `ma_id`, `ma_pb_id`, `ma_fileno`, `ma_accno`, `vd_accno`,
         `tbdefitems_subzone`.`tdi_parent_name` `zone`, `tbdefitems_subzone`.`tdi_value` `subzone`, `ma_addr_ln1`, 
         `tbdefitems_ishasbuilding`.`tdi_value` `isbldg`, `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,bldgsotery.tdi_value bldgsotery, 
-        format(`vt_approvednt`,2) vt_approvednt, format(`vt_approvedtax`,2) `vt_approvedtax`,  format(`vt_proposedrate`,2) `vt_proposedrate`, `vt_note`, propertstatus.tdi_desc propertstatus, ma_addr_ln1, ma_addr_ln2, ma_addr_ln3, ma_addr_ln4, ma_city,ma_postcode,state.tdi_value state
+        format(`vt_approvednt`,2) vt_approvednt, format(`vt_approvedtax`,2) `vt_approvedtax`,  format(`vt_proposedrate`,2) `vt_proposedrate`, `vt_note`,
+         propertstatus.tdi_desc propertstatus, ma_addr_ln1, ma_addr_ln2, ma_addr_ln3, ma_addr_ln4, ma_city,ma_postcode,state.tdi_value state,
+         format(vl_roundnetlandvalue,2) landvalue, format(vb_roundnetnt,2) bldgvalue
         FROM `cm_appln_valdetl`
         INNER JOIN `cm_masterlist` ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
-        LEFT JOIN `cm_appln_val_tax` ON `cm_appln_val_tax`.`vt_vd_id` = `cm_appln_valdetl`.`vd_id`
         INNER JOIN `cm_owner` ON `TO_MA_ID` = `ma_id`
+        LEFT JOIN `cm_appln_val_tax` ON `cm_appln_val_tax`.`vt_vd_id` = `cm_appln_valdetl`.`vd_id`
+        LEFT JOIN `cm_appln_val_lot` ON vl_vd_id = `cm_appln_valdetl`.`vd_id`
+        LEFT JOIN `cm_appln_val_bldg` ON vb_vd_id = `cm_appln_valdetl`.`vd_id`
         LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
         LEFT JOIN `tbdefitems_ishasbuilding` ON `cm_appln_valdetl`.`vd_ishasbuilding` = `tbdefitems_ishasbuilding`.`tdi_key`
         LEFT JOIN `tbdefitems_bldgtype` ON `tbdefitems_bldgtype`.`tdi_key` = `cm_appln_valdetl`.`vd_bldgtype_id` 
@@ -672,8 +673,7 @@ class InspectionController extends Controller
         on bldgsotery.tdi_key = vd_bldgstorey_id 
         left join (select *  from tbdefitems where tdi_td_name = "STATE") state
         on state.tdi_key = ma_state_id  where vd_va_id = ifnull("'.$baskedid.'",0) '.$filterquery);
-               // Log::info('Test');
-
+        
         $propertyDetails = Datatables::collection($property)->make(true);
    
         return $propertyDetails;

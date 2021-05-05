@@ -15,7 +15,7 @@ return [
     'col7'=>'Property Type',
     'col8'=>'Property Storey',
     'col9'=>'Register By',
-    'col01'=>'Register Date',
+    'col10'=>'Register Date',
     'col11'=>'Decision',
     'col12'=>'Status',
     'col13'=>'Action',

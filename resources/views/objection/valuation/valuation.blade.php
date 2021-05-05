@@ -14,20 +14,12 @@
 		float: inline-end;
 	}
 </style>
-@include('includes.header', ['page' => 'VP'])
+@include('includes.header-popup', ['page' => 'VP'])
 	<div id="content">
 		<div class="grid_container">
 			<div class="grid_12">
 
-				<div id="breadCrumb3" class="breadCrumb grid_12">
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Valuation Process</a></li>
-						<li><a href="valbasket?id={{$termid}}&ts=1">{{$viewparamterm}} </a></li>
-						<li><a href="property?id={{$pb}}&ts=1">{{$viewparambasket}} - {{$viewparambasketstatus}}</a></li>
-						<li>{{$accountnumber}} </li>
-					</ul>
-				</div>
+				
 				<br>
 
 				<div class="widget_wrap">
@@ -40,7 +32,6 @@
 								@foreach ($master as $rec)
 								<fieldset>
 									<div class="grid_4">		
-
 
 										<div style="line-height: 2;">	
 											<strong><span>Zone : </span></strong>
@@ -242,305 +233,18 @@
 									</div>
 
 
-									<div class="widget_wrap collapsible_widget">
-										<div class="widget_top active">
-											<span class="h_icon"></span>
-											<h6>Additional Calculation</h6>
-										</div>
-										<div class="widget_content">
-											<div class="invoice_tbl">
-												<table id="additionaltable">
-												<thead>
-												<th style="width: 40px;">
-														S No
-													</th>
-													<th style="width: 30%;">
-														Description
-													</th>
-													<th>
-														Area
-													</th>
-													<th>
-														Rate
-													</th>
-													<th>
-														Gross Value
-													</th>
-													<th>
-														Round Value
-													</th>
-													<th style="width: 10%;">
-														Action 
-													</th>
-													<th style="display: none;">
-														actioncode 
-													</th>
-												</tr>
-												</thead>
-												<tbody>
-													@php($totaladditonal = 0)
-													@foreach ($additional as $rec)
-													<td>
-														{{$loop->iteration}}
-													</td>
-													<td>
-														{{$rec->vad_desc}}
-													</td>
-													<td style="text-align:right;">
-														{{$rec->vad_area}}
-													</td>
-													<td style="text-align:right;">
-														{{number_format($rec->vad_rate,2)}}
-													</td>
-													<td style="text-align:right;">
-														{{number_format($rec->vad_grossvalue,2)}}
-													</td>
-													<td style="text-align:right;">
-														{{number_format($rec->vad_roundnetvalue,2)}}
-													</td>
-													<td>
-														<span><a class="action-icons c-edit editaddrow"  href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="delete">Delete</a></span>
-													</td>
-													<td style="display: none;">noaction</td>
-													@php($totaladditonal = $totaladditonal + $rec->vad_roundnetvalue)
-												</tr>
-												@endforeach	
-																								
-												
-												
-												</tbody>
-												<tr>
-													<td colspan="6" class="grand_total">
-														@if($iseditable == 1)
-														<button id="addadditional" onclick="openModal()" name="adduser" style="float: left; "  type="button" class=" basic-modal btn_small btn_blue "><span>Add Additional value</span></button>@endif							
-														Total Additional Value:
-													</td>
-													<td>
-														<input type="text" readonly="true"  style="float: right; "  value="{{number_format($totaladditonal,2)}}" class="tbl-total" id="additionaltotal">
-													</td>
-												</tr>
-												</table>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div  id="basic-modal-content">
-									<h3>Additional Valuation</h3>
-									<div  class="grid_12 form_container left_label">
-										<ul>	
-											<li class="li">
-												<input type="hidden" id="index">
-												<div class="form_grid_12">
-													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Description<span class="req">*</span></label>
-														<div class="form_input">
-															<input id="add_description" required="true"  name="add_description" type="text"  value="" />
-														</div>
-														<span class=" label_intro"></span>
-													</div>
-												</div>
-												<div class="form_grid_12">
-													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Area<span class="req">*</span></label>
-														<div class="form_input">
-															<input id="add_area" required="true" onchange="additionalCal()"  name="add_area" type="text"  value="" />
-														</div>
-														<span class=" label_intro"></span>
-													</div>
-												</div>
-												<div class="form_grid_12">
-													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Rate<span class="req">*</span></label>
-														<div class="form_input">
-															<input id="add_rate" required="true" onchange="additionalCal()" name="add_rate" type="text"  value="" />
-														</div>
-														<span class=" label_intro"></span>
-													</div>
-												</div>
-												<div class="form_grid_12">
-													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Grass value<span class="req">*</span></label>
-														<div class="form_input">
-															<input id="add_grossvalue" readonly="true"  name="add_grossvalue" type="text"  value="" />
-														</div>
-														<span class=" label_intro"></span>
-													</div>
-												</div>
-												<div class="form_grid_12">
-													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Round Value<span class="req">*</span></label>
-														<div class="form_input">
-															<input id="add_roundvalue" readonly="true"  name="add_roundvalue" type="text"  value="" />
-														</div>
-														<span class=" label_intro"></span>
-													</div>
-												</div>
-											</li>				
-										</ul>	
-									</div>
-									<span class="clear"></span>
-										<div class="btn_24_blue">
-											<a href="#" id="add" onclick="addAdditional()" class=""><span>Add </span></a>
-											<a href="#" id="edit" onclick="editAdditional()" class=""><span>Update </span></a>
-										</div>
-										<div class="btn_24_blue">
-											<a href="#" class="simplemodal-close"><span>Close </span></a>
-										</div>
 									
-								</div>
-										
-								
-								
-								<fieldset>
-									<legend>Tax Calculation</legend>
-									<form action="" id="taxvaluationform" class="form_container left_label">
-									<div style="float: right;" class="grid_5 form_container left_label">
-											<ul>
-												<li>
-													<div class="form_grid_4">
-													<label class="field_title"   id="accnumberlbl" style="width: 100%;" for="username">Valuer Discretion<span class="req">*</span></label>
-													</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxvaluerdiscretion" class="right-text " tabindex="1" style="width: 100%;" name="taxvaluerdiscretion" value="" onchange="taxCalculation()" type="text" maxlength="100" >
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-												
-												<div class="form_grid_4">
-													<label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">Gross NT<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxgrossnt" tabindex="1" value=""  readonly="true" style="width: 100%;" name="taxgrossnt" type="text" maxlength="100" class="right-text " >
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-										
-												<div class="form_grid_4">
-													<label class="field_title" id="accnumberlbl" style="width: 100%;" id="lposition" for="position">Proposed NT<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  classs="form_input" style="width: 70%;  margin-left: 30%;  position: relative;">
-														<input id="taxproposednt" style=""  readonly="true" value="" tabindex="2" name="taxproposednt"  type="text"  maxlength="50" class="right-text "/>
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-											
-												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Proposed Rate<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxproposedrate" style="width: 100%;"  value="" tabindex="2"name="taxproposedrate"  onchange="taxCalculation()" type="text"  maxlength="50" class="right-text "/>
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-										 	
-												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Calculated Rate (%)<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxcalculaterate" style="width: 100%;" value="" tabindex="2" name="taxcalculaterate"  type="text" onchange="taxCalculation()"  maxlength="50" class="right-text "/>
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-											
-												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Proposed Tax<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxproposedtax"
-														value=""  tabindex="2" name="taxproposedtax"  readonly="true" type="text"  maxlength="50" class="right-text "/>
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-
-
-												
-												</li>
-											</ul>
-									</div>
-									<div class="grid_5 form_container left_label">
-										<ul>
-											<li>													
-												<br /><br /><br /><br /><br />
-												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Approved NT<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxapprovednt" class="right-text allow_only_numbers" style="width: 100%;"  onchange="taxApprovedCalculation()"  tabindex="2" name="taxapprovednt"  type="text" value="" maxlength="50" class=""/>
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-											
-												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Approved Rate<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxapprovedrate" class="right-text " style="width: 100%;"  tabindex="2" name="taxapprovedrate"  type="text"value=""  readonly="true"  maxlength="50" class=""/>
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-										 		
-												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Adjustment<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxadjustment" class="right-text " style="width: 100%;" tabindex="2" name="taxadjustment" value="" onchange="taxApprovedCalculation()"  type="text"  maxlength="50" class=""/>
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-											
-												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Approved Tax<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_8">
-													<div  class="form_input">
-														<input id="taxapprovedtax" value=""  readonly="true" tabindex="2" name="taxapprovedtax"  type="text"  maxlength="50" class="right-text " />
-													</div>
-													<span class=" label_intro"></span>
-												</div>
-												
-												</li>
-											</ul>
-									</div>
-
-									<div class="grid_12 form_container left_label">
-										<ul>
-											<li>													
-												<br /><br /><br /><br /><br />
-												<div class="form_grid_2">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">NOTES<span class="req">*</span></label>
-												</div>
-												<div class="form_grid_9">
-													<div style="margin-left: 0px"  class="form_input"> 
-													<textarea rows="4" id="taxnotes" name="taxnotes" cols="50"></textarea>
-													<span class=" label_intro"></span>
-												</div>
-												</div>
-												</li>
-											</ul>
-									</div>
-									<div style="height: 48px; float: right; " class="grid_12">                
-					                  <div class="form_input">
-					                  	@if($iseditable == 1)
+								<div style="height: 48px; float: right; " class="grid_12">                
+					                <div class="form_input">
+					                  	
 					                    <button id="addsubmit" name="adduser" style="float: right; "  onclick="updateValuation()" type="button" class="btn_small btn_blue"><span>Update</span></button>      
-					                       @endif      
-					                    <button id="close" name="close" type="button" onclick="closePage()"  class="btn_small btn_blue"><span>Close</span></button>
+					                      
 					                    <span class=" label_intro"></span>
-					                  </div>
-					                  
-					                  <span class="clear"></span>
 					                </div>
-					            </form>
-								</fieldset>
-								
+				                  
+				                  	<span class="clear"></span>
+				                </div>
+					            
 								<span class="clear"></span>
 							</div>
 						</div>
@@ -765,7 +469,7 @@
 
 
 	function addTanah(id,i) {
-	    w = window.open('about:blank','Popup_Window','toolbar=0,resizable=0,location=no,statusbar=0,menubar=0,width=0,height=0,left = 312,top = 234');
+	    w = window.open('about:blank','Popup_Window_LotDetail','toolbar=0,resizable=0,location=no,statusbar=0,menubar=0,width=0,height=0,left = 312,top = 234');
 	    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
 	       // w.location = "landval?id="+id;
 	      // w.location.pathname = 'valuation/popup/land.blade.php';
@@ -815,7 +519,7 @@
     	//var grossnt = Number(landtotal) + Number(additionaltotal) + Number(taxvaluerdiscretion);
     	//alert(bldgtotal);
     	//console.log(grossnt);
-    	var propsednt = customroundnt(grossnt,3);// Math.floor(grossnt/1000)*1000;
+    	var propsednt = customround(grossnt,3);// Math.floor(grossnt/1000)*1000;
     	var propsedtax = propsednt * (Number(taxproposedrate) / 100) * ( Number(taxcalculaterate) / 100 );
     	var approvedtax = Number(taxapprovednt) * (Number(taxproposedrate) / 100) * ( Number(taxcalculaterate) / 100 ) + Number(taxadjustment);
 
@@ -1222,178 +926,13 @@
     };
 
     function updateValuation(){
-	    let maplottable = new Map([["0","sno"],["1", "lotno"], ["2", "lotarea"], ["3", "netvalue"],["4", "roundvalue"], ["5", "lotid"]]);
+    	window.opener.$('#landvalue').val($('#landtotal').val());
+    	window.opener.$('#bldgvalue').val( $('#vd_bldgtotal').val());
+    	window.opener.taxCalculation();
+    	window.close();
+    }
 
-	    let mapbldgtable = new Map([["0","sno"],["1", "bldgcategory"], ["2", "bldgtype"], ["3", "bldgvalue"],["4", "allowancevalue"], ["5", "depvalue"],["6", "netbldgvalue"], ["7", "roundbldgvalue"],["8", "bldgid"]]);
-
-	    let mapadditionaltable = new Map([["0","sno"],["1", "desc"],["2", "area"],["3", "rate"],["4", "grossvalue"],["5", "roundvalue"],["6", "action"],  ["7", "actioncode"],  ["8", "addadditionalid"]]);
-
-	    
-	    let maplotareatable = new Map([["0","arname"],["1", "area"],  ["2", "rate"], ["3", "calculatedrate"], ["4", "grossvalue"], ["5", "lotareaid"], ["6", "lotid"]]);
-
-	    let mapbldgareatable = new Map([["0","artype"],["1", "arlevel"],  ["2", "arcategory"], ["3", "arused"], ["4", "area"], ["5", "arearate"], ["6", "grossareavalue"],["7", "bldgarid"],["9", "bldgid"]]);
-
-	    let mapallowancetable = new Map([["0","sno"],["1", "desc"],  ["2", "calmethod"], ["3", "percentage"], ["4", "grossvalue"], ["5", "bldgallowanceid"], ["6", "bldgid"], ["7", "actioncode"]]);
-	    var noty_id = noty({
-					layout : 'center',
-					text: 'Do want submit valuation?',
-					modal : true,
-					buttons: [
-						{type: 'button pink', text: 'Submit', click: function($noty) {	
-								
-						  
-	    var lotdata = [];
-
-		for (var i = 0;i<$('#landtable').DataTable().rows().count();i++){
-			var ldata = $('#landtable').DataTable().row(i).data();
-			var tempdata1 = {};
-			$.each(ldata, function( key, value ) {
-				if (key !== 1) {
-				tempdata1[maplottable.get(""+key+"")] = value; 
-				}
-			//console.log(key);            
-        	});
-        	//console.log(templotdata);
-        	lotdata.push(tempdata1);            	
-		}
-
-		var bldgdata = [];
-
-		for (var i = 0;i<$('#bldgtable').DataTable().rows().count();i++){
-			var ldata = $('#bldgtable').DataTable().row(i).data();
-			var tempdata1 = {};
-			$.each(ldata, function( key, value ) {
-				if (key !== 1) {
-				tempdata1[mapbldgtable.get(""+key+"")] = value; 
-				 }
-			//console.log(key);            
-        	});
-        	//console.log(templotdata);
-        	bldgdata.push(tempdata1);            	
-		}
-
-		var additionaldata = [];
-
-		for (var i = 0;i<$('#additionaltable').DataTable().rows().count();i++){
-			var ldata = $('#additionaltable').DataTable().row(i).data();
-			var tempdata1 = {};
-			$.each(ldata, function( key, value ) {
-				if (key !== 6) {
-				tempdata1[mapadditionaltable.get(""+key+"")] = value; 
-				} 
-			//console.log(key);            
-        	});
-        	//console.log(templotdata);
-        	additionaldata.push(tempdata1);            	
-		}
-		if ($('#additionaltable').DataTable().rows().count() == 0){
-			additionaldata = '{}';
-		}
-
-		var lotareadata = [];
-
-		for (var i = 0;i<$('#hiddenlandarea').DataTable().rows().count();i++){
-			var ldata = $('#hiddenlandarea').DataTable().row(i).data();
-			var tempdata1 = {};
-			$.each(ldata, function( key, value ) {
-				
-				tempdata1[maplotareatable.get(""+key+"")] = value; 
-				
-			//console.log(key);            
-        	});
-        	//console.log(templotdata);
-        	lotareadata.push(tempdata1);            	
-		}
-
-		var bldgareadata = [];
-
-		for (var i = 0;i<$('#hiddenbldgarea').DataTable().rows().count();i++){
-			var ldata = $('#hiddenbldgarea').DataTable().row(i).data();
-			var tempdata1 = {};
-			$.each(ldata, function( key, value ) {
-				
-				tempdata1[mapbldgareatable.get(""+key+"")] = value; 
-				
-			//console.log(key);            
-        	});
-        	//console.log(templotdata);
-        	bldgareadata.push(tempdata1);            	
-		}
-
-		var bldgallowancedata = [];
-
-		for (var i = 0;i<$('#hiddenbldgallowance').DataTable().rows().count();i++){
-			var ldata = $('#hiddenbldgallowance').DataTable().row(i).data();
-			var tempdata1 = {};
-			$.each(ldata, function( key, value ) {
-				
-				tempdata1[mapallowancetable.get(""+key+"")] = value; 
-				
-			//console.log(key);            
-        	});
-        	//console.log(templotdata);
-        	bldgallowancedata.push(tempdata1);            	
-		}
-
-		lotdata = "["+ JSON.stringify(lotdata).replace(/]|[[]/g, '') +"]";
-		bldgdata = "["+ JSON.stringify(bldgdata).replace(/]|[[]/g, '') +"]";
-		
-		lotareadata = "["+ JSON.stringify(lotareadata).replace(/]|[[]/g, '') +"]";
-		bldgareadata = "["+ JSON.stringify(bldgareadata).replace(/]|[[]/g, '') +"]";
-		bldgallowancedata = "["+ JSON.stringify(bldgallowancedata).replace(/]|[[]/g, '') +"]";
-
-		if ($('#additionaltable').DataTable().rows().count() > 1)
-			additionaldata = "["+ JSON.stringify(additionaldata).replace(/]|[[]/g, '') +"]";
-		else
-			additionaldata = JSON.stringify(additionaldata).replace(/]|[[]/g, '');
-
-		var taxdata = {};
-		$('#taxvaluationform').serializeArray().map(function(x){taxdata[x.name] = x.value;});
-		console.log(taxdata);
-		var prop_id = '{{$prop_id}}';
-		var d=new Date();
-					$.ajax({
-			  				type: 'POST', 
-						    url:'manualValuation',
-						    headers: {
-							    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-							},
-					        data:{lotdata:lotdata,bldgdata:bldgdata,lotareadata:lotareadata,bldgareadata:bldgareadata,bldgallowancedata:bldgallowancedata,additionaldata:additionaldata,prop_id:prop_id,taxdata:JSON.stringify(taxdata)},
-					        success:function(data){
-					        	
-								$('#finishloader').html('');
-					        	var noty_id = noty({
-									layout : 'top',
-									text: 'Update successfully!',
-									modal : true,
-									type : 'success', 
-								});			
-								
-				        	},
-					        error:function(data){
-								//$('#loader').css('display','none');
-					        	$('#propertystatus').val('UnRegistered');	
-					        	$('#finishloader').html('');     	
-					        		var noty_id = noty({
-									layout : 'top',
-									text: 'Problem while update valuation!',
-									modal : true,
-									type : 'error', 
-								});
-				        	}
-				    	});
-						$noty.close();
-						}
-						},
-						{type: 'button blue', text: 'Cancel', click: function($noty) {
-								$noty.close();
-						  	}
-						}
-						],
-					type : 'success', 
-			 	});
-
-	}	
+  
 
    
 

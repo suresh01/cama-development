@@ -71,7 +71,7 @@
 										Notis 10 Date
 									</th>
 									<th>
-										Enforce Date
+										Term Date
 									</th>
 									<th>
 										Action
@@ -105,7 +105,7 @@
 										{{$rec->ob_notis10date}}
 									</td>
 									<td>
-										{{$rec->ob_enforcedate}}
+										{{$rec->vt_termdate}}
 									</td>
 									<td>
 										<span><a onclick="updateMeeting('{{$rec->ob_id}}')" class="action-icons c-edit edtlotrow" href="#" title="Edit">Edit</a></span><span><a onclick="deleteMeeting('{{$rec->ob_id}}')" class=" action-icons c-delete deletelotrow dellotrow" href="#" title="delete">Delete</a></span>
@@ -123,7 +123,7 @@
 									<input type="text" id="notis10date_{{$rec->ob_id}}" value="{{$rec->ob_notis10date}}"> 
 									<input type="text" id="notis10hijridate_{{$rec->ob_id}}" value="{{$rec->ob_notis10hijridate}}"> 
 									<input type="text" id="notis8printdate_{{$rec->ob_id}}" value="{{$rec->ob_notis8printdate}}"> 
-									<input type="text" id="enforcedate_{{$rec->ob_id}}" value="{{$rec->ob_enforcedate}}"> 
+									<input type="text" id="enforcedate_{{$rec->ob_id}}" value="{{$rec->vt_termdate}}"> 
 								</div>
 								@endforeach						
 							</tbody>
@@ -175,7 +175,7 @@
 											<span class=" label_intro"></span>
 										</div>							
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">Enforce Date<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">Term Date<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="enforcedate" required="true"  name="enforcedate" type="text"  value="{{ old('enforcedate') }}" />
 											</div>

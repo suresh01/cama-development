@@ -24,6 +24,8 @@ return [
 	'Subzone'=>'Subzone',
 	'Status_Harta'=>'Status Harta',
 	'Property_Category'=>'Property Category',
+	'Property_Type'=>'Property Type',
+	'Property_Storey'=>'Property Storey',
 	'Nt'=>'Nt',
 	'Rate'=>'Rate',
 	'Tax_Rate'=>'Tax Rate',

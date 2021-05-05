@@ -109,7 +109,7 @@
 							<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"   id="impldate" name="impldate" tabindex="14">
 								<option></option>
 								@foreach ($term as $rec)
-										<option value='{{ $rec->vt_termDate }}'>{{ $rec->termDate }}</option>
+										<option value='{{ $rec->vt_termDate }}'>{{ $rec->term }}</option>
 								@endforeach	
 							</select>
 						</div>

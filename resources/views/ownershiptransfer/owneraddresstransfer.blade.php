@@ -84,7 +84,7 @@
 											{{$loop->iteration}}
 										</td>
 										<td>
-											<a class='shobldg' onclick="edit('{{$rec->ma_accno}}')" href='#' >{{$rec->otar_accno}}</a>
+											<a class='shobldg' onclick="edit('{{$rec->otar_id}}')" href='#' >{{$rec->otar_accno}}</a>
 										</td>
 										<td>
 											{{$rec->TO_OWNNAME}}

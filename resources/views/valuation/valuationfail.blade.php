@@ -1006,9 +1006,7 @@ function updateBldg(){
 			            var transjson = JSON.stringify(transdata);
 			            //$('#jsondata').val(transjson);
 			            console.log(transjson);
-
 			            
-
 			            $.ajax({
 			  				type: 'GET', 
 						    url:'tonebldgtrn',
