@@ -4,9 +4,9 @@
 		<ul>
 			<li>
 				<fieldset>
-					<legend>Decision</legend>
+					<legend>{{__('remisiLang.Decision')}} </legend>
 					<div class="form_grid_6">
-						<label class="field_title"  id="accnumberlbl" for="username">Result Officer<span class="req">*</span></label>
+						<label class="field_title"  id="accnumberlbl" for="username">{{__('remisiLang.Result_Officer')}} <span class="req">*</span></label>
 						<div  class="form_input">
 							<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"   id="resultoffi" name="resultoffi" tabindex="14">
 								<option></option>
@@ -19,7 +19,7 @@
 					</div>
 					
 					<div class="form_grid_6">
-						<label class="field_title" id="lposition" for="position">Result Date<span class="req">*</span></label>
+						<label class="field_title" id="lposition" for="position">{{__('remisiLang.Result_Date')}} <span class="req">*</span></label>
 						<div  class="form_input">
 							<input id="resultdate" tabindex="1" name="resultdate" type="text" value="{{$master->rg_reofficerdate}}" maxlength="100" >
 						</div>
@@ -30,7 +30,7 @@
 						<br /><br />
 						<div class="form_grid_6">
 							<div class="form_grid_2">
-								<label style="width: 80%;" class="field_title">Approved
+								<label style="width: 80%;" class="field_title">{{__('common.Approved')}} 
 								</label>
 							</div>
 							<div class="form_grid_2">
@@ -46,7 +46,7 @@
 
 						<div class="form_grid_6">
 							<div class="form_grid_2">
-								<label style="width: 80%;" class="field_title">Rejected
+								<label style="width: 80%;" class="field_title">{{__('common.Rejected')}} 
 								</label>
 							</div>
 							<div class="form_grid_2">
@@ -70,11 +70,11 @@
 		<ul>
 			<li>
 				<fieldset>
-					<legend>Approved Information</legend>
+					<legend>{{__('common.Approved_Information')}} </legend>
 					
 					
 					<div class="form_grid_12">
-						<label class="field_title" id="llevel" for="level">Vacant Begin Date<span class="req">*</span></label>
+						<label class="field_title" id="llevel" for="level">{{__('remisiLang.Vacant_Begin_Date')}} <span class="req">*</span></label>
 						<div  class="form_input">
 							<input id="vacantsdate" tabindex="1" name="vacantsdate" type="text" value="{{$master->rg_revacancystartdate}}" maxlength="100" >
 						</div>
@@ -82,7 +82,7 @@
 					</div>
 			 		
 					<div class="form_grid_12">
-						<label class="field_title" id="llevel" for="level">Vacant End Date<span class="req">*</span></label>
+						<label class="field_title" id="llevel" for="level">{{__('remisiLang.Vacant_End_Date')}} <span class="req">*</span></label>
 						<div  class="form_input">
 							<input id="vacantedate" tabindex="1" name="vacantedate" type="text" value="{{$master->rg_revacancyenddate}}" maxlength="100" >
 						</div>
@@ -94,7 +94,7 @@
 
 					
 					<div class="form_grid_12">
-						<label class="field_title" id="llevel" for="level">Amount<span class="req">*</span></label>
+						<label class="field_title" id="llevel" for="level">{{__('remisiLang.Amount')}} <span class="req">*</span></label>
 						<div  class="form_input">
 							<input id="insamount" tabindex="1" name="insamount" type="text" value="{{$master->rg_reamount}}" maxlength="100" >
 						</div>
@@ -102,7 +102,7 @@
 					</div>
 			 		
 					<div class="form_grid_12">
-						<label class="field_title" id="llevel" for="level">implemented DATE<span class="req">*</span></label>
+						<label class="field_title" id="llevel" for="level">{{__('remisiLang.Implemented_Date')}} <span class="req">*</span></label>
 						<div  class="form_input">
 							<!--<input id="impldate" tabindex="1" name="impldate" type="text" value="{{$master->rg_reimplementdate}}" maxlength="100" >-->
 
@@ -123,7 +123,7 @@
 		<ul>
 			<li>
 				<fieldset>
-					<legend>Rejected Information</legend>
+					<legend>{{__('common.Rejected_Information')}}</legend>
 					<div class="form_grid_2">
 												
 						<div style="width: 20%;" class="form_input ">
@@ -134,7 +134,7 @@
 						</div>
 					</div>
 					<div class="form_grid_10">
-						<label style="width: 80%;" class="field_title">Reason 1</label>
+						<label style="width: 80%;" class="field_title">{{__('remisiLang.Reason1')}} </label>
 						
 					</div>
 					<div class="form_grid_2">
@@ -147,7 +147,7 @@
 						</div>
 					</div>
 					<div class="form_grid_10">
-						<label style="width: 80%;" class="field_title">Reason 2</label>
+						<label style="width: 80%;" class="field_title">{{__('remisiLang.Reason2')}} </label>
 						
 					</div>
 					<div class="form_grid_2">
@@ -160,7 +160,7 @@
 						</div>
 					</div>
 					<div class="form_grid_10">
-						<label style="width: 80%;" class="field_title">Reason 3</label>
+						<label style="width: 80%;" class="field_title">{{__('remisiLang.Reason3')}} </label>
 						
 					</div>
 

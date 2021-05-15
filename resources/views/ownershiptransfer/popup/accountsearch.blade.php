@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Account Number Search</title>
+<title>{{__('ownershiptran.Account_Number_Search')}}</title>
 <style type="text/css">
 
 #proptble td.numericCol {
@@ -80,11 +80,11 @@
 						<table style="width: 100%;" id="propdatatable" class="display ">							
 							<thead style="text-align: left;">
 					  		<tr>
-								<th class="table_sno"> S No</th>
-								<th>Accoutnumber</th>
-								<th>Zone</th>
-								<th>Subzone</th>
-								<th>Action</th>
+								<th class="table_sno"> {{__('ownershiptran.SNO')}}</th>
+								<th>{{__('ownershiptran.Account_Number')}}</th>
+								<th>{{__('ownershiptran.Zone')}}</th>
+								<th>{{__('ownershiptran.Subzone')}}</th>
+								<th>{{__('ownershiptran.Action')}}</th>
 							</tr>
 							</thead>
 							<tbody>

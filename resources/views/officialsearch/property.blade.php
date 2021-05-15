@@ -109,14 +109,14 @@
 								<tr>
 									<th><input name="select_all" value="1" type="checkbox"></th>
 									<th class="table_sno">{{__('officialsearch.SNO')}} </th>
+									<th> {{__('officialsearch.Group')}}  </th>
 									<th> {{__('officialsearch.Account_Number')}}  </th>
 									<th> {{__('officialsearch.Zone')}}   </th>
-									<th> {{__('officialsearch.Subzone')}}    </th>
+									<th> {{__('officialsearch.Subzone')}}   </th>
 									<th> {{__('officialsearch.Property_Building_Status')}}  </th>	
 									<th> {{__('officialsearch.Property_Category')}}  </th>			
 									<th> {{__('officialsearch.Property_Type')}}  </th>		
-									<th> {{__('officialsearch.Property_Storey')}}  </th>	
-									<th> {{__('officialsearch.Term_Date')}}  </th>	
+									<th> {{__('officialsearch.Property_Storey')}}  </th>
 									<th> {{__('officialsearch.Register_By')}}  </th>	
 									<th> {{__('officialsearch.Register_Date')}}  </th>
 									<th> {{__('officialsearch.Status')}}  </th>	
@@ -376,9 +376,9 @@ var table = $('#proptble').DataTable({
 			        {"data": "zone", "name": "zone"},
 			        {"data": "subzone", "name": "subzone"},
 			        {"data": "propertstatus", "name": "address"},
-			        {"data": "bldgcategory", "name": "owner", "sClass": "numericCol"}, 
-			        {"data": "bldgtype", "name": "ishasbldg", "sClass": "numericCol"}, 
-			        {"data": "bldgsotery", "name": "ishasbldg", "sClass": "numericCol"}, 
+			        {"data": "bldgcategory", "name": "owner"}, 
+			        {"data": "bldgtype", "name": "ishasbldg"}, 
+			        {"data": "bldgsotery", "name": "ishasbldg"}, 
 			        {"data": "os_createby", "name": "ishasbldg"}, 
 			        {"data": "os_createdate_frmt", "name": "propertstatus"}, 
 			        {"data": "approvalstatus", "name": "ishasbldg"}, 

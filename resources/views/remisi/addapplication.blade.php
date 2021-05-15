@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>New Property</title>
+<title>{{__('remisiLang.New_Property')}} </title>
 
 
 @include('includes.header-popup')
@@ -15,7 +15,7 @@
         
 				<div style="float:right;margin-right: 0px;"  class="btn_24_blue">	      
           
-          <a href="#" id="" onclick="closeWindow()" class=""><span>Close </span></a> 
+          <a href="#" id="" onclick="closeWindow()" class=""><span>{{__('common.Close')}}  </span></a> 
 				</div>
         <div style="float:right;margin-right: 15px;"  class="btn_24_blue">          
           @include('inspection.grab.search')
@@ -27,27 +27,14 @@
 						<table id="proptble" class="display select">
 							<thead style="text-align: left;">
 								<tr>
-									<th class="table_sno">
-										S No
-									</th>
-									<th>
-										ACCOUNT NUMBER
-									</th>
-									<th>
-										ZONE
-									</th>
-									<th>
-										SUBZONE
-									</th>	
-									<th>
-										Property Building Status
-									</th>		
-									<th>
-										Property Category   
-									</th>		
-                  <th>
-                    ACTION
-                  </th>			
+									<th class="table_sno">{{__('remisiLang.SNO')}}</th>
+                  <th>{{__('remisiLang.New_Property')}}</th>
+                  <th>{{__('remisiLang.Account_Number')}}</th>
+                  <th>{{__('remisiLang.Zone')}}</th>
+                  <th>{{__('remisiLang.Subzone')}}</th>
+                  <th>{{__('remisiLang.Property_Building_Status')}}</th>
+                  <th>{{__('remisiLang.Property_Category')}}</th>
+                  <th>{{__('remisiLang.Action')}}</th>		
 								</tr>
 							</thead>
 							<tbody>			
@@ -60,7 +47,7 @@
       <div id="addgroup" style="display:none" class="grid_10 full_block">
         <div class="widget_wrap">
           <div class="widget_content">
-            <h3 id="title">Add Basket</h3>
+            <h3 id="title">{{__('remisiLang.Add_Basket')}} </h3>
             <form id="addgroupfrom" autocomplete="off" class="" method="get" action="#" >
               @csrf
               <input type="hidden" name="id" id="id" value="0">
@@ -69,7 +56,7 @@
                 <ul>
                   <li>                
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="termname" for="termid">Applicant Name<span class="req">*</span></label>
+                      <label class="field_title" id="termname" for="termid">{{__('remisiLang.Applicant_Name')}} <span class="req">*</span></label>
                       <div class="form_input">
                         <input id="name"  name="name" autocomplete="off" type="text"  value="{{ old('term') }}" />
                       </div>
@@ -82,9 +69,9 @@
               <div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
                 
                 <div class="form_input">
-                  <button id="addsubmit" name="adduser" onclick="validateGroup()" class="btn_small btn_blue"><span>Submit</span></button>     
+                  <button id="addsubmit" name="adduser" onclick="validateGroup()" class="btn_small btn_blue"><span>{{__('common.Submit')}} </span></button>     
                             
-                  <button id="close" onclick="closeGroup()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+                  <button id="close" onclick="closeGroup()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}} </span></button>
                   <span class=" label_intro"></span>
                 </div>
                 

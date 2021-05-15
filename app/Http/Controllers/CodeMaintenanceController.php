@@ -234,6 +234,9 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
         $name=Auth::user()->name;
         Log::info("call proc_transaction_trn('".$jsondata."','".$name."')"); 
         $response=DB::select("call proc_transaction_trn('".$jsondata."','".$name."')");
+        
+        App::setlocale(session()->get('locale'));
+        
         return redirect('evidentmgmt');
     }
 

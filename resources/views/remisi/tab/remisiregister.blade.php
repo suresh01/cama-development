@@ -5,7 +5,7 @@
 							<li>
 								
 										<div class="form_grid_12">
-											<label class="field_title"  id="accnumberlbl" for="username">Acc No<span class="req">*</span></label>
+											<label class="field_title"  id="accnumberlbl" for="username">{{__('remisiLang.Acc_No')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->ma_accno}}" maxlength="100" >
 											</div>
@@ -13,7 +13,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">File No<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('remisiLang.File_No')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->ma_fileno}}" maxlength="100" >
 											</div>
@@ -27,10 +27,10 @@
 							<li>
 								
 									<fieldset>
-										<legend>Owner Information</legend>
+										<legend>{{__('remisiLang.Owner_Information')}} </legend>
 								 		
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">Owner Name<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.Owner_Name')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->to_ownname}}" maxlength="100" >
 											</div>
@@ -38,7 +38,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">Owner Identity No<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.Owner_Identity_No')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->to_ownno}}" maxlength="100" >
 											</div>
@@ -46,7 +46,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">Owner Tel No<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.Owner_Tel_No')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->to_telno}}" maxlength="100" >
 											</div>
@@ -55,7 +55,7 @@
 								 		
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">Address 1<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.Address1')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="ownaddr1" tabindex="1" readonly="true" name="ownaddr1" type="text" value="{{$master->TO_ADDR_LN1}}" maxlength="100" >
 											</div>
@@ -63,7 +63,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">Address 2<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.Address2')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->TO_ADDR_LN2}}" maxlength="100" >
 											</div>
@@ -71,7 +71,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">Address 3<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.Address3')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->TO_ADDR_LN3}}" maxlength="100" >
 											</div>
@@ -79,7 +79,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">Address 4<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.Address4')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->TO_ADDR_LN4}}" maxlength="100" >
 											</div>
@@ -87,7 +87,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">Postcode<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.Postcode')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->TO_POSTCODE}}" maxlength="100" >
 											</div>
@@ -95,7 +95,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">City<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.City')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->TO_CITY}}" maxlength="100" >
 											</div>
@@ -103,7 +103,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">State<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.State')}} <span class="req">*</span></label>
 											<div  class="form_input">
 
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="ownstate"  disabled="true" name="propstate" tabindex="14">
@@ -123,10 +123,10 @@
 							<ul>
 								<li>
 									<fieldset>
-										<legend>Property Information</legend>
+										<legend>{{__('remisiLang.Property_Information')}}</legend>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">Address 1<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.Address1')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->ma_addr_ln1}}" maxlength="100" >
 											</div>
@@ -134,7 +134,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">Address 2<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.Address2')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->ma_addr_ln2}}" maxlength="100" >
 											</div>
@@ -142,7 +142,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">Address 3<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.Address3')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->ma_addr_ln3}}" maxlength="100" >
 											</div>
@@ -150,7 +150,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">Address 4<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.Address4')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->ma_addr_ln4}}" maxlength="100" >
 											</div>
@@ -158,7 +158,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">Postcode<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.Postcode')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->ma_postcode}}" maxlength="100" >
 											</div>
@@ -166,7 +166,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">City<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.City')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="accnumber" tabindex="1" readonly="true" name="accnumber" type="text" value="{{$master->ma_city}}" maxlength="100" >
 											</div>
@@ -174,7 +174,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">State<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('remisiLang.State')}} <span class="req">*</span></label>
 											<div  class="form_input">
 
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  disabled="true" id="propstate" name="propstate" tabindex="14">

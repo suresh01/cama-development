@@ -4,7 +4,7 @@
 
 return [
     'home' => 'Laman Utama',
-    'tol' => 'TOL',
+    'tol' => 'ARAS NILAI',
     'tbasket' => 'BASKET TONE',
     'addbasket' => 'Tambah Bakul',
     'sno' => 'S No',

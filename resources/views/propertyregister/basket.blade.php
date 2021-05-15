@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>Basket</title>
+<title>{{__('propertyregister.Basket')}}</title>
 @include('includes.header', ['page' => 'datamaintenance'])
 	<!--<div class="page_title">
 		<span class="title_icon"><span class="blocks_images"></span></span>
@@ -73,24 +73,24 @@
 			<div class="form_input">
 				<div id="breadCrumb3"  class="breadCrumb grid_3">
 					<ul >
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-						<li>Property Registration</li>
+						<li><a href="#">{{__('propertyregister.Home')}}</a></li>
+						<li><a href="#">{{__('propertyregister.Data_Maintenance')}}</a></li>
+						<li>Property_Registration</li>
 					</ul>
 				</div>
 
 				@if(userpermission::checkaccess(321)=="true")
 				
 				<div style="float:right;margin-right: 10px;">
-					<button id="adduser"   onclick="openAddUser()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Basket</span></button>			
+					<button id="adduser"   onclick="openAddUser()" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('propertyregister.Add_Basket')}}</span></button>			
 				</div>
 				@endif
 
 				<div  style="float:right;margin-right: 20px;">		
 						<select onchange="getdata()" data-placeholder="Choose a Status..."  style="float: left;" class="cus-select"  id="parambldgcategory" name="parambldgcategory" tabindex="6">
-							<option value="0">Please Select a Filter...</option>
-							<option value="01">Property Registration Basket</option>
-							<option value="03">Inspection Stage Basket</option>
+							<option value="0">{{__('common.Please_Select_a_Filter')}}...</option>
+							<option value="01">{{__('propertyregister.Property_Registration_Basket')}}</option>
+							<option value="03">{{__('propertyregister.Inspection_Stage_Basket')}}</option>
 						</select>	
 					<span class="clear"></span>
 				</div>
@@ -102,19 +102,19 @@
 					<div class="social_activities">
 						<div class="comments_s">
 							<div class="block_label">
-								Basket Count<span id="bst_count">0</span>
+								{{__('propertyregister.Basket_Count')}}<span id="bst_count">0</span>
 							</div>
 						</div>
 						<div class="comments_s">
 							<div class="block_label">
-								Property Count<span>@foreach ($propertycount as $rec)
+								{{__('propertyregister.Property_Count')}}<span>@foreach ($propertycount as $rec)
 											{{$rec->propcount}}									
 										@endforeach	</span>
 							</div>
 						</div>
 						<div style="width: 200px;" class="comments_s">
 							<div style="width: 200px;" class="block_label">
-								Valuation Property Count<span>@foreach ($valproperty as $rec)
+								{{__('propertyregister.Valuation_Property_Count')}}<span>@foreach ($valproperty as $rec)
 											{{$rec->propcount}}									
 										@endforeach	</span>
 							</div>
@@ -124,41 +124,17 @@
 						<table id="baskettbl" class="display data_tbl">
 					<thead style="text-align: left;">
 			  		<tr>
-							<th class="table_sno">
-								 S No
-							</th>
-							<th>
-								Bakset Name
-							</th>
-							<th>
-								Application Type
-							</th>
-							<th>
-								Property Count
-							</th>
-							<th>
-								Property Count in Valuation
-							</th>
-							<th>
-								Pending Count
-							</th>
-							<th>
-								Approved Count
-							</th>
-							<th>
-								Create By /
-								Create At
-							</th>
-							<th>
-								Update By /
-								Update At
-							</th>
-							<th>
-								Status 
-							</th>
-							<th>
-								Action
-							</th>
+							<th class="table_sno"> {{__('propertyregister.SNO')}} </th>
+							<th>{{__('propertyregister.Basket_Name')}}</th>
+							<th>{{__('propertyregister.Application_Type')}}</th>
+							<th>{{__('propertyregister.Property_Count')}}</th>
+							<th>{{__('propertyregister.Property_Count_in_Valuation')}}</th>
+							<th>{{__('propertyregister.Pending_Count')}}</th>
+							<th>{{__('propertyregister.Approved_Count')}}</th>
+							<th>{{__('propertyregister.Create_By_At')}}</th>
+							<th>{{__('propertyregister.Update_By_At')}}</th>
+							<th>{{__('propertyregister.Status')}}</th>
+							<th>{{__('propertyregister.Action')}}</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -202,15 +178,15 @@
 							<td>	
 							    @if($rec->propcount == 0)	
 							    @if(userpermission::checkaccess(321)=="true")
-							    <span><a class="action-icons c-delete delete_BASKET" onclick="deleteBasket('{{ $rec->basket_id }}')" href="#" title="Delete">Delete</a></span>
+							    <span><a class="action-icons c-delete delete_BASKET" onclick="deleteBasket('{{ $rec->basket_id }}')" href="#" title="{{__('common.Delete')}} ">{{__('common.Delete')}} </a></span>
 							    @endif
 							    @elseif($rec->propcount == $rec->approved_count && $rec->PB_APPROVALSTATUS_ID == '02')
 							    @if(userpermission::checkaccess(324)=="true")
-							    <span><a class="action-icons c-approve" onclick="approveProperty('{{ $rec->basket_id }}')" title="Approve For Inspection" href="#">Approve</a></span>
+							    <span><a class="action-icons c-approve" onclick="approveProperty('{{ $rec->basket_id }}')" title="{{__('common.Approve')}} Approve For Inspection" href="#">{{__('common.Approve')}} Approve</a></span>
 							    @endif
 							    @endif
 							    @if(userpermission::checkaccess(322)=="true")
-							    <span><a class="action-icons c-edit edtlotrow" onclick="openEdit('{{ $rec->basket_id }}')" href="#" title="Edit">Edit</a></span>
+							    <span><a class="action-icons c-edit edtlotrow" onclick="openEdit('{{ $rec->basket_id }}')" href="#" title="{{__('common.Edit')}} "> {{__('common.Edit')}} </a></span>
 							    @endif
 							</td>
 						</tr>
@@ -228,7 +204,7 @@
 		<div id="adduserform" style="display:none" class="grid_10 full_block">
 			<div class="widget_wrap">
 				<div class="widget_content">
-					<h3 id="title">Add Basket</h3>
+					<h3 id="title">{{__('propertyregister.Add_Basket')}} </h3>
 					<form id="usertransform"  autocomplete="off" class="" method="post" action="propertybaskettrn" >
 						@csrf
 						<input type="hidden" name="basket_id" id="basket_id" value="0">
@@ -238,7 +214,7 @@
 							<ul>
 								<li>								
 									<div class="form_grid_12">									
-										<label class="field_title" id="luserid" for="userid">Basket Name<span class="req">*</span></label>
+										<label class="field_title" id="luserid" for="userid">{{__('propertyregister.Basket_Name')}} <span class="req">*</span></label>
 										<div class="form_input">
 											<input id="basket" name="basket" type="text"  value="{{ old('basket') }}" />
 										</div>
@@ -246,7 +222,7 @@
 									</div>
 
 									<div class="form_grid_12">									
-										<label class="field_title" id="luserid" for="userid">Application Type<span class="req">*</span></label>
+										<label class="field_title" id="luserid" for="userid">{{__('propertyregister.Application_Type')}} <span class="req">*</span></label>
 										<div class="form_input">
 											<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="applicationtype" name="applicationtype" tabindex="20">
 												<option></option>
@@ -265,9 +241,9 @@
 						<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
 							
 							<div class="form_input">
-								<button id="addsubmit" name="adduser" type="submit" class="btn_small btn_blue"><span>Submit</span></button>			
+								<button id="addsubmit" name="adduser" type="submit" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>			
 														
-								<button id="close" onclick="closeAddUser()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+								<button id="close" onclick="closeAddUser()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 								<span class=" label_intro"></span>
 							</div>
 						

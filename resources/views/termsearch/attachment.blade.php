@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Attachment</title>
+<title>{{__('Termsearch.Attachment')}}</title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @include('includes.header', ['page' => 'dataenquery'])
 	<!--<div class="page_title">
@@ -33,12 +33,12 @@
 
 					<div id="breadCrumb3"  class="breadCrumb grid_3">
 						<ul >
-							<li><a href="#">Home</a></li>
-							<li><a href="valterm">Data Enquiry</a></li>
-							<li>Term Search</li>
+							<li><a href="#">{{__('Termsearch.Application_Type')}} Home</a></li>
+							<li><a href="valterm">{{__('Termsearch.Data_Enquiry')}} </a></li>
+							<li>{{__('Termsearch.Term_Search')}} </li>
 						</ul>
 					</div>
-					<button style="float:right;" onclick="openattach()" id="addattach" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Attachment</span></button>
+					<button style="float:right;" onclick="openattach()" id="addattach" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('Termsearch.Add_Attachment')}} </span></button>
 					<br>
 				</div>		
 					            
@@ -51,14 +51,14 @@
 										<table style="width:100%" id="attachtble" class="display ">
 										<thead style="text-align: left;">
 								  		<tr>
-											<th class="table_sno">S No</th>
-											<th>FILENAME</th>
-											<th>ATTACHMENT TYPE</th>
-											<th>DECRIPTION</th>
-											<th>ACTION</th>
-											<th>actioncode</th>
-											<th>id</th>
-											<th>orginalfilename</th>
+											<th class="table_sno">{{__('Termsearch.SNO')}}</th>
+											<th>{{__('Termsearch.Filename')}} </th>
+											<th>{{__('Termsearch.Attachment_Type')}}  </th>
+											<th>{{__('Termsearch.Description')}} </th>
+											<th>{{__('Termsearch.Action')}} </th>
+											<th>{{__('Termsearch.Actioncode')}} </th>
+											<th>{{__('Termsearch.Id')}} </th>
+											<th>{{__('Termsearch.Orginalfilename')}} </th>
 										</tr>
 										</thead>
 										<tbody>										
@@ -67,52 +67,51 @@
 									</div>
 								</div>
 								<div style="display:none;" id="attachdetail" >
-
-								<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
-									<button id="submitaddattachment" onclick="addAttachment()"  name="adduser" type="button" class="btn_small btn_blue"><span>Add New</span></button>
-								<button id="close" onclick="closeattach()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
-								</div>
-								
+									<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
+										<button id="submitaddattachment" onclick="addAttachment()"  name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Add_New')}} </span></button>
+										<button id="close" onclick="closeattach()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}} </span></button>
+									</div>
+									
 									<div  class="grid_12">
 									<ul>
-									<li>
-								
-										<fieldset>
-										<legend>Attachment</legend>
-											<div class="form_grid_6">
-												<label class="field_title" id="lusername" for="username">File Name<span class="req">*</span></label>
-												<div  class="form_input">
-											<input id="filename" tabindex="3" name="filename" type="text" value="" maxlength="50" class=""/>
-												</div>
-												<span class=" label_intro"></span>
-											</div>
-											<div class="form_grid_6">
-												<label class="field_title" id="lusername" for="username">Attachment Type<span class="req">*</span></label>
-												<div  class="form_input">
-													<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="attachtype" name="attachtype" tabindex="1">
-														<option></option>
-														@foreach ($attachtype as $rec)
+											<li>
+												
+												<fieldset>
+													<legend>{{__('Termsearch.Attachment')}}</legend>
+													<div class="form_grid_6">
+														<label class="field_title" id="lusername" for="username">{{__('Termsearch.Filename')}} <span class="req">*</span></label>
+														<div  class="form_input">
+															<input id="filename" tabindex="3" name="filename" type="text" value="" maxlength="50" class=""/>
+														</div>
+														<span class=" label_intro"></span>
+													</div>
+													<div class="form_grid_6">
+														<label class="field_title" id="lusername" for="username">{{__('Termsearch.Attachment_Type')}} <span class="req">*</span></label>
+														<div  class="form_input">
+															<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="attachtype" name="attachtype" tabindex="1">
+																<option></option>
+																@foreach ($attachtype as $rec)
 																<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
-														@endforeach	
-													</select>
-												</div>
-												<span class=" label_intro"></span>
-											</div>
-											<div class="form_grid_6">
-												<label class="field_title" id="lusername" for="username">Description<span class="req">*</span></label>
-												<div  class="form_input">
-											<input id="filedesc" tabindex="3" name="filedesc" type="text" value="" maxlength="15" class=""/>
-												</div>
-												<span class=" label_intro"></span>
-											</div>
-											<div class="form_grid_6">
-												<label class="field_title" id="lusername" for="username">File<span class="req">*</span></label>
-												<div  class="form_input">
-											<input id="filepath" tabindex="3" name="filepath" type="file" value=""  class=""/>
-												</div>
-												<span class=" label_intro"></span>
-											</div>
-										</fieldset>
+																@endforeach
+															</select>
+														</div>
+														<span class=" label_intro"></span>
+													</div>
+													<div class="form_grid_6">
+														<label class="field_title" id="lusername" for="username">{{__('Termsearch.Description')}} <span class="req">*</span></label>
+														<div  class="form_input">
+															<input id="filedesc" tabindex="3" name="filedesc" type="text" value="" maxlength="15" class=""/>
+														</div>
+														<span class=" label_intro"></span>
+													</div>
+													<div class="form_grid_6">
+														<label class="field_title" id="lusername" for="username">{{__('Termsearch.File')}} <span class="req">*</span></label>
+														<div  class="form_input">
+															<input id="filepath" tabindex="3" name="filepath" type="file" value=""  class=""/>
+														</div>
+														<span class=" label_intro"></span>
+													</div>
+												</fieldset>
 									</li>
 									</ul>
 									</div>

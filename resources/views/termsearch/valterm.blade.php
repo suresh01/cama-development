@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Term</title>
+<title>{{__('Termsearch.Term')}} </title>
 @include('includes.header', ['page' => 'dataenquery'])
 	<!--<div class="page_title">
 		<span class="title_icon"><span class="blocks_images"></span></span>
@@ -39,9 +39,9 @@
 
 					<div id="breadCrumb3"  class="breadCrumb grid_3">
 						<ul >
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Data Enquiry</a></li>
-							<li>Term Search</li>
+							<li><a href="#">{{__('Termsearch.Home')}} </a></li>
+							<li><a href="#">{{__('Termsearch.Data_Enquiry')}} </a></li>
+							<li>{{__('Termsearch.Term_Search')}} </li>
 						</ul>
 					</div>
 					<div  style="float:right;margin-right: 20px;">		
@@ -60,19 +60,19 @@
 						<div class="social_activities">
 							<div class="comments_s">
 								<div class="block_label">
-									Total Term Count<span id="term_count">0</span>
+									{{__('Termsearch.Total_Term_Count')}} <span id="term_count">0</span>
 								</div>
 							</div>
 							<div style="width: 160px;" class="comments_s">
 								<div style="width: 160px;" class="block_label">
-									Total Basket Count<span>@foreach ($basket_count as $rec)
+									{{__('Termsearch.Total_Basket_Count')}} <span>@foreach ($basket_count as $rec)
 												{{$rec->basket_count}}									
 											@endforeach	</span>
 								</div>
 							</div>
 							<div style="width: 180px;" class="comments_s">
 								<div style="width: 180px;" class="block_label">
-									Total Property Count<span>@foreach ($property_count as $rec)
+									{{__('Termsearch.Total_Property_Count')}} <span>@foreach ($property_count as $rec)
 												{{$rec->property_count}}									
 											@endforeach	</span>
 								</div>
@@ -82,24 +82,12 @@
 						<table id="termtbl" class="display termtbl_details">
 							<thead style="text-align: left;">
 			  					<tr>
-									<th class="table_sno">
-										S No
-									</th>
-									<th>
-										Term Name
-									</th>
-									<th>
-										Application Type
-									</th>
-									<th>
-										Basket Count
-									</th>
-									<th>
-										Property Count
-									</th>
-									<th>
-										Term Date
-									</th>
+									<th class="table_sno">{{__('Termsearch.SNO')}}</th>
+									<th> {{__('Termsearch.Term_Name')}}  </th>
+									<th> {{__('Termsearch.Application_Type')}}  </th>
+									<th> {{__('Termsearch.Basket_Count')}}  </th>
+									<th> {{__('Termsearch.Property_Count')}}  </th>
+									<th> {{__('Termsearch.Term_Date')}}  </th>
 									<th style="display: none;">
 										Create By -
 										Create At
@@ -128,15 +116,9 @@
 									<th style="display: none;">
 										base
 									</th>
-									<th>
-										Enforced by - Enforced at
-									</th>
-									<th>
-										Status
-									</th>
-									<th>
-										Action
-									</th>
+									<th> {{__('Termsearch.Enforced_by_at')}}  </th>
+									<th> {{__('Termsearch.Status')}}  </th>
+									<th> {{__('Termsearch.Action')}}  </th>
 								</tr>
 							</thead>
 							<tbody>
@@ -213,7 +195,7 @@
 			<div id="addterm" style="display:none" class="grid_10 full_block">
 				<div class="widget_wrap">
 					<div class="widget_content">
-						<h3 id="title">Add Term</h3>
+						<h3 id="title">{{__('Termsearch.Add_Term')}} </h3>
 						<form id="addtermfrom"  autocomplete="off" class="" method="post" action="#" >
 							@csrf
 							<input type="hidden" name="id" id="id" value="0">
@@ -222,21 +204,21 @@
 								<ul>
 									<li>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="luserid" for="userid">Term Name<span class="req">*</span></label>
+											<label class="field_title" id="luserid" for="userid">{{__('Termsearch.Term_Name')}} <span class="req">*</span></label>
 											<div class="form_input">
 												<input id="name" required="true"  name="name" type="text"  value="{{ old('term') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>							
 										<div class="form_grid_12">									
-											<label class="field_title" id="luserid" for="userid">Term Date<span class="req">*</span></label>
+											<label class="field_title" id="luserid" for="userid">{{__('Termsearch.Term_Date')}} <span class="req">*</span></label>
 											<div class="form_input">
 												<input id="termdate" required="true" class="" name="termdate" type="text"  value="{{ old('term') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>	
 										<div class="form_grid_12">									
-											<label class="field_title" id="luserid" for="userid">Application Type<span class="req">*</span></label>
+											<label class="field_title" id="luserid" for="userid">{{__('Termsearch.Application_Type')}} <span class="req">*</span></label>
 											<div class="form_input">
 												<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="applicationtype" name="applicationtype" tabindex="20">
 													<option></option>
@@ -248,7 +230,7 @@
 											<span class=" label_intro"></span>
 										</div>	
 										<div class="form_grid_12">									
-											<label class="field_title" id="luserid" for="userid">Term Type<span class="req">*</span></label>
+											<label class="field_title" id="luserid" for="userid">{{__('Termsearch.Term_Type')}} <span class="req">*</span></label>
 											<div class="form_input">
 												<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="termbase" name="termbase" tabindex="20">
 													<option></option>
@@ -266,9 +248,9 @@
 							<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
 							
 								<div class="form_input">
-									<button id="addsubmit" name="adduser" type="submit" onclick="validateTerm()" class="btn_small btn_blue"><span>Submit</span></button>			
+									<button id="addsubmit" name="adduser" type="submit" onclick="validateTerm()" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>			
 														
-									<button id="close" onclick="closeTerm()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+									<button id="close" onclick="closeTerm()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 									 <span class=" label_intro"></span>
 								</div>
 								

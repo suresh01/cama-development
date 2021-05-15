@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Code Maintenance</title>
+<title>{{__('outer.Code_Maintenance')}}</title>
 @include('includes.header', ['page' => 'datamaintenance'])
 	<!--<div class="page_title">
 		<span class="title_icon"><span class="blocks_images"></span></span>
@@ -49,14 +49,14 @@
 			<br>
 			
 			<div class="form_input">
-				<button id="adduser"  style="float:right;" onclick="openAddUser()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Parameter</span></button>
+				<button id="adduser"  style="float:right;" onclick="openAddUser()" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('outer.Add_Parameter')}}</span></button>
 					
 
 				<div id="breadCrumb3" class="breadCrumb grid_3">
 					<ul >
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-						<li>Code Maintenance </li>
+						<li><a href="#">{{__('outer.Home')}}</a></li>
+						<li><a href="#">{{__('outer.Data_Maintenance')}}</a></li>
+						<li>{{__('outer.Code_Maintenance')}} </li>
 					</ul>
 				</div>
 				<br>
@@ -68,27 +68,13 @@
 						<table class="display data_tbl">
 					<thead style="text-align: left;">
 			  		<tr>
-							<th class="table_sno">
-								 S No
-							</th>
-							<th>
-								 Parameter Name
-							</th>
-							<th>
-								 Parameter Parent
-							</th>
-							<th>
-								 Parameter Description
-							</th>
-							<th>
-								 Parameter Child
-							</th>
-							<th>
-								 Parameter Items
-							</th>
-							<th>
-								 Action
-							</th>
+							<th class="table_sno">{{__('outer.SNO')}}  </th>
+							<th> {{__('outer.Parameter_Name')}} </th>
+							<th> {{__('outer.Parameter_Parent')}} </th>
+							<th> {{__('outer.Parameter_Description')}} </th>
+							<th> {{__('outer.Parameter_Child')}} </th>
+							<th> {{__('outer.Parameter_Items')}} </th>
+							<th> {{__('outer.Action')}} </th>
 						</tr>
 						</thead>
 						<tbody>
@@ -113,8 +99,8 @@
 								 {{ $rec->itemcount }}
 							</td>
 							<td class="">
-								<span><a class="action-icons c-edit" href="#" onclick="openEdit('{{ $rec->pd_name }}')" title="Edit">Edit</a></span>
-								<span><a class="action-icons c-Delete " onclick="deletecode('{{ $rec->pd_name }}')" href="#" title="Delete">Delete</a></span>
+								<span><a class="action-icons c-edit" href="#" onclick="openEdit('{{ $rec->pd_name }}')" title="{{__('common.Edit')}}">{{__('common.Edit')}}</a></span>
+								<span><a class="action-icons c-Delete " onclick="deletecode('{{ $rec->pd_name }}')" href="#" title="{{__('common.Delete')}}">{{__('common.Delete')}}</a></span>
 							</td>
 						</tr>
 						<div style="display:none">
@@ -135,7 +121,7 @@
 		<div id="adduserform" style="display:none" class="grid_10 full_block">
 			<div class="widget_wrap">
 				<div class="widget_content">
-					<h3 id="title">Add Parameter</h3>
+					<h3 id="title">{{__('outer.Add_Parameter')}} </h3>
 					<form id="usertransform" autocomplete="off" method="post" action="codeMaintenancetrn" >
 						@csrf
 							<input type="hidden" name="operation" id="operation">
@@ -143,7 +129,7 @@
 							<ul>
 								<li>								
 									<div class="form_grid_12">									
-										<label class="field_title" id="luserid" for="userid">Parameter Name<span class="req">*</span></label>
+										<label class="field_title" id="luserid" for="userid">{{__('outer.Parameter_Name')}} <span class="req">*</span></label>
 										<div class="form_input">
 											<input id="parametername" onchange="checkusername()" name="pd_name" type="text"  value="{{ old('pd_name') }}" />
 										</div>
@@ -151,7 +137,7 @@
 									</div>
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">Parameter Parent<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('outer.Parameter_Parent')}} <span class="req">*</span></label>
 										<div class="form_input ">
 											<select style="width: 100%;" data-placeholder="Choose a Role..." class="cus-select" id="parent" name="pd_parent" tabindex="20">
 											<option value="Root">Root</option>
@@ -177,7 +163,7 @@
 									</div>
 
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">Search Module<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('outer.Search_Module')}} <span class="req">*</span></label>
 										<div class="form_input ">
 											<select style="width: 100%;" data-placeholder="Choose a Role..." class="cus-select" id="searchmodule" name="search_module" tabindex="20">
 												@foreach ($searchmodule as $rec)
@@ -189,7 +175,7 @@
 									</div>
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="lfname" for="fname">Parameter Description<span class="req">*</span></label>
+										<label class="field_title" id="lfname" for="fname">{{__('outer.Parameter_Description')}} <span class="req">*</span></label>
 										<div class="form_input">
 											<input id="desc" name="pd_desc" type="text" value="{{ old('pd_desc') }}" />
 										</div>
@@ -197,7 +183,7 @@
 									</div>
 									
 									<div class="form_grid_12">
-										<label class="field_title" id="llname" for="lname">Parameter value lenght<span class="req">*</span></label>
+										<label class="field_title" id="llname" for="lname">{{__('outer.Parameter_value_lenght')}} <span class="req">*</span></label>
 										<div class="form_input">
 											<input id="lenght" name="pd_lenght" type="text" value="{{ old('pd_lenght') }}" />
 										</div>
@@ -213,7 +199,7 @@
 									<div class="form_input">
 										<input type="button" id="addsubmit" onclick="checkParameter();" class="btn_small btn_blue" value="Submit">				
 																
-										<button id="close" onclick="closeAddUser()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+										<button id="close" onclick="closeAddUser()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 										<span class=" label_intro"></span>
 									</div>
 								

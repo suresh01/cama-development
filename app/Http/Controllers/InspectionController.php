@@ -285,6 +285,7 @@ class InspectionController extends Controller
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid, sd_keymainfield
         from tbsearchdetail mtb where sd_se_id = 18 ');
+        App::setlocale(session()->get('locale'));
         return view('inspection.grab.exsitsproperty')->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id);
     }
 
@@ -348,6 +349,7 @@ class InspectionController extends Controller
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid, sd_keymainfield
         from tbsearchdetail mtb where sd_se_id = 18 ');
+        App::setlocale(session()->get('locale'));
         return view('existspropertyregister.grab.property')->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id);
     }
 
@@ -513,6 +515,7 @@ class InspectionController extends Controller
         inner join cm_appln_valterm on vt_id = va_vt_id
         where vt_approvalstatus_id = '05' and va_approvalstatus_id = '11' and vt_applicationtype_id = '".$aptype."' order by va_createdate desc");
 
+        App::setlocale(session()->get('locale'));
         return view('inspection.grab.exsitsbasket')->with(array('id'=>$id,'basket'=>$basket));
     }
 
@@ -1402,6 +1405,7 @@ left join tbdefitems walltype on walltype.tdi_key = cm_appln_bldgarea.aba_wallty
            $category = $rec->bldgcategory;
         }
 $arlvl=DB::table('tbdefitems')->where('tdi_td_name', 'AREALEVEL')->where('tdi_parent_name', $category)->orderBy('tdi_sort')->get();
+        App::setlocale(session()->get('locale'));
 
             return view("termsearch.attachment")->with('district', $district)->with('state', $state)->with('zone', $zone)->with('subzone', $subzone)->with(array('bldgstruct'=>$bldgstruct,'bldgstore'=>$bldgstore,'ishasbuilding'=>$ishasbuilding, 'landuse'=>$landuse, 'master'=> $master, 'lotlist'=> $lotlist, 'ownerlist'=>$ownerlist, 'building'=> $building,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstruct,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'bldgcate' => $bldgcate,'bldgtype' => $bldgtype,'count' => $count, 'bldgardetail' => $bldgardetail,'ratepayer' => $ratepayer, 'tenant' => $tenant,'prop_id' => $prop_id,'pb'=> $pb,'parameter' => $parameter,'attachment'=>$attachment,'attachtype' => $attachtype, 'termname' => $termname, 'accountnumber' => $accountnumber,'serverhost' => $serverhost, 'ownerd' => $owner, 'viewparambasket' => $viewparambasket, 'viewparambasketstatus' => $viewparambasketstatus, 'viewparamterm' => $viewparamterm, 'termid' => $termid,
                 'iseditable' => $iseditable, 'applntype' => $applntype));

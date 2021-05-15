@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Ownership Transfer Approval</title>
+<title>{{__('ownershiptran.Ownership_Transfer_Approval')}}</title>
 
 @include('includes.header', ['page' => 'datamaintenance'])
 					
@@ -14,22 +14,22 @@
 				<div class="breadCrumbHolder module">	
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-						<li>Ownership Transfer Approval</li>
+						<li><a href="#">{{__('ownershiptran.Home')}}</a></li>
+						<li><a href="#">{{__('ownershiptran.Data_Maintenance')}}</a></li>
+						<li>{{__('ownershiptran.Ownership_Transfer_Approval')}}</li>
 					</ul>
 				</div>
 				</div>				
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">
 					
-					<a href="#" onclick="getdata()" >Apply Search</a>
+					<a href="#" onclick="getdata()" >{{__('ownershiptran.Apply_Search')}}</a>
 				</div>
 				<div  style="float:right;margin-right: 20px;">
 						
 										
 											<select data-placeholder="Choose a Status..."  style="float: left;" class="cus-select" id="filterzone" name="parambldgcategory" tabindex="6">
-							<option value="">Please Select a Filter...</option>
+							<option value="">{{__('common.Please_Select_a_Filter')}}...</option>
 							@foreach ($owner as $rec)
 							<option value="{{$rec->tdi_key}}">{{$rec->tdi_value}}</option>
 							@endforeach
@@ -48,39 +48,17 @@
 						<table id="proptble" class="display select">
 							<thead style="text-align: left;">
 								<tr>
-									<th class="table_sno">
-										S No
-									</th>
-									<th>
-										No Account
-									</th>
-									<th>
-										Application Type
-									</th>	
-									<th>
-										Owner Name
-									</th>
-									<th>
-										Owner Id Type
-									</th>
-									<th>
-										Owner Id No
-									</th>
-									<th>
-										Address
-									</th>		
-									<th>
-										Group
-									</th>	
-									<th>
-										Register By / Register Date
-									</th>	
-									<th>
-										Register Status
-									</th>	
-									<th>
-										Action
-									</th>			
+									<th class="table_sno">{{__('ownershiptran.SNO')}}</th>
+							<th>{{__('ownershiptran.No_Account')}} </th>
+							<th>{{__('ownershiptran.Application_Type')}} </th>
+							<th>{{__('ownershiptran.Owner_Name')}} </th>
+							<th>{{__('ownershiptran.Owner_Type_ID')}} </th>
+							<th>{{__('ownershiptran.Owner_ID_No')}} </th>		
+							<th>{{__('ownershiptran.Address')}} </th>		
+							<th>{{__('ownershiptran.Group')}} </th>	
+							<th>{{__('ownershiptran.Register_By')}} / {{__('ownershiptran.Register_Date')}} </th>	
+							<th>{{__('ownershiptran.Register_Status')}} </th>	
+							<th>{{__('ownershiptran.Action')}} </th>
 								</tr>
 							</thead>
 							<tbody>		
@@ -91,9 +69,9 @@
 										</td>
 										<td>
 											@if($rec->otar_ownertranstype_id == '3')
-											<a class='shobldg' onclick="edit('{{$rec->otar_id}}',2)" href='#' >{{$rec->otar_accno}}</a>
+											<a class='shobldg' onclick="edit('{{$rec->otar_accno}}',2)" href='#' >{{$rec->otar_accno}}</a>
 											@else
-											<a class='shobldg' onclick="edit('{{$rec->otar_id}}',1)" href='#' >{{$rec->otar_accno}}</a>
+											<a class='shobldg' onclick="edit('{{$rec->otar_accno}}',1)" href='#' >{{$rec->otar_accno}}</a>
 											@endif
 										</td>
 										<td>

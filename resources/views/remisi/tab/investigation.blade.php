@@ -2,57 +2,27 @@
 
 <div id="instable" class="widget_content">	
 <div style="float:right;margin-right: 0px;"  class="btn_24_blue">	      
-	<a href="#" onclick="addInvestigation()" class=""><span>Add Investigation </span></a> 
+	<a href="#" onclick="addInvestigation()" class=""><span>{{__('remisiLang.Add_Investigation')}}  </span></a> 
 </div>
 </br>	</br></br>		
 	<table id="invesitgatetable" class="display ">
 		<thead style="text-align: left;">
 			<tr>
-				<th class="table_sno">
-					S No
-				</th>
-				<th>
-					Investigation Type
-				</th>
-				<th>
-					Investigation Officer
-				</th>
-				<th>
-					Investigation Date
-				</th>
-				<th>
-					Action 
-				</th>	
-				<th>
-					actioncode
-				</th>
-				<th>
-					id 
-				</th>	
-				<th>
-					instype 
-				</th>	
-				<th>
-					insofficer 
-				</th>		
-				<th>
-					review 
-				</th>		
-				<th>
-					finding1 
-				</th>		
-				<th>
-					finding2 
-				</th>		
-				<th>
-					finding3 
-				</th>		
-				<th>
-					finding4 
-				</th>			
-				<th>
-					finding5
-				</th>		
+				<th Class="table_sno">{{__('remisiLang.SNO')}} </th>
+				<th>{{__('remisiLang.Investigation_Type')}}  </th>
+				<th>{{__('remisiLang.Investigation_Officer')}}  </th>
+				<th>{{__('remisiLang.Investigation_Date')}}  </th>
+				<th>{{__('remisiLang.Action')}}   </th>	
+				<th>{{__('remisiLang.Actioncode')}}  </th>
+				<th>{{__('remisiLang.Id')}}   </th>	
+				<th>{{__('remisiLang.Instype')}}   </th>	
+				<th>{{__('remisiLang.Insofficer')}}   </th>		
+				<th>{{__('remisiLang.Review')}}   </th>		
+				<th>{{__('remisiLang.Finding1')}}   </th>		
+				<th>{{__('remisiLang.Finding2')}}   </th>		
+				<th>{{__('remisiLang.Finding3')}}   </th>		
+				<th>{{__('remisiLang.Finding4')}}   </th>			
+				<th>{{__('remisiLang.Finding5')}}  </th>		
 			</tr>
 		</thead>
 		<tbody>
@@ -62,9 +32,9 @@
 </div>
 <div id="addform" class="grid_12" style="display: none;">
 	<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
-		<button id="addbtn" onclick="addRow()"  name="adduser" type="button" class="btn_small btn_blue"><span>Add</span></button>	
-		<button id="updatebtn" onclick="updateRow()"  name="adduser" type="button" class="btn_small btn_blue"><span>Update</span></button>
-		<button id="close" onclick="closeIns()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+		<button id="addbtn" onclick="addRow()"  name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Add')}}</span></button>	
+		<button id="updatebtn" onclick="updateRow()"  name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Update')}}</span></button>
+		<button id="close" onclick="closeIns()" name="close" type="button" class="btn_small btn_blue"><span> {{__('common.Close')}} </span></button>
 	</div>
 	<br><br><br>
 	<input id="insid"  name="insid" type="hidden" value="0" maxlength="100" >
@@ -72,10 +42,10 @@
 	<ul>
 		<li>
 			<fieldset>
-				<legend>Information </legend>				
+				<legend>{{__('remisiLang.Information')}}  </legend>				
 				
 				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">Investigation Type<span class="req">*</span></label>
+					<label class="field_title" id="llevel" for="level">{{__('remisiLang.Investigation_Type')}} <span class="req">*</span></label>
 					<div  class="form_input">
 
 						<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"   id="instype" name="instype" tabindex="14">
@@ -89,7 +59,7 @@
 				</div>
 
 				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">Investigation Officer<span class="req">*</span></label>
+					<label class="field_title" id="llevel" for="level">{{__('remisiLang.Investigation_Officer')}} <span class="req">*</span></label>
 					<div  class="form_input">
 						<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"   id="insofficer" name="insofficer" tabindex="14">
 							<option></option>
@@ -102,7 +72,7 @@
 				</div>
 
 				<div class="form_grid_12">
-					<label class="field_title" id="llevel" for="level">Investigation Date<span class="req">*</span></label>
+					<label class="field_title" id="llevel" for="level">{{__('remisiLang.Investigation_Date')}}<span class="req">*</span></label>
 					<div  class="form_input">
 						<input id="insvdate" tabindex="1" name="insvdate" type="text" value="" maxlength="100" >
 					</div>
@@ -116,7 +86,7 @@
 	<ul>
 		<li>
 			<fieldset>
-				<legend>Investigation Finding </legend>
+				<legend>{{__('remisiLang.Investigation_Finding')}}  </legend>
 				<div class="form_grid_2">
 											
 					<div style="width: 20%;" class="form_input ">
@@ -127,7 +97,7 @@
 					</div>
 				</div>
 				<div class="form_grid_10">
-					<label style="width: 80%;" class="field_title">Finding 1</label>
+					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding1')}} </label>
 					
 				</div>
 				
@@ -141,7 +111,7 @@
 					</div>
 				</div>
 				<div class="form_grid_10">
-					<label style="width: 80%;" class="field_title">Finding 2</label>
+					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding2')}} </label>
 					
 				</div>
 				<div class="form_grid_2">
@@ -154,7 +124,7 @@
 					</div>
 				</div>
 				<div class="form_grid_10">
-					<label style="width: 80%;" class="field_title">Finding 3</label>
+					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding3')}} </label>
 					
 				</div>
 				<div class="form_grid_2">
@@ -167,7 +137,7 @@
 					</div>
 				</div>
 				<div class="form_grid_10">
-					<label style="width: 80%;" class="field_title">Finding 4</label>
+					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding4')}} </label>
 					
 				</div>
 				<div class="form_grid_2">
@@ -180,12 +150,12 @@
 					</div>
 				</div>
 				<div class="form_grid_10">
-					<label style="width: 80%;" class="field_title">Finding 5</label>
+					<label style="width: 80%;" class="field_title">{{__('remisiLang.Finding5')}} </label>
 					
 				</div>
 				
 				<div class="form_grid_2">
-					<label class="field_title" style="width: 100%;" id="lposition" for="position">Review<span class="req">*</span></label>
+					<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('remisiLang.Review')}} <span class="req">*</span></label>
 				</div>
 				<div class="form_grid_10">
 					<div style="margin-left: 0px"  class="form_input"> 

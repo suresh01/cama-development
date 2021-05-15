@@ -55,6 +55,7 @@ return [
 	'Bakset_Name'=>'Bakset Name',
 	'Approve_By_At'=>'Approve By / Approved At',
 	'Term_Name'=>'Term Name',
+	'Term'=>'Term Name',
 	'Term_Date'=>'Term Date',
 	'Account_Information'=>'Account Information',
 	//

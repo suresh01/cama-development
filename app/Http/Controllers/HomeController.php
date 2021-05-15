@@ -1494,6 +1494,7 @@ public function owneradddresTables(Request $request){
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+        App::setlocale(session()->get('locale'));
       return view('dataenquiry.datasearch')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
 
@@ -1546,33 +1547,31 @@ public function owneradddresTables(Request $request){
         'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
-      $property = DB::select('select `cm_appln_valdetl`.`vd_accno`,`cm_masterlist`.`ma_fileno`,
-      `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone,
-      `cm_masterlist`.`ma_addr_ln1`,`cm_masterlist`.`ma_addr_ln2`, `cm_masterlist`.`ma_addr_ln3`,`cm_masterlist`.`ma_addr_ln4`,owntype.tdi_value owntype, 
-      `cm_owner`.`TO_OWNNAME`,  `cm_owner`.`TO_OWNNO`, (select count(*) from cm_appln_bldg where ab_vd_id = vd_id) bldgcount,
-      `cm_appln_valdetl`.`vd_approvalstatus_id`, `cm_appln_valdetl`.`vd_id`, `cm_appln_valdetl`.`vd_va_id`, `cm_masterlist`.`ma_id`, `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, `tbdefitems_ishasbuilding`.`tdi_value` `isbldg`,
-      `cm_masterlist`.`ma_pb_id`        , `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,bldgsotery.tdi_value bldgsotery, 
-      `vt_approvednt`, `vt_approvedtax`,  `vt_proposedrate`, `vt_note`,vt_adjustment , DATE_FORMAT(vt_termDate, "%d/%m/%Y") as vt_termDate, ma_city, ma_postcode, al_no,  state.tdi_value state, lotcode.tdi_value lotcode
-      FROM `cm_appln_valdetl`
-      inner JOIN (select * from `cm_masterlist` where not exists (select 1 from cm_appln_deactivedetl where dad_accno = ma_accno )) cm_masterlist ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
-      JOIN `cm_owner` ON `ma_id` = `TO_MA_ID`
-      join cm_appln_lot on vd_id = al_vd_id
-      join cm_appln_val on va_id = vd_va_id
-      inner join (select MAX(vd_id) exsistid, vt_termDate from cm_appln_valdetl
-      inner join cm_appln_val on va_id = vd_va_id
-      inner join cm_appln_valterm on vt_id = va_vt_id
-      where vt_approvalstatus_id = "05" group by vd_ma_id,vt_termDate) exsitsproperty on exsitsproperty.exsistid = vd_id
-      LEFT JOIN `cm_appln_val_tax` ON `cm_appln_val_tax`.`vt_vd_id` = `cm_appln_valdetl`.`vd_id`
-      LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
-      LEFT JOIN `tbdefitems` as owntype on `TO_OWNTYPE_ID` = `owntype`.`tdi_key` and owntype.tdi_td_name = "OWNTYPE"
-      left join (select *  from tbdefitems where tdi_td_name = "PROPERTYSTAGE") propertstatus
-      on propertstatus.tdi_key = vd_approvalstatus_id 
-      left join (select *  from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgsotery
-      on bldgsotery.tdi_key = vd_bldgstorey_id 
-      LEFT JOIN `tbdefitems_ishasbuilding` ON `cm_appln_valdetl`.`vd_ishasbuilding` = `tbdefitems_ishasbuilding`.`tdi_key`
-      LEFT JOIN `tbdefitems_bldgtype` ON `tbdefitems_bldgtype`.`tdi_key` = `cm_appln_valdetl`.`vd_bldgtype_id` 
-      left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = al_lotcode_id
-      left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE") state on state.tdi_key = ma_state_id 
+      $property = DB::select('
+select  `cm_appln_valdetl`.`vd_accno`,`cm_masterlist`.`ma_fileno`,
+  `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone,
+  `cm_masterlist`.`ma_addr_ln1`,`cm_masterlist`.`ma_addr_ln2`, `cm_masterlist`.`ma_addr_ln3`,`cm_masterlist`.`ma_addr_ln4`, "" as owntype, 
+  "" as TO_OWNNAME,  "" as TO_OWNNO,   bldgcount, 
+  `cm_appln_valdetl`.`vd_approvalstatus_id`, `cm_appln_valdetl`.`vd_id`, `cm_appln_valdetl`.`vd_va_id`, `cm_masterlist`.`ma_id`, `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, `tbdefitems_ishasbuilding`.`tdi_value` `isbldg`,
+  `cm_masterlist`.`ma_pb_id`        , `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,bldgsotery.tdi_value bldgsotery, 
+  `vt_approvednt`, `vt_approvedtax`,  `vt_proposedrate`, `vt_note`,vt_adjustment , DATE_FORMAT(vt_termDate, "%d/%m/%Y") as vt_termDate, ma_city, ma_postcode, al_no,  state.tdi_value state, lotcode.tdi_value lotcode
+FROM  cm_appln_valdetl
+inner join cm_appln_val on va_id = vd_va_id  
+inner join cm_appln_valterm  on vt_id = va_vt_id and  vt_approvalstatus_id = "05"
+inner join v_activeterm  on accno = vd_accno and v_activeterm.termdate = vt_termDate
+inner JOIN (select * from `cm_masterlist` left join cm_appln_deactivedetl on dad_accno = ma_accno where dad_id is null) cm_masterlist ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
+inner join cm_appln_lot on vd_id = al_vd_id
+LEFT JOIN `cm_appln_val_tax` ON `cm_appln_val_tax`.`vt_vd_id` = `cm_appln_valdetl`.`vd_id`
+LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
+-- LEFT JOIN `tbdefitems` as owntype on `TO_OWNTYPE_ID` = `owntype`.`tdi_key` and owntype.tdi_td_name = "OWNTYPE"
+left join (select *  from tbdefitems where tdi_td_name = "PROPERTYSTAGE") propertstatus
+on propertstatus.tdi_key = vd_approvalstatus_id 
+left join (select *  from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgsotery
+on bldgsotery.tdi_key = vd_bldgstorey_id 
+LEFT JOIN `tbdefitems_ishasbuilding` ON `cm_appln_valdetl`.`vd_ishasbuilding` = `tbdefitems_ishasbuilding`.`tdi_key`
+LEFT JOIN `tbdefitems_bldgtype` ON `tbdefitems_bldgtype`.`tdi_key` = `cm_appln_valdetl`.`vd_bldgtype_id` 
+left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = al_lotcode_id
+left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE") state on state.tdi_key = ma_state_id 
      '.$filterquery);
        // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
         $propertyDetails = Datatables::collection($property)->make(true);
@@ -1853,6 +1852,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
        $additional = DB::select('select * from cm_appln_val_additional where vad_vd_id =  ifnull("'.$prop_id.'",0)');
 
         
+        App::setlocale(session()->get('locale'));
 
             return view("dataenquiry.datasearchdetail")->with('district', $district)->with('state', $state)->with('zone', $zone)->with('subzone', $subzone)->with(array('bldgstruct'=>$bldgstruct,'bldgstore'=>$bldgstore,'ishasbuilding'=>$ishasbuilding, 'landuse'=>$landuse, 'master'=> $master, 'lotlist'=> $lotlist, 'ownerlist'=>$ownerlist, 'building'=> $building,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstruct,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'bldgcate' => $bldgcate,'bldgtype' => $bldgtype,'count' => $count, 'bldgardetail' => $bldgardetail,'ratepayer' => $ratepayer, 'tenant' => $tenant,'prop_id' => $prop_id,'pb'=> $pb,'parameter' => $parameter,'attachment'=>$attachment,'attachtype' => $attachtype, 'termname' => $termname, 'accountnumber' => $accountnumber,'serverhost' => $serverhost, 'ownerd' => $owner, 'viewparambasket' => $viewparambasket, 'viewparambasketstatus' => $viewparambasketstatus, 'viewparamterm' => $viewparamterm, 'termid' => $termid,
                 'iseditable' => $iseditable, 'applntype' => $applntype, 'lot'=>$vallot,'bldg'=>$valbldg,'valmaster' => $valmaster,'tax' => $tax,'lotdetail' => $lotdetail,'lotarea' => $lotarea,'bldgar' => $valbldgar,'allowance' => $allowance,'prop_id' => $prop_id,'additional' => $additional, 'viewparambasket' => $viewparambasket, 'viewparambasketstatus' => $viewparambasketstatus, 'viewparamterm' => $viewparamterm, 'termid' => $termid, 'accountnumber' => $accountnumber,
@@ -1918,6 +1918,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         if($param =='da_vt_id') {
           $param ='All';
         } 
+        App::setlocale(session()->get('locale'));
         return view("group.deactivate.basket")->with(array('term'=> $term,'group'=> $group,'tonebasket'=>$tonebasket,'tonetaxbasket'=>$tonetaxbasket,'propcount'=>$propcount,'bldgcount'=>$bldgcount,'inspropcount'=>$inspropcount,'valpropcount'=>$valpropcount,'termfilter' => $termfilter, 'param' => $param));
     }
 
@@ -2052,6 +2053,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid 
         from tbsearchdetail mtb where sd_se_id = 39 ');
+        App::setlocale(session()->get('locale'));
       return view('ownershiptransfer.popup.accountsearch')->with('search',$search)->with('totalcount','0');
     }
 
@@ -2140,7 +2142,8 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
             select at_name, at_fileextention,
             at_path,at_oringinalfilename,at_id,at_attachtype_id,at_filename,at_detail,at_createby,at_createdate, attachment.tdi_value attachment from cm_attachment left join 
             (select tdi_key, tdi_value from tbdefitems where tdi_td_name = 'ATTACHMENTTYPE') attachment on attachment.tdi_key =  at_attachtype_id  where at_linkid = ifnull(".$prop_id.",0) ");
-
+      
+        App::setlocale(session()->get('locale'));
        return view('termsearch.popup.attachment')->with(array('attachment'=>$attachment,
         'attachtype'=>$attachtype,'prop_id'=>$prop_id,'year'=>$year));
     }
@@ -2285,6 +2288,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         $state = DB::select("select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = 'STATE'");
 
         $group = DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "USERGROUP"');
+        App::setlocale(session()->get('locale'));
         return view('officialsearch.addapplication')->with('state',$state)->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id)->with('group',$group);
     }
 
@@ -2334,6 +2338,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid, sd_keymainfield
         from tbsearchdetail mtb where sd_se_id = 18 ');
         $state = DB::select("select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = 'STATE'");
+        App::setlocale(session()->get('locale'));
         return view('remisi.addapplication')->with('state',$state)->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id);
     }
 
@@ -2373,6 +2378,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         on state.tdi_key = os_state    where os_id = '. $id);
 
         $group = DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "USERGROUP"');
+        App::setlocale(session()->get('locale'));
         return view('officialsearch.application')->with('state',$state)->with('search',$search)->with('id',$id)->with('property',$property)->with('group',$group);
     }
 
@@ -2436,6 +2442,8 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid, sd_keymainfield
         from tbsearchdetail mtb where sd_se_id = 18 ');
 
+        App::setlocale(session()->get('locale'));
+        
         return view('codemaintenance.ownershiptransfer.popup.search')->with('search',$search)->with('id',$basketid)->with('basket_id',$basket_id)->with('page',$page);
     }
 
@@ -2680,6 +2688,9 @@ where vt_termDate >= (select vt_termDate from cm_appln_valdetl inner join cm_app
         $instype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "INVESTIGATIONTYPE"'); 
 
         $userlist=DB::select('select usr_name, concat(usr_firstname, " " ,usr_lastname) name FROM tbuser');
+
+        App::setlocale(session()->get('locale'));
+
 
         return view('remisi.tab.tab')->with('id',$id)->with('master',$master)->with('state',$state)->with('instype',$instype)->with('remisistatus',$remisistatus)->with('userlist',$userlist)->with('insdata',$insdata)->with('term',$term);
     }

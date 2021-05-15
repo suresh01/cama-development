@@ -71,6 +71,7 @@ class ObjectionController extends Controller
            order by va_id  ");
         
 
+        App::setlocale(session()->get('locale'));
         return view("objection.basket")->with(array('term'=> $term,'basket'=> $basket));
     }
 
@@ -84,7 +85,8 @@ ob_notis8hijridate,DATE_FORMAT(ob_notis9date, '%d/%m/%Y') ob_notis9date,
 ob_notis9hijridate, DATE_FORMAT(ob_notis10date, '%d/%m/%Y') ob_notis10date,ob_notis10hijridate, DATE_FORMAT(ob_notis8printdate, '%d/%m/%Y') ob_notis8printdate,
 DATE_FORMAT(ob_enforcedate, '%d/%m/%Y') ob_enforcedate  ,DATE_FORMAT(vt_termdate, '%d/%m/%Y') vt_termdate 
 from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
-           ");       
+           ");    
+        App::setlocale(session()->get('locale'));   
 
         return view("objection.meeting")->with(array('term'=> $term,'agenda'=> $agenda));
     }
@@ -118,12 +120,14 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         $propcnt = DB::select("select count(*) property_count from cm_objection
         inner join cm_objection_agenda on ag_ob_id = ob_id
         inner join cm_objection_agendadetail on agd_ag_id = ag_id where ob_id =  ".$id);
+        App::setlocale(session()->get('locale'));
         
         return view('objection.agenda')->with(array('term'=>$term, 'id'=>$id,'agenda' => $agenda,'objectioncnt'=> $objectioncnt,'propcnt'=> $propcnt,'notiscnt'=> $notiscnt,'agendacnt'=> $agendacnt,'objectiondetail'=> $objectiondetail));
     }
 
     public function objectionproperty(Request $request){
         $baskedid = $request->input('id');
+        App::setlocale(session()->get('locale'));
         return view("objection.property")->with('id',$baskedid);
     }
 
@@ -144,6 +148,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid   ,sd_keymainfield 
         from tbsearchdetail mtb where sd_se_id = "33" ');
 
+        App::setlocale(session()->get('locale'));
         return view('objection.grab.basket')->with(array('term'=>$term,'id'=>$id, 'search' =>$search ));
     }
 
@@ -207,6 +212,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         inner join cm_objection on ob_id = no_ob_id) cm_objection_notice on no_vd_id = vd_id        
         where va_approvalstatus_id in ('11')  and va_vt_id =  ".$term);
 
+        App::setlocale(session()->get('locale'));
 
         return view('objection.grab.notice')->with(array('term'=>$term,'property'=>$property,'id'=>$id,'type'=>$type));
     }
@@ -222,6 +228,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid   ,sd_keymainfield 
         from tbsearchdetail mtb where sd_se_id = "34" ');
 
+        App::setlocale(session()->get('locale'));
         return view('objection.popup.property')->with(array('term'=>$term,'search'=>$search,'id'=>$id));
     }
 
@@ -311,6 +318,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
            $serverhost = $obj->serveradd;
         }
         
+        App::setlocale(session()->get('locale'));
         return view('objection.newnotice')->with(array('term'=>$term,'id'=>$id,'objectioncnt'=> $objectioncnt,'propcnt'=> $propcnt,'notiscnt'=> $notiscnt,'agendacnt'=> $agendacnt,'objectiondetail'=> $objectiondetail))->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
 
@@ -345,6 +353,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+        App::setlocale(session()->get('locale'));
         return view('objection.notice')->with(array('term'=>$term,'id'=>$id,'objectioncnt'=> $objectioncnt,'propcnt'=> $propcnt,'notiscnt'=> $notiscnt,'agendacnt'=> $agendacnt,'objectiondetail'=> $objectiondetail))->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
 
@@ -457,6 +466,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         inner join cm_objection_agenda on ag_ob_id = ob_id
         inner join cm_objection_agendadetail on agd_ag_id = ag_id where ob_id =  ".$id);
         
+        App::setlocale(session()->get('locale'));
         return view('objection.objectionreport')->with(array('term'=>$term,'id'=>$id,'objectionlist'=>$objectionlist,'meetingroom'=>$meetingroom,'userlist'=>$userlist,'objectioncnt'=> $objectioncnt,'propcnt'=> $propcnt,'notiscnt'=> $notiscnt,'agendacnt'=> $agendacnt,'objectiondetail'=> $objectiondetail,'search'=> $search));
     }
 
@@ -543,6 +553,7 @@ on ma_subzone_id = subzone.tdi_key
             inner join cm_objection on ob_id = ol_ob_id) cm_objection_objectionlist on ol_vd_id = vd_id
             where va_approvalstatus_id in ('08','09') AND va_vt_id = ".$term);
 
+        App::setlocale(session()->get('locale'));
         return view('objection.grab.objectionlist')->with(array('term'=>$term,'id'=>$id,'property'=>$property,'search'=>$search));
     }
 
@@ -697,6 +708,7 @@ on ma_subzone_id = subzone.tdi_key
         inner join cm_objection_agenda on ag_ob_id = ob_id
         inner join cm_objection_agendadetail on agd_ag_id = ag_id where ob_id =  ".$id);            
         
+        App::setlocale(session()->get('locale'));
         return view('objection.decision')->with(array('term'=>$term,'id'=>$id,'objectionlist'=>$objectionlist,'objectioncnt'=> $objectioncnt,'propcnt'=> $propcnt,'notiscnt'=> $notiscnt,'agendacnt'=> $agendacnt,'objectiondetail'=> $objectiondetail,'search'=> $search,));
     }
 
@@ -833,6 +845,7 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
 
        $additional = DB::select('select * from cm_appln_val_additional where vad_vd_id =  ifnull("'.$prop_id.'",0)');
        
+        App::setlocale(session()->get('locale'));
         
 
       
@@ -926,6 +939,7 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
             inner join tbdefitems subzone  on subzone.tdi_key = ma_subzone_id and tdi_td_name = 'SUBZONE'
             where va_approvalstatus_id in ('08','09') ");
 
+        App::setlocale(session()->get('locale'));
         return view('objection.grab.decision')->with(array('term'=>$term,'id'=>$id,'property'=>$property,'search'=> $search));
     }
 
@@ -1052,6 +1066,7 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
         inner join cm_objection_agenda on ag_ob_id = ob_id
         inner join cm_objection_agendadetail on agd_ag_id = ag_id where ob_id =  ".$id);
         
+        App::setlocale(session()->get('locale'));
         
         return view('objection.result')->with(array('term'=>$term,'id'=>$id,'objectionlist'=>$objectionlist,'userlist'=>$userlist,'usr_position'=>$usr_position,'serverhost'=>$serverhost,'objectioncnt'=> $objectioncnt,'propcnt'=> $propcnt,'notiscnt'=> $notiscnt,'agendacnt'=> $agendacnt,'objectiondetail'=> $objectiondetail));
     }

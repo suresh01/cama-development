@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Account Number Search</title>
+<title>{{__('Termsearch.Account_Number_Search')}} </title>
 <style type="text/css">
 
 #proptble td.numericCol {
@@ -72,7 +72,7 @@
 		<div id="attachmenttable" class="grid_12">	
 			<br>
 				<div style="float:right;margin-right: 30px;"  class="btn_24_blue">
-					<a href="#" id="btn_addattachment" onclick="openAddNew()">Add Attachment</a>
+					<a href="#" id="btn_addattachment" onclick="openAddNew()">{{__('Termsearch.Add_Attachment')}} </a>
 				</div>
 				<br>
 		
@@ -81,17 +81,17 @@
 						<table style="width: 100%;" id="attachmentdatatable" class="display ">							
 							<thead style="text-align: left;">
 					  		<tr>
-								<th class="table_sno"> S No</th>
-								<th>FILE NAME</th>
-								<th>ATTACHMENT TYPE</th>
-								<th>DECRIPTION</th>
-								<th>Action</th>
-								<th>id</th>
-								<th>filetypeid</th>
-								<th>path</th>
-								<th>extension</th>
-								<th>orginalfilename</th>
-								<th>action code</th>
+								<th class="table_sno">{{__('Termsearch.SNO')}}</th>
+								<th>{{__('Termsearch.File_Name')}}</th>
+								<th>{{__('Termsearch.Attachment_Type')}}</th>
+								<th>{{__('Termsearch.Description')}}</th>
+								<th>{{__('Termsearch.Action')}}</th>
+								<th>{{__('Termsearch.Id')}}</th>
+								<th>{{__('Termsearch.filetypeid')}}</th>
+								<th>{{__('Termsearch.Path')}}</th>
+								<th>{{__('Termsearch.Extension')}}</th>
+								<th>{{__('Termsearch.orginalfilename')}}</th>
+								<th>{{__('Termsearch.Actioncode')}}</th>
 							</thead>
 							<tbody>
 							
@@ -105,13 +105,13 @@
 				
 			<div class="widget_wrap" style="display: -webkit-box;">					
 						<div class="widget_content grid_12">
-						<h3 id="title">Add New</h3>
+						<h3 id="title">{{__('Termsearch.Add_New')}} </h3>
 						
 							<div  class="grid_6 form_container left_label">
 								<ul>
 									<li>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="luserid" for="userid">File Name<span class="req">*</span></label>
+											<label class="field_title" id="luserid" for="userid">{{__('Termsearch.File_Name')}} <span class="req">*</span></label>
 											<div class="form_input">
 												<input id="filename" name="filename" type="text"  onkeypress="return alpha(event)" />
 											</div>
@@ -120,7 +120,7 @@
 										
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">Attachment Type<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('Termsearch.Attachment_Type')}} <span class="req">*</span></label>
 											<div class="form_input ">
 												<select style="width: 100%;" data-placeholder="Choose a Role..." class="cus-select" id="attachtype" name="filetype" tabindex="20">	<option></option>
 												@foreach ($attachtype as $rec)
@@ -131,14 +131,14 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">Description</label>
+											<label class="field_title" id="llevel" for="level">{{__('Termsearch.Description')}} </label>
 											<div class="form_input ">
 												<input id="atdesc" name="atdesc" type="text"   />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">File<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('Termsearch.File')}} <span class="req">*</span></label>
 											<div class="form_input ">
 												<input id="path" name="path" type="file"   />
 											</div>
@@ -156,7 +156,7 @@
 										<div class="form_input">
 											<input type="button" id="addsubmit" onclick="addAttachment();" class="btn_small btn_blue" value="Submit">				
 																	
-											<button id="close" onclick="closeNew()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+											<button id="close" onclick="closeNew()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 											<span class=" label_intro"></span>
 										</div>
 									

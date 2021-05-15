@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Basket</title>
+<title>{{__('Termsearch.Application_Type')}} Basket</title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @include('includes.header', ['page' => 'dataenquery'])
 	<!--<div class="page_title">
@@ -33,9 +33,9 @@
 
 					<div id="breadCrumb3"  class="breadCrumb grid_3">
 						<ul >
-							<li><a href="#">Home</a></li>
-							<li><a href="termsearch">Data Enquiry</a></li>
-							<li>Term Search</li>
+							<li><a href="#">{{__('Termsearch.Home')}} </a></li>
+							<li><a href="termsearch">{{__('Termsearch.Data_Enquiry')}} </a></li>
+							<li>{{__('Termsearch.Term_Search')}} </li>
 						</ul>
 					</div>
 					<br>
@@ -71,27 +71,27 @@
 						<div class="social_activities">
 							<div class="comments_s">
 								<div class="block_label">
-									Basket Count<span id="bst_count">0</span>
+									{{__('Termsearch.Basket_Count')}}<span id="bst_count">0</span>
 								</div>
 							</div>
 							<div class="comments_s">
 								<div class="block_label">
-									Property Count<span>{{$l_propcount}}</span>
+									{{__('Termsearch.Property_Count')}}<span>{{$l_propcount}}</span>
 								</div>
 							</div>
 							<div class="comments_s">
 								<div class="block_label">
-									Buliding Count<span>{{$l_bldgcount}}</span>
+									{{__('Termsearch.Buliding_Count')}}<span>{{$l_bldgcount}}</span>
 								</div>
 							</div>
 							<div style="width: 220px;" class="comments_s">
 								<div style="width: 220px;" class="block_label">
-									Inspection Property Count<span>{{$l_inscount}}</span>
+									{{__('Termsearch.Inspection_Property_Count')}}<span>{{$l_inscount}}</span>
 								</div>
 							</div>
 							<div style="width: 200px;" class="comments_s">
 								<div style="width: 200px;" class="block_label">
-									Valuation Property Count<span>{{$l_valcount}}</span>
+									{{__('Termsearch.Valuation_Property_Count')}}<span>{{$l_valcount}}</span>
 								</div>
 							</div>
 						</div>				
@@ -99,33 +99,15 @@
 						<table id="baskttable" class="display tbl_details">
 							<thead style="text-align: left;">
 			  					<tr>
-									<th class="table_sno">
-										S No
-									</th>
-									<th>
-										Basket Name
-									</th>
-									<th>
-										Application Type
-									</th>
-									<th>
-										Term Name
-									</th>
-									<th>
-										Property Count
-									</th>
-									<th>
-										Inspection Submitted
-									</th>
-									<th>
-										Valuation Submitted
-									</th>
-									<th>
-										Agenda Name
-									</th>
-									<th>
-										Status
-									</th>
+									<th class="table_sno">{{__('Termsearch.Application_Type')}}</th>
+									<th> {{__('Termsearch.Basket_Name')}} </th>
+									<th> {{__('Termsearch.Application_Type')}} </th>
+									<th> {{__('Termsearch.Term_Name')}} </th>
+									<th> {{__('Termsearch.Property_Count')}} </th>
+									<th> {{__('Termsearch.Inspection_Submitted')}} </th>
+									<th> {{__('Termsearch.Valuation_Submitted')}} </th>
+									<th> {{__('Termsearch.Agenda_Name')}} </th>
+									<th> {{__('Termsearch.Status')}} </th>
 									<th style="display: none;">
 										Update By /
 										Update At

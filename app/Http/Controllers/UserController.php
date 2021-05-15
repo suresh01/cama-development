@@ -90,6 +90,7 @@ Log::info($lang);
         }
         
         $err_msg ="username or password incorrect";
+        App::setlocale(session()->get('locale'));
         return view("index")->with('errors', 'true')->with('err_msg', $err_msg);
     }
 
@@ -109,6 +110,7 @@ Log::info($lang);
             array(":uf" => $name));
         //Log::info($access_previlige);
         //Log::info($role);
+        App::setlocale(session()->get('locale'));
         return view('user')->with('role',$role)->with('user',$user)->with('access_previlige',$access_previlige);
     }
 
@@ -209,6 +211,7 @@ Log::info($lang);
             return view('denied')->with('detail',$detail);
         }     
         $role=DB::select('select * from tbrole');
+        App::setlocale(session()->get('locale'));
         return view('role')->with('role',$role);
     }
 
@@ -271,6 +274,7 @@ Log::info($lang);
         ini_set('memory_limit', '2056M');
         $module=DB::select('select * from tbmodule');        
 
+        App::setlocale(session()->get('locale'));
         return view('module')->with('module',$module);
     }
 
@@ -336,6 +340,7 @@ Log::info($lang);
         $categories = Category::where('mod_parent', '=', 0)->get();
         $allCategories = Category::pluck('mod_name','mod_id')->all();    
         //Log::info($accessv);     
+        App::setlocale(session()->get('locale'));
         return view('newaccess',compact('categories','allCategories'))->with('access',$access)->with('accessv',$accessv)
         ->with('module',$module)->with('role',$roles)->with('parentmoudle',$parentmoudle);
     }
@@ -484,6 +489,7 @@ $roles = '';
       //  $categories = Category::where('mod_parent', '=', 0)->get();
       //  $allCategories = Category::pluck('mod_name','mod_id')->all();
        // return view('categoryTreeview',compact('categories','allCategories'));
+        App::setlocale(session()->get('locale'));
         return view('search/search')->with('tsearch',$search)->with('module',$module);
     }
 
@@ -539,6 +545,7 @@ $roles = '';
             array(":se_id" => $se_id));
         
         $keytype = DB::select('select * from tbsearchkeytype');
+        App::setlocale(session()->get('locale'));
         return view('search/searchdetail')->with('tsearchdetail',$searchdetail)->with('keytype',$keytype)->with('se_id',$se_id);
     }
 
@@ -581,6 +588,7 @@ $roles = '';
         $user=DB::select('select * from tbuser where usr_name = :un',
             array(":un" => $name));
         //$search=DB::select('select * from tbsearchdetail');
+        App::setlocale(session()->get('locale'));
         return view('profile')->with('profile',$user);
     }
 
@@ -656,6 +664,7 @@ $roles = '';
         App::setlocale(session()->get('locale'));
        // Log::info(2);
         //$search=DB::select('select * from tbsearchdetail');
+        App::setlocale(session()->get('locale'));
         return view('codemaintenance')->with(array('searchmodule' => $searchmodule, 'codemaintenance' =>$result));
     }
 
@@ -1165,6 +1174,7 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
         $page = $request->input('type');
         $maxRow = $request->input('maxrow');
         $name = $request->input('name');
+        App::setlocale(session()->get('locale'));
         if($page == 'table'){
             if ($name == 'master') {
                 return view("propertyregister.table")->with('maxRow', $maxRow);

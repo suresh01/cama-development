@@ -4,7 +4,7 @@
 // resources/lang/en/messages.php
 
 return [
-    'propertycnt'=>'Property Count',
+    'propertycnt'=>'Bilangan Harta',
 
     'col1'=>'S No',
     'col2'=>'No Akaun',

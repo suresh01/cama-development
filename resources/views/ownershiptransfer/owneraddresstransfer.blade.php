@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Ownership Transfer Process</title>
+<title>{{__('ownershiptran.Ownership_Transfer_Process')}}</title>
 
 @include('includes.header', ['page' => 'datamaintenance'])
 					
@@ -14,16 +14,16 @@
 				<div class="breadCrumbHolder module">	
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-						<li>Ownership Transfer Process</li>
+						<li><a href="#">{{__('ownershiptran.Home')}}</a></li>
+						<li><a href="#">{{__('ownershiptran.Data_Maintenance')}}</a></li>
+						<li>{{__('ownershiptran.Ownership_Transfer_Process')}}</li>
 					</ul>
 				</div>
 				</div>
 				
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">					
-					<a href="#" onclick="addProperty()">Add Property</a>
+					<a href="#" onclick="addProperty()">{{__('ownershiptran.Add_Property')}}</a>
 				</div>
 				<div  style="float:right;margin-right: 20px;">
 						
@@ -42,39 +42,17 @@
 						<table id="proptble" class="display select">
 							<thead style="text-align: left;">
 								<tr>
-									<th class="table_sno">
-										S No
-									</th>
-									<th>
-										No Account
-									</th>
-									<th>
-										Owner Name
-									</th>
-									<th>
-										Owner Id Type
-									</th>
-									<th>
-										Owner Id No
-									</th>
-									<th>
-										Address
-									</th>		
-									<th>
-										Group
-									</th>		
-									<th>
-										Transfer Type
-									</th>	
-									<th>
-										Register By / Register Date
-									</th>	
-									<th>
-										Register Status
-									</th>	
-									<th>
-										Action
-									</th>			
+									<th class="table_sno"> {{__('ownershiptran.SNO')}}</th>
+									<th>{{__('ownershiptran.No_Account')}} </th>
+									<th>{{__('ownershiptran.Owner_Name')}} </th>
+									<th>{{__('ownershiptran.Owner_Id_Type')}} </th>
+									<th>{{__('ownershiptran.Owner_Id_No')}} </th>
+									<th>{{__('ownershiptran.Address')}} </th>		
+									<th>{{__('ownershiptran.Group')}} </th>		
+									<th>{{__('ownershiptran.Transfer_Type')}} </th>	
+									<th>{{__('ownershiptran.Register_By')}} / {{__('ownershiptran.Register_Date')}} </th>	
+									<th>{{__('ownershiptran.Register_Status')}} </th>	
+									<th>{{__('ownershiptran.Action')}} </th>			
 								</tr>
 							</thead>
 							<tbody>		
@@ -116,7 +94,7 @@
 											
 											@if($rec->otar_ownertransstatus_id == '2')
 												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',2)"  title="Submit To Approve" href="#"></a></span>
-												<span><a class="action-icons c-Delete delete_tenant" onclick="deleteT('{$rec->otar_accno}}','{{$rec->otar_ownertransgroup_id}}')" href='#' title='Delete'>Delete</a></span>
+												<span><a class="action-icons c-Delete delete_tenant" onclick="deleteT('{$rec->otar_accno}}','{{$rec->otar_ownertransgroup_id}}')" href='#' title="{{__('common.Delete')}}">{{__('common.Delete')}}</a></span>
 											@endif
 
 											@if($rec->otar_ownertransstatus_id == '5')
@@ -137,46 +115,24 @@
 									<div class="widget_wrap collapsible_widget">
 										<div class="widget_top active">
 											<span class="h_icon"></span>
-											<h6>Log Information</h6>
+											<h6>{{__('ownershiptran.Log_Information')}}</h6>
 										</div>
 										<div class="widget_content">
 											<div class="invoice_tbl">
 												<table id="logtable">
 												<thead>
 												<tr class=" gray_sai">
-													<th>
-														
-													</th>
-													<th>
-														Application ID
-													</th>
-													<th>
-														Application Type
-													</th>
-													<th>
-														Application Status
-													</th>
-													<th>
-														Register Date
-													</th>
-													<th>
-														Update Date
-													</th>
-													<th>
-														Owner Name
-													</th>	
-													<th>
-														Owner Type ID
-													</th>	
-													<th>
-														Owner ID No
-													</th>	
-													<th>
-														Address
-													</th>	
-													<th>
-														Owner Race
-													</th>
+													<th></th>
+													<th>{{__('ownershiptran.Application_ID')}} </th>	
+													<th>{{__('ownershiptran.Application_Type')}} </th>	
+													<th>{{__('ownershiptran.Application_Status')}} </th>	
+													<th>{{__('ownershiptran.Register_Date')}} </th>	
+													<th>{{__('ownershiptran.Update_Date')}} </th>	
+													<th>{{__('ownershiptran.Owner_Name')}} </th>	
+													<th>{{__('ownershiptran.Owner_Type_ID')}} </th>	
+													<th>{{__('ownershiptran.Owner_ID_No')}} </th>	
+													<th>{{__('ownershiptran.Address')}} </th>	
+													<th>{{__('ownershiptran.Owner_Race')}} </th>	
 													<!--<th>
 														Action
 													</th>-->

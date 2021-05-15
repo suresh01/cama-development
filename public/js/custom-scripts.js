@@ -1748,9 +1748,8 @@ $(function() {
 	$(function() {
 	 $('.data_tbl').dataTable({   
 	"sPaginationType": "full_numbers",
-	"iDisplayLength": 100,
-	
-				"lengthMenu":  [100, 200, 500, 1000],
+	"iDisplayLength": 100,	
+	"lengthMenu":  [100, 200, 500, 1000],
 	"oLanguage": {
         "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
     },

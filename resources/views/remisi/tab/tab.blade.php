@@ -6,7 +6,7 @@
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>Property Inspection</title>
+<title>{{__('remisiLang.Property_Inspection')}} </title>
 <style>
 .disabled-btn{
     pointer-events:none;
@@ -21,7 +21,7 @@
 		<div id="usertable" class="grid_12">	
 				<div style="float:right;margin-right: 0px;"  class="btn_24_blue">	      
           
-          			<a href="#" id="" onclick="closeWindow()" class=""><span>Close </span></a> 
+          			<a href="#" id="" onclick="closeWindow()" class=""><span>{{__('common.Close')}}  </span></a> 
 				</div>
 		
 
@@ -29,7 +29,7 @@
 				<div class="widget_wrap">
 					<div class="widget_top">
 						<!--<span class="h_icon list"></span>-->
-						<h6>Remisi</h6>
+						<h6>{{__('remisiLang.Remisi')}} </h6>
 						<div id="top_tabby">
 						</div>
 					</div>
@@ -38,22 +38,22 @@
 						<!--<h3>Property Registration</h3>-->
 						<form action="" id="propertyinspectionform" class="form_container left_label">
 							<fieldset title="Step 1">		
-								<legend>Property Information </legend>	
+								<legend>{{__('remisiLang.Property_Information')}}  </legend>	
 								@include('remisi.tab.remisiregister')	
 							</fieldset>
 							<fieldset title="Step 2">
-								<legend>Registration</legend>
+								<legend>{{__('remisiLang.Registration')}} </legend>
 								@include('remisi.tab.detail')	
 							</fieldset>
 							@if($remisistatus==1 || $remisistatus==2 || $remisistatus==3 || $remisistatus==4 || $remisistatus==5 )
 							<fieldset title="Step 3">
-								<legend>Investigation</legend>
+								<legend>{{__('remisiLang.Investigation')}} </legend>
 								@include('remisi.tab.investigation')	
 							</fieldset>
 							@endif
 							@if( $remisistatus==3 || $remisistatus==4 || $remisistatus==5 )
 							<fieldset title="Step 4">
-								<legend>Investigation Result </legend>									
+								<legend>{{__('remisiLang.Investigation_Result')}}  </legend>									
 								@include('remisi.tab.investigationresult')							
 							</fieldset>
 							@endif

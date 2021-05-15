@@ -6,7 +6,7 @@
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>Ownership Transfer Process</title>
+<title>{{__('ownershiptran.Ownership_Transfer_Process')}} </title>
 <style>
 .disabled-btn{
     pointer-events:none;
@@ -22,7 +22,7 @@
 			
 
 				<div style="float:right;margin-right: 0px;"  class="btn_24_blue">   
-					<a href="#" id="" onclick="closeWindow()" class=""><span>Close </span></a> 
+					<a href="#" id="" onclick="closeWindow()" class=""><span>{{__('common.Close')}}  </span></a> 
 				</div>
 			<br>
 
@@ -30,7 +30,7 @@
 				<div class="widget_wrap">
 					<div class="widget_top">
 						<!--<span class="h_icon list"></span>-->
-						<h6>Property Inspection</h6>
+						<h6>{{__('ownershiptran.Property_Inspection')}} </h6>
 						<div id="top_tabby">
 						</div>
 					</div>
@@ -40,17 +40,17 @@
 						<form action="" id="propertyinspectionform" class="form_container left_label">
 							@foreach ($owndetail as $owner)
 							<fieldset title="Step 1">		
-								<legend>Owner Address Information</legend>	
+								<legend>{{__('ownershiptran.Owner_Address_Information')}} </legend>	
 								<div id="tab3">
 									
 									<div class="grid_6 ">
 										<ul>
 										<li>
 										<fieldset>
-												<legend>Owner Information</legend>
+												<legend>{{__('ownershiptran.Owner_Information')}} </legend>
 												<br><br><br>
 												<div class="form_grid_12">
-											<label class="field_title" id="lusername" for="username">OWNER APPLICATION TYPE<span class="req">*</span></label>
+											<label class="field_title" id="lusername" for="username">{{__('ownershiptran.Owner_Application_Type')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ownaplntype" name="ownaplntype" tabindex="1">
 													<option></option>
@@ -62,7 +62,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">TYPE OF OWNER<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Type_Of_Owner')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="typeofown" name="typeofown" tabindex="1">
 													<option></option>
@@ -75,28 +75,28 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER NUMBER<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Owner_Number')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="ownnum" readonly="true" name="ownnum" value="{{$owner->TO_OWNNO}}" type="text" tabindex="1"  maxlength="15" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER NAME<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Owner_Name')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="ownname" readonly="true" value="{{$owner->TO_OWNNAME}}" name="ownname" tabindex="1" type="text"  maxlength="80" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER ADDRES 1<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Owner_Addres')}} 1<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="ownaddr1" readonly="true" name="ownaddr1"  tabindex="1"  type="text" value="{{$owner->TO_ADDR_LN1}}" maxlength="50" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER ADDRES 2</label>
+											<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Owner_Addres')}} 2</label>
 											<div  class="form_input">
 												<input id="ownaddr2" readonly="true" value="{{$owner->TO_ADDR_LN2}}" name="ownaddr2"  tabindex="1" type="text"  maxlength="50" class=""/>
 											</div>
@@ -104,14 +104,14 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER ADDRES 3</label>
+											<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Owner_Addres')}} 3</label>
 											<div  class="form_input">
 												<input id="ownaddr3" readonly="true" name="ownaddr3" tabindex="1"  type="text" value="{{$owner->TO_ADDR_LN3}}" maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">OWNER ADDRES 4</label>
+											<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Owner_Addres')}} 4</label>
 											<div  class="form_input">
 												<input id="ownaddr4" readonly="true" value="{{$owner->TO_ADDR_LN4}}" name="ownaddr4" tabindex="1" type="text"  maxlength="50" class=""/>
 											</div>
@@ -119,21 +119,21 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Postcode')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="ownpostcode" value="{{$owner->TO_POSTCODE}}" readonly="true" name="ownpostcode" tabindex="1" type="number"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('ownershiptran.City')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="city"  name="city" tabindex="1" type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('ownershiptran.State')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ownstate" name="ownstate" tabindex="1">
 													<option></option>
@@ -145,14 +145,14 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-												<label class="field_title" id="llevel" for="level">TEL NO<span class="req">*</span></label>
+												<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Tel_No')}} <span class="req">*</span></label>
 												<div  class="form_input">
 													<input id="telno" readonly="true" name="telno" tabindex="1" type="text" value="{{$owner->TO_TELNO}}" maxlength="15" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
 											<div class="form_grid_12">
-												<label class="field_title" id="llevel" for="level">FAX NO<span class="req">*</span></label>
+												<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Fax_No')}} <span class="req">*</span></label>
 												<div  class="form_input">
 													<input id="faxno" readonly="true" name="faxno" tabindex="1" type="text" value="{{$owner->TO_FAXNO}}" maxlength="15" class=""/>
 												</div>
@@ -160,7 +160,7 @@
 											</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">CITIZENSHIP<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Citizenship')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="citizen" name="citizen" tabindex="1">
 													<option></option>
@@ -172,7 +172,7 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">RACE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Race')}}<span class="req">*</span></label>
 											<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="race" name="race" tabindex="1">
 													<option></option>
 													@foreach ($race as $rec)
@@ -183,14 +183,14 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">NUMERATOR</label>
+											<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Numerator')}}</label>
 											<div  class="form_input">
 												<input id="numerator" readonly="true" tabindex="1" name="numerator" value="{{$owner->TO_NUMETR}}" maxlength="5"  type="number" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">DENOMINATOR</label>
+											<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Denominator')}}</label>
 											<div  class="form_input">
 												<input id="demominator" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;"  name="demominator" value="{{$owner->TO_DENOMTR}}" readonly="true"  type="number" tabindex="1"  maxlength="5" class=""/>
 											</div>
@@ -212,10 +212,10 @@
 											<input type="hidden" value="0" name="tableindex" id="tableindex">
 										
 										<fieldset>
-												<legend>New Owner Information</legend>
+												<legend>{{__('ownershiptran.New_Owner_Information')}} </legend>
 
 												<div class="form_grid_12">
-													<label class="field_title">Copy Previous Owner Detail</label>
+													<label class="field_title">{{__('ownershiptran.Copy_Previous_Owner_Detail')}} </label>
 													<div class="form_input">
 														<span>
 														<input name="field08" id="copydetail" onchange="copyDetail()" class="checkbox" type="checkbox"  tabindex="7">
@@ -224,7 +224,7 @@
 													</div>
 												</div>
 												<div class="form_grid_12">
-											<label class="field_title" id="lusername" for="username">OWNER APPLICATION TYPE<span class="req">*</span></label>
+											<label class="field_title" id="lusername" for="username">{{__('ownershiptran.Owner_Application_Type')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="nownaplntype" name="nownaplntype" tabindex="1">
 													<option></option>
@@ -236,7 +236,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">TYPE OF OWNER<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Type_Of_Owner')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ntypeofown" name="ntypeofown" tabindex="1">
 													<option></option>
@@ -249,14 +249,14 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER NUMBER<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Owner_Number')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="nownnum" name="nownnum"  type="text" tabindex="1"  maxlength="15" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER NAME<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Owner_Name')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="nownname" name="nownname" tabindex="1" type="text"  maxlength="80" />
 											</div>
@@ -264,14 +264,14 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER ADDRES 1<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Owner_Addres')}} 1<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="nownaddr1" name="nownaddr1" tabindex="1"  type="text"  maxlength="50" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER ADDRES 2</label>
+											<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Owner_Addres')}} 2</label>
 											<div  class="form_input">
 												<input id="nownaddr2" name="nownaddr2" tabindex="1" type="text"  maxlength="50" class=""/>
 											</div>
@@ -279,14 +279,14 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">OWNER ADDRES 3</label>
+											<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Owner_Addres')}} 3</label>
 											<div  class="form_input">
 												<input id="nownaddr3" name="nownaddr3" tabindex="1"  type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">OWNER ADDRES 4</label>
+											<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Owner_Addres')}} 4</label>
 											<div  class="form_input">
 												<input id="nownaddr4" name="nownaddr4" tabindex="1" type="text"  maxlength="50" class=""/>
 											</div>
@@ -294,21 +294,21 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Postcode')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="nownpostcode"  name="nownpostcode" tabindex="1" type="number"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('ownershiptran.City')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="ncity"  name="ncity" tabindex="1" type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('ownershiptran.State')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="nownstate" name="nownstate" tabindex="1">
 													<option></option>
@@ -320,14 +320,14 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-												<label class="field_title" id="llevel" for="level">TEL NO<span class="req">*</span></label>
+												<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Tel_No')}}<span class="req">*</span></label>
 												<div  class="form_input">
 													<input id="ntelno" name="ntelno" tabindex="1" type="text" value="" maxlength="15" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
 											<div class="form_grid_12">
-												<label class="field_title" id="llevel" for="level">FAX NO<span class="req">*</span></label>
+												<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Fax_No')}} <span class="req">*</span></label>
 												<div  class="form_input">
 													<input id="nfaxno" name="nfaxno" tabindex="1" type="text" value="" maxlength="15" class=""/>
 												</div>
@@ -335,7 +335,7 @@
 											</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">CITIZENSHIP<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Citizenship')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ncitizen" name="ncitizen" tabindex="1">
 													<option></option>
@@ -347,7 +347,7 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">RACE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Race')}} <span class="req">*</span></label>
 											<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="nrace" name="nrace" tabindex="1">
 													<option></option>
 													@foreach ($race as $rec)
@@ -358,14 +358,14 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">NUMERATOR</label>
+											<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Numerator')}} </label>
 											<div  class="form_input">
 												<input id="nnumerator" tabindex="1" name="nnumerator" value="0" maxlength="5"  type="number" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">DENOMINATOR</label>
+											<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Denominator')}} </label>
 											<div  class="form_input">
 												<input id="demominator" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name="demominator" value="0"  type="number" tabindex="1"  maxlength="5" class=""/>
 											</div>
@@ -396,7 +396,7 @@
 							</script>
 							@endforeach
 							<fieldset title="Step 2">
-								<legend>Applicant Information</legend>
+								<legend>{{__('ownershiptran.Applicant_Information')}} </legend>
 								<div>
 									<div class="grid_12 ">
 								<ul>
@@ -409,10 +409,10 @@
 									<input type="hidden" value="0" name="tableindex" id="tableindex">
 								<div class="grid_6 ">
 								<fieldset>
-										<legend>Applicant Information</legend>
+										<legend>{{__('ownershiptran.Applicant_Information')}} </legend>
 
 										<div class="form_grid_12">
-											<label class="field_title">is Applicant</label>
+											<label class="field_title">{{__('ownershiptran.is_Applicant')}} </label>
 											<div class="form_input">
 												<span>
 												<input name="field08" id="copyadddetail" onchange="copyAddDetail()" class="checkbox" type="checkbox"  tabindex="7">
@@ -423,7 +423,7 @@
 								
 								
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">NAME<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Name')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addname" name="addname" tabindex="1" type="text"  maxlength="80" />
 									</div>
@@ -432,14 +432,14 @@
 								
 
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">ADDRES 1<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Address')}} 1<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addaddr1" name="addaddr1" tabindex="1"  type="text"  maxlength="50" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">ADDRES 2</label>
+									<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Address')}} 2</label>
 									<div  class="form_input">
 										<input id="addaddr2" name="addaddr2" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -447,14 +447,14 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">ADDRES 3</label>
+									<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Address')}} 3</label>
 									<div  class="form_input">
 										<input id="addaddr3" name="addaddr3" tabindex="1"  type="text"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">ADDRES 4</label>
+									<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Address')}} 4</label>
 									<div  class="form_input">
 										<input id="addaddr4" name="addaddr4" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -462,14 +462,14 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Postcode')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addpostcode"  name="addpostcode" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('ownershiptran.State')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="addstate" name="addstate" tabindex="1">
 											<option></option>
@@ -487,9 +487,9 @@
 								@if($page == 1)
 
 								<fieldset>
-										<legend>General Information</legend>
+										<legend>{{__('ownershiptran.General_Information')}} </legend>
 								<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">REQUEST DATE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Request_Date')}}<span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="reqdate"  name="reqdate" class="" type="text"  maxlength="50" />
 										</div>
@@ -497,7 +497,7 @@
 								</div>
 
 								<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">ACCEPT DATE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Accept_Date')}}<span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="addacceptdt" readonly="" name="addacceptdt" class="" type="text"  maxlength="50" />
 										</div>
@@ -505,7 +505,7 @@
 								</div>
 
 								<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TRANSACTION DATE<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Transaction_Date')}}<span class="req">*</span></label>
 										<div  class="form_input">
 										<input id="addtrndate"  name="addtrndate" class="" type="text"  maxlength="50" />
 										</div>
@@ -513,7 +513,7 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">TRANACTION VALUE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Tranaction_Value')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addtrnvalue" value="0" name="addtrnvalue" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
@@ -521,7 +521,7 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">REFERENCE NO<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Reference_No')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addref" readonly="" name="addref" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -529,7 +529,7 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">APPLICANT REFERENCE NO<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Applicant_Reference_No')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="addapplicatref"  name="addapplicatref" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -561,7 +561,7 @@
 					<div class="widget_wrap">
 						
 						<div class="widget_content">
-							<h3 id="title">Generate Report</h3>
+							<h3 id="title">{{__('ownershiptran.Generate_Report')}} </h3>
 							<form style="" id="generateform" method="GET" action="generateOwnershipreport">
 					            @csrf
 					            <input type="hidden" name="type" id="type">
@@ -571,10 +571,10 @@
 										<li>
 											
 											<fieldset>
-												<legend>Additional Information</legend>
+												<legend>{{__('ownershiptran.Additional_Information')}} </legend>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="lposition" for="position">VALUER TITTLE<span class="req">*</span></label>
+													<label class="field_title" id="lposition" for="position">{{__('ownershiptran.Valuer_Tittle')}} <span class="req">*</span></label>
 													<div  class="form_input">
 														<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="tittle" tabindex="7" name="tittle" tabindex="20">
 																<option></option>
@@ -587,7 +587,7 @@
 												</div>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="llevel" for="level">VALUER NAME<span class="req">*</span></label>
+													<label class="field_title" id="llevel" for="level">{{__('ownershiptran.Valuer_Name')}} <span class="req">*</span></label>
 													<div  class="form_input">
 														<input id="name" name="name"  type="text"  maxlength="50" class="required"/>
 													</div>
@@ -603,9 +603,9 @@
 								
 								<div class="grid_12">							
 									<div class="form_input">
-										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
+										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>{{__('common.Submit')}} </span></button>									
 										
-										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>{{__('common.Close')}} </span></button>
 										<span class=" label_intro"></span>
 									</div>								
 									<span class="clear"></span>

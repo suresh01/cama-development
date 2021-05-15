@@ -27,143 +27,139 @@
 		</script>
 	<div  class="grid_6 ">
 		<ul>
-		<li>
-
-			<input type="hidden" name="operation" id="master_operation">
-			<input type="hidden" value="0" name="role_id" id="roleid">
-			<input type="hidden" value="0" name="role_id" id="roleid">
-			<fieldset>
-										<legend>Account Information</legend>
-		<div class="form_grid_12">
-			<label class="field_title" id="accnumberlbl" for="username">ACCOUNT NUMBER<span class="req">*</span></label>
-			<div  class="form_input">
-				<input id="accnumber" tabindex="1" name="accnumber" readonly="true" type="text" value="{{$master->ma_accno}}" maxlength="100" class="">
-			</div>
-			<span class=" label_intro"></span>
-		</div>
-		
-		<div class="form_grid_12">
-			<label class="field_title" id="lposition" for="position">FILE NUMBER<span class="req">*</span></label>
-			<div  class="form_input">
-				<input id="filenumber" tabindex="2"name="filenumber"  type="text" value="{{$master->ma_fileno}}" maxlength="50" class=""/>
-			</div>
-			<span class=" label_intro"></span>
-		</div>
-		
-		
-		<div class="form_grid_12">
-			<label class="field_title" id="llevel" for="level">DISTRICT<span class="req">*</span></label>
-			<div  class="form_input">
-				<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="district" name="district" tabindex="3">
-					@foreach ($district as $rec)
-							<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
-					@endforeach	
-				</select>
-			</div>
-			<span class=" label_intro"></span>
-		</div>
- 
-		<div class="form_grid_12">
-			<label class="field_title" id="llevel" for="level">ZONE<span class="req">*</span></label>
-			<div  class="form_input">
-				<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="zone" name="zone" tabindex="4">
-					@foreach ($zone as $rec)
-							<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
-					@endforeach	
-				</select>
-			</div>
-			<span class=" label_intro"></span>
-		</div>
-
-		<div class="form_grid_12">
-			<label class="field_title" id="llevel" for="level">SUBZONE<span class="req">*</span></label>
-			<div  class="form_input">
-				<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="subzone" name="subzone" tabindex="5">
-					@foreach ($subzone as $rec)
-							<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
-					@endforeach	
-				</select>
-			</div>
-			<span class=" label_intro"></span>
-		</div>
-
-		<div class="form_grid_12">
-			<label class="field_title" id="llevel" for="level">IS BUILDING<span class="req">*</span></label>
-			<div  class="form_input">
-				<select data-placeholder="Choose a Status..."  style="width:100%" class="cus-select"  id="bldgtype" name="bldgtype" tabindex="6">
-					@foreach ($ishasbuilding as $rec)
-							<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
-					@endforeach	
-				</select>
-			</div>
-			<span class=" label_intro"></span>
-		</div>
-		</fieldset>
-	</li>
-</ul>
-	</div>
-		<div  class="grid_6 form_container left_label">
-		<ul>
-		<li>				
-		<fieldset>
-										<legend>Address Information</legend>					
-		<div class="form_grid_12">
-			<label class="field_title" id="lposition" for="position">ADDRESS 1<span class="req">*</span></label>
-			<div  class="form_input">
-				<input id="address1" tabindex="8" name="address1"  type="text" value="{{$master->ma_addr_ln1}}" maxlength="100" class=""/>
-			</div>
-			<span class=" label_intro"></span>
-		</div>
-
-		<div class="form_grid_12">
-			<label class="field_title" id="lposition" for="position">ADDRESS 2<span class="req">*</span></label>
-			<div  class="form_input">
-				<input id="address2"  tabindex="9" name="address2"  type="text" value="{{$master->ma_addr_ln2}}" maxlength="100" class=""/>
-			</div>
-			<span class=" label_intro"></span>
-		</div>
-		<div class="form_grid_12">
-			<label class="field_title" id="lposition" for="position">ADDRESS 3<span class="req">*</span></label>
-			<div  class="form_input">
-				<input id="address3"  name="address3" tabindex="10"  type="text" value="{{$master->ma_addr_ln3}}" maxlength="100" class=""/>
-			</div>
-			<span class=" label_intro"></span>
-		</div>
-		<div class="form_grid_12">
-			<label class="field_title" id="lposition" for="position">ADDRESS 4<span class="req">*</span></label>
-			<div  class="form_input">
-				<input id="address4"  name="address4" tabindex="11"  type="text" value="{{$master->ma_addr_ln3}}" maxlength="100" class=""/>
-			</div>
-			<span class=" label_intro"></span>
-		</div>
-		<div class="form_grid_12">
-			<label class="field_title" id="lposition" for="position">POST CODE<span class="req">*</span></label>
-			<div  class="form_input">
-				<input id="postcode" name="postcode" tabindex="12"  type="text" value="{{$master->ma_postcode}}" maxlength="50" class=""/>
-			</div>
-			<span class=" label_intro"></span>
-		</div>
-		<div class="form_grid_12">
-			<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
-			<div  class="form_input">
-				<input id="city"  name="city" tabindex="13"  type="text" value="{{$master->ma_city}}" maxlength="50" class=""/>
-			</div>
-			<span class=" label_intro"></span>
-		</div>
-		<div class="form_grid_12">
-			<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
-			<div  class="form_input">
-				<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" value="{{$master->ma_state_id}}" id="state" name="state" tabindex="14">
-					@foreach ($state as $rec)
-							<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
-					@endforeach	
-				</select>
-			</div>
-			<span class=" label_intro"></span>
-		</div>
-	</fieldset>
-		</li>
+			<li>
+				<input type="hidden" name="operation" id="master_operation">
+				<input type="hidden" value="0" name="role_id" id="roleid">
+				<input type="hidden" value="0" name="role_id" id="roleid">
+				<fieldset>
+					<legend>{{__('propertyregister.Account_Information')}} </legend>
+					<div class="form_grid_12">
+						<label class="field_title" id="accnumberlbl" for="username">{{__('propertyregister.Account_Number')}} <span class="req">*</span></label>
+						<div  class="form_input">
+							<input id="accnumber" tabindex="1" name="accnumber" readonly="true" type="text" value="{{$master->ma_accno}}" maxlength="100" class="">
+						</div>
+						<span class=" label_intro"></span>
+					</div>
+					
+					<div class="form_grid_12">
+						<label class="field_title" id="lposition" for="position">{{__('propertyregister.File_Number')}} <span class="req">*</span></label>
+						<div  class="form_input">
+							<input id="filenumber" tabindex="2"name="filenumber"  type="text" value="{{$master->ma_fileno}}" maxlength="50" class=""/>
+						</div>
+						<span class=" label_intro"></span>
+					</div>
+					
+					
+					<div class="form_grid_12">
+						<label class="field_title" id="llevel" for="level">{{__('propertyregister.District')}} <span class="req">*</span></label>
+						<div  class="form_input">
+							<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="district" name="district" tabindex="3">
+								@foreach ($district as $rec)
+								<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+								@endforeach
+							</select>
+						</div>
+						<span class=" label_intro"></span>
+					</div>
+					
+					<div class="form_grid_12">
+						<label class="field_title" id="llevel" for="level">{{__('propertyregister.Zone')}} <span class="req">*</span></label>
+						<div  class="form_input">
+							<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="zone" name="zone" tabindex="4">
+								@foreach ($zone as $rec)
+								<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+								@endforeach
+							</select>
+						</div>
+						<span class=" label_intro"></span>
+					</div>
+					<div class="form_grid_12">
+						<label class="field_title" id="llevel" for="level">{{__('propertyregister.Subzone')}} <span class="req">*</span></label>
+						<div  class="form_input">
+							<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="subzone" name="subzone" tabindex="5">
+								@foreach ($subzone as $rec)
+								<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+								@endforeach
+							</select>
+						</div>
+						<span class=" label_intro"></span>
+					</div>
+					<div class="form_grid_12">
+						<label class="field_title" id="llevel" for="level">{{__('propertyregister.Is_Building')}} <span class="req">*</span></label>
+						<div  class="form_input">
+							<select data-placeholder="Choose a Status..."  style="width:100%" class="cus-select"  id="bldgtype" name="bldgtype" tabindex="6">
+								@foreach ($ishasbuilding as $rec)
+								<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+								@endforeach
+							</select>
+						</div>
+						<span class=" label_intro"></span>
+					</div>
+				</fieldset>
+			</li>
 		</ul>
+	</div>
+<div  class="grid_6 form_container left_label">
+	<ul>
+		<li>
+			<fieldset>
+				<legend>{{__('propertyregister.Address_Information')}} </legend>
+				<div class="form_grid_12">
+					<label class="field_title" id="lposition" for="position">{{__('propertyregister.Address1')}}<span class="req">*</span></label>
+					<div  class="form_input">
+						<input id="address1" tabindex="8" name="address1"  type="text" value="{{$master->ma_addr_ln1}}" maxlength="100" class=""/>
+					</div>
+					<span class=" label_intro"></span>
+				</div>
+				<div class="form_grid_12">
+					<label class="field_title" id="lposition" for="position">{{__('propertyregister.Address2')}}<span class="req">*</span></label>
+					<div  class="form_input">
+						<input id="address2"  tabindex="9" name="address2"  type="text" value="{{$master->ma_addr_ln2}}" maxlength="100" class=""/>
+					</div>
+					<span class=" label_intro"></span>
+				</div>
+				<div class="form_grid_12">
+					<label class="field_title" id="lposition" for="position">{{__('propertyregister.Address3')}}<span class="req">*</span></label>
+					<div  class="form_input">
+						<input id="address3"  name="address3" tabindex="10"  type="text" value="{{$master->ma_addr_ln3}}" maxlength="100" class=""/>
+					</div>
+					<span class=" label_intro"></span>
+				</div>
+				<div class="form_grid_12">
+					<label class="field_title" id="lposition" for="position">{{__('propertyregister.Address4')}}<span class="req">*</span></label>
+					<div  class="form_input">
+						<input id="address4"  name="address4" tabindex="11"  type="text" value="{{$master->ma_addr_ln3}}" maxlength="100" class=""/>
+					</div>
+					<span class=" label_intro"></span>
+				</div>
+				<div class="form_grid_12">
+					<label class="field_title" id="lposition" for="position">{{__('propertyregister.postcode')}} <span class="req">*</span></label>
+					<div  class="form_input">
+						<input id="postcode" name="postcode" tabindex="12"  type="text" value="{{$master->ma_postcode}}" maxlength="50" class=""/>
+					</div>
+					<span class=" label_intro"></span>
+				</div>
+				<div class="form_grid_12">
+					<label class="field_title" id="lposition" for="position">{{__('propertyregister.City')}} <span class="req">*</span></label>
+					<div  class="form_input">
+						<input id="city"  name="city" tabindex="13"  type="text" value="{{$master->ma_city}}" maxlength="50" class=""/>
+					</div>
+					<span class=" label_intro"></span>
+				</div>
+				<div class="form_grid_12">
+					<label class="field_title" id="llevel" for="level">{{__('propertyregister.State')}} <span class="req">*</span></label>
+					<div  class="form_input">
+						<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" value="{{$master->ma_state_id}}" id="state" name="state" tabindex="14">
+							@foreach ($state as $rec)
+							<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+							@endforeach
+						</select>
+					</div>
+					<span class=" label_intro"></span>
+				</div>
+			</fieldset>
+		</li>
+	</ul>
 	
 	</div>
 	@endforeach

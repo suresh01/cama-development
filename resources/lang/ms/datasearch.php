@@ -3,7 +3,7 @@
 // resources/lang/en/messages.php
 
 return [
-    'propertycnt'=>'Property Count',
+    'propertycnt'=>'Kira Rekod',
 
     'col1'=>'S No',
     'col2'=>'No Akaun',

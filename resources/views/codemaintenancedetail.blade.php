@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Code Maintenance</title>
+<title>{{__('outer.Code_Maintenance')}} </title>
 @include('includes.header', ['page' => 'datamaintenance'])
 	
 	<div id="content">
@@ -35,9 +35,9 @@
 
 				<div id="breadCrumb3" class="breadCrumb grid_4">
 					<ul >
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-						<li><a href="codemaintenance">Code Maintenance</a></li>
+						<li><a href="#">{{__('outer.Home')}} </a></li>
+						<li><a href="#">{{__('outer.Data_Maintenance')}} </a></li>
+						<li><a href="codemaintenance">{{__('outer.Code_Maintenance')}} </a></li>
 						@foreach ($isparent as $rec)
 							@if($rec->pd_parent != 'Root' )	
 								<li><a href="codemaintenancedetail?name={{$rec->pd_parent}}">{{$rec->pd_parent}} - 
@@ -52,7 +52,7 @@
 					</ul>
 				</div>
 
-				<button id="adduser" style="float:right;" onclick="openAddUser()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Parameter Detail</span></button>
+				<button id="adduser" style="float:right;" onclick="openAddUser()" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('outer.Add_Parameter_Detail')}}</span></button>
 
 				@include('search.sample')
 				<br>
@@ -63,38 +63,38 @@
 						<thead style="text-align: left;">
 						<tr>
 							<th class="table_sno">
-								S No
+								{{__('outer.SNO')}} 
 							</th>
 							@foreach ($isparent as $rec)
 							@if($rec->pd_parent != 'Root' )	
 							<th>
-								Parent Parameter Key
+								{{__('outer.Parent_Parameter_Key')}} 
 							</th>
 							<th>
-								Parent Parameter Velue
+								{{__('outer.Parent_Parameter_Velue')}} 
 							</th>
 							@endif
 							@endforeach
 							<th>
-								Parameter Key
+								{{__('outer.Parameter_')}} 
 							</th>
 							<th>
-								Parameter Value	
+								{{__('outer.Parameter_')}} 	
 							</th>
 							<th>
-								Parameter Description	
+								{{__('outer.Parameter_Description')}} 	
 							</th>
 							<th>
-								Sort	
+								{{__('outer.Sort')}} 	
 							</th>
 							<th>
-								Update by
+								{{__('outer.Update_')}} 
 							</th>
 							<!--<th>
 								Update at
 							</th>-->	
 							<th>
-								Action
+								{{__('outer.Application_Type')}} Action
 							</th>
 						</tr> 
 						</thead>
@@ -142,8 +142,8 @@
 									{{ $rec->tdi_updateat }}
 								</td>	-->
 								<td>
-									<span><a class="action-icons c-edit" onclick="openEditDetail('{{ $rec->tdi_key }}')" href="#" title="Edit">Edit</a></span>
-									<span><a class="action-icons c-Delete " onclick="deleteSdt('{{ $rec->tdi_key }}')" href="#" title="Delete">Delete</a></span>
+									<span><a class="action-icons c-edit" onclick="openEditDetail('{{ $rec->tdi_key }}')" href="#" title="{{__('common.Edit')}}">{{__('common.Edit')}}</a></span>
+									<span><a class="action-icons c-Delete " onclick="deleteSdt('{{ $rec->tdi_key }}')" href="#" title="{{__('common.Delete')}}">{{__('common.Delete')}}</a></span>
 								</td>
 							</tr>
 							<div style="display:none;">
@@ -162,7 +162,7 @@
 		<div id="adduserform" style="display:none;" class="grid_10">
 			<div class="widget_wrap">
 				<div class="widget_content">
-					<h3 id="title">Add Parameter</h3>
+					<h3 id="title">{{__('outer.Add_Parameter')}}</h3>
 					<form id="usertransform" autocomplete="off" method="post" action="codemaintenancedetail?name={{ $name }}&id={{ $id }}" class="">
 						<div  class="grid_6 form_container left_label">
 						<ul>
@@ -174,7 +174,7 @@
 
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lkey_name" for="key_name">Parameter Key<!--<span class="req">*</span>--></label>
+									<label class="field_title" id="lkey_name" for="key_name">{{__('outer.Parameter_Key')}}<!--<span class="req">*</span>--></label>
 									<div class="form_input">
 										<input id="parameterkey" placeholder="Last Used Code : {{$lastcode}}" name="parameterkey" type="text" value="" maxlength="100" >
 									</div>
@@ -182,7 +182,7 @@
 								</div>							
 								
 								<div class="form_grid_12">
-									<label class="field_title" id="lkey_type" for="key_type">Parameter Value</label>
+									<label class="field_title" id="lkey_type" for="key_type">{{__('outer.Parameter_Value')}}</label>
 									<div class="form_input">
 										<input id="parametervalue" name="parametervalue" type="text" value="" maxlength="50" />
 									</div>
@@ -191,7 +191,7 @@
 								@foreach ($isparent as $rec)
 								@if($rec->pd_parent != 'Root' )	
 									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">Parameter Parent<span class="req">*</span></label>
+										<label class="field_title" id="llevel" for="level">{{__('outer.Parameter_Parent')}} <span class="req">*</span></label>
 										<div class="form_input ">
 											<select style="width: 100%;" onchange="getLastCode(this.value)" data-placeholder="Choose a Parent..." disabled="" class="cus-select" id="parent" name="parent" tabindex="20">
 											@foreach ($childparent as $rec)
@@ -204,7 +204,7 @@
 								@endif
 								@endforeach								
 								<div class="form_grid_12">
-									<label class="field_title" id="ltable_name" for="table_name">Parameter Description</label>
+									<label class="field_title" id="ltable_name" for="table_name">{{__('outer.Parameter_Description')}} </label>
 									<div class="form_input">
 										<input id="desc" name="desc" type="text" value="" maxlength="50" />
 									</div>
@@ -212,7 +212,7 @@
 								</div>
 								
 								<div class="form_grid_12">
-									<label class="field_title" id="lbltable_field_name" for="table_field_name">Sort Order</label>
+									<label class="field_title" id="lbltable_field_name" for="table_field_name">{{__('outer.Sort_Order')}} </label>
 									<div class="form_input">
 										<input id="sort" name="sort" type="text" value="0" maxlength="50" />
 									</div>
@@ -226,7 +226,7 @@
 						<div class="form_input">
 							<input type="button" id="addsubmit" onclick="checkSubmission();" class="btn_small btn_blue" value="Submit">				
 																							
-							<button id="close" onclick="closeAddUser()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+							<button id="close" onclick="closeAddUser()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}} </span></button>
 						</div>
 					</div>
 							
@@ -239,7 +239,7 @@
 
 
 	<div style="display: none;height: 160px;"  id="open-modal-content-child">
-		<h3>Select Child</h3>
+		<h3>{{__('outer.Select_Child')}}</h3>
 		<form action="#" id="codemaintenancedetail" method="get" class="form_container">	
 			@csrf		
 			<ul id="filterrow">		
@@ -248,11 +248,11 @@
 						<div class="form_input">
 							<div class="form_grid_6">
 								<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="child" name="child" tabindex="20">
-									<option value="#">Please select Child</option>
-									<option value="AREALEVEL">AREALEVEL</option>				
-									<option value="AREAUSE">AREAUSE</option>	
-									<option value="BUILDINGSTOREY">BUILDINGSTOREY</option>				
-									<option value="BULDINGTYPE">BULDINGTYPE</option>						
+									<option value="#">{{__('outer.Please_select_Child')}}</option>
+									<option value="AREALEVEL">{{__('outer.Arealevel')}}</option>				
+									<option value="AREAUSE">{{__('outer.Areause')}}</option>	
+									<option value="BUILDINGSTOREY">{{__('outer.Buildingstorey')}}</option>				
+									<option value="BULDINGTYPE">{{__('outer.Buldingtype')}}</option>						
 								</select>
 							</div>
 							<span class="clear"></span>
@@ -263,8 +263,8 @@
 			</ul>
 			
 			<div class="btn_24_blue">
-				<a href="#" onclick="childSelect()" ><span>Submit</span></a>
-				<a href="#" class="simplemodal-close"><span>Close </span></a>
+				<a href="#" onclick="childSelect()" ><span>{{__('common.Submit')}}</span></a>
+				<a href="#" class="simplemodal-close"><span>{{__('common.Close')}} </span></a>
 			</div>
 			</form>
 	</div>

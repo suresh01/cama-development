@@ -1,45 +1,46 @@
-
+ 
 						<div id="tab3">
-							<h4>Owner</h4>
+							<h4>{{__('propertyregister.Application_Type')}} Owner</h4>
 								<p>
-									Account Number = <span id="ownerlabel"></span>
+									{{__('propertyregister.Application_Type')}} Account Number = <span id="ownerlabel"></span>
 								</p>
 
-							@if($iseditable == 1)<button onclick="openowner()" id="addowner" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Owner</span></button>@endif
+							@if($iseditable == 1)<button onclick="openowner()" id="addowner" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('propertyregister.Application_Type')}} Add Owner</span></button>@endif
 
 								<div id="ownertable" class="widget_wrap">					
 									<div class="widget_content">						
 										<table style="width: 100%" id="ownertble" class="display ">
 										<thead style="text-align: left;">
 								  		<tr>
-											<th class="table_sno">S No</th>
-											<th>OWNER APPLICATION TYPE</th>
-											<th>TYPE OF OWNER</th>
-											<th>OWNER NO</th>
-											<th>OWNER NAME</th>
-											<th>OWNER ADDRES 1</th>
-											<th>OWNER ADDRES 2</th>
-											<th>OWNER ADDRES 3</th>
-											<th>OWNER ADDRES 4</th>
-											<th>POSTCODE</th>
-											<th>STATE</th>
-											<th>TEL NUMBER</th>
-											<th>FAX NUMBER</th>
-											<th>Citizenship</th>
-											<th>RACE</th>
-											<th>Numerator</th>
-											<th>Denominator</th>
-											<th>Action</th>
-											<th>ACTIONCODE</th>
-											<th>TO ID</th>
-											<th>accoumnum</th>
-											<th>Email</th>
-											<th>city</th>
-											<th>APP TYPE / ID TYPE</th>
-											<th>ID NUMBER</th>
-											<th>ADDRESS </th>
-											<th>TEL NUMBER / FAXNUMBER</th>
-											<th>ACTION</th>
+											<th class="table_sno">{{__('propertyregister.SNO')}} </th>
+
+											<th>{{__('propertyregister.Owner_Application_Type')}}</th>
+											<th>{{__('propertyregister.Type_Of_Owner')}}</th>
+											<th>{{__('propertyregister.Owner_No')}}</th>
+											<th>{{__('propertyregister.Owner_Name')}}</th>
+											<th>{{__('propertyregister.Owner_Addres1')}}</th>
+											<th>{{__('propertyregister.Owner_Addres2')}}</th>
+											<th>{{__('propertyregister.Owner_Addres3')}}</th>
+											<th>{{__('propertyregister.Owner_Addres4')}}</th>
+											<th>{{__('propertyregister.postcode')}}</th>
+											<th>{{__('propertyregister.State')}}</th>
+											<th>{{__('propertyregister.Tel_Number')}}</th>
+											<th>{{__('propertyregister.Fax_Number')}}</th>
+											<th>{{__('propertyregister.Citizenship')}}</th>
+											<th>{{__('propertyregister.Race')}}</th>
+											<th>{{__('propertyregister.Numerator')}}</th>
+											<th>{{__('propertyregister.Denominator')}}</th>
+											<th>{{__('propertyregister.Action')}}</th>
+											<th>{{__('propertyregister.Actioncode')}}</th>
+											<th>{{__('propertyregister.To_Id')}}</th>
+											<th>{{__('propertyregister.Accoumnum')}}</th>
+											<th>{{__('propertyregister.Email')}}</th>
+											<th>{{__('propertyregister.City')}}</th>
+											<th>{{__('propertyregister.App_Type')}} / {{__('propertyregister.Id_Type')}}</th>
+											<th>{{__('propertyregister.Id_Number')}}</th>
+											<th>{{__('propertyregister.Address')}}</th>
+											<th>{{__('propertyregister.Tel_Number')}} / {{__('propertyregister.Fax_Number')}}</th>
+											<th>{{__('propertyregister.Action')}}</th>
 										</tr>
 										</thead>
 										</table>
@@ -48,9 +49,9 @@
 								<div style="display:none;" id="ownerdetail" >
 								<div id="owner_form"  autocomplete="off" onsubmit="return false;" class=" left_label" method="post" action="#" >
 										<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
-									<button id="submitaddtblowner" onclick="addownerRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Add New</span></button>	
-									<button id="submitedittblowner" onclick="editownerRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>Update</span></button>	
-								<button id="close" onclick="closeowner()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+									<button id="submitaddtblowner" onclick="addownerRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Add_New')}}  </span></button>	
+									<button id="submitedittblowner" onclick="editownerRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Update')}} </span></button>	
+								<button id="close" onclick="closeowner()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}} </span></button>
 								</div>
 								<div class="grid_6 ">
 								<ul>
@@ -61,76 +62,74 @@
 									<input type="hidden" value="0" name="ownerid" id="ownerid">
 									<input type="hidden" value="0" name="tableindex" id="tableindex">
 								
-								<fieldset>
-										<legend>Owner Information</legend>
-
+									<fieldset>
+										<legend>{{__('propertyregister.Owner_Information')}}</legend>
 										<div class="form_grid_12">
-									<label class="field_title" id="lusername" for="username">OWNER APPLICATION TYPE<span class="req">*</span></label>
-									<div  class="form_input">
-										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ownaplntype" name="ownaplntype" tabindex="1">
-											<option></option>
-											<option value='C'>CMK</option>
-											<option value='K'>KAD</option>
-										</select>
-									</div>
-									<span class=" label_intro"></span>
-								</div>
-								
-								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">TYPE OF OWNER<span class="req">*</span></label>
-									<div  class="form_input">
-										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="typeofown" name="typeofown" tabindex="1">
-											<option></option>
-											@foreach ($owntype as $rec)
-												<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
-											@endforeach	
-										</select>
-									</div>
-									<span class=" label_intro"></span>
-								</div>
-
-								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER NUMBER<span class="req">*</span></label>
-									<div  class="form_input">
-										<input id="ownnum" name="ownnum"  type="text" tabindex="1"  maxlength="15" />
-									</div>
-									<span class=" label_intro"></span>
-								</div>
-								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER NAME<span class="req">*</span></label>
-									<div  class="form_input">
-										<input id="ownname" name="ownname" tabindex="1" type="text"  maxlength="80" />
-									</div>
-									<span class=" label_intro"></span>
-								</div>
-								<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">TEL NO<span class="req">*</span></label>
-										<div  class="form_input">
-											<input id="telno" name="telno" tabindex="1" type="text" value="" maxlength="80" />
+											<label class="field_title" id="lusername" for="username">{{__('propertyregister.Application_TypeOwner_Application_Type')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ownaplntype" name="ownaplntype" tabindex="1">
+													<option></option>
+													<option value='C'>CMK</option>
+													<option value='K'>KAD</option>
+												</select>
+											</div>
+											<span class=" label_intro"></span>
 										</div>
-										<span class=" label_intro"></span>
-									</div>
-									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">FAX NO<span class="req">*</span></label>
-										<div  class="form_input">
-											<input id="faxno" name="faxno" tabindex="1" type="text" value="" maxlength="80" />
+										
+										<div class="form_grid_12">
+											<label class="field_title" id="lposition" for="position">{{__('propertyregister.Type_Of_Owner')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="typeofown" name="typeofown" tabindex="1">
+													<option></option>
+													@foreach ($owntype as $rec)
+													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+													@endforeach
+												</select>
+											</div>
+											<span class=" label_intro"></span>
 										</div>
-										<span class=" label_intro"></span>
-									</div>
-									<div class="form_grid_12">
-										<label class="field_title" id="llevel" for="level">EMAIL ID<span class="req">*</span></label>
-										<div  class="form_input">
-											<input id="emailno" name="emailno" tabindex="1" type="text" value="" maxlength="50" />
+										<div class="form_grid_12">
+											<label class="field_title" id="llevel" for="level">{{__('propertyregister.Owner_No')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="ownnum" name="ownnum"  type="text" tabindex="1"  maxlength="15" />
+											</div>
+											<span class=" label_intro"></span>
 										</div>
-										<span class=" label_intro"></span>
-									</div>
-								</fieldset>
+										<div class="form_grid_12">
+											<label class="field_title" id="llevel" for="level">{{__('propertyregister.Owner_Name')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="ownname" name="ownname" tabindex="1" type="text"  maxlength="80" />
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="llevel" for="level">{{__('propertyregister.Tel_Number')}}<span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="telno" name="telno" tabindex="1" type="text" value="" maxlength="80" />
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="llevel" for="level">{{__('propertyregister.Fax_Number')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="faxno" name="faxno" tabindex="1" type="text" value="" maxlength="80" />
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+										<div class="form_grid_12">
+											<label class="field_title" id="llevel" for="level">{{__('propertyregister.Email')}} <span class="req">*</span></label>
+											<div  class="form_input">
+												<input id="emailno" name="emailno" tabindex="1" type="text" value="" maxlength="50" />
+											</div>
+											<span class=" label_intro"></span>
+										</div>
+									</fieldset>
 
 
 								<fieldset>
 									<legend>Other Information</legend>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">CITIZENSHIP<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('propertyregister.Citizenship')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="citizen" name="citizen" tabindex="1">
 											<option></option>
@@ -142,7 +141,7 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">RACE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('propertyregister.Race')}} <span class="req">*</span></label>
 									<div  class="form_input"><select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="race" name="race" tabindex="1">
 											<option></option>
 											@foreach ($race as $rec)
@@ -153,14 +152,14 @@
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">NUMERATOR</label>
+									<label class="field_title" id="lposition" for="position">{{__('propertyregister.Numerator')}} </label>
 									<div  class="form_input">
 										<input id="numerator" tabindex="1" name="numerator" value="0" maxlength="5"  type="number" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">DENOMINATOR</label>
+									<label class="field_title" id="lposition" for="position">{{__('propertyregister.Denominator')}} </label>
 									<div  class="form_input">
 										<input id="demominator" onKeyDown="if(this.value.length==5 && event.keyCode>47 && event.keyCode < 58) return false;" name="demominator" value="0"  type="number" tabindex="1"  maxlength="5" class=""/>
 									</div>
@@ -174,16 +173,16 @@
 								<ul>
 								<li >
 									<fieldset>
-										<legend>Address Information</legend>
+										<legend>{{__('propertyregister.Address_Information')}} </legend>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER ADDRES 1<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('propertyregister.Owner_Addres1')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="ownaddr1" name="ownaddr1" tabindex="1"  type="text"  maxlength="50" />
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER ADDRES 2</label>
+									<label class="field_title" id="llevel" for="level">{{__('propertyregister.Owner_Addres2')}} </label>
 									<div  class="form_input">
 										<input id="ownaddr2" name="ownaddr2" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -191,14 +190,14 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">OWNER ADDRES 3</label>
+									<label class="field_title" id="llevel" for="level">{{__('propertyregister.Owner_Addres3')}} </label>
 									<div  class="form_input">
 										<input id="ownaddr3" name="ownaddr3" tabindex="1"  type="text"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">OWNER ADDRES 4</label>
+									<label class="field_title" id="lposition" for="position">{{__('propertyregister.Owner_Addres4')}} </label>
 									<div  class="form_input">
 										<input id="ownaddr4" name="ownaddr4" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -206,7 +205,7 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('propertyregister.City')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="owncity"  name="owncity" tabindex="1" type="text"  maxlength="50" class=""/>
 									</div>
@@ -214,14 +213,14 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">POSTCODE<span class="req">*</span></label>
+									<label class="field_title" id="lposition" for="position">{{__('propertyregister.postcode')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="ownpostcode"  name="ownpostcode" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
 								<div class="form_grid_12">
-									<label class="field_title" id="llevel" for="level">STATE<span class="req">*</span></label>
+									<label class="field_title" id="llevel" for="level">{{__('propertyregister.State')}} <span class="req">*</span></label>
 									<div  class="form_input">
 										<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ownstate" name="ownstate" tabindex="1">
 											<option></option>

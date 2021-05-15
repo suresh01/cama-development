@@ -4,6 +4,8 @@
 
 return [
     // addapplication.blade.php
+    'SNO'=>'S No',
+    'Group'=>'Group',
     'New_Property'=>'New Property',
     'Account_Number'=>'Account Number',
     'Zone'=>'Zone',

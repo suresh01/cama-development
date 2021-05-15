@@ -51,6 +51,7 @@ return [
 	//grab-basket.blade.php
 	'Bakset_Name'=>'Nama Basket',
 	'Approve_By_At'=>'Disahkan Oleh / Disahkan Pada',
+	'Term'=>'Penggal',
 	'Term_Name'=>'Penggal',
 	'Term_Date'=>'Tarikh Penggal',
 	'Account_Information'=>'Maklumat Harta',

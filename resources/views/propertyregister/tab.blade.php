@@ -6,7 +6,7 @@
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>Property Registeration</title>
+<title>{{__('propertyregister.Property_Registration')}}</title>
 <style>
 .disabled-btn{
     pointer-events:none;
@@ -21,9 +21,9 @@
 		<div id="usertable" class="grid_12">	
 			<div id="breadCrumb3" class="breadCrumb grid_12">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Data Maintenance</a></li>
-						<li><a href="propertybasket">Property Registeration </a></li>
+						<li><a href="#">{{__('propertyregister.Home')}} </a></li>
+						<li><a href="#">{{__('propertyregister.Data_Maintenance')}} </a></li>
+						<li><a href="propertybasket">{{__('propertyregister.Property_Registration')}} </a></li>
 						<li><a href="propertyregister?pb={{$pb}}">{{$basket_name}}</a></li>
 						<li>{{$accountnumbber}}</li>
 					</ul>
@@ -34,7 +34,7 @@
 				<div class="widget_wrap">
 					<div class="widget_top">
 						<!--<span class="h_icon list"></span>-->
-						<h6>Property Registration</h6>
+						<h6>{{__('propertyregister.Property_Registration')}}</h6>
 						<div id="top_tabby">
 						</div>
 					</div>
@@ -43,7 +43,7 @@
 						<!--<h3>Property Registration</h3>-->
 						<form action="" id="propertyregsitration_from" class="form_container left_label">
 							<fieldset title="Step 1">		
-								<legend>Master Information</legend>						
+								<legend>{{__('propertyregister.Master_Information')}} </legend>						
 								@if ($count == 0)
 				            		@include('propertyregister.tab.masternew')
 				            	@else
@@ -51,15 +51,15 @@
 				            	@endif								
 							</fieldset>
 							<fieldset title="Step 2">
-								<legend>Owner Information</legend>
+								<legend>{{__('propertyregister.Owner_Information')}} </legend>
 								@include('propertyregister.tab.owner')
 							</fieldset>
 							<fieldset title="Step 3">
-								<legend>Lot Inforamtion</legend>
+								<legend>{{__('propertyregister.Lot_Inforamtion')}} </legend>
 								@include('propertyregister.tab.lot')
 							</fieldset>
 							<fieldset title="Step 4">
-								<legend>Building Inforamtion</legend>
+								<legend>{{__('propertyregister.Building_Inforamtion')}} </legend>
 								@include('propertyregister.tab.building')
 							</fieldset>
 							@if($iseditable == 1)
