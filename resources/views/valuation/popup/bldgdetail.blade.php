@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Buliding Detail</title>
+<title>{{__('valuation.Building_Detail')}} </title>
 <style type="text/css">
   #bldgarea td.numericCol {
     text-align: right;
@@ -18,43 +18,54 @@
       <div class="grid_12">
         <div class="widget_wrap">
           <div class="widget_top">
-            <h6>Valuation</h6> 
+            <h6>{{__('valuation.Valuation')}} </h6> 
           </div>
           <div class="widget_content">
             <div class=" page_content"> 
               <div class="invoice_container"> 
                 
                 <fieldset>
-                  <legend>Building Detail</legend>   
+                  <legend>{{__('valuation.Building_Detail')}} </legend>   
                   @foreach($bldg as $rec)
                  
                     
                       <div class="grid_4 invoice_to"> 
-                        <strong><span>Building Number : </span></strong>
+                        <!--  -->
+                        <strong><span>{{__('valuation.Building_Number')}} : </span></strong>
                         <span>{{$rec->vb_bldg_no}}</span>  <br><br>
-                        <strong><span>Building Category : </span></strong>
+                        <!--  -->
+                        <strong><span>{{__('valuation.Building_Category')}} : </span></strong>
                         <span>{{$rec->bldgcategory}}</span>  <br><br>
-                        <strong><span>Building Position : </span></strong>
+                        <!--  -->
+                        <strong><span>{{__('valuation.Building_Position')}} : </span></strong>
                         <span>{{$rec->bldgposition}}</span> <br>
                       </div> 
                       <div class="grid_4 invoice_to">   
-                        <strong><span>Building Condition : </span></strong>
+                        <!--  -->
+                        <strong><span>{{__('valuation.Building_Condition')}} : </span></strong>
                         <span>{{$rec->bldgcategory}}</span><br><br>
-                        <strong><span>Building Type : </span></strong>
+                        <!--  -->
+                        <strong><span>{{__('valuation.Building_Type')}} : </span></strong>
                         <span>{{$rec->bldgtype}}</span>  <br><br>
-                        <strong><span>Building Roof : </span></strong>
+                        <!--  -->
+                        <strong><span>{{__('valuation.Building_Roof')}} : </span></strong>
                         <span>{{$rec->rooftype}}</span> <br><br>
-                        <strong><span>Building Wall : </span></strong>
+                        <!--  -->
+                        <strong><span>{{__('valuation.Building_Wall')}} : </span></strong>
                         <span>{{$rec->walltype}}</span>  <br><br>
-                        <strong><span>Building Storey : </span></strong>
+                        <!--  -->
+                        <strong><span>{{__('valuation.Building_Storey')}} : </span></strong>
                         <span>{{$rec->bldgstorey}}</span> <br><br>
-                        <strong><span>Building Floor : </span></strong>
+                        <!--  -->
+                        <strong><span>{{__('valuation.Building_Floor')}} : </span></strong>
                         <span>{{$rec->floortype}}</span> <br>
                       </div>
                       <div class="grid_4 invoice_from">
-                        <strong><span>CCC Date : </span></strong>
+                        <!--  -->
+                        <strong><span>{{__('valuation.CCC_Date')}} : </span></strong>
                         <span>{{$rec->vb_cccdate1}}</span><br><br>
-                        <strong><span>Occupied Date : </span></strong>
+                        <!--  -->
+                        <strong><span>{{__('valuation.Occupied_Date')}} : </span></strong>
                         <span>{{$rec->vb_occupieddate1}}</span> <br>
                       </div>
                       </div>
@@ -68,8 +79,8 @@
             
             <div id="widget_tab">
               <ul>
-                <li><a href="#tab1" class="active_tab">Building Detail</a></li>
-                <li><a href="#tab2">Allowance</a></li>
+                <li><a href="#tab1" class="active_tab">{{__('valuation.Building_Detail')}} </a></li>
+                <li><a href="#tab2">{{__('valuation.Allowance')}}</a></li>
               </ul>
             </div>
           </div>
@@ -80,39 +91,17 @@
                         <table  id="bldgarea">
                         <thead>
                         <tr class=" gray_sai">
-                          <th>
-                            S No
-                          </th>
-                          <th>
-                            AREA TYPE
-                          </th>
-                          <th>
-                            AREA LEVEL
-                          </th>
-                          <th>
-                            AREA CATEGORY
-                          </th>
-                          <th>
-                            AREA USED
-                          </th>
-                          <th>
-                            AREA
-                          </th>
-                          <th>
-                            AREA RATE
-                          </th>
-                          <th >
-                            GROSS AREA VALUE
-                          </th>
-                          <th>
-                            RATE
-                          </th>
-                          <th>
-                            BLDGARID
-                          </th>
-                          <th>
-                            BLDGID
-                          </th>
+                          <th>{{__('valuation.SNo')}}</th>  
+                          <th>{{__('valuation.Area_Type')}}</th>  
+                          <th>{{__('valuation.Area_Level')}}</th>  
+                          <th>{{__('valuation.Area_Category')}}</th>  
+                          <th>{{__('valuation.Area_Used')}}</th>  
+                          <th>{{__('valuation.Area')}}</th>  
+                          <th>{{__('valuation.Area_Rate')}}</th>  
+                          <th>{{__('valuation.Gross_Area_Value')}}</th>  
+                          <th>{{__('valuation.Rate')}}</th>  
+                          <th>{{__('valuation.Bldgarid')}}</th>  
+                          <th>{{__('valuation.Bldgid')}}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -121,7 +110,7 @@
                         </tbody>
                         <tr>
                           <td colspan="7" class="grand_total">                            
-                            Total Buliding Value:
+                            {{__('valuation.Total_Buliding_Value')}} :
                           </td>
                           <td>
                             <input type="text" readonly="true"  style="float: right; text-align: right;" class="tbl-total" id="bldgtotal">
@@ -137,30 +126,14 @@
                         <table id="bldgallowance">
                         <thead>
                         <tr class=" gray_sai">
-                          <th>
-                            S No
-                          </th>
-                          <th>
-                            Description (Allwoance Cateory ,  Allowance Type)
-                          </th>
-                          <th>
-                            Calculation Method
-                          </th>
-                          <th>
-                            Percentage / Value
-                          </th>
-                          <th>
-                            Gross Allowance
-                          </th>
-                          <th>
-                            allowanceid
-                          </th>
-                          <th>
-                            bldgid
-                          </th>
-                          <th>
-                            Action
-                          </th>
+                          <th>{{__('valuation.SNo')}}</th>
+                          <th>{{__('valuation.Description')}} ({{__('valuation.Allwoance_Cateory')}} ,  {{__('valuation.Allowance_Type')}})</th>
+                          <th>{{__('valuation.Calculation_Method')}}</th>
+                          <th>{{__('valuation.Percentage')}} / {{__('valuation.Value')}}</th>
+                          <th>{{__('valuation.Gross_Allowance')}}</th>
+                          <th>{{__('valuation.allowanceid')}}</th>
+                          <th>{{__('valuation.bldgid')}}</th>
+                          <th>{{__('valuation.Action')}}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -170,8 +143,8 @@
                         </tbody>
                          <tr>
                           <td colspan="4" class="grand_total">    
-                          <button id="addadditional" onclick="openModal()" name="adduser" style="float: left; "  type="button" class=" basic-modal btn_small btn_blue "><span>Add Allowance value</span></button>                        
-                            Total Allowance Value:
+                          <button id="addadditional" onclick="openModal()" name="adduser" style="float: left; "  type="button" class=" basic-modal btn_small btn_blue "><span>{{__('valuation.Add_Allowance_value')}} </span></button>                        
+                            {{__('valuation.Total_Allowance_Value')}} :
                           </td>
                           <td>
                             <input type="text" readonly="true"  style="float: right;text-align: right; " class="tbl-total" id="allowancetotal">
@@ -188,7 +161,7 @@
                     <ul>
                       <li>
                           <div class="form_grid_6">
-                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">Total Gross Area + Allowance Value<span class="req">*</span></label>
+                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username"> {{__('valuation.Total_Gross_Area')}}  + {{__('valuation.Allowance_Value')}}<span class="req">*</span></label>
                         </div>
                         <div class="form_grid_6">
                           <div  class="form_input">
@@ -198,7 +171,7 @@
                         </div>
                       
                           <div class="form_grid_6">
-                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">Depreciation Rate (%) 
+                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">{{__('valuation.Depreciation_Rate')}} (%) 
                             <!--(<input type="text" value="0.00" style="text-align:right;" id="nilaitambah">%)--><span class="req">*</span></label>
                         </div>
                         <div class="form_grid_6">
@@ -208,7 +181,7 @@
                           <span class=" label_intro"></span>
                         </div>
                       <div class="form_grid_6">
-                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">Depreciation Value 
+                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">{{__('valuation.Depreciation_Value')}}  
                             <!--(<input type="text" value="0.00" style="text-align:right;" id="nilaitambah">%)--><span class="req">*</span></label>
                         </div>
                         <div class="form_grid_6">
@@ -218,7 +191,7 @@
                           <span class=" label_intro"></span>
                         </div>
                           <div class="form_grid_6">
-                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">Net Building Value<span class="req">*</span></label>
+                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">{{__('valuation.Net_Building_Value')}} <span class="req">*</span></label>
                         </div>
                         <div class="form_grid_6">
                           <div  class="form_input">
@@ -227,7 +200,7 @@
                           <span class=" label_intro"></span>
                         </div>
                           <div class="form_grid_6">
-                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">Rounded Building Value<span class="req">*</span></label>
+                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">{{__('valuation.Rounded_Building_Value')}} <span class="req">*</span></label>
                         </div>
                         <div class="form_grid_6">
                           <div  class="form_input">
@@ -243,9 +216,9 @@
                 <div style="height: 48px; float: right; " class="grid_12">
                 
                   <div class="form_input">
-                    <button id="addsubmit" name="adduser" style="float: right; "  onclick="updateCalculation()" type="button" class="btn_small btn_blue"><span>Update</span></button>      
+                    <button id="addsubmit" name="adduser" style="float: right; "  onclick="updateCalculation()" type="button" class="btn_small btn_blue"><span>{{__('common.Update')}}</span></button>      
                               
-                    <button id="close" name="close" type="button" onclick="closeWindow()"  class="btn_small btn_blue"><span>Close</span></button>
+                    <button id="close" name="close" type="button" onclick="closeWindow()"  class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
                     <span class=" label_intro"></span>
                   </div>
                   
@@ -262,13 +235,13 @@
     </div>
     <span class="clear"></span>
     <div  id="basic-modal-content">
-                  <h3>Allowance</h3>
+                  <h3>{{__('valuation.Allowance')}} </h3>
                   <div  class="grid_12 form_container left_label">
                     <ul>  
                       <li class="li">
                         <div class="form_grid_12">
                           <div class="form_grid_8">                 
-                            <label class="field_title" id="luserid" for="userid">Allowance Category<span class="req">*</span></label>
+                            <label class="field_title" id="luserid" for="userid">{{__('valuation.Allowance_Category')}} <span class="req">*</span></label>
                             <div class="form_input">
                             <select data-placeholder="Choose a Status..." style="width:100%" onchange="allowancetype(this.value)" class="cus-select"  id="allowancecateg" tabindex="4" name="lttt" tabindex="20">
                                 <option></option>
@@ -283,7 +256,7 @@
                         <input type="hidden" id="allowancetableindex" >
                         <div class="form_grid_12">
                           <div class="form_grid_8">                 
-                            <label class="field_title" id="luserid" for="userid">Allowance Type<span class="req">*</span></label>
+                            <label class="field_title" id="luserid" for="userid">{{__('valuation.Allowance_Type')}} <span class="req">*</span></label>
                             <div class="form_input">
                               <select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="allowancetype" tabindex="4" name="lttt" tabindex="20">
                                 <option></option>
@@ -295,7 +268,7 @@
                         </div>
                         <div class="form_grid_12">
                           <div class="form_grid_8">                 
-                            <label class="field_title" id="luserid" for="userid">Allowance Calculation Method<span class="req">*</span></label>
+                            <label class="field_title" id="luserid" for="userid">{{__('valuation.Allowance_Calculation_Method')}} <span class="req">*</span></label>
                             <div class="form_input">
                               <select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="calcmethod" tabindex="4" onchange="allowanceCal()" name="lttt" tabindex="20">
                                 <option></option>
@@ -309,7 +282,7 @@
                         </div>
                         <div class="form_grid_12">
                           <div class="form_grid_8">                 
-                            <label class="field_title" id="luserid" for="userid">Drive value<span class="req">*</span></label>
+                            <label class="field_title" id="luserid" for="userid">{{__('valuation.Drive_value')}} <span class="req">*</span></label>
                             <div class="form_input">
                               <input id="add_grossvalue" onchange="allowanceCal()"  name="add_grossvalue" type="text"  value="" />
                             </div>
@@ -318,7 +291,7 @@
                         </div>
                         <div class="form_grid_12">
                           <div class="form_grid_8">                 
-                            <label class="field_title" id="luserid" for="userid">Gross Allowance<span class="req">*</span></label>
+                            <label class="field_title" id="luserid" for="userid">{{__('valuation.Gross_Allowance')}} <span class="req">*</span></label>
                             <div class="form_input">
                               <input id="add_roundvalue" readonly="true" name="add_roundvalue" type="text"  value="" />
                             </div>
@@ -330,10 +303,10 @@
                   </div>
                   <span class="clear"></span>
                     <div class="btn_24_blue">
-                      <a href="#" onclick="addAdditional()" class=""><span>Add </span></a>
+                      <a href="#" onclick="addAdditional()" class=""><span>{{__('common.Add')}} </span></a>
                     </div>
                     <div class="btn_24_blue">
-                      <a href="#" class="simplemodal-close"><span>Close </span></a>
+                      <a href="#" class="simplemodal-close"><span>{{__('common.Close')}} </span></a>
                     </div>
                   
                 </div>

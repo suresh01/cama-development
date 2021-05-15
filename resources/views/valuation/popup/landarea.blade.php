@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Land Detail</title>
+<title>{{__('valuation.Land_Detail')}} </title>
 <style type="text/css">
   #landdetail td.numericCol {
     text-align: right;
@@ -22,31 +22,31 @@
               <div class="invoice_container"> 
                 
                 <fieldset>
-                  <legend>Land Detail</legend>             
+                  <legend>{{__('valuation.Land_Detail')}}</legend>             
                   @foreach ($lotdetail as $rec)
                   <div class="grid_3 invoice_to"> 
-                    <strong><span>Code Lot / No : </span></strong>
+                    <strong><span>{{__('valuation.Code_Lot_No')}} : </span></strong>
                     <span>{{$rec->lotnumber}}</span>  
                   </div>
                   <div class="grid_3 invoice_to">   
-                    <strong><span>Lot Position : </span></strong>
+                    <strong><span>{{__('valuation.Lot_Position')}}  : </span></strong>
                     <span>{{$rec->landposition}}</span>
                   </div>
                   <div class="grid_3 invoice_from">
-                    <strong><span>Alternate Lot No : </span></strong>
+                    <strong><span>{{__('valuation.Alternate_Lot_No')}}  : </span></strong>
                     <span>{{$rec->titlenumber}}</span>
                   </div>
                   <div class="grid_3 invoice_from">
-                    <strong><span>Tenure Type : </span></strong>
+                    <strong><span>{{__('valuation.Tenure_Type')}}  : </span></strong>
                     <span>{{$rec->tentype}}</span>
                   </div>
                   <br>  <br>  <br>
                   <div class="grid_3 invoice_from">
-                    <strong><span>Land Area : </span></strong>
+                    <strong><span>{{__('valuation.Land_Area')}}  : </span></strong>
                     <span>{{$rec->vl_size}}</span>
                   </div>
                   <div class="grid_3 invoice_from">
-                    <strong><span>Tenure Duration : </span></strong>
+                    <strong><span>{{__('valuation.Tenure_Duration')}}  : </span></strong>
                     <span>{{$rec->duration}}</span>
                   </div>
                
@@ -58,36 +58,16 @@
                         <table id="landdetail">
                         <thead>
                         <tr class=" gray_sai">
-                          <th>
-                            S No
-                          </th>
-                          <th>
-                            Area Name
-                          </th>
-                          <th>
-                            Area
-                          </th>
-                          <th>
-                            Rate(smp)
-                          </th>
-                          <th>
-                            Discount Rate(%)
-                          </th>
-                          <th>
-                            Gross Value
-                          </th>
-                          <th >
-                            rate
-                          </th>
-                          <th>
-                            calucate rate
-                          </th>
-                          <th>
-                            lotareaid
-                          </th>
-                          <th >
-                            lotid
-                          </th>
+                          <th>  {{__('valuation.SNo')}} </th>
+                          <th>  {{__('valuation.Area_Name')}} </th>
+                          <th>  {{__('valuation.Area')}} </th>
+                          <th>  {{__('valuation.Rate_smp')}} </th>
+                          <th>  {{__('valuation.Discount_Rate')}} (%)</th>
+                          <th>  {{__('valuation.Gross_Value')}} </th>                        
+                          <th>  {{__('valuation.Rate')}} </th>
+                          <th>  {{__('valuation.calucate_rate')}} </th>
+                          <th>  {{__('valuation.lotareaid')}} </th>
+                          <th>  {{__('valuation.lotid')}} </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -99,7 +79,7 @@
                     <ul>
                       <li>
                           <div class="form_grid_6">
-                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">Net Land Value<span class="req">*</span></label>
+                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">{{__('valuation.Net_Land_Value')}}  <span class="req">*</span></label>
                         </div>
                         <div class="form_grid_6">
                           <div  class="form_input">
@@ -110,7 +90,7 @@
                       </li>
                       <li>
                           <div class="form_grid_6">
-                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">Rounded Value <span class="req">*</span></label>
+                          <label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">{{__('valuation.Rounded_Value')}} <span class="req">*</span></label>
                         </div>
                         <div class="form_grid_6">
                           <div  class="form_input">
@@ -125,9 +105,9 @@
                 <div style="height: 48px; float: right; " class="grid_12">
                 
                   <div class="form_input">
-                    <button id="addsubmit" name="adduser" style="float: right; "  onclick="updateCalculation()" type="button" class="btn_small btn_blue"><span>Update</span></button>      
+                    <button id="addsubmit" name="adduser" style="float: right; "  onclick="updateCalculation()" type="button" class="btn_small btn_blue"><span>{{__('common.Update')}}  </span></button>      
                               
-                    <button id="close" name="close" type="button" onclick="closeWindow()"  class="btn_small btn_blue"><span>Close</span></button>
+                    <button id="close" name="close" type="button" onclick="closeWindow()"  class="btn_small btn_blue"><span>{{__('common.Close')}}  </span></button>
                     <span class=" label_intro"></span>
                   </div>
                   

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Meeting</title>
+<title>{{__('objection.Meeting')}} </title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @include('includes.header', ['page' => 'VP'])
 	<!--<div class="page_title">
@@ -33,9 +33,9 @@
 
 					<div id="breadCrumb3"  class="breadCrumb grid_4">
 						<ul >
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Valuation Process</a></li>
-							<li>Meeting</li>
+							<li><a href="#">{{__('objection.Home')}} </a></li>
+							<li><a href="#">{{__('objection.ValuaNoticetion_Process')}} </a></li>
+							<li>{{__('objection.Meeting')}} </li>
 						</ul>
 					</div>
 					<!--<button id="adduser" style="float:right;margin-right: 10px;" onclick="newGroup()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Meeting</span></button>-->
@@ -46,36 +46,16 @@
 						<table class="display tbl_details">
 							<thead style="text-align: left;">
 			  					<tr>
-									<th class="table_sno">
-										S No
-									</th>
-									<th>
-										Term Name
-									</th>
-									<th>
-										Description
-									</th>
-									<th>
-										List Year
-									</th>
-									<th>
-										Meeting Date
-									</th>
-									<th>
-										Notis 8 Date
-									</th>
-									<th>
-										Notis 9 Date
-									</th>
-									<th>
-										Notis 10 Date
-									</th>
-									<th>
-										Term Date
-									</th>
-									<th>
-										Action
-									</th>
+									<th class="table_sno">{{__('objection.SNO')}}</th>
+									<th> {{__('objection.Term_Name')}}  </th>
+									<th> {{__('objection.Description')}}  </th>
+									<th> {{__('objection.List_Year')}}  </th>
+									<th> {{__('objection.Meeting_Date')}}  </th>
+									<th> {{__('objection.Notice')}} 8 {{__('objection.Date')}} </th>
+									<th> {{__('objection.Notice')}} 9 {{__('objection.Date')}} </th>
+									<th> {{__('objection.Notice')}} 10 {{__('objection.Date')}} </th>
+									<th> {{__('objection.Enforce_Date')}}  </th>
+									<th> {{__('objection.Action')}}  </th>
 								</tr>
 							</thead>
 							<tbody>
@@ -138,7 +118,7 @@
 			<div id="addgroup" style="display:none" class="grid_10 full_block">
 				<div class="widget_wrap">
 					<div class="widget_content">
-						<h3 id="title">Add Meeting</h3>
+						<h3 id="title">{{__('objection.Add_Meeting')}}</h3>
 						<form id="addgroupfrom"  autocomplete="off" class="" method="post" action="#" >
 							@csrf
 							<input type="hidden" name="id" id="id" value="0">
@@ -147,9 +127,9 @@
 								<ul>
 									<li>		
 									<fieldset>
-										<legend>Basic Information</legend>						
+										<legend>{{__('objection.Basic_Information')}}</legend>						
 										<div class="form_grid_12">									
-											<label class="field_title" id="termname" for="termid">Term Name<span class="req">*</span></label>
+											<label class="field_title" id="termname" for="termid">{{__('objection.Term_Name')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<select disabled="disabled" data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="termid" name="termid" tabindex="20">
 													<option></option>
@@ -161,21 +141,21 @@
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">Description<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.Description')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="desc" required="true"  name="desc" type="text"  value="{{ old('desc') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">List year<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.List_Year')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="listyear" required="true"  name="listyear" type="text"  value="{{ old('listyear') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>							
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">Term Date<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.Enforce_Date')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="enforcedate" required="true"  name="enforcedate" type="text"  value="{{ old('enforcedate') }}" />
 											</div>
@@ -190,58 +170,58 @@
 								<ul>
 									<li>								
 										<fieldset>
-										<legend>Meeting Information</legend>							
+										<legend>{{__('objection.Meeting_Information')}}</legend>							
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">Meeting Date<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.Meeting_Date')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="meetingdate" required="true"  name="meetingdate" type="text"  value="{{ old('meetingdate') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">Notis 8 Date<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.Notice')}} 8 {{__('objection.Date')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="notis8date" required="true"  name="notis8date" type="text"  value="{{ old('notis8date') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">notis 8 hijridate<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.Notice')}} 8 {{__('objection. hijridate')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="notis8hijridate" required="true"  name="notis8hijridate" type="text"  value="{{ old('notis8hijridate') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">Notis 9 Date<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.Notice')}} 9 {{__('objection.Date')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="notis9date" required="true"  name="notis9date" type="text"  value="{{ old('notis9date') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">notis 9 hijridate<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.Notice')}} 9 {{__('objection.hijridate')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="notis9hijridate" required="true"  name="notis9hijridate" type="text"  value="{{ old('notis9hijridate') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">Notis 10 Date<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.Notice')}} 10 {{__('objection.Date')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="notis10date" required="true"  name="notis10date" type="text"  value="{{ old('notis10date') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">notis 10 hijridate<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.Notice')}} 10 {{__('objection.hijridate')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="notis10hijridate" required="true"  name="notis10hijridate" type="text"  value="{{ old('notis10hijridate') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>							
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">notis 8 printdate<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.Notice')}} 8 {{__('objection.printdate')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="notis8printdate" required="true"  name="notis8printdate" type="text"  value="{{ old('notis8printdate') }}" />
 											</div>
@@ -254,9 +234,9 @@
 							<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
 								
 								<div class="form_input">
-									<button id="addsubmit" name="adduser" type="submit" onclick="validateGroup()" class="btn_small btn_blue"><span>Submit</span></button>			
+									<button id="addsubmit" name="adduser" type="submit" onclick="validateGroup()" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>			
 														
-									<button id="close" onclick="closeGroup()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+									<button id="close" onclick="closeGroup()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 									<span class=" label_intro"></span>
 								</div>
 								

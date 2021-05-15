@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Result</title>
+<title>{{__('objection.Result')}} </title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @include('includes.header', ['page' => 'VP'])
 	<!--<div class="page_title">
@@ -29,15 +29,15 @@
 				<div class="form_input">
 					<div id="breadCrumb3"  class="breadCrumb grid_4">
 						<ul>
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Valuation Process</a></li>
-							<li><a href="meeting">Meeting</a></li>
+							<li><a href="#">{{__('objection.Home')}} </a></li>
+							<li><a href="#">{{__('objection.Valuation_Process')}} </a></li>
+							<li><a href="meeting">{{__('objection.Meeting')}} </a></li>
 							<li>{{$objectiondetail}}</li>
 						</ul>
 					</div>
 					<div style="float:right;margin-right: 0px;"  class="btn_24_blue">   
-						<a href="#" onclick="deleteProperty()">Decision Report</a>		 
-						<a href="#" onclick="valuationDetail()">R5 Report</a>		
+						<a href="#" onclick="deleteProperty()">{{__('objection.Decision_Report')}} </a>		 
+						<a href="#" onclick="valuationDetail()">{{__('objection.R5_Report')}} </a>		
 						<!--<a href="#" onclick="addProperty()">Add Objection Property</a>-->
 					</div>
 					<br>
@@ -47,13 +47,12 @@
 					<div class="widget_top">
 						<div id="widget_tab">
 							<ul>
-								<li><a href="agenda?term={{$term}}&id={{$id}}" >Agenda</a></li>
-								
-								<!--<li><a href="newnotice?term={{$term}}&id={{$id}}">New Notis</a></li>-->
-								<li><a href="notice?term={{$term}}&id={{$id}}">Notis</a></li>
-								<li><a href="objectionreport?term={{$term}}&id={{$id}}" >Objection</a></li>
-								<li><a href="decision?term={{$term}}&id={{$id}}">Decision</a></li>
-								<li><a href="result?term={{$term}}&id={{$id}}"  class="active_tab">Report</a></li>
+								<li><a href="agenda?term={{$term}}&id={{$id}}" >{{__('objection.Agenda')}} </a></li>
+								<li><a href="newnotice?term={{$term}}&id={{$id}}">{{__('objection.New_Notice')}} </a></li>
+								<li><a href="notice?term={{$term}}&id={{$id}}">{{__('objection.Existing_Notice')}} </a></li>
+								<li><a href="objectionreport?term={{$term}}&id={{$id}}" >{{__('objection.Objection')}} </a></li>
+								<li><a href="decision?term={{$term}}&id={{$id}}">{{__('objection.Decision')}} </a></li>
+								<li><a href="result?term={{$term}}&id={{$id}}"  class="active_tab">{{__('objection.Report')}} </a></li>
 							</ul>
 						</div>
 					</div>
@@ -62,28 +61,28 @@
 							<div class="social_activities">
 					<div class="comments_s">
 						<div class="block_label">
-							Agenda Count<span>@foreach ($agendacnt as $rec)
+							{{__('objection.Application_Type')}} Agenda Count<span>@foreach ($agendacnt as $rec)
 										{{$rec->agenda_count}}									
 									@endforeach	</span>
 						</div>
 					</div>
 					<div class="comments_s">
 						<div class="block_label">
-							Property Count<span>@foreach ($propcnt as $rec)
+							{{__('objection.Application_Type')}} Property Count<span>@foreach ($propcnt as $rec)
 										{{$rec->property_count}}
 									@endforeach	</span>
 						</div>
 					</div>
 					<div class="views_s">
 						<div class="block_label">
-							Notice Count<span>@foreach ($notiscnt as $rec)
+							{{__('objection.Application_Type')}} Notice Count<span>@foreach ($notiscnt as $rec)
 										{{$rec->notis_count}}
 									@endforeach	</span>
 						</div>
 					</div>
 					<div class="comments_s">
 						<div class="block_label">
-							Objection Count<span>@foreach ($objectioncnt as $rec)
+							{{__('objection.Application_Type')}} Objection Count<span>@foreach ($objectioncnt as $rec)
 										{{$rec->objection_count}}
 									@endforeach	</span>
 						</div>
@@ -94,45 +93,23 @@
 							<thead style="text-align: left;">
 			  					<tr>
 			  						<th><input name="select_all" value="1" type="checkbox"></th>
-									<th class="table_sno">
-										S No
-									</th>
+									<th class="table_sno"> {{__('objection.SNO')}} </th>
 									<th style="display: none;">
 										id
 									</th>
 									<th style="display: none;">
 										vdid
 									</th>
-									<th>
-										Account number
-									</th>
-									<th>
-										Basket Name
-									</th>
-									<th>
-										Proposed NT
-									</th>
-									<th>
-										Proposed Rate
-									</th>
-									<th>
-										Proposed Tax
-									</th>
-									<th>
-										Valuer Recommend 
-									</th>
-									<th>
-										Approved NT 
-									</th>
-									<th>
-										Approved Tax
-									</th>
-									<th>
-										Status
-									</th>
-									<th>
-										Action
-									</th>
+									<th> {{__('objection.Account_number')}} </th>
+									<th> {{__('objection.Basket_Name')}} </th>
+									<th> {{__('objection.Proposed_NT')}} </th>
+									<th> {{__('objection.Proposed_Rate')}} </th>
+									<th> {{__('objection.Proposed_Tax')}} </th>
+									<th> {{__('objection.Valuer_Recommend')}}  </th>
+									<th> {{__('objection.Approved_NT')}}  </th>
+									<th> {{__('objection.Approved_Tax')}} </th>
+									<th> {{__('objection.Status')}} </th>
+									<th> {{__('objection.Action')}} </th>
 								</tr>
 							</thead>
 							<tbody>
@@ -188,7 +165,7 @@
 							</tbody>
 						</table>
 				
-            <div><p id="info">0 Row Selected</p></div>		
+            <div><p id="info">0 {{__('objection.Row_Selected')}}</p></div>		
 				</div>	
 			</div>
 				
@@ -207,7 +184,7 @@
 					<div class="widget_wrap">
 						
 						<div class="widget_content">
-							<h3 id="title">Generate Report</h3>
+							<h3 id="title">{{__('objection.Generate_Report')}}</h3>
 							<form style="" id="generateform" method="GET" action="generateResult">
 					            @csrf
 					            <input type="hidden" name="accounts" id="accounts">
@@ -215,10 +192,10 @@
 									<ul>
 										<li>											
 											<fieldset>
-												<legend>Additional Information</legend>												
+												<legend>{{__('objection.Additional_Information')}}</legend>												
 											
 												<div class="form_grid_12">
-													<label class="field_title" id="lposition" for="position">Officer Incharge<span class="req">*</span></label>
+													<label class="field_title" id="lposition" for="position">{{__('objection.Officer_Incharge')}}<span class="req">*</span></label>
 													<div  class="form_input">
 														<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="user" tabindex="7" name="user" tabindex="20">
 																<option></option>
@@ -239,9 +216,9 @@
 								
 								<div class="grid_12">							
 									<div class="form_input">
-										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
+										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>{{__('common.Submit')}} </span></button>									
 										
-										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>{{__('common.Close')}} </span></button>
 										<span class=" label_intro"></span>
 									</div>								
 									<span class="clear"></span>
@@ -255,7 +232,7 @@
 					<div class="widget_wrap">
 						
 						<div class="widget_content">
-							<h3 id="title">Generate Report</h3>
+							<h3 id="title">{{__('objection.Generate_Report')}} </h3>
 							<form style="" id="generateValform" method="GET" action="http://{{$serverhost}}:8002/generateValuationForm">
 					            @csrf
 					            <input type="hidden" name="accounts" id="accounts1">
@@ -264,10 +241,10 @@
 										<li>
 											
 											<fieldset>
-												<legend>Additional Information</legend>
+												<legend>{{__('objection.Additional_Information')}} </legend>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="lposition" for="position">VALUER NAME<span class="req">*</span></label>
+													<label class="field_title" id="lposition" for="position">{{__('objection.Valuer_Name')}} <span class="req">*</span></label>
 													<div  class="form_input">
 														<select onchange="getposition()" data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="tittle" tabindex="7" name="tittle1" tabindex="20">
 																<option></option>
@@ -281,7 +258,7 @@
 												</div>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="llevel" for="level">VALUER TITTLE<span class="req">*</span></label>
+													<label class="field_title" id="llevel" for="level">{{__('objection.Valuer_Tittle')}} <span class="req">*</span></label>
 													<div  class="form_input">
 														<input id="name" name="name"   type="text"  maxlength="50" class="required"/>
 													</div>
@@ -297,9 +274,9 @@
 								
 								<div class="grid_12">							
 									<div class="form_input">
-										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
+										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>									
 										
-										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>{{__('common.Close')}}</span></button>
 										<span class=" label_intro"></span>
 									</div>								
 									<span class="clear"></span>

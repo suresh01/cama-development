@@ -348,7 +348,7 @@ $('.mainNav li:has(ul)').addClass('has-child');
 <div id="container">
 	<div id="header" class="blue_lin">
 		
-		<div style=" margin-top: 10px;width: 600px" class="header_left">
+		<div style=" margin-top: 10px;width: 700px" class="header_left">
 			<p style="
     font-size: 25px;
     font-weight: bold;

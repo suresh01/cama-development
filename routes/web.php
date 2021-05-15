@@ -601,3 +601,10 @@ Route::get('investigation',  function () {
 Route::get('insresult',  function () {
     return view('remisi.investigationresult'); 
 });
+
+
+
+Route::get('generateinspectionform', 'ReportController@generateInspectionForm');
+
+
+Route::get('generatevaluation', 'ReportController@generateValuationR5');

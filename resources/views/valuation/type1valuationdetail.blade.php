@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>Valuation Details</title>
+<title>{{__('valuation.Valuation_Details')}} </title>
 <style>
 	.right-text {
 		text-align:right;
@@ -21,8 +21,8 @@
 
 				<div id="breadCrumb3" class="breadCrumb grid_12">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Valuation Process</a></li>
+						<li><a href="#">{{__('valuation.Home')}} </a></li>
+						<li><a href="#">{{__('valuation.Valuation_Process')}} </a></li>
 						<li><a href="valbasket?id={{$termid}}&ts=1">{{$viewparamterm}} </a></li>
 						<li><a href="property?id={{$pb}}&ts=1">{{$viewparambasket}} - {{$viewparambasketstatus}}</a></li>
 						<li>{{$accountnumber}} </li>
@@ -32,7 +32,7 @@
 
 				<div class="widget_wrap">
 					<div class="widget_top">
-						<h6>Valuation</h6>
+						<h6>{{__('valuation.Valuation')}} </h6>
 					</div>
 					<div class="widget_content">
 						<div class=" page_content">
@@ -43,30 +43,30 @@
 
 
 										<div style="line-height: 2;">	
-											<strong><span>Zone : </span></strong>
+											<strong><span>{{__('valuation.Zone')}} : </span></strong>
 											<span>{{$rec->zone}}</span>	
 										</div>
 										<div style="line-height: 2;">		
-											<strong><span>Sub Zone : </span></strong>
+											<strong><span>{{__('valuation.Sub_Zone')}} : </span></strong>
 											<span>{{$rec->subzone}}</span>
 										</div>
 									</div>
 									<div class="grid_4">		
 
 										<div style="line-height: 2;">
-											<strong><span>Property Category : </span></strong>
+											<strong><span>{{__('valuation.Property_Category')}} : </span></strong>
 											<span>{{$rec->propcategorty}}</span>
 										</div>
 										<div style="line-height: 2;">
-											<strong><span>Property Type : </span></strong>
+											<strong><span>{{__('valuation.Property_Type')}} : </span></strong>
 											<span>{{$rec->proptype}}</span>
 										</div>
 										<div style="line-height: 2;">
-											<strong><span>Property Status : </span></strong>
+											<strong><span>{{__('valuation.Property_Status')}} : </span></strong>
 											<span>{{$rec->bldgstatus}}</span>
 										</div>
 										<div style="line-height: 2;">
-											<strong><span>Property Storey : </span></strong>
+											<strong><span>{{__('valuation.Property_Storey')}} : </span></strong>
 											<span>{{$rec->bldgstorey}}</span>
 										</div>
 									</div>
@@ -82,28 +82,19 @@
 									<div class="widget_wrap collapsible_widget">
 										<div class="widget_top active">
 											<span class="h_icon"></span>
-											<h6>Land Calculation</h6>
+											<h6>{{__('valuation.Land_Calculation')}}</h6>
 										</div>
 										<div class="widget_content">
 											<div class="invoice_tbl">
 												<table id="landtable">
 												<thead>
 												<tr class=" gray_sai">
-													<th style="width: 40px;">
-														S No
-													</th>
-													<th>
-														Lot Code / Lot No
-													</th>
-													<th>
-														Land Area
-													</th>
-													<th>
-														Net Value
-													</th>
-													<th>
-														Round Value
-													</th>													
+													<th style="width: 40px;"> {{__('valuation.SNo')}} </th>
+													<th> {{__('valuation.Lot_Code')}} / {{__('valuation.Lot_No')}} </th>
+													<th> {{__('valuation.Land_Area')}} </th>
+													<th> {{__('valuation.Net_Value')}} </th>
+													<th> {{__('valuation.Round_Value')}} </th>
+
 													<th style="display: none;">
 														Lot id
 													</th>
@@ -137,7 +128,7 @@
 												@endforeach												
 												<tr>
 													<td colspan="4" class="grand_total">
-														Total Land Value:
+														{{__('valuation.Total_Land_Value')}}:
 													</td>
 													<td>
 														<input type="text" readonly="true" onchange="taxCalculation()" style="float: right; "  value="{{number_format($totalland1,2)}}" class="tbl-total" id="landtotal">
@@ -152,40 +143,22 @@
 									<div class="widget_wrap collapsible_widget">
 										<div class="widget_top active">
 											<span class="h_icon"></span>
-											<h6>Building Calculation</h6>
+											<h6>{{__('valuation.Building_Calculation')}}</h6>
 										</div>
 										<div class="widget_content">
 											<div class="invoice_tbl">
 												<table id="bldgtable">
 												<thead>
 												<tr class=" gray_sai">
-													<th  style="width: 40px;">
-														S No
-													</th>
-													<th>
-														Building Category
-													</th>
-													<th>
-														Building Type
-													</th>
-													<!--<th>
-														Building Area
-													</th>-->
-													<th>
-														Building Value
-													</th>
-													<th>
-														Allowancess Value
-													</th>
-													<th>
-														Depreciation Value
-													</th>
-													<th>
-														Net Building Value
-													</th>
-													<th>
-														Round Value 
-													</th>
+													<th  style="width: 40px;"> {{__('valuation.SNo')}} </th>
+													<th> {{__('valuation.Building_Category')}} </th>
+													<th> {{__('valuation.Building_Type')}} </th>
+													<!--<th> {{__('valuation.SNo')}} Building Area </th>-->
+													<th> {{__('valuation.Building_Value')}} </th>
+													<th> {{__('valuation.Allowancess_Value')}} </th>
+													<th> {{__('valuation.Depreciation_Value')}} </th>
+													<th> {{__('valuation.Net_Building_Value')}}  </th>
+													<th> {{__('valuation.Round_Value')}}  </th>
 													<th style="display: none;">
 														bldgid 
 													</th>
@@ -245,33 +218,21 @@
 									<div class="widget_wrap collapsible_widget">
 										<div class="widget_top active">
 											<span class="h_icon"></span>
-											<h6>Additional Calculation</h6>
+											<h6>{{__('valuation.Additional_Calculation')}}</h6>
 										</div>
 										<div class="widget_content">
 											<div class="invoice_tbl">
 												<table id="additionaltable">
 												<thead>
-												<th style="width: 40px;">
-														S No
-													</th>
-													<th style="width: 30%;">
-														Description
-													</th>
-													<th>
-														Area
-													</th>
-													<th>
-														Rate
-													</th>
-													<th>
-														Gross Value
-													</th>
-													<th>
-														Round Value
-													</th>
-													<th style="width: 10%;">
-														Action 
-													</th>
+													<tr class="gray_sai">
+														<th style="width: 40px;">{{__('valuation.SNo')}}</th>
+														<th style="width: 30%;">{{__('valuation.Description')}}</th>
+														<th>{{__('valuation.Area')}}</th>
+														<th>{{__('valuation.Rate')}}</th>
+														<th> {{__('valuation.Gross_Value')}}</th>
+														<th> {{__('valuation.Round_Value')}}</th>
+														<th style="width: 10%;"> {{__('valuation.Action')}}  </th>
+
 													<th style="display: none;">
 														actioncode 
 													</th>
@@ -299,7 +260,7 @@
 														{{number_format($rec->vad_roundnetvalue,2)}}
 													</td>
 													<td>
-														<span><a class="action-icons c-edit editaddrow"  href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="delete">Delete</a></span>
+														<span><a class="action-icons c-edit editaddrow"  href="#" title="{{__('common.Edit')}} ">{{__('common.Edit')}}</a></span><span><a onclick="" class=" action-icons c-delete deleteaddrow " href="#" title="{{__('common.Delete')}} ">{{__('common.Delete')}}</a></span>
 													</td>
 													<td style="display: none;">noaction</td>
 													@php($totaladditonal = $totaladditonal + $rec->vad_roundnetvalue)
@@ -312,8 +273,8 @@
 												<tr>
 													<td colspan="6" class="grand_total">
 														@if($iseditable == 1)
-														<button id="addadditional" onclick="openModal()" name="adduser" style="float: left; "  type="button" class=" basic-modal btn_small btn_blue "><span>Add Additional value</span></button>@endif							
-														Total Additional Value:
+														<button id="addadditional" onclick="openModal()" name="adduser" style="float: left; "  type="button" class=" basic-modal btn_small btn_blue "><span>{{__('valuation.Add_Additional_value')}}</span></button>@endif							
+														{{__('valuation.Total_Additional_Value')}}:
 													</td>
 													<td>
 														<input type="text" readonly="true"  style="float: right; "  value="{{number_format($totaladditonal,2)}}" class="tbl-total" id="additionaltotal">
@@ -325,14 +286,14 @@
 									</div>
 								</div>
 								<div  id="basic-modal-content">
-									<h3>Additional Valuation</h3>
+									<h3>{{__('valuation.Additional_Valuation')}}</h3>
 									<div  class="grid_12 form_container left_label">
 										<ul>	
 											<li class="li">
 												<input type="hidden" id="index">
 												<div class="form_grid_12">
 													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Description<span class="req">*</span></label>
+														<label class="field_title" id="luserid" for="userid">{{__('valuation.Description')}}<span class="req">*</span></label>
 														<div class="form_input">
 															<input id="add_description" required="true"  name="add_description" type="text"  value="" />
 														</div>
@@ -341,7 +302,7 @@
 												</div>
 												<div class="form_grid_12">
 													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Area<span class="req">*</span></label>
+														<label class="field_title" id="luserid" for="userid">{{__('valuation.Area')}}<span class="req">*</span></label>
 														<div class="form_input">
 															<input id="add_area" required="true" onchange="additionalCal()"  name="add_area" type="text"  value="" />
 														</div>
@@ -350,7 +311,7 @@
 												</div>
 												<div class="form_grid_12">
 													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Rate<span class="req">*</span></label>
+														<label class="field_title" id="luserid" for="userid">{{__('valuation.Rate')}}<span class="req">*</span></label>
 														<div class="form_input">
 															<input id="add_rate" required="true" onchange="additionalCal()" name="add_rate" type="text"  value="" />
 														</div>
@@ -359,7 +320,7 @@
 												</div>
 												<div class="form_grid_12">
 													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Grass value<span class="req">*</span></label>
+														<label class="field_title" id="luserid" for="userid">{{__('valuation.Gross_value')}} <span class="req">*</span></label>
 														<div class="form_input">
 															<input id="add_grossvalue" readonly="true"  name="add_grossvalue" type="text"  value="" />
 														</div>
@@ -368,7 +329,7 @@
 												</div>
 												<div class="form_grid_12">
 													<div class="form_grid_6">									
-														<label class="field_title" id="luserid" for="userid">Round Value<span class="req">*</span></label>
+														<label class="field_title" id="luserid" for="userid">{{__('valuation.Round_Value')}} <span class="req">*</span></label>
 														<div class="form_input">
 															<input id="add_roundvalue" readonly="true"  name="add_roundvalue" type="text"  value="" />
 														</div>
@@ -380,11 +341,11 @@
 									</div>
 									<span class="clear"></span>
 										<div class="btn_24_blue">
-											<a href="#" id="add" onclick="addAdditional()" class=""><span>Add </span></a>
-											<a href="#" id="edit" onclick="editAdditional()" class=""><span>Update </span></a>
+											<a href="#" id="add" onclick="addAdditional()" class=""><span>{{__('common.Add')}} </span></a>
+											<a href="#" id="edit" onclick="editAdditional()" class=""><span>{{__('common.Update')}} </span></a>
 										</div>
 										<div class="btn_24_blue">
-											<a href="#" class="simplemodal-close"><span>Close </span></a>
+											<a href="#" class="simplemodal-close"><span>{{__('common.Close')}} </span></a>
 										</div>
 									
 								</div>
@@ -392,13 +353,13 @@
 								
 								
 								<fieldset>
-									<legend>Tax Calculation</legend>
+									<legend>{{__('valuation.Tax_Calculation')}} </legend>
 									<form action="" id="taxvaluationform" class="form_container left_label">
 									<div style="float: right;" class="grid_5 form_container left_label">
 											<ul>
 												<li>
 													<div class="form_grid_4">
-													<label class="field_title"   id="accnumberlbl" style="width: 100%;" for="username">Valuer Discretion<span class="req">*</span></label>
+													<label class="field_title"   id="accnumberlbl" style="width: 100%;" for="username">{{__('valuation.Valuer_Discretion')}} <span class="req">*</span></label>
 													</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -408,7 +369,7 @@
 												</div>
 												
 												<div class="form_grid_4">
-													<label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">Gross NT<span class="req">*</span></label>
+													<label class="field_title"  id="accnumberlbl" style="width: 100%;" for="username">{{__('valuation.Gross_NT')}} <span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -418,7 +379,7 @@
 												</div>
 										
 												<div class="form_grid_4">
-													<label class="field_title" id="accnumberlbl" style="width: 100%;" id="lposition" for="position">Proposed NT<span class="req">*</span></label>
+													<label class="field_title" id="accnumberlbl" style="width: 100%;" id="lposition" for="position">{{__('valuation.Proposed_NT')}} <span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  classs="form_input" style="width: 70%;  margin-left: 30%;  position: relative;">
@@ -428,7 +389,7 @@
 												</div>
 											
 												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Proposed Rate<span class="req">*</span></label>
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Proposed_Rate')}} <span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -438,7 +399,7 @@
 												</div>
 										 	
 												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Calculated Rate (%)<span class="req">*</span></label>
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Calculated_Rate')}}  (%)<span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -448,7 +409,7 @@
 												</div>
 											
 												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Proposed Tax<span class="req">*</span></label>
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Proposed_Tax')}} <span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -468,7 +429,7 @@
 											<li>													
 												<br /><br /><br /><br /><br />
 												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Approved NT<span class="req">*</span></label>
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Approved_NT')}} <span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -478,7 +439,7 @@
 												</div>
 											
 												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Approved Rate<span class="req">*</span></label>
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Approved_Rate')}} <span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -488,7 +449,7 @@
 												</div>
 										 		
 												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Adjustment<span class="req">*</span></label>
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Adjustment')}} <span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -498,7 +459,7 @@
 												</div>
 											
 												<div class="form_grid_4">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">Approved Tax<span class="req">*</span></label>
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Approved_Tax')}} <span class="req">*</span></label>
 												</div>
 												<div class="form_grid_8">
 													<div  class="form_input">
@@ -516,7 +477,7 @@
 											<li>													
 												<br /><br /><br /><br /><br />
 												<div class="form_grid_2">
-													<label class="field_title" style="width: 100%;" id="lposition" for="position">NOTES<span class="req">*</span></label>
+													<label class="field_title" style="width: 100%;" id="lposition" for="position">{{__('valuation.Notes')}} <span class="req">*</span></label>
 												</div>
 												<div class="form_grid_9">
 													<div style="margin-left: 0px"  class="form_input"> 
@@ -530,9 +491,9 @@
 									<div style="height: 48px; float: right; " class="grid_12">                
 					                  <div class="form_input">
 					                  	@if($iseditable == 1)
-					                    <button id="addsubmit" name="adduser" style="float: right; "  onclick="updateValuation()" type="button" class="btn_small btn_blue"><span>Update</span></button>      
+					                    <button id="addsubmit" name="adduser" style="float: right; "  onclick="updateValuation()" type="button" class="btn_small btn_blue"><span>{{__('common.Update')}}</span></button>      
 					                       @endif      
-					                    <button id="close" name="close" type="button" onclick="closePage()"  class="btn_small btn_blue"><span>Close</span></button>
+					                    <button id="close" name="close" type="button" onclick="closePage()"  class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 					                    <span class=" label_intro"></span>
 					                  </div>
 					                  

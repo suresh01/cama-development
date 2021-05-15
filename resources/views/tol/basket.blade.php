@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>TOL Basket Management</title>
+<title>{{__('tol.TOL_Basket_Management')}}</title>
 @include('includes.header', ['page' => 'TOL'])
 	
 	<div id="content">
@@ -89,8 +89,8 @@
 													
 							@elseif($rec->tollis_activeind_id == '2')
 							 <span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tollist_id}}',2)"  title=" Active" href="#"></a></span>'	
-								<span><a class="action-icons c-edit" onclick="editBasket('{{ $rec->tollist_id }}')" href="#" title="Edit">Edit</a></span>
-								<span><a class="action-icons c-Delete delete_tenant" onclick="deleteBasket('{{ $rec->tollist_id }}')" href="#" title="Delete">Delete</a></span>
+								<span><a class="action-icons c-edit" onclick="editBasket('{{ $rec->tollist_id }}')" href="#" title="{{__('common.Edit')}}">{{__('common.Edit')}}</a></span>
+								<span><a class="action-icons c-Delete delete_tenant" onclick="deleteBasket('{{ $rec->tollist_id }}')" href="#" title="{{__('common.Delete')}}">{{__('common.Delete')}}</a></span>
 							@endif
 						</td>
 					</tr>

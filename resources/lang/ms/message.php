@@ -3,15 +3,15 @@
 // resources/lang/en/messages.php
 
 return [
-    'welcome' => 'Selamat datang ke aplikasi kami !',
-    'account' => 'No Account',
-    'address1' => 'Alamat 1',
-    'address2' => 'Alamat 2',
-    'address3' => 'Alamat 3',
-    'address4' => 'Alamat 4',
-    'zone' => 'Zon',
-    'subzone' => 'Sub Zon',
+    'welcome' => 'Selamat datang Sistem CAMA MPHTJ',
+    'account' => 'No Akaun',
+    'address1' => 'No Bangunan',
+    'address2' => 'Jalan',
+    'address3' => 'Tempat',
+    'address4' => 'Kawasan',
+    'zone' => 'Mukim',
+    'subzone' => 'Taman/Kawasan',
     'fileno' => 'No Fail',
-    'district' => 'daerah',
-    'postcode' => 'poskod',
+    'district' => 'Daerah',
+    'postcode' => 'Poskod',
 ]; 

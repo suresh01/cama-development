@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>TOL Depreciation</title>
+<title>{{__('tol.TOL_Depreciation')}} </title>
 @include('includes.header', ['page' => 'TOL'])
 	<div id="content">
 		<div class="grid_container">
@@ -13,14 +13,14 @@
 
 				<div id="breadCrumb3" class="breadCrumb grid_3">
 					<ul >
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Tone of List</a></li>
-						<li>Depreciation</li>
+						<li><a href="#">{{__('tol.Home')}} </a></li>
+						<li><a href="#">{{__('tol.Tone_of_List')}} </a></li>
+						<li>{{__('tol.Depreciation')}} </li>
 					</ul>
 				</div>
 
 
-				<button id="addtrans" onclick="openBasket()" style="float:right;" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add  Land Standard</span></button>
+				<button id="addtrans" onclick="openBasket()" style="float:right;" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('tol.Add_Land_Standard')}} </span></button>
 				<br>
 			</div>
 		
@@ -29,30 +29,14 @@
 					<table class="display data_tbl">
 					<thead style="text-align: left;">
 					<tr>
-						<th class="table_sno">
-							S No
-						</th>
-						<th>
-							ID
-						</th>
-						<th>
-							Tone Basket
-						</th>
-						<th>
-							Building Condition
-						</th>
-						<th>
-							Value
-						</th>
-						<th>
-							Update by / Update date
-						</th>
-						<th>
-							Status
-						</th>
-						<th>
-							Action
-						</th>
+						<th class="table_sno">{{__('tol.SNo')}} </th>
+						<th>{{__('tol.ID')}} </th>
+						<th>{{__('tol.Tone_Basket')}} Tone Basket</th>
+						<th>{{__('tol.Building_Condition')}} </th>
+						<th>{{__('tol.Value')}} </th>
+						<th>{{__('tol.Update_by_date')}}</th>
+						<th>{{__('tol.Status')}} </th>
+						<th>{{__('tol.Action')}} </th>
 						
 					</tr>
 					</thead>
@@ -82,23 +66,23 @@
 						</td>
 						<td class="">
 							@if($rec->tdepre_approvaltdeprestatus_id == '1' || $rec->tdepre_approvaltdeprestatus_id == '6')
-							<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editBasket('{{ $rec->tdepre_id }}')" href='#' title='Edit'></a></span>&nbsp;&nbsp;
-								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block;'  onclick="deleteBasket('{{ $rec->tdepre_id }}')" href='#' title='Delete'></a></span>
+							<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editBasket('{{ $rec->tdepre_id }}')" href='#' title="{{__('common.Edit')}}"></a></span>&nbsp;&nbsp;
+								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block;'  onclick="deleteBasket('{{ $rec->tdepre_id }}')" href='#' title="{{__('common.Delete')}}"></a></span>
 								
-								 <span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tdepre_id}}',1)"  title="Submit To Approve" href="#"></a></span>'						
+								 <span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tdepre_id}}',1)"  title="{{__('common.Submit_To_Approve')}}" href="#"></a></span>'						
 							@elseif($rec->tdepre_approvaltdeprestatus_id == '2')
-								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tdepre_id}}',2,1)"  title="Approve" href="#"></a></span>
-								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tdepre_id}}',2,2)"  title="Reject" href="#"></a></span>
+								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tdepre_id}}',2,1)"  title="{{__('common.Approve')}} " href="#"></a></span>
+								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tdepre_id}}',2,2)"  title="{{__('common.Reject')}} " href="#"></a></span>
 							@elseif($rec->tdepre_approvaltdeprestatus_id == '3')
-								<spane><a class=" new-action-icons reverse" onclick="approve('{{$rec->tdepre_id}}',3)" title="Revise" href="#"></a></span>	
+								<spane><a class=" new-action-icons reverse" onclick="approve('{{$rec->tdepre_id}}',3)" title="{{__('common.Revise')}} " href="#"></a></span>	
 									
 							@elseif($rec->tdepre_approvaltdeprestatus_id == '4')
-								<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editBasket('{{ $rec->tdepre_id }}')" href='#' title='Edit'></a></span>&nbsp;&nbsp;
-								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick="deleteBasket('{{ $rec->tdepre_id }}')" href='#' title='Delete'></a></span>
+								<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editBasket('{{ $rec->tdepre_id }}')" href='#' title="{{__('common.Edit')}}"></a></span>&nbsp;&nbsp;
+								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; '  onclick="deleteBasket('{{ $rec->tdepre_id }}')" href='#' title="{{__('common.Delete')}}"></a></span>
 								
-								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tdepre_id}}',1)"  title="Submit To Approve" href="#"></a></span>				
+								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tdepre_id}}',1)"  title="{{__('common.Submit_To_Approve')}}" href="#"></a></span>				
 							@elseif($rec->tdepre_approvaltdeprestatus_id == '5')
-								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tdepre_id}}',5)"  title="Approve Revision" href="#"></a></span>						
+								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tdepre_id}}',5)"  title="{{__('common.Approve_Revision')}} " href="#"></a></span>						
 							@endif
 							<!--<span><a class="action-icons c-edit" onclick="editBasket('{{ $rec->tdepre_id }}')" href="#" title="Edit">Edit</a></span>
 							<span><a class="action-icons c-Delete delete_tenant" onclick="deleteBasket('{{ $rec->tdepre_id }}')" href="#" title="Delete">Delete</a></span>-->
@@ -119,7 +103,7 @@
 			<div class="widget_wrap">
 				
 				<div class="widget_content">
-					<h3 id="title">Add Basket</h3>
+					<h3 id="title">{{__('tol.Add_Basket')}} </h3>
 					<form id="basketform" autocomplete="off" method="post" action="#" >
 						<div  class="grid_6 form_container left_label">
 							<ul>
@@ -128,9 +112,9 @@
 									<input type="hidden" name="depreciationid" id="depreciationid">
 									<input type="hidden" name="jsondata" id="jsondata">
 									<fieldset>
-										<legend>Basket Information</legend>
+										<legend>{{__('tol.Basket_Information')}} </legend>
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">BASKET<span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('tol.Basket')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="basketid" name="basketid" tabindex="20">
 													<option></option>
@@ -143,7 +127,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">BUILDING CONDITION<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('tol.Building_Condition')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="bldgcond" name="bldgcond" tabindex="20">
 													<option></option>
@@ -156,7 +140,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">VALUE<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('tol.Value')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="value" name="value"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -172,9 +156,9 @@
 						
 						<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">							
 							<div class="form_input">
-								<button id="addsubmit" name="adduser" onclick="validateBasket()" class="btn_small btn_blue"><span>Submit</span></button>									
+								<button id="addsubmit" name="adduser" onclick="validateBasket()" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>									
 								
-								<button id="close" onclick="closeBasket()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+								<button id="close" onclick="closeBasket()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 								<span class=" label_intro"></span>
 							</div>								
 							<span class="clear"></span>

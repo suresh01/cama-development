@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Objection list</title>
+<title>{{__('objection.Objection_List')}}</title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <style type="text/css">
 
@@ -37,23 +37,23 @@
 				<div class="form_input">
 					<div id="breadCrumb3"  class="breadCrumb grid_4">
 						<ul>
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Valuation Process</a></li>
-							<li><a href="meeting">Meeting</a></li>
+							<li><a href="#">{{__('objection.Home')}}</a></li>
+							<li><a href="#">{{__('objection.Valuation_Process')}}</a></li>
+							<li><a href="meeting">{{__('objection.Meeting')}}</a></li>
 							<li>{{$objectiondetail}}</li>
 						</ul>
 					</div>
 					<div style="float:right;margin-right: 0px;"  class="btn_24_blue">   
 						<!--<a href="#" onclick="deleteProperty()">Generate Report</a>		-->
-						<a href="#" onclick="updateReason()" title="Set time, reason and recommendation valued" >Update</a>	
+						<a href="#" onclick="updateReason()" title="Set time, reason and recommendation valued" >{{__('common.Update')}}</a>	
 
-						<a href="#" onclick="deleteProperty2()" >Objection List</a>	
-						<a href="#" onclick="deleteProperty()" >Invitation Letter</a>	
-						<a href="#" onclick="addProperty()" title="Add New Property">Add Property</a>
+						<a href="#" onclick="deleteProperty2()" >{{__('objection.Objection_List')}}</a>	
+						<a href="#" onclick="deleteProperty()" >{{__('objection.Invitation_Letter')}}</a>	
+						<a href="#" onclick="addProperty()" title="Add New Property">{{__('objection.Add_Property')}} </a>
 					</div>
 					<div style="float:right;margin-right: 20px;"  class="btn_24_orange">   
 			            <!--<a href="#" id="" onclick="getSelectedProp()" class=""><span>Add Basket </span></a>  -->
-			          	<a href="#" id="" onclick="deleteObjection()" title="Delete Selected"><span>Delete </span></a> 
+			          	<a href="#" id="" onclick="deleteObjection()" title="Delete Selected"><span>{{__('common.Delete')}} </span></a> 
 		        	</div>
 
 		        	 <div style="float:right;margin-right: 10px;"  class="btn_24_blue">   
@@ -68,13 +68,12 @@
 					<div class="widget_top">
 						<div id="widget_tab">
 							<ul>
-								<li><a href="agenda?term={{$term}}&id={{$id}}" >Agenda</a></li>
-								
-								<!--<li><a href="newnotice?term={{$term}}&id={{$id}}">New Notis</a></li>-->
-								<li><a href="notice?term={{$term}}&id={{$id}}">Notis</a></li>
-								<li><a href="objectionreport?term={{$term}}&id={{$id}}" class="active_tab">Objection</a></li>
-								<li><a href="decision?term={{$term}}&id={{$id}}">Decision</a></li>
-								<li><a href="result?term={{$term}}&id={{$id}}">Report</a></li>
+								<li><a href="agenda?term={{$term}}&id={{$id}}" >{{__('objection.Agenda')}}</a></li>
+								<li><a href="newnotice?term={{$term}}&id={{$id}}">{{__('objection.New_Notice')}}</a></li>
+								<li><a href="notice?term={{$term}}&id={{$id}}">{{__('objection.Existing_Notice')}}</a></li>
+								<li><a href="objectionreport?term={{$term}}&id={{$id}}" class="active_tab">{{__('objection.Objection')}}</a></li>
+								<li><a href="decision?term={{$term}}&id={{$id}}">{{__('objection.Decision')}}</a></li>
+								<li><a href="result?term={{$term}}&id={{$id}}">{{__('objection.Report')}}</a></li>
 							</ul>
 						</div>
 					</div>
@@ -82,28 +81,28 @@
 					<div class="social_activities">
 					<div class="comments_s">
 						<div class="block_label">
-							Agenda Count<span>@foreach ($agendacnt as $rec)
+							{{__('objection.Agenda_Count')}} <span>@foreach ($agendacnt as $rec)
 										{{$rec->agenda_count}}									
 									@endforeach	</span>
 						</div>
 					</div>
 					<div class="comments_s">
 						<div class="block_label">
-							Property Count<span>@foreach ($propcnt as $rec)
+							{{__('objection.Property_Count')}} <span>@foreach ($propcnt as $rec)
 										{{$rec->property_count}}
 									@endforeach	</span>
 						</div>
 					</div>
 					<div class="views_s">
 						<div class="block_label">
-							Notice Count<span>@foreach ($notiscnt as $rec)
+							{{__('objection.Notice_Count')}} <span>@foreach ($notiscnt as $rec)
 										{{$rec->notis_count}}
 									@endforeach	</span>
 						</div>
 					</div>
 					<div class="comments_s">
 						<div class="block_label">
-							Objection Count<span>@foreach ($objectioncnt as $rec)
+							{{__('objection.Objection_Count')}} <span>@foreach ($objectioncnt as $rec)
 										{{$rec->objection_count}}
 									@endforeach	</span>
 						</div>
@@ -115,42 +114,16 @@
 							<thead style="text-align: left;">
 			  					<tr>
 			  						<th><input name="select_all" value="1" type="checkbox"></th>
-									<th class="table_sno">
-										S No
-									</th>
-									<th>
-										Account number
-									</th>
-									<th>
-										Time 
-									</th>
-									<th>
-										Reason 
-									</th>
-									<th>
-										Zone 
-									</th>
-									<th>
-										Sub Zone 
-									</th>
-									<th>
-										Land Value 
-									</th>
-									<th>
-										Buliding Value
-									</th>
-									<th>
-										Proposed NT 
-									</th>
-									<th>
-										Proposed Rate 
-									</th>
-									<th>
-										Proposed Tax 
-									</th>
-									<th>
-										Valuer Recommend 
-									</th>
+									<th class="table_sno"> {{__('objection.SNO')}} </th>
+									<th> {{__('objection.Account_number')}}  </th>
+									<th> {{__('objection.Time')}}   </th>
+									<th> {{__('objection.Reason')}}   </th>
+									<th> {{__('objection.Zone')}}   </th>
+									<th> {{__('objection.Sub_Zone')}}   </th>
+									<th> {{__('objection.Proposed_NT')}}   </th>
+									<th> {{__('objection.Proposed_Rate')}}   </th>
+									<th> {{__('objection.Proposed_Tax')}}   </th>
+									<th> {{__('objection.Valuer_Recommend')}}   </th>
 									<th style="display: none;">
 										Difference
 									</th>
@@ -160,9 +133,7 @@
 									<th style="display: none;">
 										ID
 									</th>
-									<th>
-										Action
-									</th>
+									<th> {{__('objection.Action')}}  </th>
 								</tr>
 							</thead>
 							<tbody>
@@ -170,7 +141,7 @@
 
 							</tbody>
 						</table>
-            		<div><p id="info">0 Row Selected</p></div>		
+            		<div><p id="info">0 {{__('objection.Row_Selected')}} </p></div>		
 				</div>	
 			</div>
 			@foreach ($objectionlist as $rec)
@@ -191,7 +162,7 @@
 			<div id="addgroup" style="display:none" class="grid_10 full_block">
 				<div class="widget_wrap">
 					<div class="widget_content">
-						<h3 id="title">Objection</h3>
+						<h3 id="title">{{__('objection.Objection')}}</h3>
 						<form id="addgroupfrom"  autocomplete="off" class="" method="post" action="#" >
 							@csrf
 							<input type="hidden" name="id" id="id" value="0">
@@ -202,30 +173,30 @@
 								<ul>
 									<li>		
 									<fieldset>
-										<legend>Information</legend>						
+										<legend>{{__('objection.Information')}}</legend>						
 										<div class="form_grid_12">									
-											<label class="field_title" id="termname" for="termid">Zone<span class="req">*</span></label>
+											<label class="field_title" id="termname" for="termid">{{__('objection.Zone')}} <span class="req">*</span></label>
 											<div class="form_input">
 												<input id="vzone" readonly="true" name="" type="text"  value="{{ old('siries') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">Subzone<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.Sub_Zone')}} <span class="req">*</span></label>
 											<div class="form_input">
 												<input id="vsubzone"  readonly="true" name="" type="text"  value="{{ old('desc') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">Approved NT<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.Approved_NT')}} <span class="req">*</span></label>
 											<div class="form_input">
 												<input id="vaprovednt"  readonly="true" name="" type="text"  value="{{ old('desc') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">Approved TAX<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.Approved_Tax')}} <span class="req">*</span></label>
 											<div class="form_input">
 												<input id="vaprovedtax"  readonly="true" name="" type="text"  value="{{ old('desc') }}" />
 											</div>
@@ -242,23 +213,23 @@
 								<ul>
 									<li>		
 									<fieldset>
-										<legend>Basic Information</legend>						
+										<legend>{{__('objection.Basic_Information')}} </legend>						
 										<div class="form_grid_12">									
-											<label class="field_title" id="termname" for="termid">Time<span class="req">*</span></label>
+											<label class="field_title" id="termname" for="termid">{{__('objection.Time')}} <span class="req">*</span></label>
 											<div class="form_input">
 												<input id="time" required="true"  name="time" type="text"  value="{{ old('siries') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">Reason<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.Reason')}} <span class="req">*</span></label>
 											<div class="form_input">
 												<input id="reason" required="true"  name="reason" type="text"  value="{{ old('desc') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">Valuer Recommend<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.Valuer_Recommend')}} <span class="req">*</span></label>
 											<div class="form_input">
 												<input id="valuerrec" required="true"  name="valuerrec" type="text"  value="{{ old('desc') }}" />
 											</div>
@@ -273,9 +244,9 @@
 							<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
 								
 								<div class="form_input">
-									<button id="addsubmit" name="adduser" type="submit" onclick="validateGroup()" class="btn_small btn_blue"><span>Submit</span></button>			
+									<button id="addsubmit" name="adduser" type="submit" onclick="validateGroup()" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>			
 														
-									<button id="close" onclick="closeGroup()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+									<button id="close" onclick="closeGroup()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 									<span class=" label_intro"></span>
 								</div>
 								
@@ -302,7 +273,7 @@
 					<div class="widget_wrap">
 						
 						<div class="widget_content">
-							<h3 id="title">Generate Report</h3>
+							<h3 id="title">{{__('objection.Generate_Report')}}</h3>
 							<form style="" id="generateform" method="GET" action="generateobjection1">
 					            @csrf
 					            <input type="hidden" name="accounts" id="accounts">
@@ -310,10 +281,10 @@
 									<ul>
 										<li>											
 											<fieldset>
-												<legend>Additional Information</legend>
+												<legend>{{__('objection.Additional_Information')}} </legend>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="lposition" for="position">MEETING ROOM<span class="req">*</span></label>
+													<label class="field_title" id="lposition" for="position">{{__('objection.Meeting_Room')}} <span class="req">*</span></label>
 													<div  class="form_input">
 														<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="meetingroom" tabindex="7" name="meetingroom" tabindex="20">
 																<option></option>
@@ -326,7 +297,7 @@
 												</div>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="lposition" for="position">Officer Incharge<span class="req">*</span></label>
+													<label class="field_title" id="lposition" for="position">{{__('objection.Officer_Incharge')}} <span class="req">*</span></label>
 													<div  class="form_input">
 														<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="user" tabindex="7" name="user" tabindex="20">
 																<option></option>
@@ -347,9 +318,9 @@
 								
 								<div class="grid_12">							
 									<div class="form_input">
-										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
+										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>{{__('common.Submit')}} </span></button>									
 										
-										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>{{__('common.Close')}} </span></button>
 										<span class=" label_intro"></span>
 									</div>								
 									<span class="clear"></span>

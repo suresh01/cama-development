@@ -166,6 +166,9 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
        $lotdetail = DB::select('select * from cm_appln_val_lotarea where vla_vt_id =  ifnull("'.$prop_id.'",0)');
 
        $additional = DB::select('select * from cm_appln_val_additional where vad_vd_id =  ifnull("'.$prop_id.'",0)');
+
+
+        App::setlocale(session()->get('locale'));
        
         if ($termtype ==2){
            if  ($bldgtype ==0){
@@ -313,6 +316,9 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
 
               $lotarea = DB::select('select * from cm_appln_val_lotarea, cm_appln_val_lot where vla_vt_id = vl_id and vl_vd_id = ifnull("'.$prop_id.'",0) order by vla_id asc ');
 
+
+        App::setlocale(session()->get('locale'));
+
         return view('valuation.manual.manualvaluationdetail')->with(array('lot'=>$lot,'bldg'=>$bldg,'master' => $master,'prop_id' => $prop_id, 'viewparambasket' => $viewparambasket, 'viewparambasketstatus' => $viewparambasketstatus, 'viewparamterm' => $viewparamterm, 'termid' => $termid, 'accountnumber' => $accountnumber,
                     'iseditable' => $iseditable,'pb'=>$pb,'lotarea' => $lotarea,'bldgar' => $bldgar,'tax' => $tax));
     }
@@ -335,6 +341,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
      
         $lot = DB::select('select * from cm_appln_val_lotarea where vla_vt_id =  ifnull("'.$id.'",0)');
         
+        App::setlocale(session()->get('locale'));
         return view('valuation.popup.landarea')->with(array('lot'=>$lot,'lotdetail'=>$lotdetail,'id'=>$id));
     }
 
@@ -380,6 +387,8 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         left join (select tdi_key, tdi_value,tdi_parent_name from tbdefitems where tdi_td_name = "ALLOWANCETYPE") allowancetype on allowancetype.tdi_key = vbal_allowancetype_id 
                  where vbal_vb_id = ifnull("'.$id.'",0)');           
         
+        App::setlocale(session()->get('locale'));
+
         return view('valuation.popup.bldgdetail')->with(array('bldgar'=>$bldgar,'allowance'=>$allowance,'bldg'=>$bldg,'id'=>$id,'allowancecategory'=>$allowancecategory,'calcmethod'=>$calcmethod));
     }
 
@@ -538,6 +547,9 @@ AND (tstand_approvaltstandstatus_id = 3)) IS NULL');
        $landstandardcnt = count($landstandard);
        $taxcnt = count($tax);
         
+
+        App::setlocale(session()->get('locale'));
+
        if ($bldgarcnt == 0 && $depreciationcnt == 0  && $landcnt == 0 && $landstandardcnt == 0 && $taxcnt == 0) {    
             $valuationbasket = DB::select('select va_id,va_name, va_vt_id termid, vt_name termaname,  
 ifnull(propertycount,0) propertycount, applntype.tdi_value applntype
@@ -743,7 +755,9 @@ left join (SELECT * FROM tbdefitems where tdi_td_name = "APPLICATIONTYPE") appln
         $allowancecategory = DB::select(" select * from tbdefitems WHERE tdi_td_name = 'ALLOWANCECATEGORY';");
         
         $calcmethod = DB::select("select * from tbdefitems WHERE tdi_td_name = 'ALLOWANCECALMETHOD'");
-                
+        
+        
+        App::setlocale(session()->get('locale'));
         
         return view('valuation.manual.bldgdetail')->with(array('bldgar'=>$bldgar, 'id'=>$id,'allowancecategory'=>$allowancecategory,'calcmethod'=>$calcmethod));
     }

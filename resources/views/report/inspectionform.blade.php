@@ -32,7 +32,7 @@
 						
 						<div class="widget_content">
 							<h3 id="title">Generate Report</h3>
-							<form style="" id="generateform" method="GET" action="http://{{$serverhost}}:8002/generateinspectionform">
+							<form style="" id="generateform" method="GET" action="generateinspectionform">
 					            @csrf
 					            <input type="hidden" name="accounts" id="accounts">
 								<div  class="grid_12 form_container left_label">

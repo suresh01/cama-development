@@ -3,19 +3,19 @@
 // common {{__('common.File_Name')}}
 
 return [
-    'Add_New'=>'Add New',
-    'Close'=>'Close',
-    'Choose_a_Status'=>'Choose a Status...',
-    'Choose_a_Role'=>'Choose a Role',
-    'Add'=>'Add',
-    'Update'=>'Update',
-    'Edit'=>'Edit',
-    'Delete'=>'Delete',
-    'Submit'=>'Submit',
-    'Update_Data'=>'Update Data',
-    'Please_Select_a_Filter'=>'Please Select a Filter',
-    'Choose_a_Custom'=>'Choose a Custom',
-    'Back'=>'Back',
-    'Revise'=>'Revise'
+    'Add_New'=>'Tambah Baru',
+    'Close'=>'Tutup',
+    'Choose_a_Status'=>'Pilih Status...',
+    'Choose_a_Role'=>'Pilih Roles...',
+    'Add'=>'Tambah',
+    'Update'=>'Kemaskini',
+    'Edit'=>'Kemaskini',
+    'Delete'=>'Padam',
+    'Submit'=>'Hantar',
+    'Update_Data'=>'Kemaskini',
+    'Please_Select_a_Filter'=>'Pilih Tapisan',
+    'Choose_a_Custom'=>'Pilih Kustom ',
+    'Back'=>'Kembali',
+    'Revise'=>'Semak Semula'
 
 ];

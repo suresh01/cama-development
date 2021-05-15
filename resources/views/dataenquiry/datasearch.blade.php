@@ -31,7 +31,7 @@
 					@include('dataenquiry.search')
 				</div>
 				<br>
-        
+        		
 				<div class="widget_wrap">					
 					<div class="widget_content">						
 						<table style="width: 100%;" id="proptble" class="display select">

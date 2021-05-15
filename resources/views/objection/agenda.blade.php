@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Meeting</title>
+<title>{{__('objection.Meeting')}}</title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @include('includes.header', ['page' => 'VP'])
 	<!--<div class="page_title">
@@ -31,15 +31,15 @@
 				<div class="form_input">
 					<div id="breadCrumb3"  class="breadCrumb grid_4">
 						<ul >
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Valuation Process</a></li>
-							<li><a href="meeting">Meeting</a></li>
+							<li><a href="#">{{__('objection.Home')}}</a></li>
+							<li><a href="#">{{__('objection.Valuation_Process')}}</a></li>
+							<li><a href="meeting">{{__('objection.Meeting')}}</a></li>
 							<li>{{$objectiondetail}}</li>
 						</ul>
 					</div>
 					<div style="float:right;margin-right: 0px;"  class="btn_24_blue">   
-						<a href="#" onclick="deleteProperty()">Generate Report</a>		
-						<a href="#" onclick="newGroup()">New Agenda</a>
+						<a href="#" onclick="deleteProperty()">{{__('objection.Generate_Report')}}</a>		
+						<a href="#" onclick="newGroup()">{{__('objection.New_Agenda')}}</a>
 					</div>
 					<br>
 				</div>	
@@ -48,12 +48,12 @@
 					<div class="widget_top">
 						<div id="widget_tab">
 							<ul>
-								<li><a href="agenda?term={{$term}}&id={{$id}}" class="active_tab">Agenda</a></li>
-								<!--<li><a href="newnotice?term={{$term}}&id={{$id}}">New Notis</a></li>-->
-								<li><a href="notice?term={{$term}}&id={{$id}}">Notis</a></li>
-								<li><a href="objectionreport?term={{$term}}&id={{$id}}">Objection</a></li>
-								<li><a href="decision?term={{$term}}&id={{$id}}">Decision</a></li>
-								<li><a href="result?term={{$term}}&id={{$id}}">Report</a></li>
+								<li><a href="agenda?term={{$term}}&id={{$id}}" class="active_tab">{{__('objection.Agenda')}}</a></li>
+								<li><a href="newnotice?term={{$term}}&id={{$id}}">{{__('objection.New_Notice')}}</a></li>
+								<li><a href="notice?term={{$term}}&id={{$id}}">{{__('objection.Existing_Notice')}}</a></li>
+								<li><a href="objectionreport?term={{$term}}&id={{$id}}">{{__('objection.Objection')}}</a></li>
+								<li><a href="decision?term={{$term}}&id={{$id}}">{{__('objection.Decision')}}</a></li>
+								<li><a href="result?term={{$term}}&id={{$id}}">{{__('objection.Report')}}</a></li>
 							</ul>
 						</div>
 
@@ -63,28 +63,28 @@
 				<div class="social_activities">
 					<div class="comments_s">
 						<div class="block_label">
-							Agenda Count<span>@foreach ($agendacnt as $rec)
+							{{__('objection.Agenda_Count')}}<span>@foreach ($agendacnt as $rec)
 										{{$rec->agenda_count}}									
 									@endforeach	</span>
 						</div>
 					</div>
 					<div class="comments_s">
 						<div class="block_label">
-							Property Count<span>@foreach ($propcnt as $rec)
+							{{__('objection.Property_Count')}}<span>@foreach ($propcnt as $rec)
 										{{$rec->property_count}}
 									@endforeach	</span>
 						</div>
 					</div>
 					<div class="views_s">
 						<div class="block_label">
-							Notice Count<span>@foreach ($notiscnt as $rec)
+							{{__('objection.Notice_Count')}}<span>@foreach ($notiscnt as $rec)
 										{{$rec->notis_count}}
 									@endforeach	</span>
 						</div>
 					</div>
 					<div class="comments_s">
 						<div class="block_label">
-							Objection Count<span>@foreach ($objectioncnt as $rec)
+							{{__('objection.Objection_Count')}}<span>@foreach ($objectioncnt as $rec)
 										{{$rec->objection_count}}
 									@endforeach	</span>
 						</div>
@@ -95,30 +95,14 @@
 							<thead style="text-align: left;">
 			  					<tr>
 			  						<th><input name="select_all" value="1" type="checkbox"></th>
-									<th class="table_sno">
-										S No
-									</th>
-									<th>
-										Siries
-									</th>
-									<th>
-										Description 
-									</th>
-									<th>
-										List Year 
-									</th>
-									<th>
-										Property Count 
-									</th>
-									<th>
-										Notice Count 
-									</th>
-									<th>
-										Objection Count 
-									</th>
-									<th>
-										Action
-									</th>
+									<th class="table_sno"> {{__('objection.SNO')}}</th>
+									<th> {{__('objection.Siries')}}</th>
+									<th> {{__('objection.Description')}} </th>
+									<th> {{__('objection.List_Year')}} </th>
+									<th> {{__('objection.Property_Count')}} </th>
+									<th> {{__('objection.Notice_Count')}} </th>
+									<th> {{__('objection.Objection_Count')}} </th>
+									<th> {{__('objection.Action')}}</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -147,9 +131,9 @@
 										{{$rec->object_count}} 
 									</td>
 									<td>
-										<span><a onclick="addProperty('{{$rec->ag_id}}')" class="action-icons c-add " href="#" title="New Property">New Agenda</a></span>
-										<span><a onclick="editAgenda('{{$rec->ag_id}}')" class="action-icons c-edit " href="#" title="Edit Agenda">Edit Agenda</a></span>
-										<span><a onclick="deleteAgenda('{{$rec->ag_id}}')" class="action-icons " href="#" title="Delete Agenda">Delete Agenda</a></span>
+										<span><a onclick="addProperty('{{$rec->ag_id}}')" class="action-icons c-add " href="#" title="{{__('objection.New_Property')}}">{{__('objection.New_Property')}}</a></span>
+										<span><a onclick="editAgenda('{{$rec->ag_id}}')" class="action-icons c-edit " href="#" title="{{__('objection.Edit_Agenda')}}">{{__('objection.Edit_Agenda')}}</a></span>
+										<span><a onclick="deleteAgenda('{{$rec->ag_id}}')" class="action-icons " href="#" title="{{__('objection.Delete_Agenda')}}">{{__('objection.Delete_Agenda')}}</a></span>
 									</td>
 								</tr>
 								<div style="display: none;">
@@ -160,7 +144,7 @@
 							</tbody>
 						</table>
 				
-            <div><p id="info">0 Row Selected</p></div>
+            <div><p id="info">0 {{__('objection.Row_Selected')}}</p></div>
 				</div>	
 		
 	
@@ -171,7 +155,7 @@
 			<div id="addgroup" style="display:none" class="grid_10 full_block">
 				<div class="widget_wrap">
 					<div class="widget_content">
-						<h3 id="title">Add Agenda</h3>
+						<h3 id="title">{{__('objection.Add_Agenda')}}</h3>
 						<form id="addgroupfrom"  autocomplete="off" class="" method="post" action="#" >
 							@csrf
 							<input type="hidden" name="id" id="id" value="0">
@@ -181,16 +165,16 @@
 								<ul>
 									<li>		
 									<fieldset>
-										<legend>Basic Information</legend>						
+										<legend>{{__('objection.Basic_Information')}}</legend>						
 										<div class="form_grid_12">									
-											<label class="field_title" id="termname" for="termid">siries<span class="req">*</span></label>
+											<label class="field_title" id="termname" for="termid">{{__('objection.Siries')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="siries" required="true"  name="siries" type="text"  value="{{ old('siries') }}" />
 											</div>
 											<span class=" label_intro"></span>
 										</div>								
 										<div class="form_grid_12">									
-											<label class="field_title" id="lblgroup" for="name">Description<span class="req">*</span></label>
+											<label class="field_title" id="lblgroup" for="name">{{__('objection.Description')}}<span class="req">*</span></label>
 											<div class="form_input">
 												<input id="desc" required="true"  name="desc" type="text"  value="{{ old('desc') }}" />
 											</div>
@@ -205,9 +189,9 @@
 							<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
 								
 								<div class="form_input">
-									<button id="addsubmit" name="adduser" type="submit" onclick="validateGroup()" class="btn_small btn_blue"><span>Submit</span></button>			
+									<button id="addsubmit" name="adduser" type="submit" onclick="validateGroup()" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>			
 														
-									<button id="close" onclick="closeGroup()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+									<button id="close" onclick="closeGroup()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 									<span class=" label_intro"></span>
 								</div>
 								

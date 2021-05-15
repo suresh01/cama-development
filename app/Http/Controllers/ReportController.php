@@ -201,7 +201,7 @@ class ReportController extends Controller
         return $propertyDetails;
     }
 
-    public function generateInspectionForm(Request $request)
+  /*  public function generateInspectionForm(Request $request)
     {   
 
              //$jasper = new JasperPHP;
@@ -238,9 +238,9 @@ class ReportController extends Controller
               'Content-Type: application/pdf',
             );*/
           //  $xml = file_get_contents("http://localhost:8002/generateinspectionform?");
-        return response()->download(base_path('/vendor/cossou/jasperphp/examples/inspection.pdf'), 'inspectionform.pdf', $headers);
+       /* return response()->download(base_path('/vendor/cossou/jasperphp/examples/inspection.pdf'), 'inspectionform.pdf', $headers);
 
-    }
+    }*/
 
 
 
@@ -1624,7 +1624,7 @@ bldgcategory,bldgtype ');
         //$jasper = new JasperPHP;        
         $account = $request->input('basketid');        
         $date = $request->input('s_date');
-            
+        
         $filter = ' vd_va_id  = '. $account;
         JasperPHP::process(
             base_path('/vendor/cossou/jasperphp/examples/newowner.jasper'),
@@ -1657,6 +1657,82 @@ bldgcategory,bldgtype ');
         );
 
         return response()->download(base_path('/vendor/cossou/jasperphp/examples/newowner.pdf'), 'notis penyata pemilik.pdf', $headers);
+
+    }
+
+
+    public function generateInspectionForm(Request $request)
+    {        
+        //$jasper = new JasperPHP;        
+        $account = $request->input('accounts');
+        $inspector = $request->input('inspector');
+        $insdate = $request->input('insdate');
+        $approvedby = $request->input('approvedby');
+        $approveddate = $request->input('approveddate');
+        Log::info($account);
+        $input = $request->input();
+        $account1 = $input['accounts'];
+        Log::info($account1);
+        $filter = 'vd_id in ('. $account.')';
+            
+            
+            JasperPHP::process(
+                base_path('/vendor/cossou/jasperphp/examples/inspection.jasper'),
+                  false,
+                    array("pdf"),
+                    array("propid" => $filter,"inspectorname" => $inspector,"inspectordate" => $insdate,"insapprover" => $approvedby,"insapprovedate" => $approveddate,"logo" =>  base_path('/public/images/logo.jpeg')),
+                array(
+                  'driver' => 'generic',
+                  'username' => env('DB_USERNAME',''),
+                  'password' => env('DB_PASSWORD',''),
+                  'jdbc_driver' => 'com.mysql.jdbc.Driver',
+                  'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+                ))->execute();
+
+             Log::info('3');
+           $headers = array(
+                  'Content-Type: application/pdf',
+                );
+           $output_path = base_path('/vendor/cossou/jasperphp/examples/inspection.pdf'  );
+       
+        return response()->download($output_path, 'inspectionform.pdf', $headers);
+
+    }
+
+
+    public function generateValuationR5(Request $request)
+    {        
+        //$jasper = new JasperPHP;        
+        $account = $request->input('accounts');
+        
+        $tittle = $request->input('tittle');
+        $name = $request->input('name');
+        Log::info($account);
+        $input = $request->input();
+        $account1 = $input['accounts'];
+        Log::info($account1);
+        $filter = 'vd_id in ('. $account.')';            
+            
+        JasperPHP::process(
+        base_path('/vendor/cossou/jasperphp/examples/valuationform.jasper'),
+          false,
+            array("pdf"),
+            array("propid" => $filter,"valuer" => $name,"valuertitle" => $tittle,"logo" =>  base_path('/public/images/logo.jpeg')),
+        array(
+          'driver' => 'generic',
+          'username' => env('DB_USERNAME',''),
+          'password' => env('DB_PASSWORD',''),
+          'jdbc_driver' => 'com.mysql.jdbc.Driver',
+          'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+        ))->execute();
+
+        Log::info('3');
+        $headers = array(
+          'Content-Type: application/pdf',
+        );
+        $output_path = base_path('/vendor/cossou/jasperphp/examples/valuationform.pdf'  );
+       
+        return response()->download($output_path, 'valuationform.pdf', $headers);
 
     }
 }

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>New Property</title>
+<title>{{__('officialsearch.New_Property')}}</title>
 
 
 @include('includes.header-popup')
@@ -15,7 +15,7 @@
         
 				<div style="float:right;margin-right: 0px;"  class="btn_24_blue">	      
           
-          <a href="#" id="" onclick="closeWindow()" class=""><span>Close </span></a> 
+          <a href="#" id="" onclick="closeWindow()" class=""><span>{{__('common.Close')}} </span></a> 
 				</div>
 				<div style="float:right;margin-right: 15px;"  class="btn_24_blue">					
 					@include('inspection.grab.search')
@@ -27,27 +27,13 @@
 						<table id="proptble" class="display select">
 							<thead style="text-align: left;">
 								<tr>
-									<th class="table_sno">
-										S No
-									</th>
-									<th>
-										ACCOUNT NUMBER
-									</th>
-									<th>
-										ZONE
-									</th>
-									<th>
-										SUBZONE
-									</th>	
-									<th>
-										PROPERTY ADDRESS 1
-									</th>		
-									<th>
-										IS EMPTY LOT
-									</th>		
-                  <th>
-                    ACTION
-                  </th>			
+									<th class="table_sno"> {{__('officialsearch.SNO')}} </th>
+									<th> {{__('officialsearch.Account_Number')}} </th>
+                  <th> {{__('officialsearch.Zone')}} </th>
+                  <th> {{__('officialsearch.Subzone')}} </th> 
+                  <th> {{__('officialsearch.Property_Address1')}}  </th>    
+                  <th> {{__('officialsearch.Is_Empty_Lot')}} </th>    
+                  <th> {{__('officialsearch.Action')}} </th>      
 								</tr>
 							</thead>
 							<tbody>			
@@ -60,7 +46,7 @@
       <div id="addgroup" style="display:none" class="grid_10 full_block">
         <div class="widget_wrap">
           <div class="widget_content">
-            <h3 id="title">Application</h3>
+            <h3 id="title">{{__('officialsearch.Application')}} </h3>
             <form id="addgroupfrom" autocomplete="off" class="" method="get" action="#" >
               @csrf
               <input type="hidden" name="id" id="id" value="0">
@@ -69,56 +55,56 @@
                 <ul>
                   <li>                
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="termname" for="termid">Applicant Name<span class="req">*</span></label>
+                      <label class="field_title" id="termname" for="termid">{{__('officialsearch.Applicant_Name')}} <span class="req">*</span></label>
                       <div class="form_input">
                         <input id="name"  name="name" autocomplete="off" type="text"  value="{{ old('term') }}" />
                       </div>
                       <span class=" label_intro"></span>
                     </div>                
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">Address 1<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('officialsearch.Address1')}} <span class="req">*</span></label>
                       <div class="form_input">
                         <input id="addrln1"  name="addrln1" type="text"  value="{{ old('term') }}" />
                       </div>
                       <span class=" label_intro"></span>
                     </div>                
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">Address 2<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('officialsearch.Address2')}} <span class="req">*</span></label>
                       <div class="form_input">
                         <input id="addrln2"  name="addrln2" type="text"  value="{{ old('term') }}" />
                       </div>
                       <span class=" label_intro"></span>
                     </div>             
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">Address 3<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('officialsearch.Address3')}} <span class="req">*</span></label>
                       <div class="form_input">
                         <input id="addrln3"  name="addrln3" type="text"  value="{{ old('term') }}" />
                       </div>
                       <span class=" label_intro"></span>
                     </div>             
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">Address 4<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('officialsearch.Address4')}} <span class="req">*</span></label>
                       <div class="form_input">
                         <input id="addrln4"  name="addrln4" type="text"  value="{{ old('term') }}" />
                       </div>
                       <span class=" label_intro"></span>
                     </div>             
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">City<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('officialsearch.City')}} <span class="req">*</span></label>
                       <div class="form_input">
                         <input id="city"  name="city" type="text"  value="{{ old('term') }}" />
                       </div>
                       <span class=" label_intro"></span>
                     </div>              
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">Postcode<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('officialsearch.Postcode')}} <span class="req">*</span></label>
                       <div class="form_input">
                         <input id="postcode"  name="postcode" type="text"  value="{{ old('term') }}" />
                       </div>
                       <span class=" label_intro"></span>
                     </div>               
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">State<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('officialsearch.State')}} <span class="req">*</span></label>
                       <div class="form_input">
                          <select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="state" name="state" tabindex="20">
                           @foreach ($state as $rec)
@@ -129,35 +115,35 @@
                       <span class=" label_intro"></span>
                     </div>           
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">Applicant Ref<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('officialsearch.Applicant_Ref')}} <span class="req">*</span></label>
                       <div class="form_input">
                         <input id="appref"  name="appref" type="text"  value="{{ old('term') }}" />
                       </div>
                       <span class=" label_intro"></span>
                     </div>                   
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">Our Ref<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('officialsearch.Our_Ref')}} <span class="req">*</span></label>
                       <div class="form_input">
                         <input id="ref" name="ref" type="text"  value="{{ old('term') }}" />
                       </div>
                       <span class=" label_intro"></span>
                     </div>                  
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">Date<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('officialsearch.Date')}} <span class="req">*</span></label>
                       <div class="form_input">
                         <input id="date" name="date" type="text"  value="{{ old('term') }}" />
                       </div>
                       <span class=" label_intro"></span>
                     </div>                  
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">Hijri Date<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('officialsearch.Hijri_Date')}} <span class="req">*</span></label>
                       <div class="form_input">
                         <input id="hdate"  name="hdate" type="text"  value="{{ old('term') }}" />
                       </div>
                       <span class=" label_intro"></span>
                     </div>                   
                     <div class="form_grid_12">                  
-                      <label class="field_title" id="lblgroup" for="name">Letter Date<span class="req">*</span></label>
+                      <label class="field_title" id="lblgroup" for="name">{{__('officialsearch.Letter_Date')}} <span class="req">*</span></label>
                       <div class="form_input">
                         <input id="letterdate"  name="letterdate" type="text"  value="{{ old('term') }}" />
                       </div>
@@ -183,9 +169,9 @@
               <div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
                 
                 <div class="form_input">
-                  <button id="addsubmit" name="adduser" onclick="validateGroup()" class="btn_small btn_blue"><span>Submit</span></button>     
+                  <button id="addsubmit" name="adduser" onclick="validateGroup()" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>     
                             
-                  <button id="close" onclick="closeGroup()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+                  <button id="close" onclick="closeGroup()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
                   <span class=" label_intro"></span>
                 </div>
                 

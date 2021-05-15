@@ -85,6 +85,7 @@ return [
 	'Approve_Valuation'=>'Approve Valuation',
 	'Mass_Valuation'=>'Mass Valuation',
 	'Delete_Valuation'=>'Delete Valuation',
+	'Please_Select_a_Filter'=>'Please Select Filter',
 	// basket.blade.php
 	'All_Basket'=>'All Basket',
 	'Update_By'=>'Update By',

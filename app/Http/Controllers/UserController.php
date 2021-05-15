@@ -34,7 +34,8 @@ class UserController extends Controller
 
     public function languageSetup(Request $request){
         $lang = $request->input('lang'); // passed from the form
-//Log::info("S");
+        Log::info('Test');
+Log::info($lang);
        // App::setlocale('en');
         session()->put('locale', $lang); 
 

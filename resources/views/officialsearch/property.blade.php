@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>Official Search</title>
+<title>{{__('officialsearch.Official_Search')}}</title>
 <style type="text/css">
 
 #proptble td.numericCol {
@@ -73,8 +73,8 @@
 				<div class="breadCrumbHolder module">	
 				<div id="breadCrumb3" style="/*float:right;*/" class="breadCrumb module grid_3">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li>Official Search</li>
+						<li><a href="#">{{__('officialsearch.Home')}} </a></li>
+						<li>{{__('officialsearch.Official_Search')}}</li>
 					</ul>
 				</div>
 				</div>
@@ -82,7 +82,7 @@
 				<div style="float:right;margin-right: 30px;"  class="btn_24_blue">
 
 					@include('officialsearch.search')
-					<a href="#" onclick="addApplication()">Add Application</a>
+					<a href="#" onclick="addApplication()">{{__('officialsearch.Date')}} Add Application</a>
 					
 				</div>
 				<br>
@@ -96,7 +96,7 @@
 
 								<div class="comments_s">
 									<div class="block_label">
-										Property Count<span id="prop_count">0</span>
+										{{__('officialsearch.Property_Count')}} <span id="prop_count">0</span>
 									</div>
 								</div>
 							</div>	
@@ -108,45 +108,19 @@
 							<thead style="text-align: left;">
 								<tr>
 									<th><input name="select_all" value="1" type="checkbox"></th>
-									<th class="table_sno">
-										S No
-									</th>
-									<th>
-										Group
-									</th>
-									<th>
-										Account Number
-									</th>
-									<th>
-										Zone 
-									</th>
-									<th>
-										Sub Zone 
-									</th>
-									<th>
-										Property Building Status
-									</th>	
-									<th>
-										Property Category
-									</th>			
-									<th>
-										Property Type
-									</th>		
-									<th>
-										Property Storey
-									</th>	
-									<th>
-										Register By
-									</th>	
-									<th>
-										Register Date
-									</th>
-									<th>
-										Status
-									</th>	
-									<th>
-										Action
-									</th>			
+									<th class="table_sno">{{__('officialsearch.SNO')}} </th>
+									<th> {{__('officialsearch.Account_Number')}}  </th>
+									<th> {{__('officialsearch.Zone')}}   </th>
+									<th> {{__('officialsearch.Subzone')}}    </th>
+									<th> {{__('officialsearch.Property_Building_Status')}}  </th>	
+									<th> {{__('officialsearch.Property_Category')}}  </th>			
+									<th> {{__('officialsearch.Property_Type')}}  </th>		
+									<th> {{__('officialsearch.Property_Storey')}}  </th>	
+									<th> {{__('officialsearch.Term_Date')}}  </th>	
+									<th> {{__('officialsearch.Register_By')}}  </th>	
+									<th> {{__('officialsearch.Register_Date')}}  </th>
+									<th> {{__('officialsearch.Status')}}  </th>	
+									<th> {{__('officialsearch.Action')}}  </th>			
 								</tr>
 							</thead>
 							<tbody>			

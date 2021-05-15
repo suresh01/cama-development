@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width"/>
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>Valuation Details</title>
+<title>{{__('valuation.Valuation_Details')}}</title>
 <style>
 	.left-text {
 		text-align:right;
@@ -17,7 +17,7 @@
 			<div class="grid_12">
 				<div class="widget_wrap">
 					<div class="widget_top">
-						<h6>Comfirmation</h6>
+						<h6>{{__('valuation.Comfirmation')}}</h6>
 					</div>
 					<div class="widget_content">
 						<div class=" page_content">
@@ -25,23 +25,23 @@
 								
 								<div class="grid_3">
 									<fieldset>
-										<legend>Valuation Basket Information</legend>	
+										<legend>{{__('valuation.Valuation_Basket_Information')}}</legend>	
 										@foreach ($valuationbasket as $rec)		
 										<input type="hidden" name="valuationbasket_id" id="valuationbasket_id" value="{{$rec->va_id}}">				
 										<div style="line-height: 2;" class=" invoice_to">	
-											<strong><span>Name : </span></strong>
+											<strong><span>{{__('valuation.Name')}} : </span></strong>
 											<span>{{$rec->va_name}}</span>	
 										</div>		 		
 										<div style="line-height: 2;" class=" invoice_to">	
-											<strong><span>Application Type : </span></strong>
+											<strong><span>{{__('valuation.Application_Type')}} : </span></strong>
 											<span>{{$rec->applntype}}</span>	
 										</div>	 		
 										<div style="line-height: 2;" class=" invoice_to">	
-											<strong><span>Total Property Count : </span></strong>
+											<strong><span>{{__('valuation.Total_Property_Count')}} : </span></strong>
 											<span>{{$rec->propertycount}}</span>	
 										</div> 		
 										<div style="line-height: 2;" class=" invoice_to">	
-											<strong><span>Valuation Property Count : </span></strong>
+											<strong><span>{{__('valuation.Valuation_Property_Count')}} : </span></strong>
 											<span>{{$valpropcount}}</span>	
 										</div>
 										@endforeach
@@ -49,19 +49,19 @@
 								</div>
 								<div class="grid_3">
 									<fieldset>
-										<legend>Tone Basket Information</legend>	
+										<legend>{{__('valuation.Tone_Basket_Information')}}</legend>	
 										@foreach ($tonebasket as $rec)			
 										<input type="hidden" name="tonebasket_id" id="tonebasket_id" value="{{$rec->tollist_id}}">								
 										<div style="line-height: 2;" class=" invoice_to">	
-											<strong><span>Name : </span></strong>
+											<strong><span>{{__('valuation.Name')}}  : </span></strong>
 											<span>{{$rec->tollis_desc}}</span>	
 										</div>
 										<div style="line-height: 2;" class=" invoice_to">		
-											<strong><span>Year : </span></strong>
+											<strong><span>{{__('valuation.Year')}}  : </span></strong>
 											<span>{{$rec->tollis_year}}</span>
 										</div>
 										<div style="line-height: 2;" class=" invoice_to">	
-											<strong><span>Enforcement Year : </span></strong>
+											<strong><span>{{__('valuation.Enforcement_Year')}}  : </span></strong>
 											<span>{{$rec->tollis_enforceyear}}</span>
 										</div>
 										@endforeach
@@ -73,15 +73,15 @@
 										@foreach ($tonetaxbasket as $rec)			
 										<input type="hidden" name="tonetaxbasket_id" id="tonetaxbasket_id" value="{{$rec->trlist_id}}">								
 										<div style="line-height: 2;" class=" invoice_to">	
-											<strong><span>Name : </span></strong>
+											<strong><span>{{__('valuation.Name')}}  : </span></strong>
 											<span>{{$rec->trlist_desc}}</span>	
 										</div>
 										<div style="line-height: 2;" class=" invoice_to">	
-											<strong><span>Year : </span></strong>
+											<strong><span>{{__('valuation.Year')}}  : </span></strong>
 											<span>{{$rec->trlist_year}}</span>
 										</div>
 										<div style="line-height: 2;" class=" invoice_to">	
-											<strong><span>Enforcement Year : </span></strong>
+											<strong><span>{{__('valuation.Enforcement_Year')}}  : </span></strong>
 											<span>{{$rec->trlist_enforceyear}}</span>
 										</div>
 										@endforeach
@@ -89,15 +89,15 @@
 								</div>
 								<div class="grid_3">
 									<fieldset>
-										<legend>Valuation Information</legend>	
+										<legend>{{__('valuation.Valuation_Information')}}</legend>	
 										<input type="hidden" name="drivedrate" id="drivedrate" value="{{$drivedrate}}">						
 									
 										<div style="line-height: 2;" class=" invoice_to">	
-											<strong><span>Drivered Rate : </span></strong>
+											<strong><span>{{__('valuation.Drivered_Rate')}} : </span></strong>
 											<span>{{$drivedrate}}</span>	
 										</div>
 										<div style="display: none;" >		
-											<strong><span>Drivered Value : </span></strong>
+											<strong><span>{{__('valuation.Drivered_Value')}} : </span></strong>
 											
 										</div>
 										
@@ -106,9 +106,9 @@
 								<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">
 								
 									<div class="form_input">
-										<button id="addsubmit" name="adduser" onclick="startValuation()" type="button" class="btn_small btn_blue"><span>Submit</span></button>			
+										<button id="addsubmit" name="adduser" onclick="startValuation()" type="button" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>			
 															
-										<button id="close" onclick="back()" name="close" type="button" class="btn_small btn_blue"><span>Back</span></button>
+										<button id="close" onclick="back()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Back')}}</span></button>
 										<span class=" label_intro"></span>
 									</div>
 									

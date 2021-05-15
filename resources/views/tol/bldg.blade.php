@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>TOL Building</title>
+<title>{{__('tol.TOL_Building')}} </title>
 @include('includes.header', ['page' => 'TOL'])
 	<style>
 		
@@ -21,15 +21,15 @@
 
 				<div id="breadCrumb3" class="breadCrumb grid_3">
 					<ul >
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Tone of List</a></li>
-						<li>Building</li>
+						<li><a href="#">{{__('tol.Home')}} </a></li>
+						<li><a href="#">{{__('tol.Tone_of_List')}} </a></li>
+						<li>{{__('tol.Building')}} </li>
 					</ul>
 				</div>
 							
 				@include('tol.search',['tableid'=>'bldgtable', 'action' => 'tonebldgtable', 'searchid' => '24'])
 				
-				<button id="addtrans" onclick="openBasket()" style="float:right;" name="btnadduser" type="button" class="btn_small btn_blue"><span>Add Building</span></button>
+				<button id="addtrans" onclick="openBasket()" style="float:right;" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('tol.Add_Building')}} </span></button>
 				<br>
 			</div>
 		
@@ -41,7 +41,7 @@
 						<div class="social_activities">
 							<div style="width: 220px;" class="comments_s">
 								<div class="block_label">
-									Count<span id="prop_count">0</span>
+									{{__('common.Count')}} <span id="prop_count">0</span>
 								</div>
 							</div>
 							
@@ -145,7 +145,7 @@
 			<div class="widget_wrap">
 				
 				<div class="widget_content">
-					<h3 id="title">Add Basket</h3>
+					<h3 id="title">{{__('tol.Add_Basket')}} </h3>
 					<form id="basketform" autocomplete="off" method="post" action="#" >
 						<div  class="grid_6 form_container left_label">
 							<ul>
@@ -154,9 +154,9 @@
 									<input type="hidden" name="bldgid" id="bldgid">
 									<input type="hidden" name="jsondata" id="jsondata">
 									<fieldset>
-										<legend>Basket Information</legend>
+										<legend>{{__('tol.Basket_Information')}} </legend>
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">Tone Basket<span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('tol.Tone_Basket')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="basketid" name="basketid" tabindex="20">
 													<option></option>
@@ -169,7 +169,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">TRANSACTION TYPE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('tol.Transaction_Type')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="trnstype" name="trnstype" tabindex="20">
 													<option></option>
@@ -182,7 +182,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">ZONE<span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('tol.Zone')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="zone" name="zone" tabindex="20">
 													<option></option>
@@ -195,7 +195,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">SUBZONE<span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('tol.Subzone')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="subzone" name="subzone" tabindex="20">
 													<option></option>
@@ -208,7 +208,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">PROPERTY CATEGORY<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('tol.Property_Category')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="bldgcate" name="bldgcate" tabindex="20">
 													<option></option>
@@ -221,7 +221,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">PROPERTY TYPE<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('tol.Property_Type')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="proptype" name="proptype" tabindex="20">
 													<option></option>
@@ -234,7 +234,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">PROPERTY STOREY<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('tol.Property_Storey')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="propstoery" name="propstoery" tabindex="20">
 													<option></option>
@@ -246,7 +246,7 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">AREA TYPE<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('tol.Area_Type')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="artype" name="artype" tabindex="20">
 													<option></option>
@@ -258,7 +258,7 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">AREA LEVEL<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('tol.Area_Level')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="arlvl" name="arlvl" tabindex="20">
 													<option></option>
@@ -270,7 +270,7 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">AREA CATEGORY<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('tol.Area_Category')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="arcate" name="arcate" tabindex="20">
 													<option></option>
@@ -283,7 +283,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">AREA USE<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('tol.Area_Use')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="aruse" name="aruse" tabindex="20">
 													<option></option>
@@ -296,7 +296,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">VALUE<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('tol.Value')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="value" name="value" pattern="^\d*(\.\d{0,2})?$" type="text"  maxlength="50" class="required"/>
 											</div>
@@ -312,9 +312,9 @@
 						
 						<div style="height: 48px; float: none; display: -webkit-box;text-align: -webkit-center;" class="grid_12">							
 							<div class="form_input">
-								<button id="addsubmit" name="adduser" onclick="validateBasket()" class="btn_small btn_blue"><span>Submit</span></button>									
+								<button id="addsubmit" name="adduser" onclick="validateBasket()" class="btn_small btn_blue"><span>{{__('common.Submit')}}</span></button>									
 								
-								<button id="close" onclick="closeBasket()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
+								<button id="close" onclick="closeBasket()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 								<span class=" label_intro"></span>
 							</div>								
 							<span class="clear"></span>

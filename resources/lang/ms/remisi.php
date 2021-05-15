@@ -7,21 +7,21 @@ return [
     'propertycnt'=>'Property Count',
 
     'col1'=>'S No',
-    'col2'=>'Account Number',
-    'col3'=>'Zone',
-    'col4'=>'Sub Zone',
-    'col5'=>'Property Building Status',
-    'col6'=>'Property Category',
-    'col7'=>'Property Type',
-    'col8'=>'Property Storey',
-    'col9'=>'Register By',
-    'col01'=>'Register Date',
-    'col11'=>'Decision',
+    'col2'=>'No Akaun',
+    'col3'=>'Mukim',
+    'col4'=>'Taman/Kawasan',
+    'col5'=>'Status Harta',
+    'col6'=>'Kategori Harta',
+    'col7'=>'Jenis Harta',
+    'col8'=>'Tingkat Harta',
+    'col9'=>'Didaftar Oleh',
+    'col01'=>'Didaftar Pada',
+    'col11'=>'Keputusan',
     'col12'=>'Status',
-    'col13'=>'Action',
+    'col13'=>'Aksi',
 
 
-    'addapplication'=>'Account Application'
+    'addapplication'=>'Aplikasi'
 
 
 
