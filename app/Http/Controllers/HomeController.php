@@ -2707,6 +2707,15 @@ where vt_termDate >= (select vt_termDate from cm_appln_valdetl inner join cm_app
   
       return response()->json(array('msg'=> 'true'), 200);
     }
+
+    public function  remisi(Request $request){
+       
+
+        App::setlocale(session()->get('locale'));
+
+
+        return view('remisi.remisi');
+    }
     
 }
 

@@ -578,9 +578,7 @@ Route::get('manualbldg', 'ValutionController@bldgDetailManaual');
 
 Route::get('landstarndard', 'ValutionController@landStarndard');
 
-Route::get('remisi',  function () {
-    return view('remisi.remisi'); 
-});
+Route::get('remisi', 'HomeController@remisi');  
 
 Route::get('addremisi', 'HomeController@addRemisi'); 
 
