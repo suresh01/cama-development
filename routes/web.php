@@ -304,7 +304,9 @@ Route::get('valuationform', 'ReportController@valuationForm');
 
 Route::get('valuationdata', 'ReportController@group');
 
-Route::get('valuationdatatable', 'ReportController@basketTables');
+Route::get('valuationdatatable', 'ReportController@valuationDataTable');
+
+Route::get('valuationdatatablebasket', 'ReportController@basketTables');
 
 Route::get('generateValuationData','ReportController@generateValuationData');
 

@@ -136,7 +136,7 @@
 		$('#searchLoader').attr('style','display:block');
 
 		xhr = $.ajax({
-            url: action+'?test=manual&ts_='+timestamp,
+            url: action+'&test=manual&ts_='+timestamp,
             type: 'GET',
             data: $("#filterForm").serialize()
         }).done(function (result) {

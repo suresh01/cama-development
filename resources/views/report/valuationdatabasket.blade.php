@@ -24,10 +24,9 @@
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
 					<a href="#" onclick="deleteProperty()">Generate Report</a>				
 					
-					@include('report.search.search',['tableid'=>'proptble', 'action' => 'valuationdatatable?page='.$page, 'searchid' => $msearchid])	
+					@include('report.search.search',['tableid'=>'proptble', 'action' => 'valuationdatatablebasket', 'searchid' => $msearchid])	
 				</div>
-				<br>
-
+				<br>				
 				<div class="widget_wrap">					
 					<div class="widget_content">						
 						<table id="proptble" class="display select">
@@ -44,10 +43,7 @@
 										Term Date
 									</th>
 									<th>
-										Enforce Date
-									</th>
-									<th>
-										Basket Count
+										Basket Name
 									</th>
 									<th>
 										Property Count
@@ -193,11 +189,10 @@ var table = $('#proptble').DataTable({
 		        "columns": [
 			        {"data": "id", "orderable": false, "searchable": false, "name":"id" },
 			        {"data": null, "name": "sno"},
-			        {"data": "name", "name": "account number"},
-			        {"data": "termDate", "name": "zone"},
-			        {"data": "enforceDate", "name": "subzone"},
-			        {"data": "basket_count", "name": "zone"},
-			        {"data": "property_count", "name": "subzone"}
+			        {"data": "termaname", "name": "account number"},
+			        {"data": "termdate", "name": "zone"},
+			        {"data": "l_group", "name": "zone"},
+			        {"data": "propertycount", "name": "subzone"}
 		   		],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
 			        $("td:nth-child(2)", nRow).html(iDisplayIndex + 1);

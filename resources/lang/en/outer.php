@@ -26,10 +26,10 @@ return [
 	'Add_Parameter_Detail'=>'Add Parameter Detail',
 	'Parent_Parameter_Key'=>'Parent Parameter Key',
 	'Parent_Parameter_Velue'=>'Parent Parameter Velue',
-	'Parameter_Key'=>'Parameter Key'
-	'Parameter_Value'=>'Parameter Value'
-	'Sort'=>'Sort'
-	'Update_by'=>'Update by'
+	'Parameter_Key'=>'Parameter Key',
+	'Parameter_Value'=>'Parameter Value',
+	'Sort'=>'Sort',
+	'Update_by'=>'Update by',
 	'Sort_Order'=>'Sort Order',
 	'Select_Child'=>'Select Child',
 	'Please_select_Child'=>'Please select Child',
@@ -53,11 +53,11 @@ return [
 	'First_Name'=>'First Name',
 	'Email_Id'=>'Email Id',
 	'Phone_Number'=>'Phone Number',
-	'Change_Password'='Change Password',
-	'Current_Password'='Current Password',
-	'New_Password'='New Password',
-	'Confirm_Password'='Confirm Password',
-	'Change_Password'='Change Password',
+	'Change_Password'=>'Change Password',
+	'Current_Password'=>'Current Password',
+	'New_Password'=>'New Password',
+	'Confirm_Password'=>'Confirm Password',
+	'Change_Password'=>'Change Password',
 	// roles.blade.php
 	'Role'=>'Role',
 	'Please_Enter_fileds'=>'Please Enter all mandantory fileds',

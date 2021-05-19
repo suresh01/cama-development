@@ -76,10 +76,10 @@
 							@endif
 							@endforeach
 							<th>
-								{{__('outer.Parameter_')}} 
+								{{__('outer.Parameter_Key')}} 
 							</th>
 							<th>
-								{{__('outer.Parameter_')}} 	
+								{{__('outer.Parameter_Value')}} 	
 							</th>
 							<th>
 								{{__('outer.Parameter_Description')}} 	
@@ -88,13 +88,13 @@
 								{{__('outer.Sort')}} 	
 							</th>
 							<th>
-								{{__('outer.Update_')}} 
+								{{__('outer.Update_by')}} 
 							</th>
 							<!--<th>
 								Update at
 							</th>-->	
 							<th>
-								{{__('outer.Application_Type')}} Action
+								{{__('outer.Action')}} 
 							</th>
 						</tr> 
 						</thead>
