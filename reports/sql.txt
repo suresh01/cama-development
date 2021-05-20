@@ -1,0 +1,22 @@
+select ma_addr_ln1 as  ma_address1, ma_addr_ln2 as ma_address2, ma_addr_ln3 as ma_address3, ma_addr_ln4 as ma_address4, ma_city, ma_state_id, ma_postcode , TO_OWNNAME,
+TO_ADDR_LN1,TO_ADDR_LN2,TO_ADDR_LN3,TO_ADDR_LN4,TO_POSTCODE,TO_STATE_ID, ma_ishasbuilding_id,  ma_accno,ma_fileno,  
+subzone.tdi_value subzone, subzone.tdi_parent_name zone, ma_district_id,  concat(lotcode.tdi_value,al_no) lotnumber, al_altno,  
+al_tenureperiod, al_expireddate,  al_size,  bldgtype.tdi_value bldgtype, bldgtype.tdi_parent_name bldgcategory, 
+bldgstorey.tdi_value bldgstorey, bldgstr.tdi_value bldgstr, ab_cccdate, vd_updateby, vd_updatedate, vd_approvalstatusby,
+vd_id,vt_approvednt, vt_approvedrate, vt_approvedtax
+from cm_appln_val inner join cm_appln_valdetl on vd_va_id = va_id  
+inner join cm_masterlist on ma_id = vd_ma_id 
+inner join cm_appln_lot on al_vd_id = vd_id -- and al_activeind_id = 1
+inner join cm_appln_bldg on ab_vd_id = vd_id -- and ab_ismainbldg_id = 1
+inner join cm_owner on TO_MA_ID = ma_id and TO_ACTIVEIND_ID = 1
+left join (select tdi_key, tdi_value,tdi_parent_key, tdi_parent_name from tbdefitems where tdi_td_name = "SUBZONE") subzone 
+on subzone.tdi_key = ma_subzone_id
+left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = al_lotcode_id
+left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BULDINGTYPE") bldgtype 
+on bldgtype.tdi_key = AB_BLDGTYPE_ID
+left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgstorey
+on bldgstorey.tdi_key = AB_BLDGSTOREY_ID
+left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BLDGSTRUCTURE") bldgstr
+on bldgstr.tdi_key = AB_BLDGSTRUCTURE_ID
+left join cm_appln_val_tax on vt_vd_id = vd_id
+where $P!{basketid}

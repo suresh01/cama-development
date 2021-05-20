@@ -33,9 +33,9 @@ return [
 	'Status'=>'Status',
 	// valterm.blade.php
 	'Term'=>'Term',
-	'Total_Term_Count'=>'Total Term Count'
-	'Total_Basket_Count'=>'Total Basket Count'
-	'Total_Property_Count'=>'Total Property Count'
+	'Total_Term_Count'=>'Total Term Count',
+	'Total_Basket_Count'=>'Total Basket Count',
+	'Total_Property_Count'=>'Total Property Count',
 	'Application_Type'=>'Application Type',
 	'Term_Date'=>'Term Date',
 	'Enforced_by_at'=>'Enforced by - Enforced at',
