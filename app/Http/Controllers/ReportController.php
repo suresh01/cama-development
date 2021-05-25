@@ -318,15 +318,22 @@ class ReportController extends Controller
 
         if($page == 3){
           $statuscond = 'vt_approvalstatus_id = "05"' ;
-        } else if($page == 2){
-          $statuscond = 'vt_approvalstatus_id = vt_approvalstatus_id' ;
-        } 
+       
         
      
         $group = DB::select("select vt_id as id, vt_termtype_id,vt_valbase_id, vt_id, vt_name name, vt_createby createby,  DATE_FORMAT(vt_createdate, '%d/%m/%Y') createdate, vt_updateby updateby, applntype.tdi_value applntype, 
-          DATE_FORMAT(vt_updatedate, '%d/%m/%Y')  updatedate, ifnull(basket_count,0) basket_count, ifnull(property_count,0) property_count,DATE_FORMAT(vt_termDate, '%d/%m/%Y') termDate, DATE_FORMAT(now(), '%d/%m/%Y') enforceDate,  vt_applicationtype_id,DATE_FORMAT(vt_transferDate, '%d/%m/%Y') vt_transferDate, vt_transferby,
+          DATE_FORMAT(vt_updatedate, '%d/%m/%Y')  updatedate, ifnull(propertycount,0) propertycount,DATE_FORMAT(vt_termDate, '%d/%m/%Y') termDate, 
+          DATE_FORMAT(now(), '%d/%m/%Y') enforceDate,  vt_applicationtype_id,DATE_FORMAT(vt_transferDate, '%d/%m/%Y') vt_transferDate, vt_transferby,
           termstage.tdi_desc termstage, vt_approvalstatus_id,ap_basket_count, valbase.tdi_value valbase 
           from cm_appln_valterm
+          inner join ( select count(*) propertycount, max(vt_termDate) termdate from cm_appln_valterm
+          inner JOIN (select va_vt_id termid from `cm_masterlist`
+          inner join cm_appln_valdetl on vd_ma_id = ma_id
+          inner join cm_appln_val on va_id = vd_va_id
+          inner join cm_appln_valterm on vt_id = va_vt_id
+          inner join v_activeterm on accno = vd_accno and v_activeterm.termdate = vt_termDate
+          left join cm_appln_deactivedetl on dad_accno = ma_accno where dad_id is null) cm_masterlist 
+          ON termid = vt_id ) termcount on termdate <= vt_termDate 
           left join (select va_vt_id, count(*) ap_basket_count from cm_appln_val where va_approvalstatus_id = '11' group by va_vt_id) approve on approve.va_vt_id = vt_id
           left join (select va_vt_id, count(*) basket_count from cm_appln_val group by va_vt_id) cm_appln_val on cm_appln_val.va_vt_id = vt_id
           left join (select va_vt_id, count(vd_id) property_count from cm_appln_valdetl inner join cm_appln_val on va_id = vd_va_id
@@ -339,6 +346,28 @@ class ReportController extends Controller
           where ".$statuscond." ".$filterquery."
              order by vt_id
         ");
+
+
+      } else if($page == 2){
+          $statuscond = 'vt_approvalstatus_id = vt_approvalstatus_id' ;
+
+           $group = DB::select("select vt_id as id, vt_termtype_id,vt_valbase_id, vt_id, vt_name name, vt_createby createby,  DATE_FORMAT(vt_createdate, '%d/%m/%Y') createdate, vt_updateby updateby, applntype.tdi_value applntype, 
+DATE_FORMAT(vt_updatedate, '%d/%m/%Y')  updatedate, ifnull(basket_count,0) basket_count, ifnull(property_count,0) propertycount,DATE_FORMAT(vt_termDate, '%d/%m/%Y') termDate, DATE_FORMAT(now(), '%d/%m/%Y') enforceDate,  vt_applicationtype_id,DATE_FORMAT(vt_transferDate, '%d/%m/%Y') vt_transferDate, vt_transferby,
+termstage.tdi_desc termstage, vt_approvalstatus_id,ap_basket_count, valbase.tdi_value valbase 
+from cm_appln_valterm
+left join (select va_vt_id, count(*) ap_basket_count from cm_appln_val where va_approvalstatus_id = '11' group by va_vt_id) approve on approve.va_vt_id = vt_id
+left join (select va_vt_id, count(*) basket_count from cm_appln_val group by va_vt_id) cm_appln_val on cm_appln_val.va_vt_id = vt_id
+left join (select va_vt_id, count(vd_id) property_count from cm_appln_valdetl inner join cm_appln_val on va_id = vd_va_id
+group by va_vt_id) cm_appln_valdetl on cm_appln_valdetl.va_vt_id = vt_id 
+left join (select *  from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype
+on applntype.tdi_key = vt_applicationtype_id
+left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage
+on termstage.tdi_key = vt_approvalstatus_id 
+left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbase on valbase.tdi_key = vt_valbase_id
+          where ".$statuscond." ".$filterquery."
+             order by vt_id
+        ");
+        } 
         $propertyDetails = Datatables::collection($group)->make(true);
    
         return $propertyDetails;
@@ -412,18 +441,36 @@ class ReportController extends Controller
 
         $account = $request->input('accounts');
         $title = $request->input('title');
-        
-       $filter = ' vd_va_id in ('. $account.')';
+        $page = $request->input('page');
+        if($page == '3'){
+          $filter = " vt_termDate <='". $account."'";
+        } else if($page == '2'){
+          $filter = ' va_vt_id in ('. $account.')';
+        } else{
+          $filter = ' vd_va_id in ('. $account.')';
+        }
+       
       /* $input = $request->input();
             $account1 = $input['accounts'];
         Log::info($account1);*/
             // Compile a JRXML to Jasper
         //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
+         Log::info(JasperPHP::process(
+            base_path('/vendor/cossou/jasperphp/examples/valuationdata_active.jasper'),
+                false,
+                array("pdf"),               
+                array("basketid" => $filter,'title'=>$title),
+            array(
+              'driver' => 'generic',
+              'username' => env('DB_USERNAME',''),
+              'password' => env('DB_PASSWORD',''),
+              'jdbc_driver' => 'com.mysql.jdbc.Driver',
+              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+            ))->output());
 
 
-
-     JasperPHP::process(
-            base_path('/vendor/cossou/jasperphp/examples/valuationdata.jasper'),
+      JasperPHP::process(
+            base_path('/vendor/cossou/jasperphp/examples/valuationdata_active.jasper'),
                 false,
                 array("pdf"),               
                 array("basketid" => $filter,'title'=>$title),
@@ -439,7 +486,7 @@ class ReportController extends Controller
               'Content-Type: application/pdf',
             );
 
-        return response()->download(base_path('/vendor/cossou/jasperphp/examples/valuationdata.pdf'), 'valuationdata.pdf', $headers);
+        return response()->download(base_path('/vendor/cossou/jasperphp/examples/valuationdata_active.pdf'), 'valuationdata_until_term.pdf', $headers);
 
     }
 

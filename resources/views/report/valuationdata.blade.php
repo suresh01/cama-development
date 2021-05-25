@@ -47,9 +47,6 @@
 										Enforce Date
 									</th>
 									<th>
-										Basket Count
-									</th>
-									<th>
 										Property Count
 									</th>
 									<th>			
@@ -67,6 +64,7 @@
             @csrf
             <input type="hidden" name="accounts" id="accounts">
             <input type="hidden" name="title" id="title">
+            <input type="hidden" name="page" id="page">
 		</form>
 		
 	</div>
@@ -88,9 +86,10 @@
 //console.log(table.rows('.selected').data());termdate
 			var account = $.map(table.rows('.selected').data(), function (item) {
 				//console.log(item);
-	        	termdate= item['termdate'];
-	        	return item['id']
+	        	termdate= item['termDate'];
+	        	return item['termDate']
 	   		});
+	   		$('#page').val('{{$page}}');
 			var type = "delete";
 			if(account.length > 0) {
 			console.log(account.toString());
@@ -196,8 +195,7 @@ var table = $('#proptble').DataTable({
 			        {"data": "name", "name": "account number"},
 			        {"data": "termDate", "name": "zone"},
 			        {"data": "enforceDate", "name": "subzone"},
-			        {"data": "basket_count", "name": "zone"},
-			        {"data": "property_count", "name": "subzone"}
+			        {"data": "propertycount", "name": "subzone"}
 		   		],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
 			        $("td:nth-child(2)", nRow).html(iDisplayIndex + 1);
