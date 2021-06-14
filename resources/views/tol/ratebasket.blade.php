@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>{{__('tol.TOL_Rate_Basket_Management')}} </title>
+<title>{{__('toneoflist.TOL_Rate_Basket_Management')}} </title>
 @include('includes.header', ['page' => 'TOL'])
 	
 	<div id="content">
@@ -16,12 +16,12 @@
 
 				<div id="breadCrumb3" class="breadCrumb grid_3">
 					<ul >
-						<li><a href="#">{{__('tol.Home')}} </a></li>
-						<li><a href="#">{{__('tol.Tone_of_List')}} </a></li>
-						<li>{{__('tol.Property_Type')}} Basket Management</li>
+						<li><a href="#">{{__('toneoflist.Home')}} </a></li>
+						<li><a href="#">{{__('toneoflist.Tone_of_List')}} </a></li>
+						<li>{{__('toneoflist.Property_Type')}} Basket Management</li>
 					</ul>
 				</div>
-				<button id="addtrans" onclick="openBasket()" style="float:right;" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('tol.Add_Basket')}}</span></button>
+				<button id="addtrans" onclick="openBasket()" style="float:right;" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('toneoflist.Add_Basket')}}</span></button>
 				<br>
 			</div>
 			
@@ -30,14 +30,14 @@
 					<table class="display data_tbl">
 					<thead style="text-align: left;">
 					<tr>
-						<th class="table_sno"> {{__('tol.SNo')}} </th>
-						<th> {{__('tol.ID')}}  </th>
-						<th> {{__('tol.TOL_Year')}}  </th>
-						<th> {{__('tol.Enforcement_Year')}}  </th>
-						<th> {{__('tol.Description')}}   </th>
-						<th> {{__('tol.Status')}} Status </th>
-						<th> {{__('tol.Update_by_date')}}  </th>
-						<th> {{__('tol.Action')}}  </th>
+						<th class="table_sno"> {{__('toneoflist.SNo')}} </th>
+						<th> {{__('toneoflist.ID')}}  </th>
+						<th> {{__('toneoflist.TOL_Year')}}  </th>
+						<th> {{__('toneoflist.Enforcement_Year')}}  </th>
+						<th> {{__('toneoflist.Description')}}   </th>
+						<th> {{__('toneoflist.Status')}} Status </th>
+						<th> {{__('toneoflist.Update_by_date')}}  </th>
+						<th> {{__('toneoflist.Action')}}  </th>
 						
 					</tr>
 					</thead>
@@ -95,7 +95,7 @@
 			<div class="widget_wrap">
 				
 				<div class="widget_content">
-					<h3 id="title">{{__('tol.Add_Basket')}}</h3>
+					<h3 id="title">{{__('toneoflist.Add_Basket')}}</h3>
 					<form id="basketform" autocomplete="off" method="post" action="#" >
 						<div  class="grid_6 form_container left_label">
 							<ul>
@@ -104,9 +104,9 @@
 									<input type="hidden" name="basketid" id="basketid">
 									<input type="hidden" name="jsondata" id="jsondata">
 									<fieldset>
-										<legend>{{__('tol.Basket_Information')}}</legend>
+										<legend>{{__('toneoflist.Basket_Information')}}</legend>
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">{{__('tol.TOL_Year')}}<span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('toneoflist.TOL_Year')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="year" name="year"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -114,7 +114,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">{{__('tol.Enforcement_Year')}} <span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('toneoflist.Enforcement_Year')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="eyear" name="eyear"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -122,7 +122,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">{{__('tol.Description')}} <span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('toneoflist.Description')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="desc" name="desc"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -130,7 +130,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">{{__('tol.Status')}} <span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('toneoflist.Status')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="status" name="status" tabindex="20">
 													<option></option>

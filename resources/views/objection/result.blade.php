@@ -48,7 +48,6 @@
 						<div id="widget_tab">
 							<ul>
 								<li><a href="agenda?term={{$term}}&id={{$id}}" >{{__('objection.Agenda')}} </a></li>
-								<li><a href="newnotice?term={{$term}}&id={{$id}}">{{__('objection.New_Notice')}} </a></li>
 								<li><a href="notice?term={{$term}}&id={{$id}}">{{__('objection.Existing_Notice')}} </a></li>
 								<li><a href="objectionreport?term={{$term}}&id={{$id}}" >{{__('objection.Objection')}} </a></li>
 								<li><a href="decision?term={{$term}}&id={{$id}}">{{__('objection.Decision')}} </a></li>
@@ -233,7 +232,7 @@
 						
 						<div class="widget_content">
 							<h3 id="title">{{__('objection.Generate_Report')}} </h3>
-							<form style="" id="generateValform" method="GET" action="http://{{$serverhost}}:8002/generateValuationForm">
+							<form style="" id="generateValform" method="GET" action="generateValuationForm">
 					            @csrf
 					            <input type="hidden" name="accounts" id="accounts1">
 								<div  class="grid_12 form_container left_label">

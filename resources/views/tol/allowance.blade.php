@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>{{__('tol.TOL_Allowance')}} </title>
+<title>{{__('toneoflist.TOL_Allowance')}} </title>
 @include('includes.header', ['page' => 'TOL'])
 	
 	<div id="content">
@@ -15,12 +15,12 @@
 
 				<div id="breadCrumb3"  class="breadCrumb grid_3">
 					<ul >
-						<li><a href="#">{{__('tol.Home')}} </a></li>
-						<li><a href="#">{{__('tol.Tone_of_List')}} Tone of List</a></li>
-						<li>{{__('tol.Allowance')}} </li>
+						<li><a href="#">{{__('toneoflist.Home')}} </a></li>
+						<li><a href="#">{{__('toneoflist.Tone_of_List')}} Tone of List</a></li>
+						<li>{{__('toneoflist.Allowance')}} </li>
 					</ul>
 				</div>
-				<button id="addtrans" onclick="openBasket()" style="float:right;margin-right: 10px;" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('tol.Add_Allowance')}} </span></button>
+				<button id="addtrans" onclick="openBasket()" style="float:right;margin-right: 10px;" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('toneoflist.Add_Allowance')}} </span></button>
 				<br>
 			</div>
 		
@@ -29,17 +29,17 @@
 					<table class="display data_tbl">
 					<thead style="text-align: left;">
 					<tr>
-						<th class="table_sno"> {{__('tol.SNo')}}</th>
-						<th>{{__('tol.ID')}} ID</th>
-						<th>{{__('tol.Tone_Basket')}} </th>
-						<th>{{__('tol.Allowance_Category')}} </th>
-						<th>{{__('tol.Allowance_Type')}} </th>
-						<th>{{__('tol.Building_Category')}} </th>
-						<th>{{__('tol.Value')}} </th>
-						<th>{{__('tol.Factor')}} </th>
-						<th>{{__('tol.Update_by_date')}}</th>
-						<th>{{__('tol.Status')}} </th>	
-						<th>{{__('tol.Action')}} </th>						
+						<th class="table_sno"> {{__('toneoflist.SNo')}}</th>
+						<th>{{__('toneoflist.ID')}} ID</th>
+						<th>{{__('toneoflist.Tone_Basket')}} </th>
+						<th>{{__('toneoflist.Allowance_Category')}} </th>
+						<th>{{__('toneoflist.Allowance_Type')}} </th>
+						<th>{{__('toneoflist.Building_Category')}} </th>
+						<th>{{__('toneoflist.Value')}} </th>
+						<th>{{__('toneoflist.Factor')}} </th>
+						<th>{{__('toneoflist.Update_by_date')}}</th>
+						<th>{{__('toneoflist.Status')}} </th>	
+						<th>{{__('toneoflist.Action')}} </th>						
 					</tr>
 					</thead>
 					<tbody>
@@ -129,7 +129,7 @@
 									<fieldset>
 										<legend>{{__('common.Approve_Revision')}} Basket Information</legend>
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">{{__('tol.Basket')}} <span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('toneoflist.Basket')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="basketid" name="basketid" tabindex="20">
 													<option></option>
@@ -142,7 +142,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">{{__('tol.Allowance_Category')}} <span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('toneoflist.Allowance_Category')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="allowancecate" name="allowancecate" tabindex="20">
 													<option></option>
@@ -155,7 +155,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">{{__('tol.Allowance_Type')}} <span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('toneoflist.Allowance_Type')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="allowancetype" name="allowancetype" tabindex="20">
 													<option></option>
@@ -169,7 +169,7 @@
 
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">{{__('tol.Buliding_Category')}} <span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('toneoflist.Buliding_Category')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="bldgcate" name="bldgcate" tabindex="20">
 													<option></option>
@@ -183,7 +183,7 @@
 										
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">{{__('tol.Value')}} <span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('toneoflist.Value')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="value" name="value"  type="text"  maxlength="50" class="required"/>
 											</div>
@@ -191,7 +191,7 @@
 										</div>
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">{{__('tol.Factor')}} <span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('toneoflist.Factor')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="factor" name="factor" tabindex="20">
 													<option></option>

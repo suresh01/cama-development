@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>{{__('tol.TOL_Tax_Rate')}} </title>
+<title>{{__('toneoflist.TOL_Tax_Rate')}} </title>
 @include('includes.header', ['page' => 'TOL'])
 	<div id="content">
 		<div class="grid_container">
@@ -14,15 +14,15 @@
 
 				<div id="breadCrumb3" class="breadCrumb grid_3">
 					<ul >
-						<li><a href="#">{{__('tol.Home')}} </a></li>
-						<li><a href="#">{{__('tol.Tone_of_List')}} </a></li>
-						<li>{{__('tol.Tax_Rate')}} </li>
+						<li><a href="#">{{__('toneoflist.Home')}} </a></li>
+						<li><a href="#">{{__('toneoflist.Tone_of_List')}} </a></li>
+						<li>{{__('toneoflist.Tax_Rate')}} </li>
 					</ul>
 				</div>
 				
 				@include('tol.search',['tableid'=>'taxtable', 'action' => 'tonetaxtable', 'searchid' => '30'])
 
-				<button id="addtrans" onclick="openBasket()" style="float:right;" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('tol.Add_Tax_Rate')}} </span></button>
+				<button id="addtrans" onclick="openBasket()" style="float:right;" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('toneoflist.Add_Tax_Rate')}} </span></button>
 				<br>
 			</div>
 		
@@ -33,7 +33,7 @@
 						<div class="social_activities">
 							<div class="comments_s">
 								<div class="block_label">
-									{{__('tol.Count')}} <span id="prop_count">0</span>
+									{{__('toneoflist.Count')}} <span id="prop_count">0</span>
 								</div>
 							</div>
 
@@ -47,17 +47,17 @@
 					<thead style="text-align: left;">
 					<tr>
 						<th><input name="select_all" value="1" type="checkbox"></th>
-						<th class="table_sno">{{__('tol.SNo')}}  </th>
-						<th>{{__('tol.ID')}}  </th>
-						<th>{{__('tol.Rate_Basket')}}  </th>
-						<th>{{__('tol.Zone')}}  </th>
-						<th>{{__('tol.Property_Category')}}  </th>
-						<th>{{__('tol.Property_Type')}}  </th>
-						<th>{{__('tol.Has_Building')}} </th>
-						<th>{{__('tol.Value')}}  </th>
-						<th>{{__('tol.Update_by_date </th>
-						<th>{{__('tol.Status')}}  </th>
-						<th>{{__('tol.Action')}}  </th>
+						<th class="table_sno">{{__('toneoflist.SNo')}}  </th>
+						<th>{{__('toneoflist.ID')}}  </th>
+						<th>{{__('toneoflist.Rate_Basket')}}  </th>
+						<th>{{__('toneoflist.Zone')}}  </th>
+						<th>{{__('toneoflist.Property_Category')}}  </th>
+						<th>{{__('toneoflist.Property_Type')}}  </th>
+						<th>{{__('toneoflist.Has_Building')}} </th>
+						<th>{{__('toneoflist.Value')}}  </th>
+						<th>{{__('toneoflist.Update_by_date')}}</th>
+						<th>{{__('toneoflist.Status')}}  </th>
+						<th>{{__('toneoflist.Action')}}  </th>
 						
 					</tr>
 					</thead>
@@ -86,7 +86,7 @@
 			<div class="widget_wrap">
 				
 				<div class="widget_content">
-					<h3 id="title">{{__('tol.Add_Tax_Rate')}} </h3>
+					<h3 id="title">{{__('toneoflist.Add_Tax_Rate')}} </h3>
 					<form id="basketform" autocomplete="off" method="post" action="#" >
 						<div  class="grid_6 form_container left_label">
 							<ul>
@@ -95,9 +95,9 @@
 									<input type="hidden" name="taxid" id="taxid">
 									<input type="hidden" name="jsondata" id="jsondata">
 									<fieldset>
-										<legend>{{__('tol.Basket_Information')}} </legend>
+										<legend>{{__('toneoflist.Basket_Information')}} </legend>
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">{{__('tol.Basket')}} <span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('toneoflist.Basket')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="basketid" name="basketid" tabindex="20">
 													<option></option>
@@ -110,7 +110,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">{{__('tol.Zone')}} <span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('toneoflist.Zone')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="zone" name="zone" tabindex="20">
 													<option></option>
@@ -122,7 +122,7 @@
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">{{__('tol.Property_Category')}} <span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('toneoflist.Property_Category')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="bldgcate" name="bldgcate" tabindex="20">
 													<option></option>
@@ -135,7 +135,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">{{__('tol.Property_Type')}} <span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('toneoflist.Property_Type')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="proptype" name="proptype" tabindex="20">
 													<option></option>
@@ -149,7 +149,7 @@
 
 
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">{{__('tol.Has_Building')}}<span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('toneoflist.Has_Building')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="hasbldg" name="hasbldg" tabindex="20">
 													<option></option>
@@ -164,7 +164,7 @@
 										
 
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">{{__('tol.Value')}} <span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('toneoflist.Value')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="value" name="value"  type="text"  maxlength="50" class="required"/>
 											</div>

@@ -9,7 +9,7 @@ return [
 	'Valuation_Process'=>'Valuation Process',
 	'Agenda'=>'Agenda',
 	'New_Notice'=>'New Notice',
-	'Existing_Notice'=>'Existing Notice',
+	'Existing_Notice'=>'Notice',
 	'Objection'=>'Objection',
 	'Decision'=>'Decision',
 	'Report'=>'Report',

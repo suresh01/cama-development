@@ -49,7 +49,6 @@
 						<div id="widget_tab">
 							<ul>
 								<li><a href="agenda?term={{$term}}&id={{$id}}" class="active_tab">{{__('objection.Agenda')}}</a></li>
-								<li><a href="newnotice?term={{$term}}&id={{$id}}">{{__('objection.New_Notice')}}</a></li>
 								<li><a href="notice?term={{$term}}&id={{$id}}">{{__('objection.Existing_Notice')}}</a></li>
 								<li><a href="objectionreport?term={{$term}}&id={{$id}}">{{__('objection.Objection')}}</a></li>
 								<li><a href="decision?term={{$term}}&id={{$id}}">{{__('objection.Decision')}}</a></li>

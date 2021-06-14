@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>{{__('tol.TOL_Basket_Management')}}</title>
+<title>{{__('toneoflist.TOL_Basket_Management')}}</title>
 @include('includes.header', ['page' => 'TOL'])
 	
 	<div id="content">

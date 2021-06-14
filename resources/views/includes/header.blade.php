@@ -587,6 +587,18 @@ $('.mainNav li:has(ul)').addClass('has-child');
 			            <a style="" onclick="check_access('714','borangb')" class="test" href="#">Borang B<span class="caret"></span></a>
 			        </li>
 			        <li class="dropdown-submenu">
+			            <a style="" onclick="check_access('714','r4cover')" class="test" href="#">R4 Cover<span class="caret"></span></a>
+			        </li>
+			        <li class="dropdown-submenu">
+			            <a style="" onclick="check_access('714','defunctreport')" class="test" href="#">Deactive Property List<span class="caret"></span></a>
+			        </li>
+			        <li class="dropdown-submenu">
+			            <a style="" onclick="check_access('714','ownernotice')" class="test" href="#">Notice to Owner<span class="caret"></span></a>
+			        </li>
+			        <li class="dropdown-submenu">
+			            <a style="" onclick="check_access('714','ownertransferlist')" class="test" href="#">Ownership Transfer List<span class="caret"></span></a>
+			        </li>
+			        <li class="dropdown-submenu">
 			            <a style="" onclick="check_access('714','statistical')" class="test" href="#">Simulation Function<span class="caret"></span></a>
 			        </li>
 		          	

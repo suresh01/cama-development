@@ -431,32 +431,30 @@ left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbas
              order by va_id
         ");
         $propertyDetails = Datatables::collection($group)->make(true);
-   
+        
         return $propertyDetails;
     }
 
     public function generateValuationData(Request $request)
     {        
-             //$jasper = new JasperPHP;
-
         $account = $request->input('accounts');
         $title = $request->input('title');
         $page = $request->input('page');
+        ini_set('max_execution_time', '360');
+        ini_set('memory_limit', '2056M');
+
+        //DATE_FORMAT(vt_termDate, "%d/%m/%Y") <= '01/01/2021'
         if($page == '3'){
-          $filter = " vt_termDate <='". $account."'";
+          $filter = ' "'.$account.'"';
         } else if($page == '2'){
           $filter = ' va_vt_id in ('. $account.')';
         } else{
           $filter = ' vd_va_id in ('. $account.')';
         }
        
-      /* $input = $request->input();
-            $account1 = $input['accounts'];
-        Log::info($account1);*/
-            // Compile a JRXML to Jasper
-        //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
-         Log::info(JasperPHP::process(
-            base_path('/vendor/cossou/jasperphp/examples/valuationdata_active.jasper'),
+        
+            Log::info(JasperPHP::process(
+            base_path('/reports/valuationdata_active.jasper'),
                 false,
                 array("pdf"),               
                 array("basketid" => $filter,'title'=>$title),
@@ -470,7 +468,7 @@ left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbas
 
 
       JasperPHP::process(
-            base_path('/vendor/cossou/jasperphp/examples/valuationdata_active.jasper'),
+            base_path('/reports/valuationdata_active.jasper'),
                 false,
                 array("pdf"),               
                 array("basketid" => $filter,'title'=>$title),
@@ -486,7 +484,7 @@ left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbas
               'Content-Type: application/pdf',
             );
 
-        return response()->download(base_path('/vendor/cossou/jasperphp/examples/valuationdata_active.pdf'), 'valuationdata_until_term.pdf', $headers);
+        return response()->download(base_path('/reports/valuationdata_active.pdf'), 'valuationdata_until_term.pdf', $headers);
 
     }
 
@@ -497,12 +495,23 @@ left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbas
         Log::info($account);
         $input = $request->input();
             $account1 = $input['accounts'];
-        Log::info($account1);
+        $filter = 'vd_id in ('. $account.')';
+        Log::info( JasperPHP::process(
+            base_path('/vendor/cossou/jasperphp/examples/valuation.jasper'),
+                false,
+                array("pdf"),
+                array("propid" => $filter),
+                array(
+                      'driver' => 'generic',
+                      'username' => env('DB_USERNAME',''),
+                      'password' => env('DB_PASSWORD',''),
+                      'jdbc_driver' => 'com.mysql.jdbc.Driver',
+                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
+                ))->output());
             // Compile a JRXML to Jasper
          //  JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuation.jrxml'))->execute();
 
         
-        $filter = 'vd_id in ('. $account.')';
         JasperPHP::process(
             base_path('/vendor/cossou/jasperphp/examples/valuation.jasper'),
                 false,
@@ -537,7 +546,7 @@ left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbas
         
         $filter = 'ag_id in ('. $account.')';
         JasperPHP::process(
-            base_path('/vendor/cossou/jasperphp/examples/agenda.jasper'),
+            base_path('/reports/agenda.jasper'),
                 false,
                 array("pdf"),
                 array("basketid" => $filter),
@@ -546,14 +555,14 @@ left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbas
                       'username' => env('DB_USERNAME',''),
                       'password' => env('DB_PASSWORD',''),
                       'jdbc_driver' => 'com.mysql.jdbc.Driver',
-                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
+                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
                 ))->execute();
 
         $headers = array(
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/vendor/cossou/jasperphp/examples/agenda.pdf'), 'agenda.pdf', $headers);
+        return response()->download(base_path('/reports/agenda.pdf'), 'agenda.pdf', $headers);
 
     }
 
@@ -638,8 +647,10 @@ left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbas
          //  JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuation.jrxml'))->execute();
         
         $filter = 'ol_vd_id  in ('. $account.')';
+
+        
         JasperPHP::process(
-            base_path('/vendor/cossou/jasperphp/examples/invitationletter.jasper'),
+            base_path('/reports/invitationletter.jasper'),
                 false,
                 array("pdf"),
                 array("propid" => $filter,'meetingroom' => $meetingroom,'user' => $user),
@@ -648,27 +659,16 @@ left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbas
                       'username' => env('DB_USERNAME',''),
                       'password' => env('DB_PASSWORD',''),
                       'jdbc_driver' => 'com.mysql.jdbc.Driver',
-                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
+                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
                 ))->execute();
 
-         /*Log::info( JasperPHP::process(
-            base_path('/vendor/cossou/jasperphp/examples/objection1.jasper'),
-                false,
-                array("pdf"),
-                array("propid" => $filter,'meetingroom' => $meetingroom,'user' => $user),
-                array(
-                      'driver' => 'generic',
-                      'username' => env('DB_USERNAME',''),
-                      'password' => env('DB_PASSWORD',''),
-                      'jdbc_driver' => 'com.mysql.jdbc.Driver',
-                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
-                ))->output());*/
+         
 
         $headers = array(
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/vendor/cossou/jasperphp/examples/invitationletter.pdf'), 'Objection Invitation Letter.pdf', $headers);
+        return response()->download(base_path('/reports/invitationletter.pdf'), 'Objection Invitation Letter.pdf', $headers);
 
     }
 
@@ -685,7 +685,7 @@ left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbas
         
         $filter = 'ol_vd_id in ('. $account.')';
         JasperPHP::process(
-            base_path('/vendor/cossou/jasperphp/examples/objectionlist.jasper'),
+            base_path('/reports/objectionlist.jasper'),
                 false,
                 array("pdf"),
                 array("basketid" => $filter),
@@ -701,7 +701,7 @@ left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbas
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/vendor/cossou/jasperphp/examples/objectionlist.pdf'), 'objectionlist.pdf', $headers);
+        return response()->download(base_path('/reports/objectionlist.pdf'), 'objectionlist.pdf', $headers);
 
     }
 
@@ -719,7 +719,7 @@ left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbas
         
         $filter = 'vd_id in ('. $account.')';
         JasperPHP::process(
-            base_path('/vendor/cossou/jasperphp/examples/result.jasper'),
+            base_path('/reports/result.jasper'),
                 false,
                 array("pdf"),
                 array("propid" => $filter,'user' => $user),
@@ -728,14 +728,14 @@ left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbas
                       'username' => env('DB_USERNAME',''),
                       'password' => env('DB_PASSWORD',''),
                       'jdbc_driver' => 'com.mysql.jdbc.Driver',
-                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?autoReconnect=true&useSSL=false"
+                      'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
                 ))->execute();
 
         $headers = array(
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/vendor/cossou/jasperphp/examples/result.pdf'), 'result.pdf', $headers);
+        return response()->download(base_path('/reports/result.pdf'), 'result.pdf', $headers);
 
     }
 
@@ -1857,4 +1857,491 @@ bldgcategory,bldgtype ');
         return response()->download($output_path, 'valuationform.pdf', $headers);
 
     }
+
+    public function r4cover(Redirect $request){
+      $search=DB::select(' select sd_key, sd_label, 
+          case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  , sd_keymainfield
+        from tbsearchdetail mtb where sd_se_id = "14" ');
+        
+        $config=DB::select('select config_value serveradd from tbconfig where config_name = "host" ');
+        $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser FROM tbuser');
+        foreach ($config as $obj) {    
+           $serverhost = $obj->serveradd;
+        }
+      return view('report.r4cover')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
+    }
+
+    public function r4coverDataTables(Request $request){
+        Log::info('Test');
+        ini_set('memory_limit', '2056M');
+       // $baskedid = $request->input('id');
+        $maxRow = 30;
+
+        $isfilter = $request->input('filter');
+        $filterquery = '';
+        if($isfilter == 'true'){
+            $input = $request->input();
+            $condition = $input['condition'];
+            $value = $input['value'];
+            $logic = $input['logic'];
+            $fieldcolumn = $input['field'];
+
+             foreach ($input['field'] as $fieldindex => $field) {
+                if ($fieldcolumn[$fieldindex] == "tdi_key") {
+                    $fieldcolumn[$fieldindex] = 'tbdefitems_subzone.tdi_key';
+                }/*
+                if ($fieldcolumn[$fieldindex] == "vt_id") {
+                    $fieldcolumn[$fieldindex] = '';
+                }*/
+                if($value[$fieldindex] != ""){
+                    if($fieldindex == count($input['field']) - 1) {
+                        if($fieldcolumn[$fieldindex] != ""){
+                            $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'"';
+                         }
+                    } else {
+                        if($fieldcolumn[$fieldindex] != ""){
+                           $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'" '.$logic[$fieldindex];    
+                        }   
+                    }
+                }               
+            }
+            if($filterquery != ''){
+                $filterquery  = ' AND '. $filterquery ;
+            }
+            Log::info($filterquery);
+
+        }
+       // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
+        Log::info($filterquery);
+        /* $property = DB::table('cm_appln_valdetl')->join('cm_masternZlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
+        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
+        'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
+        'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
+    // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
+      $property = DB::select('select vd_id, `cm_appln_valdetl`.`vd_accno`,`cm_masterlist`.`ma_fileno`,
+concat(`tbdefitems_subzone`.`tdi_parent_name`, "/" , `tbdefitems_subzone`.`tdi_value`) subzone,
+`cm_masterlist`.`ma_addr_ln1`,`cm_masterlist`.`ma_addr_ln2`, ma_addr_ln3, ma_addr_ln4, ma_city, ma_postcode, concat(`lotcode`.`tdi_value` , "-",al_no, "/", al_altno) lot_detail,
+`cm_appln_valdetl`.`vd_approvalstatus_id`, `cm_appln_valdetl`.`vd_id`, `cm_appln_valdetl`.`vd_va_id`, `cm_masterlist`.`ma_id`,
+`cm_masterlist`.`ma_pb_id` 
+FROM `cm_appln_valdetl`
+JOIN `cm_masterlist` ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
+join cm_appln_val on va_id = vd_va_id
+join cm_appln_lot on al_vd_id = vd_id
+LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
+left join tbdefitems as lotcode on lotcode.tdi_key = al_lotcode_id and lotcode.tdi_td_name = "LOTCODE"
+where vd_approvalstatus_id in ("07","08","09","10","11") '.$filterquery);
+       // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
+        $propertyDetails = Datatables::collection($property)->make(true);
+   
+        return $propertyDetails;
+    }
+
+
+
+    public function defunctReport(Request $request){
+        $param = $request->input('param');
+        if($param =='All') {
+          $param ='da_vt_id';
+        } else if($param ==''){
+          $param ='0';
+        }
+       // Log::info( DB::statement('call json_procedure( )'));
+        $search=DB::select(' select sd_key, sd_label, 
+          case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
+        from tbsearchdetail mtb where sd_se_id = "18" ');
+       $termcondition = "";
+        
+        $termfilter = DB::select("select vt_id termid, vt_name term, applntype.tdi_value applntype, 
+                termstage.tdi_desc termstage
+                from cm_appln_valterm
+                left join (select *  from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype
+                on applntype.tdi_key = vt_applicationtype_id
+                left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage
+                on termstage.tdi_key = vt_approvalstatus_id ". $termcondition ." order by vt_termDate desc");
+        $term = DB::select("select vt_id termid, vt_name term, applntype.tdi_value applntype, 
+                termstage.tdi_desc termstage from cm_appln_valterm 
+                left join (select *  from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype
+                on applntype.tdi_key = vt_applicationtype_id
+                left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage
+                on termstage.tdi_key = vt_approvalstatus_id 
+                 where vt_approvalstatus_id = '01' order by vt_termDate desc");
+        $group = DB::select("select da_approved,da_id, da_vt_id, applntype.tdi_value tdi_value, vt_name, da_name, DATE_FORMAT(da_createddate, '%d/%m/%Y') da_createddate, da_createdby,
+          DATE_FORMAT(da_updateddate, '%d/%m/%Y') da_updateddate, da_updateby, (select count(*) from cm_appln_deactivedetl where
+          dad_da_id = da_id) porpcount
+          from cm_appln_deactive
+          inner join cm_appln_valterm on vt_id = da_vt_id 
+          left join tbdefitems applntype on applntype.tdi_key = vt_applicationtype_id and applntype.tdi_td_name = 'APPLICATIONTYPE'
+                  where  da_vt_id = ".$param."
+                  order by da_id desc");
+        $tonebasket = DB::select("select tollist_id, concat(tollis_enforceyear,' - ',tollis_desc) tonebasket from cm_toneoflistbasket where tollis_activeind_id = 1");
+        $tonetaxbasket = DB::select("select trlist_id, concat(trlist_enforceyear,' - ',trlist_desc) tonetaxbasket from cm_taxratelistbasket where trlist_activeind_id = 1");
+
+        $propcount = DB::select('select  count(*) totproperty_count from cm_appln_valdetl 
+        inner join cm_appln_val on va_id = vd_va_id where  va_vt_id = ifnull("'.$param.'",0)');
+
+        $bldgcount = DB::select('select  count(*) bldgcount from cm_appln_bldg
+          inner join cm_appln_valdetl  on ab_vd_id = vd_id 
+          inner join cm_appln_val on va_id = vd_va_id where  va_vt_id = ifnull("'.$param.'",0) ');
+
+
+        $inspropcount = DB::select('select  count(*) inscount from cm_appln_valdetl 
+        inner join cm_appln_val on va_id = vd_va_id
+        where vd_approvalstatus_id in ("06","07","08","09","10","11","12") and  va_vt_id = ifnull("'.$param.'",0)');
+
+        $valpropcount = DB::select('select  count(*) valcount from cm_appln_valdetl 
+        inner join cm_appln_val on va_id = vd_va_id where vd_approvalstatus_id in ("08","09","10","11","12") and  va_vt_id = ifnull("'.$param.'",0)');
+        if($param =='da_vt_id') {
+          $param ='All';
+        } 
+        App::setlocale(session()->get('locale'));
+        return view("report.deactivereport")->with(array('term'=> $term,'group'=> $group,'tonebasket'=>$tonebasket,'tonetaxbasket'=>$tonetaxbasket,'propcount'=>$propcount,'bldgcount'=>$bldgcount,'inspropcount'=>$inspropcount,'valpropcount'=>$valpropcount,'termfilter' => $termfilter, 'param' => $param));
+    }
+
+
+
+    public function generateR4Cover(Request $request)
+    {        
+             //$jasper = new JasperPHP;
+        $account = $request->input('accounts');
+        
+        $filter = " vd_id in (". $account.")";
+        
+       
+      /* $input = $request->input();
+            $account1 = $input['accounts'];
+        Log::info($account1);*/
+            // Compile a JRXML to Jasper
+        //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
+         Log::info(JasperPHP::process(
+            base_path('/reports/r4cover.jasper'),
+                false,
+                array("pdf"),               
+                array("param_condition" => $filter,"logo" =>  base_path('/public/images/logo.jpeg')),
+            array(
+              'driver' => 'generic',
+              'username' => env('DB_USERNAME',''),
+              'password' => env('DB_PASSWORD',''),
+              'jdbc_driver' => 'com.mysql.jdbc.Driver',
+              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+            ))->output());
+
+      JasperPHP::process(
+            base_path('/reports/r4cover.jasper'),
+                false,
+                array("pdf"),               
+                array("param_condition" => $filter,"background" =>  base_path('/reports/images/r4cover_bg.jpg')),
+            array(
+              'driver' => 'generic',
+              'username' => env('DB_USERNAME',''),
+              'password' => env('DB_PASSWORD',''),
+              'jdbc_driver' => 'com.mysql.jdbc.Driver',
+              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+            ))->execute();
+
+       $headers = array(
+              'Content-Type: application/pdf',
+            );
+
+        return response()->download(base_path('/reports/r4cover.pdf'), 'r4cover.pdf', $headers);
+
+    }
+
+    public function generateOwnerTypeA(Request $request)
+    {        
+             //$jasper = new JasperPHP;
+        $account = $request->input('accounts');
+        
+        $filter = " vd_id in (". $account.")";
+        
+       
+      /* $input = $request->input();
+            $account1 = $input['accounts'];
+        Log::info($account1);*/
+            // Compile a JRXML to Jasper
+        //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
+         Log::info(JasperPHP::process(
+            base_path('/reports/onwertypea.jasper'),
+                false,
+                array("pdf"),               
+                array("param_condition" => $filter,"background" =>  base_path('/public/images/onwertypea.jpg')),
+            array(
+              'driver' => 'generic',
+              'username' => env('DB_USERNAME',''),
+              'password' => env('DB_PASSWORD',''),
+              'jdbc_driver' => 'com.mysql.jdbc.Driver',
+              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+            ))->output());
+
+      JasperPHP::process(
+            base_path('/reports/onwertypea.jasper'),
+                false,
+                array("pdf"),               
+                array("param_condition" => $filter,"background" =>  base_path('/reports/images/onwertypea.jpg')),
+            array(
+              'driver' => 'generic',
+              'username' => env('DB_USERNAME',''),
+              'password' => env('DB_PASSWORD',''),
+              'jdbc_driver' => 'com.mysql.jdbc.Driver',
+              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+            ))->execute();
+
+            $headers = array(
+              'Content-Type: application/pdf',
+            );
+
+        return response()->download(base_path('/reports/onwertypea.pdf'), 'Onwer Type A.pdf', $headers);
+
+    }
+
+     public function ownerNotice(Redirect $request){
+      $search=DB::select(' select sd_key, sd_label, 
+          case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  , sd_keymainfield
+        from tbsearchdetail mtb where sd_se_id = "14" ');
+        
+        $config=DB::select('select config_value serveradd from tbconfig where config_name = "host" ');
+        $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser FROM tbuser');
+        foreach ($config as $obj) {    
+           $serverhost = $obj->serveradd;
+        }
+      return view('report.ownernotice')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
+    }
+
+    public function ownerNoticeDataTables(Request $request){
+        Log::info('Test');
+        ini_set('memory_limit', '2056M');
+       // $baskedid = $request->input('id');
+        $maxRow = 30;
+
+        $isfilter = $request->input('filter');
+        $filterquery = '';
+        if($isfilter == 'true'){
+            $input = $request->input();
+            $condition = $input['condition'];
+            $value = $input['value'];
+            $logic = $input['logic'];
+            $fieldcolumn = $input['field'];
+
+             foreach ($input['field'] as $fieldindex => $field) {
+                if ($fieldcolumn[$fieldindex] == "tdi_key") {
+                    $fieldcolumn[$fieldindex] = 'tbdefitems_subzone.tdi_key';
+                }/*
+                if ($fieldcolumn[$fieldindex] == "vt_id") {
+                    $fieldcolumn[$fieldindex] = '';
+                }*/
+                if($value[$fieldindex] != ""){
+                    if($fieldindex == count($input['field']) - 1) {
+                        if($fieldcolumn[$fieldindex] != ""){
+                            $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'"';
+                         }
+                    } else {
+                        if($fieldcolumn[$fieldindex] != ""){
+                           $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'" '.$logic[$fieldindex];    
+                        }   
+                    }
+                }               
+            }
+            if($filterquery != ''){
+                $filterquery  = ' where '. $filterquery ;
+            }
+            Log::info($filterquery);
+
+        }
+       // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
+        Log::info($filterquery);
+        /* $property = DB::table('cm_appln_valdetl')->join('cm_masternZlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
+        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
+        'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
+        'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
+    // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
+      $property = DB::select('select vd_id, to_ownname, to_ownno, `cm_appln_valdetl`.`vd_accno`,`cm_masterlist`.`ma_fileno`,
+concat(`tbdefitems_subzone`.`tdi_parent_name`, "/" , `tbdefitems_subzone`.`tdi_value`) subzone,
+`cm_masterlist`.`ma_addr_ln1`,`cm_masterlist`.`ma_addr_ln2`, ma_addr_ln3, ma_addr_ln4, ma_city, ma_postcode, concat(`lotcode`.`tdi_value` , "-",al_no, "/", al_altno) lot_detail,
+`cm_appln_valdetl`.`vd_approvalstatus_id`, `cm_appln_valdetl`.`vd_id`, `cm_appln_valdetl`.`vd_va_id`, `cm_masterlist`.`ma_id`,
+`cm_masterlist`.`ma_pb_id`
+FROM `cm_appln_valdetl`
+inner join `cm_masterlist` ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
+inner join cm_owner on to_ma_id = ma_id
+inner join cm_appln_val on va_id = vd_va_id
+inner join cm_appln_lot on al_vd_id = vd_id
+LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
+left join tbdefitems as lotcode on lotcode.tdi_key = al_lotcode_id and lotcode.tdi_td_name = "LOTCODE" '.$filterquery);
+       // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
+        $propertyDetails = Datatables::collection($property)->make(true);
+   
+        return $propertyDetails;
+    }
+
+    public function generateOwnerTypeB(Request $request)
+    {        
+             //$jasper = new JasperPHP;
+        $account = $request->input('accounts');
+        $prntdate = $request->input('prntdate');
+        
+        $filter = " vd_id in (". $account.")";
+        
+       
+      /* $input = $request->input();
+            $account1 = $input['accounts'];
+        Log::info($account1);*/
+            // Compile a JRXML to Jasper
+        //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
+         Log::info(JasperPHP::process(
+            base_path('/reports/ownernoticeb.jasper'),
+                false,
+                array("pdf"),               
+                array("propid" => $filter,"p_date" =>  $prntdate),
+            array(
+              'driver' => 'generic',
+              'username' => env('DB_USERNAME',''),
+              'password' => env('DB_PASSWORD',''),
+              'jdbc_driver' => 'com.mysql.jdbc.Driver',
+              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+            ))->output());
+
+      JasperPHP::process(
+            base_path('/reports/ownernoticeb.jasper'),
+                false,
+                array("pdf"),               
+                array("propid" => $filter,"p_date" =>  $prntdate),
+            array(
+              'driver' => 'generic',
+              'username' => env('DB_USERNAME',''),
+              'password' => env('DB_PASSWORD',''),
+              'jdbc_driver' => 'com.mysql.jdbc.Driver',
+              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+            ))->execute();
+
+            $headers = array(
+              'Content-Type: application/pdf',
+            );
+
+        return response()->download(base_path('/reports/ownernoticeb.pdf'), 'Onwer Notice Type B.pdf', $headers);
+
+    }
+
+    public function ownerTransferList(Redirect $request){
+      $search=DB::select(' select sd_key, sd_label, 
+          case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
+        then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  , sd_keymainfield
+        from tbsearchdetail mtb where sd_se_id = "40" ');
+        
+        $config=DB::select('select config_value serveradd from tbconfig where config_name = "host" ');
+        $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser FROM tbuser');
+        foreach ($config as $obj) {    
+           $serverhost = $obj->serveradd;
+        }
+      return view('report.ownershiptransferlist')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
+    }
+
+    public function ownerTransferListData(Request $request){
+        Log::info('Test');
+        ini_set('memory_limit', '2056M');
+       // $baskedid = $request->input('id');
+        $maxRow = 30;
+
+        $isfilter = $request->input('filter');
+        $filterquery = '';
+        if($isfilter == 'true'){
+            $input = $request->input();
+            $condition = $input['condition'];
+            $value = $input['value'];
+            $logic = $input['logic'];
+            $fieldcolumn = $input['field'];
+
+             foreach ($input['field'] as $fieldindex => $field) {
+                if ($fieldcolumn[$fieldindex] == "tdi_key") {
+                    $fieldcolumn[$fieldindex] = 'tbdefitems_subzone.tdi_key';
+                }/*
+                if ($fieldcolumn[$fieldindex] == "vt_id") {
+                    $fieldcolumn[$fieldindex] = '';
+                }*/
+                if($value[$fieldindex] != ""){
+                    if($fieldindex == count($input['field']) - 1) {
+                        if($fieldcolumn[$fieldindex] != ""){
+                            $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'"';
+                         }
+                    } else {
+                        if($fieldcolumn[$fieldindex] != ""){
+                           $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'" '.$logic[$fieldindex];    
+                        }   
+                    }
+                }               
+            }
+            if($filterquery != ''){
+                $filterquery  = ' WHERE '. $filterquery ;
+            }
+            Log::info($filterquery);
+
+        }
+       // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
+        Log::info($filterquery);
+        /* $property = DB::table('cm_appln_valdetl')->join('cm_masternZlist', 'vd_ma_id', '=', 'ma_id')->leftJoin('cm_appln_val_tax', 'vd_id', '=', 'vt_vd_id')->leftJoin('tbdefitems_ishasbuilding', 'vd_ishasbuilding', '=', 'tbdefitems_ishasbuilding.tdi_key')->leftJoin('tbdefitems_bldgtype', 'vd_bldgtype_id', '=', 'tbdefitems_bldgtype.tdi_key')->leftJoin('tbdefitems_bldgstorey', 'vd_bldgstorey_id', '=', 'tbdefitems_bldgstorey.tdi_key')->select( 'vd_approvalstatus_id','vd_id', 'vd_va_id','ma_id', 'ma_pb_id', 'ma_fileno', 'ma_accno',
+        'ma_addr_ln1', 'tbdefitems_ishasbuilding.tdi_value' ,
+        'tbdefitems_bldgtype.tdi_value', 'tbdefitems_bldgstorey.tdi_value', 'tbdefitems_bldgtype.tdi_parent_name as bldgcategory',
+        'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
+    // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
+      $property = DB::select("select otar_id, otar_accno, grouptb.tdi_value, otar_ownertransgroup_id, date_format(otar_createdate,'%d/%m/%Y') otar_createdate, otar_createby, 'TRANSFER',
+date_format(ota_createdate,'%d/%m/%Y')  ota_createdate, ota_createby, DATEDIFF(otar_createdate, ota_createdate) + 1 days  
+from cm_ownertrans_applnreg 
+inner join cm_ownertrans_appln on ota_otar_id = otar_id
+inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and grouptb.tdi_td_name = 'USERGROUP' ".$filterquery);
+       // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
+        $propertyDetails = Datatables::collection($property)->make(true);
+   
+        return $propertyDetails;
+    }
+
+
+
+    public function generateOwnerTransferList(Request $request)
+    {        
+             //$jasper = new JasperPHP;
+        $account = $request->input('accounts');
+        //$prntdate = $request->input('prntdate');
+        
+        $filter = " otar_id in (". $account.")";
+        
+       
+      /* $input = $request->input();
+            $account1 = $input['accounts'];
+        Log::info($account1);*/
+            // Compile a JRXML to Jasper
+        //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
+         Log::info(JasperPHP::process(
+            base_path('/reports/ownershiptransferlist.jasper'),
+                false,
+                array("pdf"),               
+                array("basketid" => $filter),
+            array(
+              'driver' => 'generic',
+              'username' => env('DB_USERNAME',''),
+              'password' => env('DB_PASSWORD',''),
+              'jdbc_driver' => 'com.mysql.jdbc.Driver',
+              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+            ))->output());
+
+      JasperPHP::process(
+            base_path('/reports/ownershiptransferlist.jasper'),
+                false,
+                array("pdf"),               
+                array("basketid" => $filter),
+            array(
+              'driver' => 'generic',
+              'username' => env('DB_USERNAME',''),
+              'password' => env('DB_PASSWORD',''),
+              'jdbc_driver' => 'com.mysql.jdbc.Driver',
+              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+            ))->execute();
+
+            $headers = array(
+              'Content-Type: application/pdf',
+            );
+
+        return response()->download(base_path('/reports/ownershiptransferlist.pdf'), 'Onwership Transfer List.pdf', $headers);
+
+    }
+
 }

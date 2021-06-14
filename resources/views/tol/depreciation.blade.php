@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>{{__('tol.TOL_Depreciation')}} </title>
+<title>{{__('toneoflist.TOL_Depreciation')}} </title>
 @include('includes.header', ['page' => 'TOL'])
 	<div id="content">
 		<div class="grid_container">
@@ -13,14 +13,14 @@
 
 				<div id="breadCrumb3" class="breadCrumb grid_3">
 					<ul >
-						<li><a href="#">{{__('tol.Home')}} </a></li>
-						<li><a href="#">{{__('tol.Tone_of_List')}} </a></li>
-						<li>{{__('tol.Depreciation')}} </li>
+						<li><a href="#">{{__('toneoflist.Home')}} </a></li>
+						<li><a href="#">{{__('toneoflist.Tone_of_List')}} </a></li>
+						<li>{{__('toneoflist.Depreciation')}} </li>
 					</ul>
 				</div>
 
 
-				<button id="addtrans" onclick="openBasket()" style="float:right;" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('tol.Add_Land_Standard')}} </span></button>
+				<button id="addtrans" onclick="openBasket()" style="float:right;" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('toneoflist.Add_Land_Standard')}} </span></button>
 				<br>
 			</div>
 		
@@ -29,14 +29,14 @@
 					<table class="display data_tbl">
 					<thead style="text-align: left;">
 					<tr>
-						<th class="table_sno">{{__('tol.SNo')}} </th>
-						<th>{{__('tol.ID')}} </th>
-						<th>{{__('tol.Tone_Basket')}} Tone Basket</th>
-						<th>{{__('tol.Building_Condition')}} </th>
-						<th>{{__('tol.Value')}} </th>
-						<th>{{__('tol.Update_by_date')}}</th>
-						<th>{{__('tol.Status')}} </th>
-						<th>{{__('tol.Action')}} </th>
+						<th class="table_sno">{{__('toneoflist.SNo')}} </th>
+						<th>{{__('toneoflist.ID')}} </th>
+						<th>{{__('toneoflist.Tone_Basket')}} Tone Basket</th>
+						<th>{{__('toneoflist.Building_Condition')}} </th>
+						<th>{{__('toneoflist.Value')}} </th>
+						<th>{{__('toneoflist.Update_by_date')}}</th>
+						<th>{{__('toneoflist.Status')}} </th>
+						<th>{{__('toneoflist.Action')}} </th>
 						
 					</tr>
 					</thead>
@@ -103,7 +103,7 @@
 			<div class="widget_wrap">
 				
 				<div class="widget_content">
-					<h3 id="title">{{__('tol.Add_Basket')}} </h3>
+					<h3 id="title">{{__('toneoflist.Add_Basket')}} </h3>
 					<form id="basketform" autocomplete="off" method="post" action="#" >
 						<div  class="grid_6 form_container left_label">
 							<ul>
@@ -112,9 +112,9 @@
 									<input type="hidden" name="depreciationid" id="depreciationid">
 									<input type="hidden" name="jsondata" id="jsondata">
 									<fieldset>
-										<legend>{{__('tol.Basket_Information')}} </legend>
+										<legend>{{__('toneoflist.Basket_Information')}} </legend>
 										<div class="form_grid_12">
-											<label class="field_title" id="accnumberlbl" for="username">{{__('tol.Basket')}} <span class="req">*</span></label>
+											<label class="field_title" id="accnumberlbl" for="username">{{__('toneoflist.Basket')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="basketid" name="basketid" tabindex="20">
 													<option></option>
@@ -127,7 +127,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="lposition" for="position">{{__('tol.Building_Condition')}} <span class="req">*</span></label>
+											<label class="field_title" id="lposition" for="position">{{__('toneoflist.Building_Condition')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="bldgcond" name="bldgcond" tabindex="20">
 													<option></option>
@@ -140,7 +140,7 @@
 										</div>
 										
 										<div class="form_grid_12">
-											<label class="field_title" id="llevel" for="level">{{__('tol.Value')}}<span class="req">*</span></label>
+											<label class="field_title" id="llevel" for="level">{{__('toneoflist.Value')}}<span class="req">*</span></label>
 											<div  class="form_input">
 												<input id="value" name="value"  type="text"  maxlength="50" class="required"/>
 											</div>

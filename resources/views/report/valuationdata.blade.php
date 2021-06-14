@@ -16,7 +16,15 @@
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Report</a></li>
-						<li>Valuation Data</li>
+						@if($page==3)
+							<li>Valuation Data Until Term</li>
+						@endif	
+						@if($page==2)
+							<li>Valuation Data Selected Term</li>
+						@endif
+						@if($page==1)
+							<li>Valuation Data BY Basket</li>
+						@endif
 					</ul>
 				</div>
 				</div>
@@ -89,6 +97,7 @@
 	        	termdate= item['termDate'];
 	        	return item['termDate']
 	   		});
+
 	   		$('#page').val('{{$page}}');
 			var type = "delete";
 			if(account.length > 0) {
@@ -176,19 +185,7 @@ $(document).ready(function (){
 
 var table = $('#proptble').DataTable({
 		        "processing": false,
-		        "serverSide": false,
-		        /*"dom": '<"toolbar">frtip',*/
-		       /* "ajax": {
-		            "type": "GET",
-		            "url": 'http://localhost:8000/valuationdatatable',
-		            "contentType": 'application/json; charset=utf-8',
-				    "headers": {
-					    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-					}
-		        },*/
-									
-		       // ajax: '{{ url("inspectionproperty") }}',
-		        /*"ajax": '/bookings/datatables',*/
+		        "serverSide": false,		        
 		        "columns": [
 			        {"data": "id", "orderable": false, "searchable": false, "name":"id" },
 			        {"data": null, "name": "sno"},

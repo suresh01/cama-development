@@ -608,3 +608,27 @@ Route::get('generateinspectionform', 'ReportController@generateInspectionForm');
 
 
 Route::get('generatevaluation', 'ReportController@generateValuationR5');
+
+
+Route::get('r4cover', 'ReportController@r4cover');
+
+Route::get('generater4cover', 'ReportController@generateR4Cover');
+
+
+Route::get('r4coverdatatable', 'ReportController@r4coverDataTables');
+
+Route::get('defunctreport', 'ReportController@defunctReport');
+
+Route::get('ownernotice', 'ReportController@ownerNotice');
+
+Route::get('ownernoticedata', 'ReportController@ownerNoticeDataTables');
+
+Route::get('generateowntypa', 'ReportController@generateOwnerTypeA');
+
+Route::get('generateowntypb', 'ReportController@generateOwnerTypeB');
+
+Route::get('ownertransferlist', 'ReportController@ownerTransferList');
+
+Route::get('ownertransferlistdata', 'ReportController@ownerTransferListData');
+
+Route::get('generateownertransferlist', 'ReportController@generateOwnerTransferList');
