@@ -16,7 +16,7 @@
 					<ul>
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Report</a></li>
-						<li>Valuation Data</li>
+						<li>Valuation Data BY Basket</li>
 					</ul>
 				</div>
 				</div>
@@ -98,7 +98,7 @@
 					{type: 'button pink', text: 'Generate', click: function($noty) {
 						$noty.close();
 						$('#accounts').val(account.toString());
-						var tilte = prompt("Report Title", "STATISTIK KUTIPAN MENGIKUT KAT. BANGUNAN SEHINGGA PENGGAL "+termdate);
+						var tilte = prompt("Report Title", "SENARAI NILAIAN PINDAAN DAN HARTA BARU HARTA MAJLIS PERBANDARAN HANG TUAH JAYA BAGI PENGGAL "+termdate);
 						$('#title').val(tilte);
 						$('#generateform').submit();
 					/*	$.ajax({

@@ -91,12 +91,31 @@
 		function deleteProperty(){
 			var table = $('#proptble').DataTable();
 			var termdate = '';
+			var title_txt = '';
 //console.log(table.rows('.selected').data());termdate
-			var account = $.map(table.rows('.selected').data(), function (item) {
-				//console.log(item);
-	        	termdate= item['termDate'];
-	        	return item['termDate']
-	   		});
+			if('{{$page}}'=='2'){
+				var account = $.map(table.rows('.selected').data(), function (item) {
+					//console.log(item);
+		        	termdate= item['termDate'];
+		        	return item['vt_id']
+		   		});
+		   		title_txt="SENARAI NILAIAN PINDAAN DAN HARTA BARU HARTA MAJLIS PERBANDARAN HANG TUAH JAYA BAGI PENGGAL";
+			} else if('{{$page}}'=='1') {
+				var account = $.map(table.rows('.selected').data(), function (item) {
+					//console.log(item);
+		        	termdate= item['termDate'];
+		        	return item['va_id']
+		   		});
+		   		title_txt="SENARAI NILAIAN PINDAAN DAN HARTA BARU HARTA MAJLIS PERBANDARAN HANG TUAH JAYA BAGI PENGGAL";
+			} else {
+				var account = $.map(table.rows('.selected').data(), function (item) {
+					//console.log(item);
+		        	termdate= item['termDate'];
+		        	return item['vt_termDate']
+		   		});
+		   		title_txt="STATISTIK KUTIPAN MENGIKUT KAT. BANGUNAN SEHINGGA PENGGAL";
+			}
+			
 
 	   		$('#page').val('{{$page}}');
 			var type = "delete";
@@ -110,7 +129,7 @@
 					{type: 'button pink', text: 'Generate', click: function($noty) {
 						$noty.close();
 						$('#accounts').val(account.toString());
-						var tilte = prompt("Report Title", "STATISTIK KUTIPAN MENGIKUT KAT. BANGUNAN SEHINGGA PENGGAL "+termdate);
+						var tilte = prompt("Report Title", title_txt+" "+termdate);
 						$('#title').val(tilte);
 						$('#generateform').submit();
 					/*	$.ajax({

@@ -317,32 +317,17 @@ class ReportController extends Controller
         $statuscond ="";
 
         if($page == 3){
-          $statuscond = 'vt_approvalstatus_id = "05"' ;
+          $statuscond = 'vt_approvalstatus_id = vt_approvalstatus_id' ;
        
+        //$statuscond = 'vt_approvalstatus_id = "05"' ;
         
      
-        $group = DB::select("select vt_id as id, vt_termtype_id,vt_valbase_id, vt_id, vt_name name, vt_createby createby,  DATE_FORMAT(vt_createdate, '%d/%m/%Y') createdate, vt_updateby updateby, applntype.tdi_value applntype, 
-          DATE_FORMAT(vt_updatedate, '%d/%m/%Y')  updatedate, ifnull(propertycount,0) propertycount,DATE_FORMAT(vt_termDate, '%d/%m/%Y') termDate, 
-          DATE_FORMAT(now(), '%d/%m/%Y') enforceDate,  vt_applicationtype_id,DATE_FORMAT(vt_transferDate, '%d/%m/%Y') vt_transferDate, vt_transferby,
-          termstage.tdi_desc termstage, vt_approvalstatus_id,ap_basket_count, valbase.tdi_value valbase 
-          from cm_appln_valterm
-          inner join ( select count(*) propertycount, max(vt_termDate) termdate from cm_appln_valterm
-          inner JOIN (select va_vt_id termid from `cm_masterlist`
-          inner join cm_appln_valdetl on vd_ma_id = ma_id
-          inner join cm_appln_val on va_id = vd_va_id
-          inner join cm_appln_valterm on vt_id = va_vt_id
-          inner join v_activeterm on accno = vd_accno and v_activeterm.termdate = vt_termDate
-          left join cm_appln_deactivedetl on dad_accno = ma_accno where dad_id is null) cm_masterlist 
-          ON termid = vt_id ) termcount on termdate <= vt_termDate 
-          left join (select va_vt_id, count(*) ap_basket_count from cm_appln_val where va_approvalstatus_id = '11' group by va_vt_id) approve on approve.va_vt_id = vt_id
-          left join (select va_vt_id, count(*) basket_count from cm_appln_val group by va_vt_id) cm_appln_val on cm_appln_val.va_vt_id = vt_id
-          left join (select va_vt_id, count(vd_id) property_count from cm_appln_valdetl inner join cm_appln_val on va_id = vd_va_id
-          group by va_vt_id) cm_appln_valdetl on cm_appln_valdetl.va_vt_id = vt_id 
-          left join (select *  from tbdefitems where tdi_td_name = 'APPLICATIONTYPE') applntype
-          on applntype.tdi_key = vt_applicationtype_id
-          left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage
-          on termstage.tdi_key = vt_approvalstatus_id 
-          left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbase on valbase.tdi_key = vt_valbase_id
+        $group = DB::select("select get_activeterm_count(vt_termDate) propertycount, 
+vt_id as id, vt_termDate, vt_termtype_id,vt_valbase_id, vt_id, vt_name name, vt_createby createby,  DATE_FORMAT(vt_createdate, '%d/%m/%Y') createdate, vt_updateby updateby, 
+DATE_FORMAT(vt_updatedate, '%d/%m/%Y')  updatedate, DATE_FORMAT(vt_termDate, '%d/%m/%Y') termDate, 
+DATE_FORMAT(now(), '%d/%m/%Y') enforceDate,  vt_applicationtype_id,DATE_FORMAT(vt_transferDate, '%d/%m/%Y') vt_transferDate, vt_transferby,
+vt_approvalstatus_id
+from  cm_appln_valterm 
           where ".$statuscond." ".$filterquery."
              order by vt_id
         ");
@@ -443,18 +428,23 @@ left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbas
         ini_set('max_execution_time', '360');
         ini_set('memory_limit', '2056M');
 
+        $report_name = "";
+
         //DATE_FORMAT(vt_termDate, "%d/%m/%Y") <= '01/01/2021'
         if($page == '3'){
           $filter = ' "'.$account.'"';
+          $report_name = "valuationdata_active";
         } else if($page == '2'){
           $filter = ' va_vt_id in ('. $account.')';
+          $report_name = "valuationdata_term";
         } else{
           $filter = ' vd_va_id in ('. $account.')';
+          $report_name = "valuationdata_term";
         }
        
         
             Log::info(JasperPHP::process(
-            base_path('/reports/valuationdata_active.jasper'),
+            base_path('/reports/'.$report_name.'.jasper'),
                 false,
                 array("pdf"),               
                 array("basketid" => $filter,'title'=>$title),
@@ -468,7 +458,7 @@ left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbas
 
 
       JasperPHP::process(
-            base_path('/reports/valuationdata_active.jasper'),
+            base_path('/reports/'.$report_name.'.jasper'),
                 false,
                 array("pdf"),               
                 array("basketid" => $filter,'title'=>$title),
@@ -484,7 +474,7 @@ left join (select *  from tbdefitems where tdi_td_name = 'VALUATIONBASE') valbas
               'Content-Type: application/pdf',
             );
 
-        return response()->download(base_path('/reports/valuationdata_active.pdf'), 'valuationdata_until_term.pdf', $headers);
+        return response()->download(base_path('/reports/'.$report_name.'.pdf'), 'valuationdata.pdf', $headers);
 
     }
 
