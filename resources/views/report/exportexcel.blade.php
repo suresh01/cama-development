@@ -20,8 +20,12 @@
 				</div>
 				</div>
 				
+				<form style="display: hidden;" id="generateexcel" method="GET" action="downloadexcel">
+            @csrf
+            <input type="hidden" name="termid" id="termid">
+		</form>
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="http://{{$serverhost}}:8002/downloadexcel" onclick="exportexcel()">Generate Report</a>				@include('report.search.search',['tableid'=>'proptble', 'action' => 'exportexceltable', 'searchid' => '21'])	
+					<a href="#" onclick="exportexcel()">Generate Report</a>				@include('report.search.search',['tableid'=>'proptble', 'action' => 'exportexceltable', 'searchid' => '17'])	
 					
 				</div>
 				<br>
@@ -114,32 +118,17 @@
 										S No
 									</th>
 									<th>
-										ACCOUNT NUMBER
+										Term Name
 									</th>
 									<th>
-										ZONE
+										Term Date
 									</th>
 									<th>
-										SUBZONE
+										Enforce Date
 									</th>
 									<th>
-										BUILDING STATUS
+										Property Count
 									</th>
-									<th>
-										BUILDING CATEGORY
-									</th>
-									<th>
-										BUILDING STOREY
-									</th>
-									<th>
-										NT
-									</th>
-									<th>
-										TAX
-									</th>
-									<th>
-										RATE
-									</th>		
 								</tr>
 							</thead>
 							<tbody>			
@@ -170,16 +159,17 @@
 		}
 
 
-		function deleteProperty(){
+		function exportexcel(){
 			var table = $('#proptble').DataTable();
 //console.log(table.rows('.selected').data());
 			var account = $.map(table.rows('.selected').data(), function (item) {
 				//console.log(item);
-	        	return item['vd_id']
+	        	return item['id']
 	   		});
 			var type = "delete";
-			$('#accounts').val(account.toString());
-			$('#addDetail').modal();
+			$('#termid').val(account);
+			//$('#addDetail').modal();
+			$('#generateexcel').submit();
 			console.log(account.toString());
 			
 			
@@ -228,17 +218,12 @@ $(document).ready(function (){
 		        // ajax: '{{ url("inspectionproperty") }}',
 		        /*"ajax": '/bookings/datatables',*/
 		        "columns": [
-			        {"data": null, "orderable": false, "searchable": false, "name":"_id" },
+			        {"data": "id", "orderable": false, "searchable": false, "name":"id" },
 			        {"data": null, "name": "sno"},
-			        {"data": "ma_accno", "name": "account number"},
-			        {"data": "zone", "name": "fileno"},
-			        {"data": "subzone", "name": "zone"},
-			        {"data": "bldgstatus", "name": "zone"},
-			        {"data": "bldgcategory", "name": "zone"},
-			        {"data": "bldgstorey", "name": "zone"},
-			        {"data": "vt_approvednt", "name": "subzone","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" },
-			        {"data": "vt_approvedtax", "name": "owner","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" },
-			        {"data": "vt_approvedrate", "name": "owner","render": $.fn.dataTable.render.number( ',', '.', 2 ), "className": "number_algin" }
+			        {"data": "name", "name": "account number"},
+			        {"data": "termDate", "name": "zone"},
+			        {"data": "enforceDate", "name": "subzone"},
+			        {"data": "propertycount", "name": "subzone"}
 		   		],
 		   		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
 		   			var oSettings = this.fnSettings();

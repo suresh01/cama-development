@@ -104,6 +104,8 @@
 									<input type="text" id="notis10hijridate_{{$rec->ob_id}}" value="{{$rec->ob_notis10hijridate}}"> 
 									<input type="text" id="notis8printdate_{{$rec->ob_id}}" value="{{$rec->ob_notis8printdate}}"> 
 									<input type="text" id="enforcedate_{{$rec->ob_id}}" value="{{$rec->vt_termdate}}"> 
+									<input type="text" id="ob_noticeobjdate_{{$rec->ob_id}}" value="{{$rec->ob_noticeobjdate}}"> 
+									<input type="text" id="ob_vallistrevdate_{{$rec->ob_id}}" value="{{$rec->ob_vallistrevdate}}"> 
 								</div>
 								@endforeach						
 							</tbody>
@@ -226,6 +228,20 @@
 												<input id="notis8printdate" required="true"  name="notis8printdate" type="text"  value="{{ old('notis8printdate') }}" />
 											</div>
 											<span class=" label_intro"></span>
+										</div>								
+										<div class="form_grid_12">									
+											<label class="field_title" id="lblgroup" for="name">Objection Notice Date<span class="req">*</span></label>
+											<div class="form_input">
+												<input id="objnotisdate" required="true"  name="objnotisdate" type="text"  value="{{ old('notis10hijridate') }}" />
+											</div>
+											<span class=" label_intro"></span>
+										</div>							
+										<div class="form_grid_12">									
+											<label class="field_title" id="lblgroup" for="name">valuationlist date<span class="req">*</span></label>
+											<div class="form_input">
+												<input id="vallistdate" required="true"  name="vallistdate" type="text"  value="{{ old('notis8printdate') }}" />
+											</div>
+											<span class=" label_intro"></span>
 										</div>	
 										</fieldset>										
 									</li>
@@ -291,6 +307,8 @@
 			$("#notis10hijridate").val($("#notis10hijridate_"+id).val());
 			$("#notis8printdate").val($("#notis8printdate_"+id).val());
 			$("#enforcedate").val($("#enforcedate_"+id).val());
+			$("#objnotisdate").val($("#ob_noticeobjdate_"+id).val());
+			$("#vallistdate").val($("#ob_vallistrevdate_"+id).val());
 			
 			$("#addsubmit").html("Update");
 		 	$("label.error").remove();	
@@ -366,9 +384,9 @@
 		 	$( "#notis8date" ).datepicker({dateFormat: 'dd/mm/yy'});
 		 	//$( "#notis8hijridate" ).datepicker({dateFormat: 'dd/mm/yy'});
 		 	$( "#notis9date" ).datepicker({dateFormat: 'dd/mm/yy'});
-		 	//$( "#notis9hijridate" ).datepicker({dateFormat: 'dd/mm/yy'});
+		 	$( "#objnotisdate" ).datepicker({dateFormat: 'dd/mm/yy'});
 		 	$( "#notis10date" ).datepicker({dateFormat: 'dd/mm/yy'});
-		 	//$( "#notis10hijridate" ).datepicker({dateFormat: 'dd/mm/yy'});
+		 	$( "#vallistdate" ).datepicker({dateFormat: 'dd/mm/yy'});
 		 	$( "#notis8printdate" ).datepicker({dateFormat: 'dd/mm/yy'});
 		});
 	</script>

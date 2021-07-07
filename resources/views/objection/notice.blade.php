@@ -24,7 +24,10 @@
 				
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
 					<a href="#" onclick="deleteProperty2()" > {{__('objection.Rejection_Notice')}} </a>	
-					<a href="#" onclick="deleteProperty3()" > {{__('objection.Notice')}} </a>	
+					<a href="#" onclick="deleteProperty3(1)" >Notice 141 A </a>	
+					<a href="#" onclick="deleteProperty3(2)" >Notice 141 B</a>	
+					<a href="#" onclick="deleteProperty3(3)" >Notice 144 A</a>	
+					<a href="#" onclick="deleteProperty3(4)" >Notice 144 B</a>	
 
 					<a href="#" onclick="openNotice()" >Add Notice</a>	
 
@@ -166,6 +169,7 @@
 		 <form style="display: hidden;" id="generateform" method="GET" action="generateNotis">
             @csrf
             <input type="hidden" name="accounts" id="accounts2">
+            <input type="hidden" name="type" id="nottype">
 		</form>
 		
 		
@@ -242,14 +246,14 @@ function deleteProperty2(){
 			$('#addDetail').modal();
 			console.log(account.toString());
 }
-		function deleteProperty3(){
+		function deleteProperty3(notype){
 			var table = $('#proptble').DataTable();
 //console.log(table.rows('.selected').data());
 			var account = $.map(table.rows('.selected').data(), function (item) {
 				//console.log(item);
 	        	return item['no_vd_id']
 	   		});
-			var type = "delete";
+			//var type = "delete";
 			//$('#accounts').val(account.toString());
 			//$('#addDetail').modal();
 			console.log(account.toString());
@@ -261,6 +265,7 @@ function deleteProperty2(){
 					{type: 'button pink', text: 'Generate', click: function($noty) {
 						$noty.close();
 						$('#accounts2').val(account.toString());
+						$('#nottype').val(notype);
 						$('#generateform').submit();
 					/*	$.ajax({
 					        type:'GET',

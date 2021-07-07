@@ -103,12 +103,16 @@
 									<th class="table_sno"> {{__('objection.SNO')}}</th>
 									<th> {{__('objection.Account_number')}} </th>
 									<th> {{__('objection.Basket_Name')}} </th>
+									<th> Land Value </th>
+									<th> Building Value </th>
 									<th> {{__('objection.Proposed_NT')}} </th>
 									<th> {{__('objection.Proposed_Rate')}} </th>
 									<th> {{__('objection.Proposed_Tax')}} </th>
 									<th> {{__('objection.Valuer_Recommend')}}  </th>
 									<th> {{__('objection.Approved_NT')}}  </th>
 									<th> {{__('objection.Approved_Tax')}} </th>
+									<th> Difference </th>
+									<th> Percentage </th>
 									<th> {{__('objection.Action')}} </th>
 								</tr>
 							</thead>

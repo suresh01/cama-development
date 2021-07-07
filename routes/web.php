@@ -518,6 +518,8 @@ Route::get('exportexcel', 'ReportController@exportExcel');
 
 Route::get('exportexceltable', 'ReportController@exportExcelTables');
 
+Route::get('downloadexcel', 'ReportController@generateExcel');
+
 Route::get('districtcollection', 'ReportController@districtCollection');
 
 Route::get('districtcollectiontable', 'ReportController@districtCollectionTables');
@@ -632,3 +634,7 @@ Route::get('ownertransferlist', 'ReportController@ownerTransferList');
 Route::get('ownertransferlistdata', 'ReportController@ownerTransferListData');
 
 Route::get('generateownertransferlist', 'ReportController@generateOwnerTransferList');
+
+Route::get('pivotreport', 'ReportController@pivotReport');
+
+Route::get('generatePivotReport','ReportController@generatePivotReport');

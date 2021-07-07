@@ -215,11 +215,11 @@
 			var account = $.map(table.rows('.selected').data(), function (item) {
 	       		return item[0]
 	      	});
-			 console.log(table.rows('.selected').data());
+			// console.log(table.rows('.selected').data());
 			
 			var type = "delete";
 			
-console.log(account.toString());
+//console.log(account.toString());
 			if(account.length>0){
 				
 			var noty_id = noty({

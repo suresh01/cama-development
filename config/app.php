@@ -147,7 +147,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         
-        Yajra\Oci8\Oci8ServiceProvider::class,
+       // Yajra\Oci8\Oci8ServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -167,6 +167,9 @@ return [
 
         // datatable
         Yajra\DataTables\DataTablesServiceProvider::class,
+
+        //maat excel
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -218,7 +221,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'userpermission' => App\Http\Controllers\UserAcessController::class,
-
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

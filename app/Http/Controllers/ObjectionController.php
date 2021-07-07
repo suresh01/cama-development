@@ -83,7 +83,7 @@ class ObjectionController extends Controller
 select ob_id, vt_id,vt_name,ob_desc,ob_listyear,DATE_FORMAT(ob_meetingdate, '%d/%m/%Y') ob_meetingdate, DATE_FORMAT(ob_notis8date, '%d/%m/%Y') ob_notis8date,
 ob_notis8hijridate,DATE_FORMAT(ob_notis9date, '%d/%m/%Y') ob_notis9date,
 ob_notis9hijridate, DATE_FORMAT(ob_notis10date, '%d/%m/%Y') ob_notis10date,ob_notis10hijridate, DATE_FORMAT(ob_notis8printdate, '%d/%m/%Y') ob_notis8printdate,
-DATE_FORMAT(ob_enforcedate, '%d/%m/%Y') ob_enforcedate  ,DATE_FORMAT(vt_termdate, '%d/%m/%Y') vt_termdate 
+DATE_FORMAT(ob_enforcedate, '%d/%m/%Y') ob_enforcedate  ,DATE_FORMAT(vt_termdate, '%d/%m/%Y') vt_termdate ,DATE_FORMAT(ob_vallistrevdate, '%d/%m/%Y') ob_vallistrevdate ,DATE_FORMAT(ob_noticeobjdate, '%d/%m/%Y') ob_noticeobjdate 
 from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
            ");    
         App::setlocale(session()->get('locale'));   
@@ -210,7 +210,7 @@ from cm_objection inner join cm_appln_valterm on vt_id = ob_vt_id
         inner join cm_appln_valterm on vt_id = va_vt_id                           
         left join (select no_vd_id,ob_listyear, ob_desc from cm_objection_notis 
         inner join cm_objection on ob_id = no_ob_id) cm_objection_notice on no_vd_id = vd_id        
-        where va_approvalstatus_id in ('11')  and va_vt_id =  ".$term);
+        where va_approvalstatus_id in ('08')  and va_vt_id =  ".$term);
 
         App::setlocale(session()->get('locale'));
 
@@ -1123,7 +1123,7 @@ on bldgstorey.tdi_key = ap_propertylevel_id,
         FROM cm_objection_notis inner join cm_objection on ob_id = no_ob_id
         inner join cm_appln_valdetl on vd_id = no_vd_id
         inner join cm_appln_val on va_id = vd_va_id
-        inner join cm_appln_valterm on vt_id = va_vt_id where no_noticetype_id ='.$type.' and ob_id = '.$id.' '. $filterquery);
+        inner join cm_appln_valterm on vt_id = va_vt_id where  no_noticetype_id ='.$type.' and ob_id = '.$id.' '. $filterquery);
         
         $propertyDetails = Datatables::collection($property)->make(true);
    

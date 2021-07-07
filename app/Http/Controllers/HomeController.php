@@ -1487,7 +1487,7 @@ public function owneradddresTables(Request $request){
       $search=DB::select(' select sd_key, sd_label, 
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_id and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid ,sd_keymainfield 
-        from tbsearchdetail mtb where sd_se_id = "22" order by sd_id ');
+        from tbsearchdetail mtb where sd_se_id = "22" order by sd_sort ');
         
         $config=DB::select('select config_value serveradd from tbconfig where config_name = "host" ');
         $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser FROM tbuser');
@@ -1502,7 +1502,8 @@ public function owneradddresTables(Request $request){
      public function dataSearchTables(Request $request){
         Log::info('Test');
         ini_set('memory_limit', '2056M');
-       // $baskedid = $request->input('id');
+        ini_set('max_execution_time', '200');
+       // $baskedid = $request->input('id');max_execution_time = 30     ; 
         $maxRow = 30;
 
         $isfilter = $request->input('filter');
@@ -1548,30 +1549,33 @@ public function owneradddresTables(Request $request){
         'vt_approvednt', 'vt_approvedtax', 'vt_proposedrate', 'vt_note')->where('vd_va_id', '=', $baskedid)->paginate(15);      */     
     // $property = DB::select('select * from property where vd_approvalstatus_id = "13" '.$filterquery);
       $property = DB::select('
-      select  `cm_appln_valdetl`.`vd_accno`,`cm_masterlist`.`ma_fileno`,
-        `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone,
-        `cm_masterlist`.`ma_addr_ln1`,`cm_masterlist`.`ma_addr_ln2`, `cm_masterlist`.`ma_addr_ln3`,`cm_masterlist`.`ma_addr_ln4`, "" as owntype, 
-        "" as TO_OWNNAME,  "" as TO_OWNNO,   bldgcount, 
-        `cm_appln_valdetl`.`vd_approvalstatus_id`, `cm_appln_valdetl`.`vd_id`, `cm_appln_valdetl`.`vd_va_id`, `cm_masterlist`.`ma_id`, `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, `tbdefitems_ishasbuilding`.`tdi_value` `isbldg`,
-        `cm_masterlist`.`ma_pb_id`        , `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,bldgsotery.tdi_value bldgsotery, 
-        `vt_approvednt`, `vt_approvedtax`,  `vt_proposedrate`, `vt_note`,vt_adjustment , DATE_FORMAT(vt_termDate, "%d/%m/%Y") as vt_termDate, ma_city, ma_postcode, al_no,  state.tdi_value state, lotcode.tdi_value lotcode
-      FROM  cm_appln_valdetl
-      inner join cm_appln_val on va_id = vd_va_id  
-      inner join cm_appln_valterm  on vt_id = va_vt_id and  vt_approvalstatus_id = "05"
-      inner join v_activeterm  on accno = vd_accno and v_activeterm.termdate = vt_termDate
-      inner JOIN (select * from `cm_masterlist` left join cm_appln_deactivedetl on dad_accno = ma_accno where dad_id is null) cm_masterlist ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
-      inner join cm_appln_lot on vd_id = al_vd_id
-      LEFT JOIN `cm_appln_val_tax` ON `cm_appln_val_tax`.`vt_vd_id` = `cm_appln_valdetl`.`vd_id`
-      LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
-      -- LEFT JOIN `tbdefitems` as owntype on `TO_OWNTYPE_ID` = `owntype`.`tdi_key` and owntype.tdi_td_name = "OWNTYPE"
-      left join (select *  from tbdefitems where tdi_td_name = "PROPERTYSTAGE") propertstatus
-      on propertstatus.tdi_key = vd_approvalstatus_id 
-      left join (select *  from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgsotery
-      on bldgsotery.tdi_key = vd_bldgstorey_id 
-      LEFT JOIN `tbdefitems_ishasbuilding` ON `cm_appln_valdetl`.`vd_ishasbuilding` = `tbdefitems_ishasbuilding`.`tdi_key`
-      LEFT JOIN `tbdefitems_bldgtype` ON `tbdefitems_bldgtype`.`tdi_key` = `cm_appln_valdetl`.`vd_bldgtype_id` 
-      left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = al_lotcode_id
-      left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATE") state on state.tdi_key = ma_state_id 
+      select 
+      `cm_appln_valdetl`.`vd_accno`, `cm_masterlist`.`ma_fileno`,`SUBZONE`.`tdi_parent_name` zone, `SUBZONE`.`tdi_value` subzone,`cm_masterlist`.`ma_addr_ln1`,`cm_masterlist`.`ma_addr_ln2`, `cm_masterlist`.`ma_addr_ln3`,
+      `cm_masterlist`.`ma_addr_ln4`, ma_postcode, ma_city, ma_postcode, STATE.tdi_value state, OWNTYPE.tdi_value owntype, to_ownname  TO_OWNNAME,  TO_OWNNO TO_OWNNO,   0 bldgcount, `cm_appln_valdetl`.`vd_approvalstatus_id`, 
+      `cm_appln_valdetl`.`vd_id`, `cm_appln_valdetl`.`vd_va_id`, `cm_masterlist`.`ma_id`, `cm_masterlist`.`ma_pb_id`, `ISHASBUILDING`.`tdi_value` isbldg,`BULDINGTYPE`.`tdi_parent_name` bldgcategory, `BULDINGTYPE`.`tdi_value` bldgtype,
+      `BUILDINGSTOREY`.`tdi_value` bldgsotery,`vt_approvednt`, `vt_approvedtax`,  `vt_proposedrate`, `vt_note`,vt_adjustment , DATE_FORMAT(vt_termDate, "%d/%m/%Y") as vt_termDate,LOTCODE.tdi_value lotcode,al_no
+      from cm_appln_valdetl
+      inner join cm_appln_val on va_id = vd_va_id
+      inner join cm_appln_valterm on vt_id = va_vt_id
+      inner join cm_masterlist on vd_ma_id = ma_id
+      inner join cm_appln_lot on al_vd_id = vd_id
+      inner join cm_owner on to_ma_id = ma_id
+      inner join cm_appln_val_tax on vt_vd_id = vd_id
+      left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") SUBZONE on SUBZONE.tdi_key = ma_subzone_id
+      left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "LOTCODE") LOTCODE on LOTCODE.tdi_key = al_lotcode_id
+      left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "STATE") STATE on STATE.tdi_key = ma_state_id
+      left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "STATE") OWNSTATE on OWNSTATE.tdi_key = TO_STATE_ID
+      left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "OWNTYPE") OWNTYPE on OWNTYPE.tdi_key = TO_OWNTYPE_ID
+      left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "ISHASBUILDING") ISHASBUILDING on ISHASBUILDING.tdi_key = vd_ishasbuilding
+      left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BULDINGTYPE") BULDINGTYPE on BULDINGTYPE.tdi_key = vd_bldgtype_id
+      left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BUILDINGSTOREY") BUILDINGSTOREY on BUILDINGSTOREY.tdi_key = vd_bldgstorey_id
+      inner join (select max(vt_termDate) termdate,  vd_ma_id, vd_accno as accountno from cm_appln_valdetl
+      inner join cm_appln_val on va_id = vd_va_id
+      inner join cm_appln_valterm on vt_id = va_vt_id
+      where  vt_id  IN (select vt_id from cm_appln_valterm where vt_approvalstatus_id = "05") 
+      and vd_accno NOT IN (select cm_appln_deactivedetl.dad_accno from cm_appln_deactivedetl inner join  cm_appln_deactive on cm_appln_deactivedetl.dad_da_id = cm_appln_deactive.da_id 
+      inner join cm_appln_valterm on cm_appln_deactive.da_vt_id = cm_appln_valterm.vt_id where vt_id IN (select vt_id from cm_appln_valterm where vt_approvalstatus_id = "05") )
+      group by vd_ma_id, vd_accno) active_term on active_term.termdate = vt_termDate and active_term.accountno = cm_appln_valdetl.vd_accno 
      '.$filterquery);
        // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
         $propertyDetails = Datatables::collection($property)->make(true);

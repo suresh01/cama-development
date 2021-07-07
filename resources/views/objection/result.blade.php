@@ -232,7 +232,7 @@
 						
 						<div class="widget_content">
 							<h3 id="title">{{__('objection.Generate_Report')}} </h3>
-							<form style="" id="generateValform" method="GET" action="generateValuationForm">
+							<form style="" id="generateValform" method="GET" action="generatevaluation">
 					            @csrf
 					            <input type="hidden" name="accounts" id="accounts1">
 								<div  class="grid_12 form_container left_label">

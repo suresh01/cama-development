@@ -402,12 +402,13 @@ class PropertyRegisterationController extends Controller
         } else if ($param == 'borangb2') {
             # code...
            // Log::info('select tdi_key,tdi_value from tbdefitems WHERE tdi_td_name = "ALLOWANCETYPE" and tdi_parent_key = "'.$param_value.'" ');
-            $res_arr=DB::select("select te_id tdi_key,te_name tdi_value FROM cm_tenant, cm_appln_tenant, cm_ratepayer, cm_appln_ratepayer, cm_appln_valdetl, cm_appln_val
+            $res_arr=DB::select("select ma_accno tdi_key, CONCAT(te_name, '(', ma_accno, '), ', ma_addr_ln1, ' ', ma_addr_ln2, ' ') tdi_value   FROM cm_tenant, cm_appln_tenant, cm_ratepayer, cm_appln_ratepayer, cm_appln_valdetl, cm_appln_val, cm_masterlist
             WHERE ARP_RP_ID = rp_id and
             vd_id = ARP_VD_ID and 
             va_id = vd_va_id and
             at_vd_id = vd_id and
             at_te_id = te_id and
+            vd_ma_id = ma_id and
             va_vt_id = ".$param_value." and
             rp_type_id = '".$param_value2."'");
 

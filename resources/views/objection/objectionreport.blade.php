@@ -660,8 +660,6 @@ $(document).ready(function (){
 	                {"data": "ol_reason", "name": "subzone"},
 	                {"data": "zone", "name": "address"},
 	                {"data": "subzone", "name": "account number"},
-	                {"data": "landvalue", "name": "zone", "sClass": "numericCol"},
-	                {"data": "bldgvalue", "name": "subzone", "sClass": "numericCol"},
 	                {"data": "vt_proposednt", "name": "zone", "sClass": "numericCol"},
 	                {"data": "vt_proposedrate", "name": "subzone", "sClass": "numericCol"},
 	                {"data": "vt_proposedtax", "name": "address", "sClass": "numericCol"},
