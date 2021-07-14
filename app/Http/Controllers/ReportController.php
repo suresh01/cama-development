@@ -1656,7 +1656,7 @@ from  cm_appln_valterm ".$filterquery);
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
         from tbsearchdetail mtb where sd_se_id = "14" ');
-
+      
       $ratepayertype = DB::select("select * from tbdefitems where tdi_td_name = 'RATEPAYERTYPE'");
       $term = DB::select("select vt_id termid, vt_name term, applntype.tdi_value applntype, 
                 termstage.tdi_desc termstage from cm_appln_valterm 
@@ -1664,6 +1664,7 @@ from  cm_appln_valterm ".$filterquery);
                 on applntype.tdi_key = vt_applicationtype_id
                 left join (select *  from tbdefitems where tdi_td_name = 'TERMSTAGE') termstage
                 on termstage.tdi_key = vt_approvalstatus_id 
+                where vt_applicationtype_id = 'C' and vt_approvalstatus_id = '05'
                 order by vt_termDate desc");
         
         $ratepayer=DB::select('select  distinct te_id,te_name from cm_tenant  inner join cm_appln_tenant on at_te_id = te_id ');

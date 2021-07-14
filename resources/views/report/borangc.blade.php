@@ -51,7 +51,7 @@
 										<div class="form_grid_12">									
 											<label class="field_title" id="termname" for="termid">Ratepayer Type<span class="req">*</span></label>
 											<div class="form_input">
-												<select onchange="ratepayer(this.value)" data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="ratepayertypeid" name="ratepayertypeid" tabindex="20">
+												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="ratepayertypeid" name="ratepayertypeid" tabindex="20">
 													<option></option>
 													@foreach ($ratepayertype as $rec)
 														<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
@@ -62,7 +62,7 @@
 										</div>		
 
 
-										<div id="ratepayername" style="display: none;" class="form_grid_12">									
+										<div class="form_grid_12">									
 											<label class="field_title" id="termname" for="termid">Ratepayer Name<span class="req">*</span></label>
 											<div class="form_input">
 												<select data-placeholder="Choose a type..." style="width:100%" class="cus-select" id="ratepayername" name="ratepayername" tabindex="20">
@@ -290,7 +290,7 @@ $(document).ready(function (){
    $("#termid").change(function() {
 	    	//console.log(this.value);
 	    	var param_value = this.value;
-	    	var param = 'borangb';
+	    	var param = 'borangc';
 	        $.ajax({
 			  url: "subCategory",
 			  cache: false,
@@ -304,7 +304,7 @@ $(document).ready(function (){
 	    	//console.log(this.value);
 			var param_value2 = this.value;
 	    	var param_value = $("#termid").val();
-	    	var param = 'borangb2';
+	    	var param = 'borangc2';
 	        $.ajax({
 			  url: "subCategory",
 			  cache: false,

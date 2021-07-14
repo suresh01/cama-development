@@ -390,6 +390,27 @@ class PropertyRegisterationController extends Controller
             # code...
            // Log::info('select tdi_key,tdi_value from tbdefitems WHERE tdi_td_name = "ALLOWANCETYPE" and tdi_parent_key = "'.$param_value.'" ');
             $res_arr=DB::select('select tdi_key,tdi_value from tbdefitems WHERE tdi_td_name = "ALLOWANCETYPE" and tdi_parent_key = "'.$param_value.'" order by tdi_sort');
+        } else if ($param == 'borangc') {
+            # code...
+           // Log::info('select tdi_key,tdi_value from tbdefitems WHERE tdi_td_name = "ALLOWANCETYPE" and tdi_parent_key = "'.$param_value.'" ');
+           $res_arr=DB::select("select * from tbdefitems where tdi_td_name = 'RATEPAYERTYPE' AND tdi_key in 
+           (SELECT DISTINCT rp_type_id FROM cm_ratepayer, cm_appln_ratepayer, cm_appln_valdetl, cm_appln_val, cm_appln_valterm
+           WHERE ARP_RP_ID = rp_id AND
+           vd_id = ARP_VD_ID AND 
+           va_id = vd_va_id AND 
+           vt_id = va_vt_id AND
+           vt_termDate <= (select vt_termDate  from cm_appln_valterm where vt_id = ".$param_value." and vt_applicationtype_id ='C') and vt_approvalstatus_id = '05')"); 
+        } else if ($param == 'borangc2') {
+            # code...
+           // Log::info('select tdi_key,tdi_value from tbdefitems WHERE tdi_td_name = "ALLOWANCETYPE" and tdi_parent_key = "'.$param_value.'" ');
+           $res_arr=DB::select("select rp_id tdi_key, rp_name tdi_value   
+           FROM  cm_ratepayer where rp_id in (select arp_rp_id from  cm_appln_ratepayer, cm_appln_valdetl, cm_appln_val, cm_appln_valterm
+                      WHERE 
+                      vd_id = ARP_VD_ID and 
+                      va_id = vd_va_id and
+                      vt_id = va_vt_id and
+                      vt_termDate <= (select vt_termDate  from cm_appln_valterm where vt_id = ".$param_value." and vt_applicationtype_id ='C') and vt_approvalstatus_id = '05' and
+                      rp_type_id = '".$param_value2."')");
         } else if ($param == 'borangb') {
             # code...
            // Log::info('select tdi_key,tdi_value from tbdefitems WHERE tdi_td_name = "ALLOWANCETYPE" and tdi_parent_key = "'.$param_value.'" ');
