@@ -890,7 +890,7 @@
 
 		
 
-		$('#taxnotes').val('{{$rec -> vt_note}}');
+		//$('#taxnotes').val('{{$rec -> vt_note}}');
 	@endforeach
 
 

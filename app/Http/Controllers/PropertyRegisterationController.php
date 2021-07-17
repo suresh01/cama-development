@@ -72,7 +72,7 @@ class PropertyRegisterationController extends Controller
             $activeind=DB::table('tbdefitems')->where('tdi_td_name', "ACTIVEIND")->orderBy('tdi_sort')->pluck('tdi_value');
 
             App::setlocale(session()->get('locale'));
-            return view("propertyregister.table")->with(array('maxRow'=> $maxRow, 'district'=>$district, 'state'=> $state, 'bldgcate'=>$bldgcate,'ishasbuilding' => $ishasbuilding,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'landuse' => $landuse,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstructure,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'pb' => $pb,'activeind' => $activeind,'zone' => $zone,'subzone' => $subzone,'bldgstore' => $bldgstore,'bldgtype' => $bldgtype));                      
+            return view("propertyregister.newtable")->with(array('maxRow'=> $maxRow, 'district'=>$district, 'state'=> $state, 'bldgcate'=>$bldgcate,'ishasbuilding' => $ishasbuilding,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'landuse' => $landuse,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstructure,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'pb' => $pb,'activeind' => $activeind,'zone' => $zone,'subzone' => $subzone,'bldgstore' => $bldgstore,'bldgtype' => $bldgtype));                      
         } else {
 
             //$pb = $request->input('pb');  
@@ -177,6 +177,7 @@ class PropertyRegisterationController extends Controller
            
             foreach ($basket as $obj) {  
                $basket_name = $obj->PB_NAME;
+               $basket_type = $obj->PB_APPLICATIONTYPE_ID;
             }
             foreach ($prop as $obj) {  
                $accountnumbber = $obj->ma_accno;
@@ -184,7 +185,7 @@ class PropertyRegisterationController extends Controller
 
             App::setlocale(session()->get('locale'));
 
-            return view("propertyregister.tab")->with('district', $district)->with('state', $state)->with('zone', $zone)->with('subzone', $subzone)->with('pb', $pb)->with(array('bldgstruct'=>$bldgstruct,'bldgstore'=>$bldgstore,'ishasbuilding'=>$ishasbuilding, 'landuse'=>$landuse, 'master'=> $master, 'lotlist'=> $lotlist, 'ownerlist'=>$ownerlist, 'building'=> $building,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstruct,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'bldgcate' => $bldgcate,'bldgtype' => $bldgtype,'count' => $count, 'bldgardetail' => $bldgardetail,'prop_id' => $prop_id,'iseditable' => $iseditable,'pb_id' => $pb,'basket_name' => $basket_name,'accountnumbber' => $accountnumbber));
+            return view("propertyregister.tab")->with('district', $district)->with('state', $state)->with('zone', $zone)->with('subzone', $subzone)->with('pb', $pb)->with(array('bldgstruct'=>$bldgstruct,'bldgstore'=>$bldgstore,'ishasbuilding'=>$ishasbuilding, 'landuse'=>$landuse, 'master'=> $master, 'lotlist'=> $lotlist, 'ownerlist'=>$ownerlist, 'building'=> $building,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstruct,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'bldgcate' => $bldgcate,'bldgtype' => $bldgtype,'count' => $count, 'bldgardetail' => $bldgardetail,'prop_id' => $prop_id,'iseditable' => $iseditable,'pb_id' => $pb,'basket_name' => $basket_name,'accountnumbber' => $accountnumbber,'basket_type' => $basket_type));
         }
         
     }
@@ -524,12 +525,13 @@ $master ='{"aa":"ss '.$type.'"}';
         foreach ($basket as $obj) {  
            $basket_status = $obj->PB_APPROVALSTATUS_ID;
            $basket_name = $obj->PB_NAME;
+           $appln_type = $obj->PB_APPLICATIONTYPE_ID;
         }
 
         App::setlocale(session()->get('locale'));
             
 
-        return view("propertyregister.property")->with('pb', $pb)->with('maxRow', $maxRow)->with('propertydetail', $propertydetail)->with('basket_status', $basket_status)->with('basket_name', $basket_name);
+        return view("propertyregister.property")->with('pb', $pb)->with('maxRow', $maxRow)->with('propertydetail', $propertydetail)->with('basket_status', $basket_status)->with('basket_name', $basket_name)->with('appln_type', $appln_type);
     }
 
     public function existspropertyRegister(Request $request){

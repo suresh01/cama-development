@@ -218,6 +218,7 @@
 	});
 		
 	 function addmaster(){
+
 	    
 	    $('#masterform').validate({
 	        rules: {

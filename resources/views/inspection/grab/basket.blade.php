@@ -23,6 +23,7 @@
 									<th>{{__('inspection.Bakset_Name')}} </th>
 									<th>{{__('inspection.Property_Count')}} </th>
 									<th>{{__('inspection.Approve_By_At')}} </th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -41,6 +42,7 @@
 										{{ $rec->pb_approvedby }} /
 										{{ $rec->pb_approvedate }}
 									</td>
+									<td><span><a onclick="getSelectedProp('{{ $rec->pb_id }}')" class="action-icons c-add  addbldgarearow" href="#" title="Add Property">Add</a></span></td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -63,6 +65,27 @@
 	    window.close();
 	    return false;
   	}
+
+
+  	function getSelectedProp(id){
+		//var table = $('#proptble').DataTable();
+		
+      var type = "addpropbasket";
+   		$.ajax({
+	        type:'GET',
+	        url:'grappdata',
+	        data:{accounts:'{{$id}}',id:id,type:type},
+	        success:function(data){	        	
+	        	alert(data.newcount+" Property Added");
+	        
+	        }
+		});
+    	//console.log(ids)
+    //alert(table.rows('.selected').data().length + ' row(s) selected');
+		
+
+		//console.log(rows);
+	}
 
 </script>
 </body>

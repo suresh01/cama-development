@@ -146,12 +146,23 @@ class InspectionController extends Controller
         $desc = $request->input('desc');
         $basketid = $request->input('id');
         $type = $request->input('type');
-    	$accounts = implode(",",$accounts);
         $name=Auth::user()->name;
     	//$sql = 'call proc_grabdata("'.$accounts.'",1)';
-    	Log::info("call proc_grabdata('".$accounts."',".$basketid.",'".$name."','".$type."','".$reason."','".$desc."',@p_newprop)");
-    	$search=DB::select("call proc_grabdata('".$accounts."',".$basketid.",'".$name."','".$type."','".$reason."','".$desc."',@p_newprop)"); 
-        $result=DB::select("select @p_newprop");
+        if($type=='addpropbasket'){
+
+            Log::info("call proc_grabbasketdata('".$accounts."',".$basketid.",'".$name."','".$type."','".$reason."','".$desc."',@p_newprop)");
+            $search=DB::select("call proc_grabbasketdata('".$accounts."',".$basketid.",'".$name."','".$type."','".$reason."','".$desc."',@p_newprop)"); 
+            $result=DB::select("select @p_newprop");
+
+        } else {
+            $accounts = implode(",",$accounts);
+
+            Log::info("call proc_grabdata('',".$basketid.",'".$name."','".$type."','".$reason."','".$desc."',@p_newprop)");
+            $search=DB::select("call proc_grabdata('',".$basketid.",'".$name."','".$type."','".$reason."','".$desc."',@p_newprop)"); 
+            $result=DB::select("select @p_newprop");
+
+        }
+
         Log::info($result);
         $data = array();
         foreach ($result as $obj) {

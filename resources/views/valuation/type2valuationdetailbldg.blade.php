@@ -773,7 +773,7 @@
 		formatMoney('taxproposednt','{{$rec -> vt_proposednt}}');
 		formatMoney('taxcalculaterate','{{$rec -> vt_calculatedrate}}');
 		formatMoney('taxproposedtax','{{$rec -> vt_proposedtax}}');
-		$('#taxnotes').val('{{$rec -> vt_note}}');
+		//$('#taxnotes').val('');
 	@endforeach
 
 

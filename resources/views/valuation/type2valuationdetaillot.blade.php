@@ -935,7 +935,7 @@
 			formatMoney('taxdriverate','0');
 		@endif
 
-		$('#taxnotes').val('{{$rec -> vt_note}}');
+		//$('#taxnotes').val(');
 	@endforeach
 
 

@@ -104,7 +104,13 @@
 				</div>
 				@if($basket_status != '03')
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">
-						<a href="#" class="basic-modal"><span>{{__('propertyregister.Register_Property')}} </span></a>
+					@if($appln_type =='K')
+					<a href="#" class="basic-modal"><span>{{__('propertyregister.Register_Property')}} </span></a>
+					@endif
+
+					@if($appln_type =='C')
+					<a href="tableview?type=tab&pb_id={{$pb}}&pb={{$pb}}" ><span>{{__('propertyregister.Register_Property')}} </span></a>
+					@endif
 				</div>
 				@endif			
 				<br>
