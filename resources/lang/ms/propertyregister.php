@@ -40,6 +40,7 @@ return [
 	'Address3'=>'Tempat',		
 	'Address4'=>'Kawasan',		
 	'Owner_Count'=>'BIlangan Pemilik',
+	'addowner'=>'Add Pemilik',
 	// tab.blade.php
 	'Master_Information'=>'Induk',
 	'Owner_Information'=>'Pemilik',
@@ -142,6 +143,7 @@ return [
 	'Id_Number'=>'ID Pemilik',
 	'Address'=>'Alamat Pemilik',
 	'Tel_Number'=>'No Tel',
-	'Fax_Number'=>'No Fax'
+	'Fax_Number'=>'No Fax',
+	'SNo'=>'Bil No'
 
 ];

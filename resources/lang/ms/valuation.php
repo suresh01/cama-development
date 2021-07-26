@@ -21,7 +21,7 @@ return [
 	'Total_Buliding_Value'=>'Jumlah Nilai Bangunan',
 	'Description'=>'Keterangan',
 	'Allwoance_Cateory'=>'Kategori Elaun',
-	'Allowance_Type'=>'',
+	'Allowance_Type'=>'Elaun Type ',
 	'Calculation_Method'=>'Kaedah Pengiraan',
 	'Percentage'=>'Peratus',
 	'Value'=>'Nilai Tepat',

@@ -37,5 +37,6 @@ return [
     'Register_By'=>'Register By',
     'Register_Date'=>'Register Date',
     'Status'=>'Status',
-    'Action'=>'Action'
+    'Action'=>'Action',
+    'addapplication'=>'Add Application'
 ];

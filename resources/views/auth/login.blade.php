@@ -159,8 +159,8 @@ $(function(){
     margin-top: 10px;
     margin-right: 10px;">
       <select data-placeholder="Choose a Status..."  style="float: left;" class="cus-select"  id="lang" name="lang" tabindex="6">
-                                <option value="en">English</option>                                
-                                <option value='ms'>Malay</option>                                
+                                <option value="ms">Malay</option>                                
+                                <option value='en'>English</option>                                
                             </select>
                         </div>
             <div class="login_form">

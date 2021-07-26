@@ -37,5 +37,6 @@ return [
     'Register_By'=>'Didaftar Oleh',
     'Register_Date'=>'Didaftar Pada',
     'Status'=>'Status',
-    'Action'=>'Aksi'
+    'Action'=>'Aksi',
+    'addapplication'=>'Add Application'
 ];

@@ -21,7 +21,7 @@ return [
 	'Total_Buliding_Value'=>'Total Buliding Value',
 	'Description'=>'Description',
 	'Allwoance_Cateory'=>'Allwoance Cateory',
-	'Allowance_Type'=>'',
+	'Allowance_Type'=>'Allowance Type',
 	'Calculation_Method'=>'Calculation Method',
 	'Percentage'=>'Percentage',
 	'Value'=>'Value',

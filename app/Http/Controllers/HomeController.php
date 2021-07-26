@@ -1235,12 +1235,12 @@ public function owneradddresTables(Request $request){
       $tittle = $request->input('tittle');
       $name = $request->input('name');
       if($type == 'Successs'){
-        $jasper_path = base_path('/vendor/cossou/jasperphp/examples/ownertransfers.jasper');
-        $dowload_path = base_path('/vendor/cossou/jasperphp/examples/ownertransfers.pdf');
+        $jasper_path = base_path('/reports/ownertransfers.jasper');
+        $dowload_path = base_path('/reports/ownertransfers.pdf');
         $filename = 'OnwerTransferSuccess.pdf';
       } else {
-        $jasper_path = base_path('/vendor/cossou/jasperphp/examples/ownertransferF.jasper');
-        $dowload_path = base_path('/vendor/cossou/jasperphp/examples/ownertransferF.pdf');
+        $jasper_path = base_path('/reports/ownertransferF.jasper');
+        $dowload_path = base_path('/reports/ownertransferF.pdf');
         $filename = 'OnwerTransferFailure.pdf';
       }
           

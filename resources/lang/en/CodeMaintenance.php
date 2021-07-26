@@ -97,5 +97,7 @@ return [
 	'Lease_Information'=>'Lease Information',
 	'Tenure_Type'=>'Tenure Type',
 	'Tenure_Start_Date'=>'Tenure Start Date',
-	'Tenure_End_Date'=>'Tenure End Date'
+	'Tenure_End_Date'=>'Tenure End Date',
+	'Submit'=>'Submit',
+	'Close'=>'Close'
 ];

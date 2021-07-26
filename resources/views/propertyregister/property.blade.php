@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width"/>
-<title>{{__('propertyregister.Property_Registeration')}} </title>
+<title>{{__('propertyregister.Property_Registration')}} </title>
 <style type="text/css">
 
 #proptble td.numericCol {

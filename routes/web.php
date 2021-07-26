@@ -638,3 +638,5 @@ Route::get('generateownertransferlist', 'ReportController@generateOwnerTransferL
 Route::get('pivotreport', 'ReportController@pivotReport');
 
 Route::get('generatePivotReport','ReportController@generatePivotReport');
+
+Route::get('generateoffsReport','ReportController@officialSearchReport');

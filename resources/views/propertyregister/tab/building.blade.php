@@ -105,7 +105,7 @@
 	<div style="display:none;" id="bldgdetail" >
 		<div id="bldgform"  autocomplete="off" onsubmit="return false;" class=" left_label" method="post" action="#" >
 			<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
-				<button id="submitaddtblbldg" onclick="addbldgRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Add_New')}} New</span></button>	
+				<button id="submitaddtblbldg" onclick="addbldgRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Add_New')}} </span></button>	
 				<button id="submitedittblbldg" onclick="editbldgRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Update')}}</span></button>	
 				<button id="close" onclick="closebldg()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 			</div>
@@ -506,14 +506,14 @@
 	 	var blsgardata = [];
 		@foreach ($bldgardetail as $rec)
 				 
-			blsgardata.push( [ '{{$loop->iteration}}', $('#accnumber').val(), '{{$rec->BA_BL_ID}}', '{{$rec->artype}}','{{$rec->arcate}}','{{$rec->aruse}}','{{$rec->BA_UNITCOUNT}}','{{$rec->BA_TOTSIZE}}','{{$rec->ceilingtype}}','{{$rec->floortype}}','{{$rec->arzone}}','{{$rec->BA_AREADESC}}', '{{$rec->BA_REF}}', '{{$rec->BA_AREATYPE_ID}}','{{$rec->BA_AREACATEGORY_ID}}','{{$rec->BA_AREALEVEL_ID}}', '{{$rec->BA_AREAZONE_ID}}', '{{$rec->BA_AERAUSE_ID}}', '{{$rec->BA_AREADESC}}',  '{{$rec->BA_DIMENTION}}', '{{$rec->BA_UNITCOUNT}}', '{{$rec->BA_SIZE}}','{{$rec->BA_SIZEUNIT_ID}}', '{{$rec->BA_TOTSIZE}}', '{{$rec->BA_FLOORTYPE_ID}}','{{$rec->BA_WALLTYPE_ID}}','{{$rec->BA_CEILINGTYPE_ID}}','<span><a onclick="" class="action-icons c-edit edtbldgarrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete  deletebldgarrow" href="#" title="delete">Delete</a></span>', 'noaction','{{$rec->BA_ID}}','{{$rec->bl_bldg_no}}' ] );
+			blsgardata.push( [ '', $('#accnumber').val(), '{{$rec->BA_BL_ID}}', '{{$rec->artype}}','{{$rec->arcate}}','{{$rec->aruse}}','{{$rec->BA_UNITCOUNT}}','{{$rec->BA_TOTSIZE}}','{{$rec->ceilingtype}}','{{$rec->floortype}}','{{$rec->arzone}}','{{$rec->BA_AREADESC}}', '{{$rec->BA_REF}}', '{{$rec->BA_AREATYPE_ID}}','{{$rec->BA_AREACATEGORY_ID}}','{{$rec->BA_AREALEVEL_ID}}', '{{$rec->BA_AREAZONE_ID}}', '{{$rec->BA_AERAUSE_ID}}', '{{$rec->BA_AREADESC}}',  '{{$rec->BA_DIMENTION}}', '{{$rec->BA_UNITCOUNT}}', '{{$rec->BA_SIZE}}','{{$rec->BA_SIZEUNIT_ID}}', '{{$rec->BA_TOTSIZE}}', '{{$rec->BA_FLOORTYPE_ID}}','{{$rec->BA_WALLTYPE_ID}}','{{$rec->BA_CEILINGTYPE_ID}}','<span><a onclick="" class="action-icons c-edit edtbldgarrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete  deletebldgarrow" href="#" title="delete">Delete</a></span>', 'noaction','{{$rec->BA_ID}}','{{$rec->bl_bldg_no}}' ] );
 	    @endforeach
 			var groupColumn = 4;
 		 $('#bldgartable1').DataTable({
         	data:           blsgardata,
             "columns":[ null, { "visible": false }, { "visible": false }, null, null, null, null, null,null, null, null, null, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, null,{ "visible": false },{ "visible": false }],
             "sPaginationType": "full_numbers",
-			"iDisplayLength": 5,
+			"iDisplayLength": 10,
 			"oLanguage": {
 		        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
 		    },
@@ -525,17 +525,24 @@
 	            var api = this.api();
 	            var rows = api.rows( {page:'current'} ).nodes();
 	            var last=null;
+	            var iDisplayIndex = 0;
 	 
 	            api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
 	                if ( last !== group ) {
 	                    $(rows).eq( i ).before(
 	                        '<tr class="group"><td colspan="5">'+group+'</td></tr>'
 	                    );
+
+	                   
 	 
 	                    last = group;
 	                }
 	            } );
-	        }
+	        },
+	        "fnRowCallback" : function(nRow, aData, iDisplayIndex){
+                $("td:first", nRow).html(iDisplayIndex +1);
+               return nRow;
+            },
 			 
 		});
 
@@ -650,7 +657,7 @@
 
 	 	var blsgdata = [];
 		@foreach ($building as $rec)
-			blsgdata.push( [ '{{$loop->iteration}}', "<a class='shobldg' onclick='showBldgAr({{$rec->BL_ID}})' href='#' >{{ $rec->BL_BLDG_NO}}<input type='hidden' value='{{ $rec->BL_BLDGTYPE_ID}}' id='bldgtype_{{$rec->BL_ID}}'><input type='hidden' value='{{ $rec->bldgcategory_id}}' id='bldgcategory_{{$rec->BL_ID}}'><input type='hidden' value='{{ $rec->BL_BLDG_NO}}' id='{{$rec->BL_ID}}'></a>", '{{$rec->BL_BLDG_NO}}','{{$rec->bldgcategory}} / {{$rec->bldgtype}}','{{$rec->bldgstorey}}','{{$rec->bldgstr}}','{{$rec->rootype}}','{{$rec->BL_BLDGTYPE_ID}}', '{{$rec->BL_BLDGSTOREY_ID}}', '{{$rec->BL_BLDGCONDN_ID}}', '{{$rec->BL_BLDGPOSITION_ID}}', '{{$rec->BL_BLDGSTRUCTURE_ID}}', '{{$rec->BL_ROOFTYPE_ID}}', '{{$rec->BL_WALLTYPE_ID}}','{{$rec->BL_FLOORTYPE_ID}}',  '{{$rec->BL_CCCDATE}}', '{{$rec->BL_OCCUPIEDDATE}}','@if($rec->BL_ISMAINBLDG_ID == 0) N @endif @if($rec->BL_ISMAINBLDG_ID == 1) Y @endif','<span><a onclick="" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span><span><a onclick="openbldgarea({{$rec->BL_ID}})" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span>&nbsp;&nbsp;&nbsp;<span><a onclick="" class="action-icons c-delete  deletebldgrow" href="#" title="delete">Delete</a></span>','noation', '{{$rec->BL_ID}}',account]);
+			blsgdata.push( [ '{{$loop->iteration}}', "<a class='shobldg' onclick='showBldgAr({{$rec->BL_ID}})' href='#' >{{ $rec->BL_BLDG_NO}}<input type='hidden' value='{{ $rec->BL_BLDGTYPE_ID}}' id='bldgtype_{{$rec->BL_ID}}'><input type='hidden' value='{{ $rec->bldgcategory_id}}' id='bldgcategory_{{$rec->BL_ID}}'><input type='hidden' value='{{ $rec->BL_BLDG_NO}}' id='{{$rec->BL_ID}}'></a>", '{{$rec->BL_BLDG_NO}}','{{$rec->bldgcategory}} / {{$rec->bldgtype}}','{{$rec->bldgstorey}}','{{$rec->bldgstr}}','{{$rec->rootype}}','{{$rec->BL_BLDGTYPE_ID}}', '{{$rec->BL_BLDGSTOREY_ID}}', '{{$rec->BL_BLDGCONDN_ID}}', '{{$rec->BL_BLDGPOSITION_ID}}', '{{$rec->BL_BLDGSTRUCTURE_ID}}', '{{$rec->BL_ROOFTYPE_ID}}', '{{$rec->BL_WALLTYPE_ID}}','{{$rec->BL_FLOORTYPE_ID}}',  '{{$rec->BL_CCCDATE}}', '{{$rec->BL_OCCUPIEDDATE}}','{{$rec->BL_ISMAINBLDG_ID}}','<span><a onclick="" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span><span><a onclick="openbldgarea({{$rec->BL_ID}})" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span>&nbsp;&nbsp;&nbsp;<span><a onclick="" class="action-icons c-delete  deletebldgrow" href="#" title="delete">Delete</a></span>','noation', '{{$rec->BL_ID}}',account]);
 
 		@endforeach
 
@@ -971,6 +978,7 @@
 		$("#addbldg").hide();
 		$("#bldgtable").hide();
 		$('#artype').val('');
+		$('#reffinfo').val('');
 		//$('#arlevel').val('');
 		$('#arcate').val('');
 		$('#arzone').val('');
@@ -982,7 +990,7 @@
 		$('#uom').val('');
 		$('#totsize').val('');
 		$('#fltype').val('');
-		$('#walltype').val('');
+		$('#dwalltype').val('');
 		$('#celingtype').val('');
 	}
 

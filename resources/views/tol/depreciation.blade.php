@@ -31,7 +31,7 @@
 					<tr>
 						<th class="table_sno">{{__('toneoflist.SNo')}} </th>
 						<th>{{__('toneoflist.ID')}} </th>
-						<th>{{__('toneoflist.Tone_Basket')}} Tone Basket</th>
+						<th>{{__('toneoflist.Tone_Basket')}} </th>
 						<th>{{__('toneoflist.Building_Condition')}} </th>
 						<th>{{__('toneoflist.Value')}} </th>
 						<th>{{__('toneoflist.Update_by_date')}}</th>
@@ -69,7 +69,7 @@
 							<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editBasket('{{ $rec->tdepre_id }}')" href='#' title="{{__('common.Edit')}}"></a></span>&nbsp;&nbsp;
 								<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block;'  onclick="deleteBasket('{{ $rec->tdepre_id }}')" href='#' title="{{__('common.Delete')}}"></a></span>
 								
-								 <span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tdepre_id}}',1)"  title="{{__('common.Submit_To_Approve')}}" href="#"></a></span>'						
+								 <span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tdepre_id}}',1)"  title="{{__('common.Submit_To_Approve')}}" href="#"></a></span>					
 							@elseif($rec->tdepre_approvaltdeprestatus_id == '2')
 								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tdepre_id}}',2,1)"  title="{{__('common.Approve')}} " href="#"></a></span>
 								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->tdepre_id}}',2,2)"  title="{{__('common.Reject')}} " href="#"></a></span>

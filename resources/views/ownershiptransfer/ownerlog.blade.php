@@ -315,10 +315,12 @@ $(document).ready(function (){
 							abdstr="<a href='#' style='	width: 14px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -963px -2px;!important;display: inline-block; float: left;' title='Retry Transfer' onclick='Resend("+data.ota_id+")'></a>";
 								//return abdstr;
 						} else {
-				        	if(data.ota_transtocenterstatus_id == 3) {
-								return "<a href='#'  style='	width: 14px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -843px -102px!important;display: inline-block; float: left;' title='Success Report' onclick='reportSuccess("+data.otar_accno+")'></a>"+abdstr;
-							} else if(data.ota_transtocenterstatus_id == 5) {
-								return "<a href='#' style='	width: 16px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -983px -102px;!important;display: inline-block; float: left;'  title='Rejected Report' onclick='reportFailure("+data.otar_accno+")'></a>"+abdstr;
+							if(data.otar_ownertranstype_id == 1 || data.otar_ownertranstype_id == 2) {
+					        	if(data.otar_ownertransstatus_id == 5 || data.otar_ownertransstatus_id == 7 || data.otar_ownertransstatus_id == 8 || data.otar_ownertransstatus_id == 9) {
+									return "<a href='#'  style='	width: 14px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -843px -102px!important;display: inline-block; float: left;' title='Success Report' onclick='reportSuccess("+data.otar_accno+")'></a>"+abdstr;
+								} else if(data.otar_ownertransstatus_id == 3 || data.otar_ownertransstatus_id == 6) {
+									return "<a href='#' style='	width: 16px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -983px -102px;!important;display: inline-block; float: left;'  title='Rejected Report' onclick='reportFailure("+data.otar_accno+")'></a>"+abdstr;
+								}
 							}
 						}
 			        	return '';

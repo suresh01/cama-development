@@ -97,5 +97,7 @@ return [
 	'Lease_Information'=>'Maklumat Pajakan',
 	'Tenure_Type'=>'Jenis Pajakan',
 	'Tenure_Start_Date'=>'Tarikh Mula',
-	'Tenure_End_Date'=>'Tarikh Tamat'
+	'Tenure_End_Date'=>'Tarikh Tamat',
+	'Submit'=>'Submit',
+	'Close'=>'Close
 ];

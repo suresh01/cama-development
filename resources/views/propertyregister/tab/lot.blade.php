@@ -540,6 +540,7 @@ function addlotRow(){
 							//$('#').val($('#landrt'+id).val());
 							$('#tentype').val($('#tnttype'+id).val());
 							$('#tenduration').val($('#tnttime'+id).val());
+							$('#stratano').val('43234');
 							//$('#').val($('#sdate'+id).val());
 							//$('#').val($('#edate'+id).val());
 							$('#status').val($('#status'+id).val());	
@@ -571,6 +572,7 @@ function addlotRow(){
 							$('#roadtype').val('');
 							$('#roadcate').val('');
 							$('#landuse').val('');
+							$('#stratano').val('');
 							//$('#').val($('#lanex'+id).val());
 							//$('#').val($('#landrt'+id).val());
 							$('#tentype').val('');

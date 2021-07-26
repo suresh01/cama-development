@@ -2546,4 +2546,52 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
 
     }
 
+
+    public function officialSearchReport(Request $request)
+    {        
+             //$jasper = new JasperPHP;
+        $account = $request->input('accounts');
+        
+        $filter = " os_id in (". $account.")";
+        
+       
+      /* $input = $request->input();
+            $account1 = $input['accounts'];
+        Log::info($account1);*/
+            // Compile a JRXML to Jasper
+        //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
+         Log::info(JasperPHP::process(
+            base_path('/reports/officialsearch.jasper'),
+                false,
+                array("pdf"),               
+                array("propid" => $filter),
+            array(
+              'driver' => 'generic',
+              'username' => env('DB_USERNAME',''),
+              'password' => env('DB_PASSWORD',''),
+              'jdbc_driver' => 'com.mysql.jdbc.Driver',
+              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+            ))->output());
+
+      JasperPHP::process(
+            base_path('/reports/officialsearch.jasper'),
+                false,
+                array("pdf"),               
+                array("propid" => $filter),
+            array(
+              'driver' => 'generic',
+              'username' => env('DB_USERNAME',''),
+              'password' => env('DB_PASSWORD',''),
+              'jdbc_driver' => 'com.mysql.jdbc.Driver',
+              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+            ))->execute();
+
+            $headers = array(
+              'Content-Type: application/pdf',
+            );
+
+        return response()->download(base_path('/reports/officialsearch.pdf'), 'Official Search.pdf', $headers);
+
+    }
+
 }

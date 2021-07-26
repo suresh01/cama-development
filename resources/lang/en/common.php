@@ -33,6 +33,8 @@ return [
     'Transaction_Date'=>'Transaction Date',
     'Tranaction_Value'=>'Tranaction Value',
     'Reference_No'=>'Reference No',
-    'Register'=>'Register'
+    'Register'=>'Register',
+    'Pending'=>'PENDING',
+    'Count'=>'COUNT'
 
 ];

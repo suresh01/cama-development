@@ -201,8 +201,30 @@
 		//alert(index);
 	//	if(index < 0){
 			var t = $('#invesitgatetable').DataTable();
+			var finreason1 = 0;
+			var finreason2 = 0;
+			var finreason3 = 0;
+			var finreason4 = 0;
+			var finreason5 = 0;
+
+			if($('#finreason1').is(":checked")) {
+				finreason1 = 1;
+			}
+
+			if($('#finreason2').is(":checked")) {
+				finreason2 = 1;
+			}
+			if($('#finreason3').is(":checked")) {
+				finreason3 = 1;
+			}
+			if($('#finreason4').is(":checked")) {
+				finreason4 = 1;
+			}
+			if($('#finreason5').is(":checked")) {
+				finreason5 = 1;
+			}
 				
-			t.row.add([ 'New', $('#instype option:selected').text(), $('#insofficer option:selected').text(), $('#insvdate').val(),  '<span><a onclick="" class="action-icons c-edit editrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deleterow " href="#" title="delete">Delete</a></span>','new',$('#insid').val(), $('#instype').val(),$('#insofficer').val(),$('#review').val(),$('#finreason1').val(),$('#finreason2').val(),$('#finreason3').val(),$('#finreason4').val(),$('#finreason5').val() ]).draw( false );			
+			t.row.add([ 'New', $('#instype option:selected').text(), $('#insofficer option:selected').text(), $('#insvdate').val(),  '<span><a onclick="" class="action-icons c-edit editrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deleterow " href="#" title="delete">Delete</a></span>','new',$('#insid').val(), $('#instype').val(),$('#insofficer').val(),$('#review').val(),finreason1,finreason2,finreason3,finreason4,finreason5 ]).draw( false );			
 			
 		//} else {
 		//	editINSRow();
@@ -320,9 +342,28 @@
 			operation = "New";
 			operation_code = "new";
 		}
+		var finreason1 = 0;
+		var finreason2 = 0;
+		var finreason3 = 0;
+		var finreason4 = 0;
+		var finreason5 = 0;
 
-
-		data=[operation,$('#instype option:selected').text(),  $('#insofficer option:selected').text(), $('#insvdate').val(),  '<span><a onclick="" class="action-icons c-edit editrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deleterow " href="#" title="delete">Delete</a></span>',operation_code,$('#insid').val(), $('#instype').val(),$('#insofficer').val(),$('#review').val(),$('#finreason1').val(),$('#finreason2').val(),$('#finreason3').val(),$('#finreason4').val(),$('#finreason5').val() ];
+		if($('#finreason1').is(":checked")) {
+			finreason1 = 1;
+		}
+		if($('#finreason2').is(":checked")) {
+			finreason2 = 1;
+		}
+		if($('#finreason3').is(":checked")) {
+			finreason3 = 1;
+		}
+		if($('#finreason4').is(":checked")) {
+			finreason4 = 1;
+		}
+		if($('#finreason5').is(":checked")) {
+			finreason5 = 1;
+		}
+		data=[operation,$('#instype option:selected').text(),  $('#insofficer option:selected').text(), $('#insvdate').val(),  '<span><a onclick="" class="action-icons c-edit editrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deleterow " href="#" title="delete">Delete</a></span>',operation_code,$('#insid').val(), $('#instype').val(),$('#insofficer').val(),$('#review').val(),finreason1,finreason2,finreason3,finreason4,finreason5];
 		
 		row.data(data);
 		closeIns();

@@ -82,7 +82,7 @@
 				<div style="float:right;margin-right: 30px;"  class="btn_24_blue">
 
 					@include('officialsearch.search')
-					<a href="#" onclick="addApplication()">{{__('officialsearch.Date')}} Add Application</a>
+					<a href="#" onclick="addApplication()">{{__('officialsearch.addapplication')}}</a>
 					
 				</div>
 				<br>
@@ -134,11 +134,54 @@
 		
 		
 	</div>
-
+<form style="display: hidden;" id="generatereport" method="GET" action="generateoffsReport">
+            @csrf
+            <input type="hidden" name="accounts" id="accounts">
+		</form>
 
 	<span class="clear"></span>
 	
 	<script>
+
+
+		function generateReport(id){
+			var table = $('#proptble').DataTable();
+
+			 var account = $.map(table.rows('.selected').data(), function (item) {
+		       return item['os_id']
+		      });
+			 console.log(table.rows('.selected').data());
+			
+			var type = "delete";
+			
+			
+			
+			if(account.length<1){
+				$('#accounts').val(id);
+			} else {
+				$('#accounts').val(account.toString());
+			}
+
+			var noty_id = noty({
+				layout : 'center',
+				text: 'Are want to Generate Report?',
+				modal : true,
+				buttons: [
+					{type: 'button pink', text: 'Generate', click: function($noty) {
+						$noty.close();
+					//	$('#accounts').val(account.toString());
+						$('#generatereport').submit();
+					  }
+					},
+					{type: 'button blue', text: 'Cancel', click: function($noty) {
+						$noty.close();
+					  }
+					}
+					],
+				 type : 'success', 
+			 });
+			
+			}
 		
 		function approve(id,currstatus){
 
@@ -395,7 +438,7 @@ var table = $('#proptble').DataTable({
 								action =   '<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('+data.os_id+',2,1)"  title="Approve" href="#"></a></span>' + 
 								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('+data.os_id+',2,2)"  title="Reject" href="#"></a></span>';							
 							} else if(data.os_officialsearchstatus_id == '3'){
-								action =  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -142px !important;display: inline-block; float: left;" onclick="print('+data.os_id+',1)"  title="Print" href="#"></a></span>';
+								action =  '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -142px !important;display: inline-block; float: left;" onclick="generateReport('+data.os_id+')"  title="Print" href="#"></a></span>';
 						
 							} else if(data.os_officialsearchstatus_id == '4'){
 								action =  editaction +   '<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('+data.os_id+',1)"  title="Submit To Approve" href="#"></a></span>';
@@ -434,11 +477,12 @@ var table = $('#proptble').DataTable({
 			"drawCallback": function ( settings ) {
 	            var api = this.api();
 	            var rows = api.rows( {page:'current'} ).nodes();
-	            var last=null;
+	            var last="";
 	 
-	            api.column(2, {page:'current'} ).data().each( function ( group, i ) {
+	            api.column(2, {page:'current'} ).data().each( function (group, i ) {
 	            	
 	                if ( last !== group ) {
+
 	                    $(rows).eq( i ).before(
 	                        '<tr class="group"><td colspan="5">'+group+'</td></tr>'
 	                    );

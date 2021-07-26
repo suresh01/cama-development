@@ -40,6 +40,7 @@ return [
 	'Address3'=>'Address 3',		
 	'Address4'=>'Address 4',		
 	'Owner_Count'=>'Owner Count',
+	'addowner'=>'Add Owner',
 	// tab.blade.php
 	'Master_Information'=>'Master Information',
 	'Owner_Information'=>'Owner Information',
@@ -142,6 +143,6 @@ return [
 	'Id_Number'=>'Id Number',
 	'Address'=>'Address',
 	'Tel_Number'=>'Tel Number',
-	'Fax_Number'=>'Fax Number'
-
+	'Fax_Number'=>'Fax Number',
+	'SNo'=>'SNo'
 ];

@@ -60,28 +60,28 @@
 							<div class="social_activities">
 					<div class="comments_s">
 						<div class="block_label">
-							{{__('objection.Application_Type')}} Agenda Count<span>@foreach ($agendacnt as $rec)
+							{{__('objection.Agenda_Count')}} <span>@foreach ($agendacnt as $rec)
 										{{$rec->agenda_count}}									
 									@endforeach	</span>
 						</div>
 					</div>
 					<div class="comments_s">
 						<div class="block_label">
-							{{__('objection.Application_Type')}} Property Count<span>@foreach ($propcnt as $rec)
+							{{__('objection.Property_Count')}} <span>@foreach ($propcnt as $rec)
 										{{$rec->property_count}}
 									@endforeach	</span>
 						</div>
 					</div>
 					<div class="views_s">
 						<div class="block_label">
-							{{__('objection.Application_Type')}} Notice Count<span>@foreach ($notiscnt as $rec)
+							{{__('objection.Notice_Count')}} <span>@foreach ($notiscnt as $rec)
 										{{$rec->notis_count}}
 									@endforeach	</span>
 						</div>
 					</div>
 					<div class="comments_s">
 						<div class="block_label">
-							{{__('objection.Application_Type')}} Objection Count<span>@foreach ($objectioncnt as $rec)
+							{{__('objection.Objection_Count')}} <span>@foreach ($objectioncnt as $rec)
 										{{$rec->objection_count}}
 									@endforeach	</span>
 						</div>

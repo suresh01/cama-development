@@ -1,11 +1,11 @@
  
 						<div id="tab3">
-							<h4>{{__('propertyregister.Application_Type')}} Owner</h4>
+							<h4>{{__('propertyregister.Application_Type')}} </h4>
 								<p>
-									{{__('propertyregister.Application_Type')}} Account Number = <span id="ownerlabel"></span>
+									{{__('propertyregister.Account_Number')}}  = <span id="ownerlabel"></span>
 								</p>
 
-							@if($iseditable == 1)<button onclick="openowner()" id="addowner" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('propertyregister.Application_Type')}} Add Owner</span></button>@endif
+							@if($iseditable == 1)<button onclick="openowner()" id="addowner" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('propertyregister.addowner')}}</span></button>@endif
 
 								<div id="ownertable" class="widget_wrap">					
 									<div class="widget_content">						
