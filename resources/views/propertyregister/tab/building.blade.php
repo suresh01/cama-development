@@ -256,10 +256,11 @@
 						<div class="form_grid_12">
 							<label class="field_title" id="lposition" for="position">{{__('propertyregister.Main_Building')}}<span class="req">*</span></label>
 							<div  class="form_input">
-								<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="mainbldg" name="mainbldg" tabindex="1">
-									<option></option>
-									<option value='Y'>Y</option>
-									<option value='N'>N</option>
+								<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="mbldg" name="mbldg" tabindex="1">
+									<option></option>			
+									@foreach ($mbldg as $rec)
+											<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+									@endforeach	
 									
 								</select>									
 							</div>
@@ -653,11 +654,11 @@
 			 
 		});*/
 		var account = $('#accnumber').val();
-		let bldgmap = new Map([["0","sno"],["1", "url"],["2", "bldgnum"],["3", "bldgnum1"],["4", "bldgnum2"],["5", "bldgnum3"],["6", "bldgnum4"],  ["7", "bldgttype"],["8", "bldgstorey"], ["9", "bldgcond"],["10", "bldgpos"], ["11", "bldgstructure"],["12", "rooftype"], ["13", "walltype"],["14", "floortype"], ["15", "cccdt"],["16", "occupieddt"],["17", "mainbldg"],["18", "action"],["19", "actioncode"],["20", "bldgid"],["21","bldgaccnum"]]);
+		let bldgmap = new Map([["0","sno"],["1", "url"],["2", "bldgnum"],["3", "bldgnum1"],["4", "bldgnum2"],["5", "bldgnum3"],["6", "bldgnum4"],  ["7", "bldgttype"],["8", "bldgstorey"], ["9", "bldgcond"],["10", "bldgpos"], ["11", "bldgstructure"],["12", "rooftype"], ["13", "walltype"],["14", "floortype"], ["15", "cccdt"],["16", "occupieddt"],["17", "mainbldg"],["18", "action"],["19", "actioncode"],["20", "bldgid"],["21","bldgaccnum"],["22","mbldg"]]);
 
 	 	var blsgdata = [];
 		@foreach ($building as $rec)
-			blsgdata.push( [ '{{$loop->iteration}}', "<a class='shobldg' onclick='showBldgAr({{$rec->BL_ID}})' href='#' >{{ $rec->BL_BLDG_NO}}<input type='hidden' value='{{ $rec->BL_BLDGTYPE_ID}}' id='bldgtype_{{$rec->BL_ID}}'><input type='hidden' value='{{ $rec->bldgcategory_id}}' id='bldgcategory_{{$rec->BL_ID}}'><input type='hidden' value='{{ $rec->BL_BLDG_NO}}' id='{{$rec->BL_ID}}'></a>", '{{$rec->BL_BLDG_NO}}','{{$rec->bldgcategory}} / {{$rec->bldgtype}}','{{$rec->bldgstorey}}','{{$rec->bldgstr}}','{{$rec->rootype}}','{{$rec->BL_BLDGTYPE_ID}}', '{{$rec->BL_BLDGSTOREY_ID}}', '{{$rec->BL_BLDGCONDN_ID}}', '{{$rec->BL_BLDGPOSITION_ID}}', '{{$rec->BL_BLDGSTRUCTURE_ID}}', '{{$rec->BL_ROOFTYPE_ID}}', '{{$rec->BL_WALLTYPE_ID}}','{{$rec->BL_FLOORTYPE_ID}}',  '{{$rec->BL_CCCDATE}}', '{{$rec->BL_OCCUPIEDDATE}}','{{$rec->BL_ISMAINBLDG_ID}}','<span><a onclick="" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span><span><a onclick="openbldgarea({{$rec->BL_ID}})" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span>&nbsp;&nbsp;&nbsp;<span><a onclick="" class="action-icons c-delete  deletebldgrow" href="#" title="delete">Delete</a></span>','noation', '{{$rec->BL_ID}}',account]);
+			blsgdata.push( [ '{{$loop->iteration}}', "<a class='shobldg' onclick='showBldgAr({{$rec->BL_ID}})' href='#' >{{ $rec->BL_BLDG_NO}}<input type='hidden' value='{{ $rec->BL_BLDGTYPE_ID}}' id='bldgtype_{{$rec->BL_ID}}'><input type='hidden' value='{{ $rec->bldgcategory_id}}' id='bldgcategory_{{$rec->BL_ID}}'><input type='hidden' value='{{ $rec->BL_BLDG_NO}}' id='{{$rec->BL_ID}}'></a>", '{{$rec->BL_BLDG_NO}}','{{$rec->bldgcategory}} / {{$rec->bldgtype}}','{{$rec->bldgstorey}}','{{$rec->bldgstr}}','{{$rec->rootype}}','{{$rec->BL_BLDGTYPE_ID}}', '{{$rec->BL_BLDGSTOREY_ID}}', '{{$rec->BL_BLDGCONDN_ID}}', '{{$rec->BL_BLDGPOSITION_ID}}', '{{$rec->BL_BLDGSTRUCTURE_ID}}', '{{$rec->BL_ROOFTYPE_ID}}', '{{$rec->BL_WALLTYPE_ID}}','{{$rec->BL_FLOORTYPE_ID}}',  '{{$rec->BL_CCCDATE}}', '{{$rec->BL_OCCUPIEDDATE}}','{{$rec->astatus}}','<span><a onclick="" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span><span><a onclick="openbldgarea({{$rec->BL_ID}})" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span>&nbsp;&nbsp;&nbsp;<span><a onclick="" class="action-icons c-delete  deletebldgrow" href="#" title="delete">Delete</a></span>','noation', '{{$rec->BL_ID}}',account,'{{$rec->BL_ISMAINBLDG_ID}}']);
 
 		@endforeach
 
@@ -665,9 +666,9 @@
 
 	    $('#bldgtble').DataTable({
 	        data:           blsgdata,
-	        "columns":[ null, null, { "visible": false }, null, null, null, null,{ "visible": false },  { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, null, null, null, null, { "visible": false }, { "visible": false }, { "visible": false }],
+	        "columns":[ null, null, { "visible": false }, null, null, null, null,{ "visible": false },  { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, null, null, null, null, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }],
 	        "sPaginationType": "full_numbers",
-			"iDisplayLength": 5,
+			"iDisplayLength": 10,
         	"bAutoWidth": false,
 			"oLanguage": {
 		        "sLengthMenu": "<span class='lenghtMenu'> _MENU_</span><span class='lengthLabel'>Entries per page:</span>",	
@@ -857,7 +858,7 @@
 			//var row = table.row(table.row( $(this).parents('tr') ).index()),
 			//data = row.data();
 			var updatebldgno = $('#bldgnum').val();
-			data=[operation,'<a class="shobldg" onclick="showBldgAr('+$('#bldgid').val()+')" href="#">'+updatebldgno+'</a><input type="hidden" value="'+$('#bldgcate').val()+'" id="bldgcategory_'+temp_id+'"><input type="hidden" value="'+$('#bldgttype').val()+'" id="bldgtype_'+$('#bldgid').val()+'"><input type="hidden" value="'+updatebldgno+'" id="'+$('#bldgid').val()+'">', updatebldgno, $('#bldgcate option:selected').text() +' / '+ $('#bldgttype option:selected').text(), $('#bldgstorey option:selected').text(), $('#bldgstructure option:selected').text(),$('#rooftype option:selected').text(), $('#bldgttype').val(), $('#bldgstorey').val(),  $('#bldgcond').val(), $('#bldgpos').val(), $('#bldgstructure').val(),$('#rooftype').val(), $('#walltype').val(), $('#floortype').val(),$('#cccdt').val(), $('#occupieddt').val(), $('#mainbldg').val(), '<span><a onclick="" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span><span><a onclick="openbldgarea('+$('#bldgid').val()+')" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span>&nbsp;&nbsp;&nbsp;<span><a onclick="" class="action-icons c-delete  deletebldgrow" href="#" title="delete">Delete</a></span>',operation_code, temp_id, account ];
+			data=[operation,'<a class="shobldg" onclick="showBldgAr('+$('#bldgid').val()+')" href="#">'+updatebldgno+'</a><input type="hidden" value="'+$('#bldgcate').val()+'" id="bldgcategory_'+temp_id+'"><input type="hidden" value="'+$('#bldgttype').val()+'" id="bldgtype_'+$('#bldgid').val()+'"><input type="hidden" value="'+updatebldgno+'" id="'+$('#bldgid').val()+'">', updatebldgno, $('#bldgcate option:selected').text() +' / '+ $('#bldgttype option:selected').text(), $('#bldgstorey option:selected').text(), $('#bldgstructure option:selected').text(),$('#rooftype option:selected').text(), $('#bldgttype').val(), $('#bldgstorey').val(),  $('#bldgcond').val(), $('#bldgpos').val(), $('#bldgstructure').val(),$('#rooftype').val(), $('#walltype').val(), $('#floortype').val(),$('#cccdt').val(), $('#occupieddt').val(), $('#mbldg option:selected').text(), '<span><a onclick="" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span><span><a onclick="openbldgarea('+$('#bldgid').val()+')" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span>&nbsp;&nbsp;&nbsp;<span><a onclick="" class="action-icons c-delete  deletebldgrow" href="#" title="delete">Delete</a></span>',operation_code, temp_id, account, $('#mbldg').val() ];
 
 
 			var parenttable = $('#bldgartable1').DataTable();
@@ -913,6 +914,7 @@
 	            //console.log(key);            
 	            });
         	}
+        	
         	if(!duplicate){
 				var operation = $("#lot_operation").val();
 				//console.log(operation);
@@ -928,7 +930,7 @@
 				var bldgtta = $('#bldgtble').DataTable();
 				/*bldgtta.row.add(['New','<a class="shobldg" onclick="showBldgAr('+temp_id+')" href="#">'+updatebldgno+'</a><input type="hidden" value="'+$('#bldgttype').val()+'" id="bldgtype_'+$('#bldgid').val()+'"><input type="hidden" value="'+updatebldgno+'" id="'+$('#bldgid').val()+'">', updatebldgno,$('#bldgttype option:selected').text(), $('#bldgstorey option:selected').text(), $('#bldgstructure option:selected').text(),$('#rooftype option:selected').text(),  $('#bldgttype').val(), $('#bldgstorey').val(),  $('#bldgcond').val(), $('#bldgpos').val(), $('#bldgstructure').val(),$('#rooftype').val(), $('#walltype').val(), $('#floortype').val(),$('#cccdt').val(), $('#occupieddt').val(), $('#mainbldg').val(),'<span><a onclick="" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span><span><a onclick="openbldgarea('+temp_id+')" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span>&nbsp;&nbsp;&nbsp;<span><a onclick="" class="action-icons c-delete  deletebldgrow" href="#" title="delete">Delete</a></span>', 'new', $('#bldgid').val(),account ]).draw(false);
 			*/
-				bldgtta.row.add(['New','<a class="shobldg" onclick="showBldgAr('+temp_id+')" href="#">'+updatebldgno+'</a><input type="hidden" value="'+$('#bldgcate').val()+'" id="bldgcategory_'+temp_id+'"><input type="hidden" value="'+$('#bldgttype').val()+'" id="bldgtype_'+$('#bldgid').val()+'"><input type="hidden" value="'+updatebldgno+'" id="'+$('#bldgid').val()+'">', updatebldgno,$('#bldgcate option:selected').text() +' / '+ $('#bldgttype option:selected').text(), $('#bldgstorey option:selected').text(), $('#bldgstructure option:selected').text(),$('#rooftype option:selected').text(),  $('#bldgttype').val(), $('#bldgstorey').val(),  $('#bldgcond').val(), $('#bldgpos').val(), $('#bldgstructure').val(),$('#rooftype').val(), $('#walltype').val(), $('#floortype').val(),$('#cccdt').val(), $('#occupieddt').val(), $('#mainbldg').val(),'<span><a onclick="" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span><span><a onclick="openbldgarea('+temp_id+')" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span>&nbsp;&nbsp;&nbsp;<span><a onclick="" class="action-icons c-delete  deletebldgrow" href="#" title="delete">Delete</a></span>', 'new', temp_id,account ]).draw(false);
+				bldgtta.row.add(['New','<a class="shobldg" onclick="showBldgAr('+temp_id+')" href="#">'+updatebldgno+'</a><input type="hidden" value="'+$('#bldgcate').val()+'" id="bldgcategory_'+temp_id+'"><input type="hidden" value="'+$('#bldgttype').val()+'" id="bldgtype_'+$('#bldgid').val()+'"><input type="hidden" value="'+updatebldgno+'" id="'+$('#bldgid').val()+'">', updatebldgno,$('#bldgcate option:selected').text() +' / '+ $('#bldgttype option:selected').text(), $('#bldgstorey option:selected').text(), $('#bldgstructure option:selected').text(),$('#rooftype option:selected').text(),  $('#bldgttype').val(), $('#bldgstorey').val(),  $('#bldgcond').val(), $('#bldgpos').val(), $('#bldgstructure').val(),$('#rooftype').val(), $('#walltype').val(), $('#floortype').val(),$('#cccdt').val(), $('#occupieddt').val(), $('#mbldg option:selected').text(),'<span><a onclick="" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span><span><a onclick="openbldgarea('+temp_id+')" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span>&nbsp;&nbsp;&nbsp;<span><a onclick="" class="action-icons c-delete  deletebldgrow" href="#" title="delete">Delete</a></span>', 'new', temp_id,account, $('#mbldg').val() ]).draw(false);
 				
 				alert('Record is successfully added');
 
@@ -1136,6 +1138,28 @@ function editbldgarRow() {
 	}
 
 	function openbldg(){
+
+		$('#masterid').val('');
+		$("#bldgaccnum").val('');
+		$('#bldg_masterid').val('');
+		$('#bldgnum').val('');
+		$('#bldgttype').val('');
+		//$('#lotnum').val($('#city'+id).val());
+		$('#bldgstorey').val('');
+		$('#bldgcond').val('');
+		$('#bldgpos').val('');
+		$('#bldgstructure').val('');
+		$('#rooftype').val('');
+		$('#walltype').val('');
+		$('#cccdt').val('');
+		$('#occupieddt').val('');
+
+
+
+		$('#bldgcate').val('');
+		$('#floortype').val('');
+		$('#mbldg').val('');
+
 		$("#bldgareatable").hide();
 		$('#propertyregsitration_from-back-3').hide();
 		addDisableTab();
@@ -1143,6 +1167,10 @@ function editbldgarRow() {
 		$('#submitedittblbldg').hide();
 		$("#bldgareatable1").hide();
 		$('#submitaddtblbldg').show();
+
+					
+		
+
 		//$("#bldg_operation").val(1);
 		$("#bldgaccnum").val($('#accnumber').val());
 		$("#bldgdetail").show();

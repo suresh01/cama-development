@@ -231,17 +231,20 @@ var validateBldg = function() {
         for (var i = 0;i<$('#bldgtble').DataTable().rows().count();i++){
             var ldata = $('#bldgtble').DataTable().row(i).data();
             //var tempdata1 = {};
+            console.log(ldata);
             $.each(ldata, function( key, value ) {
-                if (value == 'Y'){
+                if (key == 22){
                     mainbldg = value; 
-                    mainbldgnumber = ldata[20]; 
+                    mainbldgnumber = ldata[2]; 
                 }          
             });
         }
+        console.log(mainbldgnumber);
+        console.log($('#bldgnum').val());
         //alert(mainbldgnumber);
         //alert($('#bldgnum').val());
-        if (mainbldgnumber !== $('#bldgtemp').val()){
-            if(mainbldg == 'Y' && $('#mainbldg').val() == 'Y'){
+        if (mainbldgnumber !== $('#bldgnum').val()){
+            if(mainbldg == '1' && $('#mbldg').val() == '1'){
 
                 alert('Only one building should be main building');
                 $('#mainbldg').focus();
