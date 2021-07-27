@@ -111,7 +111,7 @@
 
 											@if($rec->otar_ownertransstatus_id == '3' || $rec->otar_ownertransstatus_id == '6')
 
-												<a href='#' style='	width: 16px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -983px -102px;!important;display: inline-block; float: left;'  title='Rejected Report'></a>
+												<a href='#' style='	width: 16px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -983px -102px;!important;display: inline-block; float: left;' onclick='reportFailure("{{$rec->otar_id}}")'  title='Rejected Report'></a>
 											@endif
 
 											@if($rec->otar_ownertransstatus_id == '4' || $rec->otar_ownertransstatus_id == '5' || $rec->otar_ownertransstatus_id == '7' || $rec->otar_ownertransstatus_id == '8' || $rec->otar_ownertransstatus_id == '9')
@@ -181,13 +181,12 @@
 					            <input type="hidden" name="accountnumber" id="accountnumber">
 								<div  class="grid_12 form_container left_label">
 									<ul>
-										<li>
-											
+										<li>											
 											<fieldset>
 												<legend>Additional Information</legend>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="lposition" for="position">VALUER TITTLE<span class="req">*</span></label>
+													<label class="field_title" id="lposition" for="position">VALUER NAME<span class="req">*</span></label>
 													<div  class="form_input">
 														<select data-placeholder="Choose a Status..." onchange="getposition()" style="width:100%" class="cus-select"  id="tittle" tabindex="7" name="tittle" tabindex="20">
 																<option></option>
@@ -200,16 +199,13 @@
 												</div>
 												
 												<div class="form_grid_12">
-													<label class="field_title" id="llevel" for="level">VALUER NAME<span class="req">*</span></label>
+													<label class="field_title" id="llevel" for="level">VALUER TITTLE<span class="req">*</span></label>
 													<div  class="form_input">
 														<input id="name" name="name"  type="text"  maxlength="50" class="required"/>
 													</div>
 													<span class=" label_intro"></span>
-												</div>
-											
-											</fieldset>
-
-					
+												</div>											
+											</fieldset>					
 										</li>
 									</ul>
 								</div>

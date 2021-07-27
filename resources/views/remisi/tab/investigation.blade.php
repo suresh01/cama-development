@@ -179,6 +179,8 @@
 		$('#finreason2').val('');
 		$('#finreason3').val('');
 		$('#finreason4').val('');
+
+
 		$('#review').val('');
 		$('#propertyinspectionform-back-2').hide();
 		$('#propertyinspectionform-next-2').hide();
@@ -186,6 +188,12 @@
 		$('#addform').show();
 		$('#addbtn').show();
 		$('#updatebtn').hide();
+
+		$("#uniform-finreason1").find('span').attr("class", "");
+		$("#uniform-finreason2").find('span').attr("class", "");
+		$("#uniform-finreason3").find('span').attr("class", "");
+		$("#uniform-finreason4").find('span').attr("class", "");
+		$("#uniform-finreason5").find('span').attr("class", "");
 	}
 	function closeIns(){
 		//alert();
@@ -206,6 +214,8 @@
 			var finreason3 = 0;
 			var finreason4 = 0;
 			var finreason5 = 0;
+
+
 
 			if($('#finreason1').is(":checked")) {
 				finreason1 = 1;
@@ -277,6 +287,12 @@
 			$('#instableindex').val(table.row( $(this).parents('tr') ).index());
 			var lotdata = {};
 			
+			$("#uniform-finreason1").find('span').attr("class", "");
+			$("#uniform-finreason2").find('span').attr("class", "");
+			$("#uniform-finreason3").find('span').attr("class", "");
+			$("#uniform-finreason4").find('span').attr("class", "");
+			$("#uniform-finreason5").find('span').attr("class", "");
+			
 			$.each( ldata, function( key, value ) {
 
 				lotdata[invesitagemap.get(""+key+"")] = value;              
@@ -290,6 +306,8 @@
             	if(key.includes("finreason") && val ==1) {
 	            	var checkbox = $("#uniform-"+key).find('span');
 					checkbox.attr("class", "checked");
+
+					$("#"+key+":checkbox").attr("checked","checked");
 				}
 			});
 

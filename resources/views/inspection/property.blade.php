@@ -231,7 +231,7 @@
 							<div class="form_grid_12 multiline">
 								<div class="form_input">
 									<div class="form_grid_6">
-										<select onchange="regirect()" data-placeholder="{{__('common.Choose_a_Custom')}}..." style="width:100%" class="cus-select field" id="stage" name="stage" tabindex="20">
+										<select onchange="regirect(this.value)" data-placeholder="{{__('common.Choose_a_Custom')}}..." style="width:100%" class="cus-select field" id="stage" name="stage" tabindex="20">
 											<option value="#">{{__('inspection.Please_select_Stage')}} </option>
 											<option value="inspection">{{__('inspection.Inspection')}}</option>				
 											<option value="valuationdetail">{{__('inspection.Valuation')}} </option>						
@@ -279,8 +279,8 @@ function showCheckboxes() {
 
 		}
 
-		function regirect(){
-			var url = $('#stage').val();
+		function regirect(url){
+			//var url = $('#stage').val();
 			var basket = $('#basket').val();
 			var property = $('#property').val();
 			var propstatus = $('#propstatus').val();

@@ -615,6 +615,8 @@ left join (SELECT * FROM tbdefitems where tdi_td_name = "APPLICATIONTYPE") appln
         $bldgallowance_param = $request->input('bldgallowancedata');
         $taxdata = $request->input('taxdata');
         $name=Auth::user()->name;
+
+        DB::connection()->getPdo()->quote("'");
         //Log::info($taxdata);
         Log::info("call proc_manaualvaluation( '".$lot_param."', '".$bldg_param."', '".$lotarea_param."','".$additional_param."', '".$bldgarea_param."', '".$bldgallowance_param."',  '".$taxdata."', '".$name."',".$prop_id.")");
         $response = DB::select("call proc_manaualvaluation( '".$lot_param."', '".$bldg_param."', '".$lotarea_param."', '".$additional_param."', '".$bldgarea_param."', '".$bldgallowance_param."', '".$taxdata."', '".$name."',".$prop_id.")"); 
@@ -632,6 +634,8 @@ left join (SELECT * FROM tbdefitems where tdi_td_name = "APPLICATIONTYPE") appln
         $bldgallowance_param = $request->input('bldgallowancedata');
         $taxdata = $request->input('taxdata');
         $name=Auth::user()->name;
+        
+        DB::connection()->getPdo()->quote("'");
         //Log::info($taxdata);
         Log::info("call proc_manaualvaluation_v2( '".$lot_param."', '".$bldg_param."', '".$lotarea_param."','".$additional_param."', '".$bldgarea_param."', '".$bldgallowance_param."',  '".$taxdata."', '".$name."',".$prop_id.")");
         $response = DB::select("call proc_manaualvaluation_v2( '".$lot_param."', '".$bldg_param."', '".$lotarea_param."', '".$additional_param."', '".$bldgarea_param."', '".$bldgallowance_param."', '".$taxdata."', '".$name."',".$prop_id.")"); 

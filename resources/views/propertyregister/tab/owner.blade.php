@@ -65,7 +65,7 @@
 									<fieldset>
 										<legend>{{__('propertyregister.Owner_Information')}}</legend>
 										<div class="form_grid_12">
-											<label class="field_title" id="lusername" for="username">{{__('propertyregister.Application_TypeOwner_Application_Type')}} <span class="req">*</span></label>
+											<label class="field_title" id="lusername" for="username">{{__('propertyregister.Owner_Application_Type')}} <span class="req">*</span></label>
 											<div  class="form_input">
 												<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="ownaplntype" name="ownaplntype" tabindex="1">
 													<option></option>

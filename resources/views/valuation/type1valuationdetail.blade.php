@@ -857,7 +857,6 @@
 
 		
 
-		//$('#taxnotes').val('');
 	@endforeach
 
 

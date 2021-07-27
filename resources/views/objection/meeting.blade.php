@@ -34,7 +34,7 @@
 					<div id="breadCrumb3"  class="breadCrumb grid_4">
 						<ul >
 							<li><a href="#">{{__('objection.Home')}} </a></li>
-							<li><a href="#">{{__('objection.ValuaNoticetion_Process')}} </a></li>
+							<li><a href="#">{{__('objection.Valuation_Process')}} </a></li>
 							<li>{{__('objection.Meeting')}} </li>
 						</ul>
 					</div>

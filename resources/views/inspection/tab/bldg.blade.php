@@ -277,7 +277,7 @@
 	<div style="display:none;" id="bldgardetail1" >
 								<div id="bldgarform" autocomplete="off" onsubmit="return false;" class="form_container left_label" method="post" action="#" >
 									<div style="height: 48px; display: -webkit-box;text-align: -webkit-right;" class="grid_12">
-									<button id="submitaddtblbldgar" onclick="addbldgarRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Add_New')}} New</span></button>	
+									<button id="submitaddtblbldgar" onclick="addbldgarRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Add_New')}}</span></button>	
 									<button id="submitedittblbldgar" onclick="editbldgarRow()" style="display:none" name="adduser" type="button" class="btn_small btn_blue"><span>{{__('common.Update')}}</span></button>	
 								<button id="close" onclick="closebldgar()" name="close" type="button" class="btn_small btn_blue"><span>{{__('common.Close')}}</span></button>
 								</div>
@@ -511,8 +511,11 @@
 	                    last = group;
 	                }
 	            } );
-	        }
-			 
+	        },			 
+	        "fnRowCallback" : function(nRow, aData, iDisplayIndex){
+                $("td:first", nRow).html(iDisplayIndex +1);
+               return nRow;
+            },
 		});
 
 
