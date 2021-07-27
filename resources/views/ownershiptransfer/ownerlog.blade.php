@@ -113,7 +113,7 @@
 												<div class="form_grid_12">
 													<label class="field_title" id="lposition" for="position">VALUER TITTLE<span class="req">*</span></label>
 													<div  class="form_input">
-														<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="tittle" tabindex="7" name="tittle" tabindex="20">
+														<select data-placeholder="Choose a Status..." onchange="getposition()"  style="width:100%" class="cus-select"  id="tittle" tabindex="7" name="tittle" tabindex="20">
 																<option></option>
 															@foreach ($userlist as $rec)
 																	<option value='{{ $rec->usr_position }}'>{{ $rec->tbuser }}</option>
@@ -164,6 +164,20 @@
 			$('#type').val('Fail');
 			$('#accountnumber').val(accno);
 			$('#addDetail').modal();
+		}
+
+		function getposition(){
+			var userid = $('#tittle').val();
+			$('#username').val($("#tittle option:selected").text());
+			$.ajax({
+		        type:'GET',
+		        url:'/getuserdetail',
+		        data:{id:userid},
+		        success:function(data){	        	
+		        	console.log(data);
+		        	$('#name').val(data.userposition);
+		        }
+		    });
 		}
 
 		function Resend(id){

@@ -126,7 +126,7 @@
 										<div class="form_grid_12">
 											<label class="field_title" id="lposition" for="position">CITY<span class="req">*</span></label>
 											<div  class="form_input">
-												<input id="city"  name="city" tabindex="1" type="text"  maxlength="50" class=""/>
+												<input id="city"  name="city" tabindex="1"  value="{{$owner->TO_CITY}}"  readonly="true" type="text"  maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
@@ -160,7 +160,7 @@
 											<div class="form_grid_12">
 												<label class="field_title" id="llevel" for="level">Email ID<span class="req">*</span></label>
 												<div  class="form_input">
-													<input id="emailid" name="emailid" tabindex="1" type="text" value="" maxlength="" class=""/>
+													<input id="emailid" name="emailid" tabindex="1" type="text" value="{{$owner->TO_EMAIL}}"  readonly="true" value="" maxlength="" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
@@ -505,7 +505,7 @@
 								<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">REQUEST DATE<span class="req">*</span></label>
 										<div  class="form_input">
-										<input id="reqdate"  value="{{$owner->ota_applydate}}"  name="reqdate" class="" type="text"  maxlength="50" />
+										<input id="reqdate"  value="{{$owner->applydate}}"  name="reqdate" class="" type="text"  maxlength="50" />
 										</div>
 										<span class=" label_intro"></span>
 								</div>
@@ -513,7 +513,7 @@
 								<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">ACCEPT DATE<span class="req">*</span></label>
 										<div  class="form_input">
-										<input id="addacceptdt" readonly="" name="addacceptdt" class="" type="text"  value="{{$owner->ota_recievedate}}"   maxlength="50" />
+										<input id="addacceptdt" readonly="" name="addacceptdt" class="" type="text"  value="{{$owner->recievedate}}"   maxlength="50" />
 										</div>
 										<span class=" label_intro"></span>
 								</div>
@@ -521,7 +521,7 @@
 								<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">TRANSACTION DATE<span class="req">*</span></label>
 										<div  class="form_input">
-										<input id="addtrndate"  value="{{$owner->ota_transactiondate}}"  name="addtrndate" class="" type="text"  maxlength="50" />
+										<input id="addtrndate"  value="{{$owner->transactiondate}}"  name="addtrndate" class="" type="text"  maxlength="50" />
 										</div>
 										<span class=" label_intro"></span>
 								</div>
@@ -575,7 +575,7 @@
 											
 											<div style="width: 20%;" class="form_input ">
 												<span>
-												<input name="reason1" value="1" class="checkbox reason" type="checkbox"  tabindex="7">
+												<input name="reason1" id="reason1" value="1" class="checkbox reason" type="checkbox"  tabindex="7">
 												
 												</span>
 											</div>
@@ -588,7 +588,7 @@
 											
 											<div style="width: 20%;" class="form_input ">
 												<span>
-												<input name="reason2" value="1" class="checkbox reason" type="checkbox"  tabindex="7">
+												<input name="reason2" value="1" id="reason2" class="checkbox reason" type="checkbox"  tabindex="7">
 												
 												</span>
 											</div>
@@ -601,7 +601,7 @@
 											
 											<div style="width: 20%;" class="form_input ">
 												<span>
-												<input name="reason3" value="1" class="checkbox reason" type="checkbox"  tabindex="7">
+												<input name="reason3" value="1" id="reason3" class="checkbox reason" type="checkbox"  tabindex="7">
 												
 												</span>
 											</div>
@@ -614,7 +614,7 @@
 											
 											<div style="width: 20%;" class="form_input ">
 												<span>
-												<input name="reason4" value="1" class="checkbox reason" type="checkbox"  tabindex="7">												
+												<input name="reason4" value="1" id="reason4" class="checkbox reason" type="checkbox"  tabindex="7">												
 												</span>
 											</div>
 										</div>
@@ -626,7 +626,7 @@
 											
 											<div style="width: 20%;" class="form_input ">
 												<span>
-												<input name="reason5" value="1" class="checkbox reason" type="checkbox"  tabindex="7">
+												<input name="reason5" value="1" id="reason5" class="checkbox reason" type="checkbox"  tabindex="7">
 												
 												</span>
 											</div>
@@ -639,7 +639,7 @@
 											
 											<div style="width: 20%;" class="form_input ">
 												<span>
-												<input name="reason6" value="1" class="checkbox reason" type="checkbox"  tabindex="7">
+												<input name="reason6" value="1" id="reason6" class="checkbox reason" type="checkbox"  tabindex="7">
 												
 												</span>
 											</div>
@@ -652,7 +652,7 @@
 											
 											<div style="width: 20%;" class="form_input ">
 												<span>
-												<input name="reason7" value="1" class="checkbox reason" type="checkbox"  tabindex="7">
+												<input name="reason7" value="1" id="reason7" class="checkbox reason" type="checkbox"  tabindex="7">
 												
 												</span>
 											</div>
@@ -665,7 +665,7 @@
 											
 											<div style="width: 20%;" class="form_input ">
 												<span>
-												<input name="reason8" value="1" class="checkbox reason" type="checkbox"  tabindex="7">
+												<input name="reason8" value="1" id="reason8" class="checkbox reason" type="checkbox"  tabindex="7">
 												
 												</span>
 											</div>
@@ -678,7 +678,7 @@
 											
 											<div style="width: 20%;" class="form_input ">
 												<span>
-												<input name="reason9" value="1" class="checkbox reason" type="checkbox"  tabindex="7">
+												<input name="reason9" value="1" id="reason9" class="checkbox reason" type="checkbox"  tabindex="7">
 												
 												</span>
 											</div>
@@ -691,7 +691,7 @@
 											
 											<div style="width: 20%;" class="form_input ">
 												<span>
-												<input name="reason10" value="1" class="checkbox reason" type="checkbox"  tabindex="7">
+												<input name="reason10" value="1" id="reason10" class="checkbox reason" type="checkbox"  tabindex="7">
 												
 												</span>
 											</div>
@@ -723,6 +723,62 @@
 						 			$( "#reqdate" ).datepicker({dateFormat: 'dd/mm/yy'});
 						 			$("#addacceptdt").val('{{$owner->otar_createdate}}');
 						 			$("#addref").val('{{$owner->ma_fileno}}');
+
+
+						 			if('{{$owner->ota_rejectreason1}}' == 1){				
+										var to_replace = $("#uniform-reason1").find('span');
+										to_replace.attr("class", "checked");
+										$("#reason1:checkbox").attr("checked","checked");
+										$("#reason1").val('{{$owner->ota_rejectreason1}}');
+									} 
+						 			if('{{$owner->ota_rejectreason2}}' == 1){				
+										var to_replace = $("#uniform-reason2").find('span');
+										to_replace.attr("class", "checked");
+										$("#reason2:checkbox").attr("checked","checked");
+										$("#reason2").val('{{$owner->ota_rejectreason2}}');
+									} 
+						 			if('{{$owner->ota_rejectreason3}}' == 1){				
+										var to_replace = $("#uniform-reason3").find('span');
+										to_replace.attr("class", "checked");
+										$("#reason3:checkbox").attr("checked","checked");
+										$("#reason3").val('{{$owner->ota_rejectreason3}}');
+									} 
+						 			if('{{$owner->ota_rejectreason4}}' == 1){				
+										var to_replace = $("#uniform-reason4").find('span');
+										to_replace.attr("class", "checked");
+										$("#reason4:checkbox").attr("checked","checked");
+										$("#reason4").val('{{$owner->ota_rejectreason4}}');
+									} 
+						 			if('{{$owner->ota_rejectreason5}}' == 1){				
+										var to_replace = $("#uniform-reason5").find('span');
+										to_replace.attr("class", "checked");
+										$("#reason5:checkbox").attr("checked","checked");
+										$("#reason5").val('{{$owner->ota_rejectreason5}}');
+									} 
+						 			if('{{$owner->ota_rejectreason6}}' == 1){				
+										var to_replace = $("#uniform-reason6").find('span');
+										to_replace.attr("class", "checked");
+										$("#reason6:checkbox").attr("checked","checked");
+										$("#reason6").val('{{$owner->ota_rejectreason6}}');
+									} 
+						 			if('{{$owner->ota_rejectreason7}}' == 1){				
+										var to_replace = $("#uniform-reason7").find('span');
+										to_replace.attr("class", "checked");
+										$("#reason7:checkbox").attr("checked","checked");
+										$("#reason7").val('{{$owner->ota_rejectreason7}}');
+									} 
+						 			if('{{$owner->ota_rejectreason8}}' == 1){				
+										var to_replace = $("#uniform-reason8").find('span');
+										to_replace.attr("class", "checked");
+										$("#reason8:checkbox").attr("checked","checked");
+										$("#reason8").val('{{$owner->ota_rejectreason8}}');
+									} 
+						 			if('{{$owner->ota_rejectreason9}}' == 1){				
+										var to_replace = $("#uniform-reason9").find('span');
+										to_replace.attr("class", "checked");
+										$("#reason9:checkbox").attr("checked","checked");
+										$("#reason9").val('{{$owner->ota_rejectreason9}}');
+									} 
 								});
 							</script>
 							@endforeach
@@ -891,14 +947,45 @@
 		$('#readsoncount').val(count);
 		$("#propertyinspectionform").submit(function(e){
                 //alert('submit intercepted');
-
-                e.preventDefault(e);
+		e.preventDefault(e);
 		var formdata = {};
-		$('#propertyinspectionform').serializeArray().map(function(x){formdata[x.name] = x.value;});
+		$('#propertyinspectionform').serializeArray().map(function(x) {
 
-	
+			/*var checkbox = false;
+
+			if(x.name == "reason1"){
+				checkbox = true;
+			} else if(x.name == "reason1") {
+				checkbox = true;
+			} else if(x.name == "reason2") {
+				checkbox = true;
+			} else if(x.name == "reason3") {
+				checkbox = true;
+			} else if(x.name == "reason4") {
+				checkbox = true;
+			} else if(x.name == "reason5") {
+				checkbox = true;
+			} else if(x.name == "reason6") {
+				checkbox = true;
+			} else if(x.name == "reason7") {
+				checkbox = true;
+			} else if(x.name == "reason8") {
+				checkbox = true;
+			} else if(x.name == "reason9") {
+				checkbox = true;
+			} 
+
+			if(checkbox){
+				if($('#'+x.name).is(":checked")) {
+					formdata[x.name] = 1;
+				}				
+			} else {*/
+				formdata[x.name] = x.value;
+			//}
+		});
+
            
-		//console.log(formdata);
+		console.log(formdata);
 			var noty_id1 = noty({
 				layout : 'center',
 				text: 'Are want to Update?',

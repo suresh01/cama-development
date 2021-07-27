@@ -278,11 +278,15 @@
 			var lotdata = {};
 			
 			$.each( ldata, function( key, value ) {
+
 				lotdata[invesitagemap.get(""+key+"")] = value;              
             });
 
             $.each( lotdata, function( key, val ) {
-            	$('#'+key).val(val);
+            	if(key != 'finreason1' && key != 'finreason2' && key != 'finreason3' && key != 'finreason4' && key != 'finreason5'  ){
+            		$('#'+key).val(val);
+            	}
+            	
             	if(key.includes("finreason") && val ==1) {
 	            	var checkbox = $("#uniform-"+key).find('span');
 					checkbox.attr("class", "checked");

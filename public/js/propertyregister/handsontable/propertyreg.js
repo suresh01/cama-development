@@ -15,341 +15,427 @@ $( document ).ready(function() {
 	var hotSettings = {
 		data: masterDataObject,
 		columns: [
-			{
+			{ // 0
 				data: 'accnumber',
 				type: 'text',
         		validator: notEmpty,
         		validator: maxLength
 			},
-			{
+			{ // 1
 			  	data: 'filenumber',
 				type: 'text',		
 				allowEmpty: false
 			},
-			{
-			  data: 'bldgtype',
-			  type: 'dropdown',
-			  source: ishasbuilding,
-				allowEmpty: false
-			},
-			{
+			{ // 2
 				data: 'district',
 			  	type: 'dropdown',
 			  	source: district,
 				allowEmpty: false
 			},
-			{
+			{ // 3
 				data: 'zone',
 			  	type: 'dropdown',
 			  	source: zone,
 				allowEmpty: false
 			},
-			{
+			{ // 4
 				data: 'subzone',
 				type: 'dropdown',
 			  	source: subzone,	
 				allowEmpty: false
 			},
-			{
+			{ // 5
 			  data: 'address1',
 			  type: 'text',		
         		validator: notEmpty
 			},
-			{
+			{ // 6
 			  data: 'address2',
 			  type: 'text'
 			},
-			{
+			{ // 7
 			  data: 'address3',
 			  type: 'text'
 			},
-			{
+			{ // 8
 			  	data: 'address4',
 			  	type: 'text'
 			},
-			{
+			{ // 9
 			  data: 'city',
 			  type: 'text',
 			},
-			{
+			{ // 10
 			  data: 'postcode',
 			  type: 'text',
 				allowEmpty: false,
         		validator: postcodeValidator
 			},
-			{
+			{ //11
 				data: 'state',
 				type: 'dropdown',
-			  	source: state,
+			  	source: subzone,
 				allowEmpty: false
 			},
-			{
-			  data: 'address2',
-			  type: 'text'
+			{ //12
+			  data: 'bldgstatus',
+			  type: 'dropdown',
+			  source: ishasbuilding,
+				allowEmpty: false
 			},
-			{
-			  data: 'address3',
-			  type: 'text'
+			{ //13
+				data: 'lotype',
+				type: 'dropdown',
+				source: lotcode,
+				allowEmpty: false
 			},
-			{
-			  	data: 'address4',
+			{ //14
+				data: 'lotnum',
+				type: 'text',		
+				validator: notEmpty
+			},
+			{ //15
+				data: 'altlotnum',
+				type: 'text'
+			},
+			{ //16
+				data: 'lttt',
+				type: 'dropdown',
+				source: titiletype,
+				allowEmpty: false
+			},
+			{ //17
+				data: 'ltnum',
+				type: 'text',		
+				validator: notEmpty
+			},
+			{ //18
+				data: 'ltaltnum',
+				type: 'text'
+			},
+			{ //19
+				data: 'ltstrata',
+				type: 'text'
+			},
+			{ //20
+				data: 'landar',
+				type: 'numeric',				  
+				allowEmpty: false
+			},
+			{ //21
+				data: 'landaruni',
+				type: 'dropdown',
+				source: unitsize,
+				allowEmpty: false
+			},
+			{ //22
+				data: 'landcon',
+				type: 'dropdown',
+				source: landcond,
+				allowEmpty: false
+			},
+			{ //23
+				data: 'lanpos',
+				type: 'dropdown',
+				source: landpos,
+				allowEmpty: false
+			},
+			{ //24
+				data: 'roadtype',
+				type: 'dropdown',
+				source: roadtype,
+				allowEmpty: false
+			},
+			{ //25
+				data: 'roadcate',
+				type: 'dropdown',
+				source: roadcaty,
+				allowEmpty: false
+			},
+			{ //26
+				data: 'landuse',
+				type: 'dropdown',
+				source: landuse,
+				allowEmpty: false
+			},
+			{ //27
+				data: 'expcon',
+				type: 'text'
+			},
+			{ //28
+				data: 'interest',
+				type: 'text'
+			},
+			{ //29
+				data: 'tentype',
+				type: 'dropdown',
+				source: tnttype,
+				allowEmpty: false
+			},
+			{ //30
+				data: 'tenduration',
+				type: 'numeric'
+			},
+			{ //31
+				data: 'tenstart',
+				type: 'date',
+				dateFormat: 'DD/MM/YYYY'
+			},
+			{ //32
+				data: 'tenend',
+				type: 'date',
+				dateFormat: 'DD/MM/YYYY'
+			},
+			{ //33
+				data: 'lotstatus',
+				type: 'dropdown',
+				source: activeind,
+				allowEmpty: false
+			},
+			{ //34
+				data: 'ownaplntype',
+				type: 'dropdown',
+				source: ['KAD'],
+				allowEmpty: false
+			},
+			{ //35
+				data: 'typeofown',
+				type: 'dropdown',
+				source: owntype,
+				allowEmpty: false
+			},
+			{ //36
+				data: 'ownnum',
+				type: 'text',
+				validator: notEmpty,
+				allowEmpty: false
+			},
+			{ //37
+				data: 'ownname',
+				type: 'text',		
+				validator: notEmpty
+			},
+			{ //38
+				data: 'ownaddr1',
+				type: 'text',		
+				validator: notEmpty
+			},
+			{ //39
+				data: 'ownaddr2',
+				type: 'text',
+				allowEmpty: false
+			},
+			{ //40
+				data: 'ownaddr3',
+				type: 'text'
+			},
+			{ //41
+				data: 'ownaddr4',
+				type: 'text'
+			},
+			{ //42
+				data: 'ownpostcode',
+				type: 'text',		
+				validator: notEmpty,
+				validator: postcodeValidator
+			},
+			{ //43
+				data: 'owncity',
+				type: 'text'
+			},
+			{ //44
+				data: 'ownstate',
+				type: 'dropdown',
+				source: state,
+				allowEmpty: false
+			},
+			{ //45
+				data: 'telno',
+				type: 'text',		
+				validator: notEmpty
+			},
+			{ //46
+				data: 'mobno',
+				type: 'text'
+			},
+			{ //47
+			  	data: 'email',
 			  	type: 'text'
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //48
+				data: 'citizen',
+				type: 'dropdown',
+				source: citizen,
+				allowEmpty: false
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //49
+				data: 'race',
+				type: 'dropdown',
+				source: race,
+				allowEmpty: false
 			},
-			{
-			  data: 'address2',
-			  type: 'text'
+			{ //50
+				data: 'numerator',
+				type: 'numeric'
 			},
-			{
-			  data: 'address3',
-			  type: 'text'
+			{ //51
+				data: 'demominator',
+				type: 'numeric'
 			},
-			{
-			  	data: 'address4',
-			  	type: 'text'
+			{ //52
+				data: 'bldgnum',
+				type: 'text',
+				allowEmpty: false
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //53
+				data: 'bldgcate',
+				type: 'dropdown',
+				source: bldgcate,
+				allowEmpty: false
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //54
+				data: 'bldgttype',
+				type: 'dropdown',
+				source: bldgtype,
+				allowEmpty: false
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //55
+				data: 'bldgstorey',
+				type: 'dropdown',
+				source: bldgstore,
+				allowEmpty: false
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //56
+				data: 'bldgcond',
+				type: 'dropdown',
+				source: bldgcond,
+				allowEmpty: false
 			},
-			{
-			  data: 'address2',
-			  type: 'text'
+			{ //57
+				data: 'bldgpos',
+				type: 'dropdown',
+				source: bldgpos,
+				allowEmpty: false
 			},
-			{
-			  data: 'address3',
-			  type: 'text'
+			{ //58
+				data: 'bldgstructure',
+				type: 'dropdown',
+				source: bldgstructure,
+				allowEmpty: false
 			},
-			{
-			  	data: 'address4',
-			  	type: 'text'
+			{ //59
+				data: 'rooftype',
+				type: 'dropdown',
+				source: rooftype,
+				allowEmpty: false
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //60
+				data: 'walltype',
+				type: 'dropdown',
+				source: walltype,
+				allowEmpty: false
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //61
+				data: 'floortype',
+				type: 'dropdown',
+				source: fltype,
+				allowEmpty: false
 			},
-			{
-			  	data: 'address4',
-			  	type: 'text'
+			{ //62
+				data: 'cccdt',
+				type: 'date',
+				dateFormat: 'DD/MM/YYYY',
+				allowEmpty: false
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //63
+				data: 'occupieddt',
+				type: 'date',
+				dateFormat: 'DD/MM/YYYY',
+				allowEmpty: false
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //64
+				data: 'mainbldg',
+				type: 'dropdown',
+				source: ['Y','N'],
+				allowEmpty: false
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //65
+				data: 'reffinfo',
+				type: 'text'
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //66
+				data: 'artype',
+				type: 'dropdown',
+				source: artype,
+				allowEmpty: false
 			},
-			{
-			  data: 'address2',
-			  type: 'text'
+			{ //67
+				data: 'arcate',
+				type: 'dropdown',
+				source: arcaty,
+				allowEmpty: false
 			},
-			{
-			  data: 'address3',
-			  type: 'text'
+			{ //68
+				data: 'arlevel',
+				type: 'dropdown',
+				source: arlvl,
+				allowEmpty: false
 			},
-			{
-			  	data: 'address4',
-			  	type: 'text'
+			{ //69
+				data: 'arzone',
+				type: 'dropdown',
+				source: arzone,
+				allowEmpty: false
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //70
+				data: 'aruse',
+				type: 'dropdown',
+				source: aruse,
+				allowEmpty: false
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //71
+				data: 'ardesc',
+				type: 'text'
 			},
-			{
-			  	data: 'address4',
-			  	type: 'text'
+			{ //72
+				data: 'dimention',
+				type: 'text'
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //73
+				data: 'arcnt',
+				type: 'numeric'
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //74
+				data: 'size',
+				type: 'numeric'
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //75
+				data: 'uom',
+				type: 'dropdown',
+				source: unitsize,
+				allowEmpty: false
 			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //76
+				data: 'totsize',
+				type: 'numeric'
 			},
-			{
-			  data: 'address2',
-			  type: 'text'
+			{ //77
+				data: 'fltype',
+				type: 'dropdown',
+				source: fltype,
+				allowEmpty: false
 			},
-			{
-			  data: 'address3',
-			  type: 'text'
+			{ //78
+				data: 'walltype',
+				type: 'dropdown',
+				source: walltype,
+				allowEmpty: false
 			},
-			{
-			  	data: 'address4',
-			  	type: 'text'
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  	data: 'address4',
-			  	type: 'text'
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  data: 'address2',
-			  type: 'text'
-			},
-			{
-			  data: 'address3',
-			  type: 'text'
-			},
-			{
-			  	data: 'address4',
-			  	type: 'text'
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  	data: 'address4',
-			  	type: 'text'
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  data: 'address2',
-			  type: 'text'
-			},
-			{
-			  data: 'address3',
-			  type: 'text'
-			},
-			{
-			  	data: 'address4',
-			  	type: 'text'
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  	data: 'address4',
-			  	type: 'text'
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  data: 'address2',
-			  type: 'text'
-			},
-			{
-			  data: 'address3',
-			  type: 'text'
-			},
-			{
-			  	data: 'address4',
-			  	type: 'text'
-			},
-			{
-			  data: 'city',
-			  type: 'text',
-			},
-			{
-			  data: 'city',
-			  type: 'text',
+			{ //79
+				data: 'celingtype',
+				type: 'dropdown',
+				source: ceiling,
+				allowEmpty: false
 			}
 		],
 		stretchH: 'all',
@@ -387,92 +473,100 @@ $( document ).ready(function() {
           }
         },
     	rowHeaders: true,
-		colWidths: [150, 150, 150, 150, 150,200, 200, 200, 200,150, 150, 150, 150,150, 150, 150, 150, 150,200, 200, 150, 150, 150,150, 150, 150, 150, 150,200, 200, 150, 150, 150,150, 150, 150, 150, 150,200, 200
-		, 150, 150, 150,150, 150, 150, 150, 150,200, 200, 150, 150, 150,150, 150, 150, 150, 150,200, 200, 150, 150, 150,150, 150, 150, 150, 150,200, 200, 150, 150, 150,150, 150, 150, 150, 150,200, 200],
+		colWidths: [
+			150, 150, 150, 150, 150, 200, 200, 200, 200, 150, 
+			150, 150, 150, 150, 150, 150, 150, 150, 200, 200, 
+			150, 150, 150, 150, 150, 150, 150, 150, 200, 200, 
+			150, 150, 150, 150, 150, 150, 150, 150, 200, 200, 
+			150, 150, 150, 150, 150, 150, 150, 150, 200, 200, 
+			150, 150, 150, 150, 150, 150, 150, 150, 200, 200, 
+			150, 150, 150, 150, 150, 150, 150, 150, 200, 200, 
+			150, 150, 150, 150, 150, 150, 150, 150, 200, 200],
     	dataSchema: {accnumber:'',filenumber:'',bldgtype:'',district:'',
     		zone:'',subzone:'',address1:'',address2:'',address3:'',
     		address4:'',city:'',postcode:'',state:''},
 		colHeaders: [
-			'ACC NUMBER',
-			'FILE NUMBER',
-			'DISTRICT',
-			'ZONE',
-			'SUBZONE',
-			'ADDRESS 1',
-			'ADDRESS 2',
-			'ADDRESS 3',
-			'ADDRESS 4',
-			'CITY',
-			'POST CODE',
-			'STATE',
-			'BUILDING STATUS',
-			'LOT TYPE',
-			'LOT NUMBER',
-			'ALTERNATIVE LOT NUMBER',
-			'TITLE TYPE',
-			'TITLE NUMBER',
-			'ALTERNATIVE TITLE NUMBER',
-			'STRATA NUMBER',
-			'LAND AREA',
-			'LAND AREA UNIT',
-			'LAND CONDITION',
-			'LAND POSITION',
-			'ROAD TYPE',
-			'ROAD CATEGORY',
-			'LAND USE',
-			'EXPRESS CONDITION',
-			'RESTRICTION OF INTEREST',
-			'TENURE TYPE',
-			'TENURE PERIOD',
-			'TERURE START',
-			'TENURE END',
-			'IS ACTIVE',
-			'OWNER APPLICATION TYPE',
-			'TYPE OF OWNER',
-			'OWNER NUMBER',
-			'OWNER NAME',
-			'OWNER ADDRESS 1',
-			'OWNER ADDRESS 2',
-			'OWNER ADDRESS 3',
-			'OWNER ADDRESS 4',
-			'OWNER POSTCODE',
-			'OWNER CITY',
-			'OWNER STATE',
-			'TEL NUMBER',
-			'MOBILE NUMBER',
-			'EMAIL',
-			'CITIZENSHIP',
-			'RACE',
-			'NUMERATOR',
-			'DENOMURATOR',
-			'BUILDING LABEL',
-			'BUILDING CATEGORY',
-			'BUILDING TYPE',
-			'BUILDING STOREY',
-			'BUILDING CONDITION',
-			'BUILDING POSITION',
-			'BUILDING STRUCTURE',
-			'BUILDING ROOF',
-			'BUILDING WALL',
-			'BUILDING FLOOR',
-			'CCC DATE',
-			'OCCUPIED DATE',
-			'IS MAIN BUILDING',
-			'REFF INFORMATION',
-			'AREA TYPE',
-			'AREA CATEGORY',
-			'AREA LEVEL',
-			'AREA ZONE',
-			'AREA USE',
-			'AREA DESCRIPTION',
-			'DIMENTION',
-			'AREA COUNT',
-			'MEASUREMENT',
-			'UNIT OF MEASUREMENT',
-			'TOTAL SIZE',
-			'AREA FLOOR',
-			'AREA WALL',
-			'AREA CEILING'
+			'0 ACC NUMBER',
+			'1 FILE NUMBER',
+			'2 DISTRICT',
+			'3 ZONE',
+			'4 SUBZONE',
+			'5 ADDRESS 1',
+			'6 ADDRESS 2',
+			'7 ADDRESS 3',
+			'8 ADDRESS 4',
+			'9 CITY',
+			'10 POST CODE',
+			'11 STATE',
+			'12 BUILDING STATUS',
+			'13 LOT TYPE',
+			'14 LOT NUMBER',
+			'15 ALTERNATIVE LOT NUMBER',
+			'16 TITLE TYPE',
+			'17 TITLE NUMBER',
+			'18 ALTERNATIVE TITLE NUMBER',
+			'19 STRATA NUMBER',
+			'20 LAND AREA',
+			'21 LAND AREA UNIT',
+			'22 LAND CONDITION',
+			'23 LAND POSITION',
+			'24 ROAD TYPE',
+			'25 ROAD CATEGORY',
+			'26 LAND USE',
+			'27 EXPRESS CONDITION',
+			'28 RESTRICTION OF INTEREST',
+			'29 TENURE TYPE',
+			'30 TENURE PERIOD',
+			'31 TERURE START',
+			'32 TENURE END',
+			'33 IS ACTIVE',
+			'34 OWNER APPLICATION TYPE',
+			'35 TYPE OF OWNER',
+			'36 OWNER NUMBER',
+			'37 OWNER NAME',
+			'38 OWNER ADDRESS 1',
+			'39 OWNER ADDRESS 2',
+			'40 OWNER ADDRESS 3',
+			'41 OWNER ADDRESS 4',
+			'42 OWNER POSTCODE',
+			'43 OWNER CITY',
+			'44 OWNER STATE',
+			'45 TEL NUMBER',
+			'46 MOBILE NUMBER',
+			'47 EMAIL',
+			'48 CITIZENSHIP',
+			'49 RACE',
+			'50 NUMERATOR',
+			'51 DENOMURATOR',
+			'52 BUILDING LABEL',
+			'53 BUILDING CATEGORY',
+			'54 BUILDING TYPE',
+			'55 BUILDING STOREY',
+			'56 BUILDING CONDITION',
+			'57 BUILDING POSITION',
+			'58 BUILDING STRUCTURE',
+			'59 BUILDING ROOF',
+			'60 BUILDING WALL',
+			'61 BUILDING FLOOR',
+			'62 CCC DATE',
+			'63 OCCUPIED DATE',
+			'64 IS MAIN BUILDING',
+			'65 REFF INFORMATION',
+			'66 AREA TYPE',
+			'67 AREA CATEGORY',
+			'68 AREA LEVEL',
+			'69 AREA ZONE',
+			'70 AREA USE',
+			'71 AREA DESCRIPTION',
+			'72 DIMENTION',
+			'73 AREA COUNT',
+			'74 MEASUREMENT',
+			'75 UNIT OF MEASUREMENT',
+			'76 TOTAL SIZE',
+			'77 AREA FLOOR',
+			'78 AREA WALL',
+			'79 AREA CEILING'
+
 
 
 		]/*,
@@ -559,7 +653,7 @@ $( document ).ready(function() {
 		}
 
 		if(prop === 'district'){
-			var cur_district = masterhot.getDataAtCell(row,3);
+			var cur_district = masterhot.getDataAtCell(row,2);
 			var param = 'zone'
 			$.ajax({
 			  url: "childparam",
@@ -577,7 +671,7 @@ $( document ).ready(function() {
 
 		if(prop === 'zone'){
 
-			var cur_zone = masterhot.getDataAtCell(row,4);
+			var cur_zone = masterhot.getDataAtCell(row,3);
 			var param = "subzone";
 			$.ajax({
 			  url: "childparam",
@@ -588,6 +682,33 @@ $( document ).ready(function() {
 			    //console.log(data.zone);
 	    		masterhot.setCellMeta(row, masterhot.propToCol('subzone'), 'source', data.res_arr);
         		masterhot.setDataAtRowProp(row, 'subzone', data.res_arr[0]);
+			  }
+			});
+		}
+
+		if(prop === 'bldgcate'){
+
+			var cur_bldgcate = masterhot.getDataAtCell(row,53);
+			var param = "bldgtype";
+			$.ajax({
+			  url: "childparam",
+			  cache: false,
+			  data:{param_value:cur_bldgcate,param:param},
+			  success: function(data){
+			    //$("#results").append(html);
+			    //console.log(data.zone);
+				//alert(cur_bldgcate);
+	    		masterhot.setCellMeta(row, masterhot.propToCol('bldgttype'), 'source', data.res_arr);
+        		masterhot.setDataAtRowProp(row, 'bldgttype', data.res_arr[0]);
+
+				masterhot.setCellMeta(row, masterhot.propToCol('bldgstorey'), 'source', data.storey_arr);
+				masterhot.setDataAtRowProp(row, 'bldgstorey', data.storey_arr[0]);
+
+				masterhot.setCellMeta(row, masterhot.propToCol('arlevel'), 'source', data.arelvl_arr);
+				masterhot.setDataAtRowProp(row, 'arlevel', data.arelvl_arr[0]);
+
+				masterhot.setCellMeta(row, masterhot.propToCol('aruse'), 'source', data.areuse_arr);
+				masterhot.setDataAtRowProp(row, 'aruse', data.areuse_arr[0]);
 			  }
 			});
 		}

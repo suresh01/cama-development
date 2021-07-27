@@ -100,7 +100,7 @@
 
 											
 											@if($rec->otar_ownertransstatus_id == '2')
-											<a href='#'  style='	width: 14px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -843px -102px!important;display: inline-block; float: left;' title=' Report'></a>
+
 												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -462px -122px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',2)"  title="Submit To Approve" href="#"></a></span>
 												<span><a class="action-icons c-Delete delete_tenant" onclick="deleteT('{$rec->otar_accno}}','{{$rec->otar_ownertransgroup_id}}')" href='#' title='Delete'>Delete</a></span>
 											@endif
@@ -108,6 +108,17 @@
 											@if($rec->otar_ownertransstatus_id == '5')
 												<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->otar_id}}',5)" title="Transfer" href="#"></a></span>
 											@endif
+
+											@if($rec->otar_ownertransstatus_id == '3' || $rec->otar_ownertransstatus_id == '6')
+
+												<a href='#' style='	width: 16px;	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -983px -102px;!important;display: inline-block; float: left;'  title='Rejected Report'></a>
+											@endif
+
+											@if($rec->otar_ownertransstatus_id == '4' || $rec->otar_ownertransstatus_id == '5' || $rec->otar_ownertransstatus_id == '7' || $rec->otar_ownertransstatus_id == '8' || $rec->otar_ownertransstatus_id == '9')
+
+												<a href='#' onclick='reportSuccess("{{$rec->otar_id}}")' style='width: 14px;height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position:  -843px -102px!important;display: inline-block; float: left;' title='Sucess Report'></a>
+											@endif
+
 										</td>
 									</tr>
 									@endforeach	
@@ -158,10 +169,96 @@
 				</div>
 			</div>
 		</div>
+
+		<div id="addDetail" style="display:none" class="grid_12">
+					<div class="widget_wrap">
+						
+						<div class="widget_content">
+							<h3 id="title">Generate Report</h3>
+							<form style="" id="generateform" method="GET" action="generateOwnershipreport">
+					            @csrf
+					            <input type="hidden" name="type" id="type">
+					            <input type="hidden" name="accountnumber" id="accountnumber">
+								<div  class="grid_12 form_container left_label">
+									<ul>
+										<li>
+											
+											<fieldset>
+												<legend>Additional Information</legend>
+												
+												<div class="form_grid_12">
+													<label class="field_title" id="lposition" for="position">VALUER TITTLE<span class="req">*</span></label>
+													<div  class="form_input">
+														<select data-placeholder="Choose a Status..." onchange="getposition()" style="width:100%" class="cus-select"  id="tittle" tabindex="7" name="tittle" tabindex="20">
+																<option></option>
+															@foreach ($userlist as $rec)
+																	<option value='{{ $rec->usr_position }}'>{{ $rec->tbuser }}</option>
+															@endforeach	
+														</select>
+													</div>
+													<span class=" label_intro"></span>
+												</div>
+												
+												<div class="form_grid_12">
+													<label class="field_title" id="llevel" for="level">VALUER NAME<span class="req">*</span></label>
+													<div  class="form_input">
+														<input id="name" name="name"  type="text"  maxlength="50" class="required"/>
+													</div>
+													<span class=" label_intro"></span>
+												</div>
+											
+											</fieldset>
+
+					
+										</li>
+									</ul>
+								</div>
+								
+								<div class="grid_12">							
+									<div class="form_input">
+										<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
+										
+										<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+										<span class=" label_intro"></span>
+									</div>								
+									<span class="clear"></span>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 		
 	<span class="clear"></span>
 	
 	<script>
+
+		function getposition(){
+			var userid = $('#tittle').val();
+			$('#username').val($("#tittle option:selected").text());
+			$.ajax({
+		        type:'GET',
+		        url:'/getuserdetail',
+		        data:{id:userid},
+		        success:function(data){	        	
+		        	console.log(data);
+		        	$('#name').val(data.userposition);
+		        }
+		    });
+		}
+
+
+		function reportSuccess(accno){
+			$('#type').val('Successs');
+			$('#accountnumber').val(accno);
+			$('#addDetail').modal();
+		}
+
+		function reportFailure(accno){
+			$('#type').val('Fail');
+			$('#accountnumber').val(accno);
+			$('#addDetail').modal();
+		}
+
 		function getdata(){
 			var zone = $('#filterzone').val();
 			//alert();

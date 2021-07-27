@@ -40,6 +40,7 @@ class PropertyRegisterationController extends Controller
             $subzone=DB::table('tbdefitems')->where('tdi_td_name', "SUBZONE")->orderBy('tdi_sort')->pluck('tdi_value');
             //$subzone=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SUBZONE"'); 
         	$district=DB::table('tbdefitems')->where('tdi_td_name', "DISTRICT")->orderBy('tdi_sort')->pluck('tdi_value');
+            $statedefault=DB::table('tbdefitems')->where('tdi_td_name', "STATEDEFAULT")->orderBy('tdi_sort')->pluck('tdi_value');
         	$bldgcate=DB::table('tbdefitems')->where('tdi_td_name', "BULDINGCATEGORY")->orderBy('tdi_sort')->pluck('tdi_value');
         	$state=DB::table('tbdefitems')->where('tdi_td_name', "STATE")->orderBy('tdi_sort')->pluck('tdi_value');
         	$ishasbuilding=DB::table('tbdefitems')->where('tdi_td_name', "ISHASBUILDING")->orderBy('tdi_sort')->pluck('tdi_value');
@@ -72,7 +73,7 @@ class PropertyRegisterationController extends Controller
             $activeind=DB::table('tbdefitems')->where('tdi_td_name', "ACTIVEIND")->orderBy('tdi_sort')->pluck('tdi_value');
 
             App::setlocale(session()->get('locale'));
-            return view("propertyregister.newtable")->with(array('maxRow'=> $maxRow, 'district'=>$district, 'state'=> $state, 'bldgcate'=>$bldgcate,'ishasbuilding' => $ishasbuilding,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'landuse' => $landuse,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstructure,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'pb' => $pb,'activeind' => $activeind,'zone' => $zone,'subzone' => $subzone,'bldgstore' => $bldgstore,'bldgtype' => $bldgtype));                      
+            return view("propertyregister.newtable")->with(array('maxRow'=> $maxRow, 'district'=>$district, 'state'=> $state, 'bldgcate'=>$bldgcate,'ishasbuilding' => $ishasbuilding,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'landuse' => $landuse,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstructure,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'pb' => $pb,'activeind' => $activeind,'zone' => $zone,'subzone' => $subzone,'bldgstore' => $bldgstore,'bldgtype' => $bldgtype, 'statedefault' => $statedefault));                      
         } else {
 
             //$pb = $request->input('pb');  
@@ -323,6 +324,8 @@ class PropertyRegisterationController extends Controller
     	$param_value = $request->input('param_value');
     	$param = $request->input('param');
     	$storey_arr = '';
+        $arelvl_arr = '';
+        $areuse_arr = '';
 
     	if($param == 'zone'){
     		$res_arr=DB::table('tbdefitems')->where('tdi_td_name', "ZONE")->where('tdi_parent_name', $param_value)->orderBy('tdi_sort')->pluck('tdi_value');
@@ -332,6 +335,9 @@ class PropertyRegisterationController extends Controller
     		# code...
     		$res_arr=DB::table('tbdefitems')->where('tdi_td_name', "BULDINGTYPE")->where('tdi_parent_name', $param_value)->orderBy('tdi_sort')->pluck('tdi_value');
     		$storey_arr=DB::table('tbdefitems')->where('tdi_td_name', "BUILDINGSTOREY")->where('tdi_parent_name', $param_value)->orderBy('tdi_sort')->pluck('tdi_value');
+            $arelvl_arr=DB::table('tbdefitems')->where('tdi_td_name', "AREALEVEL")->where('tdi_parent_name', $param_value)->orderBy('tdi_sort')->pluck('tdi_value');
+            $areuse_arr=DB::table('tbdefitems')->where('tdi_td_name', "AREAUSE")->where('tdi_parent_name', $param_value)->orderBy('tdi_sort')->pluck('tdi_value');
+
     	} else if ($param == 'bldgartype') {
             # code...
             $res_arr=DB::table('tbdefitems')->where('tdi_td_name', "AREAUSE")->where('tdi_parent_name', $param_value)->orderBy('tdi_sort')->pluck('tdi_value');
@@ -350,7 +356,7 @@ class PropertyRegisterationController extends Controller
         }
 
     	//Log::info();
-    	return response()->json(array('res_arr'=> $res_arr,'storey_arr'=> $storey_arr), 200);
+    	return response()->json(array('res_arr'=> $res_arr,'storey_arr'=> $storey_arr, 'arelvl_arr' =>$arelvl_arr, 'areuse_arr' => $areuse_arr ), 200);
     }
 
     public function subCategory(Request $request) {

@@ -251,13 +251,15 @@
 							</div>
 							<span class=" label_intro"></span>
 						</div>
+						<input type="hidden" id="mainbldg">
 						<div class="form_grid_12">
 							<label class="field_title" id="lposition" for="position">{{__('inspection.Main_Building')}} <span class="req">*</span></label>
 							<div  class="form_input">
-								<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="mainbldg" name="mainbldg" tabindex="1">
-									<option></option>
-									<option value='Y'>Y</option>
-									<option value='N'>N</option>
+								<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select" id="mbldg" name="mbldg" tabindex="1">
+									<option></option>		
+									@foreach ($mbldg as $rec)
+										<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+									@endforeach	
 									
 								</select>									
 							</div>
@@ -624,16 +626,16 @@
 			 
 		});*/
 		var account = $('#accnumber').val();
-		let bldgmap = new Map([["0","sno"],["1", "url"],["2", "bldgnum"],["3", "bldgnum1"],["4", "bldgnum2"],["5", "bldgnum3"],["6", "bldgnum4"],  ["7", "bldgttype"],["8", "bldgstorey"], ["9", "bldgcond"],["10", "bldgpos"], ["11", "bldgstructure"],["12", "rooftype"], ["13", "walltype"],["14", "floortype"], ["15", "cccdt"],["16", "occupieddt"],["17", "mainbldg"],["18", "action"],["19", "actioncode"],["20", "bldgid"],["21","bldgaccnum"]]);
+		let bldgmap = new Map([["0","sno"],["1", "url"],["2", "bldgnum"],["3", "bldgnum1"],["4", "bldgnum2"],["5", "bldgnum3"],["6", "bldgnum4"],  ["7", "bldgttype"],["8", "bldgstorey"], ["9", "bldgcond"],["10", "bldgpos"], ["11", "bldgstructure"],["12", "rooftype"], ["13", "walltype"],["14", "floortype"], ["15", "cccdt"],["16", "occupieddt"],["17", "mainbldg"],["18", "action"],["19", "actioncode"],["20", "bldgid"],["21","bldgaccnum"],["22","mbldg"]]);
 
 	 	var blsgdata = [];
 		@foreach ($building as $rec)
-			blsgdata.push( [ '{{$loop->iteration}}', "<a class='shobldg' onclick='showBldgAr({{$rec->ab_id}})' href='#' >{{ $rec->ab_bldg_no}}<input type='hidden' value='{{ $rec->ab_bldgtype_id}}' id='bldgtype_{{$rec->ab_id}}'><input type='hidden' value='{{ $rec->bldgcategory_id}}' id='bldgcate_{{$rec->ab_id}}'><input type='hidden' value='{{ $rec->ab_bldg_no}}' id='{{$rec->ab_id}}'></a>", '{{$rec->ab_bldg_no}}','{{$rec->bldgcategory}} / {{$rec->bldgtype}}','{{$rec->bldgstorey}}','{{$rec->bldgstr}}','{{$rec->rootype}}','{{$rec->ab_bldgtype_id}}', '{{$rec->ab_bldgstorey_id}}', '{{$rec->ab_bldgcondn_id}}', '{{$rec->ab_bldgposition_id}}', '{{$rec->ab_bldgstructure_id}}', '{{$rec->ab_rooftype_id}}', '{{$rec->ab_walltype_id}}','{{$rec->ab_floortype_id}}',  '{{$rec->ab_cccdate1}}', '{{$rec->ab_occupieddate1}}','@if($rec->ab_ismainbldg_id == 0) N @endif @if($rec->ab_ismainbldg_id == 1) Y @endif','<span><a onclick="edit({{$rec->ab_id}})" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span>@if($iseditable == 1)<span><a onclick="openbldgarea({{$rec->ab_id}})" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span><span><a class="action-icons1 c-copy  copybldgar" href="#" title="Copy Building Detail">Copy</a></span><span><a  class="action-icons1 c-paste  pastebldgar" href="#" title="Paste Building Detail">Paste</a></span><span><a onclick="" class="action-icons    deletebldgrow" href="#" title="delete">Delete</a></span>@endif','noation', '{{$rec->ab_id}}',account]);
+			blsgdata.push( [ '{{$loop->iteration}}', "<a class='shobldg' onclick='showBldgAr({{$rec->ab_id}})' href='#' >{{ $rec->ab_bldg_no}}<input type='hidden' value='{{ $rec->ab_bldgtype_id}}' id='bldgtype_{{$rec->ab_id}}'><input type='hidden' value='{{ $rec->bldgcategory_id}}' id='bldgcate_{{$rec->ab_id}}'><input type='hidden' value='{{ $rec->ab_bldg_no}}' id='{{$rec->ab_id}}'></a>", '{{$rec->ab_bldg_no}}','{{$rec->bldgcategory}} / {{$rec->bldgtype}}','{{$rec->bldgstorey}}','{{$rec->bldgstr}}','{{$rec->rootype}}','{{$rec->ab_bldgtype_id}}', '{{$rec->ab_bldgstorey_id}}', '{{$rec->ab_bldgcondn_id}}', '{{$rec->ab_bldgposition_id}}', '{{$rec->ab_bldgstructure_id}}', '{{$rec->ab_rooftype_id}}', '{{$rec->ab_walltype_id}}','{{$rec->ab_floortype_id}}',  '{{$rec->ab_cccdate1}}', '{{$rec->ab_occupieddate1}}','{{$rec->astatus}}','<span><a onclick="edit({{$rec->ab_id}})" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span>@if($iseditable == 1)<span><a onclick="openbldgarea({{$rec->ab_id}})" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span><span><a class="action-icons1 c-copy  copybldgar" href="#" title="Copy Building Detail">Copy</a></span><span><a  class="action-icons1 c-paste  pastebldgar" href="#" title="Paste Building Detail">Paste</a></span><span><a onclick="" class="action-icons    deletebldgrow" href="#" title="delete">Delete</a></span>@endif','noation', '{{$rec->ab_id}}',account, '{{$rec->ab_ismainbldg_id}}']);
 		@endforeach
 
 	    $('#bldgtble').DataTable({
 	        data:           blsgdata,
-	        "columns":[ null, null, { "visible": false }, null, null, null, null,{ "visible": false },  { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, null, null, null, null, { "visible": false }, { "visible": false }, { "visible": false }],
+	        "columns":[ null, null, { "visible": false }, null, null, null, null,{ "visible": false },  { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, null, null, null, null, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }],
 	        "sPaginationType": "full_numbers",
 			"iDisplayLength": 100,
         	"bAutoWidth": false,
@@ -853,7 +855,7 @@
 			//var row = table.row(table.row( $(this).parents('tr') ).index()),
 			//data = row.data();
 			var updatebldgno = $('#bldgnum').val();
-			data=[operation,'<a class="shobldg" onclick="showBldgAr('+$('#bldgid').val()+')" href="#">'+updatebldgno+'</a><input type="hidden" value="'+$('#bldgttype').val()+'" id="bldgtype_'+$('#bldgid').val()+'"><input type="hidden" value="'+updatebldgno+'" id="'+$('#bldgid').val()+'">', updatebldgno, $('#bldgcate option:selected').text() +' / '+ $('#bldgttype option:selected').text(), $('#bldgstorey option:selected').text(), $('#bldgstructure option:selected').text(),$('#rooftype option:selected').text(), $('#bldgttype').val(), $('#bldgstorey').val(),  $('#bldgcond').val(), $('#bldgpos').val(), $('#bldgstructure').val(),$('#rooftype').val(), $('#walltype').val(), $('#floortype').val(),$('#cccdt').val(), $('#occupieddt').val(), $('#mainbldg').val(), '<span><a onclick="" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span><span><a onclick="openbldgarea('+$('#bldgid').val()+')" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span><span><a class="action-icons1 c-copy  copybldgar" href="#" title="Copy Building Detail">Copy</a></span><span><a  class="action-icons1 c-paste  pastebldgar" href="#" title="Paste Building Detail">Paste</a></span><span><a onclick="" class="action-icons    deletebldgrow" href="#" title="delete">Delete</a></span>',operation_code, $('#bldgid').val(), account ];
+			data=[operation,'<a class="shobldg" onclick="showBldgAr('+$('#bldgid').val()+')" href="#">'+updatebldgno+'</a><input type="hidden" value="'+$('#bldgttype').val()+'" id="bldgtype_'+$('#bldgid').val()+'"><input type="hidden" value="'+updatebldgno+'" id="'+$('#bldgid').val()+'">', updatebldgno, $('#bldgcate option:selected').text() +' / '+ $('#bldgttype option:selected').text(), $('#bldgstorey option:selected').text(), $('#bldgstructure option:selected').text(),$('#rooftype option:selected').text(), $('#bldgttype').val(), $('#bldgstorey').val(),  $('#bldgcond').val(), $('#bldgpos').val(), $('#bldgstructure').val(),$('#rooftype').val(), $('#walltype').val(), $('#floortype').val(),$('#cccdt').val(), $('#occupieddt').val(), $('#mbldg option:selected').text(), '<span><a onclick="" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span><span><a onclick="openbldgarea('+$('#bldgid').val()+')" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span><span><a class="action-icons1 c-copy  copybldgar" href="#" title="Copy Building Detail">Copy</a></span><span><a  class="action-icons1 c-paste  pastebldgar" href="#" title="Paste Building Detail">Paste</a></span><span><a onclick="" class="action-icons    deletebldgrow" href="#" title="delete">Delete</a></span>',operation_code, $('#bldgid').val(), account, $('#mbldg').val() ];
 
 			row.data(data);
 			$('#propertystatus').val('');
@@ -904,7 +906,7 @@
 				var bldgtta = $('#bldgtble').DataTable();
 				/*bldgtta.row.add(['New','<a class="shobldg" onclick="showBldgAr('+temp_id+')" href="#">'+updatebldgno+'</a><input type="hidden" value="'+$('#bldgttype').val()+'" id="bldgtype_'+$('#bldgid').val()+'"><input type="hidden" value="'+updatebldgno+'" id="'+$('#bldgid').val()+'">', updatebldgno,$('#bldgttype option:selected').text(), $('#bldgstorey option:selected').text(), $('#bldgstructure option:selected').text(),$('#rooftype option:selected').text(),  $('#bldgttype').val(), $('#bldgstorey').val(),  $('#bldgcond').val(), $('#bldgpos').val(), $('#bldgstructure').val(),$('#rooftype').val(), $('#walltype').val(), $('#floortype').val(),$('#cccdt').val(), $('#occupieddt').val(), $('#mainbldg').val(),'<span><a onclick="" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span><span><a onclick="openbldgarea('+temp_id+')" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span>&nbsp;&nbsp;&nbsp;<span><a onclick="" class="action-icons    deletebldgrow" href="#" title="delete">Delete</a></span>', 'new', $('#bldgid').val(),account ]).draw(false);
 			*/
-				bldgtta.row.add(['New','<a class="shobldg" onclick="showBldgAr('+temp_id+')" href="#">'+updatebldgno+'</a><input type="hidden" value="'+$('#bldgttype').val()+'" id="bldgtype_'+$('#bldgid').val()+'"><input type="hidden" value="'+updatebldgno+'" id="'+$('#bldgid').val()+'">', updatebldgno,$('#bldgcate option:selected').text() +' / '+ $('#bldgttype option:selected').text(), $('#bldgstorey option:selected').text(), $('#bldgstructure option:selected').text(),$('#rooftype option:selected').text(),  $('#bldgttype').val(), $('#bldgstorey').val(),  $('#bldgcond').val(), $('#bldgpos').val(), $('#bldgstructure').val(),$('#rooftype').val(), $('#walltype').val(), $('#floortype').val(),$('#cccdt').val(), $('#occupieddt').val(), $('#mainbldg').val(),'<span><a onclick="" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span><span><a onclick="openbldgarea('+temp_id+')" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span><span><a class="action-icons1 c-copy  copybldgar" href="#" title="Copy Building Detail">Copy</a></span><span><a  class="action-icons1 c-paste  pastebldgar" href="#" title="Paste Building Detail">Paste</a></span><span><a onclick="" class="action-icons    deletebldgrow" href="#" title="delete">Delete</a></span>', 'new', $('#bldgid').val(),account ]).draw(false);
+				bldgtta.row.add(['New','<a class="shobldg" onclick="showBldgAr('+temp_id+')" href="#">'+updatebldgno+'</a><input type="hidden" value="'+$('#bldgttype').val()+'" id="bldgtype_'+$('#bldgid').val()+'"><input type="hidden" value="'+updatebldgno+'" id="'+$('#bldgid').val()+'">', updatebldgno,$('#bldgcate option:selected').text() +' / '+ $('#bldgttype option:selected').text(), $('#bldgstorey option:selected').text(), $('#bldgstructure option:selected').text(),$('#rooftype option:selected').text(),  $('#bldgttype').val(), $('#bldgstorey').val(),  $('#bldgcond').val(), $('#bldgpos').val(), $('#bldgstructure').val(),$('#rooftype').val(), $('#walltype').val(), $('#floortype').val(),$('#cccdt').val(), $('#occupieddt').val(), $('#mbldg option:selected').text(),'<span><a onclick="" class="action-icons c-edit edtbldgrow" href="#" title="Edit">Edit</a></span><span><a onclick="openbldgarea('+temp_id+')" class="action-icons c-add  addbldgarearow" href="#" title="Add Building Detail">Add</a></span><span><a class="action-icons1 c-copy  copybldgar" href="#" title="Copy Building Detail">Copy</a></span><span><a  class="action-icons1 c-paste  pastebldgar" href="#" title="Paste Building Detail">Paste</a></span><span><a onclick="" class="action-icons    deletebldgrow" href="#" title="delete">Delete</a></span>', 'new', $('#bldgid').val(),account, $('#mbldg').val()]).draw(false);
 				
 				alert('Record is successfully added');
 
@@ -1135,6 +1137,29 @@ function editbldgarRow() {
 
 			$('#propertyinspectionform-back-4').hide();
 			$('#propertyinspectionform-next-4').hide();
+
+
+		$('#masterid').val('');
+		$("#bldgaccnum").val('');
+		$('#bldg_masterid').val('');
+		$('#bldgnum').val('');
+		$('#bldgttype').val('');
+		//$('#lotnum').val($('#city'+id).val());
+		$('#bldgstorey').val('');
+		$('#bldgcond').val('');
+		$('#bldgpos').val('');
+		$('#bldgstructure').val('');
+		$('#rooftype').val('');
+		$('#walltype').val('');
+		$('#cccdt').val('');
+		$('#occupieddt').val('');
+
+
+
+		$('#bldgcate').val('');
+		$('#floortype').val('');
+		$('#mbldg').val('');
+
 		//addDisableTab();
 		$('#finish').hide();
 		$('#submitedittblbldg').hide();

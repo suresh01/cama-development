@@ -667,26 +667,26 @@ class InspectionController extends Controller
         Log::info($filterquery); 
           
         $property = DB::select('select `vd_approvalstatus_id`, `vd_id`, `vd_va_id`, `ma_id`, `ma_pb_id`, `ma_fileno`, `ma_accno`, `vd_accno`,
-        `tbdefitems_subzone`.`tdi_parent_name` `zone`, `tbdefitems_subzone`.`tdi_value` `subzone`, `ma_addr_ln1`, 
-        `tbdefitems_ishasbuilding`.`tdi_value` `isbldg`, `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,bldgsotery.tdi_value bldgsotery, 
-        format(`vt_approvednt`,2) vt_approvednt, format(`vt_approvedtax`,2) `vt_approvedtax`,  format(`vt_proposedrate`,2) `vt_proposedrate`, `vt_note`,
-         propertstatus.tdi_desc propertstatus, ma_addr_ln1, ma_addr_ln2, ma_addr_ln3, ma_addr_ln4, ma_city,ma_postcode,state.tdi_value state,
-         format(vl_roundnetlandvalue,2) landvalue, format(vb_roundnetnt,2) bldgvalue
-        FROM `cm_appln_valdetl`
-        INNER JOIN `cm_masterlist` ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
-        INNER JOIN `cm_owner` ON `TO_MA_ID` = `ma_id`
-        LEFT JOIN `cm_appln_val_tax` ON `cm_appln_val_tax`.`vt_vd_id` = `cm_appln_valdetl`.`vd_id`
-        LEFT JOIN `cm_appln_val_lot` ON vl_vd_id = `cm_appln_valdetl`.`vd_id`
-        LEFT JOIN `cm_appln_val_bldg` ON vb_vd_id = `cm_appln_valdetl`.`vd_id`
-        LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
-        LEFT JOIN `tbdefitems_ishasbuilding` ON `cm_appln_valdetl`.`vd_ishasbuilding` = `tbdefitems_ishasbuilding`.`tdi_key`
-        LEFT JOIN `tbdefitems_bldgtype` ON `tbdefitems_bldgtype`.`tdi_key` = `cm_appln_valdetl`.`vd_bldgtype_id` 
-        left join (select *  from tbdefitems where tdi_td_name = "PROPERTYSTAGE") propertstatus
-        on propertstatus.tdi_key = vd_approvalstatus_id 
-        left join (select *  from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgsotery
-        on bldgsotery.tdi_key = vd_bldgstorey_id 
-        left join (select *  from tbdefitems where tdi_td_name = "STATE") state
-        on state.tdi_key = ma_state_id  where vd_va_id = ifnull("'.$baskedid.'",0) '.$filterquery);
+`tbdefitems_subzone`.`tdi_parent_name` `zone`, `tbdefitems_subzone`.`tdi_value` `subzone`, `ma_addr_ln1`, 
+`tbdefitems_ishasbuilding`.`tdi_value` `isbldg`, `tbdefitems_bldgtype`.`tdi_value` `bldgtype`, `tbdefitems_bldgtype`.`tdi_parent_name` `bldgcategory`,bldgsotery.tdi_value bldgsotery, 
+format(`vt_approvednt`,2) vt_approvednt, format(`vt_approvedtax`,2) `vt_approvedtax`,  format(`vt_proposedrate`,2) `vt_proposedrate`, `vt_note`,
+ propertstatus.tdi_desc propertstatus, ma_addr_ln1, ma_addr_ln2, ma_addr_ln3, ma_addr_ln4, ma_city,ma_postcode,state.tdi_value state,
+ format(vl_roundnetlandvalue,2) landvalue, format(vb_roundnetnt,2) bldgvalue
+FROM `cm_appln_valdetl`
+INNER JOIN `cm_masterlist` ON `cm_masterlist`.`ma_id` = `cm_appln_valdetl`.`vd_ma_id`
+INNER JOIN `cm_owner` ON `TO_MA_ID` = `ma_id`
+LEFT JOIN `cm_appln_val_tax` ON `cm_appln_val_tax`.`vt_vd_id` = `cm_appln_valdetl`.`vd_id`
+left join (select sum(vl_roundnetlandvalue) vl_roundnetlandvalue, vl_vd_id from cm_appln_val_lot group by vl_vd_id) land_value on land_value.vl_vd_id = `cm_appln_valdetl`.`vd_id`
+left join (select sum(vb_roundnetnt) vb_roundnetnt, vb_vd_id from cm_appln_val_bldg group by vb_vd_id) bldg_value on bldg_value.vb_vd_id = `cm_appln_valdetl`.`vd_id`
+LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
+LEFT JOIN `tbdefitems_ishasbuilding` ON `cm_appln_valdetl`.`vd_ishasbuilding` = `tbdefitems_ishasbuilding`.`tdi_key`
+LEFT JOIN `tbdefitems_bldgtype` ON `tbdefitems_bldgtype`.`tdi_key` = `cm_appln_valdetl`.`vd_bldgtype_id` 
+left join (select *  from tbdefitems where tdi_td_name = "PROPERTYSTAGE") propertstatus
+on propertstatus.tdi_key = vd_approvalstatus_id 
+left join (select *  from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgsotery
+on bldgsotery.tdi_key = vd_bldgstorey_id 
+left join (select *  from tbdefitems where tdi_td_name = "STATE") state
+on state.tdi_key = ma_state_id   where vd_va_id = ifnull("'.$baskedid.'",0) '.$filterquery);
         
         $propertyDetails = Datatables::collection($property)->make(true);
    
@@ -971,6 +971,8 @@ App::setlocale(session()->get('locale'));
         	$aruse=DB::table('tbdefitems')->where('tdi_td_name', 'AREAUSE')->get();
         	$arzone=DB::table('tbdefitems')->where('tdi_td_name', 'AREAZONE')->get();
             $attachtype=DB::table('tbdefitems')->where('tdi_td_name', 'ATTACHMENTTYPE')->get();
+            $mbldg=DB::table('tbdefitems')->where('tdi_td_name', 'ISMAINBLDG')->get();
+            $status=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ACTIVEIND" order by tdi_sort ');
 
 
             $term=DB::select("select concat(vt_name,'', DATE_FORMAT(vt_createdate, '%d%m%Y')) termfoldername, vd_accno accountnumber, va_vt_id, vt_applicationtype_id,
@@ -1016,10 +1018,10 @@ left join (select tdi_key, tdi_value,tdi_parent_key from tbdefitems where tdi_td
 on subzone.tdi_key = ma_subzone_id where vd_id = ifnull("'.$prop_id.'",0)');
             //$master = DB::table('cm_masterlist')->where('ma_id', $prop_id)->first();
         	//$building = DB::select('select * from cm_bldg where bl_ma_id = ifnull("'.$prop_id.'",0)');
-            $building = DB::select('select DATE_FORMAT(ab_cccdate, "%d/%m/%Y") ab_cccdate1, DATE_FORMAT(ab_occupieddate, "%d/%m/%Y") ab_occupieddate1,cm_appln_bldg.*, bldgtype.tdi_value bldgtype, tdi_parent_name
+            $building = DB::select('select ifnull(DATE_FORMAT(ab_cccdate, "%d/%m/%Y"),ab_cccdate) ab_cccdate1, ifnull(DATE_FORMAT(ab_occupieddate, "%d/%m/%Y"),ab_occupieddate) ab_occupieddate1,cm_appln_bldg.*, bldgtype.tdi_value bldgtype, tdi_parent_name
                  bldgcategory, tdi_parent_key bldgcategory_id, bldgstorey.tdi_value bldgstorey, 
                 bldgstr.tdi_value bldgstr
-                , rootype.tdi_value rootype
+                , rootype.tdi_value rootype, astatus.tdi_value astatus
                  from cm_appln_bldg left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BULDINGTYPE") bldgtype 
                  on bldgtype.tdi_key = AB_BLDGTYPE_ID
                 left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BUILDINGSTOREY") bldgstorey
@@ -1027,7 +1029,9 @@ on subzone.tdi_key = ma_subzone_id where vd_id = ifnull("'.$prop_id.'",0)');
                 left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BLDGSTRUCTURE") bldgstr
                 on bldgstr.tdi_key = AB_BLDGSTRUCTURE_ID
                 left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROOFTYPE") rootype  
-                on rootype.tdi_key = AB_ROOFTYPE_ID where ab_vd_id = ifnull("'.$prop_id.'",0)');
+                on rootype.tdi_key = AB_ROOFTYPE_ID 
+                left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ISMAINBLDG") astatus  
+                on astatus.tdi_key = ab_ismainbldg_id where ab_vd_id = ifnull("'.$prop_id.'",0)');
 
         	//$lotlist = DB::select('select * from cm_lot where lo_ma_id = ifnull("'.$prop_id.'",0)');
             $lotlist = DB::select('select DATE_FORMAT(al_startdate, "%d/%m/%Y") al_startdate1, DATE_FORMAT(al_expireddate, "%d/%m/%Y") al_expireddate1,cm_appln_lot.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
@@ -1102,7 +1106,7 @@ on subzone.tdi_key = ma_subzone_id where vd_id = ifnull("'.$prop_id.'",0)');
         App::setlocale(session()->get('locale'));
 
         return view("inspection.tab")->with('district', $district)->with('state', $state)->with('zone', $zone)->with('subzone', $subzone)->with(array('bldgstruct'=>$bldgstruct,'bldgstore'=>$bldgstore,'ishasbuilding'=>$ishasbuilding, 'landuse'=>$landuse, 'master'=> $master, 'lotlist'=> $lotlist, 'ownerlist'=>$ownerlist, 'building'=> $building,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstruct,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'bldgcate' => $bldgcate,'bldgtype' => $bldgtype,'count' => $count, 'bldgardetail' => $bldgardetail,'ratepayer' => $ratepayer, 'tenant' => $tenant,'prop_id' => $prop_id,'pb'=> $pb,'parameter' => $parameter,'attachment'=>$attachment,'attachtype' => $attachtype, 'termname' => $termname, 'accountnumber' => $accountnumber,'serverhost' => $serverhost, 'ownerd' => $owner, 'viewparambasket' => $viewparambasket, 'viewparambasketstatus' => $viewparambasketstatus, 'viewparamterm' => $viewparamterm, 'termid' => $termid,
-                'iseditable' => $iseditable, 'applntype' => $applntype));
+                'iseditable' => $iseditable, 'applntype' => $applntype, 'status' => $status, 'mbldg' => $mbldg));
     }
 
     public function ratepayerSearch(Request $request){

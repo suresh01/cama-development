@@ -700,6 +700,9 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
            
             $owner = DB::select('select grouptb.tdi_key, grouptb.tdi_value  from  tbdefitems grouptb 
               where grouptb.tdi_td_name = "USERGROUP" ');
+
+     // $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, usr_position FROM tbuser');
+            $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser, usr_id usr_position FROM tbuser');
             if($page == '2'){
                $search=DB::select(' select sd_key, sd_label, 
                         case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
@@ -747,7 +750,7 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
 
         App::setlocale(session()->get('locale'));
         
-                return view("ownershiptransfer.ownertransfer")->with(array('search' => $search, 'page' => $page, 'ownertransfer' => $ownertransfer,'owner' => $owner,'param' => $param));
+                return view("ownershiptransfer.ownertransfer")->with(array('search' => $search, 'page' => $page, 'ownertransfer' => $ownertransfer,'owner' => $owner,'param' => $param,'userlist' => $userlist));
             }
         
         
@@ -824,7 +827,8 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
       }
 
       $newowndetail=DB::select('select date_format(otar_createdate,"%d/%m/%Y") otar_createdate, cm_masterlist.*,cm_ownertrans_appln.*, 
-        owntype.tdi_value owntype, state.tdi_value state
+        owntype.tdi_value owntype, state.tdi_value state, date_format(ota_applydate,"%d/%m/%Y") applydate, date_format(ota_recievedate,"%d/%m/%Y") recievedate,
+        date_format(ota_transactiondate,"%d/%m/%Y") transactiondate
         from cm_masterlist 
         left join cm_ownertrans_applnreg on otar_accno = ma_accno
         left join cm_ownertrans_appln on ota_otar_id = otar_id
@@ -963,7 +967,7 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
         on ownstatus.tdi_key = ota_transferapplntypestatus_id and ownstatus.tdi_td_name = "OWNERSHIPSTATUS"
         
        ');*/
-      $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, usr_position FROM tbuser');
+      $userlist=DB::select('select concat(usr_firstname, " " ,usr_lastname) tbuser, usr_id usr_position FROM tbuser');
 
         App::setlocale(session()->get('locale'));
         
@@ -1034,7 +1038,7 @@ inner join tbdefitems owntype on otar_ownertranstype_id = owntype.tdi_key and ow
       left join tbdefitems tstatus 
       on tstatus.tdi_key = otar_ownertransstatus_id and tstatus.tdi_td_name = "OWNERSHIPSTAGE"
       left join tbdefitems ttype  
-      on ttype.tdi_key = ota_transferapplntype_id and ttype.tdi_td_name = "TRANSFERAPPLNTYPE"
+      on ttype.tdi_key = otar_ownertranstype_id and ttype.tdi_td_name = "TRANSFERAPPLNTYPE"
       left join tbdefitems ownstatus 
       on ownstatus.tdi_key = ota_transferapplntypestatus_id and ownstatus.tdi_td_name = "OWNERSHIPSTATUS"  
       where ota_transferapplntype_id is not null and otar_ownertransstatus_id in (3,4,5,6,7) 
@@ -1247,7 +1251,7 @@ public function owneradddresTables(Request $request){
               // Compile a JRXML to Jasper
            //  JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuation.jrxml'))->execute();
           
-          $filter = ' ma_accno = '. $accountnumber;
+          $filter = ' otar_id = '. $accountnumber;
           JasperPHP::process(
              $jasper_path,
                   false,

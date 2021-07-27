@@ -69,9 +69,9 @@
 										</td>
 										<td>
 											@if($rec->otar_ownertranstype_id == '3')
-											<a class='shobldg' onclick="edit('{{$rec->otar_accno}}',2)" href='#' >{{$rec->otar_accno}}</a>
+											<a class='shobldg' onclick="edit('{{$rec->otar_id}}',2)" href='#' >{{$rec->otar_accno}}</a>
 											@else
-											<a class='shobldg' onclick="edit('{{$rec->otar_accno}}',1)" href='#' >{{$rec->otar_accno}}</a>
+											<a class='shobldg' onclick="edit('{{$rec->otar_id}}',1)" href='#' >{{$rec->otar_accno}}</a>
 											@endif
 										</td>
 										<td>

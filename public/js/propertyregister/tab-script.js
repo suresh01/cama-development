@@ -221,9 +221,9 @@ var validateBldg = function() {
         alert('Please select occupied date');
         $('#occupieddt').focus();
         return false;
-    } else if ($('#mainbldg').val()==='') {
+    } else if ($('#mbldg').val()==='') {
         alert('Please select main building');
-        $('#mainbldg').focus();
+        $('#mbldg').focus();
         return false;
     } else {
         var mainbldg = "";
@@ -233,7 +233,7 @@ var validateBldg = function() {
             //var tempdata1 = {};
             console.log(ldata);
             $.each(ldata, function( key, value ) {
-                if (key == 22){
+                if (key == 22 && value ==1 ){
                     mainbldg = value; 
                     mainbldgnumber = ldata[2]; 
                 }          
@@ -241,13 +241,15 @@ var validateBldg = function() {
         }
         console.log(mainbldgnumber);
         console.log($('#bldgnum').val());
+        console.log(mainbldg);
+        console.log($('#mbldg').val());
         //alert(mainbldgnumber);
         //alert($('#bldgnum').val());
         if (mainbldgnumber !== $('#bldgnum').val()){
             if(mainbldg == '1' && $('#mbldg').val() == '1'){
 
                 alert('Only one building should be main building');
-                $('#mainbldg').focus();
+                $('#mbldg').focus();
                 return false;
             }
         }

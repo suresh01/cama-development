@@ -85,7 +85,7 @@
 									<div class="form_grid_12">
 										<label class="field_title" id="lposition" for="position">{{__('inspection.Lot_Number')}} <span class="req">*</span></label>
 										<div  class="form_input">
-											<input id="lotnum" tabindex="2" name="lotnum" type="text" value="" maxlength="15" class=""/>
+											<input id="lotnum" tabindex="2" name="lotnum" type="text" value=""  class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
@@ -93,7 +93,7 @@
 									<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">{{__('inspection.Alternative_Lot_Number')}} </label>
 										<div  class="form_input">
-											<input id="altlotnum" tabindex="3" name="altlotnum" type="text" value="" maxlength="15" class=""/>
+											<input id="altlotnum" tabindex="3" name="altlotnum" type="text" value=""  class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
@@ -112,7 +112,7 @@
 									<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">{{__('inspection.Lot_Title_Number')}} </label>
 										<div  class="form_input">
-											<input id="ltnum" name="ltnum" tabindex="5" type="text" value="" maxlength="8" class=""/>
+											<input id="ltnum" name="ltnum" tabindex="5" type="text" value=""  class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
@@ -120,7 +120,7 @@
 									<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">{{__('inspection.Alternative_Title_Number')}} </label>
 										<div  class="form_input">
-											<input id="altnum" name="altnum" tabindex="6" type="text" value="" maxlength="8" class=""/>
+											<input id="altnum" name="altnum" tabindex="6" type="text" value=""  class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
@@ -128,7 +128,7 @@
 									<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">{{__('inspection.Strata_Number')}} </label>
 										<div  class="form_input">
-											<input id="stratano" name="stratano" tabindex="6" type="text" value="4323" maxlength="8" class=""/>
+											<input id="lostratano" name="lostratano" tabindex="6" type="text"  class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
@@ -159,7 +159,7 @@
 										</div>
 										<span class=" label_intro"></span>
 									</div>
-									<div class="form_grid_12">
+									<div style="display: none;" class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">{{__('inspection.City')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<input id="lotcity" name="lotcity" tabindex="9" type="text" value="" maxlength="50" class="large"/>
@@ -308,9 +308,10 @@
 										<label class="field_title" id="llevel" for="level">{{__('inspection.Indicator_For_Land_Is_Active')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="status" tabindex="22" name="status" tabindex="20">	
-												<option></option>										
-												<option value='1'>Y</option>
-												<option value='2'>N</option>											
+												<option></option>								
+											@foreach ($status as $rec)
+													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+											@endforeach											
 										</select>
 										</div>
 										<span class=" label_intro"></span>
@@ -324,7 +325,7 @@
 											<button id="close" onclick="closeAddUser()" name="close" type="button" class="btn_small btn_blue"><span>Close</span></button>
 										</div>
 									</div>
-									</li>-->
+									</li>--> 
 									</ul>	
 														
 							</div>				
@@ -337,16 +338,16 @@
 						 	$( "#tenend" ).datepicker({dateFormat: 'dd/mm/yy'});
 						 	var account = $('#accnumber').val();
 			
-			let lotmap = new Map([["0","sno"],["1", "lotstate"], ["2", "lotdistrict"], ["3", "lotcity"],["4", "presint"], ["5", "lotype"],["6", "lotnum"], ["7", "altlotnum"],["8", "lttt"], ["9", "ltnum"],["10", "altnum"], ["11", "landar"],["12", "landaruni"],["13", "landcon"], ["14", "lanpos"],["15", "roadtype"], ["16", "roadcate"],["17", "landuse"], ["18", "expcon"],["19", "interest"], ["20", "tentype"],["21", "tenduration"], ["22", "tenstart"],["23", "tenend"], ["24", "status"],["25", "action"],["26", "actioncode"],["27", "lot_id"],["28", "lotaccnum1"],["29", "lotaccnum2"],["30", "lotaccnum3"],["31", "lotaccnum4"],["32", "lotaccnum5"],["33", "lotaccnum6"],["34", "lotaccnum7"],["35", "lotaccnum"]]);
+			let lotmap = new Map([["0","sno"],["1", "lotstate"], ["2", "lotdistrict"], ["3", "lotcity"],["4", "presint"], ["5", "lotype"],["6", "lotnum"], ["7", "altlotnum"],["8", "lttt"], ["9", "ltnum"],["10", "altnum"], ["11", "landar"],["12", "landaruni"],["13", "landcon"], ["14", "lanpos"],["15", "roadtype"], ["16", "roadcate"],["17", "landuse"], ["18", "expcon"],["19", "interest"], ["20", "tentype"],["21", "tenduration"], ["22", "tenstart"],["23", "tenend"], ["24", "status"],["25", "action"],["26", "actioncode"],["27", "lot_id"],["28", "lotaccnum1"],["29", "lotaccnum2"],["30", "lotaccnum3"],["31", "lotaccnum4"],["32", "lotaccnum5"],["33", "lotaccnum6"],["34", "lotaccnum7"],["35", "lotaccnum"],["36", "lostratano"]]);
  		var lotdata = [];
 		 		@foreach ($lotlist as $rec)
 		 			lotdata.push( [ '{{$loop->iteration}}', '{{$rec->al_state}}', '{{$rec->al_district}}', '', '', '{{$rec->al_lotcode_id}}', '{{$rec->al_no}}', '{{$rec->al_altno}}', '{{$rec->al_titletype_id}}', '{{$rec->al_titleno}}', '{{$rec->al_alttitleno}}', '{{$rec->al_size}}', '{{$rec->al_sizeunit_id}}', '{{$rec->al_landcondition_id}}', '{{$rec->al_landposision_id}}', '{{$rec->al_roadtype_id}}', '{{$rec->al_roadcategory_id}}', '{{$rec->al_landuse_id}}', '{{$rec->al_excd}}', '{{$rec->al_rtit}}', '{{$rec->al_tenuretype_id}}', '{{$rec->al_tenureperiod}}', '{{$rec->al_startdate1}}', '{{$rec->al_expireddate1}}' ,'{{$rec->al_activeind_id}}','','noation', '{{$rec->al_id}}' ,'{{$rec->lotnumber}}','{{$rec->al_altno}}','{{$rec->titlenumber}}','{{$rec->al_size}}','{{$rec->landuse}}','{{$rec->tentype}}',
-		 				'<span><a onclick="" class="action-icons c-edit edtlotrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons  dellotrow deletelotrow" href="#" title="delete">Delete</a></span>',account ] );
+		 				'<span><a onclick="" class="action-icons c-edit edtlotrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons  dellotrow deletelotrow" href="#" title="delete">Delete</a></span>',account, '{{$rec->al_stratano}}' ] );
 		 		@endforeach
 
         $('#lottble').DataTable({
             data:           lotdata,
-            "columns":[ null, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false } ,{ "visible": false},{ "visible": false}, { "visible": false } , { "visible": false } ,null, null,null,null,null,null,null,{ "visible": false}],
+            "columns":[ null, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false } ,{ "visible": false},{ "visible": false}, { "visible": false } , { "visible": false } ,null, null,null,null,null,null,null,{ "visible": false},{ "visible": false}],
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
 			"oLanguage": {
@@ -463,7 +464,7 @@ function editlotRow(){
 				operation = "New";
 				operation_code = "new";
 			}
-	    data=[operation,$('#lotstate').val(), $('#lotdistrict').val(), $('#lotcity').val(), '', $('#lotype').val(), $('#lotnum').val(), $('#altlotnum').val(),$('#lttt').val(), $('#ltnum').val(), $('#altnum').val(),$('#landar').val(), $('#landaruni').val(), $('#landcon').val(), $('#lanpos').val(), $('#roadtype').val(), $('#roadcate').val(),$('#landuse').val(), $('#expcon').val(), $('#interest').val(), $('#tentype').val(), $('#tenduration').val(),$('#tenstart').val(), $('#tenend').val(),$('#status').val(), '',operation_code, $('#lot_id').val(),  $('#lotype option:selected').text()+$('#lotnum').val(),$('#altlotnum').val(),$('#lttt option:selected').text()+$('#ltnum').val(),$('#landar').val(), $('#landuse option:selected').text(),  $('#tentype option:selected').text(),  '<span><a onclick="" class="action-icons c-edit edtlotrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deletelotrow dellotrow" href="#" title="delete">Delete</a></span>',account ];
+	    data=[operation,$('#lotstate').val(), $('#lotdistrict').val(), $('#lotcity').val(), '', $('#lotype').val(), $('#lotnum').val(), $('#altlotnum').val(),$('#lttt').val(), $('#ltnum').val(), $('#altnum').val(),$('#landar').val(), $('#landaruni').val(), $('#landcon').val(), $('#lanpos').val(), $('#roadtype').val(), $('#roadcate').val(),$('#landuse').val(), $('#expcon').val(), $('#interest').val(), $('#tentype').val(), $('#tenduration').val(),$('#tenstart').val(), $('#tenend').val(),$('#status').val(), '',operation_code, $('#lot_id').val(),  $('#lotype option:selected').text()+$('#lotnum').val(),$('#altlotnum').val(),$('#lttt option:selected').text()+$('#ltnum').val(),$('#landar').val(), $('#landuse option:selected').text(),  $('#tentype option:selected').text(),  '<span><a onclick="" class="action-icons c-edit edtlotrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deletelotrow dellotrow" href="#" title="delete">Delete</a></span>',account, $('#lostratano').val() ];
 
 
 
@@ -492,7 +493,7 @@ function addlotRow(){
 		//console.log(operation);
 		var t = $('#lottble').DataTable();
 									
-		t.row.add([ 'New',$('#lotstate').val(), $('#lotdistrict').val(), $('#lotcity').val(), '', $('#lotype').val(), $('#lotnum').val(), $('#altlotnum').val(),$('#lttt').val(), $('#ltnum').val(), $('#altnum').val(),$('#landar').val(), $('#landaruni').val(), $('#landcon').val(), $('#lanpos').val(), $('#roadtype').val(), $('#roadcate').val(),$('#landuse').val(), $('#expcon').val(), $('#interest').val(), $('#tentype').val(), $('#tenduration').val(),$('#tenstart').val(), $('#tenend').val(),$('#status').val(), '','new', $('#lot_id').val(), $('#lotype option:selected').text()+$('#lotnum').val(),$('#altlotnum').val(),$('#lttt option:selected').text()+$('#ltnum').val(),$('#landar').val(), $('#landuse option:selected').text(),  $('#tentype option:selected').text(), '<span><a onclick="" class="action-icons c-edit edtlotrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deletelotrow dellotrow" href="#" title="delete">Delete</a></span>',account  ]).draw( false );
+		t.row.add([ 'New',$('#lotstate').val(), $('#lotdistrict').val(), $('#lotcity').val(), '', $('#lotype').val(), $('#lotnum').val(), $('#altlotnum').val(),$('#lttt').val(), $('#ltnum').val(), $('#altnum').val(),$('#landar').val(), $('#landaruni').val(), $('#landcon').val(), $('#lanpos').val(), $('#roadtype').val(), $('#roadcate').val(),$('#landuse').val(), $('#expcon').val(), $('#interest').val(), $('#tentype').val(), $('#tenduration').val(),$('#tenstart').val(), $('#tenend').val(),$('#status').val(), '','new', $('#lot_id').val(), $('#lotype option:selected').text()+$('#lotnum').val(),$('#altlotnum').val(),$('#lttt option:selected').text()+$('#ltnum').val(),$('#landar').val(), $('#landuse option:selected').text(),  $('#tentype option:selected').text(), '<span><a onclick="" class="action-icons c-edit edtlotrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons  deletelotrow dellotrow" href="#" title="delete">Delete</a></span>',account, $('#lostratano').val()  ]).draw( false );
 
 		/*$("#lotdetail").hide();
 		$("#lottable").show();
