@@ -742,7 +742,7 @@ $(document).ready(function (){
 			        	var editaction ='<a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -62px !important;display: inline-block; float: right;" title="View Log" 			        	onclick="submitLogForm('+data.log_id+')"></a></span>&nbsp;&nbsp;&nbsp;&nbsp;' ;
 
 			        	var deleteaction ="&nbsp;&nbsp;<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; float: right;'  onclick='deleteProperty("+data.log_id+")' href='#' title='Delete'></a></span>";
-
+			        		action = "";
 							if(data.log_approvalstatus_id == '1'  || data.log_approvalstatus_id == '6'){
 								action =  deleteaction + editaction  ;				
 
