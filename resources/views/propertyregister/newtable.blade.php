@@ -225,6 +225,7 @@ var subzone = arrayToJSON('{{$subzone}}');
 var bldgstore = arrayToJSON('{{$bldgstore}}');
 var bldgtype = arrayToJSON('{{$bldgtype}}');
 var statedefault = arrayToJSON('{{$statedefault}}');
+var mbldg = arrayToJSON('{{$mbldg}}');
 
 
 

@@ -74,7 +74,7 @@ $( document ).ready(function() {
 			{ //11
 				data: 'state',
 				type: 'dropdown',
-			  	source: subzone,
+			  	source: statedefault,
 				allowEmpty: false
 			},
 			{ //12
@@ -356,7 +356,7 @@ $( document ).ready(function() {
 			{ //64
 				data: 'mainbldg',
 				type: 'dropdown',
-				source: ['Y','N'],
+				source: mbldg,
 				allowEmpty: false
 			},
 			{ //65
