@@ -911,11 +911,13 @@
 			$("#ncitizen").val($("#citizen").val());
 			$("#ntypeofown").val($("#typeofown").val());
 			$("#nownaplntype").val($("#ownaplntype").val());
+			$("#ncity").val($("#city").val());
+			$("#nemailid").val($("#emailid").val());
         }
         else if($('#copydetail').prop("checked") == false){
             $('#nownaplntype').val('');
 			$('#ntypeofown').val('');
-			//$('#lotnum').val($('#city'+id).val());
+			//$('#lotnum').val($('#city'+id).val()); 
 			$('#nownnum').val('');
 			$('#nownname').val('');
 			$('#nownaddr1').val('');
@@ -936,6 +938,8 @@
 			$("#nownaplntype").val('');
 			$('#nfaxno').val('');
 			$('#ntelno').val('');
+			$("#ncity").val('');
+			$("#nemailid").val('');
         }
 			
 	}

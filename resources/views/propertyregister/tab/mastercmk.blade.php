@@ -10,7 +10,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="lusername" for="username">{{__('propertyregister.Account_Number')}} <span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="accnumber" tabindex="1" name="accnumber" type="text"  maxlength="12" class="">
+						<input id="accnumber1" tabindex="1" name="accnumber" type="text"  maxlength="11" class="">
 						
 					</div>
 					<span class=" label_intro"></span>
@@ -175,12 +175,12 @@
 			});
 	    });
 
-	    $("#accnumber").keyup(function(){
+	    $("#accnumber1").keyup(function(){
 	    	
 		    var account = this.value;
 		    var length = account.length;
 		    if (length > 11){
-		    	alert('Please enter 11 digit account number');
+		    	alert('Please enter 11 digit  account number');
 		    	//$("#accnumber").val(account.slice(0,-1));
 		    }
 		    
@@ -203,35 +203,12 @@
 
 		});
 
-	    $("#accnumber").change(function() {
+	    $("#accnumber1").change(function() {
 	    	//console.log(this.value);
 		    //$("#accnumber").val(this.value+""+Math.floor((Math.random() * 9) + 1));
 		    var account = this.value;
 		    var length = account.length;
-		    if (length === 11){		    
-			    $.ajax({
-				  url: "checkdigit",
-				  cache: false,
-				  data:{param_value:this.value},
-				  success: function(data){
-				  	
-				  		$("#accnumber").val(account+""+data.checkdigit);
-				    	
-				    	var valid = validateAccount(account+""+data.checkdigit).done(function(data){
-					       var count = data.res_arr;
-							if (count > 0 ) {
-								$('#accnumber').focus();
-								alert('Account Number already exists');
-							} else {
-			    				$('#propertystatus').val('');
-							}
-						});	
-				   
-				  }
-				});
-		    } else {
-		    	alert("Please enter 11 digit account number");
-		    }
+		    
 	    });
 
 	    $("#propertyregsitration_from-next-0").click(function(){

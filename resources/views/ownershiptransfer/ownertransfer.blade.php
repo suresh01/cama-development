@@ -274,8 +274,7 @@
 			}
 		}
 
-		function approve(id,currstatus){
-			
+		function approve(id,currstatus){			
 			var noty_id = noty({
 				layout : 'center',
 				text: 'Are you sure want to Submit?',

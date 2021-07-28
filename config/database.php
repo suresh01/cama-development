@@ -54,6 +54,18 @@ return [
             'engine' => null,
         ],
 
+        'oracle' => [
+            'driver' => 'oracle',
+            'host' => 'localhost',
+            'port' => '1521',
+            'database' => 'xe',
+            'service_name' => '',
+            'username' => 'data_receiver',
+            'password' => 'user123',
+            'charset' => '',
+            'prefix' => '',
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),

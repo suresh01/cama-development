@@ -103,7 +103,7 @@ var validateLot = function() {
                 alert('Please select tenant end date');
                 return false;
             }
-        } 
+        }
         var status = 0;
         var lotindex = '';
         var lotnumber = 0;
@@ -228,25 +228,33 @@ var validateBldg = function() {
     } else {
         var mainbldg = "";
         var mainbldgnumber = "";
+        var bldgid = "";
+        var bilbldg = 0;
         for (var i = 0;i<$('#bldgtble').DataTable().rows().count();i++){
             var ldata = $('#bldgtble').DataTable().row(i).data();
             //var tempdata1 = {};
             console.log(ldata);
             $.each(ldata, function( key, value ) {
+                //alert(key + '=' + value);
                 if (key == 22 && value ==1 ){
                     mainbldg = value; 
                     mainbldgnumber = ldata[2]; 
+                    bldgid =  ldata[20];
                 }          
             });
+            bilbldg = i;
         }
         console.log(mainbldgnumber);
         console.log($('#bldgnum').val());
         console.log(mainbldg);
         console.log($('#mbldg').val());
         //alert(mainbldgnumber);
-        //alert($('#bldgnum').val());
-        if (mainbldgnumber !== $('#bldgnum').val()){
-            if(mainbldg == '1' && $('#mbldg').val() == '1'){
+        //alert(bldgid + ' = ' + $('#bldgid').val());
+        if (mainbldgnumber != $('#bldgnum').val()  && bldgid != $('#bldgid').val()  ){
+        //if (bldgid != $('#bldgid').val()){
+            alert('bil bgn:' + bilbldg + ' ' + bldgid + ' = ' + $('#bldgid').val());
+            //&& bilbldg != 1
+            if(mainbldg == '1' && $('#mbldg').val() == mainbldg   ){
 
                 alert('Only one building should be main building');
                 $('#mbldg').focus();
@@ -254,6 +262,8 @@ var validateBldg = function() {
             }
         }
         return true;
+
+
     }
 };
 

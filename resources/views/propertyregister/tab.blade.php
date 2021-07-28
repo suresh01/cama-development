@@ -44,8 +44,10 @@
 						<form action="" id="propertyregsitration_from" class="form_container left_label">
 							<fieldset title="Step 1">		
 								<legend>{{__('propertyregister.Master_Information')}} </legend>						
-								@if ($count == 0)
+								@if ($count == 0 && $basket_type =='K')
 				            		@include('propertyregister.tab.masternew')
+				            	@elseif ($count == 0 && $basket_type =='C')
+				            		@include('propertyregister.tab.mastercmk')
 				            	@else
 				            		@include('propertyregister.tab.master')
 				            	@endif								

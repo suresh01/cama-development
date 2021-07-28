@@ -294,74 +294,12 @@ $("#finish").click(function(){
 		var bldgValid = false;
 		var bldgarValid = true;
 
-		if(masterhot !== undefined && lothot !== undefined && ownerhot !== undefined ) {
-			if(bldghot !== undefined ){
-				bldghot.validateCells(function(valid) {
-				    if (!valid) {
-				    	showTableError(3,4);//a current position, b previous position
-				    	bldgValid = false;
-				    } else {		
-				    	clearTableError(3,4);
-				    	bldgValid = true;
-				    }
-				});
-			}
-
-			if(bldgarhot !== undefined ){
-				bldgarhot.validateCells(function(valid) {
-				//var hasBuilding = bldghot.countRows();
-				//bldghot.countRows();
-
-				    if (!valid) {
-				    	showTableError(4,5);//a current position, b previous position
-				    	bldgarValid = false;
-				    } else {		
-				    	clearTableError(4);
-				    	bldgarValid = true;
-				    }
-				});
-			}
-
-			ownerhot.validateCells(function(valid) {
-			    if (!valid) {
-			    	showTableError(2,3);//a current position, b previous position
-			    } else {		
-			    	clearTableError(2,3);
-			    	ownerValid = true;
-			    }
-			});
-
-			lothot.validateCells(function(valid) {
-			    if (!valid) {
-			    	showTableError(1,2);//a current position, b previous position
-			    } else {		
-			    	clearTableError(1,2);
-			    	lotValid = true;
-		    	}
-			});
-
-			masterhot.validateCells(function(valid) {
-			    if (!valid) {
-			    	showTableError(0,1);//a current position, b previous position
-			    } else {		
-			    	clearTableError(0,1);
-			    	masterValid = true;
-			    }
-			});
-			//console.log(masterValid +""+ lotValid +""+ ownerValid +""+ bldgValid +""+ bldgarValid);
-			if(bldgarValid){			
+		
+					
 				//finish();
 				
 				masterdata = JSON.stringify(masterhot.getSourceData());
-				lotdata = JSON.stringify(lothot.getSourceData());
-				ownerdata = JSON.stringify(ownerhot.getSourceData());
-				if(bldgdata !== undefined ){
-					bldgdata = JSON.stringify(bldghot.getSourceData());
-				}
-
-				if(bldgardata !== undefined){
-					bldgardata = JSON.stringify(bldgarhot.getSourceData());
-				}
+				console.log(masterdata);
  
 				bldgarhot.validateCells(function(valid) {
 					if (valid){		
@@ -378,7 +316,7 @@ $("#finish").click(function(){
 								    headers: {
 									    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 									},
-							        data:{masterdata:masterdata,lotdata:lotdata,ownerdata:ownerdata,bldgdata:bldgdata,bldgardata:bldgardata,pb:pb},
+							        data:{masterdata:masterdata,pb:pb},
 							        success:function(data){
 										$('#loader').html('');
 											alert('Properties Updated');
@@ -417,14 +355,7 @@ $("#finish").click(function(){
 						showTableError(4,5);
 					}
 				})
-			} 
 			
-		} else if (lothot === undefined) {
-			alert('Please Enter atleast one lot per property');
-		} else if (ownerhot === undefined) {
-			alert('Please Enter atleast one owner per property');
-		} 
-
 
 		
 		/*console.log(masterdata);

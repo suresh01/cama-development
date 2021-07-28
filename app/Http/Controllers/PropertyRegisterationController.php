@@ -185,6 +185,8 @@ class PropertyRegisterationController extends Controller
                $basket_name = $obj->PB_NAME;
                $basket_type = $obj->PB_APPLICATIONTYPE_ID;
             }
+
+            Log::info($basket_type." - ddd");
             foreach ($prop as $obj) {  
                $accountnumbber = $obj->ma_accno;
             }
@@ -503,8 +505,8 @@ $master ='{"aa":"ss '.$type.'"}';
                     '".$lotdata."','".$ownerdata."','".$bldgdata."','".$bldgardata."','".$name."',".$prop.",'".$type."','')");   
             } else {
             	//$msg = false;
-                Log::info("call proc_property_register('".$master."','".$lot."','".$owner."','".$bldg."','".$bldgar."','".$name."',".$pb.",'','')");
-                $register=DB::select("call proc_property_register('".$master."','".$lot."','".$owner."','".$bldg."','".$bldgar."','".$name."',".$pb.",'','')");
+                Log::info("call proc_property_register_table('".$master."','".$name."',".$pb.",'','')");
+                $register=DB::select("call proc_property_register_table('".$master."','".$name."',".$pb.",'','')");
             }
             $error = "Property Registered successfully!";
          } catch (\Illuminate\Database\QueryException $ex) {
