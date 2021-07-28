@@ -290,6 +290,10 @@
 							},
 					        data:{param_value:id,module:'ownershiptrans',param:currstatus},
 					        success:function(data){
+
+					        	if(currstatus == 5){
+					        		
+					        	}
 								window.location.assign("ownertransfer?page=1");									
 				        	},
 					        error:function(data){

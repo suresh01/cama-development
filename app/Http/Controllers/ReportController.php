@@ -1474,7 +1474,7 @@ Log::info($termid);
        // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
         Log::info($filterquery);
 
-        $property = DB::select("select get_activeterm_count(vt_termDate) propertycount, 
+        $property = DB::select("select get_term_count(vt_termDate) propertycount, 
 vt_id as id, vt_termDate, vt_termtype_id,vt_valbase_id, vt_id, vt_name name, vt_createby createby,  DATE_FORMAT(vt_createdate, '%d/%m/%Y') createdate, vt_updateby updateby, 
 DATE_FORMAT(vt_updatedate, '%d/%m/%Y')  updatedate, DATE_FORMAT(vt_termDate, '%d/%m/%Y') termDate, 
 DATE_FORMAT(now(), '%d/%m/%Y') enforceDate,  vt_applicationtype_id,DATE_FORMAT(vt_transferDate, '%d/%m/%Y') vt_transferDate, vt_transferby,
@@ -1482,7 +1482,7 @@ vt_approvalstatus_id
 from  cm_appln_valterm ".$filterquery);
 
         $propertyDetails = Datatables::collection($property)->make(true);
-   
+        
         return $propertyDetails;
     }
 
@@ -1544,8 +1544,7 @@ from  cm_appln_valterm ".$filterquery);
         $export = new InvoicesExport($data,$headings);
         return Excel::download($export, 'export.xlsx');
         //$this->export($test, 'flyer_data', $captions, 'xls');
-          //return Excel::download($test, 'data.xlsx');
-    
+          //return Excel::download($test, 'data.xlsx');    
     }
 
 
