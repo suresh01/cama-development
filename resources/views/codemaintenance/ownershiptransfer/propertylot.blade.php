@@ -191,14 +191,14 @@
 									<div class="form_grid_12">
 										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Altenate_Title_No')}} <span class="req">*</span></label>
 										<div  class="form_input">
-											<input id="3altnum" name="altn3um"  tabindex="12"  type="text" " maxlength="50" class=""/>
+											<input id="3altnum" name="altn3um"  tabindex="12"  type="text"  maxlength="50" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
 									<div class="form_grid_12">
 										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Strata_No')}} <span class="req">*</span></label>
 										<div  class="form_input">
-											<input id="3stratano" name="str3atano"  tabindex="12"  type="text" " maxlength="50" class=""/>
+											<input id="3stratano" name="str3atano"  tabindex="12"  type="text"  maxlength="50" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
@@ -417,7 +417,6 @@
 	<span class="clear"></span>
 	
 	<script>
-
 		function addProperty() {		
 		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0,left = 312,top = 234');
 		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {

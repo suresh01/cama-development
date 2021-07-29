@@ -10,7 +10,7 @@
 				<div class="form_grid_12">
 					<label class="field_title" id="lusername" for="username">{{__('propertyregister.Account_Number')}} <span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="accnumber1" tabindex="1" name="accnumber" type="text"  maxlength="11" class="">
+						<input id="accnumber" tabindex="1" name="accnumber" type="text"  maxlength="11" class="">
 						
 					</div>
 					<span class=" label_intro"></span>
@@ -175,7 +175,7 @@
 			});
 	    });
 
-	    $("#accnumber1").keyup(function(){
+	    $("#accnumber").keyup(function(){
 	    	
 		    var account = this.value;
 		    var length = account.length;
@@ -203,7 +203,7 @@
 
 		});
 
-	    $("#accnumber1").change(function() {
+	    $("#accnumber").change(function() {
 	    	//console.log(this.value);
 		    //$("#accnumber").val(this.value+""+Math.floor((Math.random() * 9) + 1));
 		    var account = this.value;
