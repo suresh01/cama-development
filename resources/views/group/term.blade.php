@@ -159,17 +159,19 @@
 									<td>
 										
 										@if($rec->basket_count == 0)	
-										@if($rec->vt_approvalstatus_id == '01')										
-										    <span><a class="action-icons c-delete delete_term" onclick="deleteTerm('{{$rec->vt_id}}')" href="#" title="Delete Term">Delete</a></span>
+											@if($rec->vt_approvalstatus_id == '01')										
+											    <span><a class="action-icons c-delete delete_term" onclick="deleteTerm('{{$rec->vt_id}}')" href="#" title="Delete Term">Delete</a></span>
 
-										<span><a class="action-icons c-edit" onclick="editTerm('{{$rec->vt_id}}')" title="Edit Term" href="#">Edit</a></span>
-										@endif
-										@endif
-										@if($rec->vt_approvalstatus_id == '03' )
-										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="enforceTerm('{{$rec->vt_id}}')" disabled="true" title="Enforce Term" href="#"></a></span>
+											<span><a class="action-icons c-edit" onclick="editTerm('{{$rec->vt_id}}')" title="Edit Term" href="#">Edit</a></span>
 											@endif
+										@endif
+
+										@if($rec->vt_approvalstatus_id == '03' )
+											<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="enforceTerm('{{$rec->vt_id}}')" disabled="true" title="Enforce Term" href="#"></a></span>
+										@endif
+
 										@if($rec->ap_basket_count == $rec->basket_count && $rec->basket_count > 0 && $rec->vt_approvalstatus_id == '01' )
-										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->vt_id}}')" disabled="true" title="Approve Transfer" href="#"></a></span>
+											<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->vt_id}}')" disabled="true" title="Approve Transfer" href="#"></a></span>
 										@endif
 									</td>
 								</tr>

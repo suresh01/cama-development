@@ -201,7 +201,10 @@
 										<spane><a  class="basic-modal-c  new-action-icons reverse" onclick="resetValuation('{{$rec->id}}')" disabled="true" title="Delete Valuation" href="#"></a></span>
 
 										@endif
-
+$rec->propertycount $rec->valcount $rec->applntype  $rec->va_approvalstatus_id
+										if($rec->propertycount ==  $rec->valcount && $rec->applntype == 'CMK' && $rec->va_approvalstatus_id == '07' )
+										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->id}}')" disabled="true" title="Approve Valuation" href="#"></a></span>
+										@endif
 										
 
 										@endif

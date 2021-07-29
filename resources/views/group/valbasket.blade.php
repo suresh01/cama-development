@@ -167,27 +167,29 @@
 										@elseif($rec->va_approvalstatus_id == '11')
 											<span></span>
 										@else
-										@if($rec->propertycount == $rec->inspropertyccount && $rec->va_approvalstatus_id == '04' && $rec->propertycount != $rec->valcount )
+											@if($rec->propertycount == $rec->inspropertyccount && $rec->va_approvalstatus_id == '04' && $rec->propertycount != $rec->valcount )
 
-										<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveProperty('{{$rec->id}}')" disabled="true" title="{{__('group.Approve_Valuation')}} " href="#"></a></span>
-										@endif
-										@if($rec->va_approvalstatus_id == '05' || $rec->va_approvalstatus_id == '06')
-										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -142px -101px !important;display: inline-block; float: left;" class="basic-modal-c" onclick="startValuation('{{$rec->id}}')" disabled="true" title="{{__('group.Mass_Valuation')}} " href="#"></a></span>
-										@endif
+												<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveProperty('{{$rec->id}}')" disabled="true" title="{{__('group.Approve_Valuation')}} " href="#"></a></span>
+											@endif
+											@if($rec->va_approvalstatus_id == '05' || $rec->va_approvalstatus_id == '06')
+												<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -142px -101px !important;display: inline-block; float: left;" class="basic-modal-c" onclick="startValuation('{{$rec->id}}')" disabled="true" title="{{__('group.Mass_Valuation')}} " href="#"></a></span>
+											@endif
 
-										@if($rec->propertycount == $rec->valcount && $rec->applntype == 'KAD' && $rec->va_approvalstatus_id != '08' )
-										<spane><a style=""  class="basic-modal-c new-action-icons reverse" onclick="resetValuation('{{$rec->id}}')" disabled="true" title="{{__('group.Delete_Valuation')}} " href="#"></a></span>
-										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->id}}')" disabled="true" title="{{__('group.Approve_Valuation')}} " href="#"></a></span>
-										@elseif($rec->propertycount == $rec->valcount && $rec->applntype == 'CMK' )
-										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(. ./images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->id}}')" disabled="true" title="{{__('group.Approve_Valuation')}} " href="#"></a></span>
-										@elseif($rec->va_approvalstatus_id == '07' )		
-										<spane><a  class="basic-modal-c  new-action-icons reverse" onclick="resetValuation('{{$rec->id}}')" disabled="true" title="{{__('group.Delete_Valuation')}} " href="#"></a></span>
+											@if($rec->propertycount == $rec->valcount && $rec->applntype == 'KAD' && $rec->va_approvalstatus_id != '08' )
+												<spane><a style=""  class="basic-modal-c new-action-icons reverse" onclick="resetValuation('{{$rec->id}}')" disabled="true" title="{{__('group.Delete_Valuation')}} " href="#"></a></span>
+												<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->id}}')" disabled="true" title="{{__('group.Approve_Valuation')}} " href="#"></a></span>
+											@elseif($rec->propertycount == $rec->valcount && $rec->applntype == 'CMK' )
+												<spane><a class="action-icons c-approve " onclick="approveValuation('{{$rec->id}}')" disabled="true" title="{{__('group.Approve_Valuation')}} " href="#"></a></span>
+											@elseif($rec->va_approvalstatus_id == '07' )		
+												<spane><a  class="basic-modal-c  new-action-icons reverse" onclick="resetValuation('{{$rec->id}}')" disabled="true" title="{{__('group.Delete_Valuation')}} " href="#"></a></span>
 
-										@endif
-
+											@endif
 										
 
 										@endif
+
+
+
 										<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -121px !important;display: inline-block; float: left;" onclick="editGroup('{{ $rec->id }}')" disabled="true" title="Edit Basket" href="#"></a></span>
 										<spane><a style="width: 14px;
 	height: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat -843px -102px !important;display: inline-block; float: left;" onclick="generateReport('{{ $rec->id }}')" disabled="true" title="Report " href="#"></a></span>
