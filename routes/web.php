@@ -222,6 +222,8 @@ Route::get('ratepayersearch', 'InspectionController@ratepayerSearch');
 
 Route::get('approve', 'PropertyRegisterationController@approve');
 
+Route::get('datatransfer', 'UserController@dataTransfer');
+
 Route::get('evidentmgmt', 'CodeMaintenanceController@evidentManagement');
 
 Route::get('evidentmgmttrn', 'CodeMaintenanceController@evidentTransaction');

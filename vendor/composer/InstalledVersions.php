@@ -1103,6 +1103,24 @@ private static $installed = array (
       ),
       'reference' => '3d7f05687069d90ca5dc3e75bf269e13eecccc76',
     ),
+    'yajra/laravel-oci8' => 
+    array (
+      'pretty_version' => 'v5.6.0',
+      'version' => '5.6.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'b5f909c249b0ef156f4eb9d0b4a8038a905c4c53',
+    ),
+    'yajra/laravel-pdo-via-oci8' => 
+    array (
+      'pretty_version' => 'v1.4.0',
+      'version' => '1.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '91598cf82bf67b0e006e40be11af9ba33a802a44',
+    ),
   ),
 );
 private static $canGetVendors;

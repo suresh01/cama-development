@@ -56,13 +56,13 @@ return [
 
         'oracle' => [
             'driver' => 'oracle',
-            'host' => 'localhost',
-            'port' => '1521',
-            'database' => 'xe',
+            'host' => env('ORA_DB_HOST', 'localhost'),
+            'port' => env('ORA_DB_PORT', '1521'),
+            'database' => env('ORA_DB_SID', 'xe'),
             'service_name' => '',
-            'username' => 'data_receiver',
-            'password' => 'user123',
-            'charset' => '',
+            'username' => env('ORA_DB_USERNAME', 'data_receiver'),
+            'password' => env('ORA_DB_PASSWORD', 'user123'),
+            'charset' => 'AL32UTF8',
             'prefix' => '',
         ],
 

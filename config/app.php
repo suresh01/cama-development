@@ -171,6 +171,9 @@ return [
         //maat excel
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
+        //oracle
+        Yajra\Oci8\Oci8ServiceProvider::class,
+
     ],
 
     /*
