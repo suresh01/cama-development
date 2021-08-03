@@ -106,7 +106,7 @@
 		    var id= $(this).val();
 		    var selectedvalue = $(this).find('option:selected').text();
 		    //selectedvalue =;
-		 
+		 	
 		    $(this).find("option").removeAttr('selected');
 		    $(this).find("option[value='" + id +"']").attr('selected', true);
 
@@ -123,7 +123,7 @@
 				$valueLbl = "";
 			}
 			var searchid = 14;
-			var termid = $('#value_Term').find('option:selected').val();
+			var termid = $("#value_{{__('ownershiptran.Term')}}").find('option:selected').val();
 	        $.ajax({
 		        type:'GET',
 		        url:'getFilterData?date='+ d.getTime(),

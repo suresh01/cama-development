@@ -13,5 +13,8 @@ return [
     'value'=>'Value',
     'relation'=>'Relation',
     'remove'=>'Remove',
-    'selectfilter'=>'Please Select Filter'
+    'selectfilter'=>'Please Select Filter',
+
+
+    'Term'=>'Term'
 ];

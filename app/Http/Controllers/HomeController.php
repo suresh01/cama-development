@@ -2491,7 +2491,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
                 }               
             }
             if($filterquery != ''){
-                $filterquery  = ' where '. $filterquery ;
+                $filterquery  = ' and '. $filterquery ;
             }
             Log::info($filterquery);
 
@@ -2500,7 +2500,7 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
       inner join (select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = 'STATE') state on state_id = mal_state_id
       inner join (select tdi_key subzone_id,tdi_parent_name zone, tdi_value subzone from tbdefitems where tdi_td_name = 'SUBZONE') subzone on subzone_id = mal_subzone_id 
       left join (select tdi_key ,tdi_parent_name , tdi_value tstatus from tbdefitems where tdi_td_name = 'OWNERSHIPSTAGE') tstatus 
-      on tdi_key = mal_approvalstatus_id 
+      on tdi_key = mal_approvalstatus_id where mal_approvalstatus_id <> '7'
        ".$filterquery  );
        // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
         $propertyDetails = Datatables::collection($property)->make(true);

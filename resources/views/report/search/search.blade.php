@@ -234,7 +234,8 @@
 	    	//alert(BULDINGTYPE2);
 	    	var id  = BULDINGTYPE2;
 	    	var parentid = $(this).val();
-		    var parentvalue = $('#value_Term').find('option:selected').val();
+			var parentvalue = $("#value_{{__('ownershiptran.Term')}}").find('option:selected').val();
+		   // var parentvalue = $('#value_Term').find('option:selected').val();
 	    	//parenttypeid = $(this).val();
 
 
@@ -358,7 +359,6 @@
 			
 		});	 
 	}
-
 
 
 </script>

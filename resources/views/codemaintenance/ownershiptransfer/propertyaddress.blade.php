@@ -253,43 +253,75 @@
 	   		} else {
 	   			account=account.toString();
 	   		}
-
-		//alert(account);
-		//alert(currstatus);
-		var noty_id = noty({
-			layout : 'center',
-			text: 'Are you sure want to Submit?',
-			modal : true,
-			buttons: [
-				{type: 'button pink', text: 'Submit', click: function($noty) {
-					$noty.close();
-					$.ajax({
-		  				type: 'GET', 
-					    url:'approve',
-					    headers: {
-						    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-						},
-				        data:{param_value:id,module:'propertyaddress',param:currstatus,param_str:account,param_status:param_status },
-				        success:function(data){	 	
-				        	
-							window.location.assign("propertyaddress");	
-							
-			        	},
-				        error:function(data){
-							//$('#loader').css('display','none');	
-				        	alert('error');
-			        	}
-			    	});
-				  }
-				},
-				{type: 'button blue', text: 'Cancel', click: function($noty) {
-					$noty.close();
-				  }
-				}
-				],
-			 type : 'success', 
-		});
-
+	   	if(currstatus == 5){
+			var noty_id = noty({
+				layout : 'center',
+				text: 'Are you sure want to Transfer Data?',
+				modal : true,
+				buttons: [
+					{type: 'button pink', text: 'Submit', click: function($noty) {
+						$noty.close();
+						$.ajax({
+			  				type: 'GET', 
+						    url:'datatransfer',
+						    headers: {
+							    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+							},
+					        data:{param_value:id,module:'propertyaddress',param:currstatus,param_str:account,param_status:param_status },
+					        success:function(data){						        	
+								window.location.assign("propertyaddress");									
+				        	},
+					        error:function(data){
+								//$('#loader').css('display','none');	
+					        	alert('error');
+				        	}
+				    	});
+					  }
+					},
+					{type: 'button blue', text: 'Cancel', click: function($noty) {
+						$noty.close();
+					  }
+					}
+					],
+				 type : 'success', 
+			});
+		} else {
+			//alert(account);
+			//alert(currstatus);
+			var noty_id = noty({
+				layout : 'center',
+				text: 'Are you sure want to Submit?',
+				modal : true,
+				buttons: [
+					{type: 'button pink', text: 'Submit', click: function($noty) {
+						$noty.close();
+						$.ajax({
+			  				type: 'GET', 
+						    url:'approve',
+						    headers: {
+							    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+							},
+					        data:{param_value:id,module:'propertyaddress',param:currstatus,param_str:account,param_status:param_status },
+					        success:function(data){	 	
+					        	
+								window.location.assign("propertyaddress");	
+								
+				        	},
+					        error:function(data){
+								//$('#loader').css('display','none');	
+					        	alert('error');
+				        	}
+				    	});
+					  }
+					},
+					{type: 'button blue', text: 'Cancel', click: function($noty) {
+						$noty.close();
+					  }
+					}
+					],
+				 type : 'success', 
+			});
+		}
 	}
 
 $(document).ready(function (){

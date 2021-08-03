@@ -60,7 +60,7 @@ Log::info($lang);
        // $store = DB::connection('oracle')->select('select * from PEMILIK_SB');
        // $result = DB::connection('oracle')->update(" update PEMILIK_SB SET NAMA = 'TEST' WHERE ID = '315116007368'");
        //  dd($costcenter);
-         Log::info($store);
+        // Log::info($store);
        //  return view('outlets.create',['names' => $brands, 'storenames' => $data,'costcenter' => $costcenter ]);
 
         return view('dashboard')->with('module',$module);
@@ -1225,23 +1225,41 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
         $param = $request->input('param');
         $param_str = $request->input('param_str');
         $param_status = $request->input('param_status');
+        $type = $request->input('type');
         $name=Auth::user()->name;
         //$param = $request->input('param');
         Log::info($module);
         //$register=DB::select("call proc_approvepropreg(".$param_value.",   '".$name."', '".$module."')"); 
         $propertycnt = 0;
         //$trn_date = new DateTime();
-        $ownerdetail = DB::select('select * from cm_ownertrans_appln inner join cm_ownertrans_applnreg on otar_id = ota_otar_id
-        inner join (select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = "STATE") state on state_id = ota_state_id
-         where ota_otar_id ='.$param_value.' ');
-        Log::info($ownerdetail );
-        foreach ($ownerdetail as $rec) {            
-            //$lastcode = $rec->tdi_key;
-            $result = DB::connection('oracle')->update(" update PEMILIK_SB SET NAMA = '".$rec->ota_ownname."', NO_RUM_POS = '".$rec->ota_addr_ln1."',
-             JALAN_POS = '".$rec->ota_addr_ln2."',  TEMPAT_POS = '".$rec->ota_addr_ln3."',  KAWASAN_POS = '".$rec->ota_addr_ln4."',  BANDAR_POS = '".$rec->ota_postcode." ".$rec->ota_city."',
-              NEGERI_POS = '".$rec->state."', KP = '".$rec->ota_ownno."' , NO_TEL = '".$rec->ota_phoneno."' , TKH_UPDATE = SYSDATE  , USER_UPDATE = 'CAMA' 
-               WHERE ID = '".$rec->otar_accno."'");
-        } 
+       
+        if($module == 'propertyaddress'){
+            $ownerdetail = DB::select('select * from cm_masterlist_log 
+            inner join (select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = "STATE") state on state_id = mal_state_id
+             where mal_id ='.$param_value.' ');
+            Log::info($ownerdetail );
+            foreach ($ownerdetail as $rec) {            
+                //$lastcode = $rec->tdi_key;
+                $result = DB::connection('oracle')->update(" update PEMILIK_SB SET  NO_RUMAH = '".$rec->mal_addr_ln1."',
+                 JALAN = '".$rec->mal_addr_ln2."',  TEMPAT = '".$rec->mal_addr_ln3."',  KAWASAN = '".$rec->mal_addr_ln4."',  BANDAR = '".$rec->mal_postcode." ".$rec->mal_city."',
+                  NEGERI = '".$rec->state."', TKH_UPDATE = SYSDATE  , USER_UPDATE = 'CAMA' 
+                   WHERE ID = '".$rec->mal_accno."'");
+            } 
+        } else {
+        
+            $ownerdetail = DB::select('select * from cm_ownertrans_appln inner join cm_ownertrans_applnreg on otar_id = ota_otar_id
+            inner join (select tdi_key state_id, tdi_value state from tbdefitems where tdi_td_name = "STATE") state on state_id = ota_state_id
+             where ota_otar_id ='.$param_value.' ');
+            Log::info($ownerdetail );
+            foreach ($ownerdetail as $rec) {            
+                //$lastcode = $rec->tdi_key;
+                $result = DB::connection('oracle')->update(" update PEMILIK_SB SET NAMA = '".$rec->ota_ownname."', NO_RUM_POS = '".$rec->ota_addr_ln1."',
+                 JALAN_POS = '".$rec->ota_addr_ln2."',  TEMPAT_POS = '".$rec->ota_addr_ln3."',  KAWASAN_POS = '".$rec->ota_addr_ln4."',  BANDAR_POS = '".$rec->ota_postcode." ".$rec->ota_city."',
+                  NEGERI_POS = '".$rec->state."', KP = '".$rec->ota_ownno."' , NO_TEL = '".$rec->ota_phoneno."' , TKH_UPDATE = SYSDATE  , USER_UPDATE = 'CAMA' 
+                   WHERE ID = '".$rec->otar_accno."'");
+            } 
+        
+        }
 
 
 

@@ -520,7 +520,7 @@ Route::get('exportexcel', 'ReportController@exportExcel');
 
 Route::get('exportexceltable', 'ReportController@exportExcelTables');
 
-Route::get('downloadexcel', 'ReportController@generateExcel');
+Route::get('downloadexcel', 'ReportController@exportCsv');
 
 Route::get('districtcollection', 'ReportController@districtCollection');
 

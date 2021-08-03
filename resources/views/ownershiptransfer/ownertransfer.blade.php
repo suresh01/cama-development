@@ -289,7 +289,7 @@
 							    headers: {
 								    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 								},
-						        data:{param_value:id,module:'ownershiptrans',param:currstatus},
+						        data:{param_value:id,module:'ownershiptrans',param:currstatus,type:'2'},
 						        success:function(data){
 
 									window.location.assign("ownertransfer?page=1");									

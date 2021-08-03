@@ -1474,7 +1474,7 @@ Log::info($termid);
        // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
         Log::info($filterquery);
 
-        $property = DB::select("select get_term_count(vt_termDate) propertycount, 
+        $property = DB::select("select get_activeterm_count(vt_termDate,'','1') propertycount, 
 vt_id as id, vt_termDate, vt_termtype_id,vt_valbase_id, vt_id, vt_name name, vt_createby createby,  DATE_FORMAT(vt_createdate, '%d/%m/%Y') createdate, vt_updateby updateby, 
 DATE_FORMAT(vt_updatedate, '%d/%m/%Y')  updatedate, DATE_FORMAT(vt_termDate, '%d/%m/%Y') termDate, 
 DATE_FORMAT(now(), '%d/%m/%Y') enforceDate,  vt_applicationtype_id,DATE_FORMAT(vt_transferDate, '%d/%m/%Y') vt_transferDate, vt_transferby,
@@ -1547,6 +1547,121 @@ from  cm_appln_valterm ".$filterquery);
           //return Excel::download($test, 'data.xlsx');    
     }
 
+    public function exportCsv(Request $request)
+    {
+       $fileName = 'tasks.csv';
+       $termid = $request->input('termid');
+        ini_set('memory_limit', '2056M');
+        ini_set('max_execution_time', '5000');
+        $data = DB::select('select  vt_name,vt_termDate, va_id, va_name, ma_accno,vd_id, vd_ma_id, subzone.tdi_parent_key zoneid,subzone.tdi_parent_name zone, subzone.tdi_value subzone, subzone.tdi_key subzoneid, 
+        bldgstatus.tdi_value bldgstatus, bldgstatus.tdi_key bldgstatusid, proptype.tdi_parent_name propertycategory, proptype.tdi_value propertytype,vt_grossvalue,vt_proposednt, vt_proposedrate,
+        vt_calculatedrate, vt_proposedtax, vt_approvednt, vt_approvedrate,ma_addr_ln1 ma_address1, ma_addr_ln2 ma_address2, ma_addr_ln3 ma_address3, ma_addr_ln4 ma_address4, ma_postcode, propstate.tdi_value propstate, 
+        TO_OWNNO, TO_OWNNAME, to_addr_ln1,to_addr_ln2,
+        to_addr_ln3, to_addr_ln4, to_postcode, ownstate.tdi_value ownstate, al_no, al_altno, al_size, al_startdate, al_expireddate,al_tenureperiod
+         from cm_appln_valterm 
+        inner join cm_appln_val on va_vt_id = cm_appln_valterm.vt_id
+        inner join cm_appln_valdetl on vd_va_id = va_id
+        inner join cm_masterlist on ma_id = vd_ma_id
+        inner join cm_appln_val_tax on vt_vd_id = vd_id
+        inner join cm_owner on to_ma_id = ma_id
+        inner join cm_appln_lot on al_vd_id = vd_id
+        left join tbdefitems  subzone
+        on subzone.`tdi_key` = ma_subzone_id and  subzone.tdi_td_name = "SUBZONE"
+        left join tbdefitems proptype
+        on proptype.tdi_key = vd_bldgtype_id and proptype.tdi_td_name = "BULDINGTYPE"
+        left join tbdefitems bldgstatus
+        on bldgstatus.tdi_key = vd_ishasbuilding and bldgstatus.tdi_td_name = "ISHASBUILDING"
+        left join tbdefitems propstate
+        on propstate.tdi_key = ma_state_id and propstate.tdi_td_name = "STATE"
+        left join tbdefitems ownstate
+        on ownstate.tdi_key = TO_STATE_ID and ownstate.tdi_td_name = "STATE" 
+        inner join (select max(vt_termDate) termdate,  vd_ma_id as va_maid, vd_accno as accountno from cm_appln_valdetl
+        inner join cm_appln_val on va_id = vd_va_id
+        inner join cm_appln_valterm on vt_id = va_vt_id
+        where  cm_appln_valterm.vt_id  IN (select vt_id from cm_appln_valterm where vt_approvalstatus_id = "05") 
+        and vd_accno NOT IN (select cm_appln_deactivedetl.dad_accno from cm_appln_deactivedetl inner join  cm_appln_deactive on cm_appln_deactivedetl.dad_da_id = cm_appln_deactive.da_id 
+        inner join cm_appln_valterm on cm_appln_deactive.da_vt_id = cm_appln_valterm.vt_id where vt_id IN (select vt_id from cm_appln_valterm where vt_approvalstatus_id = "05") )
+        group by vd_ma_id, vd_accno) active_term on active_term.termdate = vt_termDate and active_term.accountno = cm_appln_valdetl.vd_accno where cm_appln_valterm.vt_id <= '.$termid.'
+          ');
+
+            $headers = array(
+                "Content-type"        => "text/csv",
+                "Content-Disposition" => "attachment; filename=$fileName",
+                "Pragma"              => "no-cache",
+                "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+                "Expires"             => "0"
+            );
+
+            $columns = array('TermName', 
+            'TermDate', 
+            'va_id', 
+             'va_name', 'accountnumber', 'vd_id', 'vd_ma_id', 'zoneid','zone', 'subzone', 'subzoneid', 'bldgstatus',
+        'bldgstatusid', 'propertycategory', 'propertytype', 'grossvalue','proposednt', 'proposedrate',
+        'calculatedrate', 'proposedtax', 'approvednt', 'approvedrate','propertyaddress1', 'propertyaddress2', 'propertyaddress3', 'propertyaddress4', 'propertypostcode', 'propstate', 
+        'OWNNO', 'OWNNAME', 'to_addr_ln1','to_addr_ln2',
+        'to_addr_ln3', 'to_addr_ln4', 'to_postcode', 'ownstate', 'al_no', 'al_altno', 'al_size', 'al_startdate', 'al_expireddate','al_tenureperiod');
+
+            $callback = function() use($data, $columns) {
+                $file = fopen('php://output', 'w');
+                fputcsv($file, $columns);
+
+                foreach ($data as $rec) {
+                    $row['TermName']  = $rec->vt_name;
+                    $row['va_id']    = $rec->va_id;
+                    $row['va_name']    = $rec->va_name;
+                    $row['accountnumber']  = $rec->ma_accno;
+                    $row['vd_id']  = $rec->vd_id;
+
+                    $row['vd_ma_id']  = $rec->vd_ma_id;
+                    $row['zoneid']    = $rec->zoneid;
+                    $row['zone']    = $rec->zone;
+                    $row['subzone']  = $rec->subzone;
+                    $row['subzoneid']  = $rec->subzoneid;
+                    $row['bldgstatus']  = $rec->bldgstatus;
+                    $row['bldgstatusid']    = $rec->bldgstatusid;
+                    $row['propertycategory']    = $rec->propertycategory;
+                    $row['propertytype']  = $rec->propertytype;
+                    $row['grossvalue']  = $rec->vt_grossvalue;
+                    $row['proposednt']  = $rec->vt_proposednt;
+                    $row['proposedrate']    = $rec->vt_proposedrate;
+                    $row['calculatedrate']    = $rec->vt_calculatedrate;
+                    $row['proposedtax']  = $rec->vt_proposedtax;
+                    $row['approvednt']  = $rec->vt_approvednt;
+                    $row['approvedrate']  = $rec->vt_approvedrate;
+                    $row['propertyaddress1']    = $rec->ma_address1;
+                    $row['propertyaddress2']    = $rec->ma_address2;
+                    $row['propertyaddress3']  = $rec->ma_address3;
+                    $row['propertyaddress4']  = $rec->ma_address4;
+                    $row['propertypostcode']  = $rec->ma_postcode;
+                    $row['propstate']    = $rec->propstate;
+                    $row['OWNNO']    = $rec->TO_OWNNO;
+                    $row['OWNNAME']  = $rec->TO_OWNNAME;
+                    $row['to_addr_ln1']  = $rec->to_addr_ln1;
+                    $row['to_addr_ln2']  = $rec->to_addr_ln2;
+                    $row['to_addr_ln3']    = $rec->to_addr_ln3;
+                    $row['to_addr_ln4']    = $rec->to_addr_ln4;
+                    $row['to_postcode']  = $rec->to_postcode;
+                    $row['ownstate']  = $rec->ownstate;
+                    $row['al_no']    = $rec->al_no;
+                    $row['al_altno']    = $rec->al_altno;
+                    $row['al_size']  = $rec->al_size;
+                    $row['al_startdate']  = $rec->al_startdate;
+                    $row['al_expireddate']  = $rec->al_expireddate;
+                    $row['al_tenureperiod']    = $rec->al_tenureperiod;
+
+                    fputcsv($file, array($row['TermName'], $row['va_id'], $row['va_name'], $row['accountnumber'], $row['vd_id'], $row['vd_ma_id'], $row['zoneid'] ,$row['zone'] ,
+                      $row['subzone'], $row['subzoneid'],  $row['bldgstatus'],  $row['bldgstatusid'],  $row['propertycategory'] , $row['propertytype'],  $row['grossvalue'],
+                      $row['proposednt'],  $row['proposedrate'],  $row['calculatedrate'],  $row['proposedtax'],  $row['approvednt'],  $row['approvedrate'],  $row['propertyaddress1'],
+                      $row['propertyaddress2'],  $row['propertyaddress3'],  $row['propertyaddress4'],  $row['propertypostcode'],  $row['propstate'],  $row['OWNNO'],
+                      $row['OWNNAME'],  $row['to_addr_ln1'],  $row['to_addr_ln2'],  $row['to_addr_ln3'],  $row['to_addr_ln4'],  $row['to_postcode'],  $row['ownstate'],
+                      $row['al_no'],  $row['al_altno'],  $row['al_size'],  $row['al_startdate'],  $row['al_expireddate'],  $row['al_tenureperiod'] ));
+                }
+
+                fclose($file);
+            };
+
+            return response()->stream($callback, 200, $headers);
+    }
 
     public function districtCollection(Redirect $request){
       $search=DB::select(' select sd_key, sd_label, 
