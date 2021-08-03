@@ -106,8 +106,8 @@
 										</div>
 										<span class=" label_intro"></span>
 									</div>
-									<input type="hidden" name="lot_id" id="lot_id">
-									<!--<div class="form_grid_12">
+
+									<div class="form_grid_12">
 										<label class="field_title" onchange="" id="lposition" for="position">{{__('CodeMaintenance.Lot_List')}} <span class="req">*</span></label>
 										<div  class="form_input">
 											<select placeholder="Choose a Status..." style="width:100%" class="cus-select" onchange="getLotDetail(this.value)" id="lotlist" name="lotlist" tabindex="1">
@@ -116,7 +116,7 @@
 										</select>
 										</div>
 										<span class=" label_intro"></span>
-									</div>-->
+									</div>
 
 									
 								</fieldset>
@@ -124,8 +124,144 @@
 						</ul>
 					</div>
 
-				
-					<div id="lotdetail_view"  class="grid_3 form_container left_label">
+				<!--	<div id="lotdetail_dy" style="display: none;" class="grid_3 form_container left_label">
+						<ul>
+							<li>				
+								<fieldset>
+									<legend>{{__('CodeMaintenance.Lot_Information')}} </legend>					
+									
+									<!--<div class="form_grid_12">
+										<label class="field_title">Copy Previous Detail</label>
+										<div class="form_input">
+											<span>
+											<input name="field08" id="copydetail" onchange="copyDetail()" class="checkbox" type="checkbox"  tabindex="7">
+											
+											</span>
+										</div>
+									</div>-->
+									
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Lot_Code')}}<span class="req">*</span></label>
+										<div  class="form_input">
+											<select placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="l3otype" name="lot3ype" tabindex="1">
+												<option value=""></option>
+											@foreach ($lotcode as $rec)
+													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+											@endforeach	
+										</select>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									
+									
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Lot_No')}}<span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="lot3num" tabindex="8" name="lotn3um"  type="text" maxlength="100" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Alternate_Lot_No')}} <span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="altl3otnum"  tabindex="9" name="altlotn3um"  type="text"  maxlength="100" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Title_Code')}}<span class="req">*</span></label>
+										<div  class="form_input">
+											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="l3ttt" tabindex="4" name="l3ttt" tabindex="20">
+												<option></option>
+											@foreach ($titiletype as $rec)
+													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
+											@endforeach	
+										</select>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Title_No')}}<span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="3ltnum"  name="ltnu3m" tabindex="11"  type="text"  maxlength="100" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Altenate_Title_No')}} <span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="3altnum" name="altn3um"  tabindex="12"  type="text"  maxlength="50" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Strata_No')}} <span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="3stratano" name="str3atano"  tabindex="12"  type="text"  maxlength="50" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+								</fieldset>
+							</li>
+						</ul>
+					</div>
+
+					<div id="lotdetail_dy_part2" class="grid_3 form_container left_label">
+						<ul>
+							<li>				
+								<fieldset>
+									<legend>{{__('CodeMaintenance.Lease_Information')}} </legend>					
+									
+									<!--<div class="form_grid_12">
+										<label class="field_title">Copy Previous Detail</label>
+										<div class="form_input">
+											<span>
+											<input name="field08" id="copydetail" onchange="copyDetail()" class="checkbox" type="checkbox"  tabindex="7">
+											
+											</span>
+										</div>
+									</div>-->
+									
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Tenure_Type')}} <span class="req">*</span></label>
+										<div  class="form_input">
+											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="3tentype" tabindex="19" name="tent3ype" tabindex="20">
+												<option></option>
+											</select>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									
+									
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Tenure_Period')}}<span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="3tenduration" tabindex="8" name="tendura3tion"  type="text" maxlength="100" class=""/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Tenure_Start_Date')}} <span class="req">*</span></label>
+										<div  class="form_input">
+										<input type="text" id="3tenstart" dateFormat='dd/mm/yyyy' name="tenst3art" tabindex="21">
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Tenure_End_Date')}}<span class="req">*</span></label>
+										<div  class="form_input">
+										<input id="t3enend"  name="3tenend" class="" type="text"  maxlength="50" />
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+								</fieldset>
+							</li>
+						</ul>
+					</div>-->
+	
+					<div id="lotdetail_view" style="display: none;" class="grid_3 form_container left_label">
 						<ul>
 							<li>				
 								<fieldset>
@@ -369,76 +505,41 @@
 	   		} else {
 	   			account=account.toString();
 	   		}
-
-	   		if(currstatus == '5'){
-			var noty_id = noty({
-				layout : 'center',
-				text: 'Are you sure want to Transfer Data?',
-				modal : true,
-				buttons: [
-					{type: 'button pink', text: 'Submit', click: function($noty) {
-						$noty.close();
-						$.ajax({
-			  				type: 'GET', 
-						    url:'datatransfer',
-						    headers: {
-							    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-							},
-					        data:{param_value:id,module:'propertylotaddress',param:currstatus,param_str:account,param_status:param_status },
-					        success:function(data){						        	
-								window.location.assign("propertylot");									
-				        	},
-					        error:function(data){
-								//$('#loader').css('display','none');	
-					        	alert('error');
-				        	}
-				    	});
-					  }
-					},
-					{type: 'button blue', text: 'Cancel', click: function($noty) {
-						$noty.close();
-					  }
-					}
-					],
-				 type : 'success', 
-			});
-		} else {
-			//alert(account);
-			//alert(currstatus);
-			var noty_id = noty({
-				layout : 'center',
-				text: 'Are you sure want to Submit?',
-				modal : true,
-				buttons: [
-					{type: 'button pink', text: 'Submit', click: function($noty) {
-						$noty.close();
-						$.ajax({
-			  				type: 'GET', 
-						    url:'approve',
-						    headers: {
-							    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-							},
-					        data:{param_value:id,module:'propertylotaddress',param:currstatus,param_str:account },
-					        success:function(data){	        	
-					        	
-								window.location.assign("propertylot");	
-								
-				        	},
-					        error:function(data){
-								//$('#loader').css('display','none');	
-					        	alert('error');
-				        	}
-				    	});
-					  }
-					},
-					{type: 'button blue', text: 'Cancel', click: function($noty) {
-						$noty.close();
-					  }
-					}
-					],
-				 type : 'success', 
-			});
-		}
+		//alert(account);
+		//alert(currstatus);
+		var noty_id = noty({
+			layout : 'center',
+			text: 'Are you sure want to Submit?',
+			modal : true,
+			buttons: [
+				{type: 'button pink', text: 'Submit', click: function($noty) {
+					$noty.close();
+					$.ajax({
+		  				type: 'GET', 
+					    url:'approve',
+					    headers: {
+						    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						},
+				        data:{param_value:id,module:'propertylotaddress',param:currstatus,param_str:account },
+				        success:function(data){	        	
+				        	
+							window.location.assign("propertylot");	
+							
+			        	},
+				        error:function(data){
+							//$('#loader').css('display','none');	
+				        	alert('error');
+			        	}
+			    	});
+				  }
+				},
+				{type: 'button blue', text: 'Cancel', click: function($noty) {
+					$noty.close();
+				  }
+				}
+				],
+			 type : 'success', 
+		});
 
 	}
 
@@ -463,75 +564,41 @@
 	   			account=account.toString();
 	   		}
 
-	   	if(currstatus == '5'){
-			var noty_id = noty({
-				layout : 'center',
-				text: 'Are you sure want to Transfer Data?',
-				modal : true,
-				buttons: [
-					{type: 'button pink', text: 'Submit', click: function($noty) {
-						$noty.close();
-						$.ajax({
-			  				type: 'GET', 
-						    url:'datatransfer',
-						    headers: {
-							    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-							},
-					        data:{param_value:id,module:'propertylotaddress',param:currstatus,param_str:account,param_status:param_status },
-					        success:function(data){						        	
-								window.location.assign("propertylot");									
-				        	},
-					        error:function(data){
-								//$('#loader').css('display','none');	
-					        	alert('error');
-				        	}
-				    	});
-					  }
-					},
-					{type: 'button blue', text: 'Cancel', click: function($noty) {
-						$noty.close();
-					  }
-					}
-					],
-				 type : 'success', 
-			});
-		} else {
-			//alert(account);
-			//alert(currstatus);
-			var noty_id = noty({
-				layout : 'center',
-				text: 'Are you sure want to Submit?',
-				modal : true,
-				buttons: [
-					{type: 'button pink', text: 'Submit', click: function($noty) {
-						$noty.close();
-						$.ajax({
-			  				type: 'GET', 
-						    url:'approve',
-						    headers: {
-							    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-							},
-					        data:{param_value:id,module:'propertylotaddress',param:currstatus,param_str:account,param_status:param_status },
-					        success:function(data){	 	
-					        	
-								window.location.assign("propertylot");	
-								
-				        	},
-					        error:function(data){
-								//$('#loader').css('display','none');	
-					        	alert('error');
-				        	}
-				    	});
-					  }
-					},
-					{type: 'button blue', text: 'Cancel', click: function($noty) {
-						$noty.close();
-					  }
-					}
-					],
-				 type : 'success', 
-			});
-		}
+		//alert(account);
+		//alert(currstatus);
+		var noty_id = noty({
+			layout : 'center',
+			text: 'Are you sure want to Submit?',
+			modal : true,
+			buttons: [
+				{type: 'button pink', text: 'Submit', click: function($noty) {
+					$noty.close();
+					$.ajax({
+		  				type: 'GET', 
+					    url:'approve',
+					    headers: {
+						    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						},
+				        data:{param_value:id,module:'propertylotaddress',param:currstatus,param_str:account,param_status:param_status },
+				        success:function(data){	 	
+				        	
+							window.location.assign("propertylot");	
+							
+			        	},
+				        error:function(data){
+							//$('#loader').css('display','none');	
+				        	alert('error');
+			        	}
+			    	});
+				  }
+				},
+				{type: 'button blue', text: 'Cancel', click: function($noty) {
+					$noty.close();
+				  }
+				}
+				],
+			 type : 'success', 
+		});
 
 	}
 
@@ -566,8 +633,6 @@
 					
 					$('#tentype').val(data.lotlist[0].LO_TENURETYPE_ID);
 					$('#tenduration').val(data.lotlist[0].LO_TENUREPERIOD);
-					$('#stratano').val(data.lotlist[0].LO_STRATANO);
-					$('#lot_id').val(data.lotlist[0].LOT_ID);
 
 					//console.log(data.lotlist);
 					//console.log(data.lotlist[0].al_activeind_id);			

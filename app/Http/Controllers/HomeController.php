@@ -545,15 +545,15 @@ DB::statement("insert into tempQuery values(select * from )");
 
     public function propertyLotDetail(Request $request) {
       $prop_id = $request->input('prop_id');  
-         $lotlist = DB::select('select distinct DATE_FORMAT(al_startdate, "%d/%m/%Y") al_startdate1, DATE_FORMAT(al_expireddate, "%d/%m/%Y") al_expireddate1,cm_appln_lot.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
-, unitsize.tdi_value unitsize, concat(lotcode.tdi_value,al_no) lotnumber, concat(titletype.tdi_value,al_titleno) titlenumber, landuse.tdi_value landuse, tentype.tdi_value tentype
- from cm_appln_lot inner join cm_appln_valdetl on vd_va_id = al_vd_id inner join cm_masterlist on ma_id = vd_ma_id
- left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = al_lotcode_id
-left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROADTYPE") roadtype on roadtype.tdi_key = al_roadtype_id
-left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE") titletype on titletype.tdi_key = al_titletype_id
-left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SIZEUNIT") unitsize on unitsize.tdi_key = al_sizeunit_id
-left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDUSE") landuse on  al_landuse_id = landuse.tdi_key
-left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENURETYPE") tentype on  al_tenuretype_id = tentype.tdi_key 
+         $lotlist = DB::select('select distinct DATE_FORMAT(lo_startdate, "%d/%m/%Y") lo_startdate1, DATE_FORMAT(lo_expireddate, "%d/%m/%Y") lo_expireddate1,cm_lot.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
+        , unitsize.tdi_value unitsize, concat(lotcode.tdi_value,lo_no) lotnumber, concat(titletype.tdi_value,lo_titleno) titlenumber, landuse.tdi_value landuse, tentype.tdi_value tentype
+         from cm_lot  inner join cm_masterlist on ma_id = lo_ma_id
+         left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = lo_lotcode_id
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROADTYPE") roadtype on roadtype.tdi_key = lo_roadtype_id
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE") titletype on titletype.tdi_key = lo_titletype_id
+        left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SIZEUNIT") unitsize on unitsize.tdi_key = lo_sizeunit_id
+        left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDUSE") landuse on  lo_landuse_id = landuse.tdi_key
+        left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENURETYPE") tentype on  lo_tenuretype_id = tentype.tdi_key 
  where ma_accno = ifnull("'.$prop_id.'",0)');
           return response()->json(array('lotlist'=> $lotlist), 200);
     

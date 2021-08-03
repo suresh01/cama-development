@@ -1245,6 +1245,18 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
                   NEGERI = '".$rec->state."', TKH_UPDATE = SYSDATE  , USER_UPDATE = 'CAMA' 
                    WHERE ID = '".$rec->mal_accno."'");
             } 
+        } else if($module == 'propertylotaddress'){
+            $ownerdetail = DB::select('select * from cm_lot_log      
+            inner join cm_lot on LOT_ID =    log_lot_id        
+            inner join cm_masterlist on LO_MA_ID =    ma_id
+             where log_id ='.$param_value);
+            Log::info($ownerdetail );
+            foreach ($ownerdetail as $rec) {            
+                //$lastcode = $rec->tdi_key;
+                $result = DB::connection('oracle')->update(" update PEMILIK_SB SET  BIL_LOT = '".$rec->log_no."',
+                 LOTID = '".$rec->log_lot_id."',TKH_UPDATE = SYSDATE  , USER_UPDATE = 'CAMA' 
+                   WHERE ID = '".$rec->ma_accno."'");
+            } 
         } else {
         
             $ownerdetail = DB::select('select * from cm_ownertrans_appln inner join cm_ownertrans_applnreg on otar_id = ota_otar_id
