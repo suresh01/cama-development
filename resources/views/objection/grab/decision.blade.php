@@ -29,10 +29,10 @@
                 {{__('objection.Account_number')}}
               </th>
               <th>
-                {{__('objection.Basket_Name')}} 
+                {{__('objection.Term_Name')}} 
               </th>
               <th>
-                {{__('objection.Term_Name')}}
+                {{__('objection.Basket_Name')}}
               </th>
 							<th>
 								{{__('objection.Objection_Property')}}

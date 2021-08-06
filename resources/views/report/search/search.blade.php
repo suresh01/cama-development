@@ -267,13 +267,15 @@
 			//alert();
 			console.log($(this).val());
 		    var id= $(this).val();
-		    var selectedvalue = $(this).find('option:selected').text();
+		   // var selectedvalue = $(this).find('option:selected').text();
+		    var selectedvalue = $(this).val();
 		    //selectedvalue =;
 		    
 		    $(this).find("option").removeAttr('selected');
 		    $(this).find("option[value='" + id +"']").attr('selected', true);
 
-		    BULDINGTYPE = selectedvalue.replace(/\s+/g, '');
+		    BULDINGTYPE = selectedvalue.replace(/\s+\./g, '');
+		    BULDINGTYPE = selectedvalue.replace(/\./g, '');
 		    BULDINGTYPE2 = selectedvalue;
 		    var self = this;
 		    var flag = "true";
@@ -296,20 +298,19 @@
 	    	});*/
 	    	var termid = "";
 	    	//alert(BULDINGTYPE);
-	    	if (BULDINGTYPE == "PropertyType") {
-	    		termid = $('#value_PropertyCategory').find('option:selected').val();
-	    	} else if(BULDINGTYPE == "Subzone"){
+	    	if (BULDINGTYPE == "tbdefitems_subzonetdi_key") {
+	    		termid = $('#value_tbdefitems_subzonetdi_parent_key').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "subzone.tdi_key"){
+	    		termid = $('#value_subzone.tdi_parent_key').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "va_id"){
 
-	    		termid = $('#value_Zone').find('option:selected').val();
-	    	} else if(BULDINGTYPE == "Basket"){
+	    		termid = $('#value_va_vt_id').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "vt_id"){
 
-	    		termid = $('#value_Term').find('option:selected').val();
-	    	}else if(BULDINGTYPE == "Term"){
-
-	    		termid = $('#value_ApplicationType').find('option:selected').val();
+	    		termid = $('#value_vt_applicationtype_id').find('option:selected').val();
 	    	}
 	    	//alert(BULDINGTYPE);
-			
+			//termid = $('#value_'+selectedvalue).find('option:selected').val();
 
 	        $.ajax({
 		        type:'GET',
@@ -337,7 +338,7 @@
 							proplist += '<option value="'+result[i].tdi_key+'">'+result[i].sd_definitionkeyname+'</option> ';
 				        }
 				        if(flag == "false"){
-							$(self).parent().parent().find(".value").html($valueLbl + '<select data-placeholder="Choose a Custom..." id="value_'+ selectedvalue.replace(/\s+/g, '')+'" style="width:100%;" class="cus-select value_drop" '+
+							$(self).parent().parent().find(".value").html($valueLbl + '<select data-placeholder="Choose a Custom..." id="value_'+ selectedvalue.replace(/\./g, '')+'" style="width:100%;" class="cus-select value_drop" '+
 							'id="value" name="value[]"  tabindex="20"> '+
 							proplist +
 							'</select>');

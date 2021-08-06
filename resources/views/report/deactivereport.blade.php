@@ -43,7 +43,7 @@
 							<li>{{__('group.Deactivate_Property')}}</li>
 						</ul>
 					</div>
-					<button id="adduser" style="float:right;margin-right: 10px;" onclick="newGroup()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Generate Report</span></button>
+					<button id="adduser" style="float:right;margin-right: 10px;" onclick="generateReport()" name="btnadduser" type="button" class="btn_small btn_blue"><span>Generate Report</span></button>
 					<div  style="float:right;margin-right: 20px;">		
 							<select onchange="getdata()" data-placeholder="Choose a Status..."  style="float: left;" class="cus-select"  id="paramterm" name="paramterm" tabindex="6">
 								<option value="0">{{__('group.Please_Select_a_Filter')}}...</option>
@@ -120,6 +120,40 @@
 	<span class="clear"></span>
 	
 	<script>
+
+		function generateReport(){
+			
+
+			var noty_id = noty({
+				layout : 'center',
+				text: 'Are want to Generate Report?',
+				modal : true,
+				buttons: [
+					{type: 'button pink', text: 'Generate', click: function($noty) {
+						$noty.close();
+						var tilte = prompt("Report Title", "SENARAI BATAL HARTA MAJLIS PERBANDARAN HANG TUAH JAYA SEHINGGA PENGGAL");
+						//var table = $('#proptble').DataTable();
+						var paramterm = $('#paramterm').val();
+
+						
+						
+						if (tilte == null || tilte == "") {
+							return;
+						} else {
+							//var id = $('#value_Term').val();
+							window.location = "generatedeactive?title="+tilte+"&termid="+paramterm;
+						}
+					  }
+					},
+					{type: 'button blue', text: 'Cancel', click: function($noty) {
+						$noty.close();
+					  }
+					}
+					],
+				 type : 'success', 
+			 });
+			
+		}
 
 		function approveValuation(id){
 			var noty_id = noty({

@@ -459,6 +459,8 @@ DB::statement("insert into tempQuery values(select * from )");
     
     }
 
+
+
      public function propertyTables(Request $request){
         Log::info('Test');
         ini_set('memory_limit', '2056M');
@@ -559,29 +561,38 @@ DB::statement("insert into tempQuery values(select * from )");
     
     }
 
+    public function lotDetail(Request $request) {
+      $prop_id = $request->input('prop_id');  
+        $master = DB::select('select *
+        from cm_lot  
+        inner join cm_masterlist on ma_id = lo_ma_id
+        left join cm_lot_log on log_lot_id = lot_id
+        where lot_id = ifnull("'.$prop_id.'",0)');
+
+          $lotcode=DB::table('tbdefitems')->where('tdi_td_name', 'LOTCODE')->get();
+          $titiletype=DB::table('tbdefitems')->where('tdi_td_name', 'TITLETYPE')->get();
+          $tnttype=DB::table('tbdefitems')->where('tdi_td_name', 'TENURETYPE')->get();
+
+        App::setlocale(session()->get('locale'));
+        
+         return view("codemaintenance.ownershiptransfer.popup.propertylotdetail")->with(array('lotcode'=>$lotcode, 'master'=>$master, 'titiletype'=>$titiletype, 'tnttype'=>$tnttype, 'prop_id'=>$prop_id));
+    
+    }
 
     public function propertyinfotrn(Request $request) {
       $name=Auth::user()->name;
-        
+          
+            $module = $request->input('module');  
             $jsondata = $request->input('jsondata');  
-            $ownerdata = json_decode($jsondata,TRUE);
-              Log::info($ownerdata);
-             try {
-            // Validate the value...
-             /* DB::connection('oracle')->table('pemilik_sb')->insert([
-                   'id' => $ownerdata['accountnumber'],'no_rumah' =>  $ownerdata['address1'],'jalan' =>  $ownerdata['address2'],'tempat' =>  $ownerdata['address3'],'bandar' =>  $ownerdata['postcode'] .''.$ownerdata['city'],'KAWASAN' => $ownerdata['address4'],'NEGERI' => $ownerdata['state'],'USER_UPDATE' =>   $name   ]);*/
-
-              $status = 'ST';
-              Log::info('S');
-
-          } catch (Exception $e) {
-              $status = 'FT';
-              Log::info('F');
-             // return false;
-          }
-               
-                Log::info("call proc_cmmasterlist_trn('".$jsondata."','".$name."','3')"); 
-            $transfer=DB::select("call proc_cmmasterlist_trn('".$jsondata."','".$name."','3')");   
+            if($module == 'lottrn'){
+              Log::info("call proc_cmlot_trn('".$jsondata."','".$name."')"); 
+              $transfer=DB::select("call proc_cmlot_trn('".$jsondata."','".$name."')");   
+            } else {
+              Log::info("call proc_cmmasterlist_trn('".$jsondata."','".$name."','3')"); 
+              $transfer=DB::select("call proc_cmmasterlist_trn('".$jsondata."','".$name."','3')");   
+            }
+            
+            
        
         //$msg = true;
         //return redirect('propertyaddress');//
@@ -2544,25 +2555,25 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
                 }               
             }
             if($filterquery != ''){
-                $filterquery  = ' where '. $filterquery ;
+                $filterquery  = ' and '. $filterquery ;
             }
             Log::info($filterquery);
 
         }
-      $property = DB::select('select cm_lot_log.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
-      , unitsize.tdi_value unitsize, concat(lotcode.tdi_value,log_no) lotnumber, concat(titletype.tdi_value, LOG_TITLENO) titlenumber, 
-      landuse.tdi_value landuse, tentype.tdi_value tentype, tstatus, ma_accno
-      from cm_lot_log
-      inner join cm_lot on lot_id = log_lot_id
+      $property = DB::select('select cm_lot.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
+      , unitsize.tdi_value unitsize, concat(lotcode.tdi_value,lo_no) lotnumber, concat(titletype.tdi_value, LO_TITLENO) titlenumber, 
+      landuse.tdi_value landuse, tentype.tdi_value tentype, tstatus, ma_accno, log_approvalstatus_id, log_id
+      from cm_lot
       inner join cm_masterlist on ma_id = lo_ma_id
-      left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = LOG_LOTCODE_ID
+      left join cm_lot_log on lot_id = log_lot_id
+      left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = LO_LOTCODE_ID
       left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROADTYPE") roadtype on roadtype.tdi_key = LO_ROADTYPE_ID
-      left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE") titletype on titletype.tdi_key = LOG_TITLETYPE_ID
+      left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE") titletype on titletype.tdi_key = LO_TITLETYPE_ID
       left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SIZEUNIT") unitsize on unitsize.tdi_key = LO_SIZEUNIT_ID
       left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "LANDUSE") landuse on  LO_LANDUSE_ID = landuse.tdi_key
-      left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENURETYPE") tentype on  LOG_TENURETYPE_ID = tentype.tdi_key 
+      left join (select  tdi_key, tdi_value from tbdefitems where tdi_td_name = "TENURETYPE") tentype on  LO_TENURETYPE_ID = tentype.tdi_key 
       left join (select tdi_key ,tdi_parent_name , tdi_value tstatus from tbdefitems where tdi_td_name = "OWNERSHIPSTAGE") tstatus 
-      on tstatus.tdi_key = log_approvalstatus_id  
+      on tstatus.tdi_key = log_approvalstatus_id  where log_approvalstatus_id <> "7" 
        '.$filterquery  );
        // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
         $propertyDetails = Datatables::collection($property)->make(true);

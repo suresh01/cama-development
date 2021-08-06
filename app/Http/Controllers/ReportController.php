@@ -2708,4 +2708,55 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
 
     }
 
-}
+    public function generateDeactive(Request $request)
+    {        
+             //$jasper = new JasperPHP;
+        $title = $request->input('title');
+        $termid = $request->input('termid');
+        if($termid == 'All'){
+          $filter = " da_vt_id = da_vt_id";
+        } else {
+          $filter = " da_vt_id = ". $termid;
+        }
+        
+        
+       
+      /* $input = $request->input();
+            $account1 = $input['accounts'];
+        Log::info($account1);*/
+            // Compile a JRXML to Jasper
+        //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
+         Log::info(JasperPHP::process(
+            base_path('/reports/deactiveproperty.jasper'),
+                false,
+                array("pdf"),               
+                array("basketid" => $filter,"title" => $title),
+            array(
+              'driver' => 'generic',
+              'username' => env('DB_USERNAME',''),
+              'password' => env('DB_PASSWORD',''),
+              'jdbc_driver' => 'com.mysql.jdbc.Driver',
+              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+            ))->output());
+
+      JasperPHP::process(
+            base_path('/reports/deactiveproperty.jasper'),
+                false,
+                array("pdf"),               
+                array("basketid" => $filter,"title" => $title),
+            array(
+              'driver' => 'generic',
+              'username' => env('DB_USERNAME',''),
+              'password' => env('DB_PASSWORD',''),
+              'jdbc_driver' => 'com.mysql.jdbc.Driver',
+              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+            ))->execute();
+
+            $headers = array(
+              'Content-Type: application/pdf',
+            );
+
+        return response()->download(base_path('/reports/deactiveproperty.pdf'), 'Deactive List.pdf', $headers);
+
+    }
+} 

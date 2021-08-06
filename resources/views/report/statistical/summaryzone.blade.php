@@ -186,7 +186,7 @@ $(document).ready(function (){
 		        "serverSide": false,
 		        "retrieve": true,
 		        /*"dom": '<"toolbar">frtip',*/
-				
+				"lengthMenu":  [100, 200, 500, 1000],
 		        // ajax: '{{ url("inspectionproperty") }}',
 		        /*"ajax": '/bookings/datatables',*/
 		        "columns": [

@@ -425,6 +425,8 @@ Route::get('ownerdetail', 'HomeController@ownerDetail');
 
 Route::post('propertylotdetail', 'HomeController@propertyLotDetail');
 
+Route::get('lotdetail', 'HomeController@lotDetail');
+
 Route::get('lotdetailtrn', 'HomeController@lotdetailtrn');
 
 Route::get('propertyinfotrn', 'HomeController@propertyinfotrn');
@@ -642,3 +644,5 @@ Route::get('pivotreport', 'ReportController@pivotReport');
 Route::get('generatePivotReport','ReportController@generatePivotReport');
 
 Route::get('generateoffsReport','ReportController@officialSearchReport');
+
+Route::get('generatedeactive','ReportController@generateDeactive');

@@ -403,7 +403,17 @@ left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "AREAUS
 left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone on subzone.tdi_key = tbldg_subzon_id
 left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "TRANSACTIONTYPE") trnstype on trnstype.tdi_key = tbldg_transtype_id
 left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = tbldg_approvalbldgstatus_id
-where tollist_id = tbldg_tone_id '  .$filterquery  );
+where tollist_id = tbldg_tone_id '  .$filterquery. ' 
+ORDER BY 
+CASE
+WHEN tbldg_approvalbldgstatus_id = "1" THEN 1
+WHEN tbldg_approvalbldgstatus_id = "2" THEN 2
+WHEN tbldg_approvalbldgstatus_id = "5" THEN 3
+WHEN tbldg_approvalbldgstatus_id = "4" THEN 4
+ WHEN tbldg_approvalbldgstatus_id = "3" THEN 5
+ WHEN tbldg_approvalbldgstatus_id = "6" THEN 5
+END ASC, tbldg_updatedate'
+  );
 
     /*  $property = DB::select('select ma_id,ma_accno, `cm_masterlist`.`ma_fileno`,ma_city, ma_postcode,
    `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone, ma_addr_ln3,
@@ -525,7 +535,17 @@ left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BUILDI
 left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BULDINGTYPE") bldgtype on bldgtype.tdi_key = tland_proptype_id 
 left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone on subzone.tdi_key = tland_subzon_id
 left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = tland_approvaltlandstatus_id
-where tollist_id = tland_tone_id'  .$filterquery  );
+where tollist_id = tland_tone_id'  .$filterquery . '
+ORDER BY 
+CASE
+WHEN tland_approvaltlandstatus_id = "1" THEN 1
+WHEN tland_approvaltlandstatus_id = "2" THEN 2
+WHEN tland_approvaltlandstatus_id = "5" THEN 3
+WHEN tland_approvaltlandstatus_id = "4" THEN 4
+ WHEN tland_approvaltlandstatus_id = "3" THEN 5
+ WHEN tland_approvaltlandstatus_id = "6" THEN 5
+END ASC, tland_updatedate
+'  );
 
     /*  $property = DB::select('select ma_id,ma_accno, `cm_masterlist`.`ma_fileno`,ma_city, ma_postcode,
    `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone, ma_addr_ln3,
@@ -697,7 +717,16 @@ left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BUILDI
 left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "BULDINGTYPE") bldgtype on bldgtype.tdi_key = tstand_proptype_id 
 left join (select tdi_key, tdi_value,tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone on subzone.tdi_key = tstand_subzon_id
 left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = tstand_approvaltstandstatus_id
-where tollist_id = tstand_tone_id '  .$filterquery  );
+where tollist_id = tstand_tone_id '  .$filterquery . '
+ORDER BY 
+CASE
+WHEN tstand_approvaltstandstatus_id = "1" THEN 1
+WHEN tstand_approvaltstandstatus_id = "2" THEN 2
+WHEN tstand_approvaltstandstatus_id = "5" THEN 3
+WHEN tstand_approvaltstandstatus_id = "4" THEN 4
+ WHEN tstand_approvaltstandstatus_id = "3" THEN 5
+ WHEN tstand_approvaltstandstatus_id = "6" THEN 5
+END ASC, tstand_updatedate'  );
 
     /*  $property = DB::select('select ma_id,ma_accno, `cm_masterlist`.`ma_fileno`,ma_city, ma_postcode,
    `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone, ma_addr_ln3,
@@ -809,7 +838,16 @@ left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems 
             left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ISHASBUILDING") hasbldg on hasbldg.tdi_key = trate_ishasbuilding_id
 left join (select tdi_key approval_id, tdi_value approvalstatus from tbdefitems where tdi_td_name = "GENERALAPPROVAL") approval on approval_id = trate_approvaltratestatus_id
             where trlist_id = trate_trlist_id
-            '  .$filterquery  );
+            '  .$filterquery . '
+            ORDER BY 
+            CASE
+                WHEN trate_approvaltratestatus_id = "1" THEN 1
+                WHEN trate_approvaltratestatus_id = "2" THEN 2
+                WHEN trate_approvaltratestatus_id = "5" THEN 3
+                WHEN trate_approvaltratestatus_id = "4" THEN 4
+                WHEN trate_approvaltratestatus_id = "3" THEN 5
+                WHEN trate_approvaltratestatus_id = "6" THEN 5
+            END ASC, trate_updatedate'  );
 
     /*  $property = DB::select('select ma_id,ma_accno, `cm_masterlist`.`ma_fileno`,ma_city, ma_postcode,
    `tbdefitems_subzone`.`tdi_parent_name` zone, `tbdefitems_subzone`.`tdi_value` subzone, ma_addr_ln3,

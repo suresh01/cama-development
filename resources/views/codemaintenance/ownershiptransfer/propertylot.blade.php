@@ -281,10 +281,10 @@
 	<span class="clear"></span>
 	
 	<script>
-		function addProperty() {		
+		function edit(id) {		
 		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0,left = 312,top = 234');
 		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
-		        w.location = "searchpropertyaddress?page=lot";
+		        w.location = "lotdetail?prop_id="+id;
 		    }	    
 		    if (w.outerWidth < screen.availWidth || w.outerHeight < screen.availHeight)
 			{
@@ -292,6 +292,20 @@
 				w.resizeTo(screen.availWidth, screen.availHeight);
 			}
 		}
+
+		function addProperty() {		
+				
+		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0,left = 312,top = 234');
+		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
+		        w.location = "searchpropertyaddress?page=lot";
+		        w.location = "lotdetail?prop_id="+id;
+		    }	    
+		    if (w.outerWidth < screen.availWidth || w.outerHeight < screen.availHeight)
+			{
+				w.moveTo(0,0);
+				w.resizeTo(screen.availWidth, screen.availHeight);
+			}
+		}	
 
 		function getLotDetail(id){
 			if(id != 0){
@@ -590,9 +604,8 @@
 		}
 
 
-		function deleteProperty(){
+		/*function deleteProperty(){
 			var table = $('#proptble').DataTable();
-//console.log(table.rows('.selected').data());
 			var account = $.map(table.rows('.selected').data(), function (item) {
 				//console.log(item);
 	        	return item['vd_id']
@@ -603,7 +616,7 @@
 			console.log(account.toString());
 			
 			
-		}
+		}*/
 	
 
 		
@@ -632,20 +645,20 @@ $(document).ready(function (){
 			        {"data": null, "name": "sno"},
 			        {"data":  function(data){
 
-			        	return "<a onclick='lotDetail("+data.ma_accno+","+data.log_id+")' href='#'>"+data.lotnumber+"</a>";
+			        	return "<a onclick='edit("+data.LOT_ID+")' href='#'>"+data.lotnumber+"</a>";
 			        
 			        }, "name": "account number"},
 			        {"data": "titlenumber", "name": "fileno"},
-			        {"data": "log_altno", "name": "zone"},
-			        {"data": "log_stratano", "name": "subzone"},
+			        {"data": "LO_ALTNO", "name": "zone"},
+			        {"data": "LO_STRATANO", "name": "subzone"},
 			        {"data": "tentype", "name": "owner"}, 
-			        {"data": "log_tenureperiod", "name": "ishasbldg"},
-			        {"data": "log_startdate", "name": "owntype"}, 
-			        {"data": "log_expireddate", "name": "TO_OWNNAME"}, 
+			        {"data": "LO_TENUREPERIOD", "name": "ishasbldg"},
+			        {"data": "LO_STARTDATE", "name": "owntype"}, 
+			        {"data": "LO_EXPIREDDATE", "name": "TO_OWNNAME"}, 
 			        {"data": "tstatus", "name": "bldgcount"},
 			        {"data":  function(data){
 
-			        	var editaction ='<a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -362px -62px !important;display: inline-block; float: right;" title="View Log" 			        	onclick="submitLogForm('+data.log_id+')"></a></span>&nbsp;&nbsp;&nbsp;&nbsp;' ;
+			        	var editaction ='' ;
 
 			        	var deleteaction ="&nbsp;&nbsp;<span><a style='height: 15px; width: 13px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -143px -23px !important;display: inline-block; float: right;'  onclick='deleteProperty("+data.log_id+")' href='#' title='Delete'></a></span>";
 			        		action = "";
