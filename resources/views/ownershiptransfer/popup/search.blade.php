@@ -351,6 +351,15 @@
 
 	    		termid = $('#value_Zone').find('option:selected').val();
 	    	}
+
+
+	    	
+	    	if (BULDINGTYPE == "JenisHarta") {
+	    		termid = $('#value_KategoriHarta').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "Taman/Kawasan"){
+
+	    		termid = $('#value_Mukim').find('option:selected').val();
+	    	}
 	    	//alert(BULDINGTYPE);
 			
 

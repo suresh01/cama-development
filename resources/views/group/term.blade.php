@@ -46,7 +46,7 @@
 					</div>
 					<button id="adduser" style="float:right;margin-right: 10px;" onclick="newTerm()" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('group.Add_Term')}}</span></button>
 					<div  style="float:right;margin-right: 20px;">		
-							<select data-placeholder="{{__('group.Choose_a_Status')}}" onchange="getdata()"  style="float: left;" class="cus-select"  id="paramterm" name="paramterm" tabindex="6">						
+							<select data-placeholder="{{__('group.Choose_a_Status')}}" onchange="getdata()"  style="float: left;" class="cus-select"  id="paramterm" name="paramterm" tabindex="6">			<option value="0">{{__('common.Please_Select_a_Filter')}}...</option>
 								<option value='A'>All</option>							
 								<option value='C'>CMK</option>							
 								<option value='K'>KAD</option>								

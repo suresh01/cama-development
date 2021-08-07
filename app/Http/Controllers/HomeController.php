@@ -2173,11 +2173,12 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
         from tbsearchdetail mtb where sd_se_id = "18" ');
         
-
+        
+        $userlist=DB::select('select usr_id, concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, concat(usr_firstname, " " ,usr_lastname) usr_name , usr_position FROM tbuser');
         $group = DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "USERGROUP"');
         App::setlocale(session()->get('locale'));
         
-         return view("officialsearch.property")->with('search',$search)->with('group',$group);
+         return view("officialsearch.property")->with('search',$search)->with('group',$group)->with('userlist',$userlist);
     
     }
 

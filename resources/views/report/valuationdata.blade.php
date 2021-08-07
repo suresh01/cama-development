@@ -111,7 +111,7 @@
 				var account = $.map(table.rows('.selected').data(), function (item) {
 					//console.log(item);
 		        	termdate= item['termDate'];
-		        	return item['vt_termDate']
+		        	return item['id']
 		   		});
 		   		title_txt="STATISTIK KUTIPAN MENGIKUT KAT. BANGUNAN SEHINGGA PENGGAL";
 			}

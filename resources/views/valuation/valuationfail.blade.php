@@ -1369,8 +1369,7 @@ function updateLand(){
 			buttons: [
 				{type: 'button pink', text: 'Update', click: function($noty) {
 		  
-					var d=new Date();
-	        	
+					var d=new Date();        	
 
 				
 					
@@ -1402,7 +1401,7 @@ function updateLand(){
 									     		$noty.close();	
 					        	//$("#finish").attr("disabled", true);
 					        	//clearTableError(4);
-													updatetablestatus("taxtable", "tax_id");
+								updatetablestatus("taxtable", "tax_id");
 				        	},
 					        error:function(data){
 								//$('#loader').css('display','none');	
@@ -1433,7 +1432,7 @@ function updateLand(){
 	}
 
 	function back(){
-		window.location.assign('group');
+		window.location.assign('valterm');
 	}
 
 </Script>

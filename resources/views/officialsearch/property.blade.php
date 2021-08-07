@@ -134,54 +134,88 @@
 		
 		
 	</div>
-<form style="display: hidden;" id="generatereport" method="GET" action="generateoffsReport">
-            @csrf
-            <input type="hidden" name="accounts" id="accounts">
-		</form>
+<div id="addDetail" style="display:none" class="grid_12">
+		<div class="widget_wrap">
+			
+			<div class="widget_content">
+				<h3 id="generatereport">Generate Report</h3>
+				<form style="" id="generateform" method="GET" action="generateoffsReport">
+					@csrf
+					<input type="hidden" name="type" id="type">
+					<input type="hidden" name="accountnumber" id="accountnumber">
+					<div  class="grid_12 form_container left_label">
+						<ul>
+							<li>
+								
+								<fieldset>
+									<legend>Additional Information</legend>
+									
+									<div class="form_grid_12">
+										<label class="field_title" id="lposition" for="position">VALUER NAME<span class="req">*</span></label>
+										<div  class="form_input">
+											<select onchange="getposition()" data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="name" tabindex="7" name="name" tabindex="20">
+											<option></option>
+												@foreach ($userlist as $rec)
+														<option value='{{ $rec->usr_id }}'>{{ $rec->usr_name }}</option>
+												@endforeach	
+											</select>
+										</div>
+										<span class=" label_intro"></span>
+										<input type="hidden" id="username" name="username">
+									</div>
+									
+									<div class="form_grid_12">
+										<label class="field_title" id="llevel" for="level">VALUER TITLE<span class="req">*</span></label>
+										<div  class="form_input">
+											<input id="title" name="title"  type="text"  maxlength="50" class="required"/>
+										</div>
+										<span class=" label_intro"></span>
+									</div>
+								
+								</fieldset>
+
+		
+							</li>
+						</ul>
+					</div>
+					
+					<div class="grid_12">							
+						<div class="form_input">
+							<button id="addsubmit" name="adduser" class="btn_small btn_blue"><span>Submit</span></button>									
+							
+							<button id="close" name="close" type="button" class="btn_small btn_blue simplemodal-close"><span>Close</span></button>
+							<span class=" label_intro"></span>
+						</div>								
+						<span class="clear"></span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
 	<span class="clear"></span>
 	
 	<script>
 
 
-		function generateReport(id){
-			var table = $('#proptble').DataTable();
-
-			 var account = $.map(table.rows('.selected').data(), function (item) {
-		       return item['os_id']
-		      });
-			 console.log(table.rows('.selected').data());
+		function generateReport(accno){
+			$('#type').val('Successs');
+			$('#accountnumber').val(accno);
+			$('#addDetail').modal();
+		}
+		function getposition(){
+			var userid = $('#name').val();
 			
-			var type = "delete";
-			
-			
-			
-			if(account.length<1){
-				$('#accounts').val(id);
-			} else {
-				$('#accounts').val(account.toString());
-			}
-
-			var noty_id = noty({
-				layout : 'center',
-				text: 'Are want to Generate Report?',
-				modal : true,
-				buttons: [
-					{type: 'button pink', text: 'Generate', click: function($noty) {
-						$noty.close();
-					//	$('#accounts').val(account.toString());
-						$('#generatereport').submit();
-					  }
-					},
-					{type: 'button blue', text: 'Cancel', click: function($noty) {
-						$noty.close();
-					  }
-					}
-					],
-				 type : 'success', 
-			 });
-			
-			}
+			$('#username').val($("#name option:selected").text());
+			$.ajax({
+		        type:'GET',
+		        url:'/getuserdetail',
+		        data:{id:userid},
+		        success:function(data){	        	
+		        	$('#title').val(data.userposition);
+		        }
+		    });
+		}
 		
 		function approve(id,currstatus){
 

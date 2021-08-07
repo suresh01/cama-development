@@ -144,6 +144,7 @@
 		    //selectedvalue =;
 		    
 		    BULDINGTYPE = selectedvalue.replace(/\s+/g, '');
+		    BULDINGTYPE = selectedvalue.replace(/\./g, '');
 		    BULDINGTYPE2 = selectedvalue;
 		    var self = this;
 		    var flag = "true";
@@ -183,7 +184,7 @@
 							proplist += '<option value="'+result[i].tdi_key+'">'+result[i].sd_definitionkeyname+'</option> ';
 				        }
 				        if(flag == "false"){
-							$(self).parent().parent().find(".value").html($valueLbl + '<select data-placeholder="Choose a Custom..." id="value_'+ selectedvalue.replace(/\s+/g, '')+'" style="width:100%;" class="cus-select value_drop" '+
+							$(self).parent().parent().find(".value").html($valueLbl + '<select data-placeholder="Choose a Custom..." id="value_'+ BULDINGTYPE+'" style="width:100%;" class="cus-select value_drop" '+
 							'id="value" name="value[]"  tabindex="20"> '+
 							proplist +
 							'</select>');
@@ -329,6 +330,7 @@
 		    //selectedvalue =;
 		    
 		    BULDINGTYPE = selectedvalue.replace(/\s+/g, '');
+		    //BULDINGTYPE = selectedvalue.replace(/\./g, '');
 		    BULDINGTYPE2 = selectedvalue;
 		    var self = this;
 		    var flag = "true";
@@ -350,11 +352,11 @@
 	        	} Subzone
 	    	});*/
 	    	var termid = "";
-	    	if (BULDINGTYPE == "PropertyType") {
-	    		termid = $('#value_PropertyCategory').find('option:selected').val();
-	    	} else if(BULDINGTYPE == "Subzone"){
+	    	if (BULDINGTYPE == "JenisHarta") {
+	    		termid = $('#value_KategoriHarta').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "Taman/Kawasan"){
 
-	    		termid = $('#value_Zone').find('option:selected').val();
+	    		termid = $('#value_Mukim').find('option:selected').val();
 	    	}
 	    	//alert(BULDINGTYPE);
 			

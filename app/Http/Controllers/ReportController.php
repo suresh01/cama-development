@@ -284,6 +284,7 @@ class ReportController extends Controller
          $isfilter = $request->input('filter');
          $page = $request->input('page');
         $filterquery = '';
+        $filterqueryvtid = '';
         if($isfilter == 'true'){
             $input = $request->input();
             $condition = $input['condition'];
@@ -294,10 +295,10 @@ class ReportController extends Controller
              foreach ($input['field'] as $fieldindex => $field) {
                 if ($fieldcolumn[$fieldindex] == "tdi_key") {
                     $fieldcolumn[$fieldindex] = 'tbdefitems_subzone.tdi_key';
-                }/*
+                }
                 if ($fieldcolumn[$fieldindex] == "vt_id") {
-                    $fieldcolumn[$fieldindex] = '';
-                }*/
+                    $filterqueryvtid =' '.$value[$fieldindex].'';
+                }
                 if($value[$fieldindex] != ""){
                     if($fieldindex == count($input['field']) - 1) {
                         if($fieldcolumn[$fieldindex] != ""){
@@ -324,15 +325,19 @@ class ReportController extends Controller
         //$statuscond = 'vt_approvalstatus_id = "05"' ;
         
      
-        $group = DB::select("select get_activeterm_count(vt_termDate,'','1') propertycount, 
-vt_id as id, vt_termDate, vt_termtype_id,vt_valbase_id, vt_id, vt_name name, vt_createby createby,  DATE_FORMAT(vt_createdate, '%d/%m/%Y') createdate, vt_updateby updateby, 
-DATE_FORMAT(vt_updatedate, '%d/%m/%Y')  updatedate, DATE_FORMAT(vt_termDate, '%d/%m/%Y') termDate, 
-DATE_FORMAT(now(), '%d/%m/%Y') enforceDate,  vt_applicationtype_id,DATE_FORMAT(vt_transferDate, '%d/%m/%Y') vt_transferDate, vt_transferby,
-vt_approvalstatus_id
-from  cm_appln_valterm 
-          where ".$statuscond." ".$filterquery."
-             order by vt_id
-        ");
+        $group = DB::select("select maxTermId id, maxAppTermType, maxTermName name, DATE_FORMAT(termDate, '%d/%m/%Y') termDate, maxEnforceDate enforceDate, count(vd_accno) propertycount
+from cm_appln_valdetl
+inner join cm_appln_val on va_id = vd_va_id
+inner join cm_appln_valterm on vt_id = va_vt_id
+inner join cm_masterlist on vd_ma_id = ma_id
+left join (select vt_id maxTermId,vt_applicationtype_id maxAppTermType, vt_name maxTermName,  DATE_FORMAT(vt_termDate, '%d/%m/%Y') maxTermDate,  DATE_FORMAT(vt_approvalstatusdate, '%d/%m/%Y') maxEnforceDate FROM cm_appln_valterm) maxTerm on maxTerm.maxTermId = ".$filterqueryvtid."
+inner join (select max(vt_termDate) termdate,  vd_ma_id, vd_accno as accountno from cm_appln_valdetl
+inner join cm_appln_val on va_id = vd_va_id
+inner join cm_appln_valterm on vt_id = va_vt_id
+where  vt_termDate <=(select vt_termDate from cm_appln_valterm where vt_id = ".$filterqueryvtid.") and vt_applicationtype_id = (select vt_applicationtype_id from cm_appln_valterm where vt_id = ".$filterqueryvtid.")
+and vd_accno NOT IN (select cm_appln_deactivedetl.dad_accno from cm_appln_deactivedetl inner join  cm_appln_deactive on cm_appln_deactivedetl.dad_da_id = cm_appln_deactive.da_id 
+inner join cm_appln_valterm on cm_appln_deactive.da_vt_id = cm_appln_valterm.vt_id where vt_termDate <=(select vt_termDate from cm_appln_valterm where vt_id = ".$filterqueryvtid.") and vt_applicationtype_id = (select vt_applicationtype_id from cm_appln_valterm where vt_id = ".$filterqueryvtid."))
+group by vd_ma_id) active_term on active_term.termdate = vt_termDate and active_term.accountno = cm_appln_valdetl.vd_accno");
 
 
       } else if($page == 2){
@@ -469,7 +474,7 @@ from  cm_appln_valterm
         //DATE_FORMAT(vt_termDate, "%d/%m/%Y") <= '01/01/2021'
         if($page == '3'){
           $filter = ' "'.$account.'"';
-          $report_name = "valuationdata_active";
+          $report_name = "valuationdata_active2";
         } else if($page == '2'){
           $filter = ' va_vt_id in ('. $account.')';
           $report_name = "valuationdata_term";
@@ -2663,48 +2668,43 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
 
     public function officialSearchReport(Request $request)
     {        
-             //$jasper = new JasperPHP;
-        $account = $request->input('accounts');
-        
-        $filter = " os_id in (". $account.")";
-        
-       
-      /* $input = $request->input();
-            $account1 = $input['accounts'];
-        Log::info($account1);*/
-            // Compile a JRXML to Jasper
-        //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
-         Log::info(JasperPHP::process(
-            base_path('/reports/officialsearch.jasper'),
-                false,
-                array("pdf"),               
-                array("propid" => $filter),
-            array(
-              'driver' => 'generic',
-              'username' => env('DB_USERNAME',''),
-              'password' => env('DB_PASSWORD',''),
-              'jdbc_driver' => 'com.mysql.jdbc.Driver',
-              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
-            ))->output());
+      $type = $request->input('type');
+      $accountnumber = $request->input('accountnumber');
+      $tittle = $request->input('title');
+      $name = $request->input('username');
+      if($type == 'Successs'){
+        $jasper_path = base_path('/reports/officialsearch.jasper');
+        $dowload_path = base_path('/reports/officialsearch.pdf');
+        $filename = 'Official Search.pdf';
+      }
+          
+              // Compile a JRXML to Jasper
+           //  JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuation.jrxml'))->execute();
+          
+      //Log::info($type);
+      //Log::info($accountnumber);
+      //Log::info($name);
+ 
+          $filter = ' os_id = '. $accountnumber;
 
-      JasperPHP::process(
-            base_path('/reports/officialsearch.jasper'),
-                false,
-                array("pdf"),               
-                array("propid" => $filter),
-            array(
-              'driver' => 'generic',
-              'username' => env('DB_USERNAME',''),
-              'password' => env('DB_PASSWORD',''),
-              'jdbc_driver' => 'com.mysql.jdbc.Driver',
-              'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
-            ))->execute();
+          JasperPHP::process(
+             $jasper_path,
+                  false,
+                  array("pdf"),
+                  array("propid" => $filter,'user'=>$name),
+                  array(
+                        'driver' => 'generic',
+                        'username' => env('DB_USERNAME',''),
+                        'password' => env('DB_PASSWORD',''),
+                        'jdbc_driver' => 'com.mysql.jdbc.Driver',
+                        'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+                  ))->execute();
 
-            $headers = array(
+          $headers = array(
               'Content-Type: application/pdf',
-            );
+          );
 
-        return response()->download(base_path('/reports/officialsearch.pdf'), 'Official Search.pdf', $headers);
+          return response()->download($dowload_path, $filename, $headers);
 
     }
 
