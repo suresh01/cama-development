@@ -116,7 +116,7 @@
 										S No
 									</th>
 									<th>
-										BUILDONG STATUS
+										BUILDING STATUS
 									</th>
 									<th>
 										BUILDING CATEGORY
@@ -178,7 +178,7 @@
 			if (tilte == null || tilte == "") {
 				return;
 			} else {
-				var id = $('#value_Term').val();
+				var id = $('#value_va_vt_id').val();
 				window.location = "generatesummaryrace?title="+tilte+"&termid="+id;
 			}
 			

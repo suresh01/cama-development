@@ -1,4 +1,6 @@
 
+
+
 			<div  id="basic-modal-content">
 				<h3>{{__('search.filter')}}</h3>
 				<form action="" id="filterForm" method="get" class="form_container">	
@@ -129,11 +131,19 @@
 		    var parentvalue = $('#value_Term').find('option:selected').val();
 
 
-		    if(BULDINGTYPE == "Subzone"){
-	    		parentvalue = $('#value_Zone').find('option:selected').val();
-	    	} else {
-	    		parentvalue = $('#value_PropertyCategory').find('option:selected').val();
-	    	} 
+		   if(BULDINGTYPE == "subzonetdi_key"){
+	    		termid = $('#value_subzonetdi_parent_key').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "tbldg_proptype_id"){
+	    		termid = $('#value_bldgtypetdi_parent_key').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "tbldg_proptype_id"){
+	    		termid = $('#value_tbldg_propstorey_id').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "tbldg_proptype_id"){
+	    		termid = $('#value_bldgtypetdi_parent_key').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "tbldg_arealevel_id"){
+	    		termid = $('#value_tbldg_propstorey_id').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "tbldg_areause_id"){
+	    		termid = $('#value_bldgtypetdi_parent_key').find('option:selected').val();
+	    	}
 	    	//parenttypeid = $(this).val();
 	    	selectedparentvalue = parentid;
 	    	console.log(parentid);
@@ -160,10 +170,10 @@
 			//alert();
 			console.log($(this).val());
 		    var id= $(this).val();
-		    var selectedvalue = $(this).find('option:selected').text();
+		    var selectedvalue = $(this).val();
 		    //selectedvalue =;
 		    
-		    BULDINGTYPE = selectedvalue.replace(/\s+/g, '');
+		    BULDINGTYPE = selectedvalue.replace(/\./g, '');
 		    BULDINGTYPE2 = selectedvalue;
 		    var self = this;
 		    var flag = "true";
@@ -186,11 +196,19 @@
 	    	} else if (BULDINGTYPE == "PropertyStorey") {
 	    		termid = $('#value_PropertyCategory').find('option:selected').val();
 	    	} */
-	    	if(BULDINGTYPE == "Subzone"){
-	    		termid = $('#value_Zone').find('option:selected').val();
-	    	} else {
-	    		termid = $('#value_PropertyCategory').find('option:selected').val();
-	    	} 
+	    	if(BULDINGTYPE == "subzonetdi_key"){
+	    		termid = $('#value_subzonetdi_parent_key').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "tbldg_proptype_id"){
+	    		termid = $('#value_bldgtypetdi_parent_key').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "tbldg_proptype_id"){
+	    		termid = $('#value_tbldg_propstorey_id').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "tbldg_proptype_id"){
+	    		termid = $('#value_bldgtypetdi_parent_key').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "tbldg_arealevel_id"){
+	    		termid = $('#value_tbldg_propstorey_id').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "tbldg_areause_id"){
+	    		termid = $('#value_bldgtypetdi_parent_key').find('option:selected').val();
+	    	}
 	    	//alert(BULDINGTYPE);
 			//var termid = $('#value_Term').find('option:selected').val();
 			var termid = selectedparentvalue;// $('#value_Term').find('option:selected').val();
@@ -211,7 +229,7 @@
 						}
 
 					});
-					//alert(isparent);
+					//alert(isparent);  selectedvalue.replace(/\./g, '');
 					if(isparent){
 			        	var result = data.result;
 			        	
@@ -220,7 +238,7 @@
 							proplist += '<option value="'+result[i].tdi_key+'">'+result[i].sd_definitionkeyname+'</option> ';
 				        }
 				        if(flag == "false"){
-							$(self).parent().parent().find(".value").html($valueLbl + '<select data-placeholder="Choose a Custom..." id="value_'+ selectedvalue.replace(/\s+/g, '')+'" style="width:100%;" class="cus-select value_drop" '+
+							$(self).parent().parent().find(".value").html($valueLbl + '<select data-placeholder="Choose a Custom..." id="value_'+ selectedvalue.replace(/\./g, '')+'" style="width:100%;" class="cus-select value_drop" '+
 							'id="value" name="value[]"  tabindex="20"> '+
 							proplist +
 							'</select>');
@@ -383,10 +401,10 @@
 			//alert();
 			console.log($(this).val());
 		    var id= $(this).val();
-		    var selectedvalue = $(this).find('option:selected').text();
+		    var selectedvalue = $(this).val();
 		    //selectedvalue =;
 		    
-		    BULDINGTYPE = selectedvalue.replace(/\s+/g, '');
+		    BULDINGTYPE =  selectedvalue.replace(/\./g, '');
 		    BULDINGTYPE2 = selectedvalue;
 		    var self = this;
 		    var flag = "true";
@@ -402,10 +420,18 @@
 			//var termid = $('#value_Term').find('option:selected').val();
 			
 	    	var termid = "";
-			if(BULDINGTYPE == "Subzone"){
-	    		termid = $('#value_Zone').find('option:selected').val();
-	    	} else {
-	    		termid = $('#value_PropertyCategory').find('option:selected').val();
+			if(BULDINGTYPE == "subzonetdi_key"){
+	    		termid = $('#value_subzonetdi_parent_key').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "tbldg_proptype_id"){
+	    		termid = $('#value_bldgtypetdi_parent_key').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "tbldg_proptype_id"){
+	    		termid = $('#value_tbldg_propstorey_id').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "tbldg_proptype_id"){
+	    		termid = $('#value_bldgtypetdi_parent_key').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "tbldg_arealevel_id"){
+	    		termid = $('#value_tbldg_propstorey_id').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "tbldg_areause_id"){
+	    		termid = $('#value_bldgtypetdi_parent_key').find('option:selected').val();
 	    	} 
 	    	//a
 
@@ -435,7 +461,7 @@
 							proplist += '<option value="'+result[i].tdi_key+'">'+result[i].sd_definitionkeyname+'</option> ';
 				        }
 				        if(flag == "false"){
-							$(self).parent().parent().find(".value").html($valueLbl + '<select data-placeholder="Choose a Custom..." id="value_'+ selectedvalue.replace(/\s+/g, '')+'" style="width:100%;" class="cus-select value_drop" '+
+							$(self).parent().parent().find(".value").html($valueLbl + '<select data-placeholder="Choose a Custom..." id="value_'+  selectedvalue.replace(/\./g, '')+'" style="width:100%;" class="cus-select value_drop" '+
 							'id="value" name="value[]"  tabindex="20"> '+
 							proplist +
 							'</select>');

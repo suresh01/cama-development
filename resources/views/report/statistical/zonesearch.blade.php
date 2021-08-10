@@ -1,7 +1,8 @@
 
+
 			<div  id="basic-modal-content">
 				<h3>Filter</h3>
-				<form action="inspectionform" id="filterForm" method="get" class="form_container">	
+				<form action="" id="filterForm" method="get" class="form_container">	
 					@csrf
 				<input type="hidden" name="filter" value="true">			
 					<ul id="filterrow">	
@@ -12,7 +13,7 @@
 											<span class=" label_intro">Field</span>
 											<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="custom" name="field[]" tabindex="20"><option value="0">Please select Filter</option>
 												@foreach ($search as $rec)
-												<option value="{{ $rec->sd_definitionkeyid }}">{{ $rec->sd_label }}</option>
+												<option value="{{ $rec->sd_keymainfield }}">{{ $rec->sd_label }}</option>
 												@endforeach
 											</select>
 										</div>
@@ -40,162 +41,84 @@
 								</div>
 							</li>						
 					</ul>	
-					
 					<div style="display: none;" id="searchLoader">
 						
 					</div>
 					<div class="btn_24_blue">
-						<a href="#" onclick="addfilter(1)" class=""><span>Add </span></a>
+						<a href="#" id="" onclick="addfilter(1)" class=""><span>Add </span></a>
 					</div>
 					<div class="btn_24_blue">						
 						<!--<button id="addsubmit"type="submit" class="btn_small btn_blue"><span>Submit</span></button>	-->
-						<a href="#" onclick="submitForm()" class=""><span>Submit </span></a>	
+						<a href="#" disabled="true" onclick="submitForm()" class=""><span>Submit </span></a>	
 					</div>
 					<div class="btn_24_blue">
-						<a href="#" class="simplemodal-custom-close"><span>Close </span></a>
+						<a href="#" onclick="terminate()" class="simplemodal-close"><span>Close </span></a>
 					</div>
 					</form>
 			</div>
 			<div style="display: none;" id="view"></div>
-			<a href="#" class="basic-custom-modal1">Add Filter</a>
+			<a href="#" class="basic-modal">Add Filter</a>
+
+			<div style="display: none;" id="manaual-filter-placeholder">
+				
+			</div>
 <script>
 	var i = 0;
 	var BULDINGTYPE = "";
 	var BULDINGTYPE2 = "";
 	var parenttypeid = "";
+	var xhr;
+
 	$(document).ready(function (){
 
- 
 		waitingIndicator('searchLoader'); //waiting indicator
-		
-		$('#simplemodal-overlay').css('display', 'block');
-		$('.simplemodal-custom-close').click(function(){
-			//alert('');
-			$('#simplemodal-overlay').css('display', 'none');
-			$('#simplemodal-container').css('display', 'none');
-			$('#basic-modal-content').attr('name','hide');
 
-			
-			//$('#basic-modal-content').css('display', 'none');
-		});
-		$('.basic-custom-modal1').click(function(){
+		$('#simplemodal-overlay').css('display', 'block');
+		$('.simplemodal-close').click(function(){
 			//alert('');
-			var status = $('#basic-modal-content').attr('name');
-			//alert($('#basic-modal-content').attr('name'));
-			if(status == 'hide'){
-				console.log("23");
-				$('#simplemodal-overlay').css('display', 'block');
-				$('#simplemodal-container').css('display', 'block');
-			} else {
-				console.log("24");
-				$('#simplemodal-overlay').css('display', 'block');
-				$('#simplemodal-container').css('display', 'block');
-				$('#basic-modal-content').modal();
-			}
+			
+
+			$('#manaual-filter-placeholder').html($('#filterrow').html());
+			$('#basic-modal-content').css('display', 'none');
+		});
+		$('.basic-modal').click(function(){
+			$.ajax({
+		        type:'GET',
+		        url:'/getaccess',
+		        data:{module:211},
+		        success:function(data){	        	
+		        	if(data.msg === "false"){
+		        		alert("211 - "
+		        			+"We are sorry "
+							+" The function you are trying to access does not have permission :(");
+
+		        		//return "false";
+		        	} else {
+	        		
+						var content = $('#manaual-filter-placeholder').html();
+						if (content.trim() != "" ){
+							$('#filterrow').html(content);
+							$('#manaual-filter-placeholder').html('');
+
+							
+					
+						}
+						filterAction();
+						
+		        	}
+		        }
+		    });
 			
 			//$('#simplemodal-overlay').css('display', 'block');
 			//$('#simplemodal-container').css('display', 'block');
 			//$('#basic-modal-content').css('display', 'none');
 		});
 
-			$(".value_drop").change(function(){
-	    	//alert($("#value_BULDINGTYPE").find('option:selected').text());
-	    	//alert(BULDINGTYPE2);
-	    	var id  = BULDINGTYPE2;
-	    	var parentid = $(this).val();
-		    var parentvalue = $('#value_Term').find('option:selected').val();
-	    	//parenttypeid = $(this).val();
-	    	console.log(parentid);
-	    	var date=new Date();
-	    	var filter = "true";
-	    	$.ajax({
-		        type:'GET',
-		        url:'getcustomfilterdata?date='+ date.getTime(),
-		        data:{id:id,filter:filter,parentid:parentid,type:'report',parentvalue:parentvalue},
-		        success:function(data){
-					//alert("#value_"+BULDINGTYPE);
-					$("#value_"+BULDINGTYPE).html("");
-					var result = data.result;
-					for (var i = 0; i < result.length; i++) {					
-			        		$("#value_"+BULDINGTYPE).append('<option value="'+result[i].tdi_key+'">'+result[i].sd_definitionkeyname+'</option> ');						
-				    }     
-	        	}
-	    	});
+		
 
-	    });
-
-		$(".field").change(function(){
-			//value_drop
-
-			console.log($(this).val());
-		    var id= $(this).val();
-		    var selectedvalue = $(this).find('option:selected').text();
-		    //selectedvalue =;
-		    
-		    BULDINGTYPE = selectedvalue.replace(/\s+/g, '');
-		    BULDINGTYPE2 = selectedvalue;
-		    var self = this;
-		    var flag = "true";
-		    var d=new Date();
-		    var proplist = '';
-			var firstrow = $(self).parent().parent().find("#firstrow").val();
-			if(firstrow == "firstrow"){
-				$valueLbl = "<span class='label_intro'>Value</span>";
-			} else {
-				$valueLbl = "";
-			}
-			var searchid = 14;
-			var termid = $('#value_Term').find('option:selected').val();
-	        $.ajax({
-		        type:'GET',
-		        url:'getcustomfilterdata?date='+ d.getTime(),
-		        data:{id:selectedvalue,searchid:searchid,parentid:termid},
-		        success:function(data){
-					var isparent = false;
-					$(".field").each(function () {
-						//alert(data.parent+" - "+$(this).find('option:selected').text());
-						if (data.parent == "" || data.parent == null){
-							isparent = true;
-							return;
-						} else if (data.parent == $(this).find('option:selected').text()){
-							isparent = true;
-							return;
-						}
-
-					});
-					//alert(isparent);
-					if(isparent){
-			        	var result = data.result;
-			        	
-			        	for (var i = 0; i < result.length; i++) {
-			        		flag = "false";
-							proplist += '<option value="'+result[i].tdi_key+'">'+result[i].sd_definitionkeyname+'</option> ';
-				        }
-				        if(flag == "false"){
-							$(self).parent().parent().find(".value").html($valueLbl + '<select data-placeholder="Choose a Custom..." id="value_'+ selectedvalue.replace(/\s+/g, '')+'" style="width:100%;" class="cus-select value_drop" '+
-							'id="value" name="value[]"  tabindex="20"> '+
-							proplist +
-							'</select>');
-						} else {
-							$(self).parent().parent().find(".value").html($valueLbl + '<input type="text"  name="value[]" >');			
-						}
-					} else {
-						alert('Please select '+data.parent+' first');
-						$(this).val(0);
-					}
-			        
-	        	}
-	    	});
-	        
-			//alert();
-			if(flag != "false"){
-				$(self).parent().parent().find(".value").html($valueLbl + '<input type="text" name="value[]">');
-			}
-			
-		});
 
 	});
-
+	
 	function submitForm(){
 		//console.log($("#filterForm").serialize());
 		var table = $('#proptble').DataTable();
@@ -243,7 +166,7 @@
 								' <div class="form_grid_3">'+
 								'			<select data-placeholder="Choose a Custom..." style="width:100%" class="cus-select field" id="custom" name="field[]" tabindex="20"><option value="0">Please select Filter</option>'+
 								'				@foreach ($search as $rec)'+
-								'				<option value="{{ $rec->sd_definitionkeyid }}">{{ $rec->sd_label }}</option>'+
+								'				<option value="{{ $rec->sd_keymainfield }}">{{ $rec->sd_label }}</option>'+
 								'				@endforeach'+
 								'			</select>'+
 								'		</div>'+
@@ -267,20 +190,186 @@
 								'	</div>'+
 								'</div>'+
 							'</li>');
-		} 
+		}
 
+
+		filterAction();
+		
+
+
+	}
+
+	function discardFilter() {
+
+		alert('This will discard filters');		
+		return false;
+
+	}
+
+	function terminate(){
+		if (xhr != undefined)
+		xhr.abort();
+	}
+
+	function filterAction(){
+		//alert();
 		$('.remove').click(function() {
 			//event.preventDefault();
 			$(this).closest(".li").remove();
 		});
 		$('#basic-modal-content').height("300");
-		
-	
+		var searchid = 21;
+		$(".value_drop").change(function(){
+	    	//alert($("#value_BULDINGTYPE").find('option:selected').text());
+	    	//alert(BULDINGTYPE2);
+	    	var id  = BULDINGTYPE2;
+	    	var parentid = $(this).val();
+			var parentvalue = $("#value_vt_id").find('option:selected').val();
+			if(parentvalue == ''){
+				parentvalue = $("#value_va_vt_id").find('option:selected').val();
+			}
+		   // var parentvalue = $('#value_Term').find('option:selected').val();
+	    	//parenttypeid = $(this).val();
+
+
+		    //$(this).find("option").removeAttr('selected');
+		    $(this).find("option[value=" + parentid +"]").attr('selected','true');
+
+
+	    	console.log(parentid);
+	    	var date=new Date();
+	    	var filter = "true";
+	    	$.ajax({
+		        type:'GET',
+		        url:'getcustomfilterdata?date='+ date.getTime(),
+		        data:{id:id,searchid:searchid,filter:filter,parentid:parentid,type:'report',parentvalue:parentvalue},
+		        success:function(data){
+					//alert("#value_"+BULDINGTYPE);
+					$("#value_"+BULDINGTYPE).html("");
+					var result = data.result;
+					for (var i = 0; i < result.length; i++) {					
+			        		$("#value_"+BULDINGTYPE).append('<option value="'+result[i].tdi_key+'">'+result[i].sd_definitionkeyname+'</option> ');						
+				    }     
+	        	}
+	    	});
+
+	    });
+
+		$(".field").change(function(){
+			//value_drop
+			//alert();
+			console.log($(this).val());
+		    var id= $(this).val();
+		   // var selectedvalue = $(this).find('option:selected').text();
+		     var selectedvalue = $(this).val();
+		    //selectedvalue =;
+		    
+		    $(this).find("option").removeAttr('selected');
+		    $(this).find("option[value='" + id +"']").attr('selected', true);
+
+		    BULDINGTYPE = selectedvalue.replace(/\s+\./g, '');
+		    BULDINGTYPE = selectedvalue.replace(/\./g, '');
+		    BULDINGTYPE2 = selectedvalue;
+		    var self = this;
+		    var flag = "true";
+		    var d=new Date();
+		    var proplist = '';
+			var firstrow = $(self).parent().parent().find("#firstrow").val();
+			if(firstrow == "firstrow"){
+				$valueLbl = "<span class='label_intro'>Value</span>";
+			} else {
+				$valueLbl = "";
+			}
+			//alert(BULDINGTYPE);
+			//filter:"true"
+			/*$.ajax({
+		        type:'GET',
+		        url:'getparentid?date='+ d.getTime(),
+		        data:{label:BULDINGTYPE,searchid:22},
+		        success:function(data){
+	        	} Subzone
+	    	});*/
+	    	var termid = "";
+	    	//alert(BULDINGTYPE);
+	    	/*if (BULDINGTYPE == "tbdefitems_subzonetdi_key") {
+	    		termid = $('#value_tbdefitems_subzonetdi_parent_key').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "subzone.tdi_key"){
+	    		termid = $('#value_subzone.tdi_parent_key').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "va_id"){
+
+	    		termid = $('#value_va_vt_id').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "vt_id"){
+
+	    		termid = $('#value_vt_applicationtype_id').find('option:selected').val();
+	    	}*/
+
+	    	if (BULDINGTYPE == "tbdefitems_subzonetdi_key") {
+	    		termid = $('#value_tbdefitems_subzonetdi_parent_key').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "SUBZONEtdi_key"){
+	    		termid = $('#value_SUBZONEtdi_parent_key').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "va_id"){
+	    		termid = $('#value_va_vt_id').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "vt_id"){
+	    		termid = $('#value_BULDINGTYPEtdi_key').find('option:selected').val();
+	    	} else if(BULDINGTYPE == "vt_id"){
+	    		termid = $('#value_BULDINGTYPEtdi_parent_key').find('option:selected').val();
+	    	}
+	    	//alert(BULDINGTYPE);
+			//termid = $('#value_'+selectedvalue).find('option:selected').val();
+
+	        $.ajax({
+		        type:'GET',
+		        url:'getcustomfilterdata?date='+ d.getTime(),
+		        data:{id:selectedvalue,searchid:searchid,parentid:termid},
+		        success:function(data){
+					var isparent = false;
+					$(".field").each(function () {
+						//alert(data.parent+" - "+$(this).find('option:selected').text());
+						if (data.parent == "" || data.parent == null){
+							isparent = true;
+							return;
+						} else if (data.parent == $(this).find('option:selected').text()){
+							isparent = true;
+							return;
+						}
+
+					});
+					//alert(isparent);
+					if(isparent){
+			        	var result = data.result;
+			        	
+			        	for (var i = 0; i < result.length; i++) {
+			        		flag = "false";
+							proplist += '<option value="'+result[i].tdi_key+'">'+result[i].sd_definitionkeyname+'</option> ';
+				        }
+				        if(flag == "false"){
+							$(self).parent().parent().find(".value").html($valueLbl + '<select data-placeholder="Choose a Custom..." id="value_'+ selectedvalue.replace(/\./g, '')+'" style="width:100%;" class="cus-select value_drop" '+
+							'id="value" name="value[]"  tabindex="20"> '+
+							proplist +
+							'</select>');
+						} else {
+							$(self).parent().parent().find(".value").html($valueLbl + '<input type="text"  name="value[]" >');			
+						}
+					} else {
+						alert('Please select '+data.parent+' first');
+						$(this).val(0);
+					}
+			        
+	        	}
+	    	});
+	        
+			//alert();
+			if(flag != "false"){
+				$(self).parent().parent().find(".value").html($valueLbl + '<input type="text" name="value[]">');
+			}
+			
+		});	 
 	}
-
-
 
 
 </script>
 </body>
 </html>
+
+			
+		

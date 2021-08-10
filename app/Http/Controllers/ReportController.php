@@ -836,7 +836,7 @@ Log::info(JasperPHP::process(
 
 
     public function zoneSummary(Redirect $request){
-      $search=DB::select(' select sd_key, sd_label, 
+      $search=DB::select(' select sd_key, sd_label, sd_keymainfield,
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
         from tbsearchdetail mtb where sd_se_id = "21" ');
@@ -918,7 +918,7 @@ Log::info(JasperPHP::process(
     }
 
     public function subzoneSummary(Redirect $request){
-      $search=DB::select(' select sd_key, sd_label, 
+      $search=DB::select(' select sd_key, sd_label, sd_keymainfield,
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
         from tbsearchdetail mtb where sd_se_id = "21" ');
@@ -1003,7 +1003,7 @@ Log::info(JasperPHP::process(
 
 
     public function racSummary(Redirect $request){
-      $search=DB::select(' select sd_key, sd_label, 
+      $search=DB::select(' select sd_key, sd_label, sd_keymainfield,
           case when (select count(*) from tbsearchdetail temp where temp.sd_definitionfilterkey =  mtb.sd_key and temp.sd_se_id =  mtb.sd_se_id) > 0 
         then sd_definitionfieldid when sd_definitionsource = "" then sd_keymainfield  else sd_definitionkeyid end as sd_definitionkeyid  
         from tbsearchdetail mtb where sd_se_id = "21" ');

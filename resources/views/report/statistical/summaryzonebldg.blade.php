@@ -180,7 +180,7 @@
 
 			var table = $('#proptble').DataTable();
 //console.log(table.rows('.selected').data());
-			var subzone = $.map(table.rows('.selected').data(), function (item) {
+			var subzone = $.map(table.rows().data(), function (item) {
 				//console.log(item);
 	        	return item['subzoneid']
 	   		});
@@ -188,7 +188,7 @@
 			if (tilte == null || tilte == "") {
 				return;
 			} else {
-				var id = $('#value_Term').val();
+				var id = $('#value_va_vt_id').val();
 				window.location = "generatesummarybldg?title="+tilte+"&termid="+id+"&subzone_id="+subzone;
 			}
 		}

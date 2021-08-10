@@ -963,7 +963,7 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
            $isparent =  DB::select("select case  when sd_definitionfilterkey = '' then 0
             when  sd_definitionfilterkey = 'parent' then 0
             when  sd_definitionfilterkey = null then 0 else 1 end as newcol, sd_keymaintable, sd_definitionfieldid  from tbsearchdetail where sd_se_id =  ".$searchid."
-            and sd_label = '".$id."'");
+            and sd_keymainfield = '".$id."'");
            
             foreach ($isparent as $rec) {
                 if ($rec->sd_keymaintable == 'tbdefitems') {
@@ -980,7 +980,7 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
             }
         //Log::info('select sd_key, sd_definitionsource, sd_definitionkeyid,sd_keymainfield, sd_definitionkeyname,sd_custom, sd_custominclude,sd_definitionfilterkey,(select ifnull(sd_label,"") from tbsearchdetail t where t.sd_key = mtb.sd_definitionfilterkey and sd_se_id = ifnull('.$searchid.',"0")) parent_label FROM tbsearchdetail mtb where  sd_se_id = '.$searchid.' and sd_label =   "'.$id.'"');
         $parent = "";
-        $query=DB::select('select sd_key, sd_definitionsource, sd_definitionkeyid,sd_keymainfield, sd_keymaintable, sd_definitionfieldid, sd_definitionkeyname,sd_custom, sd_custominclude,sd_definitionfilterkey,(select ifnull(sd_label,"") from tbsearchdetail t where t.sd_id = mtb.sd_definitionfilterkey and sd_se_id = ifnull('.$searchid.',"0")) parent_label FROM tbsearchdetail mtb where   sd_se_id = '.$searchid.' and sd_label =  :sd_id ', 
+        $query=DB::select('select sd_key, sd_definitionsource, sd_definitionkeyid,sd_keymainfield, sd_keymaintable, sd_definitionfieldid, sd_definitionkeyname,sd_custom, sd_custominclude,sd_definitionfilterkey,(select ifnull(sd_label,"") from tbsearchdetail t where t.sd_id = mtb.sd_definitionfilterkey and sd_se_id = ifnull('.$searchid.',"0")) parent_label FROM tbsearchdetail mtb where   sd_se_id = '.$searchid.' and sd_keymainfield =  :sd_id ', 
             array(":sd_id" => $id));
         $valuequery  = "";
         foreach ($query as $rec) {
@@ -1075,9 +1075,9 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
             $searchid = '0';
         }
 
-        Log::info('select sd_key, sd_definitionsource, sd_definitionkeyid,sd_keymainfield, sd_definitionkeyname,sd_custom, sd_custominclude,sd_definitionfilterkey,(select ifnull(sd_label,"") from tbsearchdetail t where t.sd_key = mtb.sd_definitionfilterkey and sd_se_id = ifnull('.$searchid.',"0")) parent_label FROM tbsearchdetail mtb where  sd_se_id = '.$searchid.' and sd_label =   "'.$id.'"');
+        Log::info('select sd_key, sd_definitionsource, sd_definitionkeyid,sd_keymainfield, sd_definitionkeyname,sd_custom, sd_custominclude,sd_definitionfilterkey,(select ifnull(sd_label,"") from tbsearchdetail t where t.sd_key = mtb.sd_definitionfilterkey and sd_se_id = ifnull('.$searchid.',"0")) parent_label FROM tbsearchdetail mtb where  sd_se_id = '.$searchid.' and sd_keymainfield =   "'.$id.'"');
         $parent = "";
-        $query=DB::select('select sd_key, sd_definitionsource, sd_definitionkeyid,sd_keymainfield, sd_definitionfieldid, sd_definitionkeyname,sd_custom, sd_custominclude,sd_definitionfilterkey,(select ifnull(sd_label,"") from tbsearchdetail t where t.sd_id = mtb.sd_definitionfilterkey and sd_se_id = ifnull('.$searchid.',"0")) parent_label FROM tbsearchdetail mtb where   sd_se_id = '.$searchid.' and sd_label =  :sd_id ', 
+        $query=DB::select('select sd_key, sd_definitionsource, sd_definitionkeyid,sd_keymainfield, sd_definitionfieldid, sd_definitionkeyname,sd_custom, sd_custominclude,sd_definitionfilterkey,(select ifnull(sd_label,"") from tbsearchdetail t where t.sd_id = mtb.sd_definitionfilterkey and sd_se_id = ifnull('.$searchid.',"0")) parent_label FROM tbsearchdetail mtb where   sd_se_id = '.$searchid.' and sd_keymainfield =  :sd_id ', 
             array(":sd_id" => $id));
         $valuequery  = "";
         foreach ($query as $rec) {
