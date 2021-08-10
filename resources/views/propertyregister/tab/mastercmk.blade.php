@@ -7,10 +7,11 @@
 				<legend>{{__('propertyregister.Account_Information')}}</legend>
 				<input type="hidden" name="operation" value="1" id="master_operation">
 				<input type="hidden" value="0" name="role_id" id="roleid">
+				<input type="hidden" value="cmk" name="pagetype" id="pagetype">
 				<div class="form_grid_12">
 					<label class="field_title" id="lusername" for="username">{{__('propertyregister.Account_Number')}} <span class="req">*</span></label>
 					<div  class="form_input">
-						<input id="accnumber" tabindex="1" name="accnumber" type="text"  maxlength="11" class="">
+						<input id="accnumber" tabindex="1" name="accnumber" type="text"  maxlength="12" class="">
 						
 					</div>
 					<span class=" label_intro"></span>
@@ -175,11 +176,10 @@
 			});
 	    });
 
-	    $("#accnumber").keyup(function(){
-	    	
+	    $("#accnumber").keyup(function(){	    	
 		    var account = this.value;
 		    var length = account.length;
-		    if (length > 11){
+		    if (length > 12){
 		    	alert('Please enter 11 digit  account number');
 		    	//$("#accnumber").val(account.slice(0,-1));
 		    }

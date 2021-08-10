@@ -1109,7 +1109,7 @@ Log::info($subzone_id);
         
       //  $filter = 'vd_id in ('. $account.')';
      JasperPHP::process(
-            base_path('/vendor/cossou/jasperphp/examples/summaryzone.jasper'),
+            base_path('/reports/summaryzone.jasper'),
                 false,
                 array("pdf"),
                  array("termid" => $termid,"title" => $title,"subzone" => $filter ),
@@ -1125,7 +1125,7 @@ Log::info($subzone_id);
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/vendor/cossou/jasperphp/examples/summaryzone.pdf'), 'summaryzone.pdf', $headers);
+        return response()->download(base_path('/reports/summaryzone.pdf'), 'summaryzone.pdf', $headers);
 
     }
 
@@ -1156,7 +1156,7 @@ Log::info($termid);
         
 
      JasperPHP::process(
-            base_path('/vendor/cossou/jasperphp/examples/summarbldg.jasper'),
+            base_path('/reports/summarbldg.jasper'),
                 false,
                 array("pdf"),
                  array("termid" => $termid,"title" => $title ,"subzone" => $filter ),
@@ -1172,7 +1172,7 @@ Log::info($termid);
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/vendor/cossou/jasperphp/examples/summarbldg.pdf'), 'summarbldg.pdf', $headers);
+        return response()->download(base_path('/reports/summarbldg.pdf'), 'summarbldg.pdf', $headers);
 
     }
 
@@ -1194,7 +1194,7 @@ Log::info($termid);
       $title = $request->input('title');
 
      JasperPHP::process(
-            base_path('/vendor/cossou/jasperphp/examples/summaryrace1.jasper'),
+            base_path('/reports/summaryrace1.jasper'),
                 false,
                 array("pdf"),
                  array("termid" => $termid,"title" => $title ),
@@ -1210,7 +1210,7 @@ Log::info($termid);
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/vendor/cossou/jasperphp/examples/summaryrace1.pdf'), 'summaryrace.pdf', $headers);
+        return response()->download(base_path('/reports/summaryrace1.pdf'), 'summaryrace.pdf', $headers);
 
     }
 
@@ -1362,7 +1362,7 @@ Log::info($termid);
       $termid = $request->input('termid');
       $title = $request->input('title');
      JasperPHP::process(
-            base_path('/vendor/cossou/jasperphp/examples/collectionzone.jasper'),
+            base_path('/reports/collectionzone.jasper'),
                 false,
                 array("pdf"),
                  array("termid" => $termid,"title" => $title ),
@@ -1378,7 +1378,7 @@ Log::info($termid);
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/vendor/cossou/jasperphp/examples/collectionzone.pdf'), 'collectionzone.pdf', $headers);
+        return response()->download(base_path('/reports/collectionzone.pdf'), 'collectionzone.pdf', $headers);
 
     }
 
@@ -1399,7 +1399,7 @@ Log::info($termid);
       $termid = $request->input('termid');
       $title = $request->input('title');
      JasperPHP::process(
-            base_path('/vendor/cossou/jasperphp/examples/collectionbldg.jasper'),
+            base_path('/reports/collectionbldg.jasper'),
                 false,
                 array("pdf"),
                  array("termid" => $termid,"title" => $title ),
@@ -1415,7 +1415,7 @@ Log::info($termid);
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/vendor/cossou/jasperphp/examples/collectionbldg.pdf'), 'collectionbldg.pdf', $headers);
+        return response()->download(base_path('/reports/collectionbldg.pdf'), 'collectionbldg.pdf', $headers);
 
     }
 
@@ -1750,7 +1750,7 @@ from  cm_appln_valterm ".$filterquery);
       $termid = $request->input('termid');
       $title = $request->input('title');
      JasperPHP::process(
-            base_path('/vendor/cossou/jasperphp/examples/summrydistrict.jasper'),
+            base_path('/reports/summrydistrict.jasper'),
                 false,
                 array("pdf"),
                  array("termid" => $termid,"title" => $title ),
@@ -1766,7 +1766,7 @@ from  cm_appln_valterm ".$filterquery);
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/vendor/cossou/jasperphp/examples/summrydistrict.pdf'), 'summrydistrict.pdf', $headers);
+        return response()->download(base_path('/reports/summrydistrict.pdf'), 'summrydistrict.pdf', $headers);
 
     }
 
@@ -2003,7 +2003,7 @@ bldgcategory,bldgtype ');
         
         $filter = ' vd_va_id  = '. $account;
         JasperPHP::process(
-            base_path('/vendor/cossou/jasperphp/examples/newowner.jasper'),
+            base_path('/reports/newowner.jasper'),
                 false,
                 array("pdf"),
                 array("basket_id" => $filter),
@@ -2032,7 +2032,7 @@ bldgcategory,bldgtype ');
             'Content-Type: application/pdf',
         );
 
-        return response()->download(base_path('/vendor/cossou/jasperphp/examples/newowner.pdf'), 'notis penyata pemilik.pdf', $headers);
+        return response()->download(base_path('/reports/newowner.pdf'), 'notis penyata pemilik.pdf', $headers);
 
     }
 
