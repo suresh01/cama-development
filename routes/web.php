@@ -179,6 +179,7 @@ Route::get('checkdigit','PropertyRegisterationController@checkDigit');
 
 //inspection 
 Route::get('term','HomeController@term');
+
 Route::get('termtrn','HomeController@termTransaction');
 
 Route::get('group','HomeController@group')->name('group');
@@ -464,6 +465,8 @@ Route::get('propaddresslogtables','HomeController@propAddressLogTables');
 
 Route::get('generateOwnershipreport','HomeController@generateOwnershipreport');
 
+Route::get('generateRemisireport','HomeController@generateRemisireport');
+
 Route::get('ownerlogdata','HomeController@ownerLogTables');
 
 Route::get('owneradddresTables','HomeController@owneradddresTables');
@@ -646,3 +649,7 @@ Route::get('generatePivotReport','ReportController@generatePivotReport');
 Route::get('generateoffsReport','ReportController@officialSearchReport');
 
 Route::get('generatedeactive','ReportController@generateDeactive');
+
+//Route::get('exportcsv','HomeController@ExportDataEnqueryCSV');
+
+Route::get('exportcsv','ReportController@ExportDataEnqueryCSV');

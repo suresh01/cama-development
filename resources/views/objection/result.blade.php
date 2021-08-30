@@ -87,7 +87,7 @@
 						</div>
 					</div>
 				</div>
-								</br>	
+								<br>	
 							<table id="agendatbl" class="display ">
 							<thead style="text-align: left;">
 			  					<tr>

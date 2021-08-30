@@ -41,6 +41,7 @@ class ReportController extends Controller
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+        App::setlocale(session()->get('locale'));
     	return view('report.inspectionform')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
 
@@ -2056,7 +2057,7 @@ bldgcategory,bldgtype ');
                 base_path('/reports/inspection.jasper'),
                   false,
                     array("pdf"),
-                    array("propid" => $filter,"inspectorname" => $inspector,"inspectordate" => $insdate,"insapprover" => $approvedby,"insapprovedate" => $approveddate,"logo" =>  base_path('/public/images/logo.jpeg')),
+                    array("propid" => $filter,"inspectorname" => $inspector,"inspectordate" => $insdate,"insapprover" => $approvedby,"insapprovedate" => $approveddate,"logo" =>  base_path('/public/images/logo.jpeg'),"SUBREPORT_DIR" => base_path('/reports/')),
                 array(
                   'driver' => 'generic',
                   'username' => env('DB_USERNAME',''),
@@ -2758,5 +2759,171 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
 
         return response()->download(base_path('/reports/deactiveproperty.pdf'), 'Deactive List.pdf', $headers);
 
+    }
+
+    public function ExportDataEnqueryCSV(Request $request){
+
+        ini_set('memory_limit', '2056M');
+        ini_set('max_execution_time', '200');
+       // $baskedid = $request->input('id');max_execution_time = 30     ; 
+        $maxRow = 30;
+        $fileName = 'ExportCarianCSV.csv';
+        $isfilter = $request->input('filter');
+        $filterquery = '';
+        if($isfilter == 'true'){
+            $input = $request->input();
+            $condition = $input['condition'];
+            $value = $input['value'];
+            $logic = $input['logic'];
+            $fieldcolumn = $input['field'];
+
+             foreach ($input['field'] as $fieldindex => $field) {
+                if ($fieldcolumn[$fieldindex] == "tdi_key") {
+                    $fieldcolumn[$fieldindex] = 'tbdefitems_subzone.tdi_key';
+                }/*
+                if ($fieldcolumn[$fieldindex] == "vt_id") {
+                    $fieldcolumn[$fieldindex] = '';
+                }*/
+                if($value[$fieldindex] != ""){
+                    if($fieldindex == count($input['field']) - 1) {
+                        if($fieldcolumn[$fieldindex] != ""){
+                            $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'"';
+                         }
+                    } else {
+                        if($fieldcolumn[$fieldindex] != ""){
+                           $filterquery = $filterquery. ' '.$fieldcolumn[$fieldindex].' '.$condition[$fieldindex].' "'.$value[$fieldindex].'" '.$logic[$fieldindex];    
+                        }   
+                    }
+                }               
+            }
+
+            if($filterquery != ''){
+                $filterquery  = ' Where '. $filterquery ;
+            }
+            //Log::info($filterquery);
+
+        }
+       // str_replace('tdi_key', 'tbdefitems_subzone.tdi_key', $filterquery);
+
+    //    Log::info("
+    //     select 
+    //     vd_accno 'NoHarta', ma_fileno 'NoFail', SUBZONE.tdi_parent_name 'Mukim', SUBZONE.tdi_value 'TamanKawasan', ma_addr_ln1 'NoBgn', ma_addr_ln2 'NamaJalan', ma_addr_ln3 'NamaKawasan',
+    //     ma_addr_ln4 'NamaTempat', ma_postcode 'Poskod', ma_city 'Bandar', STATE.tdi_value 'Negeri', OWNTYPE.tdi_value 'JenisIdPemilik', TO_OWNNO 'NomborPemilik', to_ownname  'NamaPemilik',  
+    //     ISHASBUILDING.tdi_value 'StatusHarta', BULDINGTYPE.tdi_parent_name 'KategoriHarta', BULDINGTYPE.tdi_value 'JenisHarta', BUILDINGSTOREY.tdi_value 'TingkatHarta', LOTCODE.tdi_value 'KodLot',
+    //     al_no 'NoLot', DATE_FORMAT(vt_termDate, '%d/%m/%Y') as 'TarikhKK', vt_approvednt 'NTLulus', vt_proposedrate 'KadarLulus', vt_adjustment 'Pelarasan', vt_approvedtax 'CukaiLulus', vt_note 'NotaPenilaian'   
+    //     from cm_appln_valdetl
+    //     inner join cm_appln_val on va_id = vd_va_id
+    //     inner join cm_appln_valterm on vt_id = va_vt_id
+    //     inner join cm_masterlist on vd_ma_id = ma_id
+    //     inner join cm_appln_lot on al_vd_id = vd_id
+    //     inner join cm_owner on to_ma_id = ma_id
+    //     inner join cm_appln_val_tax on vt_vd_id = vd_id
+    //     left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'SUBZONE') SUBZONE on SUBZONE.tdi_key = ma_subzone_id
+    //     left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'LOTCODE') LOTCODE on LOTCODE.tdi_key = al_lotcode_id
+    //     left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'STATE') STATE on STATE.tdi_key = ma_state_id
+    //     left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'STATE') OWNSTATE on OWNSTATE.tdi_key = TO_STATE_ID
+    //     left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'OWNTYPE') OWNTYPE on OWNTYPE.tdi_key = TO_OWNTYPE_ID
+    //     left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'ISHASBUILDING') ISHASBUILDING on ISHASBUILDING.tdi_key = vd_ishasbuilding
+    //     left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'BULDINGTYPE') BULDINGTYPE on BULDINGTYPE.tdi_key = vd_bldgtype_id
+    //     left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'BUILDINGSTOREY') BUILDINGSTOREY on BUILDINGSTOREY.tdi_key = vd_bldgstorey_id
+    //     inner join (select max(vt_termDate) termdate,  vd_ma_id, vd_accno as accountno from cm_appln_valdetl
+    //     inner join cm_appln_val on va_id = vd_va_id
+    //     inner join cm_appln_valterm on vt_id = va_vt_id
+    //     where  vt_id  IN (select vt_id from cm_appln_valterm where vt_approvalstatus_id = '05') 
+    //     and vd_accno NOT IN (select cm_appln_deactivedetl.dad_accno from cm_appln_deactivedetl inner join  cm_appln_deactive on cm_appln_deactivedetl.dad_da_id = cm_appln_deactive.da_id 
+    //     inner join cm_appln_valterm on cm_appln_deactive.da_vt_id = cm_appln_valterm.vt_id where vt_id IN (select vt_id from cm_appln_valterm where vt_approvalstatus_id = '05') )
+    //     group by vd_ma_id, vd_accno) active_term on active_term.termdate = vt_termDate and active_term.accountno = cm_appln_valdetl.vd_accno 
+    //     ".$filterquery);
+
+       
+       
+
+
+        $property = DB::select("
+        select 
+        vd_accno 'NoHarta', ma_fileno 'NoFail', SUBZONE.tdi_parent_name 'Mukim', SUBZONE.tdi_value 'TamanKawasan', ma_addr_ln1 'NoBgn', ma_addr_ln2 'NamaJalan', ma_addr_ln3 'NamaKawasan',
+        ma_addr_ln4 'NamaTempat', ma_postcode 'Poskod', ma_city 'Bandar', STATE.tdi_value 'Negeri', OWNTYPE.tdi_value 'JenisIdPemilik', TO_OWNNO 'NomborPemilik', to_ownname  'NamaPemilik',  
+        ISHASBUILDING.tdi_value 'StatusHarta', BULDINGTYPE.tdi_parent_name 'KategoriHarta', BULDINGTYPE.tdi_value 'JenisHarta', BUILDINGSTOREY.tdi_value 'TingkatHarta', LOTCODE.tdi_value 'KodLot',
+        al_no 'NoLot', DATE_FORMAT(vt_termDate, '%d/%m/%Y') as 'TarikhKK', vt_approvednt 'NTLulus', vt_proposedrate 'KadarLulus', vt_adjustment 'Pelarasan', vt_approvedtax 'CukaiLulus', vt_note 'NotaPenilaian'   
+        from cm_appln_valdetl
+        inner join cm_appln_val on va_id = vd_va_id
+        inner join cm_appln_valterm on vt_id = va_vt_id
+        inner join cm_masterlist on vd_ma_id = ma_id
+        inner join cm_appln_lot on al_vd_id = vd_id
+        inner join cm_owner on to_ma_id = ma_id
+        inner join cm_appln_val_tax on vt_vd_id = vd_id
+        left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'SUBZONE') SUBZONE on SUBZONE.tdi_key = ma_subzone_id
+        left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'LOTCODE') LOTCODE on LOTCODE.tdi_key = al_lotcode_id
+        left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'STATE') STATE on STATE.tdi_key = ma_state_id
+        left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'STATE') OWNSTATE on OWNSTATE.tdi_key = TO_STATE_ID
+        left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'OWNTYPE') OWNTYPE on OWNTYPE.tdi_key = TO_OWNTYPE_ID
+        left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'ISHASBUILDING') ISHASBUILDING on ISHASBUILDING.tdi_key = vd_ishasbuilding
+        left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'BULDINGTYPE') BULDINGTYPE on BULDINGTYPE.tdi_key = vd_bldgtype_id
+        left join (select tdi_key, tdi_value, tdi_parent_name, tdi_parent_key from tbdefitems where tdi_td_name = 'BUILDINGSTOREY') BUILDINGSTOREY on BUILDINGSTOREY.tdi_key = vd_bldgstorey_id
+        inner join (select max(vt_termDate) termdate,  vd_ma_id, vd_accno as accountno from cm_appln_valdetl
+        inner join cm_appln_val on va_id = vd_va_id
+        inner join cm_appln_valterm on vt_id = va_vt_id
+        where  vt_id  IN (select vt_id from cm_appln_valterm where vt_approvalstatus_id = '05') 
+        and vd_accno NOT IN (select cm_appln_deactivedetl.dad_accno from cm_appln_deactivedetl inner join  cm_appln_deactive on cm_appln_deactivedetl.dad_da_id = cm_appln_deactive.da_id 
+        inner join cm_appln_valterm on cm_appln_deactive.da_vt_id = cm_appln_valterm.vt_id where vt_id IN (select vt_id from cm_appln_valterm where vt_approvalstatus_id = '05') )
+        group by vd_ma_id, vd_accno) active_term on active_term.termdate = vt_termDate and active_term.accountno = cm_appln_valdetl.vd_accno 
+        ".$filterquery);
+
+    $headers = array(
+                    "Content-type"        => "text/csv",
+                    "Content-Disposition" => "attachment; filename=$fileName",
+                    "Pragma"              => "no-cache",
+                    "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+                    "Expires"             => "0"
+                );
+
+    $columns = array('No Harta', 'No Fail', 'Mukim', 'Taman/Kawasan', 'No Bgn', 'Nama Jalan', 'Nama Kawasan', 'Nama Tempat', 'Poskod', 'Bandar', 'Negeri', 'Jenis Id Pemilik', 
+                    'Nombor Pemilik', 'Nama Pemilik', 'Status Harta', 'Kategori Harta', 'Jenis Harta', 'Tingkat Harta', 'Kod Lot', 'No Lot', 'Tarikh KK', 'NT Lulus',
+                    'Kadar Lulus', 'Pelarasan', 'Cukai Lulus', 'Nota Penilaian');
+
+            $callback = function() use($property, $columns) {
+                $file = fopen('php://output', 'w');
+                fputcsv($file, $columns);
+
+                foreach ($property as $rec) {
+                    $row['NoHarta']  = $rec->NoHarta; 
+                    $row['NoFail']  = $rec->NoFail;
+                    $row['Mukim']  = $rec->Mukim;
+                    $row['TamanKawasan']  = $rec->TamanKawasan;
+                    $row['NoBgn']  = $rec->NoBgn;
+                    $row['NamaJalan']  = $rec->NamaJalan; 
+                    $row['NamaKawasan']  = $rec->NamaKawasan;
+                    $row['NamaTempat']  = $rec->NamaTempat; 
+                    $row['Poskod']  = $rec->Poskod;
+                    $row['Bandar']  = $rec->Bandar; 
+                    $row['Negeri']  = $rec->Negeri; 
+                    $row['JenisIdPemilik']  = $rec->JenisIdPemilik; 
+                    $row['NomborPemilik']  = $rec->NomborPemilik; 
+                    $row['NamaPemilik']  = $rec->NamaPemilik;  
+                    $row['StatusHarta']  = $rec->StatusHarta;
+                    $row['KategoriHarta']  = $rec->KategoriHarta; 
+                    $row['JenisHarta']  = $rec->JenisHarta;
+                    $row['TingkatHarta']  = $rec->TingkatHarta;
+                    $row['KodLot']  = $rec->KodLot;
+                    $row['NoLot']  = $rec->NoLot;
+                    $row['TarikhKK']  = $rec->TarikhKK;
+                    $row['NTLulus']  = $rec->NTLulus;
+                    $row['KadarLulus']  = $rec->KadarLulus; 
+                    $row['Pelarasan']  = $rec->Pelarasan; 
+                    $row['CukaiLulus']  = $rec->CukaiLulus; 
+                    $row['NotaPenilaian']  = $rec->NotaPenilaian;  
+
+
+                    fputcsv($file, array(
+                        $row['NoHarta'], $row['NoFail'], $row['Mukim'], $row['TamanKawasan'], $row['NoBgn'], $row['NamaJalan'], $row['NamaKawasan'], $row['NamaTempat'], $row['Poskod'], 
+                        $row['Bandar'], $row['Negeri'], $row['JenisIdPemilik'], $row['NomborPemilik'], $row['NamaPemilik'], $row['StatusHarta'], $row['KategoriHarta'], $row['JenisHarta'], 
+                        $row['TingkatHarta'], $row['KodLot'], $row['NoLot'], $row['TarikhKK'], $row['NTLulus'], $row['KadarLulus'],  $row['Pelarasan'],  $row['CukaiLulus'], $row['NotaPenilaian']
+                    ));
+                }
+
+                fclose($file);
+            };
+//dd($filterquery);
+            return response()->stream($callback, 200, $headers);
     }
 } 

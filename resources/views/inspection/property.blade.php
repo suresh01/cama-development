@@ -523,7 +523,7 @@ var table = $('#proptble').DataTable({
 			        	
 			        	var deleteuri = '&nbsp;&nbsp;&nbsp;<span><a class="action-icons  "  onclick="deleteProperty('+data.vd_id+')" disabled="true" title="Delete Property" href="#"></a></span>';
 			        	var approveuri = '<span><a class="action-icons c-approve "  onclick="approveProperty('+data.vd_id+')"  title="Approve Property" href="#"></a></span>';
-			        	var edituri = '<span><a class="action-icons c-edit editbldg"  onclick="updateProperty('+data.vd_id+')"  title="Update Property" href="#"></a></span>';
+			        	var edituri = ''//'<span><a class="action-icons c-edit editbldg"  onclick="updateProperty('+data.vd_id+')"  title="Update Property" href="#"></a></span>';
 
 			        	if('{{$approvestatus}}' == '04'  ){
 				        	if(data.vd_approvalstatus_id == '05' ){

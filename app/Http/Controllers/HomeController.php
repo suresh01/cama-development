@@ -14,6 +14,7 @@ use PHPJasper;
 use DataTables;
 use App;
 
+
 class HomeController extends Controller
 {
     /**
@@ -47,7 +48,11 @@ class HomeController extends Controller
          
         $term = DB::select("select vt_termtype_id,vt_valbase_id, vt_id, vt_name name, vt_createby createby,  DATE_FORMAT(vt_createdate, '%d/%m/%Y') createdate, vt_updateby updateby, applntype.tdi_value applntype, 
           DATE_FORMAT(vt_updatedate, '%d/%m/%Y')  updatedate, ifnull(basket_count,0) basket_count, ifnull(property_count,0) property_count,DATE_FORMAT(vt_termDate, '%d/%m/%Y') termDate, DATE_FORMAT(now(), '%d/%m/%Y') enforceDate,  vt_applicationtype_id,DATE_FORMAT(vt_transferDate, '%d/%m/%Y') vt_transferDate, vt_transferby,
-           termstage.tdi_desc termstage, vt_approvalstatus_id,ap_basket_count, valbase.tdi_value valbase 
+           termstage.tdi_desc termstage, vt_approvalstatus_id,ap_basket_count, valbase.tdi_value valbase, (select count(vd_approvalstatus_id) bil
+from cm_appln_valdetl
+inner join cm_objection_decision on vd_id = de_vd_id
+inner join  cm_appln_val on va_id = vd_va_id
+where va_vt_id = vt_id and vd_approvalstatus_id <> '12' and va_approvalstatus_id in ('08','09','10','11','12') ) objectDe_count 
           from cm_appln_valterm
           left join (select va_vt_id, count(*) ap_basket_count from cm_appln_val where va_approvalstatus_id = '11' group by va_vt_id) approve on approve.va_vt_id = vt_id
           left join (select va_vt_id, count(*) basket_count from cm_appln_val group by va_vt_id) cm_appln_val on cm_appln_val.va_vt_id = vt_id
@@ -61,8 +66,8 @@ class HomeController extends Controller
         on valbase.tdi_key = vt_valbase_id ".$cond."  order by vt_termDate desc");
         $basket_count=DB::select('select  count(*) basket_count from cm_appln_val');
         $property_count=DB::select('select  count(vd_id) property_count from cm_appln_valdetl inner join cm_appln_val on va_id = vd_va_id');
-            $applntype = DB::select('select * from tbdefitems where tdi_td_name = "APPLICATIONTYPE"');
-            $valbase = DB::select('select * from tbdefitems where tdi_td_name = "VALUATIONBASE" ');
+        $applntype = DB::select('select * from tbdefitems where tdi_td_name = "APPLICATIONTYPE"');
+        $valbase = DB::select('select * from tbdefitems where tdi_td_name = "VALUATIONBASE" ');
 
         App::setlocale(session()->get('locale'));
         
@@ -1283,7 +1288,50 @@ public function owneradddresTables(Request $request){
           return response()->download($dowload_path, $filename, $headers);
       }
 
+public function generateRemisireport(Request $request) {
+      $type = $request->input('type');
+      $accountnumber = $request->input('accountnumber');
+      $tittle = $request->input('title');
+      $name = $request->input('username');
+      if($type == 'type1'){
+        $jasper_path = base_path('/reports/remisi.jasper');
+        $dowload_path = base_path('/reports/remisi.pdf');
+        $filename = 'remisi.pdf';
+      } else {
+        $jasper_path = base_path('/reports/remisiInspection.jasper');
+        $dowload_path = base_path('/reports/remisiInspection.pdf');
+        $filename = 'remisiInspection.pdf';
+      }
+          
+              // Compile a JRXML to Jasper
+           //  JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuation.jrxml'))->execute();
+          
+      Log::info($type);
+      Log::info($accountnumber);
+      Log::info($name);
+ 
+          $filter = ' rg_id = '. $accountnumber;
 
+          JasperPHP::process(
+             $jasper_path,
+                  false,
+                  array("pdf"),
+                  array("propid" => $filter,'user'=>$name),
+                  array(
+                        'driver' => 'generic',
+                        'username' => env('DB_USERNAME',''),
+                        'password' => env('DB_PASSWORD',''),
+                        'jdbc_driver' => 'com.mysql.jdbc.Driver',
+                        'jdbc_url' => "jdbc:mysql://".env('DB_HOST','').":".env('DB_PORT','')."/".env('DB_DATABASE','')."?useSSL=false"
+                  ))->execute();
+
+          $headers = array(
+              'Content-Type: application/pdf',
+          );
+
+          return response()->download($dowload_path, $filename, $headers);
+      }
+      
  public function deactive(Request $request){
        $isfilter = $request->input('filter');
         $baskedid = $request->input('id');
@@ -1514,7 +1562,7 @@ public function owneradddresTables(Request $request){
     }
 
 
-     public function dataSearchTables(Request $request){
+    public function dataSearchTables(Request $request){
         Log::info('Test');
         ini_set('memory_limit', '2056M');
         ini_set('max_execution_time', '200');
@@ -2736,6 +2784,7 @@ where vt_termDate >= (select vt_termDate from cm_appln_valdetl inner join cm_app
 
         return view('remisi.remisi');
     }
+    
     
 }
 

@@ -46,6 +46,7 @@
 					</div>
 					<div  style="float:right;margin-right: 20px;">		
 							<select data-placeholder="Choose a Status..." onclick="getdata()"  style="float: left;" class="cus-select"  id="paramterm" name="paramterm" tabindex="6">						
+								<option value="0">{{__('common.Please_Select_a_Filter')}}...</option>
 								<option value='A'>All</option>							
 								<option value='C'>CMK</option>							
 								<option value='K'>KAD</option>								

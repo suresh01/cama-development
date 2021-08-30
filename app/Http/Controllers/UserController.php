@@ -1240,22 +1240,35 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
             Log::info($ownerdetail );
             foreach ($ownerdetail as $rec) {            
                 //$lastcode = $rec->tdi_key;
-                $result = DB::connection('oracle')->update(" update PEMILIK_SB SET  NO_RUMAH = '".$rec->mal_addr_ln1."',
-                 JALAN = '".$rec->mal_addr_ln2."',  TEMPAT = '".$rec->mal_addr_ln3."',  KAWASAN = '".$rec->mal_addr_ln4."',  BANDAR = '".$rec->mal_postcode." ".$rec->mal_city."',
-                  NEGERI = '".$rec->state."', TKH_UPDATE = SYSDATE  , USER_UPDATE = 'CAMA' 
-                   WHERE ID = '".$rec->mal_accno."'");
+                $result = DB::connection('oracle')->update("
+                update PEMILIK_SB SET  
+                NO_RUMAH = '".$rec->mal_addr_ln1."',
+                JALAN = '".$rec->mal_addr_ln2."',  
+                TEMPAT = '".$rec->mal_addr_ln3."',  
+                KAWASAN = '".$rec->mal_addr_ln4."',  
+                BANDAR = '".$rec->mal_postcode." ".$rec->mal_city."',
+                NEGERI = '".$rec->state."', 
+                TKH_UPDATE = SYSDATE, 
+                USER_UPDATE = 'CAMA' 
+                WHERE ID = '".$rec->mal_accno."'");
             } 
         } else if($module == 'propertylotaddress'){
-            $ownerdetail = DB::select('select * from cm_lot_log      
+            $ownerdetail = DB::select('select ma_accno, trim(lotcode.tdi_value) as lotcode, log_no, log_altno from cm_lot_log      
             inner join cm_lot on LOT_ID =    log_lot_id        
             inner join cm_masterlist on LO_MA_ID =    ma_id
-             where log_id ='.$param_value);
+            left join tbdefitems lotcode on lotcode.tdi_key = log_lotcode_id and lotcode.tdi_td_name = "LOTCODE"  
+            where log_id ='.$param_value);
             Log::info($ownerdetail );
             foreach ($ownerdetail as $rec) {            
                 //$lastcode = $rec->tdi_key;
-                $result = DB::connection('oracle')->update(" update PEMILIK_SB SET  BIL_LOT = '".$rec->log_no."',
-                 LOTID = '".$rec->log_lot_id."',TKH_UPDATE = SYSDATE  , USER_UPDATE = 'CAMA' 
-                   WHERE ID = '".$rec->ma_accno."'");
+                $result = DB::connection('oracle')->update("
+                UPDATE PEMILIK_SB SET  
+                LOTID = '".$rec->log_no."',
+                LOT_LAMA = '".$rec->lotcode."',
+                KOD_LOT = '".$rec->log_altno."',
+                TKH_UPDATE = SYSDATE  , 
+                USER_UPDATE = 'CAMA' 
+                WHERE ID = '".$rec->ma_accno."'");
             } 
         } else {
         
@@ -1265,10 +1278,20 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
             Log::info($ownerdetail );
             foreach ($ownerdetail as $rec) {            
                 //$lastcode = $rec->tdi_key;
-                $result = DB::connection('oracle')->update(" update PEMILIK_SB SET NAMA = '".$rec->ota_ownname."', NO_RUM_POS = '".$rec->ota_addr_ln1."',
-                 JALAN_POS = '".$rec->ota_addr_ln2."',  TEMPAT_POS = '".$rec->ota_addr_ln3."',  KAWASAN_POS = '".$rec->ota_addr_ln4."',  BANDAR_POS = '".$rec->ota_postcode." ".$rec->ota_city."',
-                  NEGERI_POS = '".$rec->state."', KP = '".$rec->ota_ownno."' , NO_TEL = '".$rec->ota_phoneno."' , TKH_UPDATE = SYSDATE  , USER_UPDATE = 'CAMA' 
-                   WHERE ID = '".$rec->otar_accno."'");
+                $result = DB::connection('oracle')->update("
+                update PEMILIK_SB SET 
+                NAMA = '".$rec->ota_ownname."', 
+                NO_RUM_POS = '".$rec->ota_addr_ln1."',
+                JALAN_POS = '".$rec->ota_addr_ln2."',  
+                TEMPAT_POS = '".$rec->ota_addr_ln3."',  
+                KAWASAN_POS = '".$rec->ota_addr_ln4."',  
+                BANDAR_POS = '".$rec->ota_postcode." ".$rec->ota_city."',
+                NEGERI_POS = '".$rec->state."', 
+                KP = '".$rec->ota_ownno."', 
+                NO_TEL = '".$rec->ota_phoneno."', 
+                TKH_UPDATE = SYSDATE , 
+                USER_UPDATE = 'CAMA' 
+                WHERE ID = '".$rec->otar_accno."'");
             } 
         
         }

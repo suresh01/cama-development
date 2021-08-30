@@ -176,8 +176,8 @@
 			var table = $('#proptble').DataTable();
 			$('#insdatehtm').html('<input id="insdate" name="insdate" autocomplete="off" type="text"  maxlength="50" class="required datepicker"/>'); 
 			$('#approveddatehtm').html('<input id="approveddate" name="approveddate"  type="text"  maxlength="50" autocomplete="off" class="required "/>'); 
-						 	$( "#insdate" ).datepicker({dateFormat: 'dd/mm/yy'});
-						 	$( "#approveddate" ).datepicker({dateFormat: 'dd/mm/yy'});
+			$( "#insdate" ).datepicker({dateFormat: 'dd/mm/yy'});
+			$( "#approveddate" ).datepicker({dateFormat: 'dd/mm/yy'});
 //console.log(table.rows('.selected').data());
 			var account = $.map(table.rows('.selected').data(), function (item) {
 				//console.log(item);

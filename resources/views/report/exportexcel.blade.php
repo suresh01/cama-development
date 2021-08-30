@@ -20,12 +20,13 @@
 				</div>
 				</div>
 				
-				<form style="display: hidden;" id="generateexcel" method="GET" action="downloadexcel">
+		<form style="display: hidden;" id="generateexcel" method="GET" action="downloadexcel">
             @csrf
             <input type="hidden" name="termid" id="termid">
 		</form>
 				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">	
-					<a href="#" onclick="exportexcel()">Generate Report</a>				@include('report.search.search',['tableid'=>'proptble', 'action' => 'exportexceltable', 'searchid' => '17'])	
+					<a href="#" onclick="exportexcel()">Generate Report</a>				
+					@include('report.search.search',['tableid'=>'proptble', 'action' => 'exportexceltable', 'searchid' => '17'])	
 					
 				</div>
 				<br>

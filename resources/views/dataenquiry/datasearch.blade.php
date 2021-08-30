@@ -9,8 +9,8 @@
     text-align: right;
   } 
 </style>
-<link href="multiselect/multiselect.css" rel="stylesheet"/>
-<script src="multiselect/multiselect.min.js"></script>
+{{-- <link href="multiselect/multiselect.css" rel="stylesheet"/>
+<script src="multiselect/multiselect.min.js"></script> --}}
 @include('includes.header', ['page' => 'dataenquery'])
 					
 	<div id="content">
@@ -27,7 +27,8 @@
 				</div>
 				</div>
 				
-				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">					
+				<div style="float:right;margin-right: 10px;"  class="btn_24_blue">		
+					<a href="#" onclick="ExportSCV()">Export CSV</a>			
 					@include('dataenquiry.search')
 				</div>
 				<br>
@@ -198,7 +199,12 @@
 	
 
 		
-
+		function ExportSCV(){
+			//alert(1);
+			location.href ="exportcsv?" + $("#filterForm").serialize();
+			//console.log($("#filterForm").serialize());
+		
+		}
 
 		function updateDataTableSelectAllCtrl(table){
 		   var $table             = table.table().node();

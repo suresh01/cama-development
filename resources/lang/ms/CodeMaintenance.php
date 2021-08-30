@@ -99,5 +99,5 @@ return [
 	'Tenure_Start_Date'=>'Tarikh Mula',
 	'Tenure_End_Date'=>'Tarikh Tamat',
 	'Submit'=>'Submit',
-	'Close'=>'Close
+	'Close'=>'Close'
 ];

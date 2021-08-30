@@ -46,7 +46,8 @@
 					</div>
 					<button id="adduser" style="float:right;margin-right: 10px;" onclick="newTerm()" name="btnadduser" type="button" class="btn_small btn_blue"><span>{{__('group.Add_Term')}}</span></button>
 					<div  style="float:right;margin-right: 20px;">		
-							<select data-placeholder="{{__('group.Choose_a_Status')}}" onchange="getdata()"  style="float: left;" class="cus-select"  id="paramterm" name="paramterm" tabindex="6">			<option value="0">{{__('common.Please_Select_a_Filter')}}...</option>
+							<select data-placeholder="{{__('group.Choose_a_Status')}}" onchange="getdata()"  style="float: left;" class="cus-select"  id="paramterm" name="paramterm" tabindex="6">			
+								<option value="0">{{__('common.Please_Select_a_Filter')}}...</option>
 								<option value='A'>All</option>							
 								<option value='C'>CMK</option>							
 								<option value='K'>KAD</option>								
@@ -157,7 +158,9 @@
 										{{$rec->termstage}}
 									</td>
 									<td>
-										
+										{{-- <span><a class="action-icons c-edit" onclick="editTerm('{{$rec->vt_id}}')" title="Edit Term" href="#">Edit</a></span>
+										<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="enforceTerm('{{$rec->vt_id}}')" disabled="true" title="Enforce Term" href="#"></a></span>
+										<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->vt_id}}')" disabled="true" title="Approve Transfer" href="#"></a></span> --}}
 										@if($rec->basket_count == 0)	
 											@if($rec->vt_approvalstatus_id == '01')										
 											    <span><a class="action-icons c-delete delete_term" onclick="deleteTerm('{{$rec->vt_id}}')" href="#" title="Delete Term">Delete</a></span>
@@ -167,11 +170,11 @@
 										@endif
 
 										@if($rec->vt_approvalstatus_id == '03' )
-											<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="enforceTerm('{{$rec->vt_id}}')" disabled="true" title="Enforce Term" href="#"></a></span>
+											<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="enforceTerm('{{$rec->vt_id}}')" disabled="true" title="Enforce Term" href="#"></a></span>
 										@endif
 
-										@if($rec->ap_basket_count == $rec->basket_count && $rec->basket_count > 0 && $rec->vt_approvalstatus_id == '01' )
-											<spane><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->vt_id}}')" disabled="true" title="Approve Transfer" href="#"></a></span>
+										@if($rec->objectDe_count == 0 && $rec->basket_count > 0 && $rec->vt_approvalstatus_id == '01')
+											<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approveValuation('{{$rec->vt_id}}')" disabled="true" title="Approve Transfer" href="#"></a></span>
 										@endif
 									</td>
 								</tr>
@@ -299,8 +302,8 @@
 			$("#operation").val(1);
 			$("#termtable").hide();
 			$("#addterm").show();
-			$("#title").html("Add Term");
-			$("#addsubmit").html("Save");
+			$("#title").html("Tambah Penggal");
+			$("#addsubmit").html("Simpan");
 		 	$("label.error").remove();	
 		}
 
@@ -319,8 +322,8 @@
 			} else {
 				$('#applntyhpeblock').hide();
 			}
-			$("#addsubmit").html("Save");
-			$("#title").html("Edit Term");
+			$("#addsubmit").html("Kemaskini");
+			$("#title").html("Kemaskini Penggal");
 		 	$("label.error").remove();	
 		}
 		function closeTerm(){

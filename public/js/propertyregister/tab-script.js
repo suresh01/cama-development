@@ -252,7 +252,7 @@ var validateBldg = function() {
         //alert(bldgid + ' = ' + $('#bldgid').val());
         if (mainbldgnumber != $('#bldgnum').val()  && bldgid != $('#bldgid').val()  ){
         //if (bldgid != $('#bldgid').val()){
-            alert('bil bgn:' + bilbldg + ' ' + bldgid + ' = ' + $('#bldgid').val());
+            //alert('bil bgn:' + bilbldg + ' ' + bldgid + ' = ' + $('#bldgid').val());
             //&& bilbldg != 1
             if(mainbldg == '1' && $('#mbldg').val() == mainbldg   ){
 
