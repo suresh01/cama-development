@@ -113,32 +113,20 @@
 								<tr>
 									<th><input name="select_all" value="1" type="checkbox"></th>
 									<th class="table_sno">
-										S No
+										{{__('inspection.SNo')}}
 									</th>
 									<th>
-										ACCOUNT NUMBER
+										{{__('inspection.Account_Number')}}
 									</th>
 									<th>
-										FILE NUMBER
+										{{__('inspection.File_Number')}}
 									</th>
-									<th>
-										ZONE
-									</th>
-									<th>
-										SUBZONE
-									</th>
-									<th>
-										ADDRESS 1
-									</th>	
-									<th>
-										ADDRESS 2
-									</th>	
-									<th>
-										OWNER TYPE
-									</th>	
-									<th>
-										OWNER NAME
-									</th>	
+									<th>{{__('inspection.Zone')}} </th>
+									<th>{{__('inspection.Subzone')}} </th>
+									<th>{{__('inspection.Address1')}}</th>
+									<th>{{__('inspection.Address2')}}</th>
+									<th>{{__('inspection.Type_Of_Owner')}}</th>
+									<th>{{__('inspection.Owner_Name')}}</th>	
 									<th>
 										BULIDING COUNT
 									</th>		

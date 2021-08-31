@@ -43,6 +43,14 @@ return [
     'objection' => 'Objection Meeting',
     'defunct' => 'Defunct Property',
     'report' => 'Report',
-    'remisi' => 'Remisi'
+    'remisi' => 'Remisi',
+    'inspectionform' => 'Inspection Form',
+    'valuationform' => 'Valuation Form',
+    'valdata' => 'Valuation Data...',
+    'vallistbybasket' => 'Valuation List By Basket',
+    'valistbyterm' => 'Valuation List By Term',
+    'vallistbyaterm' => 'Valuation List By Active Term',
+    'statistical' => 'Statistical Report...',
+    'exportexcel' => 'Export Excel'
 
 ];

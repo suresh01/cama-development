@@ -129,29 +129,19 @@
 									<tr>
 									<th><input name="select_all" value="1" type="checkbox"></th>
 									<th class="table_sno">
-										S No
+										{{__('inspection.SNo')}}
 									</th>
 									<th>
-										ACCOUNT NUMBER
+										{{__('inspection.Account_Number')}}
 									</th>
 									<th>
-										FILE NUMBER
+										{{__('inspection.File_Number')}}
 									</th>
-									<th>
-										TERM
-									</th>
-									<th>
-										BASKET
-									</th>	
-									<th>
-										NT 
-									</th>	
-									<th>
-										RATE (%)
-									</th>	
-									<th>
-										TAX (RM)
-									</th>			
+									<th> {{__('group.Term_Name')}} </th>
+									<th>{{__('group.Basket_Name')}} </th>
+									<th>{{__('inspection.Nt')}}</th>		
+									<th>{{__('inspection.Rate')}}</th>	
+									<th>{{__('inspection.Tax_Rate')}}</th>			
 								</tr>
 							</thead>
 							<tbody>			

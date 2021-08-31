@@ -124,6 +124,8 @@ class ReportController extends Controller
            $serverhost = $obj->serveradd;
         }
 
+        App::setlocale(session()->get('locale'));
+
         return view('report.valuationform')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
 
@@ -267,6 +269,8 @@ class ReportController extends Controller
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+
+        App::setlocale(session()->get('locale'));
 
         if($page == 1){
              return view("report.valuationdatabasket")->with('search',$search)->with('serverhost',$serverhost)->with('msearchid',$id)->with('page',$page);
@@ -847,6 +851,9 @@ Log::info(JasperPHP::process(
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+
+        App::setlocale(session()->get('locale'));
+
       return view('report.statistical.summaryzonebldg')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
 
@@ -929,6 +936,9 @@ Log::info(JasperPHP::process(
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+
+        App::setlocale(session()->get('locale'));
+
       return view('report.statistical.summaryzone')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
 
@@ -1014,6 +1024,9 @@ Log::info(JasperPHP::process(
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+
+        App::setlocale(session()->get('locale'));
+
       return view('report.statistical.racesummary')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
 
@@ -1227,6 +1240,9 @@ Log::info($termid);
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+
+        App::setlocale(session()->get('locale'));
+
       return view('report.collection.summaryzone')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
 
@@ -1292,6 +1308,9 @@ Log::info($termid);
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+
+        App::setlocale(session()->get('locale'));
+
       return view('report.collection.bldgcollection')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
 
@@ -1432,6 +1451,9 @@ Log::info($termid);
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+
+        App::setlocale(session()->get('locale'));
+
       return view('report.exportexcel')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
 
@@ -1680,6 +1702,9 @@ from  cm_appln_valterm ".$filterquery);
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+
+        App::setlocale(session()->get('locale'));
+        
       return view('report.collection.districtcollection')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
 
@@ -1793,6 +1818,9 @@ from  cm_appln_valterm ".$filterquery);
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+
+        App::setlocale(session()->get('locale'));
+        
       return view('report.borangc')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist)->with('ratepayertype',$ratepayertype)->with('term',$term)->with('ratepayer',$ratepayer);
     }
 
@@ -1868,6 +1896,9 @@ from  cm_appln_valterm ".$filterquery);
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+
+        App::setlocale(session()->get('locale'));
+        
       return view('report.borangb')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist)->with('ratepayertype',$ratepayertype)->with('term',$term)->with('ratepayer',$ratepayer);
     }
 
@@ -1925,6 +1956,9 @@ from  cm_appln_valterm ".$filterquery);
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+
+        App::setlocale(session()->get('locale'));
+        
       return view('report.pivotreport')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
  public function statisticalTables(Request $request){
@@ -2124,6 +2158,9 @@ bldgcategory,bldgtype ');
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+
+        App::setlocale(session()->get('locale'));
+        
       return view('report.r4cover')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
 
@@ -2361,6 +2398,9 @@ where vd_approvalstatus_id in ("07","08","09","10","11") '.$filterquery);
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+
+        App::setlocale(session()->get('locale'));
+        
       return view('report.ownernotice')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
 
@@ -2488,6 +2528,9 @@ left join tbdefitems as lotcode on lotcode.tdi_key = al_lotcode_id and lotcode.t
         foreach ($config as $obj) {    
            $serverhost = $obj->serveradd;
         }
+
+        App::setlocale(session()->get('locale'));
+        
       return view('report.ownershiptransferlist')->with('search',$search)->with('serverhost',$serverhost)->with('userlist',$userlist);
     }
 
@@ -2611,6 +2654,9 @@ inner join tbdefitems grouptb on  grouptb.tdi_key = otar_ownertransgroup_id  and
 
      
 
+
+        App::setlocale(session()->get('locale'));
+        
         
         return view("report.statistical.pivot")->with('search',$search)->with('page',$page);
         

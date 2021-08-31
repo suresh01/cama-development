@@ -167,10 +167,10 @@
 									<th>{{__('inspection.Rate')}}</th>	
 									<th>{{__('inspection.Tax_Rate')}}</th>	
 									<th>{{__('inspection.Status')}}</th>	
-									<th>{{__('inspection.Address_1')}}</th>
-									<th>{{__('inspection.Address_2')}}</th>
-									<th>{{__('inspection.Address_3')}}</th>
-									<th>{{__('inspection.Address_4')}}</th>	
+									<th>{{__('inspection.Address1')}}</th>
+									<th>{{__('inspection.Address2')}}</th>
+									<th>{{__('inspection.Address3')}}</th>
+									<th>{{__('inspection.Address4')}}</th>	
 									<th>{{__('inspection.Post_Code')}}</th>
 									<th>{{__('inspection.City')}}</th>
 									<th>{{__('inspection.State')}}</th>	
