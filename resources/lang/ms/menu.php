@@ -18,7 +18,7 @@ return [
     'dms' => 'DMS',
     'term' => 'Pengurusan Penggal',
     'evident' => 'Pengurusan Transaksi Jual/Beli/Sewa',
-    'planreg' => 'Pendaftaran Pelamn',
+    'planreg' => 'Pendaftaran Pelan',
     'ownermaintenance' => 'Pengurusan Maklumat Pemilik',
     'transferapproval' => 'Kelulusan Proses Pindah Milik',
     'transferreg' => 'Pendaftaran Pindah Milik',

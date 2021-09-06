@@ -30,9 +30,12 @@
 						$(document).ready(function(){
 							$("#subzone").val('{{$master->mal_subzone_id}}');
 							$("#zone").val('{{$master->zone_id}}');
-							$("#state").val('{{$master->mal_state_id}}');
+							$("#state").val('{{$master->ma_state_id}}');
+							$("#estate").val('{{$master->mal_state_id}}');
 							$("#district").val('{{$master->mal_district_id}}');
 							$("#eaccountnumber").val('{{$master->mal_accno}}');
+							$("#emalid").val('{{$master->mal_id}}');
+							
 						});
 			</script>
 			<div class="grid_12 full_block">
@@ -62,7 +65,7 @@
 										<div class="form_grid_12">
 											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.File_Number')}}<span class="req">*</span></label>
 											<div  class="form_input">
-												<input id="filenumber" tabindex="2"name="ofilenumber" readonly="true" type="text" value="{{$master->mal_fileno}}" maxlength="50" class=""/>
+												<input id="filenumber" tabindex="2"name="ofilenumber" readonly="true" type="text" value="{{$master->ma_fileno}}" maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
@@ -108,42 +111,42 @@
 										<div class="form_grid_12">
 											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address1')}} <span class="req">*</span></label>
 											<div  class="form_input">
-												<input id="address1" tabindex="8" readonly="true" name="oaddress1"  type="text" value="{{$master->mal_addr_ln1}}" maxlength="100" class=""/>
+												<input id="address1" tabindex="8" readonly="true" name="oaddress1"  type="text" value="{{$master->ma_addr_ln1}}" maxlength="100" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
 											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address2')}} <span class="req">*</span></label>
 											<div  class="form_input">
-												<input id="address2"  tabindex="9" readonly="true" name="oaddress2"  type="text" value="{{$master->mal_addr_ln2}}" maxlength="100" class=""/>
+												<input id="address2"  tabindex="9" readonly="true" name="oaddress2"  type="text" value="{{$master->ma_addr_ln2}}" maxlength="100" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
 											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address3')}} <span class="req">*</span></label>
 											<div  class="form_input">
-												<input id="address3"  name="oaddress3" readonly="true" tabindex="10"  type="text" value="{{$master->mal_addr_ln3}}" maxlength="100" class=""/>
+												<input id="address3"  name="oaddress3" readonly="true" tabindex="10"  type="text" value="{{$master->ma_addr_ln3}}" maxlength="100" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
 											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address4')}} <span class="req">*</span></label>
 											<div  class="form_input">
-												<input id="address4"  name="oaddress4" readonly="true" tabindex="11"  type="text" value="{{$master->mal_addr_ln4}}" maxlength="100" class=""/>
+												<input id="address4"  name="oaddress4" readonly="true" tabindex="11"  type="text" value="{{$master->ma_addr_ln4}}" maxlength="100" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
 											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Post_Code')}}<span class="req">*</span></label>
 											<div  class="form_input">
-												<input id="postcode" name="opostcode" readonly="true" tabindex="12"  type="text" value="{{$master->mal_postcode}}" maxlength="50" class=""/>
+												<input id="postcode" name="opostcode" readonly="true" tabindex="12"  type="text" value="{{$master->ma_postcode}}" maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
 										<div class="form_grid_12">
 											<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.City')}} <span class="req">*</span></label>
 											<div  class="form_input">
-												<input id="city"  name="ocity" tabindex="13" readonly="true" type="text" value="{{$master->mal_city}}" maxlength="50" class=""/>
+												<input id="city"  name="ocity" tabindex="13" readonly="true" type="text" value="{{$master->ma_city}}" maxlength="50" class=""/>
 											</div>
 											<span class=" label_intro"></span>
 										</div>
@@ -172,6 +175,7 @@
 										<fieldset>
 											<legend>{{__('CodeMaintenance.New_Address_Information')}} </legend>
 											<input type="hidden" id="eaccountnumber" name="accountnumber">
+											<input type="hidden" id="emalid" name="malid">
 											<div class="form_grid_12">
 												<label class="field_title">{{__('CodeMaintenance.Copy_Previous_Detail')}} </label>
 												<div class="form_input">
@@ -186,7 +190,7 @@
 											<div class="form_grid_12">
 												<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.File_Number')}} <span class="req">*</span></label>
 												<div  class="form_input">
-													<input id="efilenumber" tabindex="2" name="filenumber" type="text"  maxlength="50" class=""/>
+													<input id="efilenumber" tabindex="2" name="filenumber" type="text"  value="{{$master->mal_fileno}}" maxlength="50" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
@@ -194,7 +198,7 @@
 												<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.District')}} <span class="req">*</span></label>
 												<div  class="form_input">
 													
-													<input id="edistrict" tabindex="8" name="edistrict" readonly="" type="text" maxlength="100" class=""/>
+													<input id="edistrict" tabindex="8" name="edistrict" readonly="" type="text" value="{{$master->district}}" maxlength="100" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
@@ -202,14 +206,14 @@
 											<div class="form_grid_12">
 												<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.Zone')}} <span class="req">*</span></label>
 												<div  class="form_input">
-													<input id="ezone" tabindex="8" name="ezone" readonly="" type="text" maxlength="100" class=""/>
+													<input id="ezone" tabindex="8" name="ezone" readonly="" type="text" value="{{$master->zone}}" maxlength="100" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
 											<div class="form_grid_12">
 												<label class="field_title" id="llevel" for="level">{{__('CodeMaintenance.SubZone')}} <span class="req">*</span></label>
 												<div  class="form_input">
-													<input id="rsubzone" tabindex="8" name="rsubzone" readonly="" type="text" maxlength="100" class=""/>
+													<input id="rsubzone" tabindex="8" name="rsubzone" readonly="" type="text" value="{{$master->subzone}}" maxlength="100" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
@@ -217,42 +221,42 @@
 											<div class="form_grid_12">
 												<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address1')}} <span class="req">*</span></label>
 												<div  class="form_input">
-													<input id="eaddress1" tabindex="8" name="address1"  type="text" maxlength="100" class=""/>
+													<input id="eaddress1" tabindex="8" name="address1"  type="text" value="{{$master->mal_addr_ln1}}" maxlength="100" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
 											<div class="form_grid_12">
 												<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address2')}} <span class="req">*</span></label>
 												<div  class="form_input">
-													<input id="eaddress2"  tabindex="9" name="address2"  type="text"  maxlength="100" class=""/>
+													<input id="eaddress2"  tabindex="9" name="address2"  type="text" value="{{$master->mal_addr_ln2}}" maxlength="100" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
 											<div class="form_grid_12">
 												<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address3')}} <span class="req">*</span></label>
 												<div  class="form_input">
-													<input id="eaddress3"  name="address3" tabindex="10"  type="text" maxlength="100" class=""/>
+													<input id="eaddress3"  name="address3" tabindex="10"  type="text" value="{{$master->mal_addr_ln3}}" maxlength="100" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
 											<div class="form_grid_12">
 												<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Address4')}} <span class="req">*</span></label>
 												<div  class="form_input">
-													<input id="eaddress4"  name="address4" tabindex="11"  type="text"  maxlength="100" class=""/>
+													<input id="eaddress4"  name="address4" tabindex="11"  type="text" value="{{$master->mal_addr_ln4}}" maxlength="100" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
 											<div class="form_grid_12">
 												<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.Post_Code')}}<span class="req">*</span></label>
 												<div  class="form_input">
-													<input id="epostcode" name="postcode"  tabindex="12"  type="text" maxlength="50" class=""/>
+													<input id="epostcode" name="postcode"  tabindex="12"  type="text" value="{{$master->mal_postcode}}" maxlength="50" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>
 											<div class="form_grid_12">
 												<label class="field_title" id="lposition" for="position">{{__('CodeMaintenance.City')}} <span class="req">*</span></label>
 												<div  class="form_input">
-													<input id="ecity"  name="city" tabindex="13" type="text"  maxlength="50" class=""/>
+													<input id="ecity"  name="city" tabindex="13" type="text" value="{{$master->mal_city}}" maxlength="50" class=""/>
 												</div>
 												<span class=" label_intro"></span>
 											</div>

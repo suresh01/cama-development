@@ -104,7 +104,7 @@ class ReportController extends Controller
     join cm_appln_val on va_id = vd_va_id
     LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
     LEFT JOIN `tbdefitems` as owntype on `TO_OWNTYPE_ID` = `owntype`.`tdi_key` and owntype.tdi_td_name = "OWNTYPE"
-    where vd_approvalstatus_id in ("07","08","09","10","11") '.$filterquery);
+    where vd_approvalstatus_id in ("07","08","09","10","11","12") '.$filterquery);
        // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
         $propertyDetails = Datatables::collection($property)->make(true);
    
@@ -199,7 +199,7 @@ class ReportController extends Controller
     join cm_appln_valterm on vt_id = va_vt_id
     join cm_appln_val_tax on vt_vd_id = vd_id   
     LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
-    where vd_approvalstatus_id in ("10","11","14") '.$filterquery);
+    where vd_approvalstatus_id in ("10","11","12","14") '.$filterquery);
        // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
         $propertyDetails = Datatables::collection($property)->make(true);
    
@@ -1160,8 +1160,8 @@ Log::info($subzone_id);
         $termid = $request->input('termid');
         $title = $request->input('title');
          $subzone_id = $request->input('subzone_id');
-Log::info($subzone_id);
-Log::info($termid);
+        Log::info('subzon'.$subzone_id);
+        Log::info('term'.$termid);
  $filter = '';
       if($subzone_id != ''){
       
@@ -2222,7 +2222,7 @@ join cm_appln_val on va_id = vd_va_id
 join cm_appln_lot on al_vd_id = vd_id
 LEFT JOIN `tbdefitems_subzone` ON `cm_masterlist`.`ma_subzone_id` = `tbdefitems_subzone`.`tdi_key`
 left join tbdefitems as lotcode on lotcode.tdi_key = al_lotcode_id and lotcode.tdi_td_name = "LOTCODE"
-where vd_approvalstatus_id in ("07","08","09","10","11") '.$filterquery);
+where vd_approvalstatus_id in ("07","08","09","10","11","12") '.$filterquery);
        // Log::info('select * from property where vd_approvalstatus_id = "13" '+$filterquery);
         $propertyDetails = Datatables::collection($property)->make(true);
    
@@ -2344,20 +2344,23 @@ where vd_approvalstatus_id in ("07","08","09","10","11") '.$filterquery);
     {        
              //$jasper = new JasperPHP;
         $account = $request->input('accounts');
+        $prntdate = $request->input('prntdate');
         
         $filter = " vd_id in (". $account.")";
         
-       
+       Log::info($filter);
       /* $input = $request->input();
             $account1 = $input['accounts'];
         Log::info($account1);*/
             // Compile a JRXML to Jasper
         //    JasperPHP::compile(base_path('/vendor/cossou/jasperphp/examples/valuationdata.jrxml'))->execute();
          Log::info(JasperPHP::process(
-            base_path('/reports/onwertypea.jasper'),
+            base_path('/reports/ownernoticea.jasper'),
                 false,
-                array("pdf"),               
-                array("param_condition" => $filter,"background" =>  base_path('/public/images/onwertypea.jpg')),
+                array("pdf"),
+                array("propid" => $filter,"p_date" =>  $prntdate),               
+                //array("param_condition" => $filter,"background" =>  base_path('/public/images/onwertypea.jpg')),
+
             array(
               'driver' => 'generic',
               'username' => env('DB_USERNAME',''),
@@ -2367,10 +2370,11 @@ where vd_approvalstatus_id in ("07","08","09","10","11") '.$filterquery);
             ))->output());
 
       JasperPHP::process(
-            base_path('/reports/onwertypea.jasper'),
+            base_path('/reports/ownernoticea.jasper'),
                 false,
-                array("pdf"),               
-                array("param_condition" => $filter,"background" =>  base_path('/reports/images/onwertypea.jpg')),
+                array("pdf"),    
+                array("propid" => $filter,"p_date" =>  $prntdate),             
+                //array("param_condition" => $filter,"background" =>  base_path('/reports/images/onwertypea.jpg')),
             array(
               'driver' => 'generic',
               'username' => env('DB_USERNAME',''),
