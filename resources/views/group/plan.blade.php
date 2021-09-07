@@ -131,13 +131,13 @@
 										{{$rec->plan_updatedate1}}
 									</td>
 									<td>
-										{{$rec->plan_plandate1}}
+										{{$rec->plan_plandate}}
 									</td>
 									<td>
-										{{$rec->plan_cccdate1}}
+										{{$rec->plan_cccdate}}
 									</td>
 									<td>
-										{{$rec->plan_valuationdate1}}
+										{{$rec->plan_valuationdate}}
 									</td>
 									<td>
 										{{$rec->status}}
@@ -149,7 +149,7 @@
 										@endif
 
 										@if($rec->plan_planstatus_id == 9)
-										<spane><a  class=" new-action-icons reverse" onclick="approveProperty('{{$rec->plan_id}}')" title="Revise" href="#"></a></span>
+										<span><a  class=" new-action-icons reverse" onclick="approveProperty('{{$rec->plan_id}}')" title="Revise" href="#"></a></span>
 										@endif
 
 										@if($rec->plan_planstatus_id != 9)
@@ -164,9 +164,9 @@
 									<input type="text" id="applntype_{{$rec->plan_id}}" value="{{$rec->plan_planapplicationtype}}">
 									<input type="text" id="zone_{{$rec->plan_id}}" value="{{$rec->plan_zon_id}}">
 									<input type="text" id="lotid_{{$rec->plan_id}}" value="{{$rec->plan_lotno}}">
-									<input type="text" id="plandate_{{$rec->plan_id}}" value="{{$rec->plan_plandate1}}">
-									<input type="text" id="cccdate_{{$rec->plan_id}}" value="{{$rec->plan_cccdate1}}">
-									<input type="text" id="valdate_{{$rec->plan_id}}" value="{{$rec->plan_valuationdate1}}">
+									<input type="text" id="plandate_{{$rec->plan_id}}" value="{{$rec->plan_plandate}}">
+									<input type="text" id="cccdate_{{$rec->plan_id}}" value="{{$rec->plan_cccdate}}">
+									<input type="text" id="valdate_{{$rec->plan_id}}" value="{{$rec->plan_valuationdate}}">
 									<input type="text" id="note_{{$rec->plan_id}}" value="{{$rec->plan_note}}">
 									<input type="text" id="status_{{$rec->plan_id}}" value="{{$rec->plan_planstatus_id}}">
 								</div>

@@ -45,7 +45,7 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => 'C:\Users\suresh\OneDrive\Documents\FileSystem',
+            'root' => 'D:\ATTACHMENTCAMA',
         ],
 
         'public' => [

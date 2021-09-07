@@ -12,10 +12,10 @@
 										<thead style="text-align: left;">
 								  		<tr>
 											<th class="table_sno">{{__('datasearch.col1')}}</th>
-											<th>OWNER APPLICATION TYPE</th>
+											<th>OWNER APPLICATION TYPE</th> <!-- dssfsdsf -->
 											<th>TYPE OF OWNER</th>
 											<th>OWNER NO</th>
-											<th>OWNER NAME</th>
+											<th>Nama Pemilik</th>
 											<th>OWNER ADDRES 1</th>
 											<th>OWNER ADDRES 2</th>
 											<th>OWNER ADDRES 3</th>
@@ -24,6 +24,7 @@
 											<th>STATE</th>
 											<th>TEL NUMBER</th>
 											<th>FAX NUMBER</th>
+											<th>EMAIL</th>
 											<th>Citizenship</th>
 											<th>RACE</th>
 											<th>Numerator</th>
@@ -34,7 +35,7 @@
 											<th>accoumnum</th>
 											<th>{{__('datasearch.owncol1')}}</th>
 											<th>{{__('datasearch.owncol2')}}</th>
-											<th>{{__('datasearch.owncol3')}} </th>
+											<th>{{__('datasearch.owncol3')}}</th>
 											<th>{{__('datasearch.owncol4')}}</th>
 											<th>{{__('datasearch.owncol5')}}</th>
 										</tr>
@@ -116,7 +117,7 @@
 									<div class="form_grid_12">
 										<label class="field_title" id="llevel" for="level">{{__('datasearch.ownemail')}}<span class="req">*</span></label>
 										<div  class="form_input">
-											<input id="faxno" name="emailid" readonly="true" tabindex="1" type="text" value="" maxlength="15" class=""/>
+											<input id="emailid" name="emailid" readonly="true" tabindex="1" type="text" value="" maxlength="15" class=""/>
 										</div>
 										<span class=" label_intro"></span>
 									</div>
@@ -202,20 +203,22 @@
 								</div>
 
 								<div class="form_grid_12">
-									<label class="field_title" id="lposition" for="position">{{__('datasearch.city')}}<span class="req">*</span></label>
-									<div  class="form_input">
-										<input id="city"  name="city" readonly="" tabindex="1" type="number"  maxlength="50" class=""/>
-									</div>
-									<span class=" label_intro"></span>
-								</div>
-
-								<div class="form_grid_12">
 									<label class="field_title" id="lposition" for="position">{{__('datasearch.postcode')}}<span class="req">*</span></label>
 									<div  class="form_input">
 										<input id="ownpostcode"  name="ownpostcode" readonly="" tabindex="1" type="number"  maxlength="50" class=""/>
 									</div>
 									<span class=" label_intro"></span>
 								</div>
+
+								<div class="form_grid_12">
+									<label class="field_title" id="lposition" for="position">{{__('datasearch.city')}}<span class="req">*</span></label>
+									<div  class="form_input">
+										<input id="city"  name="city" readonly="" tabindex="1" type="text"  maxlength="50" class=""/>
+									</div>
+									<span class=" label_intro"></span>
+								</div>
+
+								
 								<div class="form_grid_12">
 									<label class="field_title" id="llevel" for="level">{{__('datasearch.state')}}<span class="req">*</span></label>
 									<div  class="form_input">
@@ -251,17 +254,95 @@
 					<script type="text/javascript">
 						 $(document).ready(function() {
 			
-			let ownermap = new Map([["0","sno"],["1", "ownaplntype"], ["2", "typeofown"], ["3", "ownnum"],["4", "ownname"], ["5", "ownaddr1"],["6", "ownaddr2"], ["7", "ownaddr3"],["8", "ownaddr4"], ["9", "ownpostcode"],["10", "ownstate"], ["11", "telno"],["12", "faxno"],["13", "citizen"], ["14", "race"],["15", "numerator"], ["16", "demominator"],["17", "action"], ["18", "actioncode"],["19", "ownerid"],["20","owneraccnum"]]);
+		let ownermap = new Map([
+			["0","sno"],
+			["1", "ownaplntype"], 
+			["2", "typeofown"], 
+			["3", "ownnum"],
+			["4", "ownname"], 
+			["5", "ownaddr1"],
+			["6", "ownaddr2"], 
+			["7", "ownaddr3"],
+			["8", "ownaddr4"], 
+			["9", "ownpostcode"],
+			["10", "ownstate"], 
+			["11", "telno"],
+			["12", "faxno"],
+			["13", "emailid"],
+			["14", "citizen"], 
+			["15", "race"],
+			["16", "numerator"], 
+			["17", "demominator"],
+			["18", "action"], 
+			["19", "actioncode"],
+			["20", "ownerid"],
+			["21", "owneraccnum"]
+			]);
  		var ownerdata = [];
 		 		@foreach ($ownerd as $rec)
 
 		 			
-		 			ownerdata.push( [ '{{$loop->iteration}}', '{{$rec->TO_OWNERAPPLNTYPE_ID}}', '{{$rec->TO_OWNTYPE_ID}}', '{{$rec->TO_OWNNO}}', '{{$rec->TO_OWNNAME}}', '{{$rec->TO_ADDR_LN1}}', '{{$rec->TO_ADDR_LN2}}', '{{$rec->TO_ADDR_LN3}}', '{{$rec->TO_ADDR_LN4}}', '{{$rec->TO_POSTCODE}}', '{{$rec->TO_STATE_ID}}', '{{$rec->TO_TELNO}}', '', '{{$rec->TO_CITIZEN_ID}}', '{{$rec->TO_RACE_ID}}', '{{$rec->TO_NUMETR}}', '{{$rec->TO_DENOMTR}}','<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete dellotrow deleteownerrow" href="#" title="delete">Delete</a></span>','noation', '{{$rec->TO_ID}}' ,'newacc',			'{{$rec->TO_OWNERAPPLNTYPE_ID}} / {{$rec->owntype}}'	,'{{$rec->TO_OWNNO}}'	,'{{$rec->TO_ADDR_LN1}},  {{$rec->TO_ADDR_LN2}},   {{$rec->TO_ADDR_LN3}}  {{$rec->state}} - {{$rec->TO_POSTCODE}} '	,'{{$rec->TO_TELNO}} '	,'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span>' ] );
+		 			ownerdata.push( [ 
+						 '{{$loop->iteration}}', 
+						 '{{$rec->TO_OWNERAPPLNTYPE_ID}}', 
+						 '{{$rec->TO_OWNTYPE_ID}}', 
+						 '{{$rec->TO_OWNNO}}', 
+						 '{{$rec->TO_OWNNAME}}', 
+						 '{{$rec->TO_ADDR_LN1}}', 
+						 '{{$rec->TO_ADDR_LN2}}', 
+						 '{{$rec->TO_ADDR_LN3}}', 
+						 '{{$rec->TO_ADDR_LN4}}', 
+						 '{{$rec->TO_POSTCODE}}', 
+						 '{{$rec->TO_STATE_ID}}', 
+						 '{{$rec->TO_TELNO}}', 
+						 '{{$rec->TO_MOBNO}}', 
+						 '{{$rec->TO_EMAIL}}', 
+						 '{{$rec->TO_CITIZEN_ID}}', 
+						 '{{$rec->TO_RACE_ID}}', 
+						 '{{$rec->TO_NUMETR}}', 
+						 '{{$rec->TO_DENOMTR}}',
+						 '<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class="action-icons c-delete dellotrow deleteownerrow" href="#" title="delete">Delete</a></span>',
+						 'noation', 
+						 '{{$rec->TO_ID}}' ,
+						 'newacc',			
+						 '{{$rec->TO_OWNERAPPLNTYPE_ID}} / {{$rec->owntype}}'	,
+						 '{{$rec->TO_OWNNO}}'	,
+						 '{{$rec->TO_ADDR_LN1}},  {{$rec->TO_ADDR_LN2}},   {{$rec->TO_ADDR_LN3}}  {{$rec->state}} - {{$rec->TO_POSTCODE}} '	,
+						 '{{$rec->TO_TELNO}} ',
+						 '<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span>' 
+						 ] );
 		 		@endforeach
 
         $('#ownertble').DataTable({
             data:           ownerdata,
-            "columns":[ null, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false}, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false }, { "visible": false}, { "visible": false }, { "visible": false}, { "visible": false },null,null,null,null,null],
+            "columns":[ 
+				null, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": true}, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": false}, 
+				{ "visible": false},
+				null,
+				null,
+				null,
+				null,
+				null],
             "sPaginationType": "full_numbers",
 			"iDisplayLength": 5,
         	"bAutoWidth": false,			
@@ -366,7 +447,35 @@ function editownerRow(){
 				operation_code = "new";
 			}
 
-		data=[operation,$('#ownaplntype').val(),$('#typeofown').val(), $('#ownnum').val(), $('#ownname').val(),  $('#ownaddr1').val(), $('#ownaddr2').val(), $('#ownaddr3').val(),$('#ownaddr4').val(), $('#ownpostcode').val(), $('#ownstate').val(),$('#telno').val(), $('#faxno').val(), $('#citizen').val(), $('#race').val(), $('#numerator').val(), $('#demominator').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>',operation_code, $('#ownerid').val(),account, $('#ownaplntype').val()+' / '+$('#typeofown option:selected').text(),$('#ownnum').val(),$('#ownaddr1').val()+'<br>'+$('#ownaddr2').val()+'<br>'+$('#ownpostcode').val()+'<br>'+$('#ownstate option:selected').text(),$('#telno').val()+' / '+$('#faxno').val(),'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span>'];
+		data=[
+			operation,
+			$('#ownaplntype').val(),
+			$('#typeofown').val(), 
+			$('#ownnum').val(), 
+			$('#ownname').val(),  
+			$('#ownaddr1').val(), 
+			$('#ownaddr2').val(), 
+			$('#ownaddr3').val(),
+			$('#ownaddr4').val(), 
+			$('#ownpostcode').val(), 
+			$('#ownstate').val(),
+			$('#telno').val(), 
+			$('#faxno').val(), 
+			$('#emailid').val(),
+			$('#citizen').val(), 
+			$('#race').val(), 
+			$('#numerator').val(), 
+			$('#demominator').val(),
+			'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span><span><a onclick="" class=" action-icons c-delete  deleteownerrow" href="#" title="delete">Delete</a></span>',
+			operation_code, 
+			$('#ownerid').val(),
+			account, 
+			$('#ownaplntype').val()+' / '+$('#typeofown option:selected').text(),
+			$('#ownnum').val(),
+			$('#ownaddr1').val()+'<br>'+$('#ownaddr2').val()+'<br>'+$('#ownpostcode').val()+'<br>'+$('#ownstate option:selected').text(),
+			$('#telno').val()+' / '+$('#faxno').val(),
+			'<span><a onclick="" class="action-icons c-edit edtownerrow" href="#" title="Edit">Edit</a></span>'
+			];
 
 		row.data(data);
 
