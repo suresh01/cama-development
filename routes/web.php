@@ -499,6 +499,16 @@ Route::get('subzonesummary', 'ReportController@subzoneSummary');
 
 Route::get('subzonesummarytable', 'ReportController@subzonesummaryTables');
 
+Route::get('propertycategorystatis', 'ReportController@categoryStatis');
+
+Route::get('propertycategorystatistable', 'ReportController@categoryStatisTables');
+
+
+Route::get('propertycategorysummary', 'ReportController@categorySummary');
+
+Route::get('propertycategorysummarytable', 'ReportController@categorySummaryTables');
+
+
 Route::get('racesummary', 'ReportController@racSummary');
 
 Route::get('racesummarytable', 'ReportController@racesummaryTables');
