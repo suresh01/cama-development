@@ -39,9 +39,6 @@
 									{{__('CodeMaintenance.SNo')}}
 									</th>
 									<th>
-									No Harta
-									</th>
-									<th>
 									{{__('CodeMaintenance.Lot_Type_Number')}} 
 									</th>
 									<th>
@@ -285,7 +282,7 @@
 	
 	<script>
 		function edit(id) {		
-		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0');
+		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0,left = 312,top = 234');
 		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
 		        w.location = "lotdetail?prop_id="+id;
 		    }	    
@@ -298,7 +295,7 @@
 
 		function addProperty() {		
 				
-		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0');
+		    var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=no,statusbar=0,menubar=0,resizable=0,width=0,height=0,left = 312,top = 234');
 		    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
 		        w.location = "searchpropertyaddress?page=lot";
 		        w.location = "lotdetail?prop_id="+id;
@@ -647,11 +644,10 @@ $(document).ready(function (){
 		        "columns": [
 			        {"data": null, "name": "sno"},
 			        {"data":  function(data){
-						return "<a onclick='edit("+data.log_id+")' href='#'>"+data.ma_accno+"</a>";
-			        	//return "<a onclick='edit("+data.LOT_ID+")' href='#'>"+data.ma_accno+"</a>";
+
+			        	return "<a onclick='edit("+data.LOT_ID+")' href='#'>"+data.lotnumber+"</a>";
 			        
 			        }, "name": "account number"},
-					{"data": "lotnumber", "name": "noacc"},
 			        {"data": "titlenumber", "name": "fileno"},
 			        {"data": "LO_ALTNO", "name": "zone"},
 			        {"data": "LO_STRATANO", "name": "subzone"},
@@ -677,7 +673,7 @@ $(document).ready(function (){
 								'<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('+data.log_id+',4,2)"  title="Reject" href="#"></a></span>';		
 
 							} else if(data.log_approvalstatus_id == '5'){
-								action =  editaction+  '<!--<spane><a  class=" new-action-icons reverse" onclick="approve('+data.log_id+',5)" title="Revise" href="#"></a></span>--><span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('+data.log_id+',5)" title="Transfer" href="#"></a></span>';						
+								action =  editaction+  '<!--<spane><a  class=" new-action-icons reverse" onclick="approve('+data.log_id+',5)" title="Revise" href="#"></a></span>-->								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -822px -42px !important;display: inline-block; float: left;" onclick="approve('+data.log_id+',5)" title="Transfer" href="#"></a></span>';						
 							} 
 							
 			        		return action;

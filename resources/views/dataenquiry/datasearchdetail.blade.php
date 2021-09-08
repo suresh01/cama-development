@@ -57,14 +57,14 @@
 								@include('dataenquiry.tab.ownerold')	
 							</fieldset>
 							@if($applntype == 'C')
-								<fieldset title="{{__('datasearch.step')}} 2">
-									<legend>{{__('datasearch.rateinfo')}}</legend>
-									@include('dataenquiry.tab.ratepayer')	
-								</fieldset>
-								<fieldset title="{{__('datasearch.step')}} 3">
-									<legend>{{__('datasearch.tenantinfo')}}</legend>									
-									@include('dataenquiry.tab.tenant')							
-								</fieldset>
+							<fieldset title="{{__('datasearch.step')}} 2">
+								<legend>{{__('datasearch.rateinfo')}}</legend>
+								@include('dataenquiry.tab.ratepayer')	
+							</fieldset>
+							<fieldset title="{{__('datasearch.step')}} 3">
+								<legend>{{__('datasearch.tenantinfo')}}</legend>									
+								@include('dataenquiry.tab.tenant')							
+							</fieldset>
 							@endif
 							<fieldset title="{{__('datasearch.step')}} 4">
 								<legend>{{__('datasearch.lotinfo')}}</legend>

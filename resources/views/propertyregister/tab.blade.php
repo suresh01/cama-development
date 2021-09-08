@@ -117,8 +117,7 @@
 		let bldgmap = new Map([["0","sno"],["1", "url"],["2", "bldgnum"],["3", "bldgnum1"],["4", "bldgnum2"],["5", "bldgnum3"],["6", "bldgnum4"],  ["7", "bldgttype"],["8", "bldgstorey"], ["9", "bldgcond"],["10", "bldgpos"], ["11", "bldgstructure"],["12", "rooftype"], ["13", "walltype"],["14", "floortype"], ["15", "cccdt"],["16", "occupieddt"],["17", "mainbldg"],["18", "action"],["19", "actioncode"],["20", "bldgid"],["21","bldgaccnum"],["22","mbldg"]]);
 
 		
-		let bldgarmap = new Map([["0","sno"],["1", "bldgaccnum"],  ["2", "bldgnum"], ["3", "disparlevel"], ["4", "bldgnum2"], ["5", "bldgnum4"], ["6", "bldgnum5"], ["7", "bldgnum7"], ["8", "bldgnu8m"], ["9", "bldgnu2m"], ["10", "bldgnum7"], ["11", "bldgnu8m"], ["12", "bldgnu2m"],["13", "reffinfo"], ["14", "artype"],["15", "arcate"], ["16", "arlevel"],["17", "arzone"], ["18", "aruse"],["19", "ardesc"], ["20", "dimention"],["21", "arcnt"],["22", "size"],["23", "uom"],["24", "totsize"],["25", "fltype"],["26","dwalltype"],["27", "celingtype"],["28", "action"],["29","actioncode"],["30","bldgarid"],["31","bldgnumtxt"]]);
-		//let bldgarmap = new Map([["0","sno"],["1", "bldgaccnum"],  ["2", "bldgnum"], ["3", "bldgnum2"], ["4", "bldgnum4"], ["5", "bldgnum5"], ["6", "bldgnum7"], ["7", "bldgnu8m"], ["8", "bldgnu2m"], ["9", "bldgnum7"], ["10", "bldgnu8m"], ["11", "bldgnu2m"],["12", "reffinfo"], ["13", "artype"],["14", "arcate"], ["15", "arlevel"],["16", "arzone"], ["17", "aruse"],["18", "ardesc"], ["19", "dimention"],["20", "arcnt"],["21", "size"],["22", "uom"],["23", "totsize"],["24", "fltype"],["25","dwalltype"],["26", "celingtype"],["27", "action"],["28","actioncode"],["29","bldgarid"],["30","bldgnumtxt"]]);
+		 let bldgarmap = new Map([["0","sno"],["1", "bldgaccnum"],  ["2", "bldgnum"], ["3", "bldgnum2"], ["4", "bldgnum4"], ["5", "bldgnum5"], ["6", "bldgnum7"], ["7", "bldgnu8m"], ["8", "bldgnu2m"], ["9", "bldgnum7"], ["10", "bldgnu8m"], ["11", "bldgnu2m"],["12", "reffinfo"], ["13", "artype"],["14", "arcate"], ["15", "arlevel"],["16", "arzone"], ["17", "aruse"],["18", "ardesc"], ["19", "dimention"],["20", "arcnt"],["21", "size"],["22", "uom"],["23", "totsize"],["24", "fltype"],["25","dwalltype"],["26", "celingtype"],["27", "action"],["28","actioncode"],["29","bldgarid"],["30","bldgnumtxt"]]);
 		
            $("#propertyregsitration_from").submit(function(e){
                 //alert('submit intercepted');
@@ -200,9 +199,7 @@
 						var ldata2 = $('#bldgartable1').DataTable().row(k).data();
 						var tempdata3 = {};
 						$.each(ldata2, function( key, value ) {
-							//masukk
-							//alert(key + ' == ' + value);
-							if (key !== 28) {
+							if (key !== 27) {
 							tempdata3[bldgarmap.get(""+key+"")] = value;	
 							}				           
 		            	});

@@ -84,8 +84,7 @@ class PropertyRegisterationController extends Controller
         	$zone=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ZONE" order by tdi_sort ');
         	$subzone=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "SUBZONE" order by tdi_sort '); 
             $ishasbuilding=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name =  "ISHASBUILDING" order by tdi_sort ');
-            $statedefault=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "STATEDEFAULT" order by tdi_sort '); 
-            //$statedefault=DB::table('tbdefitems')->where('tdi_td_name', "STATEDEFAULT")->orderBy('tdi_sort')->pluck('tdi_value');       
+
         	$lotcode=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE" order by tdi_sort ');
             $bldgcate=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BULDINGCATEGORY" order by tdi_sort ');
             $bldgtype=DB::select('select tdi_key, tdi_value from tbdefitems where tdi_td_name = "BULDINGTYPE" order by tdi_sort ');
@@ -196,7 +195,7 @@ class PropertyRegisterationController extends Controller
 
             App::setlocale(session()->get('locale'));
 
-            return view("propertyregister.tab")->with('district', $district)->with('state', $state)->with('statedefault', $statedefault)->with('zone', $zone)->with('subzone', $subzone)->with('pb', $pb)->with(array('bldgstruct'=>$bldgstruct,'bldgstore'=>$bldgstore,'ishasbuilding'=>$ishasbuilding, 'landuse'=>$landuse, 'master'=> $master, 'lotlist'=> $lotlist, 'ownerlist'=>$ownerlist, 'building'=> $building,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstruct,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'bldgcate' => $bldgcate,'bldgtype' => $bldgtype,'count' => $count, 'bldgardetail' => $bldgardetail,'prop_id' => $prop_id,'iseditable' => $iseditable,'pb_id' => $pb,'basket_name' => $basket_name,'accountnumbber' => $accountnumbber,'basket_type' => $basket_type,'status' => $status, 'mbldg' => $mbldg ));
+            return view("propertyregister.tab")->with('district', $district)->with('state', $state)->with('zone', $zone)->with('subzone', $subzone)->with('pb', $pb)->with(array('bldgstruct'=>$bldgstruct,'bldgstore'=>$bldgstore,'ishasbuilding'=>$ishasbuilding, 'landuse'=>$landuse, 'master'=> $master, 'lotlist'=> $lotlist, 'ownerlist'=>$ownerlist, 'building'=> $building,'lotcode'=> $lotcode, 'titiletype'=>$titiletype, 'unitsize'=> $unitsize, 'landcond'=>$landcond,'landpos' => $landpos,'roadtype'=> $roadtype, 'roadcaty'=>$roadcaty, 'tnttype'=> $tnttype, 'owntype'=>$owntype,'race' => $race,'citizen'=> $citizen, 'bldgcond'=>$bldgcond, 'bldgpos'=> $bldgpos, 'bldgstructure'=>$bldgstruct,'rooftype'=> $rooftype, 'walltype'=>$walltype, 'fltype'=> $fltype, 'arlvl'=>$arlvl,'arcaty' => $arcaty, 'artype'=> $artype, 'aruse'=>$aruse,'arzone' => $arzone,'ceiling' => $ceiling,'bldgcate' => $bldgcate,'bldgtype' => $bldgtype,'count' => $count, 'bldgardetail' => $bldgardetail,'prop_id' => $prop_id,'iseditable' => $iseditable,'pb_id' => $pb,'basket_name' => $basket_name,'accountnumbber' => $accountnumbber,'basket_type' => $basket_type,'status' => $status,'mbldg' => $mbldg ));
         }
         
     }

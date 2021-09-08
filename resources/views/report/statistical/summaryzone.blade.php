@@ -140,7 +140,6 @@
 				return;
 			} else {
 				var id = $('#value_va_vt_id').val();
-				alert(id);
 				window.location = "generatesummaryzone?title="+tilte+"&termid="+id+"&subzone_id="+subzone;
 			}
 			//var type = "delete";

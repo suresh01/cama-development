@@ -129,7 +129,7 @@
 								<span><a style="height: 20px; width: 20px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: 0px 0px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',2,1)"  title="{{__('CodeMaintenance.Approve')}} " href="#"></a></span>
 								<span><a style="height: 16px; width: 16px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -542px -42px !important;display: inline-block; float: left;" onclick="approve('{{$rec->trans_id}}',2,2)"  title="{{__('CodeMaintenance.Reject')}} " href="#"></a></span>
 							@elseif($rec->trans_approvaltransstatus_id == '3')
-								<span><a class=" new-action-icons reverse" onclick="approve('{{$rec->trans_id}}',3)" title="{{__('CodeMaintenance.Revise')}} " href="#"></a></span>	
+								<spane><a class=" new-action-icons reverse" onclick="approve('{{$rec->trans_id}}',3)" title="{{__('CodeMaintenance.Revise')}} " href="#"></a></span>	
 
 							@elseif($rec->trans_approvaltransstatus_id == '4')
 								<span><a style='height: 16px; width: 15px; margin-top: 5px; background: url(../images/sprite-icons/icons-color.png) no-repeat;background-position: -943px -102px !important;display: inline-block;' onclick="editTrans('{{ $rec->trans_id }}')" href='#' title="{{__('common.Edit')}}"></a></span>&nbsp;&nbsp;
