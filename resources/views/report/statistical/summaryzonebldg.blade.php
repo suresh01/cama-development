@@ -189,6 +189,7 @@
 				return;
 			} else {
 				var id = $('#value_va_vt_id').val();
+				alert(id);
 				window.location = "generatesummarybldg?title="+tilte+"&termid="+id+"&subzone_id="+subzone;
 			}
 		}
@@ -232,7 +233,7 @@ $(document).ready(function (){
 		        "serverSide": false,
 		        "retrieve": true,
 		        /*"dom": '<"toolbar">frtip',*/
-				 
+				"lengthMenu":  [100, 200, 500, 1000], 
 		        // ajax: '{{ url("inspectionproperty") }}',
 		        /*"ajax": '/bookings/datatables',*/
 		        "columns": [

@@ -142,10 +142,10 @@
 										<div  class="form_input">
 											<select data-placeholder="Choose a Status..." style="width:100%" class="cus-select"  id="lotstate" tabindex="7" name="lotstate" tabindex="20">
 												<option></option>
-											@foreach ($state as $rec)
+												@foreach ($statedefault as $rec)
 													<option value='{{ $rec->tdi_key }}'>{{ $rec->tdi_value }}</option>
-											@endforeach	
-										</select>
+												@endforeach	
+											</select>
 										</div>
 										<span class=" label_intro"></span>
 									</div>

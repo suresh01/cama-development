@@ -205,7 +205,7 @@ and rp_type_id = ratepayertype_id and approval_id = rp_approvalrpstatus_id");
        
         $transaction = DB::select('select trans_id, trans_transtype_id, transtype.tdi_value transtype, trans_linkid, trans_lotcode_id, lotcode.tdi_value lotcode,trans_lotno, 
 trans_titletype_id, titletype.tdi_value titletype, trans_titleno,
-DATE_FORMAT(`trans_transdate`, "%d/%m/%Y")  trans_transdate, trans_price, trans_duration, trans_addr_ln1, trans_addr_ln2, trans_addr_ln3, trans_addr_ln4, trans_postcode,
+trans_transdate, trans_price, trans_duration, trans_addr_ln1, trans_addr_ln2, trans_addr_ln3, trans_addr_ln4, trans_postcode,
 trans_city, trans_state_id, state.tdi_value state, trans_approvaltransstatus_id, approvalstatus
    from cm_transaction 
 left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = trans_lotcode_id 

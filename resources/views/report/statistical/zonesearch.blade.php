@@ -25,7 +25,9 @@
 												<option value="<>">Not Equal</option>
 											</select>
 										</div>
-										 <input type="hidden" class="firstrow" value="firstrow" id="firstrow"><div class="value form_grid_3"><span class="label_intro">Value</span>
+										 <input type="hidden" class="firstrow" value="firstrow" id="firstrow">
+										 <div class="value form_grid_3">
+											 <span class="label_intro">Value</span>
 											
 											<input class="value" type="text" name="value[]" >
 										</div>
@@ -129,7 +131,7 @@
 		
 		
 		$('#searchLoader').attr('style','display:block');
-
+		
 		var table = $('#proptble').DataTable();
 		$.ajax({
             url: 'subzonesummarytable?test=manual&ts_='+timestamp,
@@ -228,6 +230,7 @@
 			if(parentvalue == ''){
 				parentvalue = $("#value_va_vt_id").find('option:selected').val();
 			}
+
 		   // var parentvalue = $('#value_Term').find('option:selected').val();
 	    	//parenttypeid = $(this).val();
 
@@ -258,7 +261,7 @@
 		$(".field").change(function(){
 			//value_drop
 			//alert();
-			console.log($(this).val());
+			console.log("aaa " + $(this).val());
 		    var id= $(this).val();
 		   // var selectedvalue = $(this).find('option:selected').text();
 		     var selectedvalue = $(this).val();
@@ -280,6 +283,7 @@
 			} else {
 				$valueLbl = "";
 			}
+			
 			//alert(BULDINGTYPE);
 			//filter:"true"
 			/*$.ajax({
@@ -316,7 +320,7 @@
 	    	}
 	    	//alert(BULDINGTYPE);
 			//termid = $('#value_'+selectedvalue).find('option:selected').val();
-
+			
 	        $.ajax({
 		        type:'GET',
 		        url:'getcustomfilterdata?date='+ d.getTime(),
