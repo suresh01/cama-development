@@ -1264,8 +1264,8 @@ Log::info('select max(tdi_key) tdi_key, tdi_td_name from tbdefitems where '.$par
                 $result = DB::connection('oracle')->update("
                 UPDATE PEMILIK_SB SET  
                 LOTID = '".$rec->log_no."',
-                LOT_LAMA = '".$rec->log_altno."',
-                KOD_LOT = '".$rec->lotcode."',
+                LOT_LAMA = '".$rec->lotcode."',
+                KOD_LOT = '".$rec->log_altno."',
                 TKH_UPDATE = SYSDATE  , 
                 USER_UPDATE = 'CAMA' 
                 WHERE ID = '".$rec->ma_accno."'");

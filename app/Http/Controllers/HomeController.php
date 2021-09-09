@@ -447,14 +447,11 @@ DB::statement("insert into tempQuery values(select * from )");
 
     public function ownerDetail(Request $request) {
       $prop_id = $request->input('prop_id');  
-        $master = DB::select('select  mal_id,  mal_accno,mal_fileno,  mal_subzone_id, subzone.tdi_parent_key zone_id, subzone.tdi_parent_name zone, subzone.tdi_value subzone, district.tdi_value district,
-        mal_district_id, mal_addr_ln1,mal_addr_ln2,mal_addr_ln3,mal_addr_ln4, mal_postcode, mal_city, mal_state_id,
-        ma_fileno, ma_addr_ln1, ma_addr_ln2, ma_addr_ln3, ma_addr_ln4, ma_postcode, ma_city, ma_state_id
+        $master = DB::select('select  mal_id,  mal_accno,mal_fileno,  mal_subzone_id,subzone.tdi_parent_key zone_id, 
+        mal_district_id, mal_addr_ln1,mal_addr_ln2,mal_addr_ln3,mal_addr_ln4, mal_city, mal_state_id, mal_postcode 
         from  cm_masterlist_log 
-        inner join cm_masterlist on ma_accno = mal_accno
-        left join (select tdi_key, tdi_value,tdi_parent_key, tdi_parent_name from tbdefitems where tdi_td_name = "SUBZONE") subzone on subzone.tdi_key = mal_subzone_id
-        left join (select tdi_key, tdi_value,tdi_parent_key, tdi_parent_name from tbdefitems where tdi_td_name = "DISTRICT") district on district.tdi_key = mal_district_id
-        where mal_id = ifnull("'.$prop_id.'",0)');
+        left join (select tdi_key, tdi_value,tdi_parent_key from tbdefitems where tdi_td_name = "SUBZONE") subzone 
+        on subzone.tdi_key = mal_subzone_id  where mal_id = ifnull("'.$prop_id.'",0)');
 
           $district= DB::table('tbdefitems')->where('tdi_td_name', 'DISTRICT')->get(); 
           $state=DB::table('tbdefitems')->where('tdi_td_name', 'STATE')->get();
@@ -575,8 +572,8 @@ DB::statement("insert into tempQuery values(select * from )");
         from cm_lot  
         inner join cm_masterlist on ma_id = lo_ma_id
         left join cm_lot_log on log_lot_id = lot_id
-        where log_id = ifnull("'.$prop_id.'",0)');
-         Log::info($prop_id);
+        where lot_id = ifnull("'.$prop_id.'",0)');
+
           $lotcode=DB::table('tbdefitems')->where('tdi_td_name', 'LOTCODE')->get();
           $titiletype=DB::table('tbdefitems')->where('tdi_td_name', 'TITLETYPE')->get();
           $tnttype=DB::table('tbdefitems')->where('tdi_td_name', 'TENURETYPE')->get();
@@ -609,8 +606,8 @@ DB::statement("insert into tempQuery values(select * from )");
      
     public function plan(Request $request) {
       $name=Auth::user()->name;
-        $plan = DB::select("select cm_plan.*, plan_cccdate, plan_valuationdate, plan.tdi_value status,DATE_FORMAT(plan_createdate,  '%d/%m/%Y') plan_createdate1,DATE_FORMAT(plan_updatedate,  '%d/%m/%Y') plan_updatedate1,
-          plan_plandate,  appln.tdi_value appln, zone.tdi_value zone from cm_plan left join 
+        $plan = DB::select("select cm_plan.*,DATE_FORMAT(plan_cccdate,  '%d/%m/%Y') plan_cccdate1,DATE_FORMAT(plan_valuationdate, '%d/%m/%Y') plan_valuationdate1, plan.tdi_value status,DATE_FORMAT(plan_createdate,  '%d/%m/%Y') plan_createdate1,DATE_FORMAT(plan_updatedate,  '%d/%m/%Y') plan_updatedate1,
+          DATE_FORMAT(plan_plandate, '%d/%m/%Y') plan_plandate1,  appln.tdi_value appln, zone.tdi_value zone from cm_plan left join 
           tbdefitems zone on zone.tdi_key = plan_zon_id  and zone.tdi_td_name = 'ZONE'
           left join tbdefitems appln on appln.tdi_key = plan_planapplicationtype  and appln.tdi_td_name = 'PLANAPPLICATIONTYPE'
           left join tbdefitems plan on plan.tdi_key = plan_planstatus_id  and plan.tdi_td_name = 'PLANREG'
@@ -1661,39 +1658,39 @@ public function generateRemisireport(Request $request) {
            // set_time_limit(0);
         $prop_id = $request->input('prop_id');  
         $pb = $request->input('pb');  
-        $district= DB::table('tbdefitems')->where('tdi_td_name', 'DISTRICT')->get(); 
-        $state=DB::table('tbdefitems')->where('tdi_td_name', 'STATE')->get();
-        $zone=DB::table('tbdefitems')->where('tdi_td_name', 'ZONE')->get();
-        $subzone=DB::table('tbdefitems')->where('tdi_td_name', 'SUBZONE')->get();
-        $ishasbuilding=DB::table('tbdefitems')->where('tdi_td_name', 'ISHASBUILDING')->get();
-        $lotcode=DB::table('tbdefitems')->where('tdi_td_name', 'LOTCODE')->get();
-        $bldgcate=DB::table('tbdefitems')->where('tdi_td_name', 'BULDINGCATEGORY')->get();
-        $bldgtype=DB::table('tbdefitems')->where('tdi_td_name', 'BULDINGTYPE')->get();
-        $titiletype=DB::table('tbdefitems')->where('tdi_td_name', 'TITLETYPE')->get();
-        $unitsize=DB::table('tbdefitems')->where('tdi_td_name', 'SIZEUNIT')->get();
-        $landcond=DB::table('tbdefitems')->where('tdi_td_name', 'LANDCONDITION')->get();
-        $landpos=DB::table('tbdefitems')->where('tdi_td_name', 'LANDPOSISION')->get();
-        $landuse=DB::table('tbdefitems')->where('tdi_td_name', 'LANDUSE')->get();
-        $roadtype=DB::table('tbdefitems')->where('tdi_td_name', 'ROADTYPE')->get();
-        $roadcaty=DB::table('tbdefitems')->where('tdi_td_name', 'ROADCATEGORY')->get();
-        $tnttype=DB::table('tbdefitems')->where('tdi_td_name', 'TENURETYPE')->get();
-        $owntype=DB::table('tbdefitems')->where('tdi_td_name', 'OWNTYPE')->get();
-        $race=DB::table('tbdefitems')->where('tdi_td_name', 'RACE')->get();
-        $citizen=DB::table('tbdefitems')->where('tdi_td_name', 'CITIZEN')->get();
-        $bldgcond=DB::table('tbdefitems')->where('tdi_td_name', 'BLDGCONDN')->get();
-        $bldgpos=DB::table('tbdefitems')->where('tdi_td_name', 'BLDGPOSITION')->get();
-        $bldgstruct=DB::table('tbdefitems')->where('tdi_td_name', 'BLDGSTRUCTURE')->get();
-        $bldgstore=DB::table('tbdefitems')->where('tdi_td_name', 'BUILDINGSTOREY')->get();
-        $rooftype=DB::table('tbdefitems')->where('tdi_td_name', 'ROOFTYPE')->get();
-        $walltype=DB::table('tbdefitems')->where('tdi_td_name', 'WALLTYPE')->get();
-        $fltype=DB::table('tbdefitems')->where('tdi_td_name', 'FLOORTYPE')->get();
-        $arlvl=DB::table('tbdefitems')->where('tdi_td_name', 'AREALEVEL')->get();
-        $arcaty=DB::table('tbdefitems')->where('tdi_td_name', 'AREACATEGORY')->get();
-        $ceiling=DB::table('tbdefitems')->where('tdi_td_name', 'CEILINGTYPE')->get();
-        $artype=DB::table('tbdefitems')->where('tdi_td_name', 'AREATYPE')->get();
-        $aruse=DB::table('tbdefitems')->where('tdi_td_name', 'AREAUSE')->get();
-        $arzone=DB::table('tbdefitems')->where('tdi_td_name', 'AREAZONE')->get();
-        $attachtype=DB::table('tbdefitems')->where('tdi_td_name', 'ATTACHMENTTYPE')->get();
+          $district= DB::table('tbdefitems')->where('tdi_td_name', 'DISTRICT')->get(); 
+          $state=DB::table('tbdefitems')->where('tdi_td_name', 'STATE')->get();
+          $zone=DB::table('tbdefitems')->where('tdi_td_name', 'ZONE')->get();
+          $subzone=DB::table('tbdefitems')->where('tdi_td_name', 'SUBZONE')->get();
+            $ishasbuilding=DB::table('tbdefitems')->where('tdi_td_name', 'ISHASBUILDING')->get();
+          $lotcode=DB::table('tbdefitems')->where('tdi_td_name', 'LOTCODE')->get();
+          $bldgcate=DB::table('tbdefitems')->where('tdi_td_name', 'BULDINGCATEGORY')->get();
+          $bldgtype=DB::table('tbdefitems')->where('tdi_td_name', 'BULDINGTYPE')->get();
+          $titiletype=DB::table('tbdefitems')->where('tdi_td_name', 'TITLETYPE')->get();
+          $unitsize=DB::table('tbdefitems')->where('tdi_td_name', 'SIZEUNIT')->get();
+          $landcond=DB::table('tbdefitems')->where('tdi_td_name', 'LANDCONDITION')->get();
+          $landpos=DB::table('tbdefitems')->where('tdi_td_name', 'LANDPOSISION')->get();
+            $landuse=DB::table('tbdefitems')->where('tdi_td_name', 'LANDUSE')->get();
+          $roadtype=DB::table('tbdefitems')->where('tdi_td_name', 'ROADTYPE')->get();
+          $roadcaty=DB::table('tbdefitems')->where('tdi_td_name', 'ROADCATEGORY')->get();
+          $tnttype=DB::table('tbdefitems')->where('tdi_td_name', 'TENURETYPE')->get();
+          $owntype=DB::table('tbdefitems')->where('tdi_td_name', 'OWNTYPE')->get();
+          $race=DB::table('tbdefitems')->where('tdi_td_name', 'RACE')->get();
+          $citizen=DB::table('tbdefitems')->where('tdi_td_name', 'CITIZEN')->get();
+          $bldgcond=DB::table('tbdefitems')->where('tdi_td_name', 'BLDGCONDN')->get();
+          $bldgpos=DB::table('tbdefitems')->where('tdi_td_name', 'BLDGPOSITION')->get();
+          $bldgstruct=DB::table('tbdefitems')->where('tdi_td_name', 'BLDGSTRUCTURE')->get();
+          $bldgstore=DB::table('tbdefitems')->where('tdi_td_name', 'BUILDINGSTOREY')->get();
+          $rooftype=DB::table('tbdefitems')->where('tdi_td_name', 'ROOFTYPE')->get();
+          $walltype=DB::table('tbdefitems')->where('tdi_td_name', 'WALLTYPE')->get();
+          $fltype=DB::table('tbdefitems')->where('tdi_td_name', 'FLOORTYPE')->get();
+          $arlvl=DB::table('tbdefitems')->where('tdi_td_name', 'AREALEVEL')->get();
+          $arcaty=DB::table('tbdefitems')->where('tdi_td_name', 'AREACATEGORY')->get();
+          $ceiling=DB::table('tbdefitems')->where('tdi_td_name', 'CEILINGTYPE')->get();
+          $artype=DB::table('tbdefitems')->where('tdi_td_name', 'AREATYPE')->get();
+          $aruse=DB::table('tbdefitems')->where('tdi_td_name', 'AREAUSE')->get();
+          $arzone=DB::table('tbdefitems')->where('tdi_td_name', 'AREAZONE')->get();
+            $attachtype=DB::table('tbdefitems')->where('tdi_td_name', 'ATTACHMENTTYPE')->get();
 
 
             $term=DB::select("select concat(vt_name,'', DATE_FORMAT(vt_createdate, '%d%m%Y')) termfoldername, vd_accno accountnumber, va_vt_id, vt_applicationtype_id,
@@ -2613,11 +2610,11 @@ FROM `cm_appln_val_tax` where vt_vd_id = ifnull("'.$prop_id.'",0)');
 
         }
       $property = DB::select('select cm_lot.*, lotcode.tdi_value lotcode, roadtype.tdi_value roadtype, titletype.tdi_value titletype
-      , unitsize.tdi_value unitsize, concat(lotcode.tdi_value, " ",lo_no) lotnumber, concat(titletype.tdi_value, " ", LO_TITLENO) titlenumber, 
+      , unitsize.tdi_value unitsize, concat(lotcode.tdi_value,lo_no) lotnumber, concat(titletype.tdi_value, LO_TITLENO) titlenumber, 
       landuse.tdi_value landuse, tentype.tdi_value tentype, tstatus, ma_accno, log_approvalstatus_id, log_id
       from cm_lot
       inner join cm_masterlist on ma_id = lo_ma_id
-      inner join cm_lot_log on lot_id = log_lot_id
+      left join cm_lot_log on lot_id = log_lot_id
       left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "LOTCODE") lotcode on lotcode.tdi_key = LO_LOTCODE_ID
       left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "ROADTYPE") roadtype on roadtype.tdi_key = LO_ROADTYPE_ID
       left join (select tdi_key, tdi_value from tbdefitems where tdi_td_name = "TITLETYPE") titletype on titletype.tdi_key = LO_TITLETYPE_ID
@@ -2781,11 +2778,11 @@ where vt_termDate >= (select vt_termDate from cm_appln_valdetl inner join cm_app
 
     public function  remisi(Request $request){
        
-        $userlist=DB::select('select usr_id, concat(usr_firstname, " " ,usr_lastname, " - ", usr_position) tbuser, concat(usr_firstname, " " ,usr_lastname) usr_name , usr_position FROM tbuser');
+
         App::setlocale(session()->get('locale'));
 
 
-        return view('remisi.remisi')->with(array( 'userlist'=>$userlist));
+        return view('remisi.remisi');
     }
     
     

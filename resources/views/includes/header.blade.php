@@ -555,8 +555,7 @@ $('.mainNav li:has(ul)').addClass('has-child');
 								<a style="" onclick="check_access('714','subzonesummary');" href="#">Senarai NT dan Kadar Mengikut Mukim/Kawasan</a>							
 							</li>
 							<li>
-								<a style="" onclick="check_access('714','subzonesummary');" href="#">Laporan Senarai Industri (Select by Property Categori)</a>
-								{{-- <a style="" onclick="check_access('714','zonebldgsummary');" href="#">Laporan Senarai Industri (Select by Property Categori)</a> --}}
+								<a style="" onclick="check_access('714','zonebldgsummary');" href="#">Laporan Senarai Industri (Select by Property Categori)</a>
 							</li>
 							<li>
 								<a style="" onclick="check_access('714','pivotreport?page=1');" href="#">Pivot Report (Property Status = Building)</a>
@@ -568,10 +567,10 @@ $('.mainNav li:has(ul)').addClass('has-child');
 								<a style="" onclick="check_access('714','racesummary');" href="#">Pivot report</a>
 							</li>
 							<li>
-								<a style="" onclick="check_access('714','racesummary');" href="#">Laporan Cukai Taksiran Mengikut Kategori(Selected by Property Kategory)</a>
+								<a style="" onclick="check_access('714','propertycategorystatis');" href="#">Laporan Cukai Taksiran Mengikut Kategori(Selected by Property Kategory)</a>
 							</li>
 							<li>
-								<a style="" onclick="check_access('714','racesummary');" href="#">Ringkasan Cukai Taksiran Mengikut Kategori(Selected by Property Kategory)</a>
+								<a style="" onclick="check_access('714','propertycategorysummary');" href="#">Ringkasan Cukai Taksiran Mengikut Kategori(Selected by Property Kategory)</a>
 							</li>
 			            </ul>
 		          	</li>

@@ -565,21 +565,19 @@ $('#bldgallowance_filter').remove();
          // txt = "You pressed OK!";
         var allowancetable = $('#bldgallowance').DataTable();
         var allowancedata;
-        var bil = 0;
          for (var i = 0;i<$('#bldgallowance').DataTable().rows().count();i++){
-            bil = i;
-            var allowrow = allowancetable.row(i),
-            allowancedata = allowrow.data();
-            allowancedata[0]='Deleted';
-            allowancedata[7]='';
+
+              var allowrow = allowancetable.row(i),
+          allowancedata = allowrow.data();
+          allowancedata[0]='Deleted';
+        allowancedata[7]='';
        
                
         }
-        // edit by gebra at 05/09/2021 adding condition bil
-        if (bil !== 0){
-          allowrow.data(allowancedata);
-          allowancaCaluation();
-        }
+        
+                  allowrow.data(allowancedata);
+                  allowancaCaluation();
+
 
         var rowid =  data[0];
         var rate = $('#rate_'+rowid).val();

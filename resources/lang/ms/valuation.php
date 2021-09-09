@@ -99,7 +99,7 @@ return [
 	'Total_Land_Value'=>'Jumlah Nilai Tanah',
 	'Building_Calculation'=>'Pengiraan Bangunan',
 	'Building_Value'=>'Nilai Bangunan',
-	'Allowancess_Value'=>'Nilai Elaun',
+	'Allowancess_Value'=>'Niloai Elaun',
 	'Net_Building_Value'=>'Nilai Bersih Bangunan',
 	'Total_Building_Net_Value'=>'Jumlah Nilai Bersih Bangunan',
 	'Additional_Calculation'=>'Pengiraan Tambahan',
