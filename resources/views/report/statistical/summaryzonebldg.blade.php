@@ -151,6 +151,7 @@
 					</div>
 				</div>
 			</div>
+			<input type="hidden" name="termid" id="termid">
 			
 		<!-- <form style="display: hidden;" id="generateform" method="GET" action="generateinspectionreport">
             @csrf
@@ -188,8 +189,8 @@
 			if (tilte == null || tilte == "") {
 				return;
 			} else {
-				var id = $('#value_va_vt_id').val();
-				alert(id);
+				var id = $('#termid').val();
+				//alert(id);
 				window.location = "generatesummarybldg?title="+tilte+"&termid="+id+"&subzone_id="+subzone;
 			}
 		}

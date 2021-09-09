@@ -122,6 +122,8 @@
 	});
 	
 	function submitForm(){
+		$('#termid').val($('#value_va_vt_id').val());
+		//alert($('#value_va_vt_id').val());
 		//console.log($("#filterForm").serialize());
 		var table = $('#proptble').DataTable();
 		table.clear();

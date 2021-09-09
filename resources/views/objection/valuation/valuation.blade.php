@@ -573,7 +573,7 @@
     }
 
 	function addBldg(id) {		
-	    var w = window.open('about:blank','Popup_Window','toolbar=0,location=no,statusbar=0,menubar=0,width=0,height=0,left = 312,top = 234');
+	    var w = window.open('about:blank','Popup_Window_BldgDetail','toolbar=0,location=no,statusbar=0,menubar=0,width=0,height=0,left = 312,top = 234');
 	    if (w.closed || (!w.document.URL) || (w.document.URL.indexOf("about") == 0)) {
 	        w.location = "bldgval?id="+id;
 	    }	    

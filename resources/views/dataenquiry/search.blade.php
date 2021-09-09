@@ -51,12 +51,12 @@
 						<a href="#" disabled="true" onclick="submitForm()" class=""><span>Submit </span></a>	
 					</div>
 					<div class="btn_24_blue">
-						<a href="#" onclick="terminate()" class="simplemodal-custom-close"><span>Close </span></a>
+						<a href="#" onclick="terminate()" class="simplemodal-close"><span>Close </span></a>
 					</div>
 					</form>
 			</div>
 			<div style="display: none;" id="view"></div>
-			<a href="#" class="basic-custom-modal1">Add Filter</a>
+			<a href="#" class="basic-modal">Add Filter</a>
 
 			<div style="display: none;" id="manaual-filter-placeholder">
 				
@@ -73,37 +73,13 @@
 		waitingIndicator('searchLoader'); //waiting indicator
 
 		$('#simplemodal-overlay').css('display', 'block');
-		$('.simplemodal-custom-close').click(function(){
+		$('.simplemodal-close').click(function(){
 			//alert('');
-			$('#simplemodal-overlay').css('display', 'none');
-			$('#simplemodal-container').css('display', 'none');
-			$('#basic-modal-content').attr('name','hide');
-
 			
-			//$('#basic-modal-content').css('display', 'none');
+
+			$('#manaual-filter-placeholder').html($('#filterrow').html());
+			$('#basic-modal-content').css('display', 'none');
 		});
-
-		$('.basic-custom-modal1').click(function(){
-			
-        		var status = $('#basic-modal-content').attr('name');
-				//alert($('#basic-modal-content').attr('name'));
-				if(status == 'hide'){
-					console.log("23");
-					$('#simplemodal-overlay').css('display', 'block');
-					$('#simplemodal-container').css('display', 'block');
-				} else {
-					console.log("24");
-					$('#simplemodal-overlay').css('display', 'block');
-					$('#simplemodal-container').css('display', 'block');
-					$('#basic-modal-content').modal();
-				}
-		        	
-			
-			//$('#simplemodal-overlay').css('display', 'block');
-			//$('#simplemodal-container').css('display', 'block');
-			//$('#basic-modal-content').css('display', 'none');
-		});
-
 		$('.basic-modal').click(function(){
 			$.ajax({
 		        type:'GET',
@@ -137,12 +113,13 @@
 			//$('#basic-modal-content').css('display', 'none');
 		});
 
-		filterAction();
+		
 
 
 	});
 
 
+	
 	function submitForm(){
 		//console.log($("#filterForm").serialize());
 		var table = $('#proptble').DataTable();
@@ -178,6 +155,7 @@
 
       //  $.ajax.abortAll();
 	}
+
 
 	function addfilter(isFirstRow){
 		$('.simplemodal-wrap').css('overflow-y', 'scroll');
@@ -339,7 +317,7 @@
 	    		termid = $('#value_va_vt_id').find('option:selected').val();
 	    	} else if(BULDINGTYPE == "vt_id"){
 	    		termid = $('#value_BULDINGTYPEtdi_key').find('option:selected').val();
-	    	} else if(BULDINGTYPE == "vt_id"){
+	    	} else if(BULDINGTYPE == "BULDINGTYPEtdi_key"){
 	    		termid = $('#value_BULDINGTYPEtdi_parent_key').find('option:selected').val();
 	    	}
 	    	//alert(BULDINGTYPE);
@@ -398,3 +376,5 @@
 </script>
 </body>
 </html>
+		
+			
